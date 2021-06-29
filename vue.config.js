@@ -1,4 +1,8 @@
 // vue.config.js
+const pathroot = require('path');
+function resolve(dir){
+    return path.join(__dirname,dir)
+}
 module.exports = {
     publicPath: '',
     devServer: {
@@ -9,5 +13,11 @@ module.exports = {
                 ws:true
             }
         }
-    }
+    },
+    pluginOptions: {
+        'style-resources-loader': {
+          preProcessor: 'less',
+          patterns: [pathroot.resolve(__dirname, "src/assets/commen/variable.less")] // 引入全局样式变量
+        }
+  },
 }

@@ -16,17 +16,17 @@ const routes = [{
   },
   {
     path: '/demo',
-    name: '首页',
+    name: '首页概览',
     leaf: true, //只有一个节点 点击即跳转
     component: () => import('../views/home/home.vue'),
     iconCls: 'el-icon-s-home',
     children: [{
-      path: '/demo2',
+      path: '/index',
       component: demo,
-      name: '首页'
+      name: '首页概览'
     }, ],
     meta: {
-      title: '首页'
+      title: '首页概览'
     }
   },
   {

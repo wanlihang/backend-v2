@@ -12,13 +12,13 @@
         label-width="0px"
         class="demo-ruleForm login-page"
       >
-        <h3 class="title">登录MeEdu后台管理</h3>
+        <h3 class="title">{{ $t("login.title") }}</h3>
         <el-form-item prop="username">
           <el-input
             type="text"
             v-model="ruleForm2.username"
             auto-complete="off"
-            placeholder="请输入管理员账号"
+            :placeholder="$t('login.tipmes1')"
           ></el-input>
         </el-form-item>
         <el-form-item prop="password">
@@ -26,7 +26,7 @@
             type="password"
             v-model="ruleForm2.password"
             auto-complete="off"
-            placeholder="请输入账户密码"
+            :placeholder="$t('login.tipmes2')"
           ></el-input>
         </el-form-item>
         <!-- <el-checkbox v-model="checked" class="rememberme">记住密码</el-checkbox> -->
@@ -36,7 +36,7 @@
             style="width: 100%"
             @click="handleSubmit"
             :loading="logining"
-            >立即登录</el-button
+            >{{ $t("login.login") }}</el-button
           >
         </el-form-item>
       </el-form>
@@ -45,7 +45,6 @@
 </template>
  
 <script>
-
 export default {
   name: "login",
   data() {
@@ -64,6 +63,7 @@ export default {
         ],
       },
       checked: true,
+      lang: "zh",
     };
   },
   methods: {
@@ -71,14 +71,25 @@ export default {
       console.log(event);
       this.loading = true;
       this.$api.Auth.Login(this.ruleForm2).then((resp) => {
-        if (resp.status==0) {
+        if (resp.status == 0) {
           //Utils.saveLocal("token", resp.data.token);
-          localStorage.setItem('astoken',resp.data.token)
+          localStorage.setItem("astoken", resp.data.token);
           localStorage.setItem("user", this.ruleForm2.username); //保存登录名
-          this.$router.push({ path: "/account" }); //跳到账号管理
+          this.$router.push({ path: "/index" }); //跳到首页
         }
         this.loading = false;
       });
+    },
+    changeLanguage() {
+      if (this.lang === "zh") {
+        this.lang = "en";
+        this.$i18n.locale = this.lang;
+        localStorage.setItem("LANGUAGE", this.lang);
+      } else {
+        this.lang = "zh";
+        this.$i18n.locale = this.lang;
+        localStorage.setItem("LANGUAGE", this.lang);
+      }
     },
   },
 };

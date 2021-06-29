@@ -2,8 +2,37 @@
   <div id="home">
     <el-container class="menu">
       <!-- header -->
-      <el-header class="header">
-        <h4 class="header-tit">MeEdu</h4>
+      <el-header class="header" style="height: 56px !important">
+        <div class="header-tit">
+          <img src="../../assets/home/logo@2x.png" />
+        </div>
+        <div
+          class="headname"
+          v-for="item in levelList"
+          :key="item.path"
+          :to="{ path: item.path }"
+        >
+          <span>{{ item.name }}</span>
+        </div>
+        <!-- 面包屑 -->
+        <!-- 点击图标 左侧导航出现和隐藏切换 -->
+        <!-- <div class="breadcrumb"> 
+            <i
+              :class="[
+                isCollapse == false ? 'el-icon-s-fold' : 'el-icon-s-unfold',
+              ]"
+              @click="changeMenu"
+            ></i>
+            <el-breadcrumb separator-class="el-icon-arrow-right">
+              <el-breadcrumb-item
+                v-for="item in levelList"
+                :key="item.path"
+                :to="{ path: item.path }"
+              >
+                {{ item.name }}
+              </el-breadcrumb-item>
+            </el-breadcrumb>
+          </div> -->
         <!-- header右边部分 -->
         <rightmenu class="rightmenu"></rightmenu>
       </el-header>
@@ -29,7 +58,11 @@
                   v-for="(item, index) in $router.options.routes"
                   v-if="!item.hidden"
                 >
-                  <el-submenu :index="index + ''" v-if="!item.leaf">
+                  <el-submenu
+                    :index="index + ''"
+                    v-if="!item.leaf"
+                    :key="item.path"
+                  >
                     <template slot="title">
                       <i :class="item.iconCls"></i>
                       <span
@@ -48,7 +81,11 @@
                     </el-menu-item>
                   </el-submenu>
                   <!-- 没有children的leaf属性 点击直接跳转 -->
-                  <el-menu-item v-if="item.leaf" :index="item.children[0].path">
+                  <el-menu-item
+                    v-if="item.leaf"
+                    :index="item.children[0].path"
+                    :key="item.children[0].path"
+                  >
                     <i :class="item.iconCls"></i>
                     <span slot="title"> {{ item.children[0].name }}</span>
                   </el-menu-item>
@@ -60,25 +97,6 @@
 
         <!-- 右侧布局显示区域 -->
         <el-main>
-          <!-- 面包屑 -->
-          <div class="breadcrumb">
-            <!-- 点击图标 左侧导航出现和隐藏切换 -->
-            <i
-              :class="[
-                isCollapse == false ? 'el-icon-s-fold' : 'el-icon-s-unfold',
-              ]"
-              @click="changeMenu"
-            ></i>
-            <el-breadcrumb separator-class="el-icon-arrow-right">
-              <el-breadcrumb-item
-                v-for="item in levelList"
-                :key="item.path"
-                :to="{ path: item.path }"
-              >
-                {{ item.name }}
-              </el-breadcrumb-item>
-            </el-breadcrumb>
-          </div>
           <!-- 跳转展示的区域 -->
           <router-view></router-view>
         </el-main>
@@ -123,6 +141,7 @@ export default {
         this.isCollapse = true;
       }
     },
+
     //点击根据路径判断  导航变色
     clickname: function (path) {
       this.isActive = path;
@@ -152,9 +171,9 @@ export default {
 };
 </script>
  
-<style scoped>
+<style lang="less" scoped>
 #home {
-  background: #f2f2f2;
+  background: #F1F2F9;
   width: 100%;
   height: 100%;
 }
@@ -169,15 +188,39 @@ export default {
 img {
   width: 45%;
 }
+
 .header {
   font-size: 25px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-.header-tit {
-  margin-left: 20px;
-  color: #fff;
+  position: relative;
+  .header-tit {
+    margin-left: 24px;
+    color: #fff;
+    img {
+      width: 112px;
+      margin-top: 25px;
+    }
+  }
+  .headname {
+    display: none;
+    span {
+      position: absolute;
+      left: 230px;
+      top: 18px;
+      height: 20px;
+      height: 20px;
+      font-size: 20px;
+      font-family: PingFangSC-Semibold, PingFang SC;
+      font-weight: 600;
+      color: #333333;
+      line-height: 20px;
+    }
+  }
+  :nth-last-child(2) {
+    display: block;
+  }
 }
 .breadcrumb {
   display: flex;
@@ -202,6 +245,9 @@ img {
   color: #333;
   text-align: center;
   line-height: 200px;
+  .el-row {
+    margin-top: 24px;
+  }
 }
 body > .el-container {
   margin-bottom: 40px;
@@ -223,8 +269,7 @@ body > .el-container {
 .el-submenu .navName {
   width: 100%;
   display: inline-block;
-  background: #409eff;
-  color: #fff;
+  color: #555566;
 }
 .el-submenu i {
   display: none !important;
@@ -237,12 +282,12 @@ body > .el-container {
 }
 @media screen and (min-width: 700px) {
   .header {
-    background: #409eff;
+    background: #fff;
   }
 }
 @media screen and (max-width: 700px) {
   .header {
-    background: #409eff;
+    background: #fff;
   }
 }
 </style>

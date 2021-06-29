@@ -6,25 +6,18 @@
           <!-- 用户名 -->
           <p
             style="
-              line-height: 60px;
-              font-weight: 650;
-              font-style: normal;
-              color: #ffffff;
-              margin-right: 18px;
+              height: 16px;
+              font-size: 16px;
+              font-family: PingFangSC-Regular, PingFang SC;
+              font-weight: 400;
+              color: #666666;
+              line-height: 16px;
             "
           >
             {{ fullName }}
+            <img class="dropdown" src="../../assets/commen/dropdown.png">
           </p>
-          <!-- 图片 -->
-          <img
-            src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1562068714079&di=a1260d80c5ee35880c3e7cbf0a27461c&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F655ba5b31bc6243428a306b10a7f895b36d3d3d35a1e-5phgk4_fw658"
-            style="
-              width: 40px;
-              height: 40px;
-              border-radius: 20px;
-              cursor: pointer;
-            "
-          />
+          
         </div>
         <!-- 点击弹出部分 -->
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
@@ -164,6 +157,11 @@ export default {
  
  
 <style scoped>
+.dropdown{
+width: 16px;
+margin-top: 0px;
+margin-left: 20px;
+}
 .top {
   background: #409eff;
   margin-bottom: 20px;
