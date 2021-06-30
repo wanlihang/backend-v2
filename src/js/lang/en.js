@@ -5,6 +5,8 @@ const en = { //en
         tipmes2: 'Please enter the password',
         title: 'Login to MeEdu background management',
         langtext: "English",
+        username_required:'Please enter the administrator account number',
+        password_require:'Please enter your passwo',
     },
     index:{
 

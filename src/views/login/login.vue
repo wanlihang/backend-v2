@@ -78,10 +78,10 @@ export default {
       },
       rules2: {
         username: [
-          { required: true, message: localStorage.getItem('Logintip1') || '请您输入管理员账号', trigger: "blur" },
+          { required: true, message: this.$t("login.username_required"), trigger: "blur" },
         ],
         password: [
-          { required: true, message: localStorage.getItem('Logintip2') || '请您输入密码', trigger: "blur" },
+          { required: true, message: this.$t("login.password_required"), trigger: "blur" },
         ],
       },
       checked: true,
@@ -116,16 +116,12 @@ export default {
     changezh() {
       this.lang = "zh";
       this.$i18n.locale = this.lang;
-      localStorage.setItem("LANGUAGE", this.lang);
-      localStorage.setItem('Logintip1',"请您输入管理员账号");
-      localStorage.setItem('Logintip2',"请您输入密码");    
+      localStorage.setItem("LANGUAGE", this.lang);   
     },
     changeen() {
       this.lang = "en";
       this.$i18n.locale = this.lang;
       localStorage.setItem("LANGUAGE", this.lang);
-      localStorage.setItem('Logintip1',"Please enter the administrator account number");
-      localStorage.setItem('Logintip2',"Please enter your password"); 
     },
     changeLanguage() {
       if (this.lang === "zh") {
