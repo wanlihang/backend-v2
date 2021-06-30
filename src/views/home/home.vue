@@ -173,7 +173,7 @@ export default {
  
 <style lang="less" scoped>
 #home {
-  background: #F1F2F9;
+  background: #f1f2f9;
   width: 100%;
   height: 100%;
 }
@@ -212,7 +212,7 @@ img {
       height: 20px;
       height: 20px;
       font-size: 20px;
-      font-family: PingFangSC-Semibold, PingFang SC;
+
       font-weight: 600;
       color: #333333;
       line-height: 20px;

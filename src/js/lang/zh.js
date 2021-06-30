@@ -4,6 +4,10 @@ const zh = { //zh
         tipmes1: '请输入管理员账号',
         tipmes2: '请输入账户密码',
         title: '登录MeEdu后台管理',
-    }
+        langtext: "简体中文",
+    },
+    index:{
+
+    },
 }
 export default zh;

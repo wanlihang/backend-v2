@@ -30,6 +30,11 @@ const Api = {
             return get(`/backend/api/v1/app/${id}/record`, params);
         }
     },
+    Stat:{
+        Statistic(id,params) {
+            return get(`/backend/api/v1/statistic/${id}`, params);
+        },
+    },
     Member: {
         Info() {
             return get(`/backend/api/v1/member/info`);

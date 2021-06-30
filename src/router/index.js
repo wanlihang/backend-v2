@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import demo from '@/views/demo/demo' //单独的导航页面 不能用懒加载引入
+import index from '@/views/index/index' //单独的导航页面 不能用懒加载引入
 // import Index from '../views/index/index';
 
 Vue.use(VueRouter)
@@ -22,7 +22,7 @@ const routes = [{
     iconCls: 'el-icon-s-home',
     children: [{
       path: '/index',
-      component: demo,
+      component: index,
       name: '首页概览'
     }, ],
     meta: {

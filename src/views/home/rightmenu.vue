@@ -12,18 +12,18 @@
               font-weight: 400;
               color: #666666;
               line-height: 16px;
+              cursor:pointer;
             "
           >
             {{ fullName }}
-            <img class="dropdown" src="../../assets/commen/dropdown.png">
+            <img class="dropdown" src="../../assets/commen/dropdown.png" />
           </p>
-          
         </div>
         <!-- 点击弹出部分 -->
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
-          <el-dropdown-item>
+          <!-- <el-dropdown-item>
             <span style="display: block" @click="userInfo">账号信息</span>
-          </el-dropdown-item>
+          </el-dropdown-item> -->
           <el-dropdown-item divided>
             <span style="display: block" @click="update">修改密码</span>
           </el-dropdown-item>
@@ -128,6 +128,7 @@ export default {
   methods: {
     //异步函数 不阻塞后面执行
     async logout() {
+      window.localStorage.removeItem("astoken");
       window.localStorage.removeItem("user");
       this.$router.push("/");
     },
@@ -156,11 +157,12 @@ export default {
 </script>
  
  
-<style scoped>
-.dropdown{
-width: 16px;
-margin-top: 0px;
-margin-left: 20px;
+<style lang="less" scoped>
+.dropdown {
+  width: 16px;
+  margin-top: 0px;
+  margin-left: 20px;
+  vertical-align: top;
 }
 .top {
   background: #409eff;

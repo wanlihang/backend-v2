@@ -1,7 +1,6 @@
 import axios from 'axios';
 import QS from 'querystring';
 import config from '../config';
-
 // 请求域名
 axios.defaults.baseURL = config.url;
 axios.defaults.timeout = 10000;
@@ -10,7 +9,7 @@ axios.defaults.timeout = 10000;
 axios.interceptors.request.use(
     config => {
         const token = localStorage.getItem('astoken');
-        token && (config.headers.as_token = token);
+        token && (config.headers.Authorization = 'Bearer ' + token);
         return config;
     },
     error => {
@@ -21,8 +20,8 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
     response => {
         let status = response.data.status;
-        //console.log(response)
-        if (status !== 0) {
+        //console.log(status)
+        if (status !== 0 && status != 401) {
             // api请求返回错误
             return Promise.reject(response);
         } else {
