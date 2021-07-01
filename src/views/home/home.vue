@@ -111,7 +111,7 @@
 </template>
  
 <script>
-import rightmenu from "../components/rightmenu.vue";
+import rightmenu from "../components/right_menu.vue";
 export default {
   components: {
     rightmenu,

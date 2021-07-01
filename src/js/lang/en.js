@@ -2,6 +2,7 @@ import enLocale from 'element-ui/lib/locale/lang/en' //引入element语言包
 const en = { //en
     commen: {
         Locale: "enLocale",
+        logintitle:'Home page',
         indextitle: "Home Page Overview",
         operation_management: "Operation Management",
         computer_terminal: "Computer Terminal",

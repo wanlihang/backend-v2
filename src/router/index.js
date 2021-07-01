@@ -11,11 +11,11 @@ const routes = [{
     component: () => import('../views/login/login.vue'),
     hidden: true, //在导航栏不显示  作为参数传过去控制
     meta: {
-      title: '首页'
+      title: 'commen.logintitle'
     }
   },
   {
-    path: '/demo',
+    path: '/home',
     name: 'commen.indextitle',
     leaf: true, //只有一个节点 点击即跳转
     component: () => import('../views/home/home.vue'),
@@ -23,10 +23,13 @@ const routes = [{
     children: [{
       path: '/index',
       component: index,
-      name: 'commen.indextitle'
+      name: 'commen.indextitle',
+      meta: {
+        title: 'commen.indextitle'
+      }
     }, ],
     meta: {
-      title: 'commen.indextitles'
+      title: 'commen.indextitle'
     }
   },
   {
@@ -40,29 +43,39 @@ const routes = [{
         name: 'commen.computer_terminal', //通过name值传递渲染侧边导航和面包屑
         iconCls: 'el-icon-s-grid menumedia', //icon图标
         component: () => import('../views/account/computer.vue'),
+        meta: {
+          title: 'commen.operation_management'
+        }
       },
       {
         path: '/mobile',
         name: 'commen.mobile_terminal',
         iconCls: 'el-icon-s-grid menumedia',
         component: () => import('../views/account/mobile.vue'),
+        meta: {
+          title: 'commen.operation_management'
+        }
       },
       {
         path: '/micro',
         name: 'commen.micro_page',
         iconCls: 'el-icon-s-grid menumedia',
         component: () => import('../views/account/micro.vue'),
+        meta: {
+          title: 'commen.operation_management'
+        }
       },
       {
         path: '/comment',
         name: 'commen.comment_management',
         iconCls: 'el-icon-s-grid menumedia',
         component: () => import('../views/account/comment.vue'),
+        meta: {
+          title: 'commen.operation_management'
+        }
       },
     ],
-    meta: {
-      title: 'commen.operation_management'
-    }
+   
   },
   {
     path: '/system',

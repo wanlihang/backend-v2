@@ -30,9 +30,9 @@
 </template>
 
 <script>
-import homedisplaychild from "../components/homedisplaychild";
-import slidechild from "../components/slidechild";
-import noticechild from "../components/noticechild";
+import homedisplaychild from "../components/home_display_child";
+import slidechild from "../components/slide_child";
+import noticechild from "../components/notice_child";
 export default {
   name: "tabZujian",
   components: {
@@ -60,5 +60,4 @@ export default {
   position: relative;
   box-sizing: border-box;
 }
-
 </style>

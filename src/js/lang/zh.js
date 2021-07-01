@@ -2,6 +2,7 @@ import zhLocale from 'element-ui/lib/locale/lang/zh-CN' //引入element语言包
 const zh = { //zh
     commen: {
         Locale: "zhLocale",
+        logintitle:'首页',
         indextitle: "首页概览",
         operation_management: "运营管理",
         computer_terminal: "电脑端",

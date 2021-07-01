@@ -13,11 +13,16 @@ import './assets/commen/variable.less';
 Vue.use(ElementUI);
 Vue.config.productionTip = false
 Vue.prototype.$api = api;
+export const setPageTitleTxt = (meta) => {
+  const { title } = meta
+  if (title) {
+    window.document.title = i18n.t(title)
+  }
+}
+
 router.beforeEach((to, from, next) => {
   /* 路由发生变化修改页面title */
-  if (to.meta.title) {
-    document.title = to.meta.title
-  }
+  setPageTitleTxt(to.meta)
   next()
 })
 
