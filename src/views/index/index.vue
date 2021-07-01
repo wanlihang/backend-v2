@@ -2,71 +2,79 @@
   <div class="el_content">
     <div class="el_top_row1">
       <div class="el_row_item">
-        <span class="item_title">今日收入</span>
+        <span class="item_title">{{ $t("index.day_income") }}</span>
         <p>{{ dayincome }}</p>
         <div class="item_info">
-          <span>昨天收入：{{ yesincome }}</span>
+          <span>{{ $t("index.yes_income") }}：{{ yesincome }}</span>
           <span
-            >较昨日：<strong>+{{ dayincomerate }}</strong></span
+            >{{ $t("index.compared_yesterday") }}：<strong
+              >+{{ dayincomerate }}</strong
+            ></span
           >
         </div>
       </div>
       <div class="el_row_item">
-        <span class="item_title">今日付费用户</span>
+        <span class="item_title">{{ $t("index.day_paid") }}</span>
         <p>{{ daypaynum }}</p>
         <div class="item_info">
-          <span>昨天付费用户：{{ yespaynum }}</span>
+          <span>{{ $t("index.yes_paid") }}：{{ yespaynum }}</span>
           <span
-            >较昨日：<strong>+{{ daypayrate }}</strong></span
+            >{{ $t("index.compared_yesterday") }}：<strong
+              >+{{ daypayrate }}</strong
+            ></span
           >
         </div>
       </div>
       <div class="el_row_item2">
         <div class="el_item">
-          <span>总用户</span>
+          <span>{{ $t("index.allnum") }}</span>
           <span class="el_item_num">{{ allnum }}</span>
           <span style="margin-left: auto"
-            >今日新增：<strong>+{{ allrate }}</strong></span
+            >{{ $t("index.day_increase") }}：<strong
+              >+{{ allrate }}</strong
+            ></span
           >
         </div>
         <div class="el_item">
-          <span>本月总收益</span>
+          <span>{{ $t("index.month_income") }}</span>
           <span class="el_item_num">{{ allincome }}</span>
           <span style="margin-left: auto"
-            >较上月：<strong>+{{ allincomerate }}</strong></span
+            >{{ $t("index.month_increase") }}：<strong
+              >+{{ allincomerate }}</strong
+            ></span
           >
         </div>
       </div>
     </div>
     <div class="el_top_row2">
-      <div class="tit">快速访问</div>
+      <div class="tit">{{ $t("index.quick_acsess") }}</div>
       <a href="" class="el_row2_item">
         <img src="../../assets/home/demand.png" />
-        <span>点播课程</span>
+        <span>{{ $t("index.demand_course") }}</span>
       </a>
       <a href="" class="el_row2_item">
         <img src="../../assets/home/live.png" />
-        <span>直播课程</span>
+        <span>{{ $t("index.live_course") }}</span>
       </a>
       <a href="" class="el_row2_item">
         <img src="../../assets/home/tuwen.png" />
-        <span>图文课程</span>
+        <span>{{ $t("index.graphic_course") }}</span>
       </a>
       <a href="" class="el_row2_item">
         <img src="../../assets/home/ebook.png" />
-        <span>电子书</span>
+        <span>{{ $t("index.ebook") }}</span>
       </a>
       <a href="" class="el_row2_item">
         <img src="../../assets/home/course.png" />
-        <span>课程路径</span>
+        <span>{{ $t("index.curriculum_path") }}</span>
       </a>
       <a href="" class="el_row2_item">
         <img src="../../assets/home/testpaper.png" />
-        <span>试卷</span>
+        <span>{{ $t("index.testpaper") }}</span>
       </a>
     </div>
     <div class="el_top_row3">
-      <div class="tit">统计分析</div>
+      <div class="tit">{{ $t("index.statistical_analysis") }}</div>
       <div class="selchartbox">
         <el-button
           :type="flagE === index + 1 ? 'primary' : ''"
@@ -82,11 +90,11 @@
           type="daterange"
           value-format="yyyy-MM-dd"
           range-separator="-"
-          start-placeholder="开始"
-          end-placeholder="结束时间"
+          :start-placeholder="$t('index.start_time')"
+          :end-placeholder="$t('index.end_time')"
           :picker-options="pickerOptions"
         />
-        <el-button @click="getchartsdata()">查询</el-button>
+        <el-button @click="getchartsdata()">{{ $t("index.query") }}</el-button>
       </div>
       <el-col class="formbox">
         <div
@@ -116,10 +124,10 @@ export default {
       allincome: 0,
       allincomerate: 0 + "%",
       navList: [
-        { name: "新注册用户" },
-        { name: "每日创建订单量" },
-        { name: "每日支付订单量" },
-        { name: "每日支付订单总额" },
+        { name: this.$t("index.new_registered_users") },
+        { name: this.$t("index.daily_order_creation") },
+        { name: this.$t("index.daily_order_payment") },
+        { name: this.$t("index.total_dailypayment_orders") },
       ],
       flagE: 1,
       time: "",
@@ -170,7 +178,7 @@ export default {
     },
     handleClickBtnE(index) {
       this.flagE = index + 1;
-      console.log(this.flagE);
+      //console.log(this.flagE);
       this.getZXTdata();
     },
     getZXTdata() {
@@ -204,15 +212,15 @@ export default {
     drawLineChart(val, xset) {
       const echarts = require("echarts");
       let myChart = echarts.init(document.getElementById("chartLine"));
-      var yset = "新注册用户";
+      var yset = this.$t("index.new_registered_users");
       if (this.flagE == 2) {
-        yset = "每日创建订单量";
+        yset = this.$t("index.daily_order_creation");
       } else if (this.flagE == 3) {
-        yset = "每日支付订单量";
+        yset = this.$t("index.daily_order_payment");
       } else if (this.flagE == 4) {
-        yset = "每日支付订单总额";
+        yset = this.$t("index.total_dailypayment_orders");
       } else {
-        yset = "新注册用户";
+        yset = this.$t("index.new_registered_users");
       }
       myChart.setOption({
         // title: {
@@ -311,7 +319,7 @@ export default {
       .item_info {
         margin-top: 30px;
         width: 100%;
-        height: 42px;
+        min-height: 42px;
         background: #f1f2f9;
         padding: 10px;
         box-sizing: border-box;
@@ -394,10 +402,8 @@ export default {
     justify-content: space-between;
     .tit {
       position: absolute;
-      width: 64px;
       height: 16px;
       font-size: 16px;
-
       font-weight: 600;
       color: #333333;
       line-height: 16px;
@@ -443,10 +449,8 @@ export default {
     position: relative;
     .tit {
       position: absolute;
-      width: 64px;
       height: 16px;
       font-size: 16px;
-
       font-weight: 600;
       color: #333333;
       line-height: 16px;

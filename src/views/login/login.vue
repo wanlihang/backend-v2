@@ -117,11 +117,13 @@ export default {
       this.lang = "zh";
       this.$i18n.locale = this.lang;
       localStorage.setItem("LANGUAGE", this.lang);   
+      
     },
     changeen() {
       this.lang = "en";
       this.$i18n.locale = this.lang;
       localStorage.setItem("LANGUAGE", this.lang);
+      
     },
     changeLanguage() {
       if (this.lang === "zh") {

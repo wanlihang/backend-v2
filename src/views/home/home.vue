@@ -12,7 +12,7 @@
           :key="item.path"
           :to="{ path: item.path }"
         >
-          <span>{{ item.name }}</span>
+          <span>{{ $t(item.name) }}</span>
         </div>
         <!-- 面包屑 -->
         <!-- 点击图标 左侧导航出现和隐藏切换 -->
@@ -64,12 +64,12 @@
                     :key="item.path"
                   >
                     <template slot="title">
-                      <i :class="item.iconCls"></i>
+                      <img :src="item.iconCls" class="piclogo" />
                       <span
                         slot="title"
                         :class="{ navName: isActive == item.path }"
                         @click="clickname(item.path)"
-                        >{{ item.name }}</span
+                        >{{ $t(item.name) }}</span
                       >
                     </template>
                     <el-menu-item
@@ -77,17 +77,17 @@
                       :index="child.path"
                       :key="child.path"
                       v-if="!child.hidden"
-                      >{{ child.name }}
+                      >{{ $t(child.name) }}
                     </el-menu-item>
                   </el-submenu>
                   <!-- 没有children的leaf属性 点击直接跳转 -->
-                  <el-menu-item
+                  <el-menu-item style="padding-left:15px !important;"
                     v-if="item.leaf"
                     :index="item.children[0].path"
                     :key="item.children[0].path"
                   >
-                    <i :class="item.iconCls"></i>
-                    <span slot="title"> {{ item.children[0].name }}</span>
+                    <img :src="item.iconCls" class="piclogo" style="margin-right:5px !important;" />
+                    <span slot="title"> {{ $t(item.children[0].name) }}</span>
                   </el-menu-item>
                 </template>
               </el-menu>
@@ -185,9 +185,9 @@ export default {
   width: 100%;
   height: 135px;
 }
-img {
-  width: 45%;
-}
+// img {
+//   width: 45%;
+// }
 
 .header {
   font-size: 25px;
@@ -212,7 +212,6 @@ img {
       height: 20px;
       height: 20px;
       font-size: 20px;
-
       font-weight: 600;
       color: #333333;
       line-height: 20px;
@@ -260,16 +259,18 @@ body > .el-container {
   line-height: 320px;
 }
 .el-submenu {
-  text-align: center;
+  text-align: left;
 }
 .el-menu-item {
-  text-align: center;
-  padding: 0 !important;
+  text-align: left;
 }
 .el-submenu .navName {
   width: 100%;
   display: inline-block;
   color: #555566;
+}
+.el-submenu .el-menu-item{
+  padding: 0 0 0 60px !important;
 }
 .el-submenu i {
   display: none !important;
@@ -279,6 +280,11 @@ body > .el-container {
 }
 .isCollapseFalseStyle {
   width: 200px !important;
+}
+.piclogo {
+  widows: 20px;
+  height: 20px;
+  margin-right: 10px;
 }
 @media screen and (min-width: 700px) {
   .header {
