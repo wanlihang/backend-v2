@@ -6,43 +6,40 @@
           <!-- 用户名 -->
           <p
             style="
-              line-height: 60px;
-              font-weight: 650;
-              font-style: normal;
-              color: #ffffff;
-              margin-right: 18px;
+              height: 16px;
+              font-size: 16px;
+              font-family: PingFangSC-Regular, PingFang SC;
+              font-weight: 400;
+              color: #666666;
+              line-height: 16px;
+              cursor: pointer;
             "
           >
             {{ fullName }}
+            <img class="dropdown" src="../../assets/commen/dropdown.png" />
           </p>
-          <!-- 图片 -->
-          <img
-            src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1562068714079&di=a1260d80c5ee35880c3e7cbf0a27461c&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F655ba5b31bc6243428a306b10a7f895b36d3d3d35a1e-5phgk4_fw658"
-            style="
-              width: 40px;
-              height: 40px;
-              border-radius: 20px;
-              cursor: pointer;
-            "
-          />
         </div>
         <!-- 点击弹出部分 -->
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
-          <el-dropdown-item>
+          <!-- <el-dropdown-item>
             <span style="display: block" @click="userInfo">账号信息</span>
+          </el-dropdown-item> -->
+          <el-dropdown-item divided>
+            <span style="display: block" @click="update">{{
+              $t("rightmenu.dropdown_editpassword")
+            }}</span>
           </el-dropdown-item>
           <el-dropdown-item divided>
-            <span style="display: block" @click="update">修改密码</span>
-          </el-dropdown-item>
-          <el-dropdown-item divided>
-            <span style="display: block" @click="logout">退出</span>
+            <span style="display: block" @click="logout">{{
+              $t("rightmenu.dropdown_logout")
+            }}</span>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
       <el-dialog
-        title="修改密码"
+        :title="$t('rightmenu.dropdown_editpassword')"
         :visible.sync="dialogVisible"
-        width="30%"
+        width="34%"
         :before-close="handleClose"
       >
         <el-form
@@ -50,23 +47,26 @@
           :model="ruleForm2"
           status-icon
           :rules="rules2"
-          label-width="100px"
+          label-width="150px"
           class="demo-ruleForm"
         >
-          <el-form-item label="旧密码" prop="oldPwd">
+          <el-form-item :label="$t('rightmenu.oldpassword')" prop="oldPwd">
             <el-input v-model="ruleForm2.oldPwd" />
           </el-form-item>
-          <el-form-item label="新密码" prop="pass">
+          <el-form-item :label="$t('rightmenu.newpassword')" prop="pass">
             <el-input v-model="ruleForm2.pass" autocomplete="off" />
           </el-form-item>
-          <el-form-item label="确认密码" prop="checkPass">
+          <el-form-item
+            :label="$t('rightmenu.confirm_password')"
+            prop="checkPass"
+          >
             <el-input v-model="ruleForm2.checkPass" autocomplete="off" />
           </el-form-item>
 
           <el-form-item>
-            <el-button type="primary" @click="submitForm('ruleForm2')"
-              >提交</el-button
-            >
+            <el-button type="primary" @click="submitForm('ruleForm2')">{{
+              $t("rightmenu.submit")
+            }}</el-button>
             <!-- <el-button @click="resetForm('ruleForm2')">重置</el-button> -->
           </el-form-item>
         </el-form>
@@ -135,6 +135,7 @@ export default {
   methods: {
     //异步函数 不阻塞后面执行
     async logout() {
+      window.localStorage.removeItem("astoken");
       window.localStorage.removeItem("user");
       this.$router.push("/");
     },
@@ -148,13 +149,16 @@ export default {
     },
     // 修改弹出框相关
     handleClose(done) {
-      this.$confirm("确认关闭？")
-        .then((_) => {
-          done();
-        })
-        .catch((_) => {});
+      done();
+      // this.$confirm("确认关闭？")
+      //   .then((_) => {
+      //     done();
+      //   })
+      //   .catch((_) => {});
     },
-    submitForm(formName) {},
+    submitForm(formName) {
+      console.log("提交")
+    },
     resetForm(formName) {
       this.$refs[formName].resetFields();
     },
@@ -163,7 +167,13 @@ export default {
 </script>
  
  
-<style scoped>
+<style lang="less" scoped>
+.dropdown {
+  width: 16px;
+  margin-top: 0px;
+  margin-left: 20px;
+  vertical-align: top;
+}
 .top {
   background: #409eff;
   margin-bottom: 20px;

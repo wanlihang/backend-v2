@@ -24,6 +24,14 @@ const zh = { //zh
         username_required: '请您输入管理员账号',
         password_require: '请您输入密码',
     },
+    rightmenu:{
+        dropdown_editpassword:"修改密码",
+        dropdown_logout:"退出",
+        oldpassword:"旧密码",
+        newpassword:"新密码",
+        confirm_password:"确认密码",
+        submit:"提交",
+    },
     index: {
         day_income: '今日收入',
         yes_income: '昨天收入',
@@ -49,6 +57,11 @@ const zh = { //zh
         total_dailypayment_orders: "每日支付订单总额",
         start_time: '开始',
         end_time: '结束时间',
+    },
+    computer_terminal: {
+        tab1: "首页展示",
+        tab2: "幻灯片",
+        tab3: "公告",
     },
     ...zhLocale
 }

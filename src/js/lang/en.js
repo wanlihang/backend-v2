@@ -24,6 +24,14 @@ const en = { //en
         username_required: 'Please enter the administrator account number',
         password_require: 'Please enter your passwo',
     },
+    rightmenu:{
+        dropdown_editpassword:"Change password",
+        dropdown_logout:"Sign out",
+        oldpassword:"Old password",
+        newpassword:"New password",
+        confirm_password:"Confirm password",
+        submit:"Submit",
+    },
     index: {
         day_income: "Today's revenue",
         yes_income: "Yesterday's",
@@ -49,6 +57,11 @@ const en = { //en
         total_dailypayment_orders: "Total daily payment orders",
         start_time: "Start",
         end_time: "End time",
+    },
+    computer_terminal: {
+        tab1: "Home page display",
+        tab2: "Slide",
+        tab3: "Notice",
     },
     ...enLocale
 }

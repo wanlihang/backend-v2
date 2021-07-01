@@ -81,12 +81,17 @@
                     </el-menu-item>
                   </el-submenu>
                   <!-- 没有children的leaf属性 点击直接跳转 -->
-                  <el-menu-item style="padding-left:15px !important;"
+                  <el-menu-item
+                    style="padding-left: 15px !important"
                     v-if="item.leaf"
                     :index="item.children[0].path"
                     :key="item.children[0].path"
                   >
-                    <img :src="item.iconCls" class="piclogo" style="margin-right:5px !important;" />
+                    <img
+                      :src="item.iconCls"
+                      class="piclogo"
+                      style="margin-right: 5px !important"
+                    />
                     <span slot="title"> {{ $t(item.children[0].name) }}</span>
                   </el-menu-item>
                 </template>
@@ -106,7 +111,7 @@
 </template>
  
 <script>
-import rightmenu from "./rightmenu";
+import rightmenu from "../components/rightmenu.vue";
 export default {
   components: {
     rightmenu,
@@ -269,7 +274,7 @@ body > .el-container {
   display: inline-block;
   color: #555566;
 }
-.el-submenu .el-menu-item{
+.el-submenu .el-menu-item {
   padding: 0 0 0 60px !important;
 }
 .el-submenu i {
