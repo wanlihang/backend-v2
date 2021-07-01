@@ -22,7 +22,7 @@ const en = { //en
         title: 'Login to MeEdu background management',
         langtext: "English",
         username_required: 'Please enter the administrator account number',
-        password_require: 'Please enter your passwo',
+        password_required: 'Please enter your password',
     },
     rightmenu:{
         dropdown_editpassword:"Change password",

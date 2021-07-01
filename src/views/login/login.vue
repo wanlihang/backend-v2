@@ -76,17 +76,31 @@ export default {
         username: "",
         password: "",
       },
-      rules2: {
+      checked: true,
+      lang: localStorage.getItem("LANGUAGE") || "zh",
+    };
+  },
+  computed: {
+    rules2() {
+      const rules2 = {
         username: [
-          { required: true, message: this.$t("login.username_required"), trigger: "blur" },
+          {
+            required: true,
+            message: this.$t("login.username_required"),
+            trigger: "blur",
+          },
         ],
         password: [
-          { required: true, message: this.$t("login.password_required"), trigger: "blur" },
+          {
+            required: true,
+            message: this.$t("login.password_required"),
+            trigger: "blur",
+          },
         ],
-      },
-      checked: true,
-      lang: localStorage.getItem('LANGUAGE') || 'zh',
-    };
+      };
+      // 清空表单验证信息
+      return rules2;
+    },
   },
   methods: {
     handleSubmit(event) {
@@ -116,14 +130,16 @@ export default {
     changezh() {
       this.lang = "zh";
       this.$i18n.locale = this.lang;
-      localStorage.setItem("LANGUAGE", this.lang);   
-      
+      localStorage.setItem("LANGUAGE", this.lang);
+      var temp = this.rules2;
+      this.rules2 = temp;
     },
     changeen() {
       this.lang = "en";
       this.$i18n.locale = this.lang;
       localStorage.setItem("LANGUAGE", this.lang);
-      
+      var temp = this.rules2;
+      this.rules2 = temp;
     },
     changeLanguage() {
       if (this.lang === "zh") {
@@ -252,14 +268,13 @@ label.el-checkbox.rememberme {
 }
 .el-dropdown-menu {
   width: 166px;
-  height: 136px;
   background: #ffffff;
   box-shadow: 0px 4px 10px 0px rgba(102, 102, 102, 0.2);
   border-radius: 8px;
   border: none;
   box-sizing: border-box;
   margin-top: 20px;
-  padding: 20px 0;
+  padding: 20px 0px;
   .el-dropdown-menu__item {
     text-align: center;
     font-size: 16px;

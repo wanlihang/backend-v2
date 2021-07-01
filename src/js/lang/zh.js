@@ -22,7 +22,7 @@ const zh = { //zh
         title: '登录MeEdu后台管理',
         langtext: "简体中文",
         username_required: '请您输入管理员账号',
-        password_require: '请您输入密码',
+        password_required: '请您输入密码',
     },
     rightmenu:{
         dropdown_editpassword:"修改密码",
