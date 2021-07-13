@@ -111,7 +111,7 @@ export default {
           //Utils.saveLocal("token", resp.data.token);
           localStorage.setItem("astoken", resp.data.token);
           localStorage.setItem("user", this.ruleForm2.username); //保存登录名
-          this.$router.push({ path: "/index" }); //跳到首页
+          this.$router.push({ name: "Dashboard" }); //跳到首页
         }
         this.loading = false;
       });

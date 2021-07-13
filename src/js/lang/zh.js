@@ -1,8 +1,12 @@
 import zhLocale from 'element-ui/lib/locale/lang/zh-CN' //引入element语言包
 const zh = { //zh
+    title: {
+        login: '登录',
+        dashboard: '首页概览'
+    },
     commen: {
         Locale: "zhLocale",
-        logintitle:'首页',
+        logintitle: '首页',
         indextitle: "首页概览",
         operation_management: "运营管理",
         computer_terminal: "电脑端",
@@ -25,13 +29,13 @@ const zh = { //zh
         username_required: '请您输入管理员账号',
         password_required: '请您输入密码',
     },
-    rightmenu:{
-        dropdown_editpassword:"修改密码",
-        dropdown_logout:"退出",
-        oldpassword:"旧密码",
-        newpassword:"新密码",
-        confirm_password:"确认密码",
-        submit:"提交",
+    rightmenu: {
+        dropdown_editpassword: "修改密码",
+        dropdown_logout: "退出",
+        oldpassword: "旧密码",
+        newpassword: "新密码",
+        confirm_password: "确认密码",
+        submit: "提交",
     },
     index: {
         day_income: '今日收入',
