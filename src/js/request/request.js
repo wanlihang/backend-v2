@@ -46,6 +46,12 @@ const Api = {
         Add(params) {
             return post(`/backend/api/v1/role`, params);
         },
+        Getinfo(id) {
+            return get(`/backend/api/v1/role/${id}`);
+        },
+        Edit(id) {
+            return put(`/backend/api/v1/role/${id}`);
+        }
     },
     Media: {
         Image: {

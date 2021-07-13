@@ -116,11 +116,9 @@ export default {
   flex-direction: row;
   padding-left: 20px;
   box-sizing: border-box;
-  label {
-    padding-left: 12px;
-  }
   .el-input {
     width: 180px;
+    margin-right: 12px;
   }
   span {
     font-size: 14px;
