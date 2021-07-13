@@ -1,8 +1,8 @@
 import axios from 'axios';
+import Utils from '@/js/utils';
 import QS from 'querystring';
-import config from '../config';
-// 请求域名
-axios.defaults.baseURL = config.url;
+
+// 请求超时
 axios.defaults.timeout = 10000;
 
 // 请求拦截器(附带上token)
@@ -20,9 +20,14 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
     response => {
         let status = response.data.status;
-        //console.log(status)
-        if (status !== 0 && status != 401) {
-            // api请求返回错误
+        if (status !== 0) {
+            if (status === 401) {
+                // 未登录,跳转到登录界面
+                Utils.clearToken();
+                window.location = '/';
+                return;
+            }
+            // 其它错误
             return Promise.reject(response);
         } else {
             return Promise.resolve(response);
