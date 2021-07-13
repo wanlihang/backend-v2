@@ -26,5 +26,15 @@ export default [
                 key: 'Orderlist'
             }
         ],
+    },
+    {
+        name: 'title.system',
+        key: 'System',
+        children: [
+            {
+                name: 'title.config',
+                key: 'SystemConfig',
+            }
+        ]
     }
 ];

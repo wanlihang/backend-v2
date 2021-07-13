@@ -58,6 +58,14 @@ const routes = [
         meta: {
           title: 'title.order'
         }
+      },
+      {
+        path: '/system/config',
+        component: () => import('@/views/system/config'),
+        name: 'SystemConfig',
+        meta: {
+          title: 'title.config'
+        }
       }
     ]
   },

@@ -3,11 +3,13 @@ const zh = { //zh
     title: {
         login: '登录',
         dashboard: '首页概览',
-        renovation:'装修',
+        renovation: '装修',
         computer_terminal: "电脑端",
         mobile_terminal: "移动端",
-        vip:'VIP会员',
-        order:'订单列表',
+        vip: 'VIP会员',
+        order: '订单列表',
+        system: '系统',
+        config: '系统配置'
     },
     commen: {
         Locale: "zhLocale",
@@ -75,6 +77,8 @@ const zh = { //zh
         tab3: "公告",
     },
     common: {
+        success: '成功',
+        fail: '失败',
         image: {
             select: '选择图片',
             upload: '上传图片',
@@ -85,26 +89,26 @@ const zh = { //zh
         group: '分组',
         none: '暂无数据'
     },
-    member:{
-        btn_add:'添加',
-        btn_edit:'编辑',
-        btn_del:'删除',
-        day:'天',
-        currency:'￥',
+    member: {
+        btn_add: '添加',
+        btn_edit: '编辑',
+        btn_del: '删除',
+        day: '天',
+        currency: '￥',
         addpage: {
-            display:'显示',
+            display: '显示',
             rolename: '角色名',
             days: '天数',
             charge: '价格',
-            placeholder:"如年度会员",
-            textplaceholder:"一行一个描述",
-            des:'描述',
-            btn_back:'返回',
-            name_notice:'角色名不能为空',
-            day_notice:'天数不能为空',
-            charge_notice:'价格不能为空',
-            des_notice:'描述不能为空',
-            btn_save:'保存',
+            placeholder: "如年度会员",
+            textplaceholder: "一行一个描述",
+            des: '描述',
+            btn_back: '返回',
+            name_notice: '角色名不能为空',
+            day_notice: '天数不能为空',
+            charge_notice: '价格不能为空',
+            des_notice: '描述不能为空',
+            btn_save: '保存',
         },
     },
     ...zhLocale

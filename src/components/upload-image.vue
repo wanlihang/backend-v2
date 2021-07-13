@@ -65,7 +65,8 @@ export default {
     margin-bottom: 0;
 
     img {
-        border-radius: 3px;
+      max-width: 100%;
+      border-radius: 3px;
     }
   }
 }

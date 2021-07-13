@@ -59,6 +59,17 @@ const Api = {
                 return get(`/backend/api/v1/media/images`, params);
             }
         }
+    },
+    System: {
+        Config: {
+            All() {
+                return get(`/backend/api/v1/setting`);
+            },
+            Save(params) {
+                return post(`/backend/api/v1/setting`, params);
+            }
+        }
+
     }
 }
 
