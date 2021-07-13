@@ -2,7 +2,7 @@ export default [
     {
         name: '首页概览',
         key: 'Dashboard',
-        icon: '@/assets/commen/indexlogo.png',
+        icon: '@/assets/common/indexlogo.png',
         children: [],
     },
     {
