@@ -3,10 +3,6 @@ import VueRouter from 'vue-router'
 import i18n from '@/js/i18n';
 import AppLayout from '@/views/layouts/app'
 import index from '@/views/index/index'
-import vip from '@/views/vip/vip'
-import addvip from '@/views/vip/dialogMemberAdd'
-import editvip from '@/views/vip/dialogMemberEdit'
-import orderlist from'@/views/order/orderlist'
 
 Vue.use(VueRouter)
 
@@ -33,7 +29,7 @@ const routes = [
       },
       {
         path: '/vip',
-        component: vip,
+        component: () => import('@/views/vip/vip'),
         name: 'Vip',
         meta: {
           title: 'title.vip'
@@ -41,7 +37,7 @@ const routes = [
       },
       {
         path: '/addvip',
-        component: addvip,
+        component: () => import('@/views/vip/dialogMemberAdd'),
         name: 'Addvip',
         meta: {
           title: 'title.vip'
@@ -49,7 +45,7 @@ const routes = [
       },
       {
         path: '/editvip',
-        component: editvip,
+        component: () => import('@/views/vip/dialogMemberEdit'),
         name: 'Editvip',
         meta: {
           title: 'title.vip'
@@ -57,7 +53,7 @@ const routes = [
       },
       {
         path: '/orderlist',
-        component: orderlist,
+        component: () => import('@/views/order/orderlist'),
         name: 'Order',
         meta: {
           title: 'title.order'

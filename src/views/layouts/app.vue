@@ -15,11 +15,7 @@
         <el-aside>
           <el-row>
             <transition name="el-fade-in">
-              <el-menu
-                default-active="0"
-                unique-opened
-                @select="menuSelect"
-              >
+              <el-menu default-active="0" unique-opened @select="menuSelect">
                 <template v-for="(item, index) in menus">
                   <el-submenu
                     v-if="item.children.length > 0"
@@ -28,10 +24,7 @@
                   >
                     <template slot="title">
                       <img :src="item.icon" class="piclogo" />
-                      <span
-                        slot="title"
-                        >{{ $t(item.name) }}</span
-                      >
+                      <span slot="title">{{ $t(item.name) }}</span>
                     </template>
                     <!-- 子菜单 -->
                     <el-menu-item
@@ -45,7 +38,7 @@
                   <el-menu-item
                     class="menu-item"
                     v-else
-                    :index="index + ''"
+                    :index="item.key"
                     :key="item.key"
                   >
                     <img :src="item.icon" class="piclogo" />
@@ -83,9 +76,13 @@ export default {
     };
   },
   methods: {
-    menuSelect({ path }) {
+    menuSelect(path) {
+      if (this.$route.name === path) {
+        // 已经是当前页面
+        return;
+      }
       this.$router.push({ name: path });
-    }
+    },
   },
 };
 </script>
