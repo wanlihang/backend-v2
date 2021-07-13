@@ -20,6 +20,10 @@ export default [
             {
                 name: 'title.vip',
                 key: 'Vip'
+            },
+            {
+                name: 'title.order',
+                key: 'Orderlist'
             }
         ],
     }

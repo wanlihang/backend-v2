@@ -43,12 +43,10 @@ export default {
   methods: {
     //添加
     addVipform() {
-      //console.log(111);
       this.$router.push({ name: "Addvip" });
     },
     //编辑
     editVipform(id) {
-      //console.log(id);
       this.$router.push({
         name: "Editvip",
         query: {
@@ -96,7 +94,6 @@ export default {
         })
         .catch(() => {
           //点击删除按钮的操作
-          //console.log(222)
         });
     },
     //刷新页面

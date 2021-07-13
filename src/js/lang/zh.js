@@ -7,6 +7,7 @@ const zh = { //zh
         computer_terminal: "电脑端",
         mobile_terminal: "移动端",
         vip:'VIP会员',
+        order:'订单列表',
     },
     commen: {
         Locale: "zhLocale",

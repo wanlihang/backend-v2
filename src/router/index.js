@@ -4,8 +4,9 @@ import i18n from '@/js/i18n';
 import AppLayout from '@/views/layouts/app'
 import index from '@/views/index/index'
 import vip from '@/views/vip/vip'
-import addvip from '@/views/components/dialogMemberAdd'
-import editvip from '@/views/components/dialogMemberEdit'
+import addvip from '@/views/vip/dialogMemberAdd'
+import editvip from '@/views/vip/dialogMemberEdit'
+import orderlist from'@/views/order/orderlist'
 
 Vue.use(VueRouter)
 
@@ -52,6 +53,14 @@ const routes = [
         name: 'Editvip',
         meta: {
           title: 'title.vip'
+        }
+      },
+      {
+        path: '/orderlist',
+        component: orderlist,
+        name: 'Order',
+        meta: {
+          title: 'title.order'
         }
       }
     ]
