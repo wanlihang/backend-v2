@@ -1,39 +1,53 @@
 <template>
-  <div ref="editor"></div>
+  <div>
+    <div ref="editor"></div>
+    <select-image
+      :show="showUploadImage"
+      :from="1"
+      @close="showUploadImage = false"
+      @selected="uploadImage"
+    ></select-image>
+  </div>
 </template>
 <script>
+import SelectImage from "@/components/select-image";
 import wangEditor from "wangeditor";
-import Utils from "@/js/utils";
 
 export default {
+  components: {
+    SelectImage,
+  },
   props: ["html", "height"],
   data() {
     return {
       editor: null,
       content: null,
+      showUploadImage: false,
     };
   },
   mounted() {
+    // 自定义菜单
+    const { BtnMenu } = wangEditor;
+    var that = this;
+    class UploadImage extends BtnMenu {
+      constructor(editor) {
+        const $elem = wangEditor.$(
+          `<div class="w-e-menu" data-title="Images"><i class="w-e-icon-image"></i></div>`
+        );
+        super($elem, editor);
+      }
+      clickHandler() {
+        that.showUploadImage = true;
+      }
+      tryChangeActive() {}
+    }
+    wangEditor.registerMenu("meedu-upload-image", UploadImage);
+    // 初始化
     const editor = new wangEditor(this.$refs["editor"]);
     // 基础配置
     editor.config.height = this.height || 300;
     editor.config.zIndex = 10;
     editor.config.focus = false;
-    // 图片上传配置
-    editor.config.uploadImgShowBase64 = false; // base 64 存储图片
-    editor.config.uploadImgServer = "/backend/api/v1/upload/image/tinymce"; // 配置服务器端地址
-    editor.config.uploadImgHeaders = {
-      Authorization: "Bearer " + Utils.getToken(),
-    }; // 自定义 header
-    editor.config.uploadFileName = "file"; // 后端接受上传文件的参数名
-    editor.config.uploadImgMaxSize = 5 * 1024 * 1024; // 将图片大小限制为 2M
-    editor.config.uploadImgMaxLength = 1; // 限制一次最多上传 3 张图片
-    editor.config.uploadImgTimeout = 60 * 1000; // 设置超时时间
-    editor.config.uploadImgHooks = {
-      customInsert: (insertImg, result) => {
-        insertImg(result.location);
-      },
-    };
     // 配置菜单
     editor.config.menus = [
       "head", // 标题
@@ -47,7 +61,6 @@ export default {
       "link", // 插入链接
       "justify", // 对齐方式
       "quote", // 引用
-      "image", // 插入图片
       "video", // 插入iframe
       "table", // 表格
       "code", // 插入代码
@@ -63,6 +76,13 @@ export default {
   methods: {
     emitUpdate(val) {
       this.$emit("change", val);
+    },
+    uploadImage(imgUrl) {
+      this.editor.cmd.do(
+        "insertHTML",
+        `<img src="${imgUrl}" style="max-width:100%;" contenteditable="false"/>`
+      );
+      this.showUploadImage = false;
     },
   },
   beforeDestroy() {
