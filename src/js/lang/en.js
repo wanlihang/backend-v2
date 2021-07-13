@@ -14,6 +14,7 @@ const en = { //en
         exam_practice:"Exam Practice",
         marketing_center:"Marketing Center",
         user_management:'User Management',
+        vip:'VIP Members',
         transaction_management:"Transaction Management",
     },
     login: {
