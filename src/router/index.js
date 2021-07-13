@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import i18n from '@/js/i18n';
 import layout from '@/views/home/home'
 import index from '@/views/index/index'
+import vip from '@/views/vip/vip'
+import addvip from '@/views/components/dialogMemberAdd'
 
 Vue.use(VueRouter)
 
@@ -25,6 +27,22 @@ const routes = [
         name: 'Dashboard',
         meta: {
           title: 'title.dashboard'
+        }
+      },
+      {
+        path: '/vip',
+        component: vip,
+        name: 'Vip',
+        meta: {
+          title: 'title.vip'
+        }
+      },
+      {
+        path: '/addvip',
+        component: addvip,
+        name: 'Addvip',
+        meta: {
+          title: 'title.vip'
         }
       }
     ]

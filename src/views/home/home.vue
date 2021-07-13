@@ -84,7 +84,8 @@ export default {
   },
   methods: {
     menuSelect({ path }) {
-      this.$router.push({ name: path });
+      console.log(","+path)
+      this.$router.push({ name: "Vip" });
     }
   },
 };

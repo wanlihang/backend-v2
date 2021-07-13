@@ -1,21 +1,25 @@
 export default [
     {
-        name: '首页概览',
+        name: 'title.dashboard',
         key: 'Dashboard',
         icon: '@/assets/commen/indexlogo.png',
         children: [],
     },
     {
-        name: '装修',
+        name: 'title.renovation',
         key: 'Decoration',
         children: [
             {
-                name: '电脑端',
+                name: 'title.computer_terminal',
                 key: 'DecorationPC',
             },
             {
-                name: '移动端',
+                name: 'title.mobile_terminal',
                 key: 'DecorationMobile'
+            },
+            {
+                name: 'title.vip',
+                key: 'Vip'
             }
         ],
     }

@@ -1,5 +1,13 @@
 import enLocale from 'element-ui/lib/locale/lang/en' //引入element语言包
 const en = { //en
+    title: {
+        login: 'Login',
+        dashboard: 'Home Page Overview',
+        renovation:'Renovation',
+        computer_terminal: "DecorationPC",
+        mobile_terminal: "DecorationMobile",
+        vip:'VIP Members',
+    },
     commen: {
         Locale: "enLocale",
         logintitle:'Home page',

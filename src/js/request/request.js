@@ -1,7 +1,8 @@
 import {
     get,
     post,
-    put
+    put,
+    destroy
 } from './http';
 
 const Api = {
@@ -36,8 +37,11 @@ const Api = {
         },
     },
     Member: {
-        Info() {
-            return get(`/backend/api/v1/member/info`);
+        Info(params) {
+            return get(`/backend/api/v1/role`,params);
+        },
+        Del(id) {
+            return destroy(`/backend/api/v1/role/${id}`);
         }
     }
 }

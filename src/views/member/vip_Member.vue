@@ -1,8 +1,15 @@
 <template>
-  <el-containe class="member_content">
-    <el-button>添加</el-button>
+  <el-container class="member_content">
+    <el-header>
+      <el-button type="primary" @click="addVipform()">添加</el-button>
+    </el-header>
+
+    <dialogMemberAdd
+      :dialogAddvisible="dialogAddvisible" :addForm="addForm"
+      @addDialogClose="addDialogClose" @refresh="refresh"
+    ></dialogMemberAdd>
     <el-main class="main_content">
-      <div class="el_item" v-for="item in memberbox" :key="item">
+      <div class="el_item" v-for="(item, index) in memberbox" :key="index">
         <div class="name">{{ item.name }}</div>
         <div class="days">{{ item.time }}</div>
         <div class="charge">￥{{ item.price }}</div>
@@ -12,20 +19,39 @@
         </div>
       </div>
     </el-main>
-  </el-containe>
+  </el-container>
 </template>
 <script>
+import dialogMemberAdd from "../components/dialogMemberAdd.vue";
 export default {
   name: "vip_member",
+  components: { dialogMemberAdd },
   data() {
     return {
       isloading: false,
+      dialogAddvisible: false,
+      addForm: {},
       memberbox: [
         { name: "年度会员", time: "365天", price: "365" },
         { name: "季度会员", time: "90天", price: "89" },
         { name: "月度会员", time: "30天", price: "35" },
       ],
     };
+  },
+  methods: {
+    addVipform() {
+      console.log(111);
+      this.dialogAddvisible = true;
+    },
+    //刷新页面
+    refresh() {
+      console.log("刷新页面");
+    },
+    addDialogClose() {
+      //刷新页面
+      this.refresh();
+      this.dialogAddvisible = false;
+    },
   },
 };
 </script>
