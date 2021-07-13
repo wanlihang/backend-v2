@@ -77,7 +77,6 @@ export default {
   methods: {
     //获取编辑详情
     getinfo(id) {
-      console.log(id);
       this.loading = true;
       this.$api.Member.Getinfo(id).then((resp) => {
         if (resp.status == 0) {
@@ -88,7 +87,6 @@ export default {
           this.addForm.expire_days=data.expire_days;
           this.addForm.charge=data.charge;
           this.addForm.description=data.description;
-          console.log("载入完毕")
         } else {
           this.$message(resp.message);
         }
