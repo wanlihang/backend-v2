@@ -37,7 +37,7 @@ const routes = [
       },
       {
         path: '/addvip',
-        component: () => import('@/views/vip/dialogMemberAdd'),
+        component: () => import('@/views/vip/add'),
         name: 'Addvip',
         meta: {
           title: 'title.vip'
@@ -45,7 +45,7 @@ const routes = [
       },
       {
         path: '/editvip',
-        component: () => import('@/views/vip/dialogMemberEdit'),
+        component: () => import('@/views/vip/edit'),
         name: 'Editvip',
         meta: {
           title: 'title.vip'
@@ -54,7 +54,7 @@ const routes = [
       {
         path: '/orderlist',
         component: () => import('@/views/order/orderlist'),
-        name: 'Order',
+        name: 'Orderlist',
         meta: {
           title: 'title.order'
         }

@@ -53,6 +53,11 @@ const Api = {
             return put(`/backend/api/v1/role/${id}`, params);
         }
     },
+    Order:{
+        List(params) {
+            return get(`/backend/api/v1/order`, params);
+        },
+    },
     Media: {
         Image: {
             List(params) {

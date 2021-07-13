@@ -64,7 +64,6 @@ export default {
       };
       this.$api.Member.Info(data).then((resp) => {
         if (resp.status == 0) {
-          console.log("获取信息");
           this.page = resp.data.current_page + 1;
           this.memberbox = resp.data.data;
         }
@@ -83,7 +82,6 @@ export default {
           this.loading = true;
           this.$api.Member.Del(id).then((resp) => {
             if (resp.status == 0) {
-              console.log("删除成功");
               this.$message("删除成功");
               this.getmemberinfo(1);
             } else {
