@@ -5,7 +5,7 @@
         <div class="logo-box">
           <img src="@/assets/home/logo.png" width="112" height="30" />
         </div>
-        <div class="page-name">{{$t($route.meta.title)}}</div>
+        <div class="page-name">{{ $t($route.meta.title) }}</div>
         <div class="user-info">
           <rightmenu class="rightmenu"></rightmenu>
         </div>
@@ -15,7 +15,11 @@
         <el-aside>
           <el-row>
             <transition name="el-fade-in">
-              <el-menu default-active="0" unique-opened @select="menuSelect">
+              <el-menu
+                :default-active="defaultActive"
+                unique-opened
+                @select="menuSelect"
+              >
                 <template v-for="(item, index) in menus">
                   <el-submenu
                     v-if="item.children.length > 0"
@@ -70,10 +74,14 @@ export default {
   name: "home",
   data() {
     return {
+      defaultActive: "Dashboard",
       isCollapse: false,
       levelList: null,
       menus: Menus,
     };
+  },
+  mounted() {
+    this.defaultActive = this.$route.name;
   },
   methods: {
     menuSelect(path) {
