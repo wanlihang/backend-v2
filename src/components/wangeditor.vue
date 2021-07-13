@@ -3,6 +3,7 @@
 </template>
 <script>
 import wangEditor from "wangeditor";
+import Utils from "@/js/utils";
 
 export default {
   props: ["html", "height"],
@@ -22,7 +23,7 @@ export default {
     editor.config.uploadImgShowBase64 = false; // base 64 存储图片
     editor.config.uploadImgServer = "/backend/api/v1/upload/image/tinymce"; // 配置服务器端地址
     editor.config.uploadImgHeaders = {
-      Authorization: "Bearer " + Utils.getLocal("token"),
+      Authorization: "Bearer " + Utils.getToken(),
     }; // 自定义 header
     editor.config.uploadFileName = "file"; // 后端接受上传文件的参数名
     editor.config.uploadImgMaxSize = 5 * 1024 * 1024; // 将图片大小限制为 2M

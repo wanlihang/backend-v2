@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import i18n from '@/js/i18n';
-import layout from '@/views/home/home'
+import AppLayout from '@/views/layouts/app'
 import index from '@/views/index/index'
 
 Vue.use(VueRouter)
@@ -17,7 +17,7 @@ const routes = [
   },
   {
     path: '/Home',
-    component: layout,
+    component: AppLayout,
     children: [
       {
         path: '/dashboard',
@@ -28,6 +28,14 @@ const routes = [
         }
       }
     ]
+  },
+  {
+    path: '/test',
+    name: 'Test',
+    component: () => import('@/views/test/test.vue'),
+    meta: {
+      title: 'Test'
+    }
   }
 ]
 
