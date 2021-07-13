@@ -101,7 +101,7 @@ export default {
   },
 };
 </script>
-<style  lang="less" >
+<style lang="less" >
 div {
   box-sizing: border-box;
 }

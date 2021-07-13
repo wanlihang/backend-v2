@@ -42,7 +42,10 @@ const Api = {
         },
         Del(id) {
             return destroy(`/backend/api/v1/role/${id}`);
-        }
+        },
+        Add(params){
+            return post(`/backend/api/v1/role`, params);
+        },
     }
 }
 

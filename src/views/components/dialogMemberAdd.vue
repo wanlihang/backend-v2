@@ -1,5 +1,8 @@
 <template>
-  <el-container >
+  <el-container>
+    <el-header>
+      <h1>添加</h1>
+    </el-header>
     <!-- el-form表单 -->
     <el-form
       :model="addForm"
@@ -7,54 +10,148 @@
       ref="UserRef"
       label-width="80px"
     >
-      <el-form-item label="用户名" prop="username">
-        <el-input v-model="addForm.username"></el-input>
-      </el-form-item>
+      <div class="row">
+        <el-form-item label="角色名" prop="name">
+          <el-input v-model="addForm.name" placeholder="如年度会员"></el-input>
+        </el-form-item>
+        <el-form-item label="天数" prop="expire_days">
+          <el-input type="number" v-model="addForm.expire_days"></el-input>
+        </el-form-item>
+        <el-form-item label="价格" prop="charge">
+          <el-input type="number" v-model="addForm.charge"></el-input>
+        </el-form-item>
+      </div>
+      <div class="row"><span>显示</span></div>
+      <el-switch
+        prop="is_show"
+        active-color="#409eff"
+        :active-value="1"
+        :inactive-value="0"
+        v-model="addForm.is_show"
+      ></el-switch>
+      <div class="row">
+        <el-form-item label="描述" prop="description">
+          <el-input
+            type="textarea"
+            v-model="addForm.description"
+            placeholder="一行一个描述"
+          ></el-input>
+        </el-form-item>
+      </div>
     </el-form>
 
-    <span slot="footer" class="dialog-footer">
-      <el-button @click="dialogClose()">取 消</el-button>
-      <el-button type="primary" @click="addUserForm()">确 定</el-button>
-    </span>
-  </el-container >
+    <el-footer>
+      <el-button @click="dialogClose()">返回</el-button>
+      <el-button type="primary" @click="addUserForm()">添加</el-button>
+    </el-footer>
+  </el-container>
 </template>
 <script>
 export default {
   name: "addVip",
   data() {
     return {
-      isloading: false,
-      addForm: [{ username: "" }],
+      loading: false,
+      addForm: {
+        name: "",
+        expire_days: "",
+        charge: "",
+        is_show: 1,
+        description: "",
+        weight:0,
+      },
       UserRules: {
-        username: [
-          { required: true, message: "请输入活动名称", trigger: "blur" },
-          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" },
+        name: [{ required: true, message: "角色名不能为空", trigger: "blur" }],
+        expire_days: [{ required: true, message: "天数不能为空", trigger: "blur" }],
+        charge: [{ required: true, message: "价格不能为空", trigger: "blur" }],
+        description: [
+          { required: true, message: "描述不能为空", trigger: "blur" },
         ],
       },
     };
   },
   methods: {
     //清空表单
-    clearForm(){
-        this.addForm.username=""
+    clearForm() {
+      this.addForm.name = "";
+      this.addForm.expire_days= "";
+      this.addForm.charge = "";
+      this.addForm.is_show=1;
+      this.addForm.description="";
     },
     //关闭按钮
     dialogClose() {
-      this.$refs.UserRef.resetFields();
-      this.$emit("addDialogClose");
       this.clearForm();
+      this.$router.push({ name: "Vip" });
     },
     //确定
     addUserForm() {
       this.$refs.UserRef.validate(async (valid) => {
         if (!valid) return;
-        const { data: res } = await this.$http.post("roles", this.UserForm);
-        if (res.meta.status !== 201) return this.$message.error("添加失败");
-        this.$message.success("添加成功");
-        this.dialogvisible = false; //关闭dialog对话框
-        this.getUserList(); //重新加载列表
+        this.loading = true;
+        const { data: res } = await this.$api.Member.Add(this.addForm).then(
+          (resp) => {
+            if (resp.status == 0) {
+              this.$message.success("添加成功");
+              this.$router.push({ name: "Vip" });
+              this.clearForm();
+            } else {
+              this.$message(resp.message);
+            }
+            this.loading = false;
+          }
+        );
       });
     },
   },
 };
 </script>
+<style  lang="less" >
+.el-form-item__label {
+  text-align: left;
+}
+.row {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  padding-left: 20px;
+  box-sizing: border-box;
+  label {
+    padding-left: 12px;
+  }
+  .el-input {
+    width: 180px;
+  }
+  span {
+    font-size: 14px;
+    color: #606266;
+    line-height: 40px;
+    padding: 0 12px 0 0;
+    box-sizing: border-box;
+  }
+}
+.el-switch {
+  margin: 20px;
+}
+.el-textarea__inner {
+  position: relative;
+  background-color: #fff;
+  border-radius: 4px;
+  border: 1px solid #eee;
+  line-height: 1.5;
+  font-size: 14px;
+  -webkit-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  font-family: inherit;
+  vertical-align: top;
+  outline: none;
+  width: 750px;
+  height: 120px;
+}
+.el-footer {
+  margin-top: 20px;
+}
+</style>
