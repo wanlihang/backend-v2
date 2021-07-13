@@ -1,7 +1,7 @@
 <template>
   <el-dialog
     :title="$t('common.image.select')"
-    :visible.sync="dialogVisible"
+    :visible="show"
     :show-close="false"
     :close-on-press-escape="false"
     :close-on-click-modal="false"
@@ -42,6 +42,7 @@
         <div class="body" v-if="list.length > 0 || loading" v-loading="loading">
           <div
             class="image-item"
+            :class="{ active: imageUrl === item.url }"
             v-for="item in list"
             :key="item.id"
             @click="imageUrl = item.url"
@@ -71,7 +72,7 @@
       </div>
     </div>
     <div slot="footer" class="dialog-footer">
-      <el-button @click="dialogVisible = false">
+      <el-button @click="close">
         {{ $t("common.cancel") }}
       </el-button>
       <el-button type="primary" @click="confirm">
@@ -153,13 +154,19 @@ export default {
         this.loading = false;
       });
     },
+    close() {
+      this.$emit("close");
+    },
     confirm() {
-      this.$emit("imageSeleted", this.imageUrl);
+      this.$emit("selected", this.imageUrl);
     },
     uploadSuccessEvt() {
       this.getData();
     },
   },
+  beforeDestroy() {
+    this.imageUrl = null;
+  }
 };
 </script>
 
@@ -246,6 +253,7 @@ export default {
         padding: 10px;
         cursor: pointer;
 
+        &.active,
         &:hover {
           background-color: rgba(0, 0, 0, 0.05);
         }
