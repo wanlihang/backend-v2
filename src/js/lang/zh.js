@@ -84,6 +84,28 @@ const zh = { //zh
         group: '分组',
         none: '暂无数据'
     },
+    member:{
+        btn_add:'添加',
+        btn_edit:'编辑',
+        btn_del:'删除',
+        day:'天',
+        currency:'￥',
+        addpage: {
+            display:'显示',
+            rolename: '角色名',
+            days: '天数',
+            charge: '价格',
+            placeholder:"如年度会员",
+            textplaceholder:"一行一个描述",
+            des:'描述',
+            btn_back:'返回',
+            name_notice:'角色名不能为空',
+            day_notice:'天数不能为空',
+            charge_notice:'价格不能为空',
+            des_notice:'描述不能为空',
+            btn_save:'保存',
+        },
+    },
     ...zhLocale
 }
 export default zh;

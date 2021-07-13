@@ -1,7 +1,7 @@
 <template>
   <el-container>
     <el-header>
-      <h1>编辑</h1>
+      <h1>{{$t("member.btn_edit") }}</h1>
     </el-header>
     <!-- el-form表单 -->
     <el-form
@@ -11,17 +11,17 @@
       label-width="80px"
     >
       <div class="row">
-        <el-form-item label="角色名" prop="name">
-          <el-input v-model="addForm.name" placeholder="如年度会员"></el-input>
+        <el-form-item :label="$t('member.addpage.rolename')" prop="name">
+          <el-input v-model="addForm.name" :placeholder="$t('member.addpage.placeholder')"></el-input>
         </el-form-item>
-        <el-form-item label="天数" prop="expire_days">
+        <el-form-item :label="$t('member.addpage.days')" prop="expire_days">
           <el-input type="number" v-model="addForm.expire_days"></el-input>
         </el-form-item>
-        <el-form-item label="价格" prop="charge">
+        <el-form-item :label="$t('member.addpage.charge')"  prop="charge">
           <el-input type="number" v-model="addForm.charge"></el-input>
         </el-form-item>
       </div>
-      <div class="row"><span>显示</span></div>
+      <div class="row"><span>{{$t("member.addpage.display") }}</span></div>
       <el-switch
         prop="is_show"
         active-color="#409eff"
@@ -30,19 +30,19 @@
         v-model="addForm.is_show"
       ></el-switch>
       <div class="row">
-        <el-form-item label="描述" prop="description">
+        <el-form-item :label="$t('member.addpage.des')" prop="description">
           <el-input
             type="textarea"
             v-model="addForm.description"
-            placeholder="一行一个描述"
+             :placeholder="$t('member.addpage.textplaceholder')"
           ></el-input>
         </el-form-item>
       </div>
     </el-form>
 
     <el-footer>
-      <el-button @click="dialogClose()">返回</el-button>
-      <el-button type="primary" @click="editUserForm()">保存</el-button>
+      <el-button @click="dialogClose()">{{$t("member.addpage.btn_back") }}</el-button>
+      <el-button type="primary" @click="editUserForm()">{{$t("member.addpage.btn_save") }}</el-button>
     </el-footer>
   </el-container>
 </template>
@@ -53,7 +53,7 @@ export default {
     return {
       loading: false,
       addForm: {
-        id: this.$route.params.id || "",
+        id: this.$route.query.id || "",
         name: "",
         expire_days: "",
         charge: "",
@@ -62,13 +62,11 @@ export default {
         weight: 0,
       },
       UserRules: {
-        name: [{ required: true, message: "角色名不能为空", trigger: "blur" }],
-        expire_days: [
-          { required: true, message: "天数不能为空", trigger: "blur" },
-        ],
-        charge: [{ required: true, message: "价格不能为空", trigger: "blur" }],
+        name: [{ required: true, message: this.$t("member.addpage.name_notice"), trigger: "blur" }],
+        expire_days: [{ required: true, message: this.$t("member.addpage.day_notice"), trigger: "blur" }],
+        charge: [{ required: true, message: this.$t("member.addpage.charge_notice"), trigger: "blur" }],
         description: [
-          { required: true, message: "描述不能为空", trigger: "blur" },
+          { required: true, message: this.$t("member.addpage.des_notice"), trigger: "blur" },
         ],
       },
     };

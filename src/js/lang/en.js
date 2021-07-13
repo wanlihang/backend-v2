@@ -73,6 +73,9 @@ const en = { //en
         tab2: "Slide",
         tab3: "Notice",
     },
+    member:{
+        btn_add:'Add',
+    },
     ...enLocale
 }
 export default en;

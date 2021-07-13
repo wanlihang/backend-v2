@@ -1,7 +1,7 @@
 <template>
   <el-container class="member_content">
     <el-header>
-      <el-button type="primary" @click="addVipform()">添加</el-button>
+      <el-button type="primary" @click="addVipform()">{{$t("member.btn_add") }}</el-button>
     </el-header>
     <el-main class="main_content">
       <div
@@ -11,14 +11,14 @@
         v-show="item.is_show == 1"
       >
         <div class="name">{{ item.name }}</div>
-        <div class="days">{{ item.expire_days }}天</div>
-        <div class="charge">￥{{ item.charge }}</div>
+        <div class="days">{{ item.expire_days }}{{$t("member.day") }}</div>
+        <div class="charge">{{$t("member.currency") }}{{ item.charge }}</div>
         <div class="options">
           <el-button type="danger" @click="del_Meberitem(item.id)">
-            删除
+            {{$t("member.btn_del") }}
           </el-button>
           <el-button type="warning" @click="editVipform(item.id)">
-            编辑
+            {{$t("member.btn_edit") }}
           </el-button>
         </div>
       </div>
@@ -51,7 +51,7 @@ export default {
       //console.log(id);
       this.$router.push({
         name: "Editvip",
-        params: {
+        query: {
           id: id,
         },
       });
