@@ -17,7 +17,11 @@
             <img :src="scope.row.title_img" alt="" style="width: 60px" />
           </template>
         </el-table-column> -->
-        <el-table-column prop="goods" label="商品"> </el-table-column>
+        <el-table-column label="商品">
+         <template slot-scope="scope">
+            <span v-for="item in scope.row.goods" :key="item.id">[{{item.goods_text}}]{{item.goods_name}}:{{item.goods_charge}}</span>
+          </template>
+        </el-table-column>
         <el-table-column prop="updated_at" label="时间"> </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
