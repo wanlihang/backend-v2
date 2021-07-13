@@ -14,8 +14,12 @@
         <div class="days">{{ item.expire_days }}天</div>
         <div class="charge">￥{{ item.charge }}</div>
         <div class="options">
-          <el-button type="danger" @click="del_Meberitem(item.id)"> 删除 </el-button>
-          <el-button type="warning" @click="editVipform()"> 编辑 </el-button>
+          <el-button type="danger" @click="del_Meberitem(item.id)">
+            删除
+          </el-button>
+          <el-button type="warning" @click="editVipform(item.id)">
+            编辑
+          </el-button>
         </div>
       </div>
     </el-main>
@@ -39,12 +43,18 @@ export default {
   methods: {
     //添加
     addVipform() {
-      console.log(111);
+      //console.log(111);
       this.$router.push({ name: "Addvip" });
     },
     //编辑
-    editVipform(){
-      console.log(222)
+    editVipform(id) {
+      //console.log(id);
+      this.$router.push({
+        name: "Editvip",
+        params: {
+          id: id,
+        },
+      });
     },
     //获取会员信息
     getmemberinfo(p) {

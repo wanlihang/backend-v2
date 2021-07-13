@@ -49,8 +49,8 @@ const Api = {
         Getinfo(id) {
             return get(`/backend/api/v1/role/${id}`);
         },
-        Edit(id) {
-            return put(`/backend/api/v1/role/${id}`);
+        Edit(id, params) {
+            return put(`/backend/api/v1/role/${id}`, params);
         }
     },
     Media: {

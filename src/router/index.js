@@ -5,6 +5,7 @@ import AppLayout from '@/views/layouts/app'
 import index from '@/views/index/index'
 import vip from '@/views/vip/vip'
 import addvip from '@/views/components/dialogMemberAdd'
+import editvip from '@/views/components/dialogMemberEdit'
 
 Vue.use(VueRouter)
 
@@ -41,6 +42,14 @@ const routes = [
         path: '/addvip',
         component: addvip,
         name: 'Addvip',
+        meta: {
+          title: 'title.vip'
+        }
+      },
+      {
+        path: '/editvip',
+        component: editvip,
+        name: 'Editvip',
         meta: {
           title: 'title.vip'
         }
