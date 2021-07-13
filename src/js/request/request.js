@@ -31,21 +31,28 @@ const Api = {
             return get(`/backend/api/v1/app/${id}/record`, params);
         }
     },
-    Stat:{
-        Statistic(id,params) {
+    Stat: {
+        Statistic(id, params) {
             return get(`/backend/api/v1/statistic/${id}`, params);
         },
     },
     Member: {
         Info(params) {
-            return get(`/backend/api/v1/role`,params);
+            return get(`/backend/api/v1/role`, params);
         },
         Del(id) {
             return destroy(`/backend/api/v1/role/${id}`);
         },
-        Add(params){
+        Add(params) {
             return post(`/backend/api/v1/role`, params);
         },
+    },
+    Media: {
+        Image: {
+            List(params) {
+                return get(`/backend/api/v1/media/images`, params);
+            }
+        }
     }
 }
 

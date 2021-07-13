@@ -22,7 +22,7 @@ const zh = { //zh
         exam_practice: "考试练习",
         marketing_center: "营销中心",
         user_management: '用户管理',
-        vip:'VIP会员',
+        vip: 'VIP会员',
         transaction_management: "交易管理",
     },
     login: {
@@ -72,6 +72,17 @@ const zh = { //zh
         tab1: "首页展示",
         tab2: "幻灯片",
         tab3: "公告",
+    },
+    common: {
+        image: {
+            select: '选择图片',
+            upload: '上传图片',
+            format_alert: '只能上传jpg,png,jpeg,git图文文件'
+        },
+        cancel: '取消',
+        confirm: '确定',
+        group: '分组',
+        none: '暂无数据'
     },
     ...zhLocale
 }
