@@ -6,7 +6,7 @@ import router from './router';
 import store from './store';
 import api from './js/request/request';
 import i18n from './js/i18n';
-import './assets/commen/variable.less';
+import './assets/common/variable.less';
 
 
 Vue.use(ElementUI);

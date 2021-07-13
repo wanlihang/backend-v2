@@ -16,7 +16,7 @@
             "
           >
             {{ fullName }}
-            <img class="dropdown" src="../../assets/commen/dropdown.png" />
+            <img class="dropdown" src="../../assets/common/dropdown.png" />
           </p>
         </div>
         <!-- 点击弹出部分 -->

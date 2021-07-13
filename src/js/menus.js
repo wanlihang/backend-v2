@@ -2,7 +2,7 @@ export default [
     {
         name: 'title.dashboard',
         key: 'Dashboard',
-        icon: '@/assets/commen/indexlogo.png',
+        icon: '@/assets/common/indexlogo.png',
         children: [],
     },
     {
