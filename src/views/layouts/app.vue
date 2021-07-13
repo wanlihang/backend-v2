@@ -5,7 +5,7 @@
         <div class="logo-box">
           <img src="@/assets/home/logo.png" width="112" height="30" />
         </div>
-        <div class="page-name">首页</div>
+        <div class="page-name">{{$t($route.meta.title)}}</div>
         <div class="user-info">
           <rightmenu class="rightmenu"></rightmenu>
         </div>
