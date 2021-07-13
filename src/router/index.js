@@ -131,7 +131,15 @@ const routes = [{
     iconCls: require('../assets/commen/indexlogo.png'),
     component: () => import('../views/home/home.vue'), //布局页面
     children: [ //其他导航只跳转children
-
+        {
+          path: '/member',
+          name: 'commen.vip', //通过name值传递渲染侧边导航和面包屑
+          iconCls: 'el-icon-s-grid menumedia', //icon图标
+          component: () => import('../views/member/vip_Member.vue'),
+          meta: {
+            title: 'commen.user_management'
+          }
+        },
     ],
     meta: {
       title: 'commen.user_management'

@@ -14,6 +14,7 @@ const zh = { //zh
         exam_practice: "考试练习",
         marketing_center: "营销中心",
         user_management: '用户管理',
+        vip:'VIP会员',
         transaction_management: "交易管理",
     },
     login: {
