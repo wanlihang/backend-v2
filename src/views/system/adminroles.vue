@@ -137,7 +137,7 @@ export default {
             return;
           }
           this.loading = true;
-          this.$api.System.administrator.Destory(id).then((res) => {
+          this.$api.System.adminroles.Destory(id).then((res) => {
             if (res.status == 0) {
               this.loading = false;
               this.$message("删除成功");

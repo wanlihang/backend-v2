@@ -131,6 +131,9 @@ const Api = {
             Store(params) {
                 return post(`/backend/api/v1/administrator_role`, params);
             },
+            Destory(id) {
+                return destroy(`/backend/api/v1/administrator_role/${id}`);
+            },
         },
     },
     Member: {
