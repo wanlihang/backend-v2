@@ -227,6 +227,9 @@ export default {
         this.filterData.roles = res.data.roles;
       });
     },
+    detail(item) {
+      this.$router.push({ name: "MemberDetail", params: { userId: item.id } });
+    },
   },
 };
 </script>

@@ -120,7 +120,34 @@ const Api = {
         },
         Import(params) {
             return post(`/backend/api/v1/member/import`, params);
-        }
+        },
+        Detail(id) {
+            return get(`/backend/api/v1/member/${id}/detail`);
+        },
+        UserCourses(id, params) {
+            return get(`/backend/api/v1/member/${id}/detail/userCourses`, params);
+        },
+        UserVideos(id, params) {
+            return get(`/backend/api/v1/member/${id}/detail/userVideos`, params);
+        },
+        UserRoles(id, params) {
+            return get(`/backend/api/v1/member/${id}/detail/userRoles`, params);
+        },
+        UserOrders(id, params) {
+            return get(`/backend/api/v1/member/${id}/detail/userOrders`, params);
+        },
+        UserCredit1(id, params) {
+            return get(`/backend/api/v1/member/${id}/detail/credit1Records`, params);
+        },
+        UserInviteRecords(id, params) {
+            return get(`/backend/api/v1/member/${id}/detail/userInvite`, params);
+        },
+        UserVodWatchRecords(id, params) {
+            return get(`/backend/api/v1/member/${id}/detail/userHistory`, params);
+        },
+        UserVideoWatchRecords(id, params) {
+            return get(`/backend/api/v1/member/${id}/detail/videoWatchRecords`, params);
+        },
     }
 }
 

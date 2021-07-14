@@ -14,7 +14,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["loginHandle"]),
+    ...mapMutations(["loginHandle", "setEnabledAddons"]),
   },
   mounted() {
     // 自动登录
@@ -26,6 +26,19 @@ export default {
         });
       }
     }
+
+    // 获取已开启的插件
+    this.$api.System.Addons.LocalList().then((res) => {
+      let enabledAddons = {};
+      
+      for (let i = 0; i < res.data.length; i++) {
+        if (res.data[i].enabled) {
+          enabledAddons[res.data[i].sign] = 1;
+        }
+      }
+
+      this.setEnabledAddons(enabledAddons);
+    });
   },
 };
 </script>

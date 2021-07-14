@@ -7,7 +7,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     user: null,
-    isLogin: false
+    isLogin: false,
+    enabledAddons: {}
   },
   mutations: {
     loginHandle(state, user) {
@@ -18,6 +19,9 @@ export default new Vuex.Store({
       state.user = null;
       state.isLogin = false;
       Utils.clearToken();
+    },
+    setEnabledAddons(state, addons) {
+      state.enabledAddons = addons;
     }
   },
   actions: {

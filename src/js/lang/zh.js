@@ -19,7 +19,8 @@ const zh = { //zh
         member: {
             index: '用户',
             create: '创建用户',
-            import: '批量导入'
+            import: '批量导入',
+            detail: '用户详情'
         }
     },
     commen: {
