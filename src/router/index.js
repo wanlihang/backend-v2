@@ -106,6 +106,14 @@ const routes = [
         meta: {
           title: 'title.member.index'
         }
+      },
+      {
+        path: '/member/create',
+        component: () => import('@/views/member/create'),
+        name: 'MemberCreate',
+        meta: {
+          title: 'title.member.create'
+        }
       }
     ]
   },

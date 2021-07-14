@@ -16,7 +16,8 @@ const zh = { //zh
         },
         'system-application': '应用商城',
         member: {
-            index: '用户'
+            index: '用户',
+            create: '创建用户'
         }
     },
     commen: {
