@@ -13,6 +13,7 @@ const zh = { //zh
         system: '系统',
         config: '系统配置',
         'system-administrator':'管理员',
+        'system-adminroles':'管理员角色',
         createadmin:'添加管理员',
         updateadmin:'编辑管理员',
         administrator: {

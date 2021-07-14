@@ -121,6 +121,17 @@ const Api = {
                 return put(`/backend/api/v1/administrator/${id}`, params);
             }
         },
+        adminroles:{
+            List(params) {
+                return get(`/backend/api/v1/administrator_role`, params);
+            },
+            Create() {
+                return get(`/backend/api/v1/administrator_role/create`);
+            },
+            Store(params) {
+                return post(`/backend/api/v1/administrator_role`, params);
+            },
+        },
     },
     Member: {
         List(params) {

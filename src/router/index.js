@@ -140,6 +140,14 @@ const routes = [
         }
       },
       {
+        path: '/system/adminroles',
+        component: () => import('@/views/system/adminroles'),
+        name: 'SystemAdminroles',
+        meta: {
+          title: 'title.system-adminroles'
+        }
+      },
+      {
         path: '/member/index',
         component: () => import('@/views/member/index'),
         name: 'MemberIndex',

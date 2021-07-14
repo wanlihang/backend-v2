@@ -18,30 +18,20 @@
         >
           <el-table-column prop="id" sortable label="ID" width="120">
           </el-table-column>
-          <el-table-column prop="name" label="姓名" width="120">
+          <el-table-column prop="display_name" label="角色名" width="120">
           </el-table-column>
-          <el-table-column prop="email" label="邮箱" width="230">
+          <el-table-column prop="slug" label="Slug" width="250">
           </el-table-column>
           <el-table-column
-            sortable=""
-            label="登录日志"
-            width="300"
+            label="描述"
+            width="350"
             ><template slot-scope="scope">
               <span
-                >{{ scope.row.last_login_date }} /
-                {{ scope.row.last_login_ip }}</span
+                >{{ scope.row.description}} </span
               >
             </template>
           </el-table-column>
-
-          <el-table-column label="禁止登录" width="130">
-            <template slot-scope="scope">
-              <span v-if="scope.row.is_ban_login == 0">否</span>
-              <span v-else>是</span>
-            </template>
-          </el-table-column>
-
-          <el-table-column fixed="right" label="操作" width="120">
+          <el-table-column fixed="right" label="操作" width="150">
             <template slot-scope="scope">
               <el-link
                 style="margin-right: 10px"
@@ -100,34 +90,34 @@ export default {
     };
   },
   mounted() {
-    this.getAdministrator();
+    this.getAdminroles();
   },
   methods: {
     paginationReset() {
       this.pagination.page = 1;
-      this.getAdministrator();
+      this.getAdminroles();
     },
     paginationSizeChange(size) {
       this.pagination.size = size;
-      this.getAdministrator();
+      this.getAdminroles();
     },
     paginationPageChange(page) {
       this.pagination.page = page;
-      this.getAdministrator();
+      this.getAdminroles();
     },
     sortChange(column) {
       this.pagination.sort = column.prop;
       this.pagination.order = column.order === "ascending" ? "asc" : "desc";
-      this.getAdministrator();
+      this.getAdminroles();
     },
-    getAdministrator() {
+    getAdminroles() {
       if (this.loading) {
         return;
       }
       this.loading = true;
       let params = {};
       Object.assign(params, this.pagination);
-      this.$api.System.administrator.List(params).then((res) => {
+      this.$api.System.adminroles.List(params).then((res) => {
         this.loading = false;
         this.users = res.data.data;
         this.total = res.data.total;
