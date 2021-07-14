@@ -4,7 +4,12 @@
       <h1>订单</h1>
     </el-header> -->
     <el-main class="main_content">
-      <div class="row"></div>
+      <div class="row">
+        <label>UID</label>
+        <el-input class="input" v-model="user_id"></el-input>
+        <label>订单号</label>
+        <el-input class="input" v-model="order_id" placeholder="订单号"></el-input>
+      </div>
       <el-table :data="dataList" stripe style="width: 100%">
         <el-table-column prop="id" label="ID"> </el-table-column>
         <el-table-column prop="user_id" label="用户ID"> </el-table-column>
@@ -18,8 +23,12 @@
           </template>
         </el-table-column> -->
         <el-table-column label="商品">
-         <template slot-scope="scope">
-            <span v-for="item in scope.row.goods" :key="item.id">[{{item.goods_text}}]{{item.goods_name}}:￥{{item.goods_charge}}</span>
+          <template slot-scope="scope">
+            <span v-for="item in scope.row.goods" :key="item.id"
+              >[{{ item.goods_text }}]{{ item.goods_name }}:￥{{
+                item.goods_charge
+              }}</span
+            >
           </template>
         </el-table-column>
         <el-table-column prop="updated_at" label="时间"> </el-table-column>
@@ -28,8 +37,9 @@
             <el-button
               size="mini"
               type="danger"
-              v-show="scope.row.status==5"
+              v-show="scope.row.status == 5"
               @click="changeData(scope.row.id, scope.$index)"
+              style="margin-bottom: 4px"
               >改为已支付</el-button
             >
             <el-button size="mini" type="primary" @click="allAdd(scope.row)"
@@ -53,6 +63,7 @@ export default {
       status: "",
       order_id: "",
       dataList: [],
+      rolesList: [],
     };
   },
   created() {
@@ -100,15 +111,26 @@ export default {
 };
 </script>
 <style  lang="less" scoped>
-.row {
+.main_content {
   width: 100%;
-  display: flex;
-  flex-direction: row;
-  padding-left: 20px;
-  box-sizing: border-box;
-}
-.el-main {
-  width: 100%;
-  padding: 5px;
+  .row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding-left: 20px;
+    box-sizing: border-box;
+    label{
+      margin-right: 4px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+    }
+    .input{
+    .el-input__inner{
+      width: 200px;
+    }
+    }
+  }
 }
 </style>

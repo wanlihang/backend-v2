@@ -45,16 +45,16 @@ const Api = {
         Info(params) {
             return get(`/backend/api/v1/role`, params);
         },
-        Del(id) {
+        Destory(id) {
             return destroy(`/backend/api/v1/role/${id}`);
         },
-        Add(params) {
+        Create(params) {
             return post(`/backend/api/v1/role`, params);
         },
-        Getinfo(id) {
+        Detail(id) {
             return get(`/backend/api/v1/role/${id}`);
         },
-        Edit(id, params) {
+        Update(id, params) {
             return put(`/backend/api/v1/role/${id}`, params);
         }
     },

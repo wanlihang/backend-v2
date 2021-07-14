@@ -37,7 +37,7 @@ const routes = [
       },
       {
         path: '/addrole',
-        component: () => import('@/views/role/add'),
+        component: () => import('@/views/role/create'),
         name: 'Addrole',
         meta: {
           title: 'title.role'
@@ -45,7 +45,7 @@ const routes = [
       },
       {
         path: '/editrole',
-        component: () => import('@/views/role/edit'),
+        component: () => import('@/views/role/update'),
         name: 'Editrole',
         meta: {
           title: 'title.role'
