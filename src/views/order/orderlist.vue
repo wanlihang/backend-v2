@@ -178,6 +178,8 @@ export default {
       this.user_id = "";
       this.status = "";
       this.order_id = "";
+      this.pagesize = 10;
+      this.total = 0;
       this.getList(1);
     },
     //搜索

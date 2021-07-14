@@ -166,9 +166,9 @@ export default {
     //重置
     reset() {
       this.user_id = "";
-      this.key = "";
-      this.sort = "id";
-      this.order = "desc";
+      this.keywords= "";
+      this.pagesize=10;
+      this.status = -1;
       this.total = 0;
       this.getList(1);
     },

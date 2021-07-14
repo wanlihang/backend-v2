@@ -147,6 +147,7 @@ export default {
       this.user_id = "";
       this.key = "";
       this.sort = "id";
+      this.pagesize = 10;
       this.order = "desc";
       this.total = 0;
       this.getList(1);
@@ -183,12 +184,12 @@ export default {
         });
     },
     //添加
-    create(){
-        this.$router.push({ name: "Createcode" });
+    create() {
+      this.$router.push({ name: "Createcode" });
     },
     //批量生成
-    createMulti(){
-        this.$router.push({ name: "CreateMulticode" });
+    createMulti() {
+      this.$router.push({ name: "CreateMulticode" });
     },
   },
 };
