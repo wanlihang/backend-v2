@@ -148,6 +148,14 @@ const routes = [
         }
       },
       {
+        path: '/system/createadminroles',
+        component: () => import('@/views/system/createadminroles'),
+        name: 'AdminrolesCreate',
+        meta: {
+          title: 'title.createadminroles'
+        }
+      },
+      {
         path: '/member/index',
         component: () => import('@/views/member/index'),
         name: 'MemberIndex',

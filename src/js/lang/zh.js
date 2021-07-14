@@ -16,6 +16,7 @@ const zh = { //zh
         'system-adminroles':'管理员角色',
         createadmin:'添加管理员',
         updateadmin:'编辑管理员',
+        createadminroles:'添加管理员角色',
         administrator: {
             'change-password': '修改密码'
         },

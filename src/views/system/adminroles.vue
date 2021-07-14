@@ -2,7 +2,7 @@
   <div class="float-left">
     <div class="float-left mb-15">
       <el-button
-        @click="$router.push({ name: 'AdministratorCreate' })"
+        @click="$router.push({ name: 'AdminrolesCreate' })"
         type="primary"
         >添加</el-button
       >
