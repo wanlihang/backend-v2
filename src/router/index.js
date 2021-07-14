@@ -68,6 +68,14 @@ const routes = [
         }
       },
       {
+        path: '/system/application',
+        component: () => import('@/views/system/application'),
+        name: 'SystemApplication',
+        meta: {
+          title: 'title.system-application'
+        }
+      },
+      {
         path: '/administrator/change-password',
         component: () => import('@/views/administrator/change-password'),
         name: 'AdministratorChangePassword',

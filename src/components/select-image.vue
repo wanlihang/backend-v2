@@ -166,7 +166,7 @@ export default {
   },
   beforeDestroy() {
     this.imageUrl = null;
-  }
+  },
 };
 </script>
 

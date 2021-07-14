@@ -61,8 +61,24 @@ const Api = {
             Save(params) {
                 return post(`/backend/api/v1/setting`, params);
             }
+        },
+        Addons: {
+            LocalList(params) {
+                return get(`/backend/api/v1/addons`, params);
+            },
+            Repository(params) {
+                return get(`/backend/api/v1/addons/repository`, params);
+            },
+            Install(params) {
+                return get(`/backend/api/v1/addons/repository/install`, params);
+            },
+            Upgrade(params) {
+                return get(`/backend/api/v1/addons/repository/upgrade`, params);
+            },
+            Switch(params) {
+                return post(`/backend/api/v1/addons/switch`, params);
+            }
         }
-
     }
 }
 
