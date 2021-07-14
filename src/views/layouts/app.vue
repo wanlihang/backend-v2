@@ -6,8 +6,18 @@
           <img src="@/assets/home/logo.png" width="112" height="30" />
         </div>
         <div class="page-name">{{ $t($route.meta.title) }}</div>
-        <div class="user-info">
-          <rightmenu class="rightmenu"></rightmenu>
+        <div class="user-info" v-if="user">
+          <el-dropdown @command="dropMenuEvt">
+            <span class="el-dropdown-link">
+              {{ user.name }}<i class="el-icon-arrow-down el-icon--right"></i>
+            </span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item command="changePassword"
+                >修改密码</el-dropdown-item
+              >
+              <el-dropdown-item command="logout">安全退出</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
         </div>
       </el-header>
       <el-container>
@@ -65,31 +75,42 @@
  
 <script>
 import Menus from "@/js/menus.js";
-import rightmenu from "../components/right_menu.vue";
+import { mapState, mapMutations } from "vuex";
 
 export default {
-  components: {
-    rightmenu,
-  },
-  name: "home",
   data() {
     return {
       defaultActive: "Dashboard",
-      isCollapse: false,
-      levelList: null,
       menus: Menus,
     };
+  },
+  computed: {
+    ...mapState(["user"]),
   },
   mounted() {
     this.defaultActive = this.$route.name;
   },
   methods: {
+    ...mapMutations(["logout"]),
     menuSelect(path) {
       if (this.$route.name === path) {
         // 已经是当前页面
         return;
       }
       this.$router.push({ name: path });
+    },
+    changePassword() {},
+    logoutEvt() {
+      this.logout();
+      this.$message.success(this.$t("common.success"));
+      this.$router.push({ name: "Login" });
+    },
+    dropMenuEvt(cmd) {
+      if (cmd === "logout") {
+        this.logoutEvt();
+      } else if (cmd === "changePassword") {
+        this.changePassword();
+      }
     },
   },
 };
@@ -136,6 +157,7 @@ export default {
 
   .user-info {
     width: auto;
+    padding-right: 30px;
   }
 }
 

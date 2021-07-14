@@ -67,6 +67,8 @@
   </div>
 </template>
 <script>
+import { mapMutations } from "vuex";
+
 export default {
   name: "login",
   data() {
@@ -103,15 +105,14 @@ export default {
     },
   },
   methods: {
-    handleSubmit(event) {
-      console.log(event);
+    ...mapMutations(["loginHandle"]),
+    handleSubmit() {
       this.loading = true;
       this.$api.Auth.Login(this.ruleForm2).then((resp) => {
         if (resp.status == 0) {
-          //Utils.saveLocal("token", resp.data.token);
-          localStorage.setItem("astoken", resp.data.token);
-          localStorage.setItem("user", this.ruleForm2.username); //保存登录名
-          this.$router.push({ name: "Dashboard" }); //跳到首页
+          this.loginHandle(resp.data.token);
+          // 跳转到首页
+          this.$router.push({ name: "Dashboard" });
         }
         this.loading = false;
       });
@@ -126,7 +127,6 @@ export default {
           break;
       }
     },
-    // 对应选项事件
     changezh() {
       this.lang = "zh";
       this.$i18n.locale = this.lang;

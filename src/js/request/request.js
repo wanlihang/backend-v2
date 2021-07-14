@@ -11,6 +11,11 @@ const Api = {
             return post('/backend/api/v1/login', params);
         }
     },
+    Administrator:{
+        Info() {
+            return get(`/backend/api/v1/user`);
+        }
+    },
     App: {
         Index(params) {
             return get('/backend/api/v1/app/index', params);
