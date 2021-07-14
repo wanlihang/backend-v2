@@ -38,20 +38,34 @@
       >
         <el-table-column type="selection" width="55"></el-table-column
         ><!-- 显示选取表格 -->
-        <el-table-column prop="id" label="ID"> </el-table-column>
+        <el-table-column prop="id" label="ID" sortable> </el-table-column>
         <el-table-column prop="code" label="优惠码"> </el-table-column>
-        <el-table-column prop="invited_user_reward" label="抵扣">
+        <el-table-column prop="invited_user_reward" sortable label="抵扣">
           <template slot-scope="scope">
             <span>{{ scope.row.invited_user_reward }}元</span>
           </template>
         </el-table-column>
-        <el-table-column label="奖励">
+        <el-table-column prop="invite_user_reward" label="奖励" sortable>
           <template slot-scope="scope">
             <span>{{ scope.row.invite_user_reward }}元</span>
           </template>
         </el-table-column>
-        <el-table-column prop="use_times" label="可使用"> </el-table-column>
-        <el-table-column prop="used_times" label="已使用"> </el-table-column>
+        <el-table-column label="可使用">
+          <template slot-scope="scope">
+            <span style="color: red" v-if="scope.row.use_times == 0"
+              >不限制</span
+            >
+            <span v-else>{{ scope.row.use_times || 0 }}次</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="used_times"  label="已使用" sortable>
+          <template slot-scope="scope">
+            <span v-if="scope.row.used_times != null"
+              >{{ scope.row.used_times }}次</span
+            >
+            <span v-else>0次</span>
+          </template>
+        </el-table-column>
 
         <!-- <el-table-column label="商品">
           <template slot-scope="scope">
