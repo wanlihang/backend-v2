@@ -3,7 +3,9 @@
     <el-container class="main-box">
       <el-header class="header-box" style="height: 56px !important">
         <div class="logo-box">
-          <img src="@/assets/home/logo.png" width="112" height="30" />
+          <a href="javascript:void(0)" @click="goDashboard">
+            <img src="@/assets/home/logo.png" width="112" height="30" />
+          </a>
         </div>
         <div class="page-name">{{ $t($route.meta.title) }}</div>
         <div class="user-info" v-if="user">
@@ -87,6 +89,11 @@ export default {
   computed: {
     ...mapState(["user"]),
   },
+  watch: {
+    "$route.name"(newVal) {
+      this.defaultActive = newVal;
+    },
+  },
   mounted() {
     this.defaultActive = this.$route.name;
   },
@@ -112,6 +119,11 @@ export default {
         this.logoutEvt();
       } else if (cmd === "changePassword") {
         this.changePassword();
+      }
+    },
+    goDashboard() {
+      if (this.$route.name !== "Dashboard") {
+        this.$router.push({ name: "Dashboard" });
       }
     },
   },
@@ -198,59 +210,56 @@ export default {
   margin-right: 10px;
 }
 
-
 .el-menu {
-    border-right: 0;
+  border-right: 0;
 
-    .el-menu-item.is-active {
-        background-color: @primary-color;
-        color: #fff;
-    }
+  .el-menu-item.is-active {
+    background-color: @primary-color;
+    color: #fff;
+  }
 }
 
 .el-input__suffix {
-    display: none;
+  display: none;
 }
 
 .el-main {
-    background-color: #F1F2F9;
-    min-height: 1300px;
+  background-color: #f1f2f9;
+  min-height: 1300px;
 }
 
 .el-submenu__title {
-    font-size: 14px;
-    font-weight: 400;
-    color: #555566;
-    padding-left: 15px !important;
+  font-size: 14px;
+  font-weight: 400;
+  color: #555566;
+  padding-left: 15px !important;
 }
 
 .el-menu-item {
-    font-size: 14px;
-    font-weight: 400;
-    color: #555566;
+  font-size: 14px;
+  font-weight: 400;
+  color: #555566;
 }
 
 .el-tabs__nav-wrap::after {
-    height: 1px;
-    background-color: #DCDFE6;
+  height: 1px;
+  background-color: #dcdfe6;
 }
 
 .el-tabs__active-bar {
-    display: none;
+  display: none;
 }
 
 .el-tabs__item {
-    box-sizing: border-box;
-    padding: 10px 20px !important;
-    height: 36px;
-
+  box-sizing: border-box;
+  padding: 10px 20px !important;
+  height: 36px;
 }
 
-.el-submenu__title>.title {
-    font-size: 14px;
-    font-weight: 400;
-    color: #555566;
-
+.el-submenu__title > .title {
+  font-size: 14px;
+  font-weight: 400;
+  color: #555566;
 }
 </style>
 
