@@ -1,0 +1,106 @@
+<template>
+  <div class="float-left">
+    <div class="form-box broder-top-left-radius">
+      <el-form ref="form" :model="user" :rules="rules" label-width="200px">
+        <el-form-item label="角色名" prop="display_name">
+          <el-input v-model="user.display_name" class="w-200px"></el-input>
+        </el-form-item>
+
+        <el-form-item label="Slug" prop="slug">
+          <el-input v-model="user.slug" class="w-200px"></el-input>
+        </el-form-item>
+
+        <el-form-item label="描述" prop="description">
+          <el-input v-model="user.description" class="w-200px"></el-input>
+        </el-form-item>
+
+        
+      </el-form>
+    </div>
+
+    <div class="bottom-menus">
+      <div>
+        <el-button @click="$router.push({ name: 'SystemAdminroles' })"
+          >取消</el-button
+        >
+      </div>
+      <div class="ml-15">
+        <el-button @click="formValidate" :loading="loading" type="primary"
+          >保存</el-button
+        >
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+export default {
+  data() {
+    return {
+      user: {
+        display_name: null,
+        slug: null,
+        description: null,
+      },
+      rules: {
+        display_name: [
+          {
+            required: true,
+            message: "角色名不能为空",
+            trigger: "blur",
+          },
+        ],
+        slug: [
+          {
+            required: true,
+            message: "Slug不能为空",
+            trigger: "blur",
+          },
+        ],
+        description: [
+          {
+            required: true,
+            message: "描述不能为空",
+            trigger: "blur",
+          },
+        ],
+      },
+      roles: [],
+      loading: false,
+    };
+  },
+  mounted() {
+    this.params();
+  },
+  methods: {
+    params() {
+      this.$api.System.adminroles.Create().then((res) => {
+        this.roles = res.data.roles;
+      });
+    },
+    formValidate() {
+      this.$refs["form"].validate((valid) => {
+        if (valid) {
+          this.confirm();
+        }
+      });
+    },
+    confirm() {
+      if (this.loading) {
+        return;
+      }
+      this.loading = true;
+      this.user.password_confirmation = this.user.password;
+      this.$api.System.adminroles
+        .Store(this.user)
+        .then(() => {
+          this.$message.success(this.$t("common.success"));
+          this.$router.push({ name: "SystemAdminroles" });
+        })
+        .catch((e) => {
+          this.loading = false;
+          this.$message.error(e.message);
+        });
+    },
+  },
+};
+</script>

@@ -100,7 +100,41 @@ const Api = {
             Switch(params) {
                 return post(`/backend/api/v1/addons/switch`, params);
             }
-        }
+        },
+        administrator:{
+            List(params) {
+                return get(`/backend/api/v1/administrator`, params);
+            },
+            Create() {
+                return get(`/backend/api/v1/administrator/create`);
+            },
+            Store(params) {
+                return post(`/backend/api/v1/administrator`, params);
+            },
+            Destory(id) {
+                return destroy(`/backend/api/v1/administrator/${id}`);
+            },
+            Detail(id) {
+                return get(`/backend/api/v1/administrator/${id}`);
+            },
+            Update(id, params) {
+                return put(`/backend/api/v1/administrator/${id}`, params);
+            }
+        },
+        adminroles:{
+            List(params) {
+                return get(`/backend/api/v1/administrator_role`, params);
+            },
+            Create() {
+                return get(`/backend/api/v1/administrator_role/create`);
+            },
+            Store(params) {
+                return post(`/backend/api/v1/administrator_role`, params);
+            },
+            Destory(id) {
+                return destroy(`/backend/api/v1/administrator_role/${id}`);
+            },
+        },
     },
     Member: {
         List(params) {

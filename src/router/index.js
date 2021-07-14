@@ -116,6 +116,46 @@ const routes = [
         }
       },
       {
+        path: '/system/administrator',
+        component: () => import('@/views/system/administrator'),
+        name: 'SystemAdministrator',
+        meta: {
+          title: 'title.system-administrator'
+        }
+      },
+      {
+        path: '/system/createadmin',
+        component: () => import('@/views/system/createadmin'),
+        name: 'AdministratorCreate',
+        meta: {
+          title: 'title.createadmin'
+        }
+      },
+      {
+        path: '/system/updateadmin',
+        component: () => import('@/views/system/updateadmin'),
+        name: 'AdministratorUpdate',
+        meta: {
+          title: 'title.updateadmin'
+        }
+      },
+      {
+        path: '/system/adminroles',
+        component: () => import('@/views/system/adminroles'),
+        name: 'SystemAdminroles',
+        meta: {
+          title: 'title.system-adminroles'
+        }
+      },
+      {
+        path: '/system/createadminroles',
+        component: () => import('@/views/system/createadminroles'),
+        name: 'AdminrolesCreate',
+        meta: {
+          title: 'title.createadminroles'
+        }
+      },
+      {
         path: '/member/index',
         component: () => import('@/views/member/index'),
         name: 'MemberIndex',

@@ -56,7 +56,16 @@ export default [
             {
                 name: 'title.system-application',
                 key: 'SystemApplication',
+            },
+            {
+                name: 'title.system-administrator',
+                key: 'SystemAdministrator',
+            },
+            {
+                name: 'title.system-adminroles',
+                key: 'SystemAdminroles',
             }
         ]
-    }
+    },
+    
 ];
