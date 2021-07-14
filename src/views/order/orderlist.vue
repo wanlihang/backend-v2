@@ -6,9 +6,32 @@
     <el-main class="main_content">
       <div class="row">
         <label>UID</label>
-        <el-input class="input" v-model="user_id"></el-input>
+        <el-input
+          style="width: 200px; margin-right: 10px"
+          v-model="user_id"
+        ></el-input>
         <label>订单号</label>
-        <el-input class="input" v-model="order_id" placeholder="订单号"></el-input>
+        <el-input
+          style="width: 200px; margin-right: 10px"
+          v-model="order_id"
+          placeholder="订单号"
+        ></el-input>
+        <label>状态</label>
+        <el-select
+          v-model="status"
+          placeholder="请选择状态"
+          style="width: 200px; margin-right: 20px"
+        >
+          <el-option
+            v-for="(item, index) in groups"
+            :key="index"
+            :label="item.name"
+            :value="item.key"
+          >
+          </el-option>
+        </el-select>
+        <el-button type="primary" class="search" @click="search()">搜索</el-button>
+        <el-button class="reset" @click="reset()">重置</el-button>
       </div>
       <el-table :data="dataList" stripe style="width: 100%">
         <el-table-column prop="id" label="ID"> </el-table-column>
@@ -37,7 +60,7 @@
             <el-button
               size="mini"
               type="danger"
-              v-show="scope.row.status == 5"
+              v-show="scope.row.status != 9"
               @click="changeData(scope.row.id, scope.$index)"
               style="margin-bottom: 4px"
               >改为已支付</el-button
@@ -64,6 +87,24 @@ export default {
       order_id: "",
       dataList: [],
       rolesList: [],
+      groups: [
+        {
+          name: "未支付",
+          key: 1,
+        },
+        {
+          name: "支付中",
+          key: 5,
+        },
+        {
+          name: "已支付",
+          key: 9,
+        },
+        {
+          name: "已取消",
+          key: 7,
+        },
+      ],
     };
   },
   created() {
@@ -107,6 +148,17 @@ export default {
         }
       }
     },
+    //重置
+    reset() {
+      this.user_id = "";
+      this.status = "";
+      this.order_id = "";
+      this.getList(1);
+    },
+    //搜索
+    search(){
+     this.getList(1);
+    },
   },
 };
 </script>
@@ -119,17 +171,13 @@ export default {
     flex-direction: row;
     padding-left: 20px;
     box-sizing: border-box;
-    label{
-      margin-right: 4px;
+    margin-bottom: 20px;
+    label {
+      margin-right: 10px;
       height: 40px;
       display: flex;
       align-items: center;
       white-space: nowrap;
-    }
-    .input{
-    .el-input__inner{
-      width: 200px;
-    }
     }
   }
 }
