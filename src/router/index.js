@@ -68,6 +68,14 @@ const routes = [
         }
       },
       {
+        path: '/createcode',
+        component: () => import('@/views/order/create_code'),
+        name: 'Createcode',
+        meta: {
+          title: 'title.promocode'
+        }
+      },
+      {
         path: '/system/config',
         component: () => import('@/views/system/config'),
         name: 'SystemConfig',

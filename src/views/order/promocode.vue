@@ -25,10 +25,10 @@
         优惠码的 <b>U</b> 前缀是用户专属邀请码预留的，请勿在自定义优惠码中使用！
       </div>
       <div class="row">
-        <el-button type="danger">批量删除</el-button>
-        <el-button type="primary">添加</el-button>
+        <el-button type="danger" @click="deleteMulti()">批量删除</el-button>
+        <el-button type="primary" @click="create()">添加</el-button>
         <el-button type="primary">批量导入</el-button>
-        <el-button type="primary">批量生成</el-button>
+        <el-button type="primary" @click="createMulti()">批量生成</el-button>
       </div>
       <el-table
         :data="dataList"
@@ -58,7 +58,7 @@
             <span v-else>{{ scope.row.use_times || 0 }}次</span>
           </template>
         </el-table-column>
-        <el-table-column prop="used_times"  label="已使用" sortable>
+        <el-table-column prop="used_times" label="已使用" sortable>
           <template slot-scope="scope">
             <span v-if="scope.row.used_times != null"
               >{{ scope.row.used_times }}次</span
@@ -76,8 +76,8 @@
             >
           </template>
         </el-table-column> -->
-        <el-table-column prop="updated_at" label="创建时间"> </el-table-column>
-        <el-table-column prop="deleted_at" label="过期时间"> </el-table-column>
+        <el-table-column prop="created_at" label="创建时间"> </el-table-column>
+        <el-table-column prop="expired_at" label="过期时间"> </el-table-column>
       </el-table>
       <el-pagination
         style="margin-top: 20px"
@@ -107,8 +107,8 @@ export default {
       sort: "id",
       order: "desc",
       key: "",
+      ids: [],
       dataList: [],
-      multipleSelection: "",
     };
   },
   created() {
@@ -126,8 +126,12 @@ export default {
     },
     //保存选中结果
     handleSelectionChange(val) {
-      this.multipleSelection = val;
-      console.info(this.multipleSelection);
+      var newbox = [];
+      for (var i = 0; i < val.length; i++) {
+        newbox.push(val[i].id);
+      }
+      this.ids = newbox;
+      //console.info("newbox:" + newbox);
     },
     //获取order列表
     getList(p) {
@@ -141,7 +145,7 @@ export default {
         order: this.order,
         key: this.key,
       };
-      this.$api.Order.PromoCode(data).then((resp) => {
+      this.$api.Order.PromoCode.PromoCode(data).then((resp) => {
         if (resp.status == 0) {
           this.page = resp.data.current_page;
           var data = resp.data.data;
@@ -163,6 +167,41 @@ export default {
     //搜索
     search() {
       this.getList(1);
+    },
+    //批量删除
+    deleteMulti() {
+      this.$confirm("确认操作？", "警告", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          //点击确定按钮的操作
+          this.loading = true;
+          var data = {
+            ids: this.ids,
+          };
+          this.$api.Order.PromoCode.DestroyMulti(data).then((resp) => {
+            if (resp.status == 0) {
+              this.$message("删除成功");
+              this.getList(1);
+            } else {
+              this.$message(resp.message);
+            }
+            this.loading = false;
+          });
+        })
+        .catch(() => {
+          //点击删除按钮的操作
+        });
+    },
+    //添加
+    create(){
+        this.$router.push({ name: "Createcode" });
+    },
+    //批量生成
+    createMulti(){
+        this.$router.push({ name: "CreateMulticode" });
     },
   },
 };

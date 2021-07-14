@@ -42,12 +42,24 @@ const Api = {
         }
     },
     Order: {
-        List(params) {
-            return get(`/backend/api/v1/order`, params);
+        OrderList:{
+            List(params) {
+                return get(`/backend/api/v1/order`, params);
+            }, 
+        }, 
+        PromoCode:{
+            PromoCode(params) {
+                return get(`/backend/api/v1/promoCode`, params);
+            },
+            DestroyMulti(params) {
+                return post(`/backend/api/v1/promoCode/delete/multi`, params);
+            },
+            Create(params){
+                return post(`/backend/api/v1/promoCode`, params)
+            },
         },
-        PromoCode(params) {
-            return get(`/backend/api/v1/promoCode`, params);
-        },
+        
+
     },
     Media: {
         Image: {

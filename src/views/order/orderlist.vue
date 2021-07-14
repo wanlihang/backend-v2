@@ -146,7 +146,7 @@ export default {
         status: this.status,
         order_id: this.order_id,
       };
-      this.$api.Order.List(data).then((resp) => {
+      this.$api.Order.OrderList.List(data).then((resp) => {
         if (resp.status == 0) {
           this.page = resp.data.orders.current_page;
           var orders = resp.data.orders;
