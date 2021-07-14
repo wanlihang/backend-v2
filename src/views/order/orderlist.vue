@@ -19,7 +19,7 @@
         </el-table-column> -->
         <el-table-column label="商品">
          <template slot-scope="scope">
-            <span v-for="item in scope.row.goods" :key="item.id">[{{item.goods_text}}]{{item.goods_name}}:{{item.goods_charge}}</span>
+            <span v-for="item in scope.row.goods" :key="item.id">[{{item.goods_text}}]{{item.goods_name}}:￥{{item.goods_charge}}</span>
           </template>
         </el-table-column>
         <el-table-column prop="updated_at" label="时间"> </el-table-column>
@@ -28,6 +28,7 @@
             <el-button
               size="mini"
               type="danger"
+              v-show="scope.row.status==5"
               @click="changeData(scope.row.id, scope.$index)"
               >改为已支付</el-button
             >
@@ -98,7 +99,7 @@ export default {
   },
 };
 </script>
-<style  lang="less" >
+<style  lang="less" scoped>
 .row {
   width: 100%;
   display: flex;

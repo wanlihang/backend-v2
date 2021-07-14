@@ -1,7 +1,7 @@
 <template>
   <el-container>
     <el-header>
-      <h1>{{$t("member.btn_add") }}</h1>
+      <h1>{{$t("member.btn_edit") }}</h1>
     </el-header>
     <!-- el-form表单 -->
     <el-form
@@ -17,7 +17,7 @@
         <el-form-item :label="$t('member.addpage.days')" prop="expire_days">
           <el-input type="number" v-model="addForm.expire_days"></el-input>
         </el-form-item>
-        <el-form-item :label="$t('member.addpage.charge')" prop="charge">
+        <el-form-item :label="$t('member.addpage.charge')"  prop="charge">
           <el-input type="number" v-model="addForm.charge"></el-input>
         </el-form-item>
       </div>
@@ -34,7 +34,7 @@
           <el-input
             type="textarea"
             v-model="addForm.description"
-            :placeholder="$t('member.addpage.textplaceholder')"
+             :placeholder="$t('member.addpage.textplaceholder')"
           ></el-input>
         </el-form-item>
       </div>
@@ -42,23 +42,24 @@
 
     <el-footer>
       <el-button @click="dialogClose()">{{$t("member.addpage.btn_back") }}</el-button>
-      <el-button type="primary" @click="addUserForm()">{{$t("member.btn_add") }}</el-button>
+      <el-button type="primary" @click="editUserForm()">{{$t("member.addpage.btn_save") }}</el-button>
     </el-footer>
   </el-container>
 </template>
 <script>
 export default {
-  name: "addVip",
+  name: "editRole",
   data() {
     return {
       loading: false,
       addForm: {
+        id: this.$route.query.id || "",
         name: "",
         expire_days: "",
         charge: "",
         is_show: 1,
         description: "",
-        weight:0,
+        weight: 0,
       },
       UserRules: {
         name: [{ required: true, message: this.$t("member.addpage.name_notice"), trigger: "blur" }],
@@ -70,31 +71,51 @@ export default {
       },
     };
   },
+  created() {
+    this.getinfo(this.addForm.id);
+  },
   methods: {
+    //获取编辑详情
+    getinfo(id) {
+      this.loading = true;
+      this.$api.Member.Getinfo(id).then((resp) => {
+        if (resp.status == 0) {
+          var data=resp.data;
+          this.addForm.id=data.id;
+          this.addForm.is_show=data.is_show;
+          this.addForm.name=data.name;
+          this.addForm.expire_days=data.expire_days;
+          this.addForm.charge=data.charge;
+          this.addForm.description=data.description;
+        } else {
+          this.$message(resp.message);
+        }
+        this.loading = false;
+      });
+    },
     //清空表单
     clearForm() {
       this.addForm.name = "";
-      this.addForm.expire_days= "";
+      this.addForm.expire_days = "";
       this.addForm.charge = "";
-      this.addForm.is_show=1;
-      this.addForm.description="";
+      this.addForm.is_show = 1;
+      this.addForm.description = "";
     },
     //关闭按钮
     dialogClose() {
       this.clearForm();
-      this.$router.push({ name: "Vip" });
+      this.$router.push({ name: "Role" });
     },
     //确定
-    addUserForm() {
+    editUserForm() {
       this.$refs.UserRef.validate(async (valid) => {
         if (!valid) return;
         this.loading = true;
-        const { data: res } = await this.$api.Member.Add(this.addForm).then(
+        const { data: res } = await this.$api.Member.Edit(this.addForm.id,this.addForm).then(
           (resp) => {
             if (resp.status == 0) {
-              this.$message.success("添加成功");
-              this.$router.push({ name: "Vip" });
-              this.clearForm();
+              this.$message.success("保存成功");
+              this.$router.push({ name: "Role" });
             } else {
               this.$message(resp.message);
             }
@@ -106,7 +127,7 @@ export default {
   },
 };
 </script>
-<style  lang="less" >
+<style  lang="less" scoped>
 .el-form-item__label {
   text-align: left;
 }

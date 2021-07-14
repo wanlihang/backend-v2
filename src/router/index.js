@@ -28,27 +28,27 @@ const routes = [
         }
       },
       {
-        path: '/vip',
-        component: () => import('@/views/vip/vip'),
-        name: 'Vip',
+        path: '/role',
+        component: () => import('@/views/role/role'),
+        name: 'Role',
         meta: {
-          title: 'title.vip'
+          title: 'title.role'
         }
       },
       {
-        path: '/addvip',
-        component: () => import('@/views/vip/add'),
-        name: 'Addvip',
+        path: '/addrole',
+        component: () => import('@/views/role/add'),
+        name: 'Addrole',
         meta: {
-          title: 'title.vip'
+          title: 'title.role'
         }
       },
       {
-        path: '/editvip',
-        component: () => import('@/views/vip/edit'),
-        name: 'Editvip',
+        path: '/editrole',
+        component: () => import('@/views/role/edit'),
+        name: 'Editrole',
         meta: {
-          title: 'title.vip'
+          title: 'title.role'
         }
       },
       {

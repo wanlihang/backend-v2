@@ -6,7 +6,7 @@ const en = { //en
         renovation:'Renovation',
         computer_terminal: "DecorationPC",
         mobile_terminal: "DecorationMobile",
-        vip:'VIP Members',
+        role:'VIP Members',
     },
     commen: {
         Locale: "enLocale",

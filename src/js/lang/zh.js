@@ -6,7 +6,7 @@ const zh = { //zh
         renovation: '装修',
         computer_terminal: "电脑端",
         mobile_terminal: "移动端",
-        vip: 'VIP会员',
+        role: 'VIP会员',
         order: '订单列表',
         system: '系统',
         config: '系统配置'
