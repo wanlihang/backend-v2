@@ -9,7 +9,10 @@ const zh = { //zh
         role: 'VIP会员',
         order: '订单列表',
         system: '系统',
-        config: '系统配置'
+        config: '系统配置',
+        administrator: {
+            'change-password': '修改密码'
+        }
     },
     commen: {
         Locale: "zhLocale",
