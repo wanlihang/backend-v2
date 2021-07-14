@@ -25,10 +25,10 @@
         优惠码的 <b>U</b> 前缀是用户专属邀请码预留的，请勿在自定义优惠码中使用！
       </div>
       <div class="row">
-          <el-button type="danger">批量删除</el-button>
-          <el-button type="primary">添加</el-button>
-          <el-button type="primary">批量导入</el-button>
-          <el-button type="primary">批量生成</el-button>
+        <el-button type="danger">批量删除</el-button>
+        <el-button type="primary">添加</el-button>
+        <el-button type="primary">批量导入</el-button>
+        <el-button type="primary">批量生成</el-button>
       </div>
       <el-table
         :data="dataList"
@@ -41,8 +41,14 @@
         <el-table-column prop="id" label="ID"> </el-table-column>
         <el-table-column prop="code" label="优惠码"> </el-table-column>
         <el-table-column prop="invited_user_reward" label="抵扣">
+          <template slot-scope="scope">
+            <span>{{ scope.row.invited_user_reward }}元</span>
+          </template>
         </el-table-column>
-        <el-table-column prop="invite_user_reward" label="奖励">
+        <el-table-column label="奖励">
+          <template slot-scope="scope">
+            <span>{{ scope.row.invite_user_reward }}元</span>
+          </template>
         </el-table-column>
         <el-table-column prop="use_times" label="可使用"> </el-table-column>
         <el-table-column prop="used_times" label="已使用"> </el-table-column>
@@ -59,6 +65,17 @@
         <el-table-column prop="updated_at" label="创建时间"> </el-table-column>
         <el-table-column prop="deleted_at" label="过期时间"> </el-table-column>
       </el-table>
+      <el-pagination
+        style="margin-top: 20px"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="page"
+        :page-sizes="[5, 10, 20, 40]"
+        :page-size="pagesize"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total"
+      >
+      </el-pagination>
     </el-main>
   </el-container>
 </template>
@@ -72,6 +89,7 @@ export default {
       total: 0,
       loading: false,
       user_id: "",
+      pagesize: 10,
       sort: "id",
       order: "desc",
       key: "",
@@ -83,6 +101,15 @@ export default {
     this.getList(1);
   },
   methods: {
+    // 初始页currentPage、初始每页数据数pagesize和数据data
+    handleSizeChange: function (size) {
+      this.pagesize = size;
+      this.getList(this.page);
+    },
+    handleCurrentChange: function (currentPage) {
+      this.page = currentPage;
+      this.getList(this.page);
+    },
     //保存选中结果
     handleSelectionChange(val) {
       this.multipleSelection = val;
@@ -94,7 +121,7 @@ export default {
       var data = {
         page: p,
         total: this.total,
-        size: 10,
+        size: this.pagesize,
         user_id: this.user_id,
         sort: this.sort,
         order: this.order,
@@ -102,28 +129,13 @@ export default {
       };
       this.$api.Order.PromoCode(data).then((resp) => {
         if (resp.status == 0) {
-          this.page = resp.data.current_page + 1;
+          this.page = resp.data.current_page;
           var data = resp.data.data;
+          this.total = resp.data.total;
           this.dataList = data;
-          //   for (var i = 0; i < this.dataList.length; i++) {
-          //     var showkey = this.dataList[i].user_id;
-          //     this.parseJson(users, showkey);
-          //   }
         }
         this.loading = false;
       });
-    },
-    //搜索box
-    parseJson(data, index) {
-      if (typeof data[index] === "undefined") {
-        //console.log("data无值");
-        return "";
-      }
-      for (var i = 0; i < this.dataList.length; i++) {
-        if (this.dataList[i].user_id == index) {
-          this.dataList[i]["nick_name"] = data[index].nick_name;
-        }
-      }
     },
     //重置
     reset() {
