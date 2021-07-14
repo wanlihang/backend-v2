@@ -30,7 +30,9 @@
           >
           </el-option>
         </el-select>
-        <el-button type="primary" class="search" @click="search()">搜索</el-button>
+        <el-button type="primary" class="search" @click="search()"
+          >搜索</el-button
+        >
         <el-button class="reset" @click="reset()">重置</el-button>
       </div>
       <el-table :data="dataList" stripe style="width: 100%">
@@ -71,6 +73,17 @@
           </template>
         </el-table-column>
       </el-table>
+      <el-pagination
+        style="margin-top: 20px"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="page"
+        :page-sizes="[5, 10, 20, 40]"
+        :page-size="pagesize"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total"
+      >
+      </el-pagination>
     </el-main>
   </el-container>
 </template>
@@ -83,7 +96,8 @@ export default {
       page: 1,
       loading: false,
       user_id: "",
-      total:0,
+      total: 0,
+      pagesize: 10,
       status: "",
       order_id: "",
       dataList: [],
@@ -112,22 +126,32 @@ export default {
     this.getList(1);
   },
   methods: {
+    // 初始页currentPage、初始每页数据数pagesize和数据data
+    handleSizeChange: function (size) {
+      this.pagesize = size;
+      this.getList(this.page);
+    },
+    handleCurrentChange: function (currentPage) {
+      this.page = currentPage;
+      this.getList(this.page);
+    },
     //获取order列表
     getList(p) {
       this.loading = true;
       var data = {
         page: p,
         total: this.total,
-        size: 10,
+        size: this.pagesize,
         user_id: this.user_id,
         status: this.status,
         order_id: this.order_id,
       };
       this.$api.Order.List(data).then((resp) => {
         if (resp.status == 0) {
-          this.page = resp.data.orders.current_page + 1;
+          this.page = resp.data.orders.current_page;
           var orders = resp.data.orders;
           var users = resp.data.users;
+          this.total = orders.total;
           this.dataList = orders.data;
           for (var i = 0; i < this.dataList.length; i++) {
             var showkey = this.dataList[i].user_id;
@@ -157,8 +181,8 @@ export default {
       this.getList(1);
     },
     //搜索
-    search(){
-     this.getList(1);
+    search() {
+      this.getList(1);
     },
   },
 };
