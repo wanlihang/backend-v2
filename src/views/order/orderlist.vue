@@ -164,7 +164,6 @@ export default {
     //搜索box
     parseJson(data, index) {
       if (typeof data[index] === "undefined") {
-        //console.log("data无值");
         return "";
       }
       for (var i = 0; i < this.dataList.length; i++) {
@@ -178,6 +177,8 @@ export default {
       this.user_id = "";
       this.status = "";
       this.order_id = "";
+      this.pagesize = 10;
+      this.total = 0;
       this.getList(1);
     },
     //搜索
