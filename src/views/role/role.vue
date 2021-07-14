@@ -80,7 +80,7 @@ export default {
         .then(() => {
           //点击确定按钮的操作
           this.loading = true;
-          this.$api.Member.Del(id).then((resp) => {
+          this.$api.Member.Destory(id).then((resp) => {
             if (resp.status == 0) {
               this.$message("删除成功");
               this.getmemberinfo(1);
