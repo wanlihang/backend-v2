@@ -67,6 +67,7 @@
   </div>
 </template>
 <script>
+import Utils from "@/js/utils";
 import { mapMutations } from "vuex";
 
 export default {
@@ -107,15 +108,21 @@ export default {
   methods: {
     ...mapMutations(["loginHandle"]),
     handleSubmit() {
+      if (this.loading) {
+        return;
+      }
       this.loading = true;
-      this.$api.Auth.Login(this.ruleForm2).then((resp) => {
-        if (resp.status == 0) {
-          this.loginHandle(resp.data.token);
-          // 跳转到首页
+      this.$api.Auth.Login(this.ruleForm2)
+        .then((resp) => {
+          let token = resp.data.token;
+          Utils.saveToken(token);
+          this.loginHandle(token);
           this.$router.push({ name: "Dashboard" });
-        }
-        this.loading = false;
-      });
+        })
+        .catch((e) => {
+          this.loading = false;
+          this.$message.error(e.message);
+        });
     },
     batchOperate(command) {
       switch (command) {
