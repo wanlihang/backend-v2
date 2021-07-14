@@ -118,7 +118,6 @@ export default {
         newbox.push(val[i].id);
       }
       this.ids = newbox;
-      //console.info("newbox:" + newbox);
     },
     //获取order列表
     getList(p) {

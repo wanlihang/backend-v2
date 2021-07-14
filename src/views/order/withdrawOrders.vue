@@ -37,16 +37,15 @@
       >
         <el-table-column type="selection" width="55"></el-table-column
         ><!-- 显示选取表格 -->
-        <el-table-column prop="id" label="ID" > </el-table-column>
+        <el-table-column prop="id" label="ID"> </el-table-column>
         <el-table-column prop="user_id" label="用户ID"> </el-table-column>
         <el-table-column prop="nick_name" label="用户"> </el-table-column>
         <el-table-column label="金额">
           <template slot-scope="scope">
-            <span>{{ scope.row.before_balance}}元</span>
+            <span>{{ scope.row.before_balance }}元</span>
           </template>
         </el-table-column>
-        <el-table-column prop="channel" label="渠道">
-        </el-table-column>
+        <el-table-column prop="channel" label="渠道"> </el-table-column>
         <el-table-column prop="channel_name" label="渠道姓名">
         </el-table-column>
         <el-table-column prop="channel_account" label="渠道账号">
@@ -123,7 +122,6 @@ export default {
         newbox.push(val[i].id);
       }
       this.ids = newbox;
-      //console.info("newbox:" + newbox);
     },
     //获取order列表
     getList(p) {
@@ -151,10 +149,9 @@ export default {
         this.loading = false;
       });
     },
-     //搜索box
+    //搜索box
     parseJson(data, index) {
       if (typeof data[index] === "undefined") {
-        //console.log("data无值");
         return "";
       }
       for (var i = 0; i < this.dataList.length; i++) {
@@ -166,8 +163,8 @@ export default {
     //重置
     reset() {
       this.user_id = "";
-      this.keywords= "";
-      this.pagesize=10;
+      this.keywords = "";
+      this.pagesize = 10;
       this.status = -1;
       this.total = 0;
       this.getList(1);
@@ -189,15 +186,9 @@ export default {
           var data = {
             ids: this.ids,
           };
-          this.$api.Order.PromoCode.DestroyMulti(data).then((resp) => {
-            if (resp.status == 0) {
-              this.$message("删除成功");
-              this.getList(1);
-            } else {
-              this.$message(resp.message);
-            }
-            this.loading = false;
-          });
+          //批量操作函数
+          console.log(data);
+          this.loading = false;
         })
         .catch(() => {
           //点击删除按钮的操作
@@ -224,6 +215,5 @@ export default {
       white-space: nowrap;
     }
   }
-
 }
 </style>

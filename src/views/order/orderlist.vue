@@ -164,7 +164,6 @@ export default {
     //搜索box
     parseJson(data, index) {
       if (typeof data[index] === "undefined") {
-        //console.log("data无值");
         return "";
       }
       for (var i = 0; i < this.dataList.length; i++) {
