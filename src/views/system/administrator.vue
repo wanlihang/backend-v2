@@ -148,14 +148,15 @@ export default {
             return;
           }
           this.loading = true;
-          this.$api.System.administrator.Destory(id).then((resp) => {
-            if (resp.status == 0) {
+          this.$api.System.administrator.Destory(id).then((res) => {
+            if (res.status == 0) {
+              this.loading = false;
               this.$message("删除成功");
-              this.getAdministrator();
+              this.paginationReset();
             } else {
-              this.$message(resp.message);
+              this.loading = false;
+              this.$message(res.message);
             }
-            this.loading = false;
           });
         })
         .catch(() => {
