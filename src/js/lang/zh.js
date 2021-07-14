@@ -12,6 +12,8 @@ const zh = { //zh
         withdrawOrders:'邀请余额提现',
         system: '系统',
         config: '系统配置',
+        'system-administrator':'管理员',
+        createadmin:'添加管理员',
         administrator: {
             'change-password': '修改密码'
         },

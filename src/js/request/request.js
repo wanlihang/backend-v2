@@ -100,7 +100,12 @@ const Api = {
             Switch(params) {
                 return post(`/backend/api/v1/addons/switch`, params);
             }
-        }
+        },
+        administrator:{
+            List(params) {
+                return get(`/backend/api/v1/administrator`, params);
+            },
+        },
     },
     Member: {
         List(params) {

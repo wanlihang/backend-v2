@@ -116,6 +116,22 @@ const routes = [
         }
       },
       {
+        path: '/system/administrator',
+        component: () => import('@/views/system/administrator'),
+        name: 'SystemAdministrator',
+        meta: {
+          title: 'title.system-administrator'
+        }
+      },
+      {
+        path: '/system/createadmin',
+        component: () => import('@/views/system/createadmin'),
+        name: 'AdministratorCreate',
+        meta: {
+          title: 'title.createadmin'
+        }
+      },
+      {
         path: '/member/index',
         component: () => import('@/views/member/index'),
         name: 'MemberIndex',
