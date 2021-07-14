@@ -24,7 +24,7 @@ const Api = {
             return get(`/backend/api/v1/statistic/${id}`, params);
         },
     },
-    Member: {
+    Role: {
         Info(params) {
             return get(`/backend/api/v1/role`, params);
         },
@@ -96,6 +96,23 @@ const Api = {
             Switch(params) {
                 return post(`/backend/api/v1/addons/switch`, params);
             }
+        }
+    },
+    Member: {
+        List(params) {
+            return get(`/backend/api/v1/member`, params);
+        },
+        Create() {
+            return get(`/backend/api/v1/member/create`);
+        },
+        Store(params) {
+            return post(`/backend/api/v1/member`, params);
+        },
+        Edit(id) {
+            return get(`/backend/api/v1/member/${id}`);
+        },
+        Update(id, params) {
+            return put(`/backend/api/v1/member/${id}`, params);
         }
     }
 }
