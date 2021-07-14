@@ -60,6 +60,14 @@ const routes = [
         }
       },
       {
+        path: '/promocode',
+        component: () => import('@/views/order/promocode'),
+        name: 'Promocode',
+        meta: {
+          title: 'title.promocode'
+        }
+      },
+      {
         path: '/system/config',
         component: () => import('@/views/system/config'),
         name: 'SystemConfig',

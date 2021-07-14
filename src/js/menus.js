@@ -24,6 +24,10 @@ export default [
             {
                 name: 'title.order',
                 key: 'Orderlist'
+            },
+            {
+                name: 'title.promocode',
+                key: 'Promocode'
             }
         ],
     },
