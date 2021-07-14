@@ -132,6 +132,14 @@ const routes = [
         }
       },
       {
+        path: '/system/updateadmin',
+        component: () => import('@/views/system/updateadmin'),
+        name: 'AdministratorUpdate',
+        meta: {
+          title: 'title.updateadmin'
+        }
+      },
+      {
         path: '/member/index',
         component: () => import('@/views/member/index'),
         name: 'MemberIndex',

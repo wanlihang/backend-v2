@@ -44,10 +44,20 @@
 
           <el-table-column fixed="right" label="操作" width="120">
             <template slot-scope="scope">
-              <el-link style="margin-right:10px;" type="danger" @click="detail(scope.row)"
+              <el-link
+                style="margin-right: 10px"
+                type="danger"
+                @click="destory(scope.row.id)"
                 >删除</el-link
               >
-              <el-link type="primary" @click="detail(scope.row)"
+              <el-link
+                type="primary"
+                @click="
+                  $router.push({
+                    name: 'AdministratorUpdate',
+                    query: { id: scope.row.id },
+                  })
+                "
                 >编辑</el-link
               >
             </template>
@@ -125,6 +135,33 @@ export default {
       });
     },
     importUser() {},
+    //删除管理员
+    destory(id) {
+      this.$confirm("确认操作？", "警告", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          //点击确定按钮的操作
+          if (this.loading) {
+            return;
+          }
+          this.loading = true;
+          this.$api.System.administrator.Destory(id).then((resp) => {
+            if (resp.status == 0) {
+              this.$message("删除成功");
+              this.getAdministrator();
+            } else {
+              this.$message(resp.message);
+            }
+            this.loading = false;
+          });
+        })
+        .catch(() => {
+          //点击删除按钮的操作
+        });
+    },
   },
 };
 </script>

@@ -22,7 +22,11 @@
         </el-form-item>
 
         <el-form-item label="密码" prop="password">
-          <el-input v-model="user.password" class="w-200px"></el-input>
+          <el-input
+            v-model="user.password"
+            class="w-200px"
+            placeholder="不修改请勿填写"
+          ></el-input>
         </el-form-item>
 
         <el-form-item prop="is_ban_login" label="禁止登录">
@@ -55,12 +59,14 @@ export default {
   data() {
     return {
       user: {
+        id: this.$route.query.id,
         name: null,
         email: null,
         password: null,
-        password_confirmation: null,
         role_id: null,
         is_ban_login: null,
+        last_login_date: null,
+        last_login_ip: null,
       },
       rules: {
         name: [
@@ -77,13 +83,6 @@ export default {
             trigger: "blur",
           },
         ],
-        password: [
-          {
-            required: true,
-            message: "密码不能为空",
-            trigger: "blur",
-          },
-        ],
       },
       roles: [],
       loading: false,
@@ -91,8 +90,25 @@ export default {
   },
   mounted() {
     this.params();
+    this.detail();
   },
   methods: {
+    detail() {
+      this.$api.System.administrator.Detail(this.user.id).then((res) => {
+        var data = res.data;
+        var roles = data.role_id;
+        this.user.is_ban_login = data.is_ban_login;
+        this.user.last_login_ip = data.last_login_ip;
+        this.user.last_login_date = data.last_login_date;
+        this.user.email = data.email;
+        this.user.name = data.name;
+        // let newbox = [];
+        for (var i = 0; i < roles.length; i++) {
+          //   newbox.push(roles[i]);
+          this.user.role_id = roles[i];
+        }
+      });
+    },
     params() {
       this.$api.System.administrator.Create().then((res) => {
         this.roles = res.data.roles;
@@ -110,9 +126,11 @@ export default {
         return;
       }
       this.loading = true;
-      this.user.password_confirmation = this.user.password;
+      if (this.user.password == null) {
+        delete this.user.password;
+      }
       this.$api.System.administrator
-        .Store(this.user)
+        .Update(this.user.id, this.user)
         .then(() => {
           this.$message.success(this.$t("common.success"));
           this.$router.push({ name: "SystemAdministrator" });

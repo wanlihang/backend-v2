@@ -14,6 +14,7 @@ const zh = { //zh
         config: '系统配置',
         'system-administrator':'管理员',
         createadmin:'添加管理员',
+        updateadmin:'编辑管理员',
         administrator: {
             'change-password': '修改密码'
         },
