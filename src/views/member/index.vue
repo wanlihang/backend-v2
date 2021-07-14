@@ -1,7 +1,12 @@
 <template>
   <div class="float-left">
     <div class="float-left mb-15">
-      <el-button type="primary">创建用户</el-button>
+      <el-button @click="$router.push({ name: 'MemberCreate' })" type="primary"
+        >创建用户</el-button
+      >
+      <el-button @click="importUser" type="primary" class="ml-15"
+        >批量导入</el-button
+      >
     </div>
     <div class="filter-box">
       <div class="float-left d-flex">
@@ -74,7 +79,6 @@
           @sort-change="sortChange"
           :default-sort="{ prop: 'id', order: 'descending' }"
         >
-          <el-table-column type="selection" width="55"></el-table-column>
           <el-table-column prop="id" sortable label="ID" width="120">
           </el-table-column>
           <el-table-column label="用户" width="300">
@@ -163,7 +167,7 @@ export default {
         keywords: null,
         role_id: null,
         tag_id: null,
-        created_at: null
+        created_at: null,
       },
       total: 0,
       loading: false,
@@ -219,6 +223,7 @@ export default {
         this.filterData.roles = res.data.roles;
       });
     },
+    importUser() {},
   },
 };
 </script>
