@@ -8,8 +8,12 @@ import api from './js/request/request';
 import i18n from './js/i18n';
 import './assets/common/variable.less';
 
+// 组件注册
+import FormLabelComp from '@/components/form-label';
+
 
 Vue.use(ElementUI);
+Vue.component('FormLabel', FormLabelComp);
 Vue.config.productionTip = false
 // api挂载
 Vue.prototype.$api = api;

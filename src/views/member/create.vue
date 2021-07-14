@@ -23,6 +23,18 @@
           <el-input v-model="user.password" class="w-200px"></el-input>
         </el-form-item>
 
+        <el-form-item prop="is_lock">
+          <span slot="label">
+            <form-label text="锁定" helper="锁定用户无法登录"></form-label>
+          </span>
+          <el-switch
+            v-model="user.is_lock"
+            :active-value="1"
+            :inactive-value="0"
+          >
+          </el-switch>
+        </el-form-item>
+
         <el-form-item label="VIP">
           <el-select v-model="user.role_id">
             <el-option
@@ -75,6 +87,7 @@ export default {
         password: null,
         role_id: null,
         role_expired_at: null,
+        is_lock: null,
       },
       rules: {
         avatar: [
@@ -144,21 +157,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less" scoped>
-.form-box {
-  width: 100%;
-  height: auto;
-  float: left;
-  box-sizing: border-box;
-  background-color: white;
-  padding: 30px;
-  border-top-right-radius: 15px;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-
-  &.broder-top-left-radius {
-    border-top-left-radius: 15px;
-  }
-}
-</style>
