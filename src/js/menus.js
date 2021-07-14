@@ -18,8 +18,8 @@ export default [
                 key: 'DecorationMobile'
             },
             {
-                name: 'title.vip',
-                key: 'Vip'
+                name: 'title.role',
+                key: 'Role'
             },
             {
                 name: 'title.order',

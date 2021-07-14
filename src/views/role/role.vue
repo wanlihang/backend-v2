@@ -43,12 +43,12 @@ export default {
   methods: {
     //添加
     addVipform() {
-      this.$router.push({ name: "Addvip" });
+      this.$router.push({ name: "Addrole" });
     },
     //编辑
     editVipform(id) {
       this.$router.push({
-        name: "Editvip",
+        name: "Editrole",
         query: {
           id: id,
         },
@@ -106,7 +106,7 @@ export default {
   },
 };
 </script>
-<style lang="less" >
+<style lang="less" scoped>
 div {
   box-sizing: border-box;
 }
