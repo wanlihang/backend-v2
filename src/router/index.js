@@ -66,6 +66,14 @@ const routes = [
         meta: {
           title: 'title.config'
         }
+      },
+      {
+        path: '/administrator/change-password',
+        component: () => import('@/views/administrator/change-password'),
+        name: 'AdministratorChangePassword',
+        meta: {
+          title: 'title.administrator.change-password'
+        }
       }
     ]
   },

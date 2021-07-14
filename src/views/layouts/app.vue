@@ -99,7 +99,9 @@ export default {
       }
       this.$router.push({ name: path });
     },
-    changePassword() {},
+    changePassword() {
+      this.$router.push({ name: "AdministratorChangePassword" });
+    },
     logoutEvt() {
       this.logout();
       this.$message.success(this.$t("common.success"));

@@ -18,11 +18,13 @@ export default {
   },
   mounted() {
     // 自动登录
-    let token = Utils.getToken();
-    if (token) {
-      this.$api.Administrator.Info().then((res) => {
-        this.loginHandle(res.data);
-      });
+    if (this.$route.name !== "Login") {
+      let token = Utils.getToken();
+      if (token) {
+        this.$api.Administrator.Detail().then((res) => {
+          this.loginHandle(res.data);
+        });
+      }
     }
   },
 };

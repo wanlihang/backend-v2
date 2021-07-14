@@ -116,8 +116,12 @@ export default {
         .then((resp) => {
           let token = resp.data.token;
           Utils.saveToken(token);
-          this.loginHandle(token);
-          this.$router.push({ name: "Dashboard" });
+
+          this.$api.Administrator.Detail().then((res) => {
+            this.loginHandle(res.data);
+
+            this.$router.push({ name: "Dashboard" });
+          });
         })
         .catch((e) => {
           this.loading = false;
