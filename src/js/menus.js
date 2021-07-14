@@ -28,7 +28,11 @@ export default [
             {
                 name: 'title.promocode',
                 key: 'Promocode'
-            }
+            },
+            {
+                name: 'title.withdrawOrders',
+                key: 'WithdrawOrders'
+            },
         ],
     },
     {
