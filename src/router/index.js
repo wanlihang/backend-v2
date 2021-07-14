@@ -76,6 +76,14 @@ const routes = [
         }
       },
       {
+        path: '/createmulticode',
+        component: () => import('@/views/order/createmulti_code'),
+        name: 'CreateMulticode',
+        meta: {
+          title: 'title.promocode'
+        }
+      },
+      {
         path: '/system/config',
         component: () => import('@/views/system/config'),
         name: 'SystemConfig',

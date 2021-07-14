@@ -57,6 +57,9 @@ const Api = {
             Create(params){
                 return post(`/backend/api/v1/promoCode`, params)
             },
+            CreateMulti(params){
+                return post(`/backend/api/v1/promoCode/generator`, params)
+            },
         },
         
 
