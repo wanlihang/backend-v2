@@ -9,6 +9,7 @@ const zh = { //zh
         role: 'VIP会员',
         order: '订单列表',
         promocode:'优惠码',
+        withdrawOrders:'邀请余额提现',
         system: '系统',
         config: '系统配置',
         administrator: {

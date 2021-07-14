@@ -57,8 +57,15 @@ const Api = {
             Create(params){
                 return post(`/backend/api/v1/promoCode`, params)
             },
+            CreateMulti(params){
+                return post(`/backend/api/v1/promoCode/generator`, params)
+            },
         },
-        
+        WithdrawOrders:{
+            WithdrawOrders(params) {
+                return get(`/backend/api/v1/member/inviteBalance/withdrawOrders`, params);
+            }, 
+        },
 
     },
     Media: {

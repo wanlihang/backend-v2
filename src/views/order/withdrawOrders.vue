@@ -2,30 +2,32 @@
   <el-container>
     <el-main class="main_content">
       <div class="row">
-        <label>搜索</label>
-        <el-input
-          style="width: 200px; margin-right: 10px"
-          v-model="key"
-          placeholder="支持优惠吗模糊搜索"
-        ></el-input>
         <label>UID</label>
         <el-input
           style="width: 200px; margin-right: 10px"
           v-model="user_id"
         ></el-input>
+        <label>会员</label>
+        <el-select
+          v-model="status"
+          placeholder="请选择"
+          style="width: 200px; margin-right: 20px"
+        >
+          <el-option
+            v-for="(item, index) in groups"
+            :key="index"
+            :label="item.name"
+            :value="item.key"
+          >
+          </el-option>
+        </el-select>
         <el-button type="primary" class="search" @click="search()"
           >搜索</el-button
         >
         <el-button class="reset" @click="reset()">重置</el-button>
       </div>
-      <div class="alertinfo">
-        优惠码的 <b>U</b> 前缀是用户专属邀请码预留的，请勿在自定义优惠码中使用！
-      </div>
       <div class="row">
-        <el-button type="danger" @click="deleteMulti()">批量删除</el-button>
-        <el-button type="primary" @click="create()">添加</el-button>
-        <el-button type="primary">批量导入</el-button>
-        <el-button type="primary" @click="createMulti()">批量生成</el-button>
+        <el-button type="danger" @click="deleteMulti()">批量操作</el-button>
       </div>
       <el-table
         :data="dataList"
@@ -35,36 +37,21 @@
       >
         <el-table-column type="selection" width="55"></el-table-column
         ><!-- 显示选取表格 -->
-        <el-table-column prop="id" label="ID" sortable> </el-table-column>
-        <el-table-column prop="code" label="优惠码"> </el-table-column>
-        <el-table-column prop="invited_user_reward" sortable label="抵扣">
+        <el-table-column prop="id" label="ID" > </el-table-column>
+        <el-table-column prop="user_id" label="用户ID"> </el-table-column>
+        <el-table-column prop="nick_name" label="用户"> </el-table-column>
+        <el-table-column label="金额">
           <template slot-scope="scope">
-            <span>{{ scope.row.invited_user_reward }}元</span>
+            <span>{{ scope.row.before_balance}}元</span>
           </template>
         </el-table-column>
-        <el-table-column prop="invite_user_reward" label="奖励" sortable>
-          <template slot-scope="scope">
-            <span>{{ scope.row.invite_user_reward }}元</span>
-          </template>
+        <el-table-column prop="channel" label="渠道">
         </el-table-column>
-        <el-table-column label="可使用">
-          <template slot-scope="scope">
-            <span style="color: red" v-if="scope.row.use_times == 0"
-              >不限制</span
-            >
-            <span v-else>{{ scope.row.use_times || 0 }}次</span>
-          </template>
+        <el-table-column prop="channel_name" label="渠道姓名">
         </el-table-column>
-        <el-table-column prop="used_times" label="已使用" sortable>
-          <template slot-scope="scope">
-            <span v-if="scope.row.used_times != null"
-              >{{ scope.row.used_times }}次</span
-            >
-            <span v-else>0次</span>
-          </template>
+        <el-table-column prop="channel_account" label="渠道账号">
         </el-table-column>
         <el-table-column prop="created_at" label="创建时间"> </el-table-column>
-        <el-table-column prop="expired_at" label="过期时间"> </el-table-column>
       </el-table>
       <el-pagination
         style="margin-top: 20px"
@@ -91,11 +78,29 @@ export default {
       loading: false,
       user_id: "",
       pagesize: 10,
-      sort: "id",
-      order: "desc",
-      key: "",
+      status: -1,
+      keywords: "",
       ids: [],
       dataList: [],
+      rolesList: [],
+      groups: [
+        {
+          name: "全部",
+          key: -1,
+        },
+        {
+          name: "已提交",
+          key: 0,
+        },
+        {
+          name: "成功",
+          key: 1,
+        },
+        {
+          name: "失败",
+          key: 2,
+        },
+      ],
     };
   },
   created() {
@@ -128,19 +133,35 @@ export default {
         total: this.total,
         size: this.pagesize,
         user_id: this.user_id,
-        sort: this.sort,
-        order: this.order,
-        key: this.key,
+        status: this.status,
+        keywords: this.keywords,
       };
-      this.$api.Order.PromoCode.PromoCode(data).then((resp) => {
+      this.$api.Order.WithdrawOrders.WithdrawOrders(data).then((resp) => {
         if (resp.status == 0) {
-          this.page = resp.data.current_page;
-          var data = resp.data.data;
-          this.total = resp.data.total;
-          this.dataList = data;
+          this.page = resp.data.orders.current_page;
+          var orders = resp.data.orders;
+          var users = resp.data.users;
+          this.total = orders.total;
+          this.dataList = orders.data;
+          for (var i = 0; i < this.dataList.length; i++) {
+            var showkey = this.dataList[i].user_id;
+            this.parseJson(users, showkey);
+          }
         }
         this.loading = false;
       });
+    },
+     //搜索box
+    parseJson(data, index) {
+      if (typeof data[index] === "undefined") {
+        //console.log("data无值");
+        return "";
+      }
+      for (var i = 0; i < this.dataList.length; i++) {
+        if (this.dataList[i].user_id == index) {
+          this.dataList[i]["nick_name"] = data[index].nick_name;
+        }
+      }
     },
     //重置
     reset() {
@@ -182,14 +203,6 @@ export default {
           //点击删除按钮的操作
         });
     },
-    //添加
-    create(){
-        this.$router.push({ name: "Createcode" });
-    },
-    //批量生成
-    createMulti(){
-        this.$router.push({ name: "CreateMulticode" });
-    },
   },
 };
 </script>
@@ -211,22 +224,6 @@ export default {
       white-space: nowrap;
     }
   }
-  .alertinfo {
-    width: 100%;
-    height: auto;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    padding: 10px 15px;
-    background-color: #e6a23c;
-    border-radius: 2px;
-    font-weight: 400;
-    font-size: 15px;
-    color: #fff;
-    float: left;
-    margin-bottom: 20px;
-    b {
-      font-weight: bolder;
-    }
-  }
+
 }
 </style>
