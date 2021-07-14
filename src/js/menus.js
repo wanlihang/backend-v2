@@ -38,6 +38,10 @@ export default [
             {
                 name: 'title.config',
                 key: 'SystemConfig',
+            },
+            {
+                name: 'title.system-application',
+                key: 'SystemApplication',
             }
         ]
     }

@@ -197,5 +197,60 @@ export default {
   height: 20px;
   margin-right: 10px;
 }
+
+
+.el-menu {
+    border-right: 0;
+
+    .el-menu-item.is-active {
+        background-color: @primary-color;
+        color: #fff;
+    }
+}
+
+.el-input__suffix {
+    display: none;
+}
+
+.el-main {
+    background-color: #F1F2F9;
+    min-height: 1300px;
+}
+
+.el-submenu__title {
+    font-size: 14px;
+    font-weight: 400;
+    color: #555566;
+    padding-left: 15px !important;
+}
+
+.el-menu-item {
+    font-size: 14px;
+    font-weight: 400;
+    color: #555566;
+}
+
+.el-tabs__nav-wrap::after {
+    height: 1px;
+    background-color: #DCDFE6;
+}
+
+.el-tabs__active-bar {
+    display: none;
+}
+
+.el-tabs__item {
+    box-sizing: border-box;
+    padding: 10px 20px !important;
+    height: 36px;
+
+}
+
+.el-submenu__title>.title {
+    font-size: 14px;
+    font-weight: 400;
+    color: #555566;
+
+}
 </style>
 

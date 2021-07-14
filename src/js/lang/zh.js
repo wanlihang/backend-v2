@@ -13,7 +13,8 @@ const zh = { //zh
         config: '系统配置',
         administrator: {
             'change-password': '修改密码'
-        }
+        },
+        'system-application': '应用商城'
     },
     commen: {
         Locale: "zhLocale",
