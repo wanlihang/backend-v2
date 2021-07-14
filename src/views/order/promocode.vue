@@ -1,8 +1,5 @@
 <template>
   <el-container>
-    <!-- <el-header>
-      <h1>订单</h1>
-    </el-header> -->
     <el-main class="main_content">
       <div class="row">
         <label>搜索</label>
@@ -66,16 +63,6 @@
             <span v-else>0次</span>
           </template>
         </el-table-column>
-
-        <!-- <el-table-column label="商品">
-          <template slot-scope="scope">
-            <span v-for="item in scope.row.goods" :key="item.id"
-              >[{{ item.goods_text }}]{{ item.goods_name }}:￥{{
-                item.goods_charge
-              }}</span
-            >
-          </template>
-        </el-table-column> -->
         <el-table-column prop="created_at" label="创建时间"> </el-table-column>
         <el-table-column prop="expired_at" label="过期时间"> </el-table-column>
       </el-table>
