@@ -42,29 +42,29 @@ const Api = {
         }
     },
     Order: {
-        OrderList:{
+        OrderList: {
             List(params) {
                 return get(`/backend/api/v1/order`, params);
-            }, 
-        }, 
-        PromoCode:{
+            },
+        },
+        PromoCode: {
             PromoCode(params) {
                 return get(`/backend/api/v1/promoCode`, params);
             },
             DestroyMulti(params) {
                 return post(`/backend/api/v1/promoCode/delete/multi`, params);
             },
-            Create(params){
+            Create(params) {
                 return post(`/backend/api/v1/promoCode`, params)
             },
-            CreateMulti(params){
+            CreateMulti(params) {
                 return post(`/backend/api/v1/promoCode/generator`, params)
             },
         },
-        WithdrawOrders:{
+        WithdrawOrders: {
             WithdrawOrders(params) {
                 return get(`/backend/api/v1/member/inviteBalance/withdrawOrders`, params);
-            }, 
+            },
         },
 
     },
@@ -122,6 +122,9 @@ const Api = {
         },
         Update(id, params) {
             return put(`/backend/api/v1/member/${id}`, params);
+        },
+        Import(params) {
+            return post(`/backend/api/v1/member/import`, params);
         }
     }
 }

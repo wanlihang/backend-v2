@@ -20,7 +20,8 @@ const zh = { //zh
         'system-application': '应用商城',
         member: {
             index: '用户',
-            create: '创建用户'
+            create: '创建用户',
+            import: '批量导入'
         }
     },
     commen: {

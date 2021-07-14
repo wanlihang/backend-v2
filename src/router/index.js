@@ -146,6 +146,14 @@ const routes = [
         meta: {
           title: 'title.member.create'
         }
+      },
+      {
+        path: '/member/import',
+        component: () => import('@/views/member/user-import'),
+        name: 'MemberImport',
+        meta: {
+          title: 'title.member.import'
+        }
       }
     ]
   },

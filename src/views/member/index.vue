@@ -1,12 +1,16 @@
 <template>
   <div class="float-left">
     <div class="float-left mb-15">
-      <el-button @click="$router.push({ name: 'MemberCreate' })" type="primary"
-        >创建用户</el-button
+      <el-button @click="$router.push({ name: 'MemberCreate' })" type="primary">
+        创建用户
+      </el-button>
+      <el-button
+        @click="$router.push({ name: 'MemberImport' })"
+        type="primary"
+        class="ml-15"
       >
-      <el-button @click="importUser" type="primary" class="ml-15"
-        >批量导入</el-button
-      >
+        批量导入
+      </el-button>
     </div>
     <div class="filter-box">
       <div class="float-left d-flex">
@@ -70,7 +74,7 @@
         <el-button @click="paginationReset">清空</el-button>
       </div>
     </div>
-    <div class="table-body" v-loading="loading">
+    <div class="table-body top-left-radius" v-loading="loading">
       <div class="float-left">
         <el-table
           :data="users"
@@ -223,7 +227,6 @@ export default {
         this.filterData.roles = res.data.roles;
       });
     },
-    importUser() {},
   },
 };
 </script>
