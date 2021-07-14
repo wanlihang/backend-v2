@@ -32,6 +32,16 @@ export default [
         ],
     },
     {
+        name: 'title.member.index',
+        key: 'Member',
+        children: [
+            {
+                name: 'title.member.index',
+                key: 'MemberIndex',
+            }
+        ]
+    },
+    {
         name: 'title.system',
         key: 'System',
         children: [

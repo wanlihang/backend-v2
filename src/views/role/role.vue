@@ -62,7 +62,7 @@ export default {
         total: 0,
         size: 10,
       };
-      this.$api.Member.Info(data).then((resp) => {
+      this.$api.Role.Info(data).then((resp) => {
         if (resp.status == 0) {
           this.page = resp.data.current_page + 1;
           this.memberbox = resp.data.data;
@@ -80,7 +80,7 @@ export default {
         .then(() => {
           //点击确定按钮的操作
           this.loading = true;
-          this.$api.Member.Destory(id).then((resp) => {
+          this.$api.Role.Destory(id).then((resp) => {
             if (resp.status == 0) {
               this.$message("删除成功");
               this.getmemberinfo(1);

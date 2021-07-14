@@ -78,7 +78,7 @@ export default {
     //获取编辑详情
     getinfo(id) {
       this.loading = true;
-      this.$api.Member.Detail(id).then((resp) => {
+      this.$api.Role.Detail(id).then((resp) => {
         if (resp.status == 0) {
           var data=resp.data;
           this.addForm.id=data.id;
@@ -111,7 +111,7 @@ export default {
       this.$refs.UserRef.validate(async (valid) => {
         if (!valid) return;
         this.loading = true;
-        const { data: res } = await this.$api.Member.Update(this.addForm.id,this.addForm).then(
+        const { data: res } = await this.$api.Role.Update(this.addForm.id,this.addForm).then(
           (resp) => {
             if (resp.status == 0) {
               this.$message.success("保存成功");

@@ -234,47 +234,4 @@ export default {
   height: auto;
   float: left;
 }
-
-.table-tabs {
-  width: 100%;
-  height: auto;
-  float: left;
-
-  .tab-item {
-    width: 100px;
-    height: auto;
-    float: left;
-    text-align: center;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    font-size: 15px;
-    font-weight: normal;
-    cursor: pointer;
-    color: rgba(0, 0, 0, 0.6);
-
-    &.active {
-      background-color: white;
-      border-top-left-radius: 15px;
-      border-top-right-radius: 15px;
-      color: @primary-color;
-      font-weight: bold;
-    }
-  }
-}
-
-.table-body {
-  width: 100%;
-  height: auto;
-  float: left;
-  background-color: white;
-  box-sizing: border-box;
-  padding: 30px;
-  border-top-right-radius: 15px;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-
-  &.top-left-radius {
-    border-top-left-radius: 15px;
-  }
-}
 </style>

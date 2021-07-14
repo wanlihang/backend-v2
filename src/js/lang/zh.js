@@ -14,7 +14,10 @@ const zh = { //zh
         administrator: {
             'change-password': '修改密码'
         },
-        'system-application': '应用商城'
+        'system-application': '应用商城',
+        member: {
+            index: '用户'
+        }
     },
     commen: {
         Locale: "zhLocale",

@@ -120,7 +120,7 @@ export default {
       this.$refs.UserRef.validate(async (valid) => {
         if (!valid) return;
         this.loading = true;
-        const { data: res } = await this.$api.Member.Create(this.addForm).then(
+        const { data: res } = await this.$api.Role.Create(this.addForm).then(
           (resp) => {
             if (resp.status == 0) {
               this.$message.success("添加成功");

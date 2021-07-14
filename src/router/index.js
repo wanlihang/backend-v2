@@ -90,6 +90,14 @@ const routes = [
         meta: {
           title: 'title.administrator.change-password'
         }
+      },
+      {
+        path: '/member/index',
+        component: () => import('@/views/member/index'),
+        name: 'MemberIndex',
+        meta: {
+          title: 'title.member.index'
+        }
       }
     ]
   },
