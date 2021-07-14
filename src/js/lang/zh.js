@@ -8,6 +8,7 @@ const zh = { //zh
         mobile_terminal: "移动端",
         role: 'VIP会员',
         order: '订单列表',
+        promocode:'优惠码',
         system: '系统',
         config: '系统配置',
         administrator: {

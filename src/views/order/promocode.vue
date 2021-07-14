@@ -1,0 +1,180 @@
+<template>
+  <el-container>
+    <!-- <el-header>
+      <h1>订单</h1>
+    </el-header> -->
+    <el-main class="main_content">
+      <div class="row">
+        <label>搜索</label>
+        <el-input
+          style="width: 200px; margin-right: 10px"
+          v-model="key"
+          placeholder="支持优惠吗模糊搜索"
+        ></el-input>
+        <label>UID</label>
+        <el-input
+          style="width: 200px; margin-right: 10px"
+          v-model="user_id"
+        ></el-input>
+        <el-button type="primary" class="search" @click="search()"
+          >搜索</el-button
+        >
+        <el-button class="reset" @click="reset()">重置</el-button>
+      </div>
+      <div class="alertinfo">
+        优惠码的 <b>U</b> 前缀是用户专属邀请码预留的，请勿在自定义优惠码中使用！
+      </div>
+      <div class="row">
+          <el-button type="danger">批量删除</el-button>
+          <el-button type="primary">添加</el-button>
+          <el-button type="primary">批量导入</el-button>
+          <el-button type="primary">批量生成</el-button>
+      </div>
+      <el-table
+        :data="dataList"
+        stripe
+        style="width: 100%"
+        @selection-change="handleSelectionChange"
+      >
+        <el-table-column type="selection" width="55"></el-table-column
+        ><!-- 显示选取表格 -->
+        <el-table-column prop="id" label="ID"> </el-table-column>
+        <el-table-column prop="code" label="优惠码"> </el-table-column>
+        <el-table-column prop="invited_user_reward" label="抵扣">
+        </el-table-column>
+        <el-table-column prop="invite_user_reward" label="奖励">
+        </el-table-column>
+        <el-table-column prop="use_times" label="可使用"> </el-table-column>
+        <el-table-column prop="used_times" label="已使用"> </el-table-column>
+
+        <!-- <el-table-column label="商品">
+          <template slot-scope="scope">
+            <span v-for="item in scope.row.goods" :key="item.id"
+              >[{{ item.goods_text }}]{{ item.goods_name }}:￥{{
+                item.goods_charge
+              }}</span
+            >
+          </template>
+        </el-table-column> -->
+        <el-table-column prop="updated_at" label="创建时间"> </el-table-column>
+        <el-table-column prop="deleted_at" label="过期时间"> </el-table-column>
+      </el-table>
+    </el-main>
+  </el-container>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      name: "Orderlist",
+      page: 1,
+      total: 0,
+      loading: false,
+      user_id: "",
+      sort: "id",
+      order: "desc",
+      key: "",
+      dataList: [],
+      multipleSelection: "",
+    };
+  },
+  created() {
+    this.getList(1);
+  },
+  methods: {
+    //保存选中结果
+    handleSelectionChange(val) {
+      this.multipleSelection = val;
+      console.info(this.multipleSelection);
+    },
+    //获取order列表
+    getList(p) {
+      this.loading = true;
+      var data = {
+        page: p,
+        total: this.total,
+        size: 10,
+        user_id: this.user_id,
+        sort: this.sort,
+        order: this.order,
+        key: this.key,
+      };
+      this.$api.Order.PromoCode(data).then((resp) => {
+        if (resp.status == 0) {
+          this.page = resp.data.current_page + 1;
+          var data = resp.data.data;
+          this.dataList = data;
+          //   for (var i = 0; i < this.dataList.length; i++) {
+          //     var showkey = this.dataList[i].user_id;
+          //     this.parseJson(users, showkey);
+          //   }
+        }
+        this.loading = false;
+      });
+    },
+    //搜索box
+    parseJson(data, index) {
+      if (typeof data[index] === "undefined") {
+        //console.log("data无值");
+        return "";
+      }
+      for (var i = 0; i < this.dataList.length; i++) {
+        if (this.dataList[i].user_id == index) {
+          this.dataList[i]["nick_name"] = data[index].nick_name;
+        }
+      }
+    },
+    //重置
+    reset() {
+      this.user_id = "";
+      this.key = "";
+      this.sort = "id";
+      this.order = "desc";
+      this.total = 0;
+      this.getList(1);
+    },
+    //搜索
+    search() {
+      this.getList(1);
+    },
+  },
+};
+</script>
+<style  lang="less" scoped>
+.main_content {
+  width: 100%;
+  .row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding-left: 20px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    label {
+      margin-right: 10px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+    }
+  }
+  .alertinfo {
+    width: 100%;
+    height: auto;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 10px 15px;
+    background-color: #e6a23c;
+    border-radius: 2px;
+    font-weight: 400;
+    font-size: 15px;
+    color: #fff;
+    float: left;
+    margin-bottom: 20px;
+    b {
+      font-weight: bolder;
+    }
+  }
+}
+</style>

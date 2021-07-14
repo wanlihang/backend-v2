@@ -45,6 +45,9 @@ const Api = {
         List(params) {
             return get(`/backend/api/v1/order`, params);
         },
+        PromoCode(params) {
+            return get(`/backend/api/v1/promoCode`, params);
+        },
     },
     Media: {
         Image: {

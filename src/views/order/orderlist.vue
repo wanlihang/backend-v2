@@ -83,6 +83,7 @@ export default {
       page: 1,
       loading: false,
       user_id: "",
+      total:0,
       status: "",
       order_id: "",
       dataList: [],
@@ -116,7 +117,7 @@ export default {
       this.loading = true;
       var data = {
         page: p,
-        total: 0,
+        total: this.total,
         size: 10,
         user_id: this.user_id,
         status: this.status,
