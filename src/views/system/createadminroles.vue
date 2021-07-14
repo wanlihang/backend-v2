@@ -13,8 +13,17 @@
         <el-form-item label="描述" prop="description">
           <el-input v-model="user.description" class="w-200px"></el-input>
         </el-form-item>
-
-        
+        <div v-for="(item, index) in permissions" :key="index">
+          <h1>{{ index }}</h1>
+          <el-checkbox-group v-model="permission_ids">
+            <el-checkbox
+              v-for="it in item"
+              :key="it.id"
+              :label="it.display_name"
+              :value="it.id"
+            ></el-checkbox>
+          </el-checkbox-group>
+        </div>
       </el-form>
     </div>
 
@@ -64,7 +73,8 @@ export default {
           },
         ],
       },
-      roles: [],
+      permissions: [],
+      permission_ids: [],
       loading: false,
     };
   },
@@ -74,7 +84,7 @@ export default {
   methods: {
     params() {
       this.$api.System.adminroles.Create().then((res) => {
-        this.roles = res.data.roles;
+        this.permissions = res.data.permissions;
       });
     },
     formValidate() {
