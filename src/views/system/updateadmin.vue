@@ -3,7 +3,7 @@
     <div class="form-box broder-top-left-radius">
       <el-form ref="form" :model="user" :rules="rules" label-width="200px">
         <el-form-item label="角色">
-          <el-select v-model="user.role_id">
+          <el-select multiple v-model="user.role_id">
             <el-option
               v-for="(item, index) in roles"
               :key="index"
@@ -102,11 +102,11 @@ export default {
         this.user.last_login_date = data.last_login_date;
         this.user.email = data.email;
         this.user.name = data.name;
-        // let newbox = [];
+        let newbox = [];
         for (var i = 0; i < roles.length; i++) {
-          //   newbox.push(roles[i]);
-          this.user.role_id = roles[i];
+          newbox.push(roles[i]);
         }
+        this.user.role_id = newbox;
       });
     },
     params() {

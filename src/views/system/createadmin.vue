@@ -3,7 +3,7 @@
     <div class="form-box broder-top-left-radius">
       <el-form ref="form" :model="user" :rules="rules" label-width="200px">
         <el-form-item label="角色">
-          <el-select v-model="user.role_id">
+          <el-select multiple v-model="user.role_id">
             <el-option
               v-for="(item, index) in roles"
               :key="index"
