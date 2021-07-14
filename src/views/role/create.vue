@@ -57,7 +57,7 @@
 </template>
 <script>
 export default {
-  name: "adRole",
+  name: "addRole",
   data() {
     return {
       loading: false,
