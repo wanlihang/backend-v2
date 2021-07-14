@@ -17,11 +17,10 @@ export default {
   components: {
     SelectImage,
   },
-  props: ["html", "height"],
+  props: ["value", "height"],
   data() {
     return {
       editor: null,
-      content: null,
       showUploadImage: false,
     };
   },
@@ -70,12 +69,12 @@ export default {
       this.emitUpdate(newHtml);
     };
     editor.create();
-    editor.txt.html(this.html);
+    editor.txt.html(this.value);
     this.editor = editor;
   },
   methods: {
     emitUpdate(val) {
-      this.$emit("change", val);
+      this.$emit("input", val);
     },
     uploadImage(imgUrl) {
       this.editor.cmd.do(
