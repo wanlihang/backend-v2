@@ -178,6 +178,14 @@ const routes = [
         meta: {
           title: 'title.member.import'
         }
+      },
+      {
+        path: '/member/:userId',
+        component: () => import('@/views/member/detail'),
+        name: 'MemberDetail',
+        meta: {
+          title: 'title.member.detail'
+        }
       }
     ]
   },

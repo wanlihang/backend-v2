@@ -1,0 +1,315 @@
+<template>
+  <div class="float-left" v-if="user" v-loading="loading">
+    <div class="float-left mb-15">
+      <el-button @click="$router.back()" type="primary">返回</el-button>
+    </div>
+    <div class="user-info-box">
+      <div class="user-base-info-box">
+        <div class="user-avatar">
+          <img :src="user.avatar" width="100" height="100" />
+        </div>
+        <div class="user-nickname">{{ user.nick_name }}</div>
+      </div>
+      <div class="user-extra-info-box">
+        <div class="float-left mb-15 d-flex">
+          <div class="flex-1 d-flex">
+            <div class="info-label">ID</div>
+            <div class="flex-1 info-value">{{ user.id }}</div>
+          </div>
+          <div class="flex-1 d-flex">
+            <div class="info-label">手机号</div>
+            <div class="flex-1 info-value">{{ user.mobile }}</div>
+          </div>
+          <div class="flex-1 d-flex">
+            <div class="info-label">积分</div>
+            <div class="flex-1 info-value">{{ user.credit1 }}</div>
+          </div>
+          <div class="flex-1 d-flex">
+            <div class="info-label">VIP</div>
+            <div class="flex-1 info-value">
+              {{ user.role ? user.role.name : "" }}
+            </div>
+          </div>
+          <div class="flex-1 d-flex">
+            <div class="info-label">VIP过期时间</div>
+            <div class="flex-1 info-value">{{ user.role_expired_at }}</div>
+          </div>
+        </div>
+
+        <div class="float-left mb-15 d-flex">
+          <div class="flex-1 d-flex">
+            <div class="info-label">锁定登录</div>
+            <div class="flex-1 info-value">
+              {{ user.is_lock === 1 ? "是" : "否" }}
+            </div>
+          </div>
+          <div class="flex-1 d-flex">
+            <div class="info-label">邀请人</div>
+            <div class="flex-1 info-value">
+              {{ user.invitor ? user.invitor.nick_name : "" }}
+            </div>
+          </div>
+          <div class="flex-1 d-flex">
+            <div class="info-label">邀请维系时间</div>
+            <div class="flex-1 info-value">
+              {{ user.invite_user_expired_at }}
+            </div>
+          </div>
+          <div class="flex-1 d-flex">
+            <div class="info-label">邀请余额</div>
+            <div class="flex-1 info-value">
+              {{ user.invite_balance }}
+            </div>
+          </div>
+          <div class="flex-1 d-flex">
+            <div class="info-label">用户邀请码</div>
+            <div class="flex-1 info-value">
+              {{ user.is_used_promo_code === 1 ? "已使用" : "未使用" }}
+            </div>
+          </div>
+        </div>
+
+        <div class="float-left d-flex">
+          <div class="flex-1 d-flex">
+            <div class="info-label">注册IP</div>
+            <div class="flex-1 info-value">
+              {{ user.register_ip }}
+            </div>
+          </div>
+          <div class="flex-1 d-flex">
+            <div class="info-label">注册区域</div>
+            <div class="flex-1 info-value">
+              {{ user.register_area }}
+            </div>
+          </div>
+          <div class="flex-1 d-flex"></div>
+          <div class="flex-1 d-flex"></div>
+          <div class="flex-1 d-flex"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 用户课程区域 -->
+    <div class="float-left mt-15">
+      <div class="table-tabs">
+        <div
+          class="tab-item"
+          :class="{ active: courseTabActive === item.key }"
+          v-for="item in courseTypes"
+          :key="item.key"
+          @click="courseTabActive = item.key"
+        >
+          {{ item.name }}
+        </div>
+      </div>
+      <div
+        class="table-body"
+        :class="{ 'top-left-radius': courseTabActive !== 'vod' }"
+      >
+        <user-courses-comp
+          :id="id"
+          v-if="courseTabActive === 'vod'"
+        ></user-courses-comp>
+        <user-videos-comp
+          :id="id"
+          v-else-if="courseTabActive === 'video'"
+        ></user-videos-comp>
+        <user-orders-comp
+          :id="id"
+          v-else-if="courseTabActive === 'order'"
+        ></user-orders-comp>
+        <user-credit1-comp
+          :id="id"
+          v-else-if="courseTabActive === 'credit1'"
+        ></user-credit1-comp>
+        <user-roles-comp
+          :id="id"
+          v-else-if="courseTabActive === 'roles'"
+        ></user-roles-comp>
+        <user-invite-comp
+          :id="id"
+          v-else-if="courseTabActive === 'invite'"
+        ></user-invite-comp>
+        <user-vod-watch-records-comp
+          :id="id"
+          v-else-if="courseTabActive === 'vod-watch-records'"
+        ></user-vod-watch-records-comp>
+        <user-video-watch-records-comp
+          :id="id"
+          v-else-if="courseTabActive === 'video-watch-records'"
+        ></user-video-watch-records-comp>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import { mapState } from "vuex";
+import UserCoursesComp from "./detail/vod.vue";
+import UserVideosComp from "./detail/video.vue";
+import UserOrdersComp from "./detail/orders.vue";
+import UserCredit1Comp from "./detail/credit1.vue";
+import UserRolesComp from "./detail/roles.vue";
+import UserInviteComp from "./detail/invite.vue";
+import UserVodWatchRecordsComp from "./detail/vod-watch-records.vue";
+import UserVideoWatchRecordsComp from "./detail/video-watch-records.vue";
+
+export default {
+  components: {
+    UserCoursesComp,
+    UserVideosComp,
+    UserOrdersComp,
+    UserCredit1Comp,
+    UserRolesComp,
+    UserInviteComp,
+    UserVodWatchRecordsComp,
+    UserVideoWatchRecordsComp,
+  },
+  data() {
+    return {
+      id: null,
+      user: null,
+      loading: false,
+      courseTabActive: "vod",
+    };
+  },
+  computed: {
+    ...mapState(["enabledAddons"]),
+    courseTypes() {
+      let types = [
+        {
+          name: "录播",
+          key: "vod",
+        },
+        {
+          name: "视频",
+          key: "video",
+        },
+      ];
+      if (this.enabledAddons["Zhibo"]) {
+        types.push({
+          name: "直播",
+          key: "live",
+        });
+      }
+      if (this.enabledAddons["MeeduBooks"]) {
+        types.push({
+          name: "电子书",
+          key: "books",
+        });
+      }
+      if (this.enabledAddons["MeeduTopics"]) {
+        types.push({
+          name: "图文",
+          key: "topics",
+        });
+      }
+
+      types.push(
+        ...[
+          {
+            name: "录播课程观看",
+            key: "vod-watch-records",
+          },
+          {
+            name: "视频观看",
+            key: "video-watch-records",
+          },
+          {
+            name: "订单",
+            key: "order",
+          },
+          {
+            name: "积分明细",
+            key: "credit1",
+          },
+          {
+            name: "VIP记录",
+            key: "roles",
+          },
+          {
+            name: "邀请记录",
+            key: "invite",
+          },
+        ]
+      );
+
+      return types;
+    },
+  },
+  mounted() {
+    this.id = this.$route.params.userId;
+
+    this.getUser();
+  },
+  methods: {
+    getUser() {
+      if (this.loading) {
+        return;
+      }
+      this.loading = true;
+      this.$api.Member.Detail(this.id).then((res) => {
+        this.user = res.data.data;
+        this.loading = false;
+      });
+    },
+  },
+};
+</script>
+
+<style lang="less" scoped>
+.user-info-box {
+  width: 100%;
+  height: auto;
+  float: left;
+  box-sizing: border-box;
+  display: flex;
+  padding: 30px;
+  border-radius: 10px;
+  background-color: white;
+
+  .user-base-info-box {
+    width: 300px;
+    height: auto;
+    float: left;
+    box-sizing: border-box;
+
+    .user-avatar {
+      width: 100%;
+      height: auto;
+      float: left;
+      text-align: center;
+      margin-bottom: 30px;
+
+      img {
+        border-radius: 50%;
+      }
+    }
+    .user-nickname {
+      width: 100%;
+      height: auto;
+      float: left;
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
+      color: #333;
+    }
+  }
+
+  .user-extra-info-box {
+    flex: 1;
+    box-sizing: border-box;
+    padding: 30px;
+    background-color: #f5f5f5;
+
+    .info-label {
+      font-weight: bold;
+      color: #333;
+      margin-right: 15px;
+    }
+    .info-value {
+      color: rgba(0, 0, 0, 0.8);
+    }
+  }
+}
+</style>
