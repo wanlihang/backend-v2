@@ -188,6 +188,14 @@ const routes = [
         }
       },
       {
+        path: '/course/vod/update',
+        component: () => import('@/views/course/vod/update'),
+        name: 'VodUpdate',
+        meta: {
+          title: 'title.course.vod.update'
+        }
+      },
+      {
         path: '/course/vod/category/index',
         component: () => import('@/views/course/vod/category/index'),
         name: 'CourseCategories',

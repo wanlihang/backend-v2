@@ -80,7 +80,10 @@
               <el-link
                 type="primary"
                 style="margin-left: 5px"
-                @click="detail(scope.row)"
+                @click="$router.push({
+                    name: 'VodUpdate',
+                    query: { id: scope.row.id },
+                  })"
                 >编辑</el-link
               >
               <el-link
@@ -197,9 +200,6 @@ export default {
         // this.filterData.tags = res.data.tags;
         // this.filterData.roles = res.data.roles;
       });
-    },
-    detail(item) {
-      this.$router.push({ name: "VodDetail", params: { id: item.id } });
     },
     destory(item) {
       this.$confirm("确认操作？", "警告", {

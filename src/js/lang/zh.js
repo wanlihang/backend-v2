@@ -42,7 +42,7 @@ const zh = { //zh
             vod: {
                 index: '点播',
                 create: '添加点播课程',
-                edit: '编辑点播课程',
+                update: '编辑点播课程',
                 category: {
                     index: '课程分类管理',
                     create: '创建课程分类',
