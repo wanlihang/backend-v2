@@ -191,6 +191,9 @@ const Api = {
         TagUpdate(id, params) {
             return put(`/backend/api/v1/member/${id}/tags`, params);
         },
+        RemarkUpdate(id, params) {
+            return put(`/backend/api/v1/member/${id}/remark`, params);
+        },
         Tag: {
             List(params) {
                 return get(`/backend/api/v1/member/tag/index`, params);

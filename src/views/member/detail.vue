@@ -128,7 +128,13 @@
     <div class="panel-box mb-15">
       <div class="panel-header">
         <span>用户备注</span>
-        <el-link type="primary" class="ml-15">
+        <el-link
+          type="primary"
+          @click="
+            $router.push({ name: 'MemberRemark', params: { userId: id } })
+          "
+          class="ml-15"
+        >
           <i class="el-icon-edit"></i>
         </el-link>
       </div>
