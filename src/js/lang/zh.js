@@ -17,6 +17,7 @@ const zh = { //zh
         createadmin:'添加管理员',
         updateadmin:'编辑管理员',
         createadminroles:'添加管理员角色',
+        updateadminroles:'编辑管理员角色',
         administrator: {
             'change-password': '修改密码'
         },

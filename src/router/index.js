@@ -117,23 +117,23 @@ const routes = [
       },
       {
         path: '/system/administrator',
-        component: () => import('@/views/system/administrator'),
+        component: () => import('@/views/system/administrator/index'),
         name: 'SystemAdministrator',
         meta: {
           title: 'title.system-administrator'
         }
       },
       {
-        path: '/system/createadmin',
-        component: () => import('@/views/system/createadmin'),
+        path: '/system/administrator/create',
+        component: () => import('@/views/system/administrator/create'),
         name: 'AdministratorCreate',
         meta: {
           title: 'title.createadmin'
         }
       },
       {
-        path: '/system/updateadmin',
-        component: () => import('@/views/system/updateadmin'),
+        path: '/system/administrator/update',
+        component: () => import('@/views/system/administrator/update'),
         name: 'AdministratorUpdate',
         meta: {
           title: 'title.updateadmin'
@@ -141,18 +141,26 @@ const routes = [
       },
       {
         path: '/system/adminroles',
-        component: () => import('@/views/system/adminroles'),
+        component: () => import('@/views/system/adminroles/index'),
         name: 'SystemAdminroles',
         meta: {
           title: 'title.system-adminroles'
         }
       },
       {
-        path: '/system/createadminroles',
-        component: () => import('@/views/system/createadminroles'),
+        path: '/system/adminroles/create',
+        component: () => import('@/views/system/adminroles/create'),
         name: 'AdminrolesCreate',
         meta: {
           title: 'title.createadminroles'
+        }
+      },
+      {
+        path: '/system/adminroles/update',
+        component: () => import('@/views/system/adminroles/update'),
+        name: 'AdminrolesUpdate',
+        meta: {
+          title: 'title.updateadminroles'
         }
       },
       {

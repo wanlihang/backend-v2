@@ -43,7 +43,7 @@
                 type="primary"
                 @click="
                   $router.push({
-                    name: 'AdministratorUpdate',
+                    name: 'AdminrolesUpdate',
                     query: { id: scope.row.id },
                   })
                 "
