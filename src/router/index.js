@@ -202,6 +202,46 @@ const routes = [
         meta: {
           title: 'title.member.detail'
         }
+      },
+      {
+        path: '/member/:userId/edit',
+        component: () => import('@/views/member/edit'),
+        name: 'MemberEdit',
+        meta: {
+          title: 'title.member.edit'
+        }
+      },
+      {
+        path: '/member/:userId/tags',
+        component: () => import('@/views/member/tag'),
+        name: 'MemberTag',
+        meta: {
+          title: 'title.member.tags'
+        }
+      },
+      {
+        path: '/member/tag/index',
+        component: () => import('@/views/member/tag/index'),
+        name: 'MemberTagIndex',
+        meta: {
+          title: 'title.member.tag.index'
+        }
+      },
+      {
+        path: '/member/tag/create',
+        component: () => import('@/views/member/tag/create'),
+        name: 'MemberTagCreate',
+        meta: {
+          title: 'title.member.tag.create'
+        }
+      },
+      {
+        path: '/member/tag/:id',
+        component: () => import('@/views/member/tag/edit'),
+        name: 'MemberTagEdit',
+        meta: {
+          title: 'title.member.tag.edit'
+        }
       }
     ]
   },

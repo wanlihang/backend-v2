@@ -13,12 +13,12 @@ const zh = { //zh
         withdrawOrders:'邀请余额提现',
         system: '系统',
         config: '系统配置',
-        'system-administrator':'管理员',
-        'system-adminroles':'管理员角色',
-        createadmin:'添加管理员',
-        updateadmin:'编辑管理员',
-        createadminroles:'添加管理员角色',
-        updateadminroles:'编辑管理员角色',
+        'system-administrator': '管理员',
+        'system-adminroles': '管理员角色',
+        createadmin: '添加管理员',
+        updateadmin: '编辑管理员',
+        createadminroles: '添加管理员角色',
+        updateadminroles: '编辑管理员角色',
         administrator: {
             'change-password': '修改密码'
         },
@@ -27,7 +27,14 @@ const zh = { //zh
             index: '用户',
             create: '创建用户',
             import: '批量导入',
-            detail: '用户详情'
+            detail: '用户详情',
+            edit: '用户编辑',
+            tags: '用户标签',
+            tag: {
+                index: '用户标签列表',
+                create: '创建用户标签',
+                edit: '编辑用户标签'
+            }
         }
     },
     commen: {

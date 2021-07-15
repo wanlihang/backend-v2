@@ -52,6 +52,7 @@
             v-model="user.role_expired_at"
             type="date"
             placeholder="选择日期"
+            value-format="yyyy-MM-dd"
           >
           </el-date-picker>
         </el-form-item>
@@ -61,14 +62,12 @@
     <div class="bottom-menus">
       <div class="bottom-menus-box">
         <div>
-          <el-button @click="$router.push({ name: 'MemberIndex' })"
-            >取消</el-button
-          >
+          <el-button @click="$router.back()"> 取消 </el-button>
         </div>
         <div class="ml-15">
-          <el-button @click="formValidate" :loading="loading" type="primary"
-            >保存</el-button
-          >
+          <el-button @click="formValidate" :loading="loading" type="primary">
+            保存
+          </el-button>
         </div>
       </div>
     </div>
@@ -76,12 +75,14 @@
 </template>
 <script>
 import UploadImage from "@/components/upload-image";
+
 export default {
   components: {
     UploadImage,
   },
   data() {
     return {
+      id: null,
       user: {
         avatar: null,
         nick_name: null,
@@ -113,22 +114,28 @@ export default {
             trigger: "blur",
           },
         ],
-        password: [
-          {
-            required: true,
-            message: "请输入密码",
-            trigger: "blur",
-          },
-        ],
       },
       roles: [],
       loading: false,
     };
   },
   mounted() {
+    this.id = this.$route.params.userId;
+
+    this.getUser();
     this.params();
   },
   methods: {
+    getUser() {
+      this.$api.Member.Edit(this.id).then((res) => {
+        let data = res.data;
+        if (data.role_id === 0) {
+          data.role_id = null;
+        }
+
+        this.user = data;
+      });
+    },
     params() {
       this.$api.Member.Create().then((res) => {
         this.roles = res.data.roles;
@@ -146,10 +153,11 @@ export default {
         return;
       }
       this.loading = true;
-      this.$api.Member.Store(this.user)
+      this.$api.Member.Update(this.id, this.user)
         .then(() => {
           this.$message.success(this.$t("common.success"));
-          this.$router.push({ name: "MemberIndex" });
+          this.loading = false;
+          this.getUser();
         })
         .catch((e) => {
           this.loading = false;

@@ -41,15 +41,17 @@
     </div>
 
     <div class="bottom-menus">
-      <div>
-        <el-button @click="$router.push({ name: 'SystemAdministrator' })"
-          >取消</el-button
-        >
-      </div>
-      <div class="ml-15">
-        <el-button @click="formValidate" :loading="loading" type="primary"
-          >保存</el-button
-        >
+      <div class="bottom-menus-box">
+        <div>
+          <el-button @click="$router.push({ name: 'SystemAdministrator' })"
+            >取消</el-button
+          >
+        </div>
+        <div class="ml-15">
+          <el-button @click="formValidate" :loading="loading" type="primary"
+            >保存</el-button
+          >
+        </div>
       </div>
     </div>
   </div>

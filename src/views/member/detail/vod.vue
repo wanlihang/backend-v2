@@ -26,7 +26,7 @@
         background
         :page-size="pagination.size"
         :current-page="pagination.page"
-        layout="prev, pager, next"
+        layout="prev, pager, next, total"
         @current-change="pageChange"
         :total="total"
       >

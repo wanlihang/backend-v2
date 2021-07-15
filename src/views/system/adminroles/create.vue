@@ -13,29 +13,30 @@
         <el-form-item label="描述" prop="description">
           <el-input v-model="user.description" class="w-200px"></el-input>
         </el-form-item>
+
         <div v-for="(item, index) in permissions" :key="index">
           <h1>{{ index }}</h1>
           <el-checkbox-group v-model="user.permission_ids">
-            <el-checkbox
-              v-for="it in item"
-              :key="it.id"
-              :label="it.id"
-            >{{it.display_name}}</el-checkbox>
+            <el-checkbox v-for="it in item" :key="it.id" :label="it.id">{{
+              it.display_name
+            }}</el-checkbox>
           </el-checkbox-group>
         </div>
       </el-form>
     </div>
 
     <div class="bottom-menus">
-      <div>
-        <el-button @click="$router.push({ name: 'SystemAdminroles' })"
-          >取消</el-button
-        >
-      </div>
-      <div class="ml-15">
-        <el-button @click="formValidate" :loading="loading" type="primary"
-          >保存</el-button
-        >
+      <div class="bottom-menus-box">
+        <div>
+          <el-button @click="$router.push({ name: 'SystemAdminroles' })"
+            >取消</el-button
+          >
+        </div>
+        <div class="ml-15">
+          <el-button @click="formValidate" :loading="loading" type="primary"
+            >保存</el-button
+          >
+        </div>
       </div>
     </div>
   </div>
@@ -74,7 +75,7 @@ export default {
         ],
       },
       permissions: [],
-      
+
       loading: false,
     };
   },
