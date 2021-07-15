@@ -21,6 +21,12 @@ export default [
                 name: 'title.role',
                 key: 'Role'
             },
+        ],
+    },
+    {
+        name: 'title.finance',
+        key: 'Finance',
+        children: [
             {
                 name: 'title.order',
                 key: 'Orderlist'
@@ -33,7 +39,7 @@ export default [
                 name: 'title.withdrawOrders',
                 key: 'WithdrawOrders'
             },
-        ],
+        ]
     },
     {
         name: 'title.member.index',
@@ -63,5 +69,5 @@ export default [
             }
         ]
     },
-    
+
 ];

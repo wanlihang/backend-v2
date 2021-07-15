@@ -37,7 +37,8 @@ const zh = { //zh
                 create: '创建用户标签',
                 edit: '编辑用户标签'
             }
-        }
+        },
+        finance: '财务'
     },
     commen: {
         Locale: "zhLocale",
