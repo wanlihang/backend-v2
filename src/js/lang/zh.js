@@ -10,7 +10,7 @@ const zh = { //zh
         order: '订单列表',
         promocode: '优惠码',
         promocode_import: '批量导入',
-        withdrawOrders: '邀请余额提现',
+        withdrawOrders: '余额提现',
         system: '系统',
         config: '系统配置',
         'system-administrator': '管理员',
