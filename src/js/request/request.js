@@ -194,6 +194,9 @@ const Api = {
         RemarkUpdate(id, params) {
             return put(`/backend/api/v1/member/${id}/remark`, params);
         },
+        Credit1Change(params) {
+            return post(`/backend/api/v1/member/credit1/change`, params);
+        },
         Tag: {
             List(params) {
                 return get(`/backend/api/v1/member/tag/index`, params);

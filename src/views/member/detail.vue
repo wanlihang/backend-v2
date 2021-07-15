@@ -36,7 +36,16 @@
               <div class="info-label">积分</div>
               <div class="flex-1 info-value">
                 <span> {{ user.credit1 }}</span>
-                <el-link type="primary" class="ml-15">
+                <el-link
+                  type="primary"
+                  @click="
+                    $router.push({
+                      name: 'MemberCredit1',
+                      params: { userId: id },
+                    })
+                  "
+                  class="ml-15"
+                >
                   <i class="el-icon-edit"></i>
                 </el-link>
               </div>
