@@ -15,7 +15,7 @@ export default [
             },
             {
                 name: 'title.mobile_terminal',
-                key: 'DecorationMobile'
+                key: 'DecorationH5'
             },
             {
                 name: 'title.role',
