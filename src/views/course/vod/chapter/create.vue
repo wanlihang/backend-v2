@@ -1,14 +1,14 @@
 <template>
   <div class="float-left">
     <div class="form-box broder-top-left-radius">
-      <el-form ref="form" :model="user" :rules="rules" label-width="200px">
+      <el-form ref="form" :model="chapter" :rules="rules" label-width="200px">
         <el-form-item label="章节名" prop="title">
-          <el-input v-model="user.title" class="w-200px"></el-input>
+          <el-input v-model="chapter.title" class="w-200px"></el-input>
         </el-form-item>
         <el-form-item label="升序" prop="sort">
           <el-input
             type="number"
-            v-model="user.sort"
+            v-model="chapter.sort"
             class="w-200px"
           ></el-input>
         </el-form-item>
@@ -18,7 +18,7 @@
     <div class="bottom-menus">
       <div class="bottom-menus-box">
         <div>
-          <el-button @click="$router.push({ name: 'CourseChapters',query: { course_id: user.course_id },})"
+          <el-button @click="$router.push({ name: 'CourseChapters',query: { course_id: chapter.course_id },})"
             >取消</el-button
           >
         </div>
@@ -35,7 +35,7 @@
 export default {
   data() {
     return {
-      user: {
+      chapter: {
         course_id: this.$route.query.course_id,
         sort: null,
         title: null,
@@ -74,10 +74,10 @@ export default {
         return;
       }
       this.loading = true;
-      this.$api.Course.Vod.Chapters.Store(this.user.course_id,this.user)
+      this.$api.Course.Vod.Chapters.Store(this.chapter.course_id,this.chapter)
         .then(() => {
           this.$message.success(this.$t("common.success"));
-          this.$router.push({ name: "CourseChapters",query: { course_id: this.user.course_id }, });
+          this.$router.push({ name: "CourseChapters",query: { course_id: this.chapter.course_id }, });
         })
         .catch((e) => {
           this.loading = false;
