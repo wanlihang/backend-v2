@@ -45,7 +45,7 @@
         </div>
       </div>
       <div class="float-left mt-15">
-        <el-button @click="getUser" type="primary">筛选</el-button>
+        <el-button @click="getCourse" type="primary">筛选</el-button>
         <el-button @click="paginationReset">清空</el-button>
       </div>
     </div>
