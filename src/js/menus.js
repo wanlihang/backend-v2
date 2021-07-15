@@ -52,6 +52,17 @@ export default [
         ]
     },
     {
+        name: 'title.coursename',
+        key: 'Course',
+        children: [
+            {
+                name: 'title.course.vod.index',
+                key: 'Vod'
+            },
+            
+        ]
+    },
+    {
         name: 'title.system',
         key: 'System',
         children: [

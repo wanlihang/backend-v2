@@ -8,9 +8,9 @@ const zh = { //zh
         mobile_terminal: "移动端",
         role: 'VIP会员',
         order: '订单列表',
-        promocode:'优惠码',
+        promocode: '优惠码',
         promocode_import: '批量导入',
-        withdrawOrders:'邀请余额提现',
+        withdrawOrders: '邀请余额提现',
         system: '系统',
         config: '系统配置',
         'system-administrator': '管理员',
@@ -38,6 +38,19 @@ const zh = { //zh
                 edit: '编辑用户标签'
             }
         },
+        course: {
+            vod: {
+                index: '点播',
+                create: '添加点播课程',
+                edit: '编辑点播课程',
+                category: {
+                    index: '课程分类管理',
+                    create: '创建课程分类',
+                    edit: '编辑课程分类'
+                }
+            },
+        },
+        coursename: '课程',
         finance: '财务'
     },
     commen: {

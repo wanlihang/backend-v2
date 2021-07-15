@@ -145,6 +145,45 @@ const Api = {
             }
         },
     },
+    Course:{
+        Vod:{
+            List(params) {
+                return get(`/backend/api/v1/course`, params);
+            },
+            Create() {
+                return get(`/backend/api/v1/course/create`);
+            },
+            Store(params) {
+                return post(`/backend/api/v1/course`, params);
+            },
+            Destory(id) {
+                return destroy(`/backend/api/v1/course/${id}`);
+            },
+            Detail(id) {
+                return get(`/backend/api/v1/course/${id}`);
+            },
+            Update(id, params) {
+                return put(`/backend/api/v1/course/${id}`, params);
+            },
+            Categories:{
+                List(params) {
+                    return get(`/backend/api/v1/courseCategory`, params);
+                },
+                Store(params) {
+                    return post(`/backend/api/v1/courseCategory`, params);
+                },
+                Destory(id) {
+                    return destroy(`/backend/api/v1/courseCategory/${id}`);
+                },
+                Detail(id) {
+                    return get(`/backend/api/v1/courseCategory/${id}`);
+                },
+                Update(id, params) {
+                    return put(`/backend/api/v1/courseCategory/${id}`, params);
+                }
+            },
+        },
+    },
     Member: {
         List(params) {
             return get(`/backend/api/v1/member`, params);
