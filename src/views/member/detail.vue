@@ -1,8 +1,5 @@
 <template>
   <div class="float-left" v-if="user" v-loading="loading">
-    <div class="float-left mb-15">
-      <el-button @click="$router.back()" type="primary">返回</el-button>
-    </div>
     <div class="user-info-box">
       <div class="user-base-info-box">
         <div class="user-avatar">
@@ -10,82 +7,274 @@
         </div>
         <div class="user-nickname">{{ user.nick_name }}</div>
       </div>
-      <div class="user-extra-info-box">
-        <div class="float-left mb-15 d-flex">
-          <div class="flex-1 d-flex">
-            <div class="info-label">ID</div>
-            <div class="flex-1 info-value">{{ user.id }}</div>
-          </div>
-          <div class="flex-1 d-flex">
-            <div class="info-label">手机号</div>
-            <div class="flex-1 info-value">{{ user.mobile }}</div>
-          </div>
-          <div class="flex-1 d-flex">
-            <div class="info-label">积分</div>
-            <div class="flex-1 info-value">{{ user.credit1 }}</div>
-          </div>
-          <div class="flex-1 d-flex">
-            <div class="info-label">VIP</div>
-            <div class="flex-1 info-value">
-              {{ user.role ? user.role.name : "" }}
+    </div>
+
+    <div class="panel-box mt-15 mb-15">
+      <div class="panel-header">
+        <span>基础信息</span>
+
+        <el-link
+          type="primary"
+          @click="$router.push({ name: 'MemberEdit', params: { userId: id } })"
+          class="ml-15"
+        >
+          <i class="el-icon-edit"></i>
+        </el-link>
+      </div>
+      <div class="panel-body">
+        <div class="user-extra-info-box">
+          <div class="float-left mb-15 d-flex">
+            <div class="flex-1 d-flex">
+              <div class="info-label">ID</div>
+              <div class="flex-1 info-value">{{ user.id }}</div>
+            </div>
+            <div class="flex-1 d-flex">
+              <div class="info-label">手机号</div>
+              <div class="flex-1 info-value">{{ user.mobile }}</div>
+            </div>
+            <div class="flex-1 d-flex">
+              <div class="info-label">积分</div>
+              <div class="flex-1 info-value">
+                <span> {{ user.credit1 }}</span>
+                <el-link type="primary" class="ml-15">
+                  <i class="el-icon-edit"></i>
+                </el-link>
+              </div>
+            </div>
+            <div class="flex-1 d-flex">
+              <div class="info-label">VIP</div>
+              <div class="flex-1 info-value">
+                {{ user.role ? user.role.name : "" }}
+              </div>
+            </div>
+            <div class="flex-1 d-flex">
+              <div class="info-label">VIP过期时间</div>
+              <div class="flex-1 info-value">{{ user.role_expired_at }}</div>
             </div>
           </div>
-          <div class="flex-1 d-flex">
-            <div class="info-label">VIP过期时间</div>
-            <div class="flex-1 info-value">{{ user.role_expired_at }}</div>
+
+          <div class="float-left mb-15 mt-15 d-flex">
+            <div class="flex-1 d-flex">
+              <div class="info-label">锁定登录</div>
+              <div class="flex-1 info-value">
+                {{ user.is_lock === 1 ? "是" : "否" }}
+              </div>
+            </div>
+            <div class="flex-1 d-flex">
+              <div class="info-label">邀请人</div>
+              <div class="flex-1 info-value">
+                {{ user.invitor ? user.invitor.nick_name : "" }}
+              </div>
+            </div>
+            <div class="flex-1 d-flex">
+              <div class="info-label">邀请维系时间</div>
+              <div class="flex-1 info-value">
+                {{ user.invite_user_expired_at }}
+              </div>
+            </div>
+            <div class="flex-1 d-flex">
+              <div class="info-label">邀请余额</div>
+              <div class="flex-1 info-value">
+                {{ user.invite_balance }}
+              </div>
+            </div>
+            <div class="flex-1 d-flex">
+              <div class="info-label">用户邀请码</div>
+              <div class="flex-1 info-value">
+                {{ user.is_used_promo_code === 1 ? "已使用" : "未使用" }}
+              </div>
+            </div>
+          </div>
+
+          <div class="float-left mt-15 d-flex">
+            <div class="flex-1 d-flex">
+              <div class="info-label">注册IP</div>
+              <div class="flex-1 info-value">
+                {{ user.register_ip }}
+              </div>
+            </div>
+            <div class="flex-1 d-flex">
+              <div class="info-label">注册区域</div>
+              <div class="flex-1 info-value">
+                {{ user.register_area }}
+              </div>
+            </div>
+            <div class="flex-1 d-flex">
+              <div class="info-label">标签</div>
+              <div class="flex-1 info-value">
+                <template v-if="user.tags">
+                  <el-tag class="mr-5" v-for="item in user.tags" :key="item.id">
+                    {{ item.name }}
+                  </el-tag>
+                </template>
+                <el-link
+                  type="primary"
+                  @click="
+                    $router.push({ name: 'MemberTag', params: { userId: id } })
+                  "
+                  class="ml-10"
+                >
+                  <i class="el-icon-edit"></i>
+                </el-link>
+              </div>
+            </div>
+            <div class="flex-1 d-flex"></div>
+            <div class="flex-1 d-flex"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-box mb-15">
+      <div class="panel-header">
+        <span>用户备注</span>
+        <el-link type="primary" class="ml-15">
+          <i class="el-icon-edit"></i>
+        </el-link>
+      </div>
+      <div class="panel-body">
+        <template v-if="user.remark">
+          <div v-html="user.remark.remark"></div>
+        </template>
+        <el-empty :image-size="50" v-else></el-empty>
+      </div>
+    </div>
+
+    <div class="panel-box mb-15">
+      <div class="panel-header">实名信息</div>
+      <div class="panel-body">
+        <div class="user-extra-info-box" v-if="user.profile">
+          <div class="float-left mb-15 d-flex">
+            <div class="flex-1 d-flex">
+              <div class="info-label">真实姓名</div>
+              <div class="flex-1 info-value">
+                {{ user.profile ? user.profile.real_name : "" }}
+              </div>
+            </div>
+            <div class="flex-1 d-flex">
+              <div class="info-label">性别</div>
+              <div class="flex-1 info-value">
+                <template v-if="user.profile">
+                  <span v-if="user.profile.gender == 0">未知</span>
+                  <span v-else-if="user.profile.gender == 1">男</span>
+                  <span v-else-if="user.profile.gender == 2">女</span>
+                </template>
+                <span v-else></span>
+              </div>
+            </div>
+
+            <div class="flex-1 d-flex">
+              <div class="info-label">年龄</div>
+              <div class="flex-1 info-value">
+                {{ user.profile ? user.profile.age : "" }}
+              </div>
+            </div>
+
+            <div class="flex-1 d-flex">
+              <div class="info-label">生日</div>
+              <div class="flex-1 info-value">
+                {{ user.profile ? user.profile.birthday : "" }}
+              </div>
+            </div>
+
+            <div class="flex-1 d-flex">
+              <div class="info-label">职业</div>
+              <div class="flex-1 info-value">
+                {{ user.profile ? user.profile.profession : "" }}
+              </div>
+            </div>
+          </div>
+
+          <div class="float-left mb-15 d-flex">
+            <div class="flex-1 d-flex">
+              <div class="info-label">住址</div>
+              <div class="flex-1 info-value">
+                {{ user.profile ? user.profile.address : "" }}
+              </div>
+            </div>
+
+            <div class="flex-1 d-flex">
+              <div class="info-label">身份证号</div>
+              <div class="flex-1 info-value">
+                {{ user.profile ? user.profile.id_number : "" }}
+              </div>
+            </div>
+
+            <div class="flex-1 d-flex">
+              <div class="info-label">毕业院校</div>
+              <div class="flex-1 info-value">
+                {{ user.profile ? user.profile.graduated_school : "" }}
+              </div>
+            </div>
+
+            <div class="flex-1 d-flex">
+              <div class="info-label">毕业证照片</div>
+              <div class="flex-1 info-value">
+                <template v-if="user.profile && user.profile.diploma">
+                  <el-image
+                    style="width: 100px; height: 80px"
+                    :src="user.profile.diploma"
+                    lazy
+                    :preview-src-list="[user.profile.diploma]"
+                  >
+                  </el-image>
+                </template>
+              </div>
+            </div>
+            <div class="flex-1 d-flex">
+              <div class="info-label">手持身份证</div>
+              <div class="flex-1 info-value">
+                <template v-if="user.profile && user.profile.id_hand_thumb">
+                  <el-image
+                    style="width: 100px; height: 80px"
+                    :src="user.profile.id_hand_thumb"
+                    lazy
+                    :preview-src-list="[user.profile.id_hand_thumb]"
+                  >
+                  </el-image>
+                </template>
+              </div>
+            </div>
+          </div>
+
+          <div class="float-left mb-15 d-flex">
+            <div class="flex-1 d-flex">
+              <div class="info-label">身份证人像面</div>
+              <div class="flex-1 info-value">
+                <template v-if="user.profile && user.profile.id_frontend_thumb">
+                  <el-image
+                    style="width: 100px; height: 80px"
+                    :src="user.profile.id_frontend_thumb"
+                    lazy
+                    :preview-src-list="[user.profile.id_frontend_thumb]"
+                  >
+                  </el-image>
+                </template>
+              </div>
+            </div>
+
+            <div class="flex-1 d-flex">
+              <div class="info-label">身份证国徽面</div>
+              <div class="flex-1 info-value">
+                <template v-if="user.profile && user.profile.id_backend_thumb">
+                  <el-image
+                    style="width: 100px; height: 80px"
+                    :src="user.profile.id_backend_thumb"
+                    lazy
+                    :preview-src-list="[user.profile.id_backend_thumb]"
+                  >
+                  </el-image>
+                </template>
+              </div>
+            </div>
+
+            <div class="flex-1 d-flex"></div>
+            <div class="flex-1 d-flex"></div>
+            <div class="flex-1 d-flex"></div>
           </div>
         </div>
 
-        <div class="float-left mb-15 d-flex">
-          <div class="flex-1 d-flex">
-            <div class="info-label">锁定登录</div>
-            <div class="flex-1 info-value">
-              {{ user.is_lock === 1 ? "是" : "否" }}
-            </div>
-          </div>
-          <div class="flex-1 d-flex">
-            <div class="info-label">邀请人</div>
-            <div class="flex-1 info-value">
-              {{ user.invitor ? user.invitor.nick_name : "" }}
-            </div>
-          </div>
-          <div class="flex-1 d-flex">
-            <div class="info-label">邀请维系时间</div>
-            <div class="flex-1 info-value">
-              {{ user.invite_user_expired_at }}
-            </div>
-          </div>
-          <div class="flex-1 d-flex">
-            <div class="info-label">邀请余额</div>
-            <div class="flex-1 info-value">
-              {{ user.invite_balance }}
-            </div>
-          </div>
-          <div class="flex-1 d-flex">
-            <div class="info-label">用户邀请码</div>
-            <div class="flex-1 info-value">
-              {{ user.is_used_promo_code === 1 ? "已使用" : "未使用" }}
-            </div>
-          </div>
-        </div>
-
-        <div class="float-left d-flex">
-          <div class="flex-1 d-flex">
-            <div class="info-label">注册IP</div>
-            <div class="flex-1 info-value">
-              {{ user.register_ip }}
-            </div>
-          </div>
-          <div class="flex-1 d-flex">
-            <div class="info-label">注册区域</div>
-            <div class="flex-1 info-value">
-              {{ user.register_area }}
-            </div>
-          </div>
-          <div class="flex-1 d-flex"></div>
-          <div class="flex-1 d-flex"></div>
-          <div class="flex-1 d-flex"></div>
-        </div>
+        <el-empty :image-size="50" v-else></el-empty>
       </div>
     </div>
 
@@ -138,6 +327,14 @@
           :id="id"
           v-else-if="courseTabActive === 'video-watch-records'"
         ></user-video-watch-records-comp>
+      </div>
+    </div>
+
+    <div class="bottom-menus">
+      <div class="bottom-menus-box">
+        <div>
+          <el-button @click="$router.back()">取消</el-button>
+        </div>
       </div>
     </div>
   </div>
@@ -208,7 +405,7 @@ export default {
       types.push(
         ...[
           {
-            name: "录播课程观看",
+            name: "录播观看",
             key: "vod-watch-records",
           },
           {
@@ -264,6 +461,7 @@ export default {
   float: left;
   box-sizing: border-box;
   display: flex;
+  justify-content: center;
   padding: 30px;
   border-radius: 10px;
   background-color: white;
@@ -285,6 +483,7 @@ export default {
         border-radius: 50%;
       }
     }
+
     .user-nickname {
       width: 100%;
       height: auto;
@@ -295,21 +494,23 @@ export default {
       color: #333;
     }
   }
+}
 
-  .user-extra-info-box {
-    flex: 1;
-    box-sizing: border-box;
-    padding: 30px;
-    background-color: #f5f5f5;
+.user-extra-info-box {
+  width: 100%;
+  height: auto;
+  float: left;
+  box-sizing: border-box;
+  padding: 30px;
 
-    .info-label {
-      font-weight: bold;
-      color: #333;
-      margin-right: 15px;
-    }
-    .info-value {
-      color: rgba(0, 0, 0, 0.8);
-    }
+  .info-label {
+    font-weight: bold;
+    color: #333;
+    margin-right: 15px;
+  }
+
+  .info-value {
+    color: rgba(0, 0, 0, 0.8);
   }
 }
 </style>

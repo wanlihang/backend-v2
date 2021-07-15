@@ -13,21 +13,21 @@
         <el-form-item label="描述" prop="description">
           <el-input v-model="user.description" class="w-200px"></el-input>
         </el-form-item>
-
-        
       </el-form>
     </div>
 
     <div class="bottom-menus">
-      <div>
-        <el-button @click="$router.push({ name: 'SystemAdminroles' })"
-          >取消</el-button
-        >
-      </div>
-      <div class="ml-15">
-        <el-button @click="formValidate" :loading="loading" type="primary"
-          >保存</el-button
-        >
+      <div class="bottom-menus-box">
+        <div>
+          <el-button @click="$router.push({ name: 'SystemAdminroles' })"
+            >取消</el-button
+          >
+        </div>
+        <div class="ml-15">
+          <el-button @click="formValidate" :loading="loading" type="primary"
+            >保存</el-button
+          >
+        </div>
       </div>
     </div>
   </div>

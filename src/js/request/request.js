@@ -101,7 +101,7 @@ const Api = {
                 return post(`/backend/api/v1/addons/switch`, params);
             }
         },
-        administrator:{
+        administrator: {
             List(params) {
                 return get(`/backend/api/v1/administrator`, params);
             },
@@ -121,7 +121,7 @@ const Api = {
                 return put(`/backend/api/v1/administrator/${id}`, params);
             }
         },
-        adminroles:{
+        adminroles: {
             List(params) {
                 return get(`/backend/api/v1/administrator_role`, params);
             },
@@ -182,6 +182,29 @@ const Api = {
         UserVideoWatchRecords(id, params) {
             return get(`/backend/api/v1/member/${id}/detail/videoWatchRecords`, params);
         },
+        TagUpdate(id, params) {
+            return put(`/backend/api/v1/member/${id}/tags`, params);
+        },
+        Tag: {
+            List(params) {
+                return get(`/backend/api/v1/member/tag/index`, params);
+            },
+            Create() {
+                return get(`/backend/api/v1/member/tag/create`);
+            },
+            Store(params) {
+                return post(`/backend/api/v1/member/tag/create`, params);
+            },
+            Edit(id) {
+                return get(`/backend/api/v1/member/tag/${id}`);
+            },
+            Update(id, params) {
+                return put(`/backend/api/v1/member/tag/${id}`, params);
+            },
+            Destroy(id) {
+                return destroy(`/backend/api/v1/member/tag/${id}`);
+            },
+        }
     }
 }
 
