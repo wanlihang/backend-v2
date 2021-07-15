@@ -3,15 +3,27 @@
     <div class="form-box broder-top-left-radius">
       <el-form ref="form" :model="user" :rules="rules" label-width="200px">
         <el-form-item label="角色">
-          <el-select multiple v-model="user.role_id">
-            <el-option
-              v-for="(item, index) in roles"
-              :key="index"
-              :label="item.display_name"
-              :value="item.id"
-            >
-            </el-option>
-          </el-select>
+          <div class="d-flex">
+            <div>
+              <el-select multiple v-model="user.role_id">
+                <el-option
+                  v-for="(item, index) in roles"
+                  :key="index"
+                  :label="item.display_name"
+                  :value="item.id"
+                >
+                </el-option>
+              </el-select>
+            </div>
+            <div class="ml-15">
+              <el-link
+                type="primary"
+                @click="$router.push({ name: 'SystemAdminroles' })"
+              >
+                角色管理
+              </el-link>
+            </div>
+          </div>
         </el-form-item>
         <el-form-item label="姓名" prop="name">
           <el-input v-model="user.name" class="w-200px"></el-input>

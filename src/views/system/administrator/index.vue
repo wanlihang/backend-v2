@@ -7,7 +7,7 @@
         >添加</el-button
       >
     </div>
-    <div class="table-body" v-loading="loading">
+    <div class="table-body top-left-radius" v-loading="loading">
       <div class="float-left">
         <el-table
           :data="users"
@@ -16,16 +16,12 @@
           @sort-change="sortChange"
           :default-sort="{ prop: 'id', order: 'descending' }"
         >
-          <el-table-column prop="id"  label="ID" width="120">
-          </el-table-column>
+          <el-table-column prop="id" label="ID" width="120"> </el-table-column>
           <el-table-column prop="name" label="姓名" width="120">
           </el-table-column>
           <el-table-column prop="email" label="邮箱" width="230">
           </el-table-column>
-          <el-table-column
-            sortable=""
-            label="登录日志"
-            
+          <el-table-column sortable="" label="登录日志"
             ><template slot-scope="scope">
               <span
                 >{{ scope.row.last_login_date }} /
@@ -147,16 +143,17 @@ export default {
             return;
           }
           this.loading = true;
-          this.$api.System.administrator.Destory(id).then((res) => {
-            if (res.status == 0) {
+          this.$api.System.administrator
+            .Destory(id)
+            .then((res) => {
               this.loading = false;
-              this.$message("删除成功");
+              this.$message.success("删除成功");
               this.paginationReset();
-            } else {
+            })
+            .catch((e) => {
               this.loading = false;
-              this.$message(res.message);
-            }
-          });
+              this.$message(e.message);
+            });
         })
         .catch(() => {
           //点击删除按钮的操作

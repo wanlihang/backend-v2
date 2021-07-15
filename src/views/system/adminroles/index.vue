@@ -7,7 +7,7 @@
         >添加</el-button
       >
     </div>
-    <div class="table-body" v-loading="loading">
+    <div class="table-body top-left-radius" v-loading="loading">
       <div class="float-left">
         <el-table
           :data="users"
@@ -16,19 +16,14 @@
           @sort-change="sortChange"
           :default-sort="{ prop: 'id', order: 'descending' }"
         >
-          <el-table-column prop="id"  label="ID" width="120">
-          </el-table-column>
+          <el-table-column prop="id" label="ID" width="120"> </el-table-column>
           <el-table-column prop="display_name" label="角色名" width="120">
           </el-table-column>
           <el-table-column prop="slug" label="Slug" width="250">
           </el-table-column>
-          <el-table-column
-            label="描述"
-           
+          <el-table-column label="描述"
             ><template slot-scope="scope">
-              <span
-                >{{ scope.row.description}} </span
-              >
+              <span>{{ scope.row.description }} </span>
             </template>
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="150">
@@ -65,6 +60,14 @@
           :total="total"
         >
         </el-pagination>
+      </div>
+    </div>
+
+    <div class="bottom-menus">
+      <div class="bottom-menus-box">
+        <div>
+          <el-button @click="$router.back()">取消</el-button>
+        </div>
       </div>
     </div>
   </div>
@@ -137,16 +140,17 @@ export default {
             return;
           }
           this.loading = true;
-          this.$api.System.adminroles.Destory(id).then((res) => {
-            if (res.status == 0) {
+          this.$api.System.adminroles
+            .Destory(id)
+            .then(() => {
               this.loading = false;
-              this.$message("删除成功");
+              this.$message.success(this.$t("common.success"));
               this.paginationReset();
-            } else {
+            })
+            .catch((e) => {
               this.loading = false;
-              this.$message(res.message);
-            }
-          });
+              this.$message(e.message);
+            });
         })
         .catch(() => {
           //点击删除按钮的操作

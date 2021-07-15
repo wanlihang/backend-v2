@@ -60,10 +60,6 @@ export default [
             {
                 name: 'title.system-administrator',
                 key: 'SystemAdministrator',
-            },
-            {
-                name: 'title.system-adminroles',
-                key: 'SystemAdminroles',
             }
         ]
     },
