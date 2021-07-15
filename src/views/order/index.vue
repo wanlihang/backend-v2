@@ -10,39 +10,90 @@
         </div>
 
         <div class="d-flex ml-15">
-          <div class="filter-label">订单编号</div>
+          <div class="filter-label">
+            <form-label
+              text="商品ID"
+              helper="可以是录播课程ID，视频ID，VIP会员ID，直播课程ID，电子书ID等"
+            ></form-label>
+          </div>
           <div class="flex-1 ml-15">
-            <el-input v-model="filter.order_id" placeholder="订单号"></el-input>
+            <el-input v-model="filter.goods_id" placeholder="商品ID"></el-input>
           </div>
         </div>
 
         <div class="d-flex ml-15">
-          <div class="filter-label">订单状态</div>
+          <div class="filter-label">商品名</div>
           <div class="flex-1 ml-15">
-            <el-select v-model="filter.status">
-              <el-option
-                v-for="(item, index) in filterData.statusRows"
-                :key="index"
-                :label="item.name"
-                :value="item.key"
-              >
-              </el-option>
-            </el-select>
+            <el-input
+              v-model="filter.goods_name"
+              placeholder="商品名"
+            ></el-input>
+          </div>
+        </div>
+
+        <div class="d-flex ml-15">
+          <div class="filter-label">订单编号</div>
+          <div class="flex-1 ml-15">
+            <el-input
+              v-model="filter.order_id"
+              class="w-200"
+              placeholder="订单号"
+            ></el-input>
+          </div>
+        </div>
+
+        <div class="d-flex ml-15">
+          <div class="filter-label">创建时间</div>
+          <div class="flex-1 ml-15">
+            <el-date-picker
+              v-model="filter.created_at"
+              type="daterange"
+              align="right"
+              unlink-panels
+              range-separator="至"
+              start-placeholder="开始日期"
+              end-placeholder="结束日期"
+            >
+            </el-date-picker>
           </div>
         </div>
       </div>
       <div class="float-left mt-15">
-        <el-button type="primary" class="search" @click="getList()">
+        <el-button type="primary" class="search" @click="filterAct()">
           筛选
         </el-button>
         <el-button class="reset" @click="paginationReset()">清空</el-button>
       </div>
     </div>
 
-    <div class="table-body top-left-radius" v-loading="loading">
-      <el-table :data="dataList" stripe class="float-left">
-        <el-table-column prop="id" label="ID" :width="120"> </el-table-column>
-        <el-table-column prop="user_id" label="用户ID" :width="120">
+    <div class="table-tabs" v-if="countMap">
+      <div
+        class="tab-item"
+        :class="{ active: filter.status === item.key }"
+        v-for="(item, index) in filterData.statusRows"
+        :key="index"
+        @click="filter.status = item.key"
+      >
+        {{ item.name }}({{
+          item.key === null ? orderTotal : countMap[item.key]
+        }})
+      </div>
+    </div>
+    <div
+      class="table-body"
+      :class="{ 'top-left-radius': filter.status !== null }"
+      v-loading="loading"
+    >
+      <el-table
+        :data="dataList"
+        stripe
+        class="float-left"
+        @sort-change="sortChange"
+        :default-sort="{ prop: 'id', order: 'descending' }"
+      >
+        <el-table-column prop="id" sortable label="ID" :width="120">
+        </el-table-column>
+        <el-table-column prop="user_id" sortable label="用户ID" :width="120">
         </el-table-column>
         <el-table-column label="用户" :width="300">
           <template slot-scope="scope">
@@ -60,7 +111,7 @@
         </el-table-column>
         <el-table-column prop="order_id" label="订单编号" :width="200">
         </el-table-column>
-        <el-table-column prop="charge" label="总价" :width="120">
+        <el-table-column prop="charge" sortable label="总价" :width="120">
         </el-table-column>
         <el-table-column prop="status_text" label="状态" :width="100">
         </el-table-column>
@@ -71,7 +122,7 @@
             </span>
           </template>
         </el-table-column>
-        <el-table-column prop="updated_at" label="时间" :width="200">
+        <el-table-column prop="updated_at" sortable label="时间" :width="200">
         </el-table-column>
         <el-table-column label="操作" fixed="right" :width="80">
           <template slot-scope="scope">
@@ -104,16 +155,25 @@ export default {
       pagination: {
         page: 1,
         size: 10,
+        sort: "id",
+        order: "desc",
       },
       total: 0,
       loading: false,
       filter: {
         user_id: null,
+        goods_id: null,
+        goods_name: null,
         status: null,
         order_id: null,
+        created_at: null,
       },
       filterData: {
         statusRows: [
+          {
+            name: "全部",
+            key: null,
+          },
           {
             name: "未支付",
             key: 1,
@@ -133,7 +193,25 @@ export default {
         ],
       },
       dataList: [],
+      countMap: null,
     };
+  },
+  computed: {
+    orderTotal() {
+      if (this.countMap === null) {
+        return 0;
+      }
+      let total = 0;
+      for (let i = 1; i < this.filterData.statusRows.length; i++) {
+        total += this.countMap[this.filterData.statusRows[i].key];
+      }
+      return total;
+    },
+  },
+  watch: {
+    "filter.status"() {
+      this.getList();
+    },
   },
   mounted() {
     this.getList();
@@ -149,9 +227,20 @@ export default {
     },
     paginationReset() {
       this.pagination.page = 1;
-      this.filter.status = null;
       this.filter.order_id = null;
       this.filter.user_id = null;
+      this.filter.created_at = null;
+      this.filter.goods_id = null;
+      this.filter.goods_name = null;
+      this.getList();
+    },
+    sortChange(column) {
+      this.pagination.sort = column.prop;
+      this.pagination.order = column.order === "ascending" ? "asc" : "desc";
+      this.getList();
+    },
+    filterAct() {
+      this.pagination.page = 1;
       this.getList();
     },
     getList() {
@@ -167,6 +256,7 @@ export default {
         this.users = resp.data.users;
         this.total = resp.data.orders.total;
         this.dataList = resp.data.orders.data;
+        this.countMap = resp.data.countMap;
 
         this.loading = false;
       });
