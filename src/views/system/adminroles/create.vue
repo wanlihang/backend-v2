@@ -15,13 +15,12 @@
         </el-form-item>
         <div v-for="(item, index) in permissions" :key="index">
           <h1>{{ index }}</h1>
-          <el-checkbox-group v-model="permission_ids">
+          <el-checkbox-group v-model="user.permission_ids">
             <el-checkbox
               v-for="it in item"
               :key="it.id"
-              :label="it.display_name"
-              :value="it.id"
-            ></el-checkbox>
+              :label="it.id"
+            >{{it.display_name}}</el-checkbox>
           </el-checkbox-group>
         </div>
       </el-form>
@@ -49,6 +48,7 @@ export default {
         display_name: null,
         slug: null,
         description: null,
+        permission_ids: [],
       },
       rules: {
         display_name: [
@@ -74,7 +74,7 @@ export default {
         ],
       },
       permissions: [],
-      permission_ids: [],
+      
       loading: false,
     };
   },
@@ -99,7 +99,6 @@ export default {
         return;
       }
       this.loading = true;
-      this.user.password_confirmation = this.user.password;
       this.$api.System.adminroles
         .Store(this.user)
         .then(() => {
