@@ -110,6 +110,12 @@
                 >附件</el-link
               >
               <el-link type="primary" style="margin-left: 5px"
+              @click="
+                  $router.push({
+                    name: 'CourseRecords',
+                    query: { course_id: scope.row.id },
+                  })
+                "
                 >观看记录</el-link
               >
             </template>

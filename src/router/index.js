@@ -260,6 +260,14 @@ const routes = [
         }
       },
       {
+        path: '/course/vod/record/index',
+        component: () => import('@/views/course/vod/record/index'),
+        name: 'CourseRecords',
+        meta: {
+          title: 'title.course.vod.record.index'
+        }
+      },
+      {
         path: '/member/index',
         component: () => import('@/views/member/index'),
         name: 'MemberIndex',

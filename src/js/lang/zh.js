@@ -56,6 +56,9 @@ const zh = { //zh
                 attach: {
                     index: '课程附件管理',
                     create: '添加课程附件',
+                },
+                record:{
+                    index: '观看记录',
                 }
             },
         },

@@ -210,6 +210,11 @@ const Api = {
                     return destroy(`/backend/api/v1/course_attach/${id}`);
                 },
             },
+            Records:{
+                List(id,params) {
+                    return get(`/backend/api/v1/course/${id}/watch/records`, params);
+                },
+            }
         },
     },
     Member: {
