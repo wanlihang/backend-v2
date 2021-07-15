@@ -90,27 +90,27 @@ export default {
     };
   },
   mounted() {
-    this.getAdminroles();
+    this.getCategories();
   },
   methods: {
     paginationReset() {
       this.pagination.page = 1;
-      this.getAdminroles();
+      this.getCategories();
     },
     paginationSizeChange(size) {
       this.pagination.size = size;
-      this.getAdminroles();
+      this.getCategories();
     },
     paginationPageChange(page) {
       this.pagination.page = page;
-      this.getAdminroles();
+      this.getCategories();
     },
     sortChange(column) {
       this.pagination.sort = column.prop;
       this.pagination.order = column.order === "ascending" ? "asc" : "desc";
-      this.getAdminroles();
+      this.getCategories();
     },
-    getAdminroles() {
+    getCategories() {
       if (this.loading) {
         return;
       }

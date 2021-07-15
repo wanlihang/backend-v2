@@ -78,7 +78,7 @@
 
           <el-table-column fixed="right" label="操作" width="270">
             <template slot-scope="scope">
-              <el-link type="danger" @click="destory(scope.row)">删除</el-link>
+              <el-link type="danger" @click="destory(scope.row.id)">删除</el-link>
               <el-link type="primary" style="margin-left:5px;" @click="detail(scope.row)">编辑</el-link>
                <el-link type="primary" style="margin-left:10px;" >章节</el-link>
                 <el-link type="primary" style="margin-left:5px;" >视频</el-link>
@@ -176,6 +176,34 @@ export default {
     detail(item) {
       this.$router.push({ name: "VodDetail", params: { id: item.id } });
     },
+    destory(item){
+         this.$confirm("确认操作？", "警告", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          //点击确定按钮的操作
+          if (this.loading) {
+            return;
+          }
+          this.loading = true;
+          this.$api.Course.Vod
+            .Destory(item)
+            .then(() => {
+              this.loading = false;
+              this.$message.success(this.$t("common.success"));
+              this.paginationReset();
+            })
+            .catch((e) => {
+              this.loading = false;
+              this.$message(e.message);
+            });
+        })
+        .catch(() => {
+          //点击删除按钮的操作
+        });
+    }
   },
 };
 </script>
