@@ -24,7 +24,7 @@
       <div class="row">
         <el-button type="danger" @click="deleteMulti()">批量删除</el-button>
         <el-button type="primary" @click="create()">添加</el-button>
-        <el-button type="primary">批量导入</el-button>
+        <el-button type="primary" @click="$router.push({ name: 'CodeImport' })">批量导入</el-button>
         <el-button type="primary" @click="createMulti()">批量生成</el-button>
       </div>
       <el-table

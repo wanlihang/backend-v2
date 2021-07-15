@@ -60,6 +60,9 @@ const Api = {
             CreateMulti(params) {
                 return post(`/backend/api/v1/promoCode/generator`, params)
             },
+            Import(params) {
+                return post(`/backend/api/v1/promoCode/import`, params);
+            },
         },
         WithdrawOrders: {
             WithdrawOrders(params) {

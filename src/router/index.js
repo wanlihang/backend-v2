@@ -84,6 +84,14 @@ const routes = [
         }
       },
       {
+        path: '/order/code-import',
+        component: () => import('@/views/order/code-import'),
+        name: 'CodeImport',
+        meta: {
+          title: 'title.promocode_import'
+        }
+      },
+      {
         path: '/withdrawOrders',
         component: () => import('@/views/order/withdrawOrders'),
         name: 'WithdrawOrders',
