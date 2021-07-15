@@ -46,7 +46,12 @@ const zh = { //zh
                 category: {
                     index: '课程分类管理',
                     create: '创建课程分类',
-                    edit: '编辑课程分类'
+                    update: '编辑课程分类'
+                },
+                chapter: {
+                    index: '课程章节管理',
+                    create: '创建课程章节',
+                    update: '编辑课程章节'
                 }
             },
         },

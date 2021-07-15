@@ -182,6 +182,23 @@ const Api = {
                     return put(`/backend/api/v1/courseCategory/${id}`, params);
                 }
             },
+            Chapters:{
+                List(id,params) {
+                    return get(`/backend/api/v1/course_chapter/${id}`, params);
+                },
+                Store(id,params) {
+                    return post(`/backend/api/v1/course_chapter/${id}`, params);
+                },
+                Destory(id,ids) {
+                    return destroy(`/backend/api/v1/course_chapter/${id}/${ids}`);
+                },
+                Detail(id,ids) {
+                    return get(`/backend/api/v1/course_chapter/${id}/${ids}`);
+                },
+                Update(id,ids, params) {
+                    return put(`/backend/api/v1/course_chapter/${id}/${ids}`, params);
+                }
+            },
         },
     },
     Member: {
