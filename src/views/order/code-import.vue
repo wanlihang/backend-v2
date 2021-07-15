@@ -18,12 +18,13 @@
         </div>
       </div>
     </div>
-
     <div class="bottom-menus">
-      <div>
-        <el-button @click="$router.push({ name: 'Promocode'})"
-          >取消</el-button
-        >
+      <div class="bottom-menus-box">
+        <div>
+          <el-button @click="$router.push({ name: 'Promocode' })"
+            >取消</el-button
+          >
+        </div>
       </div>
     </div>
   </div>

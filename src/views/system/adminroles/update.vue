@@ -13,29 +13,29 @@
         <el-form-item label="描述" prop="description">
           <el-input v-model="user.description" class="w-200px"></el-input>
         </el-form-item>
-       <div v-for="(item, index) in permissions" :key="index">
+        <div v-for="(item, index) in permissions" :key="index">
           <h1>{{ index }}</h1>
           <el-checkbox-group v-model="user.permission_ids">
-            <el-checkbox
-              v-for="it in item"
-              :key="it.id"
-              :label="it.id"
-            >{{it.display_name}}</el-checkbox>
+            <el-checkbox v-for="it in item" :key="it.id" :label="it.id">{{
+              it.display_name
+            }}</el-checkbox>
           </el-checkbox-group>
         </div>
       </el-form>
     </div>
 
     <div class="bottom-menus">
-      <div>
-        <el-button @click="$router.push({ name: 'SystemAdminroles' })"
-          >取消</el-button
-        >
-      </div>
-      <div class="ml-15">
-        <el-button @click="formValidate" :loading="loading" type="primary"
-          >保存</el-button
-        >
+      <div class="bottom-menus-box">
+        <div>
+          <el-button @click="$router.push({ name: 'SystemAdminroles' })"
+            >取消</el-button
+          >
+        </div>
+        <div class="ml-15">
+          <el-button @click="formValidate" :loading="loading" type="primary"
+            >保存</el-button
+          >
+        </div>
       </div>
     </div>
   </div>
@@ -45,12 +45,12 @@ export default {
   data() {
     return {
       user: {
-        id:this.$route.query.id,
+        id: this.$route.query.id,
         display_name: null,
         slug: null,
         description: null,
-        created_at:null,
-        updated_at:null,
+        created_at: null,
+        updated_at: null,
         permission_ids: [],
       },
       rules: {
@@ -77,7 +77,7 @@ export default {
         ],
       },
       permissions: [],
-      
+
       loading: false,
     };
   },
@@ -91,16 +91,15 @@ export default {
         this.permissions = res.data.permissions;
       });
     },
-    detail(){
-        this.$api.System.adminroles.Detail(this.user.id).then((res) => {
+    detail() {
+      this.$api.System.adminroles.Detail(this.user.id).then((res) => {
         var data = res.data;
-        this.user.permission_ids=data.permission_ids;
+        this.user.permission_ids = data.permission_ids;
         this.user.display_name = data.display_name;
-        this.user.description= data.description;
+        this.user.description = data.description;
         this.user.slug = data.slug;
-        this.user.created_at=data.created_at;
-        this.user.updated_at=data.updated_at;
-        
+        this.user.created_at = data.created_at;
+        this.user.updated_at = data.updated_at;
       });
     },
     formValidate() {
@@ -116,7 +115,7 @@ export default {
       }
       this.loading = true;
       this.$api.System.adminroles
-        .Update(this.user.id,this.user)
+        .Update(this.user.id, this.user)
         .then(() => {
           this.$message.success(this.$t("common.success"));
           this.$router.push({ name: "SystemAdminroles" });
