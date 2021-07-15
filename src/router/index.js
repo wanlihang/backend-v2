@@ -358,6 +358,22 @@ const routes = [
     ]
   },
   {
+    path: '/decoration/h5',
+    name: 'DecorationH5',
+    component: () => import('@/views/decoration/h5.vue'),
+    meta: {
+      title: '移动端装修'
+    }
+  },
+  {
+    path: '/decoration/pc',
+    name: 'DecorationPC',
+    component: () => import('@/views/decoration/pc.vue'),
+    meta: {
+      title: '电脑端装修'
+    }
+  },
+  {
     path: '/test',
     name: 'Test',
     component: () => import('@/views/test/test.vue'),

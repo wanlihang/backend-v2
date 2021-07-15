@@ -292,6 +292,26 @@ const Api = {
                 return destroy(`/backend/api/v1/member/tag/${id}`);
             },
         }
+    },
+    ViewBlock: {
+        List(params) {
+            return get(`/backend/api/v1/viewBlock/index`, params);
+        },
+        Create() {
+            return get(`/backend/api/v1/viewBlock/create`);
+        },
+        Store(params) {
+            return post(`/backend/api/v1/viewBlock/create`, params);
+        },
+        Edit(id) {
+            return get(`/backend/api/v1/viewBlock/${id}`);
+        },
+        Update(id, params) {
+            return put(`/backend/api/v1/viewBlock/${id}`, params);
+        },
+        Destroy(id) {
+            return destroy(`/backend/api/v1/viewBlock/${id}`);
+        },
     }
 }
 
