@@ -172,6 +172,94 @@ const routes = [
         }
       },
       {
+        path: '/course/vod/index',
+        component: () => import('@/views/course/vod/index'),
+        name: 'Vod',
+        meta: {
+          title: 'title.course.vod.index'
+        }
+      },
+      {
+        path: '/course/vod/create',
+        component: () => import('@/views/course/vod/create'),
+        name: 'VodCreate',
+        meta: {
+          title: 'title.course.vod.create'
+        }
+      },
+      {
+        path: '/course/vod/update',
+        component: () => import('@/views/course/vod/update'),
+        name: 'VodUpdate',
+        meta: {
+          title: 'title.course.vod.update'
+        }
+      },
+      {
+        path: '/course/vod/category/index',
+        component: () => import('@/views/course/vod/category/index'),
+        name: 'CourseCategories',
+        meta: {
+          title: 'title.course.vod.category.index'
+        }
+      },
+      {
+        path: '/course/vod/category/create',
+        component: () => import('@/views/course/vod/category/create'),
+        name: 'CategoriesCreate',
+        meta: {
+          title: 'title.course.vod.category.create'
+        }
+      },
+      {
+        path: '/course/vod/category/update',
+        component: () => import('@/views/course/vod/category/update'),
+        name: 'CategoriesUpdate',
+        meta: {
+          title: 'title.course.vod.category.update'
+        }
+      },
+      {
+        path: '/course/vod/chapter/index',
+        component: () => import('@/views/course/vod/chapter/index'),
+        name: 'CourseChapters',
+        meta: {
+          title: 'title.course.vod.chapter.index'
+        }
+      },
+      {
+        path: '/course/vod/chapter/create',
+        component: () => import('@/views/course/vod/chapter/create'),
+        name: 'ChaptersCreate',
+        meta: {
+          title: 'title.course.vod.chapter.create'
+        }
+      },
+      {
+        path: '/course/vod/chapter/update',
+        component: () => import('@/views/course/vod/chapter/update'),
+        name: 'ChaptersUpdate',
+        meta: {
+          title: 'title.course.vod.chapter.update'
+        }
+      },
+      {
+        path: '/course/vod/attach/index',
+        component: () => import('@/views/course/vod/attach/index'),
+        name: 'CourseAttach',
+        meta: {
+          title: 'title.course.vod.attach.index'
+        }
+      },
+      {
+        path: '/course/vod/attach/create',
+        component: () => import('@/views/course/vod/attach/create'),
+        name: 'AttachCreate',
+        meta: {
+          title: 'title.course.vod.attach.create'
+        }
+      },
+      {
         path: '/member/index',
         component: () => import('@/views/member/index'),
         name: 'MemberIndex',

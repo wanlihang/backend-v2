@@ -145,6 +145,73 @@ const Api = {
             }
         },
     },
+    Course:{
+        Vod:{
+            List(params) {
+                return get(`/backend/api/v1/course`, params);
+            },
+            Create() {
+                return get(`/backend/api/v1/course/create`);
+            },
+            Store(params) {
+                return post(`/backend/api/v1/course`, params);
+            },
+            Destory(id) {
+                return destroy(`/backend/api/v1/course/${id}`);
+            },
+            Detail(id) {
+                return get(`/backend/api/v1/course/${id}`);
+            },
+            Update(id, params) {
+                return put(`/backend/api/v1/course/${id}`, params);
+            },
+            Categories:{
+                List(params) {
+                    return get(`/backend/api/v1/courseCategory`, params);
+                },
+                Store(params) {
+                    return post(`/backend/api/v1/courseCategory`, params);
+                },
+                Destory(id) {
+                    return destroy(`/backend/api/v1/courseCategory/${id}`);
+                },
+                Detail(id) {
+                    return get(`/backend/api/v1/courseCategory/${id}`);
+                },
+                Update(id, params) {
+                    return put(`/backend/api/v1/courseCategory/${id}`, params);
+                }
+            },
+            Chapters:{
+                List(id,params) {
+                    return get(`/backend/api/v1/course_chapter/${id}`, params);
+                },
+                Store(id,params) {
+                    return post(`/backend/api/v1/course_chapter/${id}`, params);
+                },
+                Destory(id,ids) {
+                    return destroy(`/backend/api/v1/course_chapter/${id}/${ids}`);
+                },
+                Detail(id,ids) {
+                    return get(`/backend/api/v1/course_chapter/${id}/${ids}`);
+                },
+                Update(id,ids, params) {
+                    return put(`/backend/api/v1/course_chapter/${id}/${ids}`, params);
+                }
+            },
+            Attach:{
+                List(params) {
+                    return get(`/backend/api/v1/course_attach`, params);
+                },
+                Store(params) {
+                    return post(`/backend/api/v1/course_attach`, params);
+                },
+                Destory(id) {
+                    return destroy(`/backend/api/v1/course_attach/${id}`);
+                },
+            },
+        },
+    },
     Member: {
         List(params) {
             return get(`/backend/api/v1/member`, params);

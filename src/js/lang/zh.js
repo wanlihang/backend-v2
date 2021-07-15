@@ -38,6 +38,28 @@ const zh = { //zh
                 edit: '编辑用户标签'
             }
         },
+        course: {
+            vod: {
+                index: '点播',
+                create: '添加点播课程',
+                update: '编辑点播课程',
+                category: {
+                    index: '课程分类管理',
+                    create: '创建课程分类',
+                    update: '编辑课程分类'
+                },
+                chapter: {
+                    index: '课程章节管理',
+                    create: '创建课程章节',
+                    update: '编辑课程章节'
+                },
+                attach: {
+                    index: '课程附件管理',
+                    create: '添加课程附件',
+                }
+            },
+        },
+        coursename: '课程',
         finance: '财务'
     },
     commen: {
