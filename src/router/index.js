@@ -236,6 +236,22 @@ const routes = [
         }
       },
       {
+        path: '/course/vod/attach/index',
+        component: () => import('@/views/course/vod/attach/index'),
+        name: 'CourseAttach',
+        meta: {
+          title: 'title.course.vod.attach.index'
+        }
+      },
+      {
+        path: '/course/vod/attach/create',
+        component: () => import('@/views/course/vod/attach/create'),
+        name: 'AttachCreate',
+        meta: {
+          title: 'title.course.vod.attach.create'
+        }
+      },
+      {
         path: '/member/index',
         component: () => import('@/views/member/index'),
         name: 'MemberIndex',

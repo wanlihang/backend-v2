@@ -52,6 +52,10 @@ const zh = { //zh
                     index: '课程章节管理',
                     create: '创建课程章节',
                     update: '编辑课程章节'
+                },
+                attach: {
+                    index: '课程附件管理',
+                    create: '添加课程附件',
                 }
             },
         },

@@ -199,6 +199,17 @@ const Api = {
                     return put(`/backend/api/v1/course_chapter/${id}/${ids}`, params);
                 }
             },
+            Attach:{
+                List(params) {
+                    return get(`/backend/api/v1/course_attach`, params);
+                },
+                Store(params) {
+                    return post(`/backend/api/v1/course_attach`, params);
+                },
+                Destory(id) {
+                    return destroy(`/backend/api/v1/course_attach/${id}`);
+                },
+            },
         },
     },
     Member: {

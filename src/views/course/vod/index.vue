@@ -95,7 +95,17 @@
                 >章节</el-link
               >
               <el-link type="primary" style="margin-left: 5px">视频</el-link>
-              <el-link type="primary" style="margin-left: 5px">附件</el-link>
+              <el-link
+                type="primary"
+                style="margin-left: 5px"
+                @click="
+                  $router.push({
+                    name: 'CourseAttach',
+                    query: { course_id: scope.row.id },
+                  })
+                "
+                >附件</el-link
+              >
               <el-link type="primary" style="margin-left: 5px"
                 >观看记录</el-link
               >
