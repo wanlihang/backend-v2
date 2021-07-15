@@ -220,6 +220,22 @@ const routes = [
         }
       },
       {
+        path: '/member/:userId/remark',
+        component: () => import('@/views/member/remark'),
+        name: 'MemberRemark',
+        meta: {
+          title: 'title.member.remark'
+        }
+      },
+      {
+        path: '/member/:userId/credit1',
+        component: () => import('@/views/member/credit1'),
+        name: 'MemberCredit1',
+        meta: {
+          title: 'title.member.credit1'
+        }
+      },
+      {
         path: '/member/tag/index',
         component: () => import('@/views/member/tag/index'),
         name: 'MemberTagIndex',

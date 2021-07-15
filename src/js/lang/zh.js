@@ -30,6 +30,8 @@ const zh = { //zh
             detail: '用户详情',
             edit: '用户编辑',
             tags: '用户标签',
+            remark: '用户备注',
+            credit1: '用户积分',
             tag: {
                 index: '用户标签列表',
                 create: '创建用户标签',
