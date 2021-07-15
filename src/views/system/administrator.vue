@@ -16,7 +16,7 @@
           @sort-change="sortChange"
           :default-sort="{ prop: 'id', order: 'descending' }"
         >
-          <el-table-column prop="id" sortable label="ID" width="120">
+          <el-table-column prop="id"  label="ID" width="120">
           </el-table-column>
           <el-table-column prop="name" label="姓名" width="120">
           </el-table-column>
@@ -25,7 +25,7 @@
           <el-table-column
             sortable=""
             label="登录日志"
-            width="300"
+            
             ><template slot-scope="scope">
               <span
                 >{{ scope.row.last_login_date }} /

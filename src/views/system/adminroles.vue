@@ -16,7 +16,7 @@
           @sort-change="sortChange"
           :default-sort="{ prop: 'id', order: 'descending' }"
         >
-          <el-table-column prop="id" sortable label="ID" width="120">
+          <el-table-column prop="id"  label="ID" width="120">
           </el-table-column>
           <el-table-column prop="display_name" label="角色名" width="120">
           </el-table-column>
@@ -24,7 +24,7 @@
           </el-table-column>
           <el-table-column
             label="描述"
-            width="350"
+           
             ><template slot-scope="scope">
               <span
                 >{{ scope.row.description}} </span
