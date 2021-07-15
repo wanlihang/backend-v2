@@ -52,8 +52,8 @@ const routes = [
         }
       },
       {
-        path: '/orderlist',
-        component: () => import('@/views/order/orderlist'),
+        path: '/order/index',
+        component: () => import('@/views/order/index'),
         name: 'Orderlist',
         meta: {
           title: 'title.order'
