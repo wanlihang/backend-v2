@@ -134,6 +134,12 @@ const Api = {
             Destory(id) {
                 return destroy(`/backend/api/v1/administrator_role/${id}`);
             },
+            Detail(id) {
+                return get(`/backend/api/v1/administrator_role/${id}`);
+            },
+            Update(id, params) {
+                return put(`/backend/api/v1/administrator_role/${id}`, params);
+            }
         },
     },
     Member: {

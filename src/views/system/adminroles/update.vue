@@ -13,21 +13,29 @@
         <el-form-item label="描述" prop="description">
           <el-input v-model="user.description" class="w-200px"></el-input>
         </el-form-item>
+       <div v-for="(item, index) in permissions" :key="index">
+          <h1>{{ index }}</h1>
+          <el-checkbox-group v-model="user.permission_ids">
+            <el-checkbox
+              v-for="it in item"
+              :key="it.id"
+              :label="it.id"
+            >{{it.display_name}}</el-checkbox>
+          </el-checkbox-group>
+        </div>
       </el-form>
     </div>
 
     <div class="bottom-menus">
-      <div class="bottom-menus-box">
-        <div>
-          <el-button @click="$router.push({ name: 'SystemAdminroles' })"
-            >取消</el-button
-          >
-        </div>
-        <div class="ml-15">
-          <el-button @click="formValidate" :loading="loading" type="primary"
-            >保存</el-button
-          >
-        </div>
+      <div>
+        <el-button @click="$router.push({ name: 'SystemAdminroles' })"
+          >取消</el-button
+        >
+      </div>
+      <div class="ml-15">
+        <el-button @click="formValidate" :loading="loading" type="primary"
+          >保存</el-button
+        >
       </div>
     </div>
   </div>
@@ -37,9 +45,13 @@ export default {
   data() {
     return {
       user: {
+        id:this.$route.query.id,
         display_name: null,
         slug: null,
         description: null,
+        created_at:null,
+        updated_at:null,
+        permission_ids: [],
       },
       rules: {
         display_name: [
@@ -64,17 +76,31 @@ export default {
           },
         ],
       },
-      roles: [],
+      permissions: [],
+      
       loading: false,
     };
   },
   mounted() {
     this.params();
+    this.detail();
   },
   methods: {
     params() {
       this.$api.System.adminroles.Create().then((res) => {
-        this.roles = res.data.roles;
+        this.permissions = res.data.permissions;
+      });
+    },
+    detail(){
+        this.$api.System.adminroles.Detail(this.user.id).then((res) => {
+        var data = res.data;
+        this.user.permission_ids=data.permission_ids;
+        this.user.display_name = data.display_name;
+        this.user.description= data.description;
+        this.user.slug = data.slug;
+        this.user.created_at=data.created_at;
+        this.user.updated_at=data.updated_at;
+        
       });
     },
     formValidate() {
@@ -89,9 +115,8 @@ export default {
         return;
       }
       this.loading = true;
-      this.user.password_confirmation = this.user.password;
       this.$api.System.adminroles
-        .Store(this.user)
+        .Update(this.user.id,this.user)
         .then(() => {
           this.$message.success(this.$t("common.success"));
           this.$router.push({ name: "SystemAdminroles" });
