@@ -9,6 +9,10 @@ import i18n from './js/i18n';
 
 import './assets/common/variable.less';
 
+import mavonEditor from "mavon-editor";
+import "mavon-editor/dist/css/index.css";
+Vue.use(mavonEditor);
+
 // 组件注册
 import FormLabelComp from '@/components/form-label';
 
