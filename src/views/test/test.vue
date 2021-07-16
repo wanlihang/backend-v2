@@ -1,21 +1,22 @@
 <template>
   <div>
-    <md-editor :content="content" @change="change"></md-editor>
+    <h5-link :show="true"></h5-link>
   </div>
 </template>
 
 <script>
 // import WangEditor from "@/components/wangeditor";
 // import UploadImage from "@/components/upload-image";
-import MdEditor from "@/components/md-editor";
+// import MdEditor from "@/components/md-editor";
+import H5Link from "@/components/h5-link/index";
 
 export default {
   components: {
-    MdEditor,
+    H5Link,
   },
   data() {
     return {
-      content: '',
+      content: "",
       img: "http://public.qiniu.1o1.cc/images/dKeiIHRWoAnqcJRPdn5FrxjToO7E1Hl9tsyWE47Z.jpg",
     };
   },
