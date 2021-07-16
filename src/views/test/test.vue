@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h5-link :show="true"></h5-link>
+    <select-vod :show="true"></select-vod>
   </div>
 </template>
 
@@ -8,11 +8,12 @@
 // import WangEditor from "@/components/wangeditor";
 // import UploadImage from "@/components/upload-image";
 // import MdEditor from "@/components/md-editor";
-import H5Link from "@/components/h5-link/index";
+// import H5Link from "@/components/h5-link/index";
+import SelectVod from '@/components/select-vod';
 
 export default {
   components: {
-    H5Link,
+    SelectVod,
   },
   data() {
     return {
