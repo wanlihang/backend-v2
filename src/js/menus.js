@@ -52,6 +52,17 @@ export default [
         ]
     },
     {
+        name: 'title.wechatname',
+        key: 'Wechat',
+        children: [
+            {
+                name: 'title.wechat.messagereply.index',
+                key: 'MessageReply'
+            },
+            
+        ]
+    },
+    {
         name: 'title.coursename',
         key: 'Course',
         children: [

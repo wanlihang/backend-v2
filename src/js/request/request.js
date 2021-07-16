@@ -237,6 +237,28 @@ const Api = {
             },
         },
     },
+    Wechat:{
+        Reply:{
+            List(params) {
+                return get(`/backend/api/v1/mpWechatMessageReply`, params);
+            },
+            Create(){
+                return get(`/backend/api/v1/mpWechatMessageReply/create`);
+            },
+            Store(params) {
+                return post(`/backend/api/v1/mpWechatMessageReply`, params);
+            },
+            Destory(id) {
+                return destroy(`/backend/api/v1/mpWechatMessageReply/${id}`);
+            },
+            Detail(id) {
+                return get(`/backend/api/v1/mpWechatMessageReply/${id}`);
+            },
+            Update(id, params) {
+                return put(`/backend/api/v1/mpWechatMessageReply/${id}`, params);
+            }
+        },
+    },
     Member: {
         List(params) {
             return get(`/backend/api/v1/member`, params);

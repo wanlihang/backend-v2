@@ -378,7 +378,39 @@ const routes = [
         meta: {
           title: 'title.member.tag.edit'
         }
-      }
+      },
+      {
+        path: '/member/index',
+        component: () => import('@/views/member/index'),
+        name: 'MemberIndex',
+        meta: {
+          title: 'title.member.index'
+        }
+      },
+      {
+        path: '/wechat/messagereply/index',
+        component: () => import('@/views/wechat/messagereply/index'),
+        name: 'MessageReply',
+        meta: {
+          title: 'title.wechat.messagereply.index'
+        }
+      },
+      {
+        path: '/wechat/messagereply/create',
+        component: () => import('@/views/wechat/messagereply/create'),
+        name: 'ReplyCreate',
+        meta: {
+          title: 'title.wechat.messagereply.create'
+        }
+      },
+      {
+        path: '/wechat/messagereply/update',
+        component: () => import('@/views/wechat/messagereply/update'),
+        name: 'ReplyUpdate',
+        meta: {
+          title: 'title.wechat.messagereply.update'
+        }
+      },
     ]
   },
   {
