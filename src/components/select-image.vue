@@ -7,7 +7,7 @@
     :close-on-click-modal="false"
     width="1200px"
   >
-    <div class="images-box">
+    <div class="select-images-box">
       <div class="category-box">
         <div class="title">{{ $t("common.group") }}</div>
         <div class="body">
@@ -172,7 +172,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.images-box {
+.select-images-box {
   width: 100%;
   height: auto;
   float: left;
@@ -195,6 +195,8 @@ export default {
       color: #333;
       border-top-left-radius: 3px;
       border-top-right-radius: 3px;
+      font-size: 15px;
+      line-height: 15px;
     }
 
     .body {
@@ -212,6 +214,8 @@ export default {
         padding-top: 15px;
         padding-bottom: 15px;
         cursor: pointer;
+        font-size: 15px;
+        line-height: 15px;
 
         &.active {
           background-color: rgba(0, 0, 0, 0.05);
