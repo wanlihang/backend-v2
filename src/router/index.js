@@ -260,6 +260,30 @@ const routes = [
         }
       },
       {
+        path: '/course/vod/video/index',
+        component: () => import('@/views/course/vod/video/index'),
+        name: 'CourseVideos',
+        meta: {
+          title: 'title.course.vod.video.index'
+        }
+      },
+      {
+        path: '/course/vod/video/create',
+        component: () => import('@/views/course/vod/video/create'),
+        name: 'VideosCreate',
+        meta: {
+          title: 'title.course.vod.video.create'
+        }
+      },
+      {
+        path: '/course/vod/video/update',
+        component: () => import('@/views/course/vod/video/update'),
+        name: 'VideosUpdate',
+        meta: {
+          title: 'title.course.vod.video.update'
+        }
+      },
+      {
         path: '/course/vod/record/index',
         component: () => import('@/views/course/vod/record/index'),
         name: 'CourseRecords',

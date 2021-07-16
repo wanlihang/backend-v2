@@ -214,7 +214,27 @@ const Api = {
                 List(id,params) {
                     return get(`/backend/api/v1/course/${id}/watch/records`, params);
                 },
-            }
+            },
+            Videos:{
+                List(params) {
+                    return get(`/backend/api/v1/video`, params);
+                },
+                Create(id,params) {
+                    return get(`/backend/api/v1/course_chapter/${id}`, params);
+                },
+                Store(params) {
+                    return post(`/backend/api/v1/video`, params);
+                },
+                DestoryMulti( params) {
+                    return post(`/backend/api/v1/video/delete/multi`, params);
+                },
+                Detail(id,ids) {
+                    return get(`/backend/api/v1/video/${id}/${ids}`);
+                },
+                Update(id,ids, params) {
+                    return put(`/backend/api/v1/video/${id}/${ids}`, params);
+                }
+            },
         },
     },
     Member: {

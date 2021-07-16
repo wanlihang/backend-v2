@@ -59,7 +59,12 @@ const zh = { //zh
                 },
                 record:{
                     index: '观看记录',
-                }
+                },
+                video: {
+                    index: '课程视频管理',
+                    create: '创建课程视频',
+                    update: '编辑课程视频'
+                },
             },
         },
         coursename: '课程',
