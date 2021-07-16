@@ -94,7 +94,7 @@ export default {
             return;
           }
           this.loading = true;
-          this.$api.Course.Vod.Chapters.Destory(id)
+          this.$api.Course.Vod.Attach.Destory(id)
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));

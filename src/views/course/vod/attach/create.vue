@@ -5,12 +5,11 @@
         <el-form-item label="附件名" prop="name">
           <el-input v-model="user.name" class="w-200px"></el-input>
         </el-form-item>
-        <el-form-item label="附件" prop="sort">
-          <el-input
-            type="file"
-            v-model="user.binary"
-            class="w-200px"
-          ></el-input>
+        <el-form-item label="附件" prop="file">
+          <input type="file" id="cover" class="w-200px" />
+          <div class="helper">
+            仅支持zip,pdf,jpeg,jpg,gif,png,md,doc,txt,csv格式文件
+          </div>
         </el-form-item>
       </el-form>
     </div>
@@ -21,7 +20,7 @@
           <el-button
             @click="
               $router.push({
-                name: 'CourseChapters',
+                name: 'CourseAttach',
                 query: { course_id: user.course_id },
               })
             "
@@ -44,8 +43,8 @@ export default {
       user: {
         course_id: this.$route.query.course_id,
         name: null,
-        binary: null,
       },
+      box: null,
       rules: {
         name: [
           {
@@ -73,12 +72,16 @@ export default {
         return;
       }
       this.loading = true;
-      this.$api.Course.Vod.Chapters.Store(this.user)
+      const formData = new FormData();
+      formData.append("file", document.getElementById("cover").files[0]);
+      formData.append("name", this.user.name);
+      formData.append("course_id", this.user.course_id);
+      this.$api.Course.Vod.Attach.Store(formData)
         .then(() => {
           this.$message.success(this.$t("common.success"));
           this.$router.push({
             name: "CourseAttach",
-            query: { course_id: this.user.course_id},
+            query: { course_id: this.user.course_id },
           });
         })
         .catch((e) => {
