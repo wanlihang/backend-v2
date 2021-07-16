@@ -5,7 +5,6 @@
     :close-on-press-escape="false"
     :close-on-click-modal="false"
     width="1200px"
-    center
   >
     <div class="h5-link-box">
       <div class="title">选择链接</div>

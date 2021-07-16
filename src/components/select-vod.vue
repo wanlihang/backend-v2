@@ -5,7 +5,6 @@
     :close-on-press-escape="false"
     :close-on-click-modal="false"
     width="1200px"
-    center
   >
     <div class="title">选择录播课程</div>
     <div class="courses-box">

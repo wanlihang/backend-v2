@@ -59,20 +59,21 @@
           <el-empty :description="$t('common.none')"></el-empty>
         </div>
 
-        <div class="pagination">
+        <div class="pagination text-center">
           <el-pagination
-            background
-            :page-size="pagination.size"
+            @size-change="paginationSizeChange"
+            @current-change="paginationPageChange"
             :current-page="pagination.page"
-            layout="prev, pager, next"
-            @current-change="pageChange"
+            :page-sizes="[10, 20, 50, 100]"
+            :page-size="pagination.size"
+            layout="total, sizes, prev, pager, next, jumper"
             :total="total"
           >
           </el-pagination>
         </div>
       </div>
     </div>
-    <div slot="footer" class="dialog-footer">
+    <div slot="footer">
       <el-button @click="close">
         {{ $t("common.cancel") }}
       </el-button>
@@ -127,16 +128,18 @@ export default {
     show(newVal) {
       this.dialogVisible = newVal;
     },
-    "pagination.page"() {
-      this.getData();
-    },
     "pagination.from"() {
       this.getData();
     },
   },
   methods: {
-    pageChange(page) {
+    paginationSizeChange(size) {
+      this.pagination.size = size;
+      this.getData();
+    },
+    paginationPageChange(page) {
       this.pagination.page = page;
+      this.getData();
     },
     getData() {
       if (this.loading) {
