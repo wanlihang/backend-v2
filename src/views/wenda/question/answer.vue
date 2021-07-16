@@ -1,25 +1,26 @@
 <template>
   <div class="float-left">
-    <div class="float-left mb-15">
-      <el-button
-        @click="
-          $router.push({
-            name: 'QuestionCategoryCreate',
-          })
-        "
-        type="primary"
-        >添加</el-button
-      >
-    </div>
     <div class="table-body top-left-radius" v-loading="loading">
       <div class="float-left">
-        <el-table :data="categories" stripe class="float-left">
-             <el-table-column label="分类名"
+        <el-table :data="answers" stripe class="float-left">
+          <el-table-column prop="id" label="ID" width="80"> </el-table-column>
+          <el-table-column prop="user_id" label="用户ID" width="80">
+          </el-table-column>
+          <el-table-column prop="user.nick_name" label="用户" width="120">
+          </el-table-column>
+           <el-table-column label="点赞" width="100"
             ><template slot-scope="scope">
-              <span>{{ scope.row.name}} </span>
+              <span>{{ scope.row.vote_count }}次</span>
             </template>
           </el-table-column>
-          <el-table-column prop="sort" label="升序" width="400">
+          <el-table-column label="内容"
+            ><template slot-scope="scope">
+              <div v-html="scope.row.original_content"></div>
+            </template>
+          </el-table-column>
+          <el-table-column label="答案" width="80">
+               <span v-if="scope.row.is_correct==1">是</span>
+               <span v-else>否</span>
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="150">
             <template slot-scope="scope">
@@ -37,7 +38,7 @@
                     query: { id: scope.row.id },
                   })
                 "
-                >编辑</el-link
+                >评论</el-link
               >
             </template>
           </el-table-column>
@@ -48,7 +49,9 @@
     <div class="bottom-menus">
       <div class="bottom-menus-box">
         <div>
-          <el-button @click="$router.push({ name: 'Question' })">取消</el-button>
+          <el-button @click="$router.push({ name: 'Question' })"
+            >取消</el-button
+          >
         </div>
       </div>
     </div>
@@ -58,8 +61,11 @@
 export default {
   data() {
     return {
+      box: {
+        id: this.$route.query.id,
+      },
       loading: false,
-      categories: [],
+      answers: [],
     };
   },
   mounted() {
@@ -71,12 +77,10 @@ export default {
         return;
       }
       this.loading = true;
-      this.$api.Wenda.Question.Category().then(
-        (res) => {
-          this.loading = false;
-          this.categories = res.data.data;
-        }
-      );
+      this.$api.Wenda.Question.Answer(this.box.id).then((res) => {
+        this.loading = false;
+        this.answers = res.data.answers;
+      });
     },
     importUser() {},
     //删除管理员

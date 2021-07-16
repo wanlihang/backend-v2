@@ -114,7 +114,7 @@
                 type="primary"
                 @click="
                   $router.push({
-                    name: 'VodUpdate',
+                    name: 'QuestionAnswer',
                     query: { id: scope.row.id },
                   })
                 "

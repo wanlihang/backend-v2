@@ -270,6 +270,9 @@ const Api = {
             DestoryMulti(params) {
                 return post(`backend/addons/Wenda/question/delete`,params);
             },
+            Answer(id){
+                return get(`/backend/addons/Wenda/question/${id}/answers`);
+            },
             Cate:{
                 Destory(id) {
                     return destroy(`/backend/addons/Wenda/category/${id}`);
