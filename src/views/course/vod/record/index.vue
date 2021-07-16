@@ -18,12 +18,19 @@
           <div class="flex-1 ml-15">
             <el-date-picker
               v-model="filter.watched_start_at"
-              type="daterange"
+              type="date"
               align="right"
-              unlink-panels
-              range-separator="至"
-              start-placeholder="开始日期"
-              end-placeholder="结束日期"
+              value-format="yyyy-MM-dd"
+              placeholder="开始日期"
+            >
+            </el-date-picker>
+            至
+            <el-date-picker
+              v-model="filter.watched_end_at"
+              type="date"
+              align="right"
+              value-format="yyyy-MM-dd"
+              placeholder="结束日期"
             >
             </el-date-picker>
           </div>
@@ -111,6 +118,13 @@
           :total="total"
         >
         </el-pagination>
+      </div>
+    </div>
+    <div class="bottom-menus">
+      <div class="bottom-menus-box">
+        <div>
+          <el-button @click="$router.push({ name: 'Vod' })">取消</el-button>
+        </div>
       </div>
     </div>
   </div>
@@ -229,7 +243,7 @@ export default {
         });
 
         Utils.exportExcel(data, filename, sheetName);
-        this.loading=false;
+        this.loading = false;
       });
     },
   },
