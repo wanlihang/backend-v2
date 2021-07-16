@@ -419,6 +419,30 @@ const routes = [
           title: 'title.wenda.question.index'
         }
       },
+      {
+        path: '/wenda/question/category/index',
+        component: () => import('@/views/wenda/question/category/index'),
+        name: 'QuestionCategory',
+        meta: {
+          title: 'title.wenda.question.category.index'
+        }
+      },
+      {
+        path: '/wenda/question/category/create',
+        component: () => import('@/views/wenda/question/category/create'),
+        name: 'QuestionCategoryCreate',
+        meta: {
+          title: 'title.wenda.question.category.create'
+        }
+      },
+      {
+        path: '/wenda/question/category/update',
+        component: () => import('@/views/wenda/question/category/update'),
+        name: 'QuestionCategoryUpdate',
+        meta: {
+          title: 'title.wenda.question.category.update'
+        }
+      },
     ]
   },
   {

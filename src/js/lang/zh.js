@@ -50,6 +50,11 @@ const zh = { //zh
         wenda:{
             question: {
                 index: '问题',
+                category:{
+                    index:'问题分类',
+                    create:'添加分类',
+                    update:'编辑分类',
+                }
             },
         },
         course: {

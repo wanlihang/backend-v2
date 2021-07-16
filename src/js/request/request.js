@@ -267,17 +267,22 @@ const Api = {
             Category(){
                 return get(`/backend/addons/Wenda/category/index`);
             },
-            Store(params) {
-                return post(`/backend/api/v1/mpWechatMessageReply`, params);
-            },
             DestoryMulti(params) {
                 return post(`backend/addons/Wenda/question/delete`,params);
             },
-            Detail(id) {
-                return get(`/backend/api/v1/mpWechatMessageReply/${id}`);
-            },
-            Update(id, params) {
-                return put(`/backend/api/v1/mpWechatMessageReply/${id}`, params);
+            Cate:{
+                Destory(id) {
+                    return destroy(`/backend/addons/Wenda/category/${id}`);
+                },
+                Store(params) {
+                    return post(`/backend/addons/Wenda/category/create`, params);
+                },
+                Detail(id) {
+                    return get(`/backend/addons/Wenda/category//${id}`);
+                },
+                Update(id, params) {
+                    return put(`/backend/addons/Wenda/category/${id}`, params);
+                }
             }
         },
     },

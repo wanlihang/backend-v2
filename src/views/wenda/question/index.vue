@@ -1,7 +1,7 @@
 <template>
   <div class="float-left">
     <div class="float-left mb-15">
-      <el-button @click="$router.push({ name: 'VodCreate' })" type="primary">
+      <el-button @click="$router.push({ name: 'QuestionCategory' })" type="primary">
         分类管理
       </el-button>
       <el-button @click="destoryMulti()" type="danger"> 批量删除 </el-button>
