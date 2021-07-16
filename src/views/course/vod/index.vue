@@ -80,10 +80,12 @@
               <el-link
                 type="primary"
                 style="margin-left: 5px"
-                @click="$router.push({
+                @click="
+                  $router.push({
                     name: 'VodUpdate',
                     query: { id: scope.row.id },
-                  })"
+                  })
+                "
                 >编辑</el-link
               >
               <el-link
@@ -97,7 +99,17 @@
                 "
                 >章节</el-link
               >
-              <el-link type="primary" style="margin-left: 5px">视频</el-link>
+              <el-link
+                type="primary"
+                style="margin-left: 5px"
+                @click="
+                  $router.push({
+                    name: 'CourseVideos',
+                    query: { course_id: scope.row.id },
+                  })
+                "
+                >视频</el-link
+              >
               <el-link
                 type="primary"
                 style="margin-left: 5px"
@@ -109,8 +121,10 @@
                 "
                 >附件</el-link
               >
-              <el-link type="primary" style="margin-left: 5px"
-              @click="
+              <el-link
+                type="primary"
+                style="margin-left: 5px"
+                @click="
                   $router.push({
                     name: 'CourseRecords',
                     query: { course_id: scope.row.id },
