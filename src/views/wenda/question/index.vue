@@ -66,14 +66,14 @@
           <el-table-column prop="id" label="ID" width="80"> </el-table-column>
           <el-table-column prop="user_id" label="用户ID" width="80">
           </el-table-column>
-          <el-table-column prop="category.name" label="分类" width="120">
+          <el-table-column prop="category.name" label="分类" width="100">
           </el-table-column>
-          <el-table-column label="用户" width="300">
+          <el-table-column label="用户" width="120">
             <template slot-scope="scope">
               <div class="user-item">
-                <div class="avatar">
+                <!-- <div class="avatar">
                   <img :src="scope.row.user.avatar" width="40" height="40" />
-                </div>
+                </div> -->
                 <div class="nickname">{{ scope.row.user.nick_name }}</div>
               </div>
             </template>
@@ -99,16 +99,16 @@
               <span>{{ scope.row.credit1 }}积分</span>
             </template>
           </el-table-column>
-          <el-table-column label="状态" width="120">
+          <el-table-column label="状态" width="100">
             <template slot-scope="scope">
-              <span v-if="status == 1" style="color: red">{{
+              <span v-if="scope.row.status == 1" style="color: red">{{
                 scope.row.status_text
               }}</span>
               <span v-else>{{ scope.row.status_text }}</span>
             </template>
           </el-table-column>
 
-          <el-table-column fixed="right" label="操作" width="100">
+          <el-table-column fixed="right" label="操作" width="80">
             <template slot-scope="scope">
               <el-link
                 type="primary"
@@ -152,12 +152,14 @@ export default {
       filter: {
         user_id: null,
         category_id: null,
-        status: null,
+        status: "",
       },
       total: 0,
       loading: false,
       questions: [],
-      ids: [],
+      spids: {
+        ids: [],
+      },
       filterData: {
         categories: [],
         status: [
@@ -182,7 +184,7 @@ export default {
       this.pagination.page = 1;
       this.filter.category_id = null;
       this.filter.user_id = null;
-      this.filter.status = null;
+      this.filter.status = "";
       this.getQuestion();
     },
     paginationSizeChange(size) {
@@ -199,7 +201,7 @@ export default {
       for (var i = 0; i < val.length; i++) {
         newbox.push(val[i].id);
       }
-      this.ids = newbox;
+      this.spids.ids = newbox;
     },
     create() {
       this.$api.Wenda.Question.Category()
@@ -231,7 +233,7 @@ export default {
         // this.filterData.roles = res.data.roles;
       });
     },
-    destory(item) {
+    destoryMulti() {
       this.$confirm("确认操作？", "警告", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -243,11 +245,11 @@ export default {
             return;
           }
           this.loading = true;
-          this.$api.Wenda.Question.Destory(item)
+          this.$api.Wenda.Question.DestoryMulti(this.spids)
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));
-              this.paginationReset();
+              this.getQuestion();
             })
             .catch((e) => {
               this.loading = false;
@@ -276,6 +278,18 @@ export default {
   .filter-label {
     font-size: 14px;
     color: rgba(0, 0, 0, 0.7);
+  }
+}
+.user-item {
+  width: auto;
+  display: flex;
+  align-items: center;
+  .avatar {
+    margin-right: 10px;
+  }
+  .nickname {
+    font-size: 15px;
+    font-weight: normal;
   }
 }
 </style>

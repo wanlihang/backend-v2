@@ -270,8 +270,8 @@ const Api = {
             Store(params) {
                 return post(`/backend/api/v1/mpWechatMessageReply`, params);
             },
-            Destory(id) {
-                return destroy(`/backend/api/v1/mpWechatMessageReply/${id}`);
+            DestoryMulti(params) {
+                return post(`backend/addons/Wenda/question/delete`,params);
             },
             Detail(id) {
                 return get(`/backend/api/v1/mpWechatMessageReply/${id}`);

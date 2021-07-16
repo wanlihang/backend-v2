@@ -111,7 +111,9 @@ export default {
       total: 0,
       loading: false,
       videos: [],
-      ids: [],
+      spids: {
+        ids: [],
+      },
     };
   },
   mounted() {
@@ -136,7 +138,7 @@ export default {
       for (var i = 0; i < val.length; i++) {
         newbox.push(val[i].id);
       }
-      this.ids = newbox;
+      this.spids.ids = newbox;
     },
     getVideos() {
       if (this.loading) {
@@ -165,7 +167,7 @@ export default {
             return;
           }
           this.loading = true;
-          this.$api.Course.Vod.Videos.DestoryMulti(this.ids)
+          this.$api.Course.Vod.Videos.DestoryMulti(this.spids)
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));
