@@ -32,6 +32,7 @@
             name="file"
             :show-file-list="false"
             :on-success="uploadSuccessEvt"
+            accept="image/gif,image/jpeg,image/jpg,image/png"
           >
             <el-button size="small" type="primary">
               {{ $t("common.image.upload") }}
