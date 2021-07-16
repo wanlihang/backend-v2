@@ -118,6 +118,18 @@ export default {
     this.getVideos();
   },
   methods: {
+    paginationReset() {
+      this.pagination.page = 1;
+      this.getVideos();
+    },
+    paginationSizeChange(size) {
+      this.pagination.size = size;
+      this.getVideos();
+    },
+    paginationPageChange(page) {
+      this.pagination.page = page;
+      this.getVideos();
+    },
     //保存选中结果
     handleSelectionChange(val) {
       var newbox = [];
