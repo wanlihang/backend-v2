@@ -411,6 +411,14 @@ const routes = [
           title: 'title.wechat.messagereply.update'
         }
       },
+      {
+        path: '/wenda/question/index',
+        component: () => import('@/views/wenda/question/index'),
+        name: 'Question',
+        meta: {
+          title: 'title.wenda.question.index'
+        }
+      },
     ]
   },
   {

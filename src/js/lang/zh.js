@@ -12,6 +12,7 @@ const zh = { //zh
         promocode_import: '批量导入',
         withdrawOrders: '余额提现',
         system: '系统',
+        wendaname:'问答',
         config: '系统配置',
         wechatname: '微信公众号',
         'system-administrator': '管理员',
@@ -44,6 +45,11 @@ const zh = { //zh
                 index: '微信公众号消息回复',
                 create: '微信公众号添加规则',
                 update: '微信公众号编辑规则',
+            },
+        },
+        wenda:{
+            question: {
+                index: '问题',
             },
         },
         course: {

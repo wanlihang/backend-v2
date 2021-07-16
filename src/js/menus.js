@@ -74,6 +74,17 @@ export default [
         ]
     },
     {
+        name: 'title.wendaname',
+        key: 'Wenda',
+        children: [
+            {
+                name: 'title.wenda.question.index',
+                key: 'Question'
+            },
+            
+        ]
+    },
+    {
         name: 'title.system',
         key: 'System',
         children: [

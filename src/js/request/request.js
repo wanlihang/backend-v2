@@ -259,6 +259,28 @@ const Api = {
             }
         },
     },
+    Wenda:{
+        Question:{
+            List(params) {
+                return get(`/backend/addons/Wenda/question/index`, params);
+            },
+            Category(){
+                return get(`/backend/addons/Wenda/category/index`);
+            },
+            Store(params) {
+                return post(`/backend/api/v1/mpWechatMessageReply`, params);
+            },
+            Destory(id) {
+                return destroy(`/backend/api/v1/mpWechatMessageReply/${id}`);
+            },
+            Detail(id) {
+                return get(`/backend/api/v1/mpWechatMessageReply/${id}`);
+            },
+            Update(id, params) {
+                return put(`/backend/api/v1/mpWechatMessageReply/${id}`, params);
+            }
+        },
+    },
     Member: {
         List(params) {
             return get(`/backend/api/v1/member`, params);
