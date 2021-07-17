@@ -378,7 +378,79 @@ const routes = [
         meta: {
           title: 'title.member.tag.edit'
         }
-      }
+      },
+      {
+        path: '/member/index',
+        component: () => import('@/views/member/index'),
+        name: 'MemberIndex',
+        meta: {
+          title: 'title.member.index'
+        }
+      },
+      {
+        path: '/wechat/messagereply/index',
+        component: () => import('@/views/wechat/messagereply/index'),
+        name: 'MessageReply',
+        meta: {
+          title: 'title.wechat.messagereply.index'
+        }
+      },
+      {
+        path: '/wechat/messagereply/create',
+        component: () => import('@/views/wechat/messagereply/create'),
+        name: 'ReplyCreate',
+        meta: {
+          title: 'title.wechat.messagereply.create'
+        }
+      },
+      {
+        path: '/wechat/messagereply/update',
+        component: () => import('@/views/wechat/messagereply/update'),
+        name: 'ReplyUpdate',
+        meta: {
+          title: 'title.wechat.messagereply.update'
+        }
+      },
+      {
+        path: '/wenda/question/index',
+        component: () => import('@/views/wenda/question/index'),
+        name: 'Question',
+        meta: {
+          title: 'title.wenda.question.index'
+        }
+      },
+      {
+        path: '/wenda/question/answer',
+        component: () => import('@/views/wenda/question/answer'),
+        name: 'QuestionAnswer',
+        meta: {
+          title: 'title.wenda.question.answer'
+        }
+      },
+      {
+        path: '/wenda/question/category/index',
+        component: () => import('@/views/wenda/question/category/index'),
+        name: 'QuestionCategory',
+        meta: {
+          title: 'title.wenda.question.category.index'
+        }
+      },
+      {
+        path: '/wenda/question/category/create',
+        component: () => import('@/views/wenda/question/category/create'),
+        name: 'QuestionCategoryCreate',
+        meta: {
+          title: 'title.wenda.question.category.create'
+        }
+      },
+      {
+        path: '/wenda/question/category/update',
+        component: () => import('@/views/wenda/question/category/update'),
+        name: 'QuestionCategoryUpdate',
+        meta: {
+          title: 'title.wenda.question.category.update'
+        }
+      },
     ]
   },
   {

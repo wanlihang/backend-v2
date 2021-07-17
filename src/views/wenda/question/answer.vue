@@ -1,42 +1,44 @@
 <template>
   <div class="float-left">
-    <div class="float-left mb-15">
-      <el-button
-        @click="
-          $router.push({
-            name: 'AttachCreate',
-            query: { course_id: box.course_id },
-          })
-        "
-        type="primary"
-        >添加</el-button
-      >
-    </div>
     <div class="table-body top-left-radius" v-loading="loading">
       <div class="float-left">
-        <el-table :data="attach" stripe class="float-left">
-          <el-table-column prop="id" label="ID" width="120">
+        <el-table :data="answers" stripe class="float-left">
+          <el-table-column prop="id" label="ID" width="80"> </el-table-column>
+          <el-table-column prop="user_id" label="用户ID" width="80">
           </el-table-column>
-          <el-table-column prop="name" label="附件名" width="250">
+          <el-table-column prop="user.nick_name" label="用户" width="120">
           </el-table-column>
-
-          <el-table-column label="路径"
+           <el-table-column label="点赞" width="100"
             ><template slot-scope="scope">
-              <span>{{ scope.row.path }} </span>
+              <span>{{ scope.row.vote_count }}次</span>
             </template>
           </el-table-column>
-           <el-table-column label="下载次数" width="150"
+          <el-table-column label="内容"
             ><template slot-scope="scope">
-              <span>{{ scope.row.download_times}}次 </span>
+              <div v-html="scope.row.original_content"></div>
             </template>
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="80">
+          <el-table-column label="答案" width="80">
+               <span v-if="scope.row.is_correct==1">是</span>
+               <span v-else>否</span>
+          </el-table-column>
+          <el-table-column fixed="right" label="操作" width="150">
             <template slot-scope="scope">
               <el-link
                 style="margin-right: 10px"
                 type="danger"
                 @click="destory(scope.row.id)"
                 >删除</el-link
+              >
+              <el-link
+                type="primary"
+                @click="
+                  $router.push({
+                    name: 'QuestionCategoryUpdate',
+                    query: { id: scope.row.id },
+                  })
+                "
+                >评论</el-link
               >
             </template>
           </el-table-column>
@@ -47,7 +49,9 @@
     <div class="bottom-menus">
       <div class="bottom-menus-box">
         <div>
-          <el-button @click="$router.push({ name: 'Vod' })">取消</el-button>
+          <el-button @click="$router.push({ name: 'Question' })"
+            >取消</el-button
+          >
         </div>
       </div>
     </div>
@@ -58,27 +62,25 @@ export default {
   data() {
     return {
       box: {
-        course_id: this.$route.query.course_id,
+        id: this.$route.query.id,
       },
       loading: false,
-      attach: [],
+      answers: [],
     };
   },
   mounted() {
-    this.getAttach();
+    this.create();
   },
   methods: {
-    getAttach() {
+    create() {
       if (this.loading) {
         return;
       }
       this.loading = true;
-      this.$api.Course.Vod.Attach.List(this.box).then(
-        (res) => {
-          this.loading = false;
-          this.attach = res.data.data;
-        }
-      );
+      this.$api.Wenda.Question.Answer(this.box.id).then((res) => {
+        this.loading = false;
+        this.answers = res.data.answers;
+      });
     },
     importUser() {},
     //删除管理员
@@ -94,11 +96,11 @@ export default {
             return;
           }
           this.loading = true;
-          this.$api.Course.Vod.Attach.Destory(id)
+          this.$api.Wenda.Question.Cate.Destory(id)
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));
-              this.getAttach();
+              this.create();
             })
             .catch((e) => {
               this.loading = false;

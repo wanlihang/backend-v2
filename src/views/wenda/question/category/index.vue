@@ -4,8 +4,7 @@
       <el-button
         @click="
           $router.push({
-            name: 'AttachCreate',
-            query: { course_id: box.course_id },
+            name: 'QuestionCategoryCreate',
           })
         "
         type="primary"
@@ -14,29 +13,31 @@
     </div>
     <div class="table-body top-left-radius" v-loading="loading">
       <div class="float-left">
-        <el-table :data="attach" stripe class="float-left">
-          <el-table-column prop="id" label="ID" width="120">
-          </el-table-column>
-          <el-table-column prop="name" label="附件名" width="250">
-          </el-table-column>
-
-          <el-table-column label="路径"
+        <el-table :data="categories" stripe class="float-left">
+             <el-table-column label="分类名"
             ><template slot-scope="scope">
-              <span>{{ scope.row.path }} </span>
+              <span>{{ scope.row.name}} </span>
             </template>
           </el-table-column>
-           <el-table-column label="下载次数" width="150"
-            ><template slot-scope="scope">
-              <span>{{ scope.row.download_times}}次 </span>
-            </template>
+          <el-table-column prop="sort" label="升序" width="400">
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="80">
+          <el-table-column fixed="right" label="操作" width="150">
             <template slot-scope="scope">
               <el-link
                 style="margin-right: 10px"
                 type="danger"
                 @click="destory(scope.row.id)"
                 >删除</el-link
+              >
+              <el-link
+                type="primary"
+                @click="
+                  $router.push({
+                    name: 'QuestionCategoryUpdate',
+                    query: { id: scope.row.id },
+                  })
+                "
+                >编辑</el-link
               >
             </template>
           </el-table-column>
@@ -47,7 +48,7 @@
     <div class="bottom-menus">
       <div class="bottom-menus-box">
         <div>
-          <el-button @click="$router.push({ name: 'Vod' })">取消</el-button>
+          <el-button @click="$router.push({ name: 'Question' })">取消</el-button>
         </div>
       </div>
     </div>
@@ -57,26 +58,23 @@
 export default {
   data() {
     return {
-      box: {
-        course_id: this.$route.query.course_id,
-      },
       loading: false,
-      attach: [],
+      categories: [],
     };
   },
   mounted() {
-    this.getAttach();
+    this.create();
   },
   methods: {
-    getAttach() {
+    create() {
       if (this.loading) {
         return;
       }
       this.loading = true;
-      this.$api.Course.Vod.Attach.List(this.box).then(
+      this.$api.Wenda.Question.Category().then(
         (res) => {
           this.loading = false;
-          this.attach = res.data.data;
+          this.categories = res.data.data;
         }
       );
     },
@@ -94,11 +92,11 @@ export default {
             return;
           }
           this.loading = true;
-          this.$api.Course.Vod.Attach.Destory(id)
+          this.$api.Wenda.Question.Cate.Destory(id)
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));
-              this.getAttach();
+              this.create();
             })
             .catch((e) => {
               this.loading = false;

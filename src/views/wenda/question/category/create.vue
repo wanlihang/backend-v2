@@ -2,28 +2,21 @@
   <div class="float-left">
     <div class="form-box broder-top-left-radius">
       <el-form ref="form" :model="user" :rules="rules" label-width="200px">
-        <el-form-item label="附件名" prop="name">
+           <el-form-item label="分类名" prop="name">
           <el-input v-model="user.name" class="w-200px"></el-input>
         </el-form-item>
-        <el-form-item label="附件" prop="file">
-          <input type="file" id="cover" class="w-200px" />
-          <div class="helper">
-            仅支持zip,pdf,jpeg,jpg,gif,png,md,doc,txt,csv格式文件
-          </div>
+        <el-form-item label="排序" prop="sort">
+          <el-input type="number" v-model="user.sort" class="w-200px"></el-input>
         </el-form-item>
+       
+       
       </el-form>
     </div>
 
     <div class="bottom-menus">
       <div class="bottom-menus-box">
         <div>
-          <el-button
-            @click="
-              $router.push({
-                name: 'CourseAttach',
-                query: { course_id: user.course_id },
-              })
-            "
+          <el-button @click="$router.push({ name: 'QuestionCategory' })"
             >取消</el-button
           >
         </div>
@@ -41,24 +34,32 @@ export default {
   data() {
     return {
       user: {
-        course_id: this.$route.query.course_id,
+        sort: 0,
         name: null,
       },
-      box: null,
       rules: {
-        name: [
+        sort: [
           {
             required: true,
-            message: "附件名不能为空",
+            message: "排序不能为空",
             trigger: "blur",
           },
         ],
+        name: [
+          {
+            required: true,
+            message: "分类名不能为空",
+            trigger: "blur",
+          },
+        ],
+        
       },
 
       loading: false,
     };
   },
-  mounted() {},
+  mounted() {
+  },
   methods: {
     formValidate() {
       this.$refs["form"].validate((valid) => {
@@ -72,17 +73,11 @@ export default {
         return;
       }
       this.loading = true;
-      const formData = new FormData();
-      formData.append("file", document.getElementById("cover").files[0]);
-      formData.append("name", this.user.name);
-      formData.append("course_id", this.user.course_id);
-      this.$api.Course.Vod.Attach.Store(formData)
+      this.$api.Wenda.Question.Cate
+        .Store(this.user)
         .then(() => {
           this.$message.success(this.$t("common.success"));
-          this.$router.push({
-            name: "CourseAttach",
-            query: { course_id: this.user.course_id },
-          });
+          this.$router.push({ name: "QuestionCategory" });
         })
         .catch((e) => {
           this.loading = false;

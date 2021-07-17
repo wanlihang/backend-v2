@@ -52,12 +52,34 @@ export default [
         ]
     },
     {
+        name: 'title.wechatname',
+        key: 'Wechat',
+        children: [
+            {
+                name: 'title.wechat.messagereply.index',
+                key: 'MessageReply'
+            },
+            
+        ]
+    },
+    {
         name: 'title.coursename',
         key: 'Course',
         children: [
             {
                 name: 'title.course.vod.index',
                 key: 'Vod'
+            },
+            
+        ]
+    },
+    {
+        name: 'title.wendaname',
+        key: 'Wenda',
+        children: [
+            {
+                name: 'title.wenda.question.index',
+                key: 'Question'
             },
             
         ]
