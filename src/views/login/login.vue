@@ -28,7 +28,6 @@
         <el-form
           :model="ruleForm2"
           :rules="rules2"
-          status-icon
           ref="ruleForm2"
           label-position="left"
           label-width="0px"

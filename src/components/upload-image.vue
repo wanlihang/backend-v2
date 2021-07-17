@@ -1,7 +1,7 @@
 <template>
   <div class="upload-image-box">
     <div class="buttons">
-      <el-button type="primary" @click="show = true">
+      <el-button @click="show = true">
         {{ $t("common.image.upload") }}
       </el-button>
     </div>

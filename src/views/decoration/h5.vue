@@ -162,7 +162,7 @@
             <div
               class="item"
               :class="{ active: curBlock === item.id }"
-              @click="curBlock = item.id"
+              @click="curBlock = index"
             >
               <render-slider
                 v-if="item.sign === 'slider'"
@@ -233,7 +233,9 @@
         </template>
       </draggable>
 
-      <div class="config-box" v-if="curBlock"></div>
+      <div class="config-box" v-if="curBlock !== null">
+        <config-setting :block="blocks[curBlock]"></config-setting>
+      </div>
     </div>
   </div>
 </template>
@@ -248,6 +250,7 @@ import RenderTopicV1 from "./components/h5/render/topic-v1.vue";
 import RenderLearnPathV1 from "./components/h5/render/learnPath-v1.vue";
 import RenderTgV1 from "./components/h5/render/tg-v1.vue";
 import RenderMsV1 from "./components/h5/render/ms-v1.vue";
+import ConfigSetting from "./components/h5/config/index.vue";
 
 export default {
   components: {
@@ -261,6 +264,7 @@ export default {
     RenderLearnPathV1,
     RenderTgV1,
     RenderMsV1,
+    ConfigSetting,
   },
   data() {
     return {
@@ -446,7 +450,7 @@ export default {
         .then(() => {
           this.$api.ViewBlock.Destroy(item.id).then(() => {
             this.$message.success(this.$t("common.success"));
-
+            this.curBlock = null;
             this.getData();
           });
         })
@@ -522,7 +526,7 @@ export default {
 }
 .top-box {
   position: fixed;
-  z-index: 99;
+  z-index: 10;
   top: 0;
   left: 0;
   right: 0;
@@ -616,7 +620,7 @@ export default {
 
 .preview-box {
   position: absolute;
-  z-index: 88;
+  z-index: 8;
   top: 86px;
   left: 50%;
   margin-left: -188px;
@@ -683,7 +687,8 @@ export default {
 
 .config-box {
   position: fixed;
-  top: 0;
+  z-index: 12;
+  top: 56px;
   right: 0;
   bottom: 0;
   width: 400px;

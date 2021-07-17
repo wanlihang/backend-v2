@@ -13,25 +13,21 @@
         :key="index"
       >
         <div class="course-thumb">
-          <img v-if="item.thumb" :src="item.thumb" width="120" height="80" />
+          <img v-if="item.thumb" :src="item.thumb" width="120" height="90" />
           <img
+            v-else
             src="@/assets/images/decoration/h5/default-vod.png"
             width="120"
             height="80"
           />
         </div>
         <div class="course-body">
-          <div class="title">{{ item.title }}</div>
+          <div class="course-title">{{ item.title }}</div>
           <div class="course-info">
             <div class="sub">
-              <span v-if="item.user_count">{{ item.user_count }}人已订阅</span>
-              <span v-else>xx人已订阅</span>
+              <span>{{ item.user_count }}人已订阅</span>
             </div>
-            <div class="price">
-              <small>￥</small>
-              <span v-if="item.charge">{{ item.charge }}</span>
-              <span v-else>XX</span>
-            </div>
+            <div class="price"><small>￥</small>{{ item.charge }}</div>
           </div>
         </div>
       </div>
@@ -117,19 +113,21 @@ export default {
 
         .course-title {
           width: 100%;
-          height: 40px;
+          height: 60px;
           float: left;
           font-size: 15px;
           font-weight: 500;
           color: #171923;
           line-height: 20px;
-          margin-bottom: 20px;
+          margin-bottom: 5px;
           word-break: break-all;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
 
         .course-info {
           width: 100%;
-          height: auto;
+          height: 20px;
           float: left;
           display: flex;
           align-items: center;
@@ -139,7 +137,7 @@ export default {
             font-size: 12px;
             font-weight: 400;
             color: #999999;
-            line-height: 12px;
+            line-height: 20px;
           }
 
           .price {

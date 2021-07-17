@@ -1,87 +1,83 @@
 <template>
-  <el-dialog
-    :title="$t('common.image.select')"
-    :visible="show"
-    :show-close="false"
-    :close-on-press-escape="false"
-    :close-on-click-modal="false"
-    width="1200px"
-  >
-    <div class="select-images-box">
-      <div class="category-box">
-        <div class="title">{{ $t("common.group") }}</div>
-        <div class="body">
-          <div
-            class="category-item"
-            :class="{ active: item.key === pagination.from }"
-            v-for="item in fromRows"
-            :key="item.key"
-            @click="pagination.from = item.key"
-          >
-            {{ item.name }}
-          </div>
-        </div>
-      </div>
-      <div class="images-list">
-        <div class="optinos">
-          <el-upload
-            :headers="uploadHeaders"
-            :multiple="false"
-            :action="uploadAction"
-            :data="uploadData"
-            name="file"
-            :show-file-list="false"
-            :on-success="uploadSuccessEvt"
-            accept="image/gif,image/jpeg,image/jpg,image/png"
-          >
-            <el-button size="small" type="primary">
-              {{ $t("common.image.upload") }}
-            </el-button>
-          </el-upload>
-        </div>
-
-        <div class="body" v-if="list.length > 0 || loading" v-loading="loading">
-          <div
-            class="image-item"
-            :class="{ active: imageUrl === item.url }"
-            v-for="item in list"
-            :key="item.id"
-            @click="imageUrl = item.url"
-          >
-            <div class="image-render">
-              <img :src="item.url" width="100" height="100" />
+  <div class="select-images-box-mask" v-if="show">
+    <div class="select-images">
+      <div class="select-images-title">选择图片</div>
+      <div class="select-images-box">
+        <div class="category-box">
+          <div class="title">{{ $t("common.group") }}</div>
+          <div class="body">
+            <div
+              class="category-item"
+              :class="{ active: item.key === pagination.from }"
+              v-for="item in fromRows"
+              :key="item.key"
+              @click="pagination.from = item.key"
+            >
+              {{ item.name }}
             </div>
-            <div class="image-name">{{ item.name }}</div>
           </div>
         </div>
+        <div class="images-list">
+          <div class="optinos">
+            <el-upload
+              :headers="uploadHeaders"
+              :multiple="false"
+              :action="uploadAction"
+              :data="uploadData"
+              name="file"
+              :show-file-list="false"
+              :on-success="uploadSuccessEvt"
+              accept="image/gif,image/jpeg,image/jpg,image/png"
+            >
+              <el-button type="primary">
+                {{ $t("common.image.upload") }}
+              </el-button>
+            </el-upload>
+          </div>
 
-        <div class="empty-box" v-else>
-          <el-empty :description="$t('common.none')"></el-empty>
-        </div>
-
-        <div class="pagination text-center">
-          <el-pagination
-            @size-change="paginationSizeChange"
-            @current-change="paginationPageChange"
-            :current-page="pagination.page"
-            :page-sizes="[10, 20, 50, 100]"
-            :page-size="pagination.size"
-            layout="total, sizes, prev, pager, next, jumper"
-            :total="total"
+          <div
+            class="body"
+            v-if="list.length > 0 || loading"
+            v-loading="loading"
           >
-          </el-pagination>
+            <div
+              class="image-item"
+              :class="{ active: imageUrl === item.url }"
+              v-for="item in list"
+              :key="item.id"
+              @click="imageUrl = item.url"
+            >
+              <div class="image-render">
+                <img :src="item.url" width="100" height="100" />
+              </div>
+              <div class="image-name">{{ item.name }}</div>
+            </div>
+          </div>
+
+          <div class="empty-box" v-else>
+            <el-empty :description="$t('common.none')"></el-empty>
+          </div>
+
+          <div class="pagination text-center">
+            <el-pagination
+              @size-change="paginationSizeChange"
+              @current-change="paginationPageChange"
+              :current-page="pagination.page"
+              :page-sizes="[10, 20, 50, 100]"
+              :page-size="pagination.size"
+              layout="total, sizes, prev, pager, next, jumper"
+              :total="total"
+            >
+            </el-pagination>
+          </div>
         </div>
       </div>
+      <div class="select-images-footer">
+        <el-button type="primary" @click="confirm"> 确定 </el-button>
+        <el-button @click="close"> 取消 </el-button>
+      </div>
     </div>
-    <div slot="footer">
-      <el-button @click="close">
-        {{ $t("common.cancel") }}
-      </el-button>
-      <el-button type="primary" @click="confirm">
-        {{ $t("common.confirm") }}
-      </el-button>
-    </div>
-  </el-dialog>
+  </div>
 </template>
 
 <script>
@@ -91,7 +87,6 @@ export default {
   props: ["show", "from"],
   data() {
     return {
-      dialogVisible: false,
       fromRows: [],
       pagination: {
         page: 1,
@@ -120,14 +115,9 @@ export default {
     },
   },
   mounted() {
-    this.dialogVisible = this.show;
-
     this.getData();
   },
   watch: {
-    show(newVal) {
-      this.dialogVisible = newVal;
-    },
     "pagination.from"() {
       this.getData();
     },
@@ -162,6 +152,10 @@ export default {
       this.$emit("close");
     },
     confirm() {
+      if (this.imageUrl === null) {
+        this.$message.warning("请选择图片");
+        return;
+      }
       this.$emit("selected", this.imageUrl);
     },
     uploadSuccessEvt() {
@@ -175,11 +169,48 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.select-images-box-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2000;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.select-images {
+  position: absolute;
+  top: 10vh;
+  left: 50%;
+  margin-left: -600px;
+  width: 1200px;
+  height: auto;
+  background-color: white;
+  box-sizing: border-box;
+}
+
+.select-images-title {
+  width: 100%;
+  height: auto;
+  float: left;
+  box-sizing: border-box;
+  padding: 30px;
+  font-size: 18px;
+  font-weight: 400;
+  color: #333333;
+  line-height: 18px;
+}
+
 .select-images-box {
   width: 100%;
   height: auto;
   float: left;
   display: flex;
+  box-sizing: border-box;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-bottom: 30px;
 
   .category-box {
     width: 200px;
@@ -294,5 +325,14 @@ export default {
       margin-top: 15px;
     }
   }
+}
+
+.select-images-footer {
+  width: 100%;
+  height: auto;
+  float: left;
+  box-sizing: border-box;
+  padding: 20px 30px;
+  border-top: 1px solid rgba(0, 0, 0, 0.6);
 }
 </style>
