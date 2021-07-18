@@ -310,6 +310,31 @@ const Api = {
                     return get(`/backend/addons/meedu_topics/topic/${id}/users`, params);
                 }
             }
+        },
+        LearnPath: {
+            Path: {
+                List(params) {
+                    return get(`/backend/addons/LearningPaths/path/index`, params);
+                },
+                Create() {
+                    return get(`/backend/addons/LearningPaths/path/create`);
+                },
+                Store(params) {
+                    return post(`/backend/addons/LearningPaths/path/create`, params);
+                },
+                Destory(id) {
+                    return destroy(`/backend/addons/LearningPaths/path/${id}`);
+                },
+                Detail(id) {
+                    return get(`/backend/addons/LearningPaths/path/${id}`);
+                },
+                Update(id, params) {
+                    return put(`/backend/addons/LearningPaths/path/${id}`, params);
+                },
+                Users(id, params) {
+                    return get(`/backend/addons/LearningPaths/path/${id}/users`, params);
+                }
+            }
         }
     },
     Wechat: {

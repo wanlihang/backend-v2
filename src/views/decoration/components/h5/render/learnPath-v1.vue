@@ -9,17 +9,18 @@
     <div class="body">
       <div class="path-item" v-for="(item, index) in config.items" :key="index">
         <div class="path-body">
-          <div class="path-title">{{ item.title }}</div>
+          <div class="path-title">{{ item.name }}</div>
           <div class="path-desc">{{ item.desc }}</div>
           <div class="path-info">
-            <span>{{ item.courses_count }}</span>
+            <span>{{ item.steps_count }}个步骤</span>
             <span>&dot;</span>
-            <span>{{ item.steps_count }}</span>
+            <span>{{ item.courses_count }}个课程</span>  
           </div>
         </div>
         <div class="path-thumb">
           <img v-if="item.thumb" :src="item.thumb" width="120" height="80" />
           <img
+            v-else
             src="@/assets/images/decoration/h5/default-learnPath.png"
             width="120"
             height="80"
@@ -83,6 +84,11 @@ export default {
       box-sizing: border-box;
       display: flex;
       align-items: center;
+      margin-bottom: 15px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
 
       .path-body {
         flex: 1;

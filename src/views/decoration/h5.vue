@@ -395,7 +395,7 @@ export default {
           items: [
             {
               id: null,
-              title: "路径一",
+              name: "路径一",
               thumb: null,
             },
           ],

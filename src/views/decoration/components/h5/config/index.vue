@@ -30,6 +30,11 @@
       :block="block"
       @update="update"
     ></topic-v1-set>
+    <learn-path-v1-set
+      v-else-if="block.sign === 'h5-learnPath-v1'"
+      :block="block"
+      @update="update"
+    ></learn-path-v1-set>
   </div>
 </template>
 <script>
@@ -39,6 +44,7 @@ import VodV1Set from "./vod-v1.vue";
 import LiveV1Set from "./live-v1.vue";
 import BookV1Set from "./book-v1.vue";
 import TopicV1Set from "./topic-v1.vue";
+import LearnPathV1Set from "./learnPath-v1.vue";
 
 export default {
   components: {
@@ -48,6 +54,7 @@ export default {
     LiveV1Set,
     BookV1Set,
     TopicV1Set,
+    LearnPathV1Set,
   },
   props: ["block"],
   methods: {
