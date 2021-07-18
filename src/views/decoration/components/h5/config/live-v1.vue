@@ -28,7 +28,7 @@
             <img v-if="item.thumb" :src="item.thumb" width="80" height="60" />
             <img
               v-else
-              src="@/assets/images/decoration/h5/default-vod.png"
+              src="@/assets/images/decoration/h5/default-live.png"
               width="80"
               height="60"
             />

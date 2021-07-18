@@ -16,6 +16,7 @@
           <div class="book-thumb">
             <img v-if="item.thumb" :src="item.thumb" width="90" height="120" />
             <img
+              v-else
               src="@/assets/images/decoration/h5/default-book.png"
               width="90"
               height="120"
@@ -24,21 +25,15 @@
           <div class="book-body">
             <div class="book-name">{{ item.name }}</div>
             <div class="book-desc">
-              {{ item.desc }}
+              {{ item.short_desc }}
             </div>
             <div class="book-info">
               <div class="sub">
-                <span v-if="item.user_count"
-                  >{{ item.user_count }}人已订阅</span
-                >
-                <span v-else>xx人已订阅</span>
+                <span>{{ item.user_count }}人已订阅</span>
               </div>
               <div class="price">
-                <small>￥</small>
-                <span v-if="item.charge">
-                  {{ item.charge }}
-                </span>
-                <span v-else>XX</span>
+                <small class="unit">￥</small>
+                <span>{{ item.charge }}</span>
               </div>
             </div>
           </div>
