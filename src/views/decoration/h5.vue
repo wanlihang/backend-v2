@@ -201,7 +201,7 @@
                 :config="item.config_render"
               ></render-ms-v1>
 
-              <div class="item-options" v-if="curBlock === item.id">
+              <div class="item-options" v-if="curBlock === index">
                 <div class="btn-item" @click="blockDestroy(index, item)">
                   <i class="el-icon-delete-solid"></i>
                 </div>
@@ -234,7 +234,7 @@
       </draggable>
 
       <div class="config-box" v-if="curBlock !== null">
-        <config-setting :block="blocks[curBlock]"></config-setting>
+        <config-setting :block="blocks[curBlock]" @update="getData()"></config-setting>
       </div>
     </div>
   </div>
@@ -489,6 +489,8 @@ export default {
         config: changeItem.config_render,
       });
 
+      this.curBlock = null;
+
       this.getData();
     },
     async moveBottom(index, item) {
@@ -507,6 +509,8 @@ export default {
         sort: item.sort,
         config: changeItem.config_render,
       });
+
+      this.curBlock = null;
 
       this.getData();
     },
@@ -693,7 +697,6 @@ export default {
   bottom: 0;
   width: 400px;
   box-sizing: border-box;
-  padding: 30px;
   background-color: white;
 }
 </style>

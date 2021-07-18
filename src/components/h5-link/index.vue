@@ -182,7 +182,7 @@ export default {
     },
     confirm() {
       if (this.link === null) {
-        this.$message.warn("请选择链接");
+        this.$message.warning("请选择链接");
         return;
       }
       this.$emit("change", this.link);

@@ -22,9 +22,9 @@
         <div class="link">
           <div class="label">链接</div>
           <div class="value">
-            {{ item.href }}
+            <el-input v-model="item.href" class="w-100"></el-input>
           </div>
-          <div class="option">
+          <div class="option ml-15">
             <el-link type="primary" @click="selectLink(index)"
               >选择链接</el-link
             >

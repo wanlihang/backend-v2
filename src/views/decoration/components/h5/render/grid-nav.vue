@@ -2,25 +2,27 @@
   <div class="grid-nav-box">
     <div class="grid-nav">
       <div class="grid-line" v-for="index in lineCount" :key="index">
-        <div class="grid-item" v-for="i in config.line_count" :key="i">
-          <div class="icon">
-            <img
-              v-if="config.items[(index - 1) * config.line_count + i - 1].src"
-              :src="config.items[(index - 1) * config.line_count + i - 1].src"
-              width="44"
-              height="44"
-            />
-            <img
-              v-else
-              src="@/assets/images/decoration/h5/default-grid-nav.png"
-              width="44"
-              height="44"
-            />
+        <template v-for="i in config.line_count">
+          <div class="grid-item" :key="i" v-if="config.items[(index - 1) * config.line_count + i - 1]">
+            <div class="icon">
+              <img
+                v-if="config.items[(index - 1) * config.line_count + i - 1].src"
+                :src="config.items[(index - 1) * config.line_count + i - 1].src"
+                width="44"
+                height="44"
+              />
+              <img
+                v-else
+                src="@/assets/images/decoration/h5/default-grid-nav.png"
+                width="44"
+                height="44"
+              />
+            </div>
+            <div class="name">
+              {{ config.items[(index - 1) * config.line_count + i - 1].name }}
+            </div>
           </div>
-          <div class="name">
-            {{ config.items[(index - 1) * config.line_count + i - 1].name }}
-          </div>
-        </div>
+        </template>
       </div>
     </div>
   </div>
