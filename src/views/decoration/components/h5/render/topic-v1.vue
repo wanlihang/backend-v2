@@ -15,13 +15,14 @@
         <div class="topic-body">
           <div class="topic-title">{{ item.title }}</div>
           <div class="topic-info">
-            <span>{{ item.read_count }}阅读</span>
-            <span class="ml-15">{{ item.comments_count }}评论</span>
+            <span>{{ item.view_times }}阅读</span>
+            <span class="ml-15">{{ item.comment_times }}评论</span>
           </div>
         </div>
         <div class="topic-thumb">
           <img v-if="item.thumb" :src="item.thumb" width="120" height="80" />
           <img
+            v-else
             src="@/assets/images/decoration/h5/default-topic.png"
             width="120"
             height="80"
@@ -77,12 +78,18 @@ export default {
     height: auto;
     float: left;
     box-sizing: border-box;
+
     .topic-item {
       width: 100%;
       height: auto;
       float: left;
       display: flex;
       align-items: center;
+      margin-bottom: 15px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
 
       .topic-body {
         flex: 1;

@@ -25,6 +25,11 @@
       :block="block"
       @update="update"
     ></book-v1-set>
+    <topic-v1-set
+      v-else-if="block.sign === 'h5-topic-v1'"
+      :block="block"
+      @update="update"
+    ></topic-v1-set>
   </div>
 </template>
 <script>
@@ -33,6 +38,7 @@ import GridNavSet from "./grid-nav.vue";
 import VodV1Set from "./vod-v1.vue";
 import LiveV1Set from "./live-v1.vue";
 import BookV1Set from "./book-v1.vue";
+import TopicV1Set from "./topic-v1.vue";
 
 export default {
   components: {
@@ -41,6 +47,7 @@ export default {
     VodV1Set,
     LiveV1Set,
     BookV1Set,
+    TopicV1Set,
   },
   props: ["block"],
   methods: {

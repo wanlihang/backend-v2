@@ -245,7 +245,7 @@ const Api = {
                     return get(`/backend/addons/zhibo/course/create`);
                 },
                 Store(params) {
-                    return post(`/backend/addons/zhibo/course`, params);
+                    return post(`/backend/addons/zhibo/course/create`, params);
                 },
                 Destory(id) {
                     return destroy(`/backend/addons/zhibo/course/${id}`);
@@ -270,7 +270,7 @@ const Api = {
                     return get(`/backend/addons/meedu_books/book/create`);
                 },
                 Store(params) {
-                    return post(`/backend/addons/zhibo/course`, params);
+                    return post(`/backend/addons/meedu_books/book/create`, params);
                 },
                 Destory(id) {
                     return destroy(`/backend/addons/meedu_books/book/${id}`);
@@ -283,6 +283,31 @@ const Api = {
                 },
                 Users(id, params) {
                     return get(`/backend/addons/meedu_books/book/${id}/users`, params);
+                }
+            }
+        },
+        Topic: {
+            Topic: {
+                List(params) {
+                    return get(`/backend/addons/meedu_topics/topic/index`, params);
+                },
+                Create() {
+                    return get(`/backend/addons/meedu_topics/topic/create`);
+                },
+                Store(params) {
+                    return post(`/backend/addons/meedu_topics/topic/create`, params);
+                },
+                Destory(id) {
+                    return destroy(`/backend/addons/meedu_topics/topic/${id}`);
+                },
+                Detail(id) {
+                    return get(`/backend/addons/meedu_topics/topic/${id}`);
+                },
+                Update(id, params) {
+                    return put(`/backend/addons/meedu_topics/topic/${id}`, params);
+                },
+                Users(id, params) {
+                    return get(`/backend/addons/meedu_topics/topic/${id}/users`, params);
                 }
             }
         }
