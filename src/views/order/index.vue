@@ -1,14 +1,13 @@
 <template>
-  <div class="float-left">
-    <div class="filter-box">
+  <div class="meedu-main-body">
+    <div class="float-left mb-30">
       <div class="float-left d-flex">
         <div class="d-flex">
           <div class="filter-label">UID</div>
-          <div class="flex-1 ml-15">
+          <div class="flex-1 ml-10">
             <el-input v-model="filter.user_id"></el-input>
           </div>
         </div>
-
         <div class="d-flex ml-15">
           <div class="filter-label">
             <form-label
@@ -16,27 +15,32 @@
               helper="可以是录播课程ID，视频ID，VIP会员ID，直播课程ID，电子书ID等"
             ></form-label>
           </div>
-          <div class="flex-1 ml-15">
-            <el-input v-model="filter.goods_id" placeholder="商品ID"></el-input>
+          <div class="flex-1 ml-10">
+            <el-input
+              v-model="filter.goods_id"
+              placeholder="商品ID"
+              class="w-100px"
+            ></el-input>
           </div>
         </div>
 
         <div class="d-flex ml-15">
           <div class="filter-label">商品名</div>
-          <div class="flex-1 ml-15">
+          <div class="flex-1 ml-10">
             <el-input
               v-model="filter.goods_name"
               placeholder="商品名"
+              class="w-200px"
             ></el-input>
           </div>
         </div>
 
         <div class="d-flex ml-15">
           <div class="filter-label">订单编号</div>
-          <div class="flex-1 ml-15">
+          <div class="flex-1 ml-10">
             <el-input
               v-model="filter.order_id"
-              class="w-200"
+              class="w-200px"
               placeholder="订单号"
             ></el-input>
           </div>
@@ -44,7 +48,7 @@
 
         <div class="d-flex ml-15">
           <div class="filter-label">创建时间</div>
-          <div class="flex-1 ml-15">
+          <div class="flex-1 ml-10">
             <el-date-picker
               v-model="filter.created_at"
               type="daterange"
@@ -57,33 +61,33 @@
             </el-date-picker>
           </div>
         </div>
-      </div>
-      <div class="float-left mt-15">
-        <el-button type="primary" class="search" @click="filterAct()">
-          筛选
-        </el-button>
-        <el-button class="reset" @click="paginationReset()">清空</el-button>
+
+        <div class="ml-15">
+          <el-button type="primary" class="search" @click="filterAct()" plain>
+            筛选
+          </el-button>
+          <el-button class="reset" @click="paginationReset()">清空</el-button>
+        </div>
       </div>
     </div>
 
-    <div class="table-tabs" v-if="countMap">
-      <div
-        class="tab-item"
-        :class="{ active: filter.status === item.key }"
-        v-for="(item, index) in filterData.statusRows"
-        :key="index"
-        @click="filter.status = item.key"
-      >
-        {{ item.name }}({{
-          item.key === null ? orderTotal : countMap[item.key]
-        }})
-      </div>
+    <div class="float-left" v-if="countMap">
+      <el-tabs v-model="filter.status">
+        <el-tab-pane
+          :label="
+            item.name +
+            '(' +
+            (item.key === null ? orderTotal : countMap[item.key]) +
+            ')'
+          "
+          :name="item.key"
+          v-for="(item, index) in filterData.statusRows"
+          :key="index"
+        ></el-tab-pane>
+      </el-tabs>
     </div>
-    <div
-      class="table-body"
-      :class="{ 'top-left-radius': filter.status !== null }"
-      v-loading="loading"
-    >
+
+    <div class="float-left" v-loading="loading">
       <el-table
         :data="dataList"
         stripe
@@ -131,7 +135,7 @@
         </el-table-column>
       </el-table>
 
-      <div class="float-left mt-15">
+      <div class="float-left mt-30 text-center">
         <el-pagination
           style="margin-top: 20px"
           @size-change="paginationSizeChange"

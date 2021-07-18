@@ -3,16 +3,23 @@
     <back-bar class="mb-30" title="用户批量导入"></back-bar>
 
     <div class="user-import-box">
-      <div class="float-left mb-15">
-        用户批量导入模板下载：<a
-          href="https://www.yuque.com/meedu/fvvkbf/qtkixc"
-          target="_blank"
-          >https://www.yuque.com/meedu/fvvkbf/qtkixc</a
-        >
+      <div class="float-left d-flex mb-15">
+        <div>
+          <el-button type="primary" @click="choiceFile">
+            选择Excel表格文件
+          </el-button>
+        </div>
+        <div class="ml-30">
+          <el-link
+            type="primary"
+            href="https://www.yuque.com/meedu/fvvkbf/qtkixc"
+            target="_blank"
+          >
+            点击链接下载「用户批量导入模板」
+          </el-link>
+        </div>
       </div>
       <div class="float-left">
-        <el-button type="primary" @click="choiceFile">选择表格文件</el-button>
-
         <div style="display: none">
           <form ref="form">
             <input type="file" ref="xlsfile" />

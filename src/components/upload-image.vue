@@ -1,13 +1,17 @@
 <template>
   <div class="upload-image-box">
     <div class="buttons">
-      <el-button @click="show = true">
-        {{ $t("common.image.upload") }}
-      </el-button>
+      <div class="d-flex">
+        <div>
+          <el-button @click="show = true">
+            {{ $t("common.image.upload") }}
+          </el-button>
+        </div>
+        <div class="helper ml-30" v-if="helper">{{ helper }}</div>
+      </div>
     </div>
-    <div class="helper" v-if="helper">{{ helper }}</div>
 
-    <div class="preview-box" v-if="value">
+    <div class="float-left mt-15" v-if="value">
       <img :src="value" :width="width" :height="height" />
     </div>
 
@@ -45,29 +49,18 @@ export default {
 .upload-image-box {
   display: inline-block;
 
-  .buttons,
-  .helper,
-  .preview-box {
+  .buttons {
     width: 100%;
     height: auto;
     float: left;
-    margin-bottom: 15px;
   }
 
   .helper {
+    width: auto;
     color: rgba(0, 0, 0, 0.5);
     font-size: 14px;
-    line-height: 1;
+    line-height: 14px;
     font-weight: normal;
-  }
-
-  .preview-box {
-    margin-bottom: 0;
-
-    img {
-      max-width: 100%;
-      border-radius: 3px;
-    }
   }
 }
 </style>

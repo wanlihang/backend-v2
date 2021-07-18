@@ -1,18 +1,20 @@
 <template>
-  <div class="float-left" v-if="user" v-loading="loading">
-    <div class="user-info-box">
-      <div class="user-base-info-box">
-        <div class="user-avatar">
-          <img :src="user.avatar" width="100" height="100" />
+  <div class="user-main-body" v-if="user" v-loading="loading">
+    <div class="float-left bg-white br-15 p-30">
+      <back-bar class="mb-30" title="用户详情"></back-bar>
+      <div class="user-info-box">
+        <div class="user-base-info-box">
+          <div class="user-avatar">
+            <img :src="user.avatar" width="100" height="100" />
+          </div>
+          <div class="user-nickname">{{ user.nick_name }}</div>
         </div>
-        <div class="user-nickname">{{ user.nick_name }}</div>
       </div>
     </div>
 
-    <div class="panel-box mt-15 mb-15">
+    <div class="panel-box mt-30">
       <div class="panel-header">
         <span>基础信息</span>
-
         <el-link
           type="primary"
           @click="$router.push({ name: 'MemberEdit', params: { userId: id } })"
@@ -134,7 +136,7 @@
       </div>
     </div>
 
-    <div class="panel-box mb-15">
+    <div class="panel-box mt-30">
       <div class="panel-header">
         <span>用户备注</span>
         <el-link
@@ -155,7 +157,7 @@
       </div>
     </div>
 
-    <div class="panel-box mb-15">
+    <div class="panel-box mt-30">
       <div class="panel-header">实名信息</div>
       <div class="panel-body">
         <div class="user-extra-info-box" v-if="user.profile">
@@ -282,7 +284,6 @@
                 </template>
               </div>
             </div>
-
             <div class="flex-1 d-flex"></div>
             <div class="flex-1 d-flex"></div>
             <div class="flex-1 d-flex"></div>
@@ -294,22 +295,17 @@
     </div>
 
     <!-- 用户课程区域 -->
-    <div class="float-left mt-15">
-      <div class="table-tabs">
-        <div
-          class="tab-item"
-          :class="{ active: courseTabActive === item.key }"
+    <div class="float-left bg-white br-15 p-30 mt-30">
+      <el-tabs v-model="courseTabActive">
+        <el-tab-pane
+          :label="item.name"
+          :name="item.key"
           v-for="item in courseTypes"
           :key="item.key"
-          @click="courseTabActive = item.key"
-        >
-          {{ item.name }}
-        </div>
-      </div>
-      <div
-        class="table-body"
-        :class="{ 'top-left-radius': courseTabActive !== 'vod' }"
-      >
+        ></el-tab-pane>
+      </el-tabs>
+
+      <div class="float-left mt-30">
         <user-courses-comp
           :id="id"
           v-if="courseTabActive === 'vod'"
@@ -345,13 +341,13 @@
       </div>
     </div>
 
-    <div class="bottom-menus">
+    <!-- <div class="bottom-menus">
       <div class="bottom-menus-box">
         <div>
           <el-button @click="$router.back()">取消</el-button>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -470,6 +466,12 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.user-main-body {
+  width: 100%;
+  height: auto;
+  float: left;
+}
+
 .user-info-box {
   width: 100%;
   height: auto;
@@ -477,9 +479,6 @@ export default {
   box-sizing: border-box;
   display: flex;
   justify-content: center;
-  padding: 30px;
-  border-radius: 10px;
-  background-color: white;
 
   .user-base-info-box {
     width: 300px;
