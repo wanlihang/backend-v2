@@ -10,8 +10,9 @@
       <div class="tg-box">
         <div class="tg-item" v-for="(item, index) in config.items" :key="index">
           <div class="tg-thumb">
-            <img v-if="item.thumb" :src="item.thumb" width="150" height="113" />
+            <img v-if="item.goods_thumb" :src="item.goods_thumb" width="150" height="113" />
             <img
+              v-else
               src="@/assets/images/decoration/h5/default-tg.png"
               width="150"
               height="113"
@@ -19,10 +20,12 @@
           </div>
           <div class="tg-info">
             <div class="label">拼团价</div>
-            <div class="price"><span class="unit">￥</span>{{ item.charge || "XX" }}</div>
+            <div class="price">
+              <span class="unit">￥</span>{{ item.charge || "XX" }}
+            </div>
           </div>
           <div class="tg-title">
-            {{ item.title }}
+            {{ item.goods_title }}
           </div>
         </div>
       </div>
@@ -88,6 +91,11 @@ export default {
         display: inline-block;
         width: 150px;
         height: auto;
+        margin-right: 15px;
+
+        &:last-child {
+          margin-right: 0;
+        }
 
         .tg-thumb {
           width: 150px;

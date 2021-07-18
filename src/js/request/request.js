@@ -504,6 +504,26 @@ const Api = {
         Destroy(id) {
             return destroy(`/backend/addons/MiaoSha/goods/${id}`);
         },
+    },
+    TuanGou: {
+        List(params) {
+            return get(`/backend/addons/TuanGou/goods/index`, params);
+        },
+        Create() {
+            return get(`/backend/addons/TuanGou/goods/create`);
+        },
+        Store(params) {
+            return post(`/backend/addons/TuanGou/goods/create`, params);
+        },
+        Edit(id) {
+            return get(`/backend/addons/TuanGou/goods/${id}`);
+        },
+        Update(id, params) {
+            return put(`/backend/addons/TuanGou/goods/${id}`, params);
+        },
+        Destroy(id) {
+            return destroy(`/backend/addons/TuanGou/goods/${id}`);
+        },
     }
 }
 

@@ -40,6 +40,11 @@
       :block="block"
       @update="update"
     ></ms-v1-set>
+    <tg-v1-set
+      v-else-if="block.sign === 'h5-tg-v1'"
+      :block="block"
+      @update="update"
+    ></tg-v1-set>
   </div>
 </template>
 <script>
@@ -51,6 +56,7 @@ import BookV1Set from "./book-v1.vue";
 import TopicV1Set from "./topic-v1.vue";
 import LearnPathV1Set from "./learnPath-v1.vue";
 import MsV1Set from "./ms-v1.vue";
+import TgV1Set from "./tg-v1.vue";
 
 export default {
   components: {
@@ -62,6 +68,7 @@ export default {
     TopicV1Set,
     LearnPathV1Set,
     MsV1Set,
+    TgV1Set,
   },
   props: ["block"],
   methods: {
