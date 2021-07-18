@@ -1,7 +1,7 @@
 <template>
   <div class="meedu-dialog-mask" v-if="show">
     <div class="meedu-dialog-box">
-      <div class="meedu-dialog-header">选择录播课程</div>
+      <div class="meedu-dialog-header">选择直播课程</div>
       <div class="meedu-dialog-body">
         <div class="courses-box">
           <div class="float-left mb-15">
@@ -15,7 +15,9 @@
               </div>
 
               <div class="ml-15">
-                <el-button @click="getCourse" type="primary" plain>筛选</el-button>
+                <el-button @click="getCourse" type="primary" plain
+                  >筛选</el-button
+                >
                 <el-button class="ml-15" @click="paginationReset">
                   清空
                 </el-button>
@@ -111,10 +113,10 @@ export default {
         return;
       }
       this.loading = true;
-      this.$api.Course.Vod.List(this.pagination).then((res) => {
+      this.$api.Course.Live.Course.List(this.pagination).then((res) => {
         this.loading = false;
-        this.courses = res.data.courses.data;
-        this.total = res.data.courses.total;
+        this.courses = res.data.data.data;
+        this.total = res.data.data.total;
       });
     },
     confirm() {
@@ -127,8 +129,9 @@ export default {
         title: this.result.title,
         thumb: this.result.thumb,
         charge: this.result.charge,
-        is_free: this.result.is_free,
-        user_count: this.result.user_count,
+        vip_can_view: this.result.vip_can_view,
+        join_user_times: this.result.join_user_times,
+        short_description: this.result.short_description,
       });
     },
     close() {

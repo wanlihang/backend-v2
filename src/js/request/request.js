@@ -145,8 +145,8 @@ const Api = {
             }
         },
     },
-    Course:{
-        Vod:{
+    Course: {
+        Vod: {
             List(params) {
                 return get(`/backend/api/v1/course`, params);
             },
@@ -165,7 +165,7 @@ const Api = {
             Update(id, params) {
                 return put(`/backend/api/v1/course/${id}`, params);
             },
-            Categories:{
+            Categories: {
                 List(params) {
                     return get(`/backend/api/v1/courseCategory`, params);
                 },
@@ -182,24 +182,24 @@ const Api = {
                     return put(`/backend/api/v1/courseCategory/${id}`, params);
                 }
             },
-            Chapters:{
-                List(id,params) {
+            Chapters: {
+                List(id, params) {
                     return get(`/backend/api/v1/course_chapter/${id}`, params);
                 },
-                Store(id,params) {
+                Store(id, params) {
                     return post(`/backend/api/v1/course_chapter/${id}`, params);
                 },
-                Destory(id,ids) {
+                Destory(id, ids) {
                     return destroy(`/backend/api/v1/course_chapter/${id}/${ids}`);
                 },
-                Detail(id,ids) {
+                Detail(id, ids) {
                     return get(`/backend/api/v1/course_chapter/${id}/${ids}`);
                 },
-                Update(id,ids, params) {
+                Update(id, ids, params) {
                     return put(`/backend/api/v1/course_chapter/${id}/${ids}`, params);
                 }
             },
-            Attach:{
+            Attach: {
                 List(params) {
                     return get(`/backend/api/v1/course_attach`, params);
                 },
@@ -210,39 +210,64 @@ const Api = {
                     return destroy(`/backend/api/v1/course_attach/${id}`);
                 },
             },
-            Records:{
-                List(id,params) {
+            Records: {
+                List(id, params) {
                     return get(`/backend/api/v1/course/${id}/watch/records`, params);
                 },
             },
-            Videos:{
+            Videos: {
                 List(params) {
                     return get(`/backend/api/v1/video`, params);
                 },
-                Create(id,params) {
+                Create(id, params) {
                     return get(`/backend/api/v1/course_chapter/${id}`, params);
                 },
                 Store(params) {
                     return post(`/backend/api/v1/video`, params);
                 },
-                DestoryMulti( params) {
+                DestoryMulti(params) {
                     return post(`/backend/api/v1/video/delete/multi`, params);
                 },
-                Detail(id,ids) {
+                Detail(id, ids) {
                     return get(`/backend/api/v1/video/${id}/${ids}`);
                 },
-                Update(id,ids, params) {
+                Update(id, ids, params) {
                     return put(`/backend/api/v1/video/${id}/${ids}`, params);
                 }
             },
         },
+        Live: {
+            Course: {
+                List(params) {
+                    return get(`/backend/addons/zhibo/course/index`, params);
+                },
+                Create() {
+                    return get(`/backend/addons/zhibo/course/create`);
+                },
+                Store(params) {
+                    return post(`/backend/addons/zhibo/course`, params);
+                },
+                Destory(id) {
+                    return destroy(`/backend/addons/zhibo/course/${id}`);
+                },
+                Detail(id) {
+                    return get(`/backend/addons/zhibo/course/${id}`);
+                },
+                Update(id, params) {
+                    return put(`/backend/addons/zhibo/course/${id}`, params);
+                },
+                Users(id, params) {
+                    return get(`/backend/addons/zhibo/course/${id}/users`, params);
+                }
+            }
+        }
     },
-    Wechat:{
-        Reply:{
+    Wechat: {
+        Reply: {
             List(params) {
                 return get(`/backend/api/v1/mpWechatMessageReply`, params);
             },
-            Create(){
+            Create() {
                 return get(`/backend/api/v1/mpWechatMessageReply/create`);
             },
             Store(params) {
@@ -259,21 +284,21 @@ const Api = {
             }
         },
     },
-    Wenda:{
-        Question:{
+    Wenda: {
+        Question: {
             List(params) {
                 return get(`/backend/addons/Wenda/question/index`, params);
             },
-            Category(){
+            Category() {
                 return get(`/backend/addons/Wenda/category/index`);
             },
             DestoryMulti(params) {
-                return post(`backend/addons/Wenda/question/delete`,params);
+                return post(`backend/addons/Wenda/question/delete`, params);
             },
-            Answer(id){
+            Answer(id) {
                 return get(`/backend/addons/Wenda/question/${id}/answers`);
             },
-            Cate:{
+            Cate: {
                 Destory(id) {
                     return destroy(`/backend/addons/Wenda/category/${id}`);
                 },

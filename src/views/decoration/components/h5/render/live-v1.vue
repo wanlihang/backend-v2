@@ -21,6 +21,7 @@
               height="124"
             />
             <img
+              v-else
               src="@/assets/images/decoration/h5/default-live.png"
               width="100%"
               height="124"
