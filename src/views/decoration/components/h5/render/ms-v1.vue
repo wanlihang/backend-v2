@@ -9,8 +9,14 @@
     <div class="body">
       <div class="ms-item" v-for="(item, index) in config.items" :key="index">
         <div class="ms-thumb">
-          <img v-if="item.thumb" :src="item.thumb" width="150" height="113" />
           <img
+            v-if="item.goods_thumb"
+            :src="item.goods_thumb"
+            width="150"
+            height="113"
+          />
+          <img
+            v-else
             src="@/assets/images/decoration/h5/default-ms.png"
             width="150"
             height="113"
@@ -18,7 +24,7 @@
         </div>
 
         <div class="ms-body">
-          <div class="ms-title">{{ item.title }}</div>
+          <div class="ms-title">{{ item.goods_title }}</div>
           <div class="ms-info">
             <span class="charge">
               <span class="unit">￥</span>{{ item.charge }}
@@ -83,6 +89,11 @@ export default {
       float: left;
       display: flex;
       align-items: center;
+      margin-bottom: 15px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
 
       .ms-thumb {
         margin-right: 15px;

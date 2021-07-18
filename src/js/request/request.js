@@ -484,6 +484,26 @@ const Api = {
         Destroy(id) {
             return destroy(`/backend/api/v1/viewBlock/${id}`);
         },
+    },
+    MiaoSha: {
+        List(params) {
+            return get(`/backend/addons/MiaoSha/goods/index`, params);
+        },
+        Create() {
+            return get(`/backend/addons/MiaoSha/goods/create`);
+        },
+        Store(params) {
+            return post(`/backend/addons/MiaoSha/goods/create`, params);
+        },
+        Edit(id) {
+            return get(`/backend/addons/MiaoSha/goods/${id}`);
+        },
+        Update(id, params) {
+            return put(`/backend/addons/MiaoSha/goods/${id}`, params);
+        },
+        Destroy(id) {
+            return destroy(`/backend/addons/MiaoSha/goods/${id}`);
+        },
     }
 }
 

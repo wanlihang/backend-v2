@@ -417,8 +417,8 @@ export default {
           items: [
             {
               id: null,
-              title: "秒杀一",
-              thumb: null,
+              goods_title: "秒杀一",
+              goods_thumb: null
             },
           ],
         };
