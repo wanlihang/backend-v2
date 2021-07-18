@@ -23,8 +23,8 @@
       @current-change="tableItemChoice"
       class="float-left"
     >
-      <el-table-column prop="id" label="课程ID" width="120"> </el-table-column>
-      <el-table-column label="课程">
+      <el-table-column prop="id" label="图文ID" width="120"> </el-table-column>
+      <el-table-column label="图文">
         <template slot-scope="scope">
           <div class="d-flex">
             <div>
@@ -97,7 +97,7 @@ export default {
     },
     tableItemChoice(row) {
       if (row) {
-        this.link = "/pages/course/show?id=" + row.id;
+        this.link = "/pages/topic/show?id=" + row.id;
       }
     },
     getCourse() {
@@ -105,10 +105,10 @@ export default {
         return;
       }
       this.loading = true;
-      this.$api.Course.Vod.List(this.pagination).then((res) => {
+      this.$api.Course.Topic.Topic.List(this.pagination).then((res) => {
         this.loading = false;
-        this.courses = res.data.courses.data;
-        this.total = res.data.courses.total;
+        this.courses = res.data.data.data;
+        this.total = res.data.data.total;
       });
     },
   },

@@ -1,7 +1,7 @@
 <template>
   <div class="float-left">
     <div class="float-left mb-15 d-flex">
-      <div>请选择课程类型</div>
+      <div class="form-label">请选择课程类型</div>
       <div class="ml-15">
         <el-select v-model="typeActive">
           <el-option
@@ -16,20 +16,59 @@
     </div>
 
     <div class="float-left">
-      <vod-comp
+      <vod-comp v-model="link" v-if="typeActive === 'vod'"></vod-comp>
+      <live-comp v-model="link" v-else-if="typeActive === 'live'"></live-comp>
+      <book-comp v-model="link" v-else-if="typeActive === 'book'"></book-comp>
+      <topic-comp
         v-model="link"
-        v-if="typeActive === 'vod'"
-      ></vod-comp>
+        v-else-if="typeActive === 'topic'"
+      ></topic-comp>
+      <ms-comp v-model="link" v-else-if="typeActive === 'ms'"></ms-comp>
+      <tg-comp v-model="link" v-else-if="typeActive === 'tg'"></tg-comp>
+      <learn-path-comp
+        v-model="link"
+        v-else-if="typeActive === 'learnPath'"
+      ></learn-path-comp>
+      <paper-comp
+        v-model="link"
+        v-else-if="typeActive === 'paper'"
+      ></paper-comp>
+      <mock-paper-comp
+        v-model="link"
+        v-else-if="typeActive === 'mock-paper'"
+      ></mock-paper-comp>
+      <practice-comp
+        v-model="link"
+        v-else-if="typeActive === 'practice'"
+      ></practice-comp>
     </div>
   </div>
 </template>
 <script>
 import VodComp from "./components/vod.vue";
+import LiveComp from "./components/live.vue";
+import BookComp from "./components/book.vue";
+import TopicComp from "./components/topic.vue";
+import MsComp from "./components/ms.vue";
+import TgComp from "./components/tg.vue";
+import LearnPathComp from "./components/learn-path.vue";
+import PaperComp from "./components/paper.vue";
+import MockPaperComp from "./components/mock-paper.vue";
+import PracticeComp from "./components/practice.vue";
 import { mapState } from "vuex";
 
 export default {
   components: {
     VodComp,
+    LiveComp,
+    BookComp,
+    TopicComp,
+    MsComp,
+    TgComp,
+    LearnPathComp,
+    PaperComp,
+    MockPaperComp,
+    PracticeComp,
   },
   props: ["value"],
   data() {
@@ -65,7 +104,7 @@ export default {
       if (this.enabledAddons["MeeduTopics"]) {
         types.push({
           name: "图文",
-          key: "live",
+          key: "topic",
         });
       }
 
@@ -77,7 +116,7 @@ export default {
 
         types.push({
           name: "模拟试卷",
-          key: "mock_paper",
+          key: "mock-paper",
         });
 
         types.push({
@@ -100,6 +139,13 @@ export default {
         });
       }
 
+      if (this.enabledAddons["LearningPaths"]) {
+        types.push({
+          name: "学习路径",
+          key: "learnPath",
+        });
+      }
+
       return types;
     },
   },
@@ -110,6 +156,13 @@ export default {
   },
   mounted() {
     this.link = this.value;
-  }
+  },
 };
 </script>
+
+<style lang="less" scoped>
+.form-label {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.7);
+}
+</style>

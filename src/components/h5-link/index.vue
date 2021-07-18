@@ -37,6 +37,11 @@
               v-model="link"
               v-else-if="tabActive === 'course'"
             ></courses>
+
+            <single-page
+              v-model="link"
+              v-else-if="tabActive === 'single-page'"
+            ></single-page>
           </div>
         </div>
       </div>
@@ -51,12 +56,14 @@
 <script>
 import CourseCategory from "./components/course-category.vue";
 import Courses from "./components/courses/index";
+import SinglePage from "./components/single-page.vue";
 import { mapState } from "vuex";
 
 export default {
   components: {
     CourseCategory,
     Courses,
+    SinglePage,
   },
   props: ["show"],
   data() {
@@ -241,5 +248,10 @@ export default {
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
   }
+}
+
+.meedu-dialog-box {
+  width: 900px !important;
+  margin-left: -450px !important;
 }
 </style>

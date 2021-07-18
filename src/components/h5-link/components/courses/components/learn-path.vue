@@ -23,14 +23,14 @@
       @current-change="tableItemChoice"
       class="float-left"
     >
-      <el-table-column prop="id" label="课程ID" width="120"> </el-table-column>
-      <el-table-column label="课程">
+      <el-table-column prop="id" label="路径ID" width="120"> </el-table-column>
+      <el-table-column label="路径">
         <template slot-scope="scope">
           <div class="d-flex">
             <div>
               <img :src="scope.row.thumb" width="100" height="80" />
             </div>
-            <div class="ml-15">{{ scope.row.title }}</div>
+            <div class="ml-15">{{ scope.row.name }}</div>
           </div>
         </template>
       </el-table-column>
@@ -97,7 +97,7 @@ export default {
     },
     tableItemChoice(row) {
       if (row) {
-        this.link = "/pages/course/show?id=" + row.id;
+        this.link = "/pages/learnPath/show?id=" + row.id;
       }
     },
     getCourse() {
@@ -105,10 +105,10 @@ export default {
         return;
       }
       this.loading = true;
-      this.$api.Course.Vod.List(this.pagination).then((res) => {
+      this.$api.Course.LearnPath.Path.List(this.pagination).then((res) => {
         this.loading = false;
-        this.courses = res.data.courses.data;
-        this.total = res.data.courses.total;
+        this.courses = res.data.data;
+        this.total = res.data.total;
       });
     },
   },

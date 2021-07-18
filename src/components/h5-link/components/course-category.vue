@@ -12,7 +12,7 @@
           <i class="el-icon-arrow-down" v-else></i>
         </span>
       </div>
-      <div class="course-type-links">
+      <div class="course-type-links" v-if="typeActive === item.key">
         <div
           class="float-left mb-15"
           v-for="(item, index) in links"
@@ -64,7 +64,7 @@ export default {
       if (this.enabledAddons["MeeduTopics"]) {
         types.push({
           name: "图文分类",
-          key: "live",
+          key: "topic",
         });
       }
 
@@ -87,11 +87,13 @@ export default {
     },
   },
   watch: {
-    typeActice() {
+    typeActive() {
       this.getData();
     },
     link(newVal) {
-      this.$emit("input", newVal);
+      if (newVal) {
+        this.$emit("input", newVal);
+      }
     },
   },
   mounted() {
@@ -101,9 +103,22 @@ export default {
   },
   methods: {
     getData() {
+      this.link = null;
       this.links = [];
       if (this.typeActive === "vod") {
         this.getVodCategory();
+      } else if (this.typeActive === "live") {
+        this.getLiveCategory();
+      } else if (this.typeActive === "book") {
+        this.getBookCategory();
+      } else if (this.typeActive === "topic") {
+        this.getTopicCategory();
+      } else if (this.typeActive === "paper") {
+        this.getPaperCategory();
+      } else if (this.typeActive === "mock_paper") {
+        this.getMockPaperCategory();
+      } else if (this.typeActive === "practice") {
+        this.getPracticeCategory();
       }
     },
     getVodCategory() {
@@ -112,7 +127,73 @@ export default {
         data.forEach((item) => {
           this.links.push({
             name: item.name,
-            url: "/pages/course/show?id=" + item.id,
+            url: "/packageA/vod/index?category_id=" + item.id,
+          });
+        });
+      });
+    },
+    getLiveCategory() {
+      this.$api.Course.Live.Course.Create().then((res) => {
+        let data = res.data.categories;
+        data.forEach((item) => {
+          this.links.push({
+            name: item.name,
+            url: "/packageA/live/index?category_id=" + item.id,
+          });
+        });
+      });
+    },
+    getBookCategory() {
+      this.$api.Course.Book.Book.Create().then((res) => {
+        let data = res.data.categories;
+        data.forEach((item) => {
+          this.links.push({
+            name: item.name,
+            url: "/packageA/book/index?category_id=" + item.id,
+          });
+        });
+      });
+    },
+    getTopicCategory() {
+      this.$api.Course.Topic.Topic.Create().then((res) => {
+        let data = res.data;
+        data.forEach((item) => {
+          this.links.push({
+            name: item.name,
+            url: "/packageA/topic/index?category_id=" + item.id,
+          });
+        });
+      });
+    },
+    getPaperCategory() {
+      this.$api.Exam.Paper.Create().then((res) => {
+        let data = res.data.categories;
+        data.forEach((item) => {
+          this.links.push({
+            name: item.name,
+            url: "/packageA/exam/paper/index?category_id=" + item.id,
+          });
+        });
+      });
+    },
+    getMockPaperCategory() {
+      this.$api.Exam.Paper.Create().then((res) => {
+        let data = res.data.categories;
+        data.forEach((item) => {
+          this.links.push({
+            name: item.name,
+            url: "/packageA/exam/mock/index?category_id=" + item.id,
+          });
+        });
+      });
+    },
+    getPracticeCategory() {
+      this.$api.Exam.Practice.Create().then((res) => {
+        let data = res.data.categories;
+        data.forEach((item) => {
+          this.links.push({
+            name: item.name,
+            url: "/packageA/exam/practice/index?category_id=" + item.id,
           });
         });
       });

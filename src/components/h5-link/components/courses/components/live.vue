@@ -97,7 +97,7 @@ export default {
     },
     tableItemChoice(row) {
       if (row) {
-        this.link = "/pages/course/show?id=" + row.id;
+        this.link = "/pages/live/show?id=" + row.id;
       }
     },
     getCourse() {
@@ -105,10 +105,10 @@ export default {
         return;
       }
       this.loading = true;
-      this.$api.Course.Vod.List(this.pagination).then((res) => {
+      this.$api.Course.Live.Course.List(this.pagination).then((res) => {
         this.loading = false;
-        this.courses = res.data.courses.data;
-        this.total = res.data.courses.total;
+        this.courses = res.data.data.data;
+        this.total = res.data.data.total;
       });
     },
   },
