@@ -41,6 +41,9 @@
                 </div>
               </template>
             </el-table-column>
+            <el-table-column label="价格" width="120">
+              <template slot-scope="scope"> ￥{{ scope.row.charge }} </template>
+            </el-table-column>
           </el-table>
 
           <div class="float-left mt-15 text-center">

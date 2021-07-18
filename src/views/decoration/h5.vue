@@ -342,7 +342,7 @@ export default {
         ];
       } else if (blockSign === "h5-vod-v1") {
         defaultConfig = {
-          title: "XXX",
+          title: "点播课程",
           items: [
             {
               id: null,
@@ -353,71 +353,71 @@ export default {
         };
       } else if (blockSign === "h5-live-v1") {
         defaultConfig = {
-          title: "XXX",
+          title: "直播课程",
           items: [
             {
               id: null,
-              title: "xxx",
+              title: "直播课程一",
               thumb: null,
             },
             {
               id: null,
-              title: "xxx",
+              title: "直播课程二",
               thumb: null,
             },
           ],
         };
       } else if (blockSign === "h5-book-v1") {
         defaultConfig = {
-          title: "XXX",
+          title: "电子书",
           items: [
             {
               id: null,
-              name: "xxx",
+              name: "电子书一",
               thumb: null,
             },
           ],
         };
       } else if (blockSign === "h5-topic-v1") {
         defaultConfig = {
-          title: "XXX",
+          title: "图文",
           items: [
             {
               id: null,
-              title: "xxx",
+              title: "图文一",
               thumb: null,
             },
           ],
         };
       } else if (blockSign === "h5-learnPath-v1") {
         defaultConfig = {
-          title: "XXX",
+          title: "学习路径",
           items: [
             {
               id: null,
-              title: "xxx",
+              title: "路径一",
               thumb: null,
             },
           ],
         };
       } else if (blockSign === "h5-tg-v1") {
         defaultConfig = {
-          title: "XXX",
+          title: "团购",
           items: [
             {
               id: null,
-              title: "xxx",
+              title: "团购商品一",
               thumb: null,
             },
           ],
         };
       } else if (blockSign === "h5-ms-v1") {
         defaultConfig = {
-          title: "XXX",
+          title: "秒杀",
           items: [
             {
               id: null,
-              title: "xxx",
+              title: "秒杀一",
               thumb: null,
             },
           ],
