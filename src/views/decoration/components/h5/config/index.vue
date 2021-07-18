@@ -10,16 +10,23 @@
       :block="block"
       @update="update"
     ></grid-nav-set>
+    <vod-v1-set
+      v-else-if="block.sign === 'h5-vod-v1'"
+      :block="block"
+      @update="update"
+    ></vod-v1-set>
   </div>
 </template>
 <script>
 import SliderSet from "./slider.vue";
 import GridNavSet from "./grid-nav.vue";
+import VodV1Set from "./vod-v1.vue";
 
 export default {
   components: {
     SliderSet,
     GridNavSet,
+    VodV1Set,
   },
   props: ["block"],
   methods: {

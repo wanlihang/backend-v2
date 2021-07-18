@@ -161,7 +161,7 @@
           <div class="float-left" :key="item.id">
             <div
               class="item"
-              :class="{ active: curBlock === item.id }"
+              :class="{ active: curBlock === index }"
               @click="curBlock = index"
             >
               <render-slider
@@ -217,7 +217,7 @@
                 </div>
                 <div
                   class="btn-item"
-                  v-if="index !== blocks.length"
+                  v-if="index !== blocks.length - 1"
                   @click="moveBottom(index, item)"
                 >
                   <i class="el-icon-arrow-down"></i>
