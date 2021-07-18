@@ -180,19 +180,19 @@ export default {
           },
           {
             name: "未支付",
-            key: 1,
+            key: '1',
           },
           {
             name: "支付中",
-            key: 5,
+            key: '5',
           },
           {
             name: "已支付",
-            key: 9,
+            key: '9',
           },
           {
             name: "已取消",
-            key: 7,
+            key: '7',
           },
         ],
       },
