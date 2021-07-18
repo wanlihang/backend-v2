@@ -6,8 +6,6 @@
         <div class="courses-box">
           <div class="float-left mb-15">
             <div class="float-left d-flex">
-              <div class="flex-1"></div>
-
               <div class="d-flex">
                 <el-input
                   class="w-200px"
@@ -18,9 +16,9 @@
 
               <div class="ml-15">
                 <el-button @click="getCourse" type="primary">筛选</el-button>
-                <el-button class="ml-15" @click="paginationReset"
-                  >清空</el-button
-                >
+                <el-button class="ml-15" @click="paginationReset">
+                  清空
+                </el-button>
               </div>
             </div>
           </div>
@@ -28,7 +26,7 @@
             :data="courses"
             highlight-current-row
             @current-change="handleCurrentChange"
-            class="float-left"
+            class="float-left mb-15"
             v-loading="loading"
           >
             <el-table-column prop="id" label="课程ID" width="120">
@@ -143,10 +141,10 @@ export default {
   height: auto;
   float: left;
   margin-bottom: 40px;
-  overflow-y: auto;
-  border: 1px solid #dcdfe6;
-  box-sizing: border-box;
-  padding: 15px;
-  border-radius: 4px;
+}
+
+.meedu-dialog-box {
+  width: 900px !important;
+  margin-left: -450px !important;
 }
 </style>
