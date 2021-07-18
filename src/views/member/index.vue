@@ -1,6 +1,6 @@
 <template>
-  <div class="float-left">
-    <div class="float-left mb-15">
+  <div class="meedu-main-body">
+    <div class="float-left mb-30">
       <el-button @click="$router.push({ name: 'MemberCreate' })" type="primary">
         创建用户
       </el-button>
@@ -12,13 +12,13 @@
         批量导入
       </el-button>
     </div>
-    <div class="filter-box">
+    <div class="float-left">
       <div class="float-left d-flex">
         <div class="d-flex">
           <div class="filter-label">关键词</div>
-          <div class="flex-1 ml-15">
+          <div class="flex-1 ml-10">
             <el-input
-              class="w-100"
+              class="w-100px"
               v-model="filter.keywords"
               placeholder="手机号，昵称"
               style="width: 200px"
@@ -26,9 +26,9 @@
           </div>
         </div>
         <div class="d-flex ml-15">
-          <div class="filter-label">VIP会员</div>
-          <div class="flex-1 ml-15">
-            <el-select v-model="filter.role_id">
+          <div class="filter-label">VIP</div>
+          <div class="flex-1 ml-10">
+            <el-select v-model="filter.role_id" class="w-200px">
               <el-option
                 v-for="(item, index) in filterData.roles"
                 :key="index"
@@ -41,8 +41,8 @@
         </div>
         <div class="d-flex ml-15">
           <div class="filter-label">标签</div>
-          <div class="flex-1 ml-15">
-            <el-select v-model="filter.tag_id">
+          <div class="flex-1 ml-10">
+            <el-select v-model="filter.tag_id" class="w-200px">
               <el-option
                 v-for="(item, index) in filterData.tags"
                 :key="index"
@@ -55,7 +55,7 @@
         </div>
         <div class="d-flex ml-15">
           <div class="filter-label">注册时间</div>
-          <div class="flex-1 ml-15">
+          <div class="flex-1 ml-10">
             <el-date-picker
               v-model="filter.created_at"
               type="daterange"
@@ -68,13 +68,13 @@
             </el-date-picker>
           </div>
         </div>
-      </div>
-      <div class="float-left mt-15">
-        <el-button @click="getUser" type="primary">筛选</el-button>
-        <el-button @click="paginationReset">清空</el-button>
+        <div class="ml-15">
+          <el-button @click="getUser" type="primary" plain>筛选</el-button>
+          <el-button @click="paginationReset">清空</el-button>
+        </div>
       </div>
     </div>
-    <div class="table-body top-left-radius" v-loading="loading">
+    <div class="float-left mt-30" v-loading="loading">
       <div class="float-left">
         <el-table
           :data="users"
@@ -141,7 +141,7 @@
         </el-table>
       </div>
 
-      <div class="float-left mt-15">
+      <div class="float-left mt-30 text-center">
         <el-pagination
           @size-change="paginationSizeChange"
           @current-change="paginationPageChange"

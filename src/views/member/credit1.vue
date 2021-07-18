@@ -1,10 +1,15 @@
 <template>
-  <div class="float-left" v-if="user">
+  <div class="meedu-main-body" v-if="user">
+    <back-bar class="mb-30" title="积分变动"></back-bar>
+
     <div class="form-box broder-top-left-radius">
       <el-form ref="form" :rules="rules" :model="form" label-width="200px">
         <el-form-item prop="credit1">
           <template slot="label">
-            <form-label text="变动额度" helper="正数增加积分，负数减少积分"></form-label>
+            <form-label
+              text="变动额度"
+              helper="正数增加积分，负数减少积分"
+            ></form-label>
           </template>
           <el-input v-model="form.credit1" class="w-200px"></el-input>
         </el-form-item>
@@ -22,12 +27,12 @@
     <div class="bottom-menus">
       <div class="bottom-menus-box">
         <div>
-          <el-button @click="$router.back()">取消 </el-button>
-        </div>
-        <div class="ml-15">
           <el-button @click="formValidate" :loading="loading" type="primary">
             确认
           </el-button>
+        </div>
+        <div class="ml-24">
+          <el-button @click="$router.back()">取消 </el-button>
         </div>
       </div>
     </div>

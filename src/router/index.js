@@ -380,14 +380,6 @@ const routes = [
         }
       },
       {
-        path: '/member/index',
-        component: () => import('@/views/member/index'),
-        name: 'MemberIndex',
-        meta: {
-          title: 'title.member.index'
-        }
-      },
-      {
         path: '/wechat/messagereply/index',
         component: () => import('@/views/wechat/messagereply/index'),
         name: 'MessageReply',

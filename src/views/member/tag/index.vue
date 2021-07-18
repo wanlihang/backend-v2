@@ -1,6 +1,6 @@
 <template>
-  <div class="float-left">
-    <div class="float-left mb-15">
+  <div class="meedu-main-body">
+    <div class="float-left mb-30">
       <el-button
         @click="$router.push({ name: 'MemberTagCreate' })"
         type="primary"
@@ -9,7 +9,7 @@
       </el-button>
     </div>
 
-    <div class="table-body top-left-radius" v-loading="loading">
+    <div class="float-left" v-loading="loading">
       <el-table :data="list" stripe class="float-left">
         <el-table-column prop="id" label="ID" width="120"> </el-table-column>
         <el-table-column prop="name" label="标签名"> </el-table-column>
@@ -23,16 +23,17 @@
                   params: { id: scope.row.id },
                 })
               "
-              >编辑</el-link
             >
-            <el-link class="ml-15" type="danger" @click="destroy(scope.row)"
-              >删除</el-link
-            >
+              编辑
+            </el-link>
+            <el-link class="ml-15" type="danger" @click="destroy(scope.row)">
+              删除
+            </el-link>
           </template>
         </el-table-column>
       </el-table>
 
-      <div class="float-left mt-15">
+      <div class="float-left mt-30 text-center">
         <el-pagination
           @current-change="paginationPageChange"
           :current-page="pagination.page"

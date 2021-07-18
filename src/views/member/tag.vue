@@ -1,6 +1,8 @@
 <template>
-  <div class="float-left">
-    <div class="form-box broder-top-left-radius">
+  <div class="meedu-main-body">
+    <back-bar class="mb-30" title="用户标签"></back-bar>
+
+    <div class="float-left">
       <el-form ref="form" label-width="200px">
         <el-form-item label="标签">
           <div class="d-flex">
@@ -19,8 +21,9 @@
               <el-link
                 @click="$router.push({ name: 'MemberTagIndex' })"
                 type="primary"
-                >标签管理</el-link
               >
+                标签管理
+              </el-link>
             </div>
           </div>
         </el-form-item>
@@ -30,12 +33,12 @@
     <div class="bottom-menus">
       <div class="bottom-menus-box">
         <div>
-          <el-button @click="$router.back()">取消 </el-button>
-        </div>
-        <div class="ml-15">
           <el-button @click="confirm" :loading="loading" type="primary">
             保存
           </el-button>
+        </div>
+        <div class="ml-24">
+          <el-button @click="$router.back()">取消 </el-button>
         </div>
       </div>
     </div>
@@ -62,6 +65,7 @@ export default {
     getUser() {
       this.$api.Member.Edit(this.id).then((res) => {
         let data = [];
+
         if (res.data.tags) {
           for (let i = 0; i < res.data.tags.length; i++) {
             data.push(res.data.tags[i].id);

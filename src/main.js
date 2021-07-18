@@ -15,10 +15,12 @@ Vue.use(mavonEditor);
 
 // 组件注册
 import FormLabelComp from '@/components/form-label';
+import BackBar from '@/components/back-bar';
 
 
 Vue.use(ElementUI);
 Vue.component('FormLabel', FormLabelComp);
+Vue.component('BackBar', BackBar);
 Vue.config.productionTip = false
 // api挂载
 Vue.prototype.$api = api;

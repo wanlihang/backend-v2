@@ -1,9 +1,11 @@
 <template>
-  <div class="float-left" v-if="user">
+  <div class="meedu-main-body" v-if="user">
+    <back-bar class="mb-30" title="用户备注"></back-bar>
+
     <div class="form-box broder-top-left-radius">
       <el-form ref="form" label-width="200px">
         <el-form-item label="备注">
-          <wang-editor v-model="remark"></wang-editor>
+          <wang-editor class="w-600px" v-model="remark"></wang-editor>
         </el-form-item>
       </el-form>
     </div>
@@ -11,12 +13,12 @@
     <div class="bottom-menus">
       <div class="bottom-menus-box">
         <div>
-          <el-button @click="$router.back()">取消 </el-button>
-        </div>
-        <div class="ml-15">
           <el-button @click="confirm" :loading="loading" type="primary">
             保存
           </el-button>
+        </div>
+        <div class="ml-24">
+          <el-button @click="$router.back()">取消 </el-button>
         </div>
       </div>
     </div>

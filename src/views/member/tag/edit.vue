@@ -1,6 +1,8 @@
 <template>
-  <div class="float-left">
-    <div class="form-box broder-top-left-radius">
+  <div class="meedu-main-body">
+    <back-bar class="mb-30" title="编辑用户标签"></back-bar>
+
+    <div class="float-left">
       <el-form ref="form" :model="form" :rules="rules" label-width="200px">
         <el-form-item label="标签名" prop="name">
           <el-input v-model="form.name" class="w-200px"></el-input>
@@ -11,12 +13,12 @@
     <div class="bottom-menus">
       <div class="bottom-menus-box">
         <div>
-          <el-button @click="$router.back()">取消</el-button>
+          <el-button @click="formValidate" :loading="loading" type="primary">
+            保存
+          </el-button>
         </div>
-        <div class="ml-15">
-          <el-button @click="formValidate" :loading="loading" type="primary"
-            >保存</el-button
-          >
+        <div class="ml-24">
+          <el-button @click="$router.back()">取消</el-button>
         </div>
       </div>
     </div>

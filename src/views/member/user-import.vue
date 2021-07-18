@@ -1,5 +1,7 @@
 <template>
-  <div class="float-left" v-loading="loading">
+  <div class="meedu-main-body">
+    <back-bar class="mb-30" title="用户批量导入"></back-bar>
+
     <div class="user-import-box">
       <div class="float-left mb-15">
         用户批量导入模板下载：<a
@@ -9,7 +11,7 @@
         >
       </div>
       <div class="float-left">
-        <el-button type="primary" @click="choiceFile">选择文件</el-button>
+        <el-button type="primary" @click="choiceFile">选择表格文件</el-button>
 
         <div style="display: none">
           <form ref="form">
@@ -22,9 +24,9 @@
     <div class="bottom-menus">
       <div class="bottom-menus-box">
         <div>
-          <el-button @click="$router.push({ name: 'MemberIndex' })"
-            >取消</el-button
-          >
+          <el-button @click="$router.push({ name: 'MemberIndex' })">
+            取消
+          </el-button>
         </div>
       </div>
     </div>
