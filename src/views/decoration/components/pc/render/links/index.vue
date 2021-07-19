@@ -56,10 +56,6 @@ export default {
   padding: 30px 30px 0 30px;
   cursor: pointer;
 
-  &:hover {
-    border: 1px solid @primary-color;
-  }
-
   .title {
     width: 100%;
     height: auto;

@@ -57,10 +57,6 @@ export default {
   background-color: white;
   cursor: pointer;
 
-  &:hover {
-    border: 1px solid @primary-color;
-  }
-
   .nav-item {
     position: relative;
     width: 100px;

@@ -49,9 +49,5 @@ export default {
   color: #de7a0b;
   line-height: 22px;
   cursor: pointer;
-
-  &:hover {
-    border: 1px solid @primary-color;
-  }
 }
 </style>
