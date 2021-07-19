@@ -30,13 +30,11 @@
             <el-input
               v-if="c.field_type === 'text'"
               v-model="c.value"
-              class="w-300px"
             ></el-input>
             <!-- 数字输入框 -->
             <el-input
               v-else-if="c.field_type === 'number'"
               v-model="c.value"
-              class="w-300px"
             ></el-input>
             <!-- 多行文本输入框 -->
             <el-input

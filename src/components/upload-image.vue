@@ -11,7 +11,7 @@
       </div>
     </div>
 
-    <div class="float-left mt-15" v-if="value">
+    <div class="preview-box float-left mt-15" v-if="value">
       <img :src="value" :width="width" :height="height" />
     </div>
 
@@ -61,6 +61,12 @@ export default {
     font-size: 14px;
     line-height: 14px;
     font-weight: normal;
+  }
+}
+
+.preview-box {
+  img {
+    max-width: 100%;
   }
 }
 </style>
