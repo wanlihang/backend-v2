@@ -1,6 +1,6 @@
 <template>
-  <div class="float-left">
-    <div class="float-left mb-15">
+  <div class="meedu-main-body">
+    <div class="float-left mb-30">
       <el-button
         @click="
           $router.push({
@@ -11,12 +11,12 @@
         >添加</el-button
       >
     </div>
-    <div class="table-body top-left-radius" v-loading="loading">
+    <div class="float-left mt-30" v-loading="loading">
       <div class="float-left">
         <el-table :data="categories" stripe class="float-left">
-             <el-table-column label="分类名"
+          <el-table-column label="分类名"
             ><template slot-scope="scope">
-              <span>{{ scope.row.name}} </span>
+              <span>{{ scope.row.name }} </span>
             </template>
           </el-table-column>
           <el-table-column prop="sort" label="升序" width="400">
@@ -48,7 +48,9 @@
     <div class="bottom-menus">
       <div class="bottom-menus-box">
         <div>
-          <el-button @click="$router.push({ name: 'Question' })">取消</el-button>
+          <el-button @click="$router.push({ name: 'Question' })"
+            >取消</el-button
+          >
         </div>
       </div>
     </div>
@@ -71,12 +73,10 @@ export default {
         return;
       }
       this.loading = true;
-      this.$api.Wenda.Question.Category().then(
-        (res) => {
-          this.loading = false;
-          this.categories = res.data.data;
-        }
-      );
+      this.$api.Wenda.Question.Category().then((res) => {
+        this.loading = false;
+        this.categories = res.data.data;
+      });
     },
     importUser() {},
     //删除管理员
