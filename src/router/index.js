@@ -284,11 +284,91 @@ const routes = [
         }
       },
       {
+        path: '/course/vod/video/subscribe',
+        component: () => import('@/views/course/vod/video/subscribe'),
+        name: 'VideoSubscribe',
+        meta: {
+          title: 'title.course.vod.video.subscribe'
+        }
+      },
+      {
         path: '/course/vod/record/index',
         component: () => import('@/views/course/vod/record/index'),
         name: 'CourseRecords',
         meta: {
           title: 'title.course.vod.record.index'
+        }
+      },
+      {
+        path: '/singlepage/index',
+        component: () => import('@/views/singlepage/page/index'),
+        name: 'SinglePage',
+        meta: {
+          title: 'title.singlepage.index'
+        }
+      },
+      {
+        path: '/singlepage/create',
+        component: () => import('@/views/singlepage/page/create'),
+        name: 'SinglePageCreate',
+        meta: {
+          title: 'title.singlepage.create'
+        }
+      },
+      {
+        path: '/singlepage/update',
+        component: () => import('@/views/singlepage/page/update'),
+        name: 'SinglePageUpdate',
+        meta: {
+          title: 'title.singlepage.update'
+        }
+      },
+      {
+        path: '/meedubook/book/index',
+        component: () => import('@/views/meedubook/book/index'),
+        name: 'Meedubook',
+        meta: {
+          title: 'title.meedubook.book.index'
+        }
+      },
+      {
+        path: '/meedubook/book/create',
+        component: () => import('@/views/meedubook/book/create'),
+        name: 'MeedubookCreate',
+        meta: {
+          title: 'title.meedubook.book.create'
+        }
+      },
+      {
+        path: '/meedubook/book/update',
+        component: () => import('@/views/meedubook/book/update'),
+        name: 'MeedubookUpdate',
+        meta: {
+          title: 'title.meedubook.book.update'
+        }
+      },
+      {
+        path: '/meedubook/category/index',
+        component: () => import('@/views/meedubook/book/category/index'),
+        name: 'MeedubookCategory',
+        meta: {
+          title: 'title.meedubook.book.category.index'
+        }
+      },
+      {
+        path: '/meedubook/category/create',
+        component: () => import('@/views/meedubook/book/category/create'),
+        name: 'MeedubookCategoryCreate',
+        meta: {
+          title: 'title.meedubook.book.category.create'
+        }
+      },
+      {
+        path: '/meedubook/category/update',
+        component: () => import('@/views/meedubook/book/category/update'),
+        name: 'MeedubookCategoryUpdate',
+        meta: {
+          title: 'title.meedubook.book.category.update'
         }
       },
       {
@@ -417,6 +497,14 @@ const routes = [
         name: 'QuestionAnswer',
         meta: {
           title: 'title.wenda.question.answer'
+        }
+      },
+      {
+        path: '/wenda/question/comment',
+        component: () => import('@/views/wenda/question/comment'),
+        name: 'QuestionComment',
+        meta: {
+          title: 'title.wenda.question.comment'
         }
       },
       {

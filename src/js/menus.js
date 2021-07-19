@@ -74,6 +74,28 @@ export default [
         ]
     },
     {
+        name: 'title.singlepage.index',
+        key: 'Single',
+        children: [
+            {
+                name: 'title.singlepage.index',
+                key: 'SinglePage'
+            },
+            
+        ]
+    },
+    {
+        name: 'title.meedubook.book.index',
+        key: 'Meedubook',
+        children: [
+            {
+                name: 'title.meedubook.book.index',
+                key: 'Meedubook'
+            },
+            
+        ]
+    },
+    {
         name: 'title.wendaname',
         key: 'Wenda',
         children: [

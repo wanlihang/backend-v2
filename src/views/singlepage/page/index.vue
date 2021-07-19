@@ -1,31 +1,27 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="问题回答"></back-bar>
+    <div class="float-left mb-30">
+      <el-button
+        @click="$router.push({ name: 'SinglePageCreate' })"
+        type="primary"
+        >添加</el-button
+      >
+    </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
-        <el-table :data="answers" stripe class="float-left">
-          <el-table-column prop="id" label="ID" width="80"> </el-table-column>
-          <el-table-column prop="user_id" label="用户ID" width="80">
+        <el-table :data="s_pages" stripe class="float-left">
+          <el-table-column prop="sign" label="唯一标识" width="150">
           </el-table-column>
-          <el-table-column prop="user.nick_name" label="用户" width="120">
+          <el-table-column prop="title" label="标题" width="280">
           </el-table-column>
-          <el-table-column label="点赞" width="100"
+          <el-table-column prop="url" label="地址"> </el-table-column>
+          <el-table-column label="浏览次数" width="150"
             ><template slot-scope="scope">
-              <span>{{ scope.row.vote_count }}次</span>
+              <span>{{ scope.row.view_times }}次</span>
             </template>
           </el-table-column>
-          <el-table-column label="内容"
-            ><template slot-scope="scope">
-              <div v-html="scope.row.original_content"></div>
-            </template>
-          </el-table-column>
-          <el-table-column label="答案" width="80">
-            <template slot-scope="scope">
-              <span style="color:red;" v-if="scope.row.is_correct == 1">是</span>
-              <span v-else>否</span>
-            </template>
-          </el-table-column>
-          <el-table-column fixed="right" label="操作" width="150">
+
+          <el-table-column fixed="right" label="操作" width="120">
             <template slot-scope="scope">
               <el-link
                 style="margin-right: 10px"
@@ -37,25 +33,28 @@
                 type="primary"
                 @click="
                   $router.push({
-                    name: 'QuestionComment',
-                    query: { id: box.id ,cid: scope.row.id },
+                    name: 'SinglePageUpdate',
+                    query: { id: scope.row.id },
                   })
                 "
-                >评论</el-link
+                >编辑</el-link
               >
             </template>
           </el-table-column>
         </el-table>
       </div>
-    </div>
 
-    <div class="bottom-menus">
-      <div class="bottom-menus-box">
-        <div>
-          <el-button @click="$router.push({ name: 'Question' })"
-            >取消</el-button
-          >
-        </div>
+      <div class="float-left mt-30 text-center">
+        <el-pagination
+          @size-change="paginationSizeChange"
+          @current-change="paginationPageChange"
+          :current-page="pagination.page"
+          :page-sizes="[10, 20, 50, 100]"
+          :page-size="pagination.size"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="total"
+        >
+        </el-pagination>
       </div>
     </div>
   </div>
@@ -64,25 +63,42 @@
 export default {
   data() {
     return {
-      box: {
-        id: this.$route.query.id,
+      pagination: {
+        page: 1,
+        size: 10,
       },
+      total: 0,
       loading: false,
-      answers: [],
+      s_pages: [],
     };
   },
   mounted() {
-    this.create();
+    this.getList();
   },
   methods: {
-    create() {
+    paginationReset() {
+      this.pagination.page = 1;
+      this.getList();
+    },
+    paginationSizeChange(size) {
+      this.pagination.size = size;
+      this.getList();
+    },
+    paginationPageChange(page) {
+      this.pagination.page = page;
+      this.getList();
+    },
+    getList() {
       if (this.loading) {
         return;
       }
       this.loading = true;
-      this.$api.Wenda.Question.Answer(this.box.id).then((res) => {
+      let params = {};
+      Object.assign(params, this.pagination);
+      this.$api.Singlepage.Page.List(params).then((res) => {
         this.loading = false;
-        this.answers = res.data.answers;
+        this.s_pages = res.data.data;
+        this.total = res.data.total;
       });
     },
     importUser() {},
@@ -99,11 +115,12 @@ export default {
             return;
           }
           this.loading = true;
-          this.$api.Wenda.Question.DestoryAnswer(this.box.id,id)
+          this.$api.Singlepage.Page
+            .Destory(id)
             .then(() => {
               this.loading = false;
-              this.$message.success(this.$t("common.success"));
-              this.create();
+              this.$message.success("删除成功");
+              this.getList();
             })
             .catch((e) => {
               this.loading = false;

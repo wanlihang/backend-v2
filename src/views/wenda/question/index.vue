@@ -248,6 +248,10 @@ export default {
           if (this.loading) {
             return;
           }
+          if(this.spids.ids==""){
+            this.$message("请选择需要操作的数据");
+            return;
+          }
           this.loading = true;
           this.$api.Wenda.Question.DestoryMulti(this.spids)
             .then(() => {
