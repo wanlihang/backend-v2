@@ -1,7 +1,7 @@
 <template>
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="问题回答"></back-bar>
-    <div class="float-left mt-30" v-loading="loading">
+    <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table :data="answers" stripe class="float-left">
           <el-table-column prop="id" label="ID" width="80"> </el-table-column>
