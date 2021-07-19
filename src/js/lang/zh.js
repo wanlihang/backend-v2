@@ -84,7 +84,8 @@ const zh = { //zh
                 video: {
                     index: '课程视频管理',
                     create: '创建课程视频',
-                    update: '编辑课程视频'
+                    update: '编辑课程视频',
+                    subscribe:'课程视频销售记录',
                 },
             },
         },

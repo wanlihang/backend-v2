@@ -233,7 +233,10 @@ const Api = {
                 },
                 Update(id, ids, params) {
                     return put(`/backend/api/v1/video/${id}/${ids}`, params);
-                }
+                },
+                Subscribe(id, params){
+                    return get(`/backend/api/v1/video/${id}/subscribes`, params);
+                },
             },
         },
         Live: {

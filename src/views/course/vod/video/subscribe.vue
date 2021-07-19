@@ -1,8 +1,7 @@
 <template>
   <div class="meedu-main-body">
-     <back-bar class="mb-30" title="课程视频管理"></back-bar>
+    <back-bar class="mb-30" title="课程视频销售记录"></back-bar>
     <div class="float-left mb-30">
-      <el-button type="danger" @click="destoryMulti()">批量删除</el-button>
       <el-button
         @click="
           $router.push({
@@ -14,30 +13,59 @@
         >添加</el-button
       >
     </div>
-    <div class="float-left" v-loading="loading">
+    <div class="float-left">
+      <div class="float-left d-flex">
+        <div class="d-flex">
+          <div class="filter-label">UID</div>
+          <div class="flex-1 ml-10">
+            <el-input
+              class="w-100px"
+              v-model="filter.user_id"
+              placeholder="请选择用户"
+              style="width: 200px"
+            ></el-input>
+          </div>
+        </div>
+        <div class="d-flex ml-15">
+          <div class="filter-label">订阅时间</div>
+          <div class="flex-1 ml-10">
+            <el-date-picker
+              v-model="filter.subscribe_start_at"
+              type="date"
+              align="right"
+              value-format="yyyy-MM-dd"
+              placeholder="开始日期"
+            >
+            </el-date-picker>
+            至
+            <el-date-picker
+              v-model="filter.subscribe_end_at"
+              type="date"
+              align="right"
+              value-format="yyyy-MM-dd"
+              placeholder="结束日期"
+            >
+            </el-date-picker>
+          </div>
+        </div>
+        <div class="ml-15">
+          <el-button @click="getSubscribes" type="primary" plain
+            >筛选</el-button
+          >
+          <el-button @click="paginationReset">清空</el-button>
+        </div>
+      </div>
+    </div>
+    <div class="float-left mt-30" v-loading="loading">
       <div class="float-left">
-        <el-table
-          :data="videos"
-          stripe
-          class="float-left"
-          @selection-change="handleSelectionChange"
-        >
-          <el-table-column type="selection" width="55"></el-table-column
-          ><!-- 显示选取表格 -->
+        <el-table :data="subscribes" stripe class="float-left">
           <el-table-column prop="id" label="视频ID" width="80">
           </el-table-column>
-          <el-table-column prop="title" label="视频"> </el-table-column>
-          <el-table-column label="价格" width="120"
-            ><template slot-scope="scope">
-              <span>￥{{ scope.row.charge }} </span>
-            </template>
+          <el-table-column prop="user.user_id" label="用户ID" width="80">
           </el-table-column>
-          <el-table-column label="时长" width="120"
-            ><template slot-scope="scope">
-              <span>{{ scope.row.duration }}s</span>
-            </template>
-          </el-table-column>
-          <el-table-column prop="published_at" label="上架时间" width="200">
+          <el-table-column prop="user.nick_name" label="用户"></el-table-column>
+
+          <el-table-column prop="published_at" label="订阅时间" width="200">
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="200">
             <template slot-scope="scope">
@@ -50,28 +78,6 @@
                   })
                 "
                 >编辑</el-link
-              >
-              <el-link
-                style="margin-left: 5px"
-                type="primary"
-                @click="
-                  $router.push({
-                    name: 'VideoSubscribe',
-                    query: {course_id: pagination.cid,video_id: scope.row.id },
-                  })
-                "
-                >销售记录</el-link
-              >
-              <el-link
-                style="margin-left: 5px"
-                type="primary"
-                @click="
-                  $router.push({
-                    name: 'VideosUpdate',
-                    query: { course_id: pagination.cid, id: scope.row.id },
-                  })
-                "
-                >用户观看</el-link
               >
             </template>
           </el-table-column>
@@ -94,7 +100,15 @@
     <div class="bottom-menus">
       <div class="bottom-menus-box">
         <div>
-          <el-button @click="$router.push({ name: 'Vod' })">取消</el-button>
+          <el-button
+            @click="
+              $router.push({
+                name: 'CourseVideos',
+                query: { course_id: this.cid },
+              })
+            "
+            >取消</el-button
+          >
         </div>
       </div>
     </div>
@@ -104,54 +118,56 @@
 export default {
   data() {
     return {
+      cid: this.$route.query.course_id,
       pagination: {
-        cid: this.$route.query.course_id,
+        video_id: this.$route.query.video_id,
         page: 1,
         size: 10,
       },
+      filter: {
+        user_id: null,
+        subscribe_start_at: null,
+        subscribe_end_at: null,
+      },
       total: 0,
       loading: false,
-      videos: [],
-      spids: {
-        ids: [],
-      },
+      subscribes: [],
     };
   },
   mounted() {
-    this.getVideos();
+    this.getSubscribes();
   },
   methods: {
     paginationReset() {
       this.pagination.page = 1;
-      this.getVideos();
+      this.filter.user_id = null;
+      this.filter.subscribe_start_at = null;
+      this.filter.subscribe_end_at = null;
+      this.getSubscribes();
     },
     paginationSizeChange(size) {
       this.pagination.size = size;
-      this.getVideos();
+      this.getSubscribes();
     },
     paginationPageChange(page) {
       this.pagination.page = page;
-      this.getVideos();
+      this.getSubscribes();
     },
-    //保存选中结果
-    handleSelectionChange(val) {
-      var newbox = [];
-      for (var i = 0; i < val.length; i++) {
-        newbox.push(val[i].id);
-      }
-      this.spids.ids = newbox;
-    },
-    getVideos() {
+    getSubscribes() {
       if (this.loading) {
         return;
       }
       this.loading = true;
       let params = {};
+      Object.assign(params, this.filter);
       Object.assign(params, this.pagination);
-      this.$api.Course.Vod.Videos.List(params).then((res) => {
+      this.$api.Course.Vod.Videos.Subscribe(
+        this.pagination.video_id,
+        params
+      ).then((res) => {
         this.loading = false;
-        this.videos = res.data.videos.data;
-        this.total = res.data.videos.total;
+        this.subscribes = res.data.data.data;
+        this.total = res.data.total;
       });
     },
     importUser() {},
@@ -167,16 +183,12 @@ export default {
           if (this.loading) {
             return;
           }
-          if(this.spids.ids==""){
-            this.$message("请选择需要操作的数据");
-            return;
-          }
           this.loading = true;
           this.$api.Course.Vod.Videos.DestoryMulti(this.spids)
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));
-              this.getVideos();
+              this.getSubscribes();
             })
             .catch((e) => {
               this.loading = false;

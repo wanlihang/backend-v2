@@ -284,6 +284,14 @@ const routes = [
         }
       },
       {
+        path: '/course/vod/video/subscribe',
+        component: () => import('@/views/course/vod/video/subscribe'),
+        name: 'VideoSubscribe',
+        meta: {
+          title: 'title.course.vod.video.subscribe'
+        }
+      },
+      {
         path: '/course/vod/record/index',
         component: () => import('@/views/course/vod/record/index'),
         name: 'CourseRecords',
