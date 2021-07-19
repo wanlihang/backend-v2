@@ -99,6 +99,7 @@ const zh = { //zh
                 index: '电子书',
                 create: '添加电子书',
                 update: '编辑电子书', 
+                comment:'电子书评论',
                 category:{
                     index: '电子书分类管理',
                     create: '添加电子书分类',

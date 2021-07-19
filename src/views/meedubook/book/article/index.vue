@@ -82,7 +82,7 @@
                   @click="
                     $router.push({
                       name: 'MeedubookArticleComment',
-                      query: { article_id: scope.row.id },
+                      query: { bid:filter.book_id,article_id: scope.row.id },
                     })
                   "
                   >评论</el-link

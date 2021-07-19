@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="电子书文章评论"></back-bar>
+    <back-bar class="mb-30" title="电子书评论"></back-bar>
     <div class="float-left">
       <div class="float-left mb-30">
         <el-button @click="approve" type="danger"> 审核通过 </el-button>
@@ -77,7 +77,7 @@
     <div class="bottom-menus">
       <div class="bottom-menus-box">
         <div>
-          <el-button @click="$router.push({ name: 'MeedubookArticle' ,query: { bid: bid },})"
+          <el-button @click="$router.push({ name: 'Meedubook' })"
             >取消</el-button
           >
         </div>
@@ -90,13 +90,12 @@
 export default {
   data() {
     return {
-        bid:this.$route.query.bid,
       pagination: {
         page: 1,
         size: 10,
       },
       filter: {
-        article_id: this.$route.query.article_id,
+        bid: this.$route.query.bid,
         user_id: null,
       },
       spids: {
@@ -141,7 +140,7 @@ export default {
       let params = {};
       Object.assign(params, this.filter);
       Object.assign(params, this.pagination);
-      this.$api.Meedubook.Book.Article.Comments(params).then((res) => {
+      this.$api.Meedubook.Book.Comments(params).then((res) => {
         this.loading = false;
         this.mbooks = res.data.data.data;
         this.total = res.data.data.total;
@@ -159,7 +158,7 @@ export default {
             return;
           }
           this.loading = true;
-          this.$api.Meedubook.Book.Article.Destorycomment(item)
+          this.$api.Meedubook.Book.Destorycomment(item)
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));
@@ -191,7 +190,7 @@ export default {
           }
           this.spids.is_check = 1;
           this.loading = true;
-          this.$api.Meedubook.Book.Article.CommentMulti(this.spids)
+          this.$api.Meedubook.Book.CommentMulti(this.spids)
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));
@@ -232,7 +231,7 @@ export default {
             })
             .catch((e) => {
               this.loading = false;
-            this.$message.success(this.$t("common.success"));
+              this.$message.success(this.$t("common.success"));
               this.getComments();
             });
         })

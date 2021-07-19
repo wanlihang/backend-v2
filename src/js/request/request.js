@@ -360,7 +360,7 @@ const Api = {
                 }
             }
         },
-       
+
         Topic: {
             Topic: {
                 List(params) {
@@ -432,7 +432,7 @@ const Api = {
         },
 
     },
-    Meedubook:{
+    Meedubook: {
         Book: {
             List(params) {
                 return get(`/backend/addons/meedu_books/book/index`, params);
@@ -445,6 +445,15 @@ const Api = {
             },
             Destory(id) {
                 return destroy(`/backend/addons/meedu_books/book/${id}`);
+            },
+            Comments(params) {
+                return get(`/backend/addons/meedu_books/book_comment/index`, params);
+            },
+            Destorycomment(id) {
+                return destroy(`/backend/addons/meedu_books/book_comment/${id}`);
+            },
+            CommentMulti(params) {
+                return post(`/backend/addons/meedu_books/book_comment/checked`, params);
             },
             Detail(id) {
                 return get(`/backend/addons/meedu_books/book/${id}`);
