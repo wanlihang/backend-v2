@@ -420,6 +420,14 @@ const routes = [
         }
       },
       {
+        path: '/meedubook/article/comment',
+        component: () => import('@/views/meedubook/book/article/comment'),
+        name: 'MeedubookArticleComment',
+        meta: {
+          title: 'title.meedubook.book.article.comment'
+        }
+      },
+      {
         path: '/member/index',
         component: () => import('@/views/member/index'),
         name: 'MemberIndex',

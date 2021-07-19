@@ -81,8 +81,8 @@
                   style="margin-left: 5px"
                   @click="
                     $router.push({
-                      name: 'MeedubookArticleUpdate',
-                      query: { course_id: scope.row.id },
+                      name: 'MeedubookArticleComment',
+                      query: { article_id: scope.row.id },
                     })
                   "
                   >评论</el-link
@@ -145,7 +145,7 @@ export default {
     paginationReset() {
       this.pagination.page = 1;
    
-      this.filter.cid = null;
+      this.filter.chapter_id = null;
       this.getBook();
     },
     paginationSizeChange(size) {
