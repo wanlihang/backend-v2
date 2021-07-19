@@ -226,7 +226,7 @@ export default {
       background-color: rgb(243, 245, 247);
       box-sizing: border-box;
       padding: 15px;
-      color: #333;
+      color: rgba(0, 0, 0, 0.8);
       border-top-left-radius: 3px;
       border-top-right-radius: 3px;
       font-size: 15px;
@@ -250,9 +250,11 @@ export default {
         cursor: pointer;
         font-size: 15px;
         line-height: 15px;
+        color: rgba(0, 0, 0, 0.6);
 
         &.active {
           background-color: rgba(0, 0, 0, 0.05);
+          color: rgba(0, 0, 0, 0.7);
         }
       }
     }
@@ -314,6 +316,7 @@ export default {
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
+          color: rgba(0, 0, 0, 0.7);
         }
       }
     }

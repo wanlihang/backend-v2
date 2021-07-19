@@ -30,11 +30,13 @@
             <el-input
               v-if="c.field_type === 'text'"
               v-model="c.value"
+              class="w-300px"
             ></el-input>
             <!-- 数字输入框 -->
             <el-input
               v-else-if="c.field_type === 'number'"
               v-model="c.value"
+              class="w-300px"
             ></el-input>
             <!-- 多行文本输入框 -->
             <el-input
@@ -66,7 +68,7 @@
             </el-switch>
 
             <!-- 选择 -->
-            <el-select v-model="c.value" v-else-if="c.field_type === 'select'">
+            <el-select class="w-300px" v-model="c.value" v-else-if="c.field_type === 'select'">
               <el-option
                 v-for="(item, index) in c.option_value"
                 :key="index"
@@ -207,6 +209,8 @@ export default {
     float: left;
     box-sizing: border-box;
     background-color: white;
+    padding-top: 30px;
+    padding-bottom: 30px;
 
     .config-item {
       width: 100%;
@@ -221,7 +225,7 @@ export default {
         float: left;
         font-size: 14px;
         font-weight: normal;
-        color: rgba(0, 0, 0, 0.6);
+        color: rgba(0, 0, 0, 0.8);
         margin-bottom: 10px;
       }
 

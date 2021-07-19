@@ -1,26 +1,13 @@
 <template>
-  <div class="application-box">
-    <div class="table-tabs">
-      <div
-        class="tab-item"
-        :class="{ active: tab === 'repository' }"
-        @click="tab = 'repository'"
-      >
-        应用商城
-      </div>
-      <div
-        class="tab-item"
-        :class="{ active: tab === 'local' }"
-        @click="tab = 'local'"
-      >
-        已安装应用
-      </div>
+  <div class="meedu-main-body" v-loading="loading">
+    <div class="float-left">
+      <el-tabs v-model="tab">
+        <el-tab-pane label="应用商城" name="repository"></el-tab-pane>
+        <el-tab-pane label="已安装应用" name="local"></el-tab-pane>
+      </el-tabs>
     </div>
-    <div
-      v-loading="loading"
-      class="table-body"
-      :class="{ 'top-left-radius': tab !== 'repository' }"
-    >
+
+    <div class="float-left">
       <template v-if="tab === 'repository'">
         <div class="float-left table-content">
           <el-table :data="repositories" class="float-left">
@@ -51,13 +38,14 @@
           </el-table>
         </div>
 
-        <div class="pagination float-left mt-15">
+        <div class="pagination float-left mt-30 text-center">
           <el-pagination
-            background
-            :page-size="pagination.size"
+            @size-change="paginationSizeChange"
+            @current-change="paginationPageChange"
             :current-page="pagination.page"
-            layout="prev, pager, next"
-            @current-change="pageChange"
+            :page-sizes="[10, 20, 50, 100]"
+            :page-size="pagination.size"
+            layout="total, sizes, prev, pager, next, jumper"
             :total="total"
           >
           </el-pagination>
@@ -115,6 +103,9 @@ export default {
     "pagination.page"() {
       this.getRepository();
     },
+    "pagination.size"() {
+      this.getRepository();
+    },
   },
   mounted() {
     this.reset();
@@ -131,7 +122,10 @@ export default {
         this.getLocal();
       }
     },
-    pageChange(page) {
+    paginationSizeChange(size) {
+      this.pagination.size = size;
+    },
+    paginationPageChange(page) {
       this.pagination.page = page;
     },
     getRepository() {
