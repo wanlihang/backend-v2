@@ -660,7 +660,6 @@ export default {
 
 .top-box {
   position: fixed;
-  z-index: 8;
   top: 0;
   left: 0;
   right: 0;
@@ -753,11 +752,10 @@ export default {
 }
 
 .preview-box {
-  position: fixed;
+  position: absolute;
   top: 70px;
   left: 249px;
   bottom: 0;
-  z-index: 9;
   background-color: #f6f6f6;
   box-sizing: border-box;
   overflow-y: auto;
@@ -824,8 +822,7 @@ export default {
 }
 
 .config-box {
-  position: fixed;
-  z-index: 10;
+  position: absolute;
   top: 56px;
   right: 0;
   bottom: 0;

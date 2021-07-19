@@ -52,10 +52,6 @@ export default {
   height: 400px;
   float: left;
   cursor: pointer;
-
-  &:hover {
-    border: 1px solid @primary-color;
-  }
 }
 
 .empty-data {
