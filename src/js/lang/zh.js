@@ -104,6 +104,11 @@ const zh = { //zh
                     create: '添加电子书分类',
                     update: '编辑电子书分类',  
                 },
+                chapter: {
+                    index: '电子书章节管理',
+                    create: '创建电子书章节',
+                    update: '编辑电子书章节'
+                },
             }
         },
         coursename: '课程',

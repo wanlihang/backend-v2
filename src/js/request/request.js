@@ -469,6 +469,23 @@ const Api = {
                     return put(`/backend/addons/meedu_books/book_category/${id}`, params);
                 }
             },
+            Chapters: {
+                List(params) {
+                    return get(`/backend/addons/meedu_books/book_chapter/index`, params);
+                },
+                Store(params) {
+                    return post(`/backend/addons/meedu_books/book_chapter/create`, params);
+                },
+                Destory(id) {
+                    return destroy(`/backend/addons/meedu_books/book_chapter/${id}`);
+                },
+                Detail(id) {
+                    return get(`/backend/addons/meedu_books/book_chapter/${id}`);
+                },
+                Update(id, params) {
+                    return put(`/backend/addons/meedu_books/book_chapter/${id}`, params);
+                }
+            },
         },
     },
     Wechat: {

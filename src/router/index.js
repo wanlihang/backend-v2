@@ -372,6 +372,30 @@ const routes = [
         }
       },
       {
+        path: '/meedubook/chapter/index',
+        component: () => import('@/views/meedubook/book/chapter/index'),
+        name: 'MeedubookChapter',
+        meta: {
+          title: 'title.meedubook.book.chapter.index'
+        }
+      },
+      {
+        path: '/meedubook/chapter/create',
+        component: () => import('@/views/meedubook/book/chapter/create'),
+        name: 'MeedubookChapterCreate',
+        meta: {
+          title: 'title.meedubook.book.chapter.create'
+        }
+      },
+      {
+        path: '/meedubook/chapter/update',
+        component: () => import('@/views/meedubook/book/chapter/update'),
+        name: 'MeedubookChapterUpdate',
+        meta: {
+          title: 'title.meedubook.book.chapter.update'
+        }
+      },
+      {
         path: '/member/index',
         component: () => import('@/views/member/index'),
         name: 'MemberIndex',
