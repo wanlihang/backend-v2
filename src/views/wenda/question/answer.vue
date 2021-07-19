@@ -21,7 +21,7 @@
           </el-table-column>
           <el-table-column label="答案" width="80">
             <template slot-scope="scope">
-              <span v-if="scope.row.is_correct == 1">是</span>
+              <span style="color:red;" v-if="scope.row.is_correct == 1">是</span>
               <span v-else>否</span>
             </template>
           </el-table-column>
