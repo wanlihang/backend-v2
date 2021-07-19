@@ -85,6 +85,17 @@ export default [
         ]
     },
     {
+        name: 'title.meedubook.book.index',
+        key: 'Meedubook',
+        children: [
+            {
+                name: 'title.meedubook.book.index',
+                key: 'Meedubook'
+            },
+            
+        ]
+    },
+    {
         name: 'title.wendaname',
         key: 'Wenda',
         children: [

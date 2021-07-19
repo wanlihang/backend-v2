@@ -324,6 +324,54 @@ const routes = [
         }
       },
       {
+        path: '/meedubook/book/index',
+        component: () => import('@/views/meedubook/book/index'),
+        name: 'Meedubook',
+        meta: {
+          title: 'title.meedubook.book.index'
+        }
+      },
+      {
+        path: '/meedubook/book/create',
+        component: () => import('@/views/meedubook/book/create'),
+        name: 'MeedubookCreate',
+        meta: {
+          title: 'title.meedubook.book.create'
+        }
+      },
+      {
+        path: '/meedubook/book/update',
+        component: () => import('@/views/meedubook/book/update'),
+        name: 'MeedubookUpdate',
+        meta: {
+          title: 'title.meedubook.book.update'
+        }
+      },
+      {
+        path: '/meedubook/category/index',
+        component: () => import('@/views/meedubook/book/category/index'),
+        name: 'MeedubookCategory',
+        meta: {
+          title: 'title.meedubook.book.category.index'
+        }
+      },
+      {
+        path: '/meedubook/category/create',
+        component: () => import('@/views/meedubook/book/category/create'),
+        name: 'MeedubookCategoryCreate',
+        meta: {
+          title: 'title.meedubook.book.category.create'
+        }
+      },
+      {
+        path: '/meedubook/category/update',
+        component: () => import('@/views/meedubook/book/category/update'),
+        name: 'MeedubookCategoryUpdate',
+        meta: {
+          title: 'title.meedubook.book.category.update'
+        }
+      },
+      {
         path: '/member/index',
         component: () => import('@/views/member/index'),
         name: 'MemberIndex',

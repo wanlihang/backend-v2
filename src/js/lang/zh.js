@@ -91,8 +91,20 @@ const zh = { //zh
         },
         singlepage: {
             index: '单页',
-            create: '添加单页',
-            update: '编辑单页',
+            create: '添加电子书',
+            update: '编辑电子书',
+        },
+        meedubook:{
+            book:{
+                index: '电子书',
+                create: '添加单页',
+                update: '编辑单页', 
+                category:{
+                    index: '电子书分类管理',
+                    create: '添加电子书分类',
+                    update: '编辑电子书分类',  
+                },
+            }
         },
         coursename: '课程',
         finance: '财务'

@@ -361,6 +361,42 @@ const Api = {
         },
 
     },
+    Meedubook:{
+        Book: {
+            List(params) {
+                return get(`/backend/addons/meedu_books/book/index`, params);
+            },
+            Store(params) {
+                return post(`/backend/addons/meedu_books/book/create`, params);
+            },
+            Destory(id) {
+                return destroy(`/backend/addons/meedu_books/book/${id}`);
+            },
+            Detail(id) {
+                return get(`/backend/addons/meedu_books/book/${id}`);
+            },
+            Update(id, params) {
+                return put(`/backend/addons/meedu_books/book/${id}`, params);
+            },
+            Categories: {
+                List() {
+                    return get(`/backend/addons/meedu_books/book_category/index`);
+                },
+                Store(params) {
+                    return post(`/backend/addons/meedu_books/book_category/create`, params);
+                },
+                Destory(id) {
+                    return destroy(`/backend/addons/meedu_books/book_category/${id}`);
+                },
+                Detail(id) {
+                    return get(`/backend/addons/meedu_books/book_category/${id}`);
+                },
+                Update(id, params) {
+                    return put(`/backend/addons/meedu_books/book_category/${id}`, params);
+                }
+            },
+        },
+    },
     Wechat: {
         Reply: {
             List(params) {
