@@ -109,6 +109,12 @@ const zh = { //zh
                     create: '创建电子书章节',
                     update: '编辑电子书章节'
                 },
+                article:{
+                    index: '电子书文章管理',
+                    create: '创建电子书文章',
+                    update: '编辑电子书文章',
+                    comment:'电子书文章评论'
+                }
             }
         },
         coursename: '课程',
