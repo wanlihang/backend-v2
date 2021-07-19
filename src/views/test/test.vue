@@ -1,6 +1,9 @@
 <template>
   <div>
-    <select-vod :show="true"></select-vod>
+    <select-resource
+      @change="change"
+      enabled-resource="vod,video,vip,book,live,topic,learnPath,paper,practice,mock-paper"
+    ></select-resource>
   </div>
 </template>
 
@@ -9,11 +12,12 @@
 // import UploadImage from "@/components/upload-image";
 // import MdEditor from "@/components/md-editor";
 // import H5Link from "@/components/h5-link/index";
-import SelectVod from '@/components/select-vod';
+// import SelectVod from '@/components/select-vod';
+import SelectResource from "@/components/select-resources/index";
 
 export default {
   components: {
-    SelectVod,
+    SelectResource,
   },
   data() {
     return {
@@ -22,8 +26,8 @@ export default {
     };
   },
   methods: {
-    change(v1, v2) {
-      console.log(v1, v2);
+    change(v1) {
+      console.log(v1);
     },
   },
 };

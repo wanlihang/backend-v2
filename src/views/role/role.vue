@@ -62,7 +62,7 @@ export default {
         total: 0,
         size: 10,
       };
-      this.$api.Role.Info(data).then((resp) => {
+      this.$api.Role.List(data).then((resp) => {
         if (resp.status == 0) {
           this.page = resp.data.current_page + 1;
           this.memberbox = resp.data.data;

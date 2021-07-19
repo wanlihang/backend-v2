@@ -25,7 +25,7 @@ const Api = {
         },
     },
     Role: {
-        Info(params) {
+        List(params) {
             return get(`/backend/api/v1/role`, params);
         },
         Destory(id) {
