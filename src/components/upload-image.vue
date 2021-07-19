@@ -30,7 +30,7 @@ export default {
   components: {
     SelectImage,
   },
-  props: ["value", "helper", "img", "width", "height"],
+  props: ["value", "helper", "width", "height"],
   data() {
     return {
       show: false,

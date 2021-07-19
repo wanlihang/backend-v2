@@ -1,7 +1,7 @@
 <template>
   <div class="bg" v-loading="loading">
     <div class="top-box">
-      <div class="btn-back" @click="$router.push({ name: 'Dashboard' })">
+      <div class="btn-back" @click="$router.back()">
         <i class="el-icon-back"></i>
         返回
       </div>
