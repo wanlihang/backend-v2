@@ -40,6 +40,13 @@ const zh = { //zh
                 edit: '编辑用户标签'
             }
         },
+        miaosha:{
+            name:'秒杀',
+            orders:{
+                name:'订单',
+                index:'秒杀订单'
+            },
+        },
         wechat: {
             messagereply: {
                 index: '微信公众号消息回复',

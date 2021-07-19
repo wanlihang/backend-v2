@@ -1,0 +1,267 @@
+<template>
+  <div class="meedu-main-body">
+    <div class="float-left mb-30">
+      <div class="float-left d-flex">
+        <div class="d-flex">
+          <div class="filter-label">课程</div>
+          <div class="flex-1 ml-15">
+            <el-select v-model="filter.category_id">
+              <el-option
+                v-for="(item, index) in filterData.courses"
+                :key="index"
+                :label="item.goods_type_text"
+                :value="item.id"
+              >
+              </el-option>
+            </el-select>
+          </div>
+        </div>
+        <div class="d-flex ml-15">
+          <div class="filter-label">课程</div>
+          <div class="flex-1 ml-15">
+            <el-select v-model="filter.category_id">
+              <el-option
+                v-for="(item, index) in filterData.courses"
+                :key="index"
+                :label="item.name"
+                :value="item.id"
+              >
+              </el-option>
+            </el-select>
+          </div>
+        </div>
+        <div class="d-flex ml-15">
+          <div class="filter-label">支付状态</div>
+          <div class="flex-1 ml-15">
+            <el-select v-model="filter.status">
+              <el-option
+                v-for="(item, index) in filterData.status"
+                :key="index"
+                :label="item.name"
+                :value="item.id"
+              >
+              </el-option>
+            </el-select>
+          </div>
+        </div>
+
+        <div class="ml-15">
+          <el-button @click="getQuestion" type="primary" plain>筛选</el-button>
+          <el-button @click="paginationReset">清空</el-button>
+        </div>
+      </div>
+    </div>
+    <div class="float-left mt-30" v-loading="loading">
+      <div class="float-left">
+        <el-table :data="results" stripe class="float-left">
+          <el-table-column prop="id" label="ID" width="80"> </el-table-column>
+          <el-table-column prop="user_id" label="用户ID" width="80">
+          </el-table-column>
+          <el-table-column prop="category.name" label="分类" width="100">
+          </el-table-column>
+          <el-table-column label="用户" width="120">
+            <template slot-scope="scope">
+              <div class="user-item">
+                <!-- <div class="avatar">
+                  <img :src="scope.row.user.avatar" width="40" height="40" />
+                </div> -->
+                <div class="nickname">{{ scope.row.user.nick_name }}</div>
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column prop="title" label="标题"> </el-table-column>
+          <el-table-column label="浏览" width="80">
+            <template slot-scope="scope">
+              <span>{{ scope.row.view_times }}次</span>
+            </template>
+          </el-table-column>
+          <el-table-column label="点赞" width="80">
+            <template slot-scope="scope">
+              <span>{{ scope.row.vote_count }}次</span>
+            </template>
+          </el-table-column>
+          <el-table-column label="答案" width="80">
+            <template slot-scope="scope">
+              <span>{{ scope.row.answer_count }}个</span>
+            </template>
+          </el-table-column>
+          <el-table-column label="积分" width="100">
+            <template slot-scope="scope">
+              <span>{{ scope.row.credit1 }}积分</span>
+            </template>
+          </el-table-column>
+          <el-table-column label="状态" width="100">
+            <template slot-scope="scope">
+              <span v-if="scope.row.status == 1" style="color: red">{{
+                scope.row.status_text
+              }}</span>
+              <span v-else>{{ scope.row.status_text }}</span>
+            </template>
+          </el-table-column>
+
+          <el-table-column fixed="right" label="操作" width="80">
+            <template slot-scope="scope">
+              <el-link
+                type="primary"
+                @click="
+                  $router.push({
+                    name: 'QuestionAnswer',
+                    query: { id: scope.row.id },
+                  })
+                "
+                >回答</el-link
+              >
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+
+      <div class="float-left mt-30 text-center">
+        <el-pagination
+          @size-change="paginationSizeChange"
+          @current-change="paginationPageChange"
+          :current-page="pagination.page"
+          :page-sizes="[10, 20, 50, 100]"
+          :page-size="pagination.size"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="total"
+        >
+        </el-pagination>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      pagination: {
+        page: 1,
+        size: 10,
+      },
+      filter: {
+        user_id: null,
+        category_id: null,
+        status: "",
+      },
+      total: 0,
+      loading: false,
+      results: [],
+      spids: {
+        ids: [],
+      },
+      filterData: {
+        courses: [],
+        status: [
+          {
+            id: 0,
+            name: "未支付",
+          },
+          {
+            id: 1,
+            name: "已支付",
+          },
+        ],
+      },
+    };
+  },
+  mounted() {
+    this.getQuestion();
+  },
+  methods: {
+    paginationReset() {
+      this.pagination.page = 1;
+      this.filter.category_id = null;
+      this.filter.user_id = null;
+      this.filter.status = "";
+      this.getQuestion();
+    },
+    paginationSizeChange(size) {
+      this.pagination.size = size;
+      this.getQuestion();
+    },
+    paginationPageChange(page) {
+      this.pagination.page = page;
+      this.getQuestion();
+    },
+    getQuestion() {
+      if (this.loading) {
+        return;
+      }
+      this.loading = true;
+      let params = {};
+      Object.assign(params, this.filter);
+      Object.assign(params, this.pagination);
+      this.$api.Miaosha.Orders.List(params).then((res) => {
+        this.loading = false;
+        this.results = res.data.data.data;
+        this.total = res.data.data.total;
+        this.filterData.courses = res.data.types;
+        this.filterData.goods= res.data.goods;
+      });
+    },
+    destoryMulti() {
+      this.$confirm("确认操作？", "警告", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          //点击确定按钮的操作
+          if (this.loading) {
+            return;
+          }
+          if (this.spids.ids == "") {
+            this.$message("请选择需要操作的数据");
+            return;
+          }
+          this.loading = true;
+          this.$api.Wenda.Question.DestoryMulti(this.spids)
+            .then(() => {
+              this.loading = false;
+              this.$message.success(this.$t("common.success"));
+              this.getQuestion();
+            })
+            .catch((e) => {
+              this.loading = false;
+              this.$message(e.message);
+            });
+        })
+        .catch(() => {
+          //点击删除按钮的操作
+        });
+    },
+  },
+};
+</script>
+
+<style lang="less" scoped>
+.filter-box {
+  width: 100%;
+  height: auto;
+  float: left;
+  box-sizing: border-box;
+  padding: 30px;
+  border-radius: 15px;
+  margin-bottom: 15px;
+  background-color: white;
+
+  .filter-label {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.7);
+  }
+}
+.user-item {
+  width: auto;
+  display: flex;
+  align-items: center;
+  .avatar {
+    margin-right: 10px;
+  }
+  .nickname {
+    font-size: 15px;
+    font-weight: normal;
+  }
+}
+</style>

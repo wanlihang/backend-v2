@@ -595,6 +595,14 @@ const routes = [
           title: 'title.wenda.question.category.update'
         }
       },
+      {
+        path: '/miaosha/orders/index',
+        component: () => import('@/views/miaosha/orders/index'),
+        name: 'MiaoshaOrders',
+        meta: {
+          title: 'title.miaosha.orders.index'
+        }
+      },
     ]
   },
   {

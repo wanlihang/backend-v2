@@ -78,6 +78,13 @@ const Api = {
             }
         }
     },
+    Miaosha:{
+        Orders:{
+            List(params) {
+                return get(`/backend/addons/MiaoSha/orders/index`, params);
+            } 
+        },
+    },
     System: {
         Config: {
             All() {

@@ -85,6 +85,17 @@ export default [
         ]
     },
     {
+        name: 'title.miaosha.name',
+        key: 'Miaosha',
+        children: [
+            {
+                name: 'title.miaosha.orders.name',
+                key: 'MiaoshaOrders'
+            },
+            
+        ]
+    },
+    {
         name: 'title.meedubook.book.index',
         key: 'Meedubook',
         children: [
