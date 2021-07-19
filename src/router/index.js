@@ -300,6 +300,30 @@ const routes = [
         }
       },
       {
+        path: '/singlepage/index',
+        component: () => import('@/views/singlepage/page/index'),
+        name: 'SinglePage',
+        meta: {
+          title: 'title.singlepage.index'
+        }
+      },
+      {
+        path: '/singlepage/create',
+        component: () => import('@/views/singlepage/page/create'),
+        name: 'SinglePageCreate',
+        meta: {
+          title: 'title.singlepage.create'
+        }
+      },
+      {
+        path: '/singlepage/update',
+        component: () => import('@/views/singlepage/page/update'),
+        name: 'SinglePageUpdate',
+        meta: {
+          title: 'title.singlepage.update'
+        }
+      },
+      {
         path: '/member/index',
         component: () => import('@/views/member/index'),
         name: 'MemberIndex',

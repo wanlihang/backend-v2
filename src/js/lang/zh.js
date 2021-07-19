@@ -12,7 +12,7 @@ const zh = { //zh
         promocode_import: '批量导入',
         withdrawOrders: '余额提现',
         system: '系统',
-        wendaname:'问答',
+        wendaname: '问答',
         config: '系统配置',
         wechatname: '微信公众号',
         'system-administrator': '管理员',
@@ -47,15 +47,15 @@ const zh = { //zh
                 update: '微信公众号编辑规则',
             },
         },
-        wenda:{
+        wenda: {
             question: {
                 index: '问题',
-                answer:'问题回答',
-                comment:'问题评论',
-                category:{
-                    index:'问题分类',
-                    create:'添加分类',
-                    update:'编辑分类',
+                answer: '问题回答',
+                comment: '问题评论',
+                category: {
+                    index: '问题分类',
+                    create: '添加分类',
+                    update: '编辑分类',
                 }
             },
         },
@@ -85,9 +85,14 @@ const zh = { //zh
                     index: '课程视频管理',
                     create: '创建课程视频',
                     update: '编辑课程视频',
-                    subscribe:'课程视频销售记录',
+                    subscribe: '课程视频销售记录',
                 },
             },
+        },
+        singlepage: {
+            index: '单页',
+            create: '添加单页',
+            update: '编辑单页',
         },
         coursename: '课程',
         finance: '财务'

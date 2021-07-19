@@ -74,6 +74,17 @@ export default [
         ]
     },
     {
+        name: 'title.singlepage.index',
+        key: 'Single',
+        children: [
+            {
+                name: 'title.singlepage.index',
+                key: 'SinglePage'
+            },
+            
+        ]
+    },
+    {
         name: 'title.wendaname',
         key: 'Wenda',
         children: [

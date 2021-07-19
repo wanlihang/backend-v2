@@ -234,7 +234,7 @@ const Api = {
                 Update(id, ids, params) {
                     return put(`/backend/api/v1/video/${id}/${ids}`, params);
                 },
-                Subscribe(id, params){
+                Subscribe(id, params) {
                     return get(`/backend/api/v1/video/${id}/subscribes`, params);
                 },
             },
@@ -289,6 +289,7 @@ const Api = {
                 }
             }
         },
+       
         Topic: {
             Topic: {
                 List(params) {
@@ -340,6 +341,26 @@ const Api = {
             }
         }
     },
+    Singlepage: {
+        Page: {
+            List(params) {
+                return get(`/backend/addons/single_page/page/index`, params);
+            },
+            Store(params) {
+                return post(`/backend/addons/single_page/page/create`, params);
+            },
+            Destory(id) {
+                return destroy(`/backend/addons/single_page/page/${id}`);
+            },
+            Detail(id) {
+                return get(`/backend/addons/single_page/page/${id}`);
+            },
+            Update(id, params) {
+                return put(`/backend/addons/single_page/page/${id}`, params);
+            },
+        },
+
+    },
     Wechat: {
         Reply: {
             List(params) {
@@ -376,10 +397,10 @@ const Api = {
             Answer(id) {
                 return get(`/backend/addons/Wenda/question/${id}/answers`);
             },
-            DestoryAnswer(id,ids) {
+            DestoryAnswer(id, ids) {
                 return destroy(`/backend/addons/Wenda/question/${id}/answers/${ids}`);
             },
-            Comment(id){
+            Comment(id) {
                 return get(`/backend/addons/Wenda/question/answers/${id}/comments`);
             },
             DestoryComment(id) {
