@@ -80,7 +80,7 @@ export default {
             return;
           }
           this.loading = true;
-          this.$api.Wenda.Question.DestoryComment(this.box.id,id)
+          this.$api.Wenda.Question.DestoryComment(id)
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));
