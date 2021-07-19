@@ -348,6 +348,14 @@ const routes = [
         }
       },
       {
+        path: '/meedubook/book/comment',
+        component: () => import('@/views/meedubook/book/comment'),
+        name: 'MeedubookComment',
+        meta: {
+          title: 'title.meedubook.book.comment'
+        }
+      },
+      {
         path: '/meedubook/category/index',
         component: () => import('@/views/meedubook/book/category/index'),
         name: 'MeedubookCategory',

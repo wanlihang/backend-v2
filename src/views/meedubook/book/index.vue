@@ -115,8 +115,8 @@
                   style="margin-left: 5px"
                   @click="
                     $router.push({
-                      name: 'CourseRecords',
-                      query: { course_id: scope.row.id },
+                      name: 'MeedubookComment',
+                      query: { bid: scope.row.id },
                     })
                   "
                   >评论</el-link
