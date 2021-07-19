@@ -197,6 +197,23 @@ const Api = {
             Update(id, params) {
                 return put(`/backend/api/v1/link/${id}`, params);
             }
+        },
+        Announcement: {
+            List(params) {
+                return get(`/backend/api/v1/announcement`, params);
+            },
+            Store(params) {
+                return post(`/backend/api/v1/announcement`, params);
+            },
+            Destroy(id) {
+                return destroy(`/backend/api/v1/announcement/${id}`);
+            },
+            Detail(id) {
+                return get(`/backend/api/v1/announcement/${id}`);
+            },
+            Update(id, params) {
+                return put(`/backend/api/v1/announcement/${id}`, params);
+            }
         }
     },
     Course: {

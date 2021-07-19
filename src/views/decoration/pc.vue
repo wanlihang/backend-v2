@@ -167,7 +167,7 @@ import { mapState } from "vuex";
 import draggable from "vuedraggable";
 import RenderNavs from "./components/pc/render/navs/index";
 import RenderSliders from "./components/pc/render/sliders/index";
-import RenderNotice from "./components/pc/render/notice";
+import RenderNotice from "./components/pc/render/notice/index";
 import RenderLink from "./components/pc/render/links/index";
 
 export default {
