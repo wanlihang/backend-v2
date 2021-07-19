@@ -1,6 +1,7 @@
 <template>
-  <div class="float-left">
-    <div class="form-box broder-top-left-radius">
+  <div class="meedu-main-body">
+    <back-bar class="mb-30" title="微信公众号编辑规则"></back-bar>
+    <div class="float-left">
       <el-form ref="form" :model="reply" :rules="rules" label-width="200px">
         <el-form-item label="消息类型" prop="type">
           <el-select v-model="reply.type" class="w-200px">
@@ -44,18 +45,18 @@
     <div class="bottom-menus">
       <div class="bottom-menus-box">
         <div>
+          <el-button @click="formValidate" :loading="loading" type="primary"
+            >保存</el-button
+          >
+        </div>
+        <div class="ml-24">
           <el-button
             @click="
               $router.push({
-                  name: 'MessageReply',
+                name: 'MessageReply',
               })
             "
             >取消</el-button
-          >
-        </div>
-        <div class="ml-15">
-          <el-button @click="formValidate" :loading="loading" type="primary"
-            >保存</el-button
           >
         </div>
       </div>
@@ -114,7 +115,7 @@ export default {
   },
   mounted() {
     this.create();
-    this.detail()
+    this.detail();
   },
   methods: {
     create() {
@@ -127,14 +128,14 @@ export default {
           this.$message.error(e.message);
         });
     },
-    detail(){
-        this.$api.Wechat.Reply.Detail(this.reply.id)
+    detail() {
+      this.$api.Wechat.Reply.Detail(this.reply.id)
         .then((res) => {
           this.reply.type = res.data.data.type;
           this.reply.reply_content = res.data.data.reply_content;
           this.reply.rule = res.data.data.rule;
           this.reply.event_key = res.data.data.event_key;
-          this.reply.event_type= res.data.data.event_type;
+          this.reply.event_type = res.data.data.event_type;
         })
         .catch((e) => {
           this.loading = false;
@@ -153,11 +154,11 @@ export default {
         return;
       }
       this.loading = true;
-      this.$api.Wechat.Reply.Update(this.reply.id,this.reply)
+      this.$api.Wechat.Reply.Update(this.reply.id, this.reply)
         .then(() => {
           this.$message.success(this.$t("common.success"));
           this.$router.push({
-             name: 'MessageReply',
+            name: "MessageReply",
           });
         })
         .catch((e) => {

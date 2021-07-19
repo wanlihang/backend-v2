@@ -1,6 +1,6 @@
 <template>
-  <div class="float-left">
-    <div class="float-left mb-15">
+  <div class="meedu-main-body">
+    <div class="float-left mb-30">
       <el-button type="danger" @click="destoryMulti()">批量删除</el-button>
       <el-button
         @click="
@@ -13,7 +13,7 @@
         >添加</el-button
       >
     </div>
-    <div class="table-body top-left-radius" v-loading="loading">
+    <div class="float-left mt-30" v-loading="loading">
       <div class="float-left">
         <el-table
           :data="videos"
@@ -76,7 +76,7 @@
           </el-table-column>
         </el-table>
       </div>
-      <div class="float-left mt-15">
+      <div class="float-left mt-30 text-center">
         <el-pagination
           @size-change="paginationSizeChange"
           @current-change="paginationPageChange"

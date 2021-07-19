@@ -1,6 +1,7 @@
 <template>
-  <div class="float-left">
-    <div class="form-box broder-top-left-radius">
+  <div class="meedu-main-body">
+    <back-bar class="mb-30" title="编辑课程视频"></back-bar>
+    <div class="float-left">
       <el-form ref="form" :model="video" :rules="rules" label-width="200px">
         <el-form-item label="视频名" prop="title">
           <el-input v-model="video.title" class="w-100"></el-input>
@@ -88,11 +89,7 @@
             style="width: 80px"
           ></el-input
           >时
-          <el-input
-            type="number"
-            v-model="r_min"
-            style="width: 80px"
-          ></el-input
+          <el-input type="number" v-model="r_min" style="width: 80px"></el-input
           >分
           <el-input
             type="number"
@@ -134,6 +131,11 @@
     <div class="bottom-menus">
       <div class="bottom-menus-box">
         <div>
+          <el-button @click="formValidate" :loading="loading" type="primary"
+            >保存</el-button
+          >
+        </div>
+        <div class="ml-24">
           <el-button
             @click="
               $router.push({
@@ -142,11 +144,6 @@
               })
             "
             >取消</el-button
-          >
-        </div>
-        <div class="ml-15">
-          <el-button @click="formValidate" :loading="loading" type="primary"
-            >保存</el-button
           >
         </div>
       </div>
@@ -174,8 +171,8 @@ export default {
         is_ban_sell: 1,
         ban_drag: 0,
         chapter_id: null,
-        duration: this.hour*3600+this.min*60+this.second,
-        free_seconds: this.r_hour*3600+this.r_min*60+this.r_second,
+        duration: this.hour * 3600 + this.min * 60 + this.second,
+        free_seconds: this.r_hour * 3600 + this.r_min * 60 + this.r_second,
         description: "",
         short_description: "",
         tencent_video_id: "",

@@ -1,78 +1,78 @@
 <template>
-  <div class="float-left">
-    <div class="float-left mb-15">
+  <div class="meedu-main-body">
+    <div class="float-left mb-30">
       <el-button
         @click="$router.push({ name: 'CategoriesCreate' })"
         type="primary"
         >添加</el-button
       >
     </div>
-    <div class="table-body top-left-radius" v-loading="loading">
+   <div class="float-left mt-30" v-loading="loading">
       <div class="float-left">
-        <el-table
-          :data="categories"
-          stripe
-          class="float-left"
-        >
-          <el-table-column prop="id" label="ID" width="150"> </el-table-column>
-          <el-table-column prop="sort" label="升序" width="150">
-          </el-table-column>
-         
-          <el-table-column label="分类名"
-            ><template slot-scope="scope">
-              <span>{{ scope.row.name }} </span>
-            </template>
-          </el-table-column>
-           <el-table-column  label="显示" width="150">
-               <template slot-scope="scope">
-              <span v-if="scope.row.is_show==1">是</span>
-              <span v-else>否</span>
-            </template>
-          </el-table-column>
-          <el-table-column fixed="right" label="操作" width="150">
-            <template slot-scope="scope">
-              <el-link
-                style="margin-right: 10px"
-                type="danger"
-                @click="destory(scope.row.id)"
-                >删除</el-link
-              >
-              <el-link
-                type="primary"
-                @click="
-                  $router.push({
-                    name: 'CategoriesUpdate',
-                    query: { id: scope.row.id },
-                  })
-                "
-                >编辑</el-link
-              >
-            </template>
-          </el-table-column>
-        </el-table>
-      </div>
+          <el-table :data="categories" stripe class="float-left">
+            <el-table-column prop="id" label="ID" width="150">
+            </el-table-column>
+            <el-table-column prop="sort" label="升序" width="150">
+            </el-table-column>
 
-      <div class="float-left mt-15">
-        <el-pagination
-          @size-change="paginationSizeChange"
-          @current-change="paginationPageChange"
-          :current-page="pagination.page"
-          :page-sizes="[10, 20, 50, 100]"
-          :page-size="pagination.size"
-          layout="total, sizes, prev, pager, next, jumper"
-          :total="total"
-        >
-        </el-pagination>
-      </div>
-    </div>
+            <el-table-column label="分类名"
+              ><template slot-scope="scope">
+                <span>{{ scope.row.name }} </span>
+              </template>
+            </el-table-column>
+            <el-table-column label="显示" width="150">
+              <template slot-scope="scope">
+                <span v-if="scope.row.is_show == 1">是</span>
+                <span v-else>否</span>
+              </template>
+            </el-table-column>
+            <el-table-column fixed="right" label="操作" width="150">
+              <template slot-scope="scope">
+                <el-link
+                  style="margin-right: 10px"
+                  type="danger"
+                  @click="destory(scope.row.id)"
+                  >删除</el-link
+                >
+                <el-link
+                  type="primary"
+                  @click="
+                    $router.push({
+                      name: 'CategoriesUpdate',
+                      query: { id: scope.row.id },
+                    })
+                  "
+                  >编辑</el-link
+                >
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>
 
-    <div class="bottom-menus">
-      <div class="bottom-menus-box">
-        <div>
-          <el-button @click="$router.push({ name: 'VodCreate' })">取消</el-button>
+        <div class="float-left mt-30 text-center">
+          <el-pagination
+            @size-change="paginationSizeChange"
+            @current-change="paginationPageChange"
+            :current-page="pagination.page"
+            :page-sizes="[10, 20, 50, 100]"
+            :page-size="pagination.size"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="total"
+          >
+          </el-pagination>
         </div>
       </div>
-    </div>
+
+      <div class="bottom-menus">
+        <div class="bottom-menus-box">
+          <div >
+            <el-button @click="$router.push({ name: 'VodCreate' })"
+              >取消</el-button
+            >
+          </div>
+        </div>
+      </div>
+   
   </div>
 </template>
 <script>
@@ -137,8 +137,7 @@ export default {
             return;
           }
           this.loading = true;
-          this.$api.Course.Vod.Categories
-            .Destory(id)
+          this.$api.Course.Vod.Categories.Destory(id)
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));

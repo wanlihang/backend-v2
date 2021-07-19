@@ -1,6 +1,7 @@
 <template>
-  <div class="float-left">
-     <div class="form-box broder-top-left-radius">
+  <div class="meedu-main-body">
+    <back-bar class="mb-30" title="编辑课程章节"></back-bar>
+    <div class="float-left">
       <el-form ref="form" :model="chapter" :rules="rules" label-width="200px">
         <el-form-item label="章节名" prop="title">
           <el-input v-model="chapter.title" class="w-200px"></el-input>
@@ -18,13 +19,19 @@
     <div class="bottom-menus">
       <div class="bottom-menus-box">
         <div>
-          <el-button @click="$router.push({ name: 'CourseChapters',query: { course_id: chapter.course_id },})"
-            >取消</el-button
-          >
-        </div>
-        <div class="ml-15">
           <el-button @click="formValidate" :loading="loading" type="primary"
             >保存</el-button
+          >
+        </div>
+        <div class="ml-24">
+          <el-button
+            @click="
+              $router.push({
+                name: 'CourseChapters',
+                query: { course_id: chapter.course_id },
+              })
+            "
+            >取消</el-button
           >
         </div>
       </div>
@@ -36,8 +43,8 @@ export default {
   data() {
     return {
       chapter: {
-        course_id:this.$route.query.course_id,
-        id:this.$route.query.id,
+        course_id: this.$route.query.course_id,
+        id: this.$route.query.id,
         sort: null,
         title: null,
       },
@@ -56,7 +63,6 @@ export default {
             trigger: "blur",
           },
         ],
-        
       },
 
       loading: false,
@@ -67,7 +73,10 @@ export default {
   },
   methods: {
     detail() {
-      this.$api.Course.Vod.Chapters.Detail(this.chapter.course_id,this.chapter.id).then((res) => {
+      this.$api.Course.Vod.Chapters.Detail(
+        this.chapter.course_id,
+        this.chapter.id
+      ).then((res) => {
         var data = res.data;
         this.chapter.title = data.title;
         this.chapter.sort = data.sort;
@@ -85,11 +94,17 @@ export default {
         return;
       }
       this.loading = true;
-      this.$api.Course.Vod.Chapters
-        .Update(this.chapter.course_id,this.chapter.id,this.chapter)
+      this.$api.Course.Vod.Chapters.Update(
+        this.chapter.course_id,
+        this.chapter.id,
+        this.chapter
+      )
         .then(() => {
           this.$message.success(this.$t("common.success"));
-          this.$router.push({ name: "CourseChapters",query: { course_id: this.chapter.course_id }, });
+          this.$router.push({
+            name: "CourseChapters",
+            query: { course_id: this.chapter.course_id },
+          });
         })
         .catch((e) => {
           this.loading = false;

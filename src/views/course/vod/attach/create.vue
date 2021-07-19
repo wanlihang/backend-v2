@@ -1,6 +1,7 @@
 <template>
-  <div class="float-left">
-    <div class="form-box broder-top-left-radius">
+  <div class="meedu-main-body">
+    <back-bar class="mb-30" title="添加课程附件"></back-bar>
+    <div class="float-left">
       <el-form ref="form" :model="user" :rules="rules" label-width="200px">
         <el-form-item label="附件名" prop="name">
           <el-input v-model="user.name" class="w-200px"></el-input>

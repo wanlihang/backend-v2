@@ -1,9 +1,14 @@
 <template>
-  <div class="float-left">
-    <div class="form-box broder-top-left-radius">
+  <div class="meedu-main-body">
+    <back-bar class="mb-30" title="添加课程分类"></back-bar>
+    <div class="float-left">
       <el-form ref="form" :model="user" :rules="rules" label-width="200px">
         <el-form-item label="升序" prop="sort">
-          <el-input type="number" v-model="user.sort" class="w-200px"></el-input>
+          <el-input
+            type="number"
+            v-model="user.sort"
+            class="w-200px"
+          ></el-input>
         </el-form-item>
         <el-form-item label="分类名" prop="name">
           <el-input v-model="user.name" class="w-200px"></el-input>
@@ -22,13 +27,13 @@
     <div class="bottom-menus">
       <div class="bottom-menus-box">
         <div>
-          <el-button @click="$router.push({ name: 'CourseCategories' })"
-            >取消</el-button
-          >
-        </div>
-        <div class="ml-15">
           <el-button @click="formValidate" :loading="loading" type="primary"
             >保存</el-button
+          >
+        </div>
+        <div class="ml-24">
+          <el-button @click="$router.push({ name: 'CourseCategories' })"
+            >取消</el-button
           >
         </div>
       </div>
@@ -43,7 +48,7 @@ export default {
         sort: 0,
         name: null,
         is_show: 0,
-        parent_id:0,
+        parent_id: 0,
       },
       rules: {
         sort: [
@@ -60,14 +65,12 @@ export default {
             trigger: "blur",
           },
         ],
-        
       },
 
       loading: false,
     };
   },
-  mounted() {
-  },
+  mounted() {},
   methods: {
     formValidate() {
       this.$refs["form"].validate((valid) => {
@@ -81,8 +84,7 @@ export default {
         return;
       }
       this.loading = true;
-      this.$api.Course.Vod.Categories
-        .Store(this.user)
+      this.$api.Course.Vod.Categories.Store(this.user)
         .then(() => {
           this.$message.success(this.$t("common.success"));
           this.$router.push({ name: "CourseCategories" });

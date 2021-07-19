@@ -1,6 +1,6 @@
 <template>
-  <div class="float-left">
-    <div class="filter-box">
+  <div class="meedu-main-body">
+    <div class="float-left">
       <div class="float-left d-flex">
         <div class="d-flex">
           <div class="filter-label">UID</div>
@@ -35,11 +35,12 @@
             </el-date-picker>
           </div>
         </div>
-      </div>
-      <div class="float-left mt-15">
-        <el-button @click="getRecords" type="primary">筛选</el-button>
-        <el-button @click="paginationReset">清空</el-button>
-        <el-button @click="importexcel" type="primary">导出表格</el-button>
+
+        <div class="ml-15">
+          <el-button @click="getRecords" type="primary" plain>筛选</el-button>
+          <el-button @click="paginationReset">清空</el-button>
+          <el-button @click="importexcel" type="primary">导出表格</el-button>
+        </div>
       </div>
     </div>
     <div class="table-body top-left-radius" v-loading="loading">
@@ -107,7 +108,7 @@
         </el-table>
       </div>
 
-      <div class="float-left mt-15">
+      <div class="float-left mt-30 text-center">
         <el-pagination
           @size-change="paginationSizeChange"
           @current-change="paginationPageChange"

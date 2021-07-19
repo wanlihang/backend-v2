@@ -1,6 +1,7 @@
 <template>
-  <div class="float-left">
-    <div class="form-box broder-top-left-radius">
+  <div class="meedu-main-body">
+    <back-bar class="mb-30" title="创建管理员角色"></back-bar>
+    <div class="float-left">
       <el-form ref="form" :model="user" :rules="rules" label-width="200px">
         <el-form-item label="角色名" prop="display_name">
           <el-input v-model="user.display_name" class="w-200px"></el-input>
@@ -28,13 +29,13 @@
     <div class="bottom-menus">
       <div class="bottom-menus-box">
         <div>
-          <el-button @click="$router.push({ name: 'SystemAdminroles' })"
-            >取消</el-button
-          >
-        </div>
-        <div class="ml-15">
           <el-button @click="formValidate" :loading="loading" type="primary"
             >保存</el-button
+          >
+        </div>
+        <div class="ml-24">
+          <el-button @click="$router.push({ name: 'SystemAdminroles' })"
+            >取消</el-button
           >
         </div>
       </div>

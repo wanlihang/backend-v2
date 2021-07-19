@@ -1,11 +1,11 @@
 <template>
-  <div class="float-left">
-    <div class="float-left mb-15">
+  <div class="meedu-main-body">
+    <div class="float-left mb-30">
       <el-button @click="$router.push({ name: 'ReplyCreate' })" type="primary"
         >添加规则</el-button
       >
     </div>
-    <div class="table-body top-left-radius" v-loading="loading">
+    <div class="float-left mt-30" v-loading="loading">
       <div class="float-left">
         <el-table :data="messages" stripe class="float-left">
           <el-table-column prop="id" label="ID" width="120"> </el-table-column>
@@ -44,7 +44,7 @@
         </el-table>
       </div>
 
-      <div class="float-left mt-15">
+      <div class="float-left mt-30 text-center">
         <el-pagination
           @size-change="paginationSizeChange"
           @current-change="paginationPageChange"

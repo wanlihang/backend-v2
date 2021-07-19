@@ -1,12 +1,15 @@
 <template>
-  <div class="float-left">
-    <div class="float-left mb-15">
-      <el-button @click="$router.push({ name: 'QuestionCategory' })" type="primary">
+  <div class="meedu-main-body">
+    <div class="float-left mb-30">
+      <el-button
+        @click="$router.push({ name: 'QuestionCategory' })"
+        type="primary"
+      >
         分类管理
       </el-button>
       <el-button @click="destoryMulti()" type="danger"> 批量删除 </el-button>
     </div>
-    <div class="filter-box">
+    <div class="float-left">
       <div class="float-left d-flex">
         <div class="d-flex">
           <div class="filter-label">用户ID</div>
@@ -47,13 +50,14 @@
             </el-select>
           </div>
         </div>
-      </div>
-      <div class="float-left mt-15">
-        <el-button @click="getQuestion" type="primary">筛选</el-button>
-        <el-button @click="paginationReset">清空</el-button>
+
+        <div class="ml-15">
+          <el-button @click="getQuestion" type="primary" plain>筛选</el-button>
+          <el-button @click="paginationReset">清空</el-button>
+        </div>
       </div>
     </div>
-    <div class="table-body top-left-radius" v-loading="loading">
+    <div class="float-left mt-30" v-loading="loading">
       <div class="float-left">
         <el-table
           :data="questions"
@@ -125,7 +129,7 @@
         </el-table>
       </div>
 
-      <div class="float-left mt-15">
+      <div class="float-left mt-30 text-center">
         <el-pagination
           @size-change="paginationSizeChange"
           @current-change="paginationPageChange"
