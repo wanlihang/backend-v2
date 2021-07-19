@@ -18,13 +18,13 @@
           <div class="link-body">
             <template v-if="tabActive === 'func'">
               <div
-                class="float-left mb-15"
+                class="func-link-item"
                 v-for="(item, index) in funcLinks"
                 :key="index"
               >
-                <el-radio v-model="link" :label="item.url">{{
-                  item.name
-                }}</el-radio>
+                <el-radio v-model="link" :label="item.url">
+                  {{ item.name }}
+                </el-radio>
               </div>
             </template>
 
@@ -247,6 +247,17 @@ export default {
     overflow-y: auto;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
+  }
+}
+
+.func-link-item {
+  width: 100%;
+  height: auto;
+  float: left;
+  margin-bottom: 15px;
+
+  &:last-child {
+    margin-bottom: 0;
   }
 }
 

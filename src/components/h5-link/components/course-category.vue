@@ -14,7 +14,7 @@
       </div>
       <div class="course-type-links" v-if="typeActive === item.key">
         <div
-          class="float-left mb-15"
+          class="category-link-item"
           v-for="(item, index) in links"
           :key="index"
         >
@@ -231,6 +231,17 @@ export default {
     float: left;
     box-sizing: border-box;
     padding: 15px;
+  }
+}
+
+.category-link-item {
+  width: 100%;
+  height: auto;
+  float: left;
+  margin-bottom: 15px;
+
+  &:last-child {
+    margin-bottom: 0;
   }
 }
 </style>
