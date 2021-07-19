@@ -366,6 +366,9 @@ const Api = {
             List(params) {
                 return get(`/backend/addons/meedu_books/book/index`, params);
             },
+            Create() {
+                return get(`/backend/addons/meedu_books/book/create`);
+            },
             Store(params) {
                 return post(`/backend/addons/meedu_books/book/create`, params);
             },

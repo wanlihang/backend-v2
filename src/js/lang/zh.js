@@ -97,8 +97,8 @@ const zh = { //zh
         meedubook:{
             book:{
                 index: '电子书',
-                create: '添加单页',
-                update: '编辑单页', 
+                create: '添加电子书',
+                update: '编辑电子书', 
                 category:{
                     index: '电子书分类管理',
                     create: '添加电子书分类',

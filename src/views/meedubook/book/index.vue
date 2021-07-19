@@ -82,7 +82,7 @@
                   style="margin-left: 5px"
                   @click="
                     $router.push({
-                      name: 'VodUpdate',
+                      name: 'MeedubookUpdate',
                       query: { id: scope.row.id },
                     })
                   "
