@@ -1,15 +1,11 @@
 <template>
   <div class="meedu-main-body">
+      <back-bar class="mb-30" title="电子书文章管理"></back-bar>
     <div class="float-left">
       <div class="float-left mb-30">
         <el-button
-          @click="$router.push({ name: 'MeedubookCategory' })"
-          type="primary"
-        >
-          电子书分类
-        </el-button>
-        <el-button
-          @click="$router.push({ name: 'MeedubookCreate' })"
+          @click="$router.push({ name: 'MeedubookArticleCreate',
+          query: { book_id: filter.book_id }, })"
           type="primary"
         >
           添加
@@ -17,23 +13,12 @@
       </div>
       <div class="float-left">
         <div class="float-left d-flex">
-          <div class="d-flex">
-            <div class="filter-label">搜索</div>
-            <div class="flex-1 ml-15">
-              <el-input
-                class="w-100"
-                v-model="filter.key"
-                placeholder="书名搜索"
-                style="width: 200px"
-              ></el-input>
-            </div>
-          </div>
           <div class="d-flex ml-15">
-            <div class="filter-label">分类</div>
+            <div class="filter-label">章节</div>
             <div class="flex-1 ml-15">
               <el-select v-model="filter.cid">
                 <el-option
-                  v-for="(item, index) in filterData.categories"
+                  v-for="(item, index) in filterData.chapters"
                   :key="index"
                   :label="item.name"
                   :value="item.id"
@@ -52,27 +37,30 @@
         <div class="float-left">
           <el-table :data="mbooks" stripe class="float-left">
             <el-table-column prop="id" label="ID" width="80"> </el-table-column>
-            <el-table-column prop="category.name" label="分类" width="100">
+            <el-table-column prop="chapter.name" label="章节" width="150">
             </el-table-column>
-            <el-table-column prop="name" label="名字"> </el-table-column>
-            <el-table-column label="价格" width="120">
-              <template slot-scope="scope">
-                <span>{{ scope.row.charge }}元</span>
-              </template>
-            </el-table-column>
+            <el-table-column prop="title" label="标题"> </el-table-column>
+           
             <el-table-column label="浏览" width="120">
               <template slot-scope="scope">
                 <span>{{ scope.row.view_times }}次</span>
               </template>
             </el-table-column>
-            <el-table-column label="订阅" width="100">
+             <el-table-column label="显示" width="80">
               <template slot-scope="scope">
-                <span>{{ scope.row.user_count }}人</span>
+                <span v-if="scope.row.is_show==1">是</span>
+                <span v-else>否</span>
+              </template>
+              </el-table-column>
+            <el-table-column label="试读" width="80">
+              <template slot-scope="scope">
+                <span style="color:red;" v-if="scope.row.charge==0">是</span>
+                <span v-else>否</span>
               </template>
             </el-table-column>
             <el-table-column prop="published_at" label="上架时间" width="180">
             </el-table-column>
-            <el-table-column fixed="right" label="操作" width="200">
+            <el-table-column fixed="right" label="操作" width="150">
               <template slot-scope="scope">
                 <el-link type="danger" @click="destory(scope.row.id)"
                   >删除</el-link
@@ -82,40 +70,18 @@
                   style="margin-left: 5px"
                   @click="
                     $router.push({
-                      name: 'MeedubookUpdate',
-                      query: { id: scope.row.id },
+                      name: 'MeedubookArticleUpdate',
+                      query: { bid:filter.book_id,id: scope.row.id },
                     })
                   "
                   >编辑</el-link
                 >
                 <el-link
                   type="primary"
-                  style="margin-left: 10px"
-                  @click="
-                    $router.push({
-                      name: 'MeedubookChapter',
-                      query: { bid: scope.row.id },
-                    })
-                  "
-                  >章节</el-link
-                >
-                <el-link
-                  type="primary"
                   style="margin-left: 5px"
                   @click="
                     $router.push({
-                      name: 'MeedubookArticle',
-                      query: { bid: scope.row.id },
-                    })
-                  "
-                  >文章</el-link
-                >
-                <el-link
-                  type="primary"
-                  style="margin-left: 5px"
-                  @click="
-                    $router.push({
-                      name: 'CourseRecords',
+                      name: 'MeedubookArticleUpdate',
                       query: { course_id: scope.row.id },
                     })
                   "
@@ -140,6 +106,15 @@
         </div>
       </div>
     </div>
+     <div class="bottom-menus">
+        <div class="bottom-menus-box">
+          <div >
+            <el-button @click="$router.push({ name: 'Meedubook' })"
+              >取消</el-button
+            >
+          </div>
+        </div>
+      </div>
   </div>
 </template>
 
@@ -152,14 +127,14 @@ export default {
         size: 10,
       },
       filter: {
-        key: null,
-        cid: null,
+        book_id:this.$route.query.bid,
+        chapter_id: null,
       },
       total: 0,
       loading: false,
       mbooks: [],
       filterData: {
-        categories: [],
+        chapters: [],
       },
     };
   },
@@ -169,7 +144,7 @@ export default {
   methods: {
     paginationReset() {
       this.pagination.page = 1;
-      this.filter.key = null;
+   
       this.filter.cid = null;
       this.getBook();
     },
@@ -181,11 +156,6 @@ export default {
       this.pagination.page = page;
       this.getBook();
     },
-    sortChange(column) {
-      this.pagination.sort = column.prop;
-      this.pagination.order = column.order === "ascending" ? "asc" : "desc";
-      this.getBook();
-    },
     getBook() {
       if (this.loading) {
         return;
@@ -194,11 +164,11 @@ export default {
       let params = {};
       Object.assign(params, this.filter);
       Object.assign(params, this.pagination);
-      this.$api.Meedubook.Book.List(params).then((res) => {
+      this.$api.Meedubook.Book.Article.List(params).then((res) => {
         this.loading = false;
         this.mbooks = res.data.data.data;
         this.total = res.data.data.total;
-        this.filterData.categories = res.data.categories;
+        this.filterData.chapters = res.data.chapters;
       });
     },
     destory(item) {
@@ -213,7 +183,7 @@ export default {
             return;
           }
           this.loading = true;
-          this.$api.Meedubook.Book.Destory(item)
+          this.$api.Meedubook.Book.Article.Destory(item)
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));

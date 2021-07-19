@@ -396,6 +396,30 @@ const routes = [
         }
       },
       {
+        path: '/meedubook/article/index',
+        component: () => import('@/views/meedubook/book/article/index'),
+        name: 'MeedubookArticle',
+        meta: {
+          title: 'title.meedubook.book.article.index'
+        }
+      },
+      {
+        path: '/meedubook/article/create',
+        component: () => import('@/views/meedubook/book/article/create'),
+        name: 'MeedubookArticleCreate',
+        meta: {
+          title: 'title.meedubook.book.article.create'
+        }
+      },
+      {
+        path: '/meedubook/article/update',
+        component: () => import('@/views/meedubook/book/article/update'),
+        name: 'MeedubookArticleUpdate',
+        meta: {
+          title: 'title.meedubook.book.article.update'
+        }
+      },
+      {
         path: '/member/index',
         component: () => import('@/views/member/index'),
         name: 'MemberIndex',
