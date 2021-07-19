@@ -50,7 +50,7 @@
           </div>
         </div>
       </div>
-      <div class="table-body top-left-radius" v-loading="loading">
+      <div class="float-left mt-30" v-loading="loading">
         <div class="float-left">
           <el-table
             :data="courses"
