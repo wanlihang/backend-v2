@@ -93,8 +93,8 @@
                   style="margin-left: 10px"
                   @click="
                     $router.push({
-                      name: 'CourseChapters',
-                      query: { course_id: scope.row.id },
+                      name: 'MeedubookChapter',
+                      query: { bid: scope.row.id },
                     })
                   "
                   >章节</el-link
@@ -105,7 +105,7 @@
                   @click="
                     $router.push({
                       name: 'CourseVideos',
-                      query: { course_id: scope.row.id },
+                      query: { bid: scope.row.id },
                     })
                   "
                   >文章</el-link
