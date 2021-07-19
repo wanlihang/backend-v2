@@ -373,6 +373,15 @@ const Api = {
             Answer(id) {
                 return get(`/backend/addons/Wenda/question/${id}/answers`);
             },
+            DestoryAnswer(id,ids) {
+                return destroy(`/backend/addons/Wenda/question/${id}/answers/${ids}`);
+            },
+            Comment(id){
+                return get(`/backend/addons/Wenda/question/answers/${id}/comments`);
+            },
+            DestoryComment(id,ids) {
+                return destroy(`/backend/addons/Wenda/question/${id}/answers/comments/${ids}`);
+            },
             Cate: {
                 Destory(id) {
                     return destroy(`/backend/addons/Wenda/category/${id}`);

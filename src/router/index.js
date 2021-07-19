@@ -420,6 +420,14 @@ const routes = [
         }
       },
       {
+        path: '/wenda/question/comment',
+        component: () => import('@/views/wenda/question/comment'),
+        name: 'QuestionComment',
+        meta: {
+          title: 'title.wenda.question.comment'
+        }
+      },
+      {
         path: '/wenda/question/category/index',
         component: () => import('@/views/wenda/question/category/index'),
         name: 'QuestionCategory',

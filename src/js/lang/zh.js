@@ -51,6 +51,7 @@ const zh = { //zh
             question: {
                 index: '问题',
                 answer:'问题回答',
+                comment:'问题评论',
                 category:{
                     index:'问题分类',
                     create:'添加分类',
