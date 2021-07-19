@@ -144,6 +144,60 @@ const Api = {
                 return put(`/backend/api/v1/administrator_role/${id}`, params);
             }
         },
+        Navs: {
+            List(params) {
+                return get(`/backend/api/v1/nav`, params);
+            },
+            Create() {
+                return get(`/backend/api/v1/nav/create`);
+            },
+            Store(params) {
+                return post(`/backend/api/v1/nav`, params);
+            },
+            Destroy(id) {
+                return destroy(`/backend/api/v1/nav/${id}`);
+            },
+            Detail(id) {
+                return get(`/backend/api/v1/nav/${id}`);
+            },
+            Update(id, params) {
+                return put(`/backend/api/v1/nav/${id}`, params);
+            }
+        },
+        Sliders: {
+            List(params) {
+                return get(`/backend/api/v1/slider`, params);
+            },
+            Store(params) {
+                return post(`/backend/api/v1/slider`, params);
+            },
+            Destroy(id) {
+                return destroy(`/backend/api/v1/slider/${id}`);
+            },
+            Detail(id) {
+                return get(`/backend/api/v1/slider/${id}`);
+            },
+            Update(id, params) {
+                return put(`/backend/api/v1/slider/${id}`, params);
+            }
+        },
+        Links: {
+            List(params) {
+                return get(`/backend/api/v1/link`, params);
+            },
+            Store(params) {
+                return post(`/backend/api/v1/link`, params);
+            },
+            Destroy(id) {
+                return destroy(`/backend/api/v1/link/${id}`);
+            },
+            Detail(id) {
+                return get(`/backend/api/v1/link/${id}`);
+            },
+            Update(id, params) {
+                return put(`/backend/api/v1/link/${id}`, params);
+            }
+        }
     },
     Course: {
         Vod: {
@@ -695,7 +749,7 @@ const Api = {
         Destroy(id) {
             return destroy(`/backend/addons/single_page/page/${id}`);
         },
-    }
+    },
 }
 
 export default Api;
