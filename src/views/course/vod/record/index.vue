@@ -1,5 +1,6 @@
 <template>
   <div class="meedu-main-body">
+    <back-bar class="mb-30" title="观看记录"></back-bar>
     <div class="float-left">
       <div class="float-left d-flex">
         <div class="d-flex">
@@ -43,7 +44,7 @@
         </div>
       </div>
     </div>
-    <div class="table-body top-left-radius" v-loading="loading">
+      <div class="float-left mt-30" v-loading="loading">
       <div class="float-left">
         <el-table :data="records" stripe class="float-left">
           <el-table-column prop="course_id" label="课程ID" width="80">
