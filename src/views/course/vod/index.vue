@@ -1,5 +1,6 @@
 <template>
   <div class="meedu-main-body">
+    
     <div class="float-left">
       <div class="float-left mb-30">
         <el-button @click="$router.push({ name: 'VodCreate' })" type="primary">

@@ -5,7 +5,7 @@
         >添加规则</el-button
       >
     </div>
-    <div class="float-left mt-30" v-loading="loading">
+    <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table :data="messages" stripe class="float-left">
           <el-table-column prop="id" label="ID" width="120"> </el-table-column>

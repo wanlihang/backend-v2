@@ -1,5 +1,6 @@
 <template>
   <div class="meedu-main-body">
+    <back-bar class="mb-30" title="课程章节管理"></back-bar>
     <div class="float-left mb-30">
       <el-button
         @click="
@@ -12,7 +13,7 @@
         >添加</el-button
       >
     </div>
-    <div class="float-left mt-30" v-loading="loading">
+    <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table :data="chapters" stripe class="float-left">
           <el-table-column prop="sort" label="升序" width="150">

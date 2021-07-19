@@ -1,5 +1,6 @@
 <template>
   <div class="meedu-main-body">
+     <back-bar class="mb-30" title="管理员角色"></back-bar>
     <div class="float-left mb-30">
       <el-button
         @click="$router.push({ name: 'AdminrolesCreate' })"
@@ -7,7 +8,7 @@
         >添加</el-button
       >
     </div>
-    <div class="float-left mt-30" v-loading="loading">
+    <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table
           :data="users"

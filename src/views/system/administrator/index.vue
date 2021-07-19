@@ -7,7 +7,7 @@
         >添加</el-button
       >
     </div>
-    <div class="float-left mt-30" v-loading="loading">
+    <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table
           :data="users"
