@@ -43,6 +43,45 @@
             </div>
           </div>
 
+          <div class="block-item" sign="blank">
+            <div class="btn">
+              <div class="icon">
+                <img
+                  src="@/assets/images/decoration/h5/blank.png"
+                  width="44"
+                  height="44"
+                />
+              </div>
+              <div class="name">空白快</div>
+            </div>
+          </div>
+
+          <div class="block-item" sign="image-group">
+            <div class="btn">
+              <div class="icon">
+                <img
+                  src="@/assets/images/decoration/h5/image-group.png"
+                  width="44"
+                  height="44"
+                />
+              </div>
+              <div class="name">图片魔方</div>
+            </div>
+          </div>
+
+          <div class="block-item" sign="mp-wechat">
+            <div class="btn">
+              <div class="icon">
+                <img
+                  src="@/assets/images/decoration/h5/mp-wechat.png"
+                  width="44"
+                  height="44"
+                />
+              </div>
+              <div class="name">微信公众号</div>
+            </div>
+          </div>
+
           <div class="block-item" sign="h5-vod-v1">
             <div class="btn">
               <div class="icon">
@@ -56,7 +95,11 @@
             </div>
           </div>
 
-          <div class="block-item" sign="h5-live-v1">
+          <div
+            class="block-item"
+            sign="h5-live-v1"
+            v-if="enabledAddons['Zhibo']"
+          >
             <div class="btn">
               <div class="icon">
                 <img
@@ -69,7 +112,11 @@
             </div>
           </div>
 
-          <div class="block-item" sign="h5-book-v1">
+          <div
+            class="block-item"
+            sign="h5-book-v1"
+            v-if="enabledAddons['MeeduBooks']"
+          >
             <div class="btn">
               <div class="icon">
                 <img
@@ -82,7 +129,11 @@
             </div>
           </div>
 
-          <div class="block-item" sign="h5-topic-v1">
+          <div
+            class="block-item"
+            sign="h5-topic-v1"
+            v-if="enabledAddons['MeeduTopics']"
+          >
             <div class="btn">
               <div class="icon">
                 <img
@@ -95,7 +146,11 @@
             </div>
           </div>
 
-          <div class="block-item" sign="h5-learnPath-v1">
+          <div
+            class="block-item"
+            sign="h5-learnPath-v1"
+            v-if="enabledAddons['LearningPaths']"
+          >
             <div class="btn">
               <div class="icon">
                 <img
@@ -108,7 +163,11 @@
             </div>
           </div>
 
-          <div class="block-item" sign="h5-ms-v1">
+          <div
+            class="block-item"
+            sign="h5-ms-v1"
+            v-if="enabledAddons['MiaoSha']"
+          >
             <div class="btn">
               <div class="icon">
                 <img
@@ -121,7 +180,11 @@
             </div>
           </div>
 
-          <div class="block-item" sign="h5-tg-v1">
+          <div
+            class="block-item"
+            sign="h5-tg-v1"
+            v-if="enabledAddons['TuanGou']"
+          >
             <div class="btn">
               <div class="icon">
                 <img
@@ -200,6 +263,14 @@
                 v-else-if="item.sign === 'h5-ms-v1'"
                 :config="item.config_render"
               ></render-ms-v1>
+              <render-blank
+                v-else-if="item.sign === 'blank'"
+                :config="item.config_render"
+              ></render-blank>
+              <render-mp-wechat
+                v-else-if="item.sign === 'mp-wechat'"
+                :config="item.config_render"
+              ></render-mp-wechat>
 
               <div class="item-options" v-if="curBlock === index">
                 <div class="btn-item" @click="blockDestroy(index, item)">
@@ -224,22 +295,21 @@
                 </div>
               </div>
             </div>
-
-            <div
-              class="float-left mt-15"
-              v-if="item.sign !== 'slider' && item.sign !== 'grid-nav'"
-            ></div>
           </div>
         </template>
       </draggable>
 
       <div class="config-box" v-if="curBlock !== null">
-        <config-setting :block="blocks[curBlock]" @update="getData()"></config-setting>
+        <config-setting
+          :block="blocks[curBlock]"
+          @update="getData()"
+        ></config-setting>
       </div>
     </div>
   </div>
 </template>
 <script>
+import { mapState } from "vuex";
 import draggable from "vuedraggable";
 import RenderSlider from "./components/h5/render/slider.vue";
 import RenderGridNav from "./components/h5/render/grid-nav.vue";
@@ -251,6 +321,8 @@ import RenderLearnPathV1 from "./components/h5/render/learnPath-v1.vue";
 import RenderTgV1 from "./components/h5/render/tg-v1.vue";
 import RenderMsV1 from "./components/h5/render/ms-v1.vue";
 import ConfigSetting from "./components/h5/config/index.vue";
+import RenderBlank from "./components/h5/render/blank.vue";
+import RenderMpWechat from "./components/h5/render/mp-wechat";
 
 export default {
   components: {
@@ -265,6 +337,8 @@ export default {
     RenderTgV1,
     RenderMsV1,
     ConfigSetting,
+    RenderBlank,
+    RenderMpWechat,
   },
   data() {
     return {
@@ -276,6 +350,7 @@ export default {
     };
   },
   computed: {
+    ...mapState(["enabledAddons"]),
     lastSort() {
       let sort = 0;
       if (this.blocks.length > 0) {
@@ -418,9 +493,19 @@ export default {
             {
               id: null,
               goods_title: "秒杀一",
-              goods_thumb: null
+              goods_thumb: null,
             },
           ],
+        };
+      } else if (blockSign === "blank") {
+        defaultConfig = {
+          height: 10,
+          bgcolor: "#FFFFFF",
+        };
+      } else if (blockSign === "mp-wechat") {
+        defaultConfig = {
+          name: "微信公众号名称",
+          desc: "微信公众号简介",
         };
       }
       // 创建block
@@ -543,6 +628,7 @@ export default {
   padding-right: 30px;
   background-color: white;
   line-height: 56px;
+  border-bottom: 1px solid #f2f2f2;
 
   .btn-back {
     font-size: 14px;
@@ -632,6 +718,8 @@ export default {
   height: auto;
   min-height: 600px;
   background-color: #f6f6f6;
+  box-sizing: border-box;
+  padding-bottom: 50px;
 
   .status-bar {
     width: 100%;
@@ -650,6 +738,8 @@ export default {
     height: auto;
     float: left;
     cursor: pointer;
+    box-sizing: border-box;
+    border: 2px solid #f6f6f6;
 
     &.active {
       border: 2px solid @primary-color;
@@ -657,10 +747,10 @@ export default {
 
     .item-options {
       position: absolute;
-      top: 0;
-      right: -36px;
-      width: 36px;
-      height: 144px;
+      z-index: 9;
+      top: -36px;
+      right: -2px;
+      height: 36px;
 
       .btn-item {
         color: white;
@@ -677,11 +767,11 @@ export default {
 
         &:first-child {
           border-top-left-radius: 2px;
-          border-top-right-radius: 2px;
+          border-bottom-right-radius: 2px;
         }
 
         &:last-child {
-          border-bottom-left-radius: 2px;
+          border-top-right-radius: 2px;
           border-bottom-right-radius: 2px;
         }
       }

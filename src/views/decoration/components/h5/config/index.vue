@@ -52,6 +52,16 @@
       :block="block"
       @update="update"
     ></code-set>
+    <blank-set
+      v-else-if="block.sign === 'blank'"
+      :block="block"
+      @update="update"
+    ></blank-set>
+    <mp-wechat-set
+      v-else-if="block.sign === 'mp-wechat'"
+      :block="block"
+      @update="update"
+    ></mp-wechat-set>
   </div>
 </template>
 <script>
@@ -65,6 +75,8 @@ import LearnPathV1Set from "./learnPath-v1.vue";
 import MsV1Set from "./ms-v1.vue";
 import TgV1Set from "./tg-v1.vue";
 import CodeSet from "./code.vue";
+import BlankSet from "./blank.vue";
+import MpWechatSet from "./mp-wechat.vue";
 
 export default {
   components: {
@@ -78,6 +90,8 @@ export default {
     MsV1Set,
     TgV1Set,
     CodeSet,
+    BlankSet,
+    MpWechatSet,
   },
   props: ["block"],
   methods: {

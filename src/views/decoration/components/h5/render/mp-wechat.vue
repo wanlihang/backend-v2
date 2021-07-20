@@ -1,0 +1,88 @@
+<template>
+  <div class="mp-wechat-box">
+    <div class="mp-wechat-icon">
+      <img
+        src="@/assets/images/decoration/h5/mp-wechat-icon.png"
+        width="50"
+        height="50"
+      />
+    </div>
+    <div class="mp-wechat-body">
+      <div class="name">{{ config.name }}</div>
+      <div class="desc">{{ config.desc }}</div>
+    </div>
+    <div class="options">
+      <a href="javascript:void(0)">查看</a>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  props: ["config"],
+};
+</script>
+
+<style lang="less" scoped>
+.mp-wechat-box {
+  width: 100%;
+  height: auto;
+  float: left;
+  box-sizing: border-box;
+  padding: 15px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+
+  .mp-wechat-icon {
+    width: 50px;
+    height: 50px;
+    float: left;
+    margin-right: 15px;
+  }
+
+  .mp-wechat-body {
+    flex: 1;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+    .name {
+      width: 100%;
+      height: auto;
+      float: left;
+      font-size: 14px;
+      font-weight: 500;
+      color: #333333;
+      line-height: 20px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 8px;
+    }
+
+    .desc {
+      width: 100%;
+      height: auto;
+      float: left;
+      font-size: 12px;
+      font-weight: 400;
+      color: #999999;
+      line-height: 12px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .options {
+    margin-left: 15px;
+
+    a {
+      font-size: 14px;
+      font-weight: 400;
+      color: #01de6d;
+      line-height: 50px;
+    }
+  }
+}
+</style>
