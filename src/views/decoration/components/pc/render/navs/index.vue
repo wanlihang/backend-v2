@@ -3,7 +3,8 @@
     <div class="navs" @click="showListWin = true">
       <div class="nav-item" v-for="(item, index) in list" :key="index">
         {{ item.name }}
-        <div class="nav-children">
+        <i class="el-icon-arrow-down" v-if="item.children.length > 0"></i>
+        <div class="nav-children" v-if="item.children.length > 0">
           <div
             class="nav-children-item"
             v-for="(item, index2) in item.children"
@@ -62,7 +63,6 @@ export default {
     width: 100px;
     height: 50px;
     box-sizing: border-box;
-    margin-right: 30px;
     font-size: 16px;
     font-weight: 400;
     color: #333333;
@@ -73,8 +73,6 @@ export default {
       display: none;
       position: absolute;
       z-index: 11;
-      width: 150px;
-      height: auto;
       top: 50px;
       left: -25px;
       background-color: white;
@@ -89,15 +87,18 @@ export default {
         font-size: 16px;
         font-weight: 400;
         color: #333333;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
 
         &:hover {
-          background-color: rgba(0, 0, 0, 0.02);
+          background-color: rgba(0, 0, 0, 0.05);
         }
       }
     }
 
     &:hover {
-      background-color: rgba(0, 0, 0, 0.02);
+      background-color: rgba(0, 0, 0, 0.05);
 
       .nav-children {
         display: block;
