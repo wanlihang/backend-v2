@@ -699,6 +699,54 @@ const routes = [
           title: 'title.learningpath.path.update'
         }
       },
+      {
+        path: '/learningpath/step/index',
+        component: () => import('@/views/learningpath/step/index'),
+        name: 'LearningStep',
+        meta: {
+          title: 'title.learningpath.step.index'
+        }
+      },
+      {
+        path: '/learningpath/step/create',
+        component: () => import('@/views/learningpath/step/create'),
+        name: 'LearningStepCreate',
+        meta: {
+          title: 'title.learningpath.step.create'
+        }
+      },
+      {
+        path: '/learningpath/step/update',
+        component: () => import('@/views/learningpath/step/update'),
+        name: 'LearningStepUpdate',
+        meta: {
+          title: 'title.learningpath.step.update'
+        }
+      },
+      {
+        path: '/learningpath/step/relation/index',
+        component: () => import('@/views/learningpath/step/relation/index'),
+        name: 'Steprelation',
+        meta: {
+          title: 'title.learningpath.step.relation.index'
+        }
+      },
+      {
+        path: '/learningpath/step/relation/create',
+        component: () => import('@/views/learningpath/step/relation/create'),
+        name: 'SteprelationCreate',
+        meta: {
+          title: 'title.learningpath.step.relation.create'
+        }
+      },
+      {
+        path: '/learningpath/step/relation/update',
+        component: () => import('@/views/learningpath/step/relation/update'),
+        name: 'SteprelationUpdate',
+        meta: {
+          title: 'title.learningpath.step.relation.update'
+        }
+      },
     ]
   },
   {

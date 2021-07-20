@@ -78,13 +78,13 @@ const Api = {
             }
         }
     },
-    Miaosha:{
-        Orders:{
+    Miaosha: {
+        Orders: {
             List(params) {
                 return get(`/backend/addons/MiaoSha/orders/index`, params);
-            } 
+            }
         },
-        Goods:{
+        Goods: {
             List(params) {
                 return get(`/backend/addons/MiaoSha/goods/index`, params);
             },
@@ -436,6 +436,49 @@ const Api = {
                 Users(id, params) {
                     return get(`/backend/addons/LearningPaths/path/${id}/users`, params);
                 }
+            },
+            Step: {
+                List(params) {
+                    return get(`/backend/addons/LearningPaths/step/index`, params);
+                },
+                Create() {
+                    return get(`/backend/addons/LearningPaths/step/create`);
+                },
+                Store(params) {
+                    return post(`/backend/addons/LearningPaths/step/create`, params);
+                },
+                Destory(id) {
+                    return destroy(`/backend/addons/LearningPaths/step/${id}`);
+                },
+                Detail(id) {
+                    return get(`/backend/addons/LearningPaths/step/${id}`);
+                },
+                Update(id, params) {
+                    return put(`/backend/addons/LearningPaths/step/${id}`, params);
+                },
+                Users(id, params) {
+                    return get(`/backend/addons/LearningPaths/step/${id}/users`, params);
+                },
+                Relation: {
+                    List(params) {
+                        return get(`/backend/addons/LearningPaths/step/relation/index`, params);
+                    },
+                    Create() {
+                        return get(`/backend/addons/LearningPaths/step/relation/create`);
+                    },
+                    Store(params) {
+                        return post(`/backend/addons/LearningPaths/step/relation/create`, params);
+                    },
+                    Destory(id) {
+                        return destroy(`/backend/addons/LearningPaths/step/relation/${id}`);
+                    },
+                    Detail(id) {
+                        return get(`/backend/addons/LearningPaths/step/relation/${id}`);
+                    },
+                    Update(id, params) {
+                        return put(`/backend/addons/LearningPaths/step/relation/${id}`, params);
+                    },
+                },
             }
         }
     },
@@ -749,25 +792,25 @@ const Api = {
         Destroy(id) {
             return destroy(`/backend/addons/TuanGou/goods/${id}`);
         },
-        Order:{
+        Order: {
             List(params) {
                 return get(`/backend/addons/TuanGou/orders/index`, params);
             },
         },
-        Refund:{
+        Refund: {
             List(params) {
                 return get(`/backend/addons/TuanGou/refunds/index`, params);
             },
-            Complete(id,params) {
-                return get(`/backend/addons/TuanGou/refunds/${id}/handler`,params);
+            Complete(id, params) {
+                return get(`/backend/addons/TuanGou/refunds/${id}/handler`, params);
             },
         },
-        Tuan:{
-            List(id,params) {
+        Tuan: {
+            List(id, params) {
                 return get(`/backend/addons/TuanGou/goods/${id}/items`, params);
-            }, 
+            },
             Complete(params) {
-                return get(`/backend/addons/TuanGou/goods/item/complete`,params);
+                return get(`/backend/addons/TuanGou/goods/item/complete`, params);
             },
         },
     },

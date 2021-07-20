@@ -65,7 +65,7 @@ const zh = { //zh
                 tuanorder: '团列表',
             },
         },
-        learningpath:{
+        learningpath: {
             name: '学习路径',
             path: {
                 name: '路径',
@@ -77,7 +77,12 @@ const zh = { //zh
                 name: '步骤',
                 index: '学习步骤',
                 create: '创建学习步骤',
-                update: '编辑学习步骤'
+                update: '编辑学习步骤',
+                relation: {
+                    index: '学习步骤关联',
+                    create: '创建步骤关联',
+                    update: '编辑步骤关联',
+                }
             },
         },
         wechat: {
