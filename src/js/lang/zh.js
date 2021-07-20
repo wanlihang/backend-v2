@@ -86,13 +86,19 @@ const zh = {
                 }
             },
         },
-        multi_level_share:{
+        multi_level_share: {
             name: '三级分销',
             poster: {
                 name: '海报',
                 index: '海报',
                 create: '创建海报',
                 update: '编辑海报'
+            },
+            goods: {
+                name: '分销商品',
+                index: '分销商品',
+                create: '创建分销商品',
+                update: '编辑分销商品'
             },
         },
         wechat: {

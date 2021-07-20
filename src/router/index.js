@@ -771,6 +771,30 @@ const routes = [
           title: 'title.multi_level_share.poster.update'
         }
       },
+      {
+        path: '/multi_level_share/goods/index',
+        component: () => import('@/views/multi_level_share/goods/index'),
+        name: 'ShareGoods',
+        meta: {
+          title: 'title.multi_level_share.goods.index'
+        }
+      },
+      {
+        path: '/multi_level_share/goods/create',
+        component: () => import('@/views/multi_level_share/goods/create'),
+        name: 'ShareGoodsCreate',
+        meta: {
+          title: 'title.multi_level_share.goods.create'
+        }
+      },
+      {
+        path: '/multi_level_share/goods/update',
+        component: () => import('@/views/multi_level_share/goods/update'),
+        name: 'ShareGoodsUpdate',
+        meta: {
+          title: 'title.multi_level_share.goods.update'
+        }
+      },
     ]
   },
   {

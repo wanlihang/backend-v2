@@ -128,8 +128,10 @@ export default [
                 name: 'title.multi_level_share.poster.name',
                 key: 'MultiPoster'
             },
-            
-            
+            {
+                name: 'title.multi_level_share.goods.name',
+                key: 'ShareGoods'
+            },
         ]
     },
     {
