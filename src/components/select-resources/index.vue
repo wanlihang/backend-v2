@@ -101,7 +101,7 @@ export default {
 
       if (this.enabledResourceMap["vod"]) {
         resources.push({
-          name: "点播",
+          name: "录播",
           key: "vod",
         });
       }

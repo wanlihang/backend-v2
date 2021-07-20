@@ -1,7 +1,7 @@
 <template>
   <div class="vod-v1-box" v-if="config">
     <div class="title">
-      <div class="text">点播课程配置</div>
+      <div class="text">录播课程配置</div>
     </div>
     <div class="config-item">
       <div class="config-item-title">板块标题</div>

@@ -27,16 +27,6 @@
         </div>
       </div>
     </div>
-
-    <div class="bottom-menus">
-      <div class="bottom-menus-box">
-        <div>
-          <el-button @click="$router.push({ name: 'MemberIndex' })">
-            取消
-          </el-button>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 

@@ -68,8 +68,8 @@
             <el-date-picker
               v-model="course.started_at"
               type="datetime"
-              format="yyyy-MM-dd hh:mm"
-              value-format="yyyy-MM-dd hh:mm"
+              format="yyyy-MM-dd HH:mm"
+              value-format="yyyy-MM-dd HH:mm"
               placeholder="请选择日期"
               :picker-options="expireTimeOption"
             >
@@ -79,8 +79,8 @@
             <el-date-picker
               v-model="course.end_at"
               type="datetime"
-              format="yyyy-MM-dd hh:mm"
-              value-format="yyyy-MM-dd hh:mm"
+              format="yyyy-MM-dd HH:mm"
+              value-format="yyyy-MM-dd HH:mm"
               placeholder="请选择日期"
               :picker-options="expireTimeOption"
             >

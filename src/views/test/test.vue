@@ -1,9 +1,10 @@
 <template>
   <div>
-    <select-resource
+    <!-- <select-resource
       @change="change"
       enabled-resource="vod,video,vip,book,live,topic,learnPath,paper,practice,mock-paper"
-    ></select-resource>
+    ></select-resource> -->
+    <user-add></user-add>
   </div>
 </template>
 
@@ -13,11 +14,12 @@
 // import MdEditor from "@/components/md-editor";
 // import H5Link from "@/components/h5-link/index";
 // import SelectVod from '@/components/select-vod';
-import SelectResource from "@/components/select-resources/index";
+// import SelectResource from "@/components/select-resources/index";
+import UserAdd from '@/components/user-add';
 
 export default {
   components: {
-    SelectResource,
+    UserAdd,
   },
   data() {
     return {

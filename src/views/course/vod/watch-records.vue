@@ -1,55 +1,57 @@
 <template>
-  <div class="meedu-main-body">
-    <back-bar class="mb-30" title="观看记录"></back-bar>
+  <div class="float-left">
     <div class="float-left">
       <div class="float-left d-flex">
-        <div class="d-flex">
-          <div class="filter-label">UID</div>
-          <div class="flex-1 ml-15">
-            <el-input
-              class="w-100"
-              v-model="filter.user_id"
-              placeholder="请选择用户"
-              style="width: 200px"
-            ></el-input>
-          </div>
+        <div>
+          <el-button type="danger" @click="delRecords()">删除</el-button>
         </div>
-        <div class="d-flex ml-15">
-          <div class="filter-label">看完时间</div>
-          <div class="flex-1 ml-15">
-            <el-date-picker
-              v-model="filter.watched_start_at"
-              type="date"
-              align="right"
-              value-format="yyyy-MM-dd"
-              placeholder="开始日期"
+        <div class="ml-10">
+          <el-select
+            v-model="filter.is_watched"
+            class="w-150px"
+            placeholder="看完"
+          >
+            <el-option
+              v-for="(item, index) in statusMapRows"
+              :key="index"
+              :label="item.name"
+              :value="item.key"
             >
-            </el-date-picker>
-            至
-            <el-date-picker
-              v-model="filter.watched_end_at"
-              type="date"
-              align="right"
-              value-format="yyyy-MM-dd"
-              placeholder="结束日期"
-            >
-            </el-date-picker>
-          </div>
+            </el-option>
+          </el-select>
+        </div>
+        <div class="ml-10">
+          <el-date-picker
+            v-model="watched_at"
+            type="daterange"
+            align="right"
+            unlink-panels
+            range-separator="至"
+            start-placeholder="看完时间-开始"
+            end-placeholder="看完时间-结束"
+          >
+          </el-date-picker>
         </div>
 
-        <div class="ml-15">
+        <div class="ml-10">
           <el-button @click="getRecords" type="primary" plain>筛选</el-button>
           <el-button @click="paginationReset">清空</el-button>
-          <el-button @click="importexcel" type="primary">导出表格</el-button>
+          <el-button @click="importexcel">导出表格</el-button>
         </div>
       </div>
     </div>
-      <div class="float-left mt-30" v-loading="loading">
+    <div class="float-left" v-loading="loading">
       <div class="float-left">
-        <el-table :data="records" stripe class="float-left">
-          <el-table-column prop="course_id" label="课程ID" width="80">
-          </el-table-column>
-          <el-table-column prop="user_id" label="用户ID" width="80">
+        <el-table
+          :data="records"
+          stripe
+          class="float-left"
+          @sort-change="sortChange"
+          :default-sort="{ prop: 'id', order: 'descending' }"
+          @selection-change="handleSelectionChange"
+        >
+          <el-table-column type="selection" width="55"> </el-table-column>
+          <el-table-column prop="id" sortable label="ID" width="120">
           </el-table-column>
           <el-table-column label="用户">
             <template slot-scope="scope">
@@ -67,43 +69,34 @@
               </div>
             </template>
           </el-table-column>
-          <el-table-column label="手机号" width="160">
-            <template slot-scope="scope">
-              <div class="d-flex" v-if="users[scope.row.user_id]">
-                <div class="ml-10">
-                  {{ users[scope.row.user_id].mobile }}
-                </div>
-              </div>
-            </template>
-          </el-table-column>
-          <el-table-column label="观看进度" width="80">
+          <el-table-column
+            property="progress"
+            label="观看进度"
+            sortable
+            width="150"
+          >
             <template slot-scope="scope">
               <span>{{ scope.row.progress }}%</span>
             </template>
           </el-table-column>
-          <el-table-column prop="updated_at" label="开始时间" width="200">
+          <el-table-column
+            prop="created_at"
+            sortable
+            label="开始时间"
+            width="240"
+          >
           </el-table-column>
-          <el-table-column prop="watched_at" label="看完时间" width="200">
+          <el-table-column
+            prop="watched_at"
+            sortable
+            label="看完时间"
+            width="240"
+          >
           </el-table-column>
-          <el-table-column label="订阅" width="80">
+          <el-table-column label="看完" width="80">
             <template slot-scope="scope">
-              <span v-if="scope.row.is_watched == 0">否</span>
-              <span v-else>是</span>
-            </template>
-          </el-table-column>
-
-          <el-table-column fixed="right" label="操作" width="80">
-            <template slot-scope="scope">
-              <el-link
-                type="primary"
-                @click="
-                  $router.push({
-                    name: 'RecordDetail',
-                    query: { id: scope.row.id },
-                  })
-                "
-                >详情</el-link
-              >
+              <span class="c-red" v-if="scope.row.is_watched === 1">是</span>
+              <span v-else>否</span>
             </template>
           </el-table-column>
         </el-table>
@@ -122,44 +115,66 @@
         </el-pagination>
       </div>
     </div>
-    <div class="bottom-menus">
-      <div class="bottom-menus-box">
-        <div>
-          <el-button @click="$router.push({ name: 'Vod' })">取消</el-button>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
 <script>
 import Utils from "@/js/utils.js";
+
 export default {
+  props: ["id"],
   data() {
     return {
-      course_id: this.$route.query.course_id,
+      course_id: this.id,
       pagination: {
         page: 1,
         size: 10,
       },
       filter: {
         user_id: null,
+        is_watched: null,
         watched_start_at: null,
         watched_end_at: null,
       },
+      watched_at: [],
       total: 0,
       loading: false,
       records: [],
       users: [],
+      selectedRows: [],
+      statusMapRows: [
+        {
+          name: "未看完",
+          key: 0,
+        },
+        {
+          name: "已看完",
+          key: 1,
+        },
+      ],
     };
   },
+  watch: {
+    watched_at(newVal) {
+      if (newVal) {
+        this.filter.watched_start_at = newVal[0];
+        this.filter.watched_end_at = newVal[1];
+      } else {
+        this.filter.watched_start_at = null;
+        this.filter.watched_end_at = null;
+      }
+    },
+  },
   mounted() {
+    this.course_id = this.id;
     this.getRecords();
   },
   methods: {
     paginationReset() {
+      this.watched_at = null;
       this.pagination.page = 1;
       this.filter.user_id = null;
+      this.filter.is_watched = null;
       this.filter.watched_start_at = null;
       this.filter.watched_end_at = null;
       this.getRecords();
@@ -177,6 +192,9 @@ export default {
       this.pagination.order = column.order === "ascending" ? "asc" : "desc";
       this.getRecords();
     },
+    handleSelectionChange(rows) {
+      this.selectedRows = rows;
+    },
     getRecords() {
       if (this.loading) {
         return;
@@ -185,6 +203,9 @@ export default {
       let params = {};
       Object.assign(params, this.filter);
       Object.assign(params, this.pagination);
+      if (params.is_watched === null) {
+        params.is_watched = -1;
+      }
       this.$api.Course.Vod.Records.List(this.course_id, params).then((res) => {
         this.loading = false;
         this.records = res.data.data.data;
@@ -199,39 +220,30 @@ export default {
       this.loading = true;
 
       let params = {
-        id: this.course_id,
         page: 1,
         size: this.total,
       };
+      Object.assign(params, this.filter);
+
       this.$api.Course.Vod.Records.List(this.course_id, params).then((res) => {
         if (res.data.data.total === 0) {
-          this.$message.warn("数据为空");
+          this.$message.error("数据为空");
+          this.loading = false;
           return;
         }
+
         let users = res.data.users;
-        let subscribeRecords = res.data.subscribe_records;
         let filename = "课程观看记录|" + Utils.currentDate() + ".xlsx";
         let sheetName = "sheet1";
 
         let data = [
-          [
-            "用户ID",
-            "用户",
-            "手机号",
-            "观看进度",
-            "开始时间",
-            "看完时间",
-            "是否订阅",
-          ],
+          ["用户ID", "用户", "手机号", "观看进度", "开始时间", "看完时间"],
         ];
         res.data.data.data.forEach((item) => {
           let user = users[item.user_id];
           if (typeof user === "undefined") {
             return;
           }
-
-          let isSub =
-            typeof subscribeRecords[item.user_id] === "undefined" ? "否" : "是";
 
           data.push([
             item.user_id,
@@ -240,13 +252,33 @@ export default {
             item.progress + "%",
             item.created_at,
             item.watched_at,
-            isSub,
           ]);
         });
 
         Utils.exportExcel(data, filename, sheetName);
         this.loading = false;
       });
+    },
+    delRecords() {
+      if (this.selectedRows.length === 0) {
+        this.$message.warning("请选择需要操作的数据");
+        return;
+      }
+      this.loading = true;
+      let ids = [];
+      this.selectedRows.forEach((item) => {
+        ids.push(item.id);
+      });
+      this.$api.Course.Vod.Records.Del(this.course_id, { record_ids: ids })
+        .then(() => {
+          this.loading = false;
+          this.$message.success(this.$t("common.success"));
+          this.getRecords();
+        })
+        .catch((e) => {
+          this.loading = false;
+          this.$message.error(e.message);
+        });
     },
   },
 };

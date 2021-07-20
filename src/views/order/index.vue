@@ -2,67 +2,43 @@
   <div class="meedu-main-body">
     <div class="float-left mb-30">
       <div class="float-left d-flex">
-        <div class="d-flex">
-          <div class="filter-label">UID</div>
-          <div class="flex-1 ml-10">
-            <el-input v-model="filter.user_id"></el-input>
-          </div>
-        </div>
-        <div class="d-flex ml-15">
-          <div class="filter-label">
-            <form-label
-              text="商品ID"
-              helper="可以是录播课程ID，视频ID，VIP会员ID，直播课程ID，电子书ID等"
-            ></form-label>
-          </div>
-          <div class="flex-1 ml-10">
-            <el-input
-              v-model="filter.goods_id"
-              placeholder="商品ID"
-              class="w-100px"
-            ></el-input>
-          </div>
+        <div>
+          <el-input
+            v-model="filter.user_id"
+            class="w-100px"
+            placeholder="用户ID"
+          ></el-input>
         </div>
 
-        <div class="d-flex ml-15">
-          <div class="filter-label">商品名</div>
-          <div class="flex-1 ml-10">
-            <el-input
-              v-model="filter.goods_name"
-              placeholder="商品名"
-              class="w-200px"
-            ></el-input>
-          </div>
+        <div class="ml-10">
+          <el-input
+            v-model="filter.goods_name"
+            placeholder="商品名"
+            class="w-200px"
+          ></el-input>
         </div>
 
-        <div class="d-flex ml-15">
-          <div class="filter-label">订单编号</div>
-          <div class="flex-1 ml-10">
-            <el-input
-              v-model="filter.order_id"
-              class="w-200px"
-              placeholder="订单号"
-            ></el-input>
-          </div>
+        <div class="ml-10">
+          <el-input
+            v-model="filter.order_id"
+            class="w-200px"
+            placeholder="订单编号"
+          ></el-input>
         </div>
 
-        <div class="d-flex ml-15">
-          <div class="filter-label">创建时间</div>
-          <div class="flex-1 ml-10">
-            <el-date-picker
-              v-model="filter.created_at"
-              type="daterange"
-              align="right"
-              unlink-panels
-              range-separator="至"
-              start-placeholder="开始日期"
-              end-placeholder="结束日期"
-            >
-            </el-date-picker>
-          </div>
+        <div class="ml-10">
+          <el-date-picker
+            v-model="filter.created_at"
+            type="daterange"
+            align="right"
+            unlink-panels
+            range-separator="至"
+            start-placeholder="订单创建开始时间"
+            end-placeholder="结束时间"
+          >
+          </el-date-picker>
         </div>
-
-        <div class="ml-15">
+        <div class="ml-10">
           <el-button type="primary" class="search" @click="filterAct()" plain>
             筛选
           </el-button>
@@ -180,19 +156,19 @@ export default {
           },
           {
             name: "未支付",
-            key: '1',
+            key: "1",
           },
           {
             name: "支付中",
-            key: '5',
+            key: "5",
           },
           {
             name: "已支付",
-            key: '9',
+            key: "9",
           },
           {
             name: "已取消",
-            key: '7',
+            key: "7",
           },
         ],
       },

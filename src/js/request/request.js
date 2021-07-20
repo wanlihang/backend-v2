@@ -263,6 +263,15 @@ const Api = {
             Update(id, params) {
                 return put(`/backend/api/v1/course/${id}`, params);
             },
+            SubUsers(id, params) {
+                return get(`/backend/api/v1/course/${id}/subscribes`, params);
+            },
+            SubUsersAdd(id, params) {
+                return post(`/backend/api/v1/course/${id}/subscribe/create`, params);
+            },
+            SubUsersDel(id, params) {
+                return get(`/backend/api/v1/course/${id}/subscribe/delete`, params);
+            },
             Categories: {
                 List(params) {
                     return get(`/backend/api/v1/courseCategory`, params);
@@ -312,6 +321,9 @@ const Api = {
                 List(id, params) {
                     return get(`/backend/api/v1/course/${id}/watch/records`, params);
                 },
+                Del(id, params) {
+                    return post(`/backend/api/v1/course/${id}/watch/records/delete`, params);
+                }
             },
             Videos: {
                 List(params) {

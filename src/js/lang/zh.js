@@ -1,5 +1,6 @@
 import zhLocale from 'element-ui/lib/locale/lang/zh-CN' //引入element语言包
-const zh = { //zh
+
+const zh = {
     title: {
         login: '登录',
         dashboard: '首页概览',
@@ -106,9 +107,10 @@ const zh = { //zh
         },
         course: {
             vod: {
-                index: '点播',
-                create: '添加点播课程',
-                update: '编辑点播课程',
+                index: '录播',
+                create: '添加录播课程',
+                update: '编辑录播课程',
+                detail: '录播课程详情',
                 category: {
                     index: '课程分类管理',
                     create: '创建课程分类',
@@ -211,7 +213,7 @@ const zh = { //zh
         day_increase: '今日新增',
         month_increase: '较上月',
         quick_acsess: '快速访问',
-        demand_course: '点播课程',
+        demand_course: '录播课程',
         live_course: '直播课程',
         graphic_course: '图文课程',
         ebook: '电子书',
