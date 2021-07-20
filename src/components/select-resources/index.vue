@@ -1,5 +1,5 @@
 <template>
-  <div class="meedu-dialog-mask">
+  <div class="meedu-dialog-mask" v-if="show">
     <div class="meedu-dialog-box">
       <div class="meedu-dialog-header">选择</div>
       <div class="meedu-dialog-body">
@@ -87,7 +87,7 @@ export default {
     VipComp,
     VideoComp,
   },
-  props: ["selectedIds", "enabledResource"],
+  props: ["show", "selectedIds", "enabledResource"],
   data() {
     return {
       selectedResult: null,
