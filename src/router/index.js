@@ -675,6 +675,30 @@ const routes = [
           title: 'title.tuangou.goods.tuanorder'
         }
       },
+      {
+        path: '/learningpath/path/index',
+        component: () => import('@/views/learningpath/path/index'),
+        name: 'LearningPath',
+        meta: {
+          title: 'title.learningpath.path.index'
+        }
+      },
+      {
+        path: '/learningpath/path/create',
+        component: () => import('@/views/learningpath/path/create'),
+        name: 'LearningPathCreate',
+        meta: {
+          title: 'title.learningpath.path.create'
+        }
+      },
+      {
+        path: '/learningpath/path/update',
+        component: () => import('@/views/learningpath/path/update'),
+        name: 'LearningPathUpdate',
+        meta: {
+          title: 'title.learningpath.path.update'
+        }
+      },
     ]
   },
   {

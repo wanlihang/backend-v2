@@ -111,6 +111,21 @@ export default [
         ]
     },
     {
+        name: 'title.learningpath.name',
+        key: 'Learning',
+        children: [
+            {
+                name: 'title.learningpath.path.name',
+                key: 'LearningPath'
+            },
+            {
+                name: 'title.learningpath.step.name',
+                key: 'LearningStep'
+            },
+            
+        ]
+    },
+    {
         name: 'title.meedubook.book.index',
         key: 'Meedubook',
         children: [

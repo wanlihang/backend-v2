@@ -65,6 +65,21 @@ const zh = { //zh
                 tuanorder: '团列表',
             },
         },
+        learningpath:{
+            name: '学习路径',
+            path: {
+                name: '路径',
+                index: '学习路径',
+                create: '创建学习路径',
+                update: '编辑学习路径'
+            },
+            step: {
+                name: '步骤',
+                index: '学习步骤',
+                create: '创建学习步骤',
+                update: '编辑学习步骤'
+            },
+        },
         wechat: {
             messagereply: {
                 index: '微信公众号消息回复',
