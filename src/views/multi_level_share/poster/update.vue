@@ -25,7 +25,7 @@
             ></upload-image>
           </el-form-item>
           <el-form-item label="参数" prop="config">
-            <el-input v-model="course.config" class="w-100"></el-input>
+            <el-input type="textarea" v-model="course.config" class="w-100"></el-input>
           </el-form-item>
         </el-form>
       </div>
