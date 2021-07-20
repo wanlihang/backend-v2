@@ -9,222 +9,211 @@
       <div class="name">电脑端首页</div>
     </div>
 
-    <div class="main-body">
-      <div class="blocks-box">
-        <div class="title">拖动添加板块</div>
-        <draggable
-          class="blocks"
-          :sort="false"
-          :group="{ name: 'blocks', pull: 'clone', put: false }"
-        >
-          <div class="block-item" sign="pc-vod-v1">
-            <div class="btn">
-              <div class="icon">
-                <img
-                  src="@/assets/images/decoration/h5/h5-vod-v1.png"
-                  width="44"
-                  height="44"
-                />
-              </div>
-              <div class="name">点播</div>
-            </div>
-          </div>
-
-          <div
-            class="block-item"
-            sign="pc-live-v1"
-            v-if="enabledAddons['Zhibo']"
-          >
-            <div class="btn">
-              <div class="icon">
-                <img
-                  src="@/assets/images/decoration/h5/h5-live-v1.png"
-                  width="44"
-                  height="44"
-                />
-              </div>
-              <div class="name">直播</div>
-            </div>
-          </div>
-
-          <div
-            class="block-item"
-            sign="pc-book-v1"
-            v-if="enabledAddons['MeeduBooks']"
-          >
-            <div class="btn">
-              <div class="icon">
-                <img
-                  src="@/assets/images/decoration/h5/h5-book-v1.png"
-                  width="44"
-                  height="44"
-                />
-              </div>
-              <div class="name">电子书</div>
-            </div>
-          </div>
-
-          <div
-            class="block-item"
-            sign="pc-topic-v1"
-            v-if="enabledAddons['MeeduTopics']"
-          >
-            <div class="btn">
-              <div class="icon">
-                <img
-                  src="@/assets/images/decoration/h5/h5-topic-v1.png"
-                  width="44"
-                  height="44"
-                />
-              </div>
-              <div class="name">图文</div>
-            </div>
-          </div>
-
-          <div
-            class="block-item"
-            sign="pc-learnPath-v1"
-            v-if="enabledAddons['LearningPaths']"
-          >
-            <div class="btn">
-              <div class="icon">
-                <img
-                  src="@/assets/images/decoration/h5/h5-learn-path-v1.png"
-                  width="44"
-                  height="44"
-                />
-              </div>
-              <div class="name">路径</div>
-            </div>
-          </div>
-
-          <div
-            class="block-item"
-            sign="pc-ms-v1"
-            v-if="enabledAddons['MiaoSha']"
-          >
-            <div class="btn">
-              <div class="icon">
-                <img
-                  src="@/assets/images/decoration/h5/h5-ms-v1.png"
-                  width="44"
-                  height="44"
-                />
-              </div>
-              <div class="name">秒杀</div>
-            </div>
-          </div>
-
-          <div
-            class="block-item"
-            sign="pc-tg-v1"
-            v-if="enabledAddons['TuanGou']"
-          >
-            <div class="btn">
-              <div class="icon">
-                <img
-                  src="@/assets/images/decoration/h5/h5-tg-v1.png"
-                  width="44"
-                  height="44"
-                />
-              </div>
-              <div class="name">团购</div>
-            </div>
-          </div>
-        </draggable>
-      </div>
-
+    <div class="blocks-box">
+      <div class="title">拖动添加板块</div>
       <draggable
-        class="preview-box"
-        draggable=".block-item"
-        group="blocks"
-        @add="dragChange"
+        class="blocks"
+        :sort="false"
+        :group="{ name: 'blocks', pull: 'clone', put: false }"
       >
-        <div class="pc-box">
-          <!-- 导航栏 -->
-          <render-navs></render-navs>
-          <div class="block"></div>
+        <div class="block-item" sign="pc-vod-v1">
+          <div class="btn">
+            <div class="icon">
+              <img
+                src="@/assets/images/decoration/h5/h5-vod-v1.png"
+                width="44"
+                height="44"
+              />
+            </div>
+            <div class="name">点播</div>
+          </div>
+        </div>
 
-          <!-- 幻灯片 -->
-          <render-sliders></render-sliders>
+        <div class="block-item" sign="pc-live-v1" v-if="enabledAddons['Zhibo']">
+          <div class="btn">
+            <div class="icon">
+              <img
+                src="@/assets/images/decoration/h5/h5-live-v1.png"
+                width="44"
+                height="44"
+              />
+            </div>
+            <div class="name">直播</div>
+          </div>
+        </div>
 
-          <!-- 公告 -->
-          <render-notice></render-notice>
-          <div class="block"></div>
+        <div
+          class="block-item"
+          sign="pc-book-v1"
+          v-if="enabledAddons['MeeduBooks']"
+        >
+          <div class="btn">
+            <div class="icon">
+              <img
+                src="@/assets/images/decoration/h5/h5-book-v1.png"
+                width="44"
+                height="44"
+              />
+            </div>
+            <div class="name">电子书</div>
+          </div>
+        </div>
 
-          <template v-for="(item, index) in blocks">
-            <div class="float-left" :key="item.id">
-              <div
-                class="item"
-                :class="{ active: curBlockIndex === index }"
-                @click="curBlockIndex = index"
-              >
-                <render-vod-v1
-                  v-if="item.sign === 'pc-vod-v1'"
-                  :config="item.config_render"
-                ></render-vod-v1>
-                <render-live-v1
-                  v-if="item.sign === 'pc-live-v1'"
-                  :config="item.config_render"
-                ></render-live-v1>
-                <render-book-v1
-                  v-if="item.sign === 'pc-book-v1'"
-                  :config="item.config_render"
-                ></render-book-v1>
-                <render-topic-v1
-                  v-if="item.sign === 'pc-topic-v1'"
-                  :config="item.config_render"
-                ></render-topic-v1>
-                <render-learn-path-v1
-                  v-if="item.sign === 'pc-learnPath-v1'"
-                  :config="item.config_render"
-                ></render-learn-path-v1>
-                <render-ms-v1
-                  v-if="item.sign === 'pc-ms-v1'"
-                  :config="item.config_render"
-                ></render-ms-v1>
-                <render-tg-v1
-                  v-if="item.sign === 'pc-tg-v1'"
-                  :config="item.config_render"
-                ></render-tg-v1>
+        <div
+          class="block-item"
+          sign="pc-topic-v1"
+          v-if="enabledAddons['MeeduTopics']"
+        >
+          <div class="btn">
+            <div class="icon">
+              <img
+                src="@/assets/images/decoration/h5/h5-topic-v1.png"
+                width="44"
+                height="44"
+              />
+            </div>
+            <div class="name">图文</div>
+          </div>
+        </div>
 
-                <div class="item-options" v-if="curBlockIndex === index">
-                  <div class="btn-item" @click="blockDestroy(index, item)">
-                    <i class="el-icon-delete-solid"></i>
-                  </div>
-                  <div class="btn-item" @click="blockCopy(index, item)">
-                    <i class="el-icon-document-copy"></i>
-                  </div>
-                  <div
-                    class="btn-item"
-                    v-if="index !== 0"
-                    @click="moveTop(index, item)"
-                  >
-                    <i class="el-icon-arrow-up"></i>
-                  </div>
-                  <div
-                    class="btn-item"
-                    v-if="index !== blocks.length - 1"
-                    @click="moveBottom(index, item)"
-                  >
-                    <i class="el-icon-arrow-down"></i>
-                  </div>
+        <div
+          class="block-item"
+          sign="pc-learnPath-v1"
+          v-if="enabledAddons['LearningPaths']"
+        >
+          <div class="btn">
+            <div class="icon">
+              <img
+                src="@/assets/images/decoration/h5/h5-learn-path-v1.png"
+                width="44"
+                height="44"
+              />
+            </div>
+            <div class="name">路径</div>
+          </div>
+        </div>
+
+        <div class="block-item" sign="pc-ms-v1" v-if="enabledAddons['MiaoSha']">
+          <div class="btn">
+            <div class="icon">
+              <img
+                src="@/assets/images/decoration/h5/h5-ms-v1.png"
+                width="44"
+                height="44"
+              />
+            </div>
+            <div class="name">秒杀</div>
+          </div>
+        </div>
+
+        <div class="block-item" sign="pc-tg-v1" v-if="enabledAddons['TuanGou']">
+          <div class="btn">
+            <div class="icon">
+              <img
+                src="@/assets/images/decoration/h5/h5-tg-v1.png"
+                width="44"
+                height="44"
+              />
+            </div>
+            <div class="name">团购</div>
+          </div>
+        </div>
+      </draggable>
+    </div>
+
+    <draggable
+      class="preview-box"
+      draggable=".block-item"
+      group="blocks"
+      @add="dragChange"
+    >
+      <div class="pc-box">
+        <!-- 导航栏 -->
+        <render-navs></render-navs>
+
+        <!-- 幻灯片 -->
+        <render-sliders></render-sliders>
+
+        <!-- 公告 -->
+        <render-notice></render-notice>
+
+        <template v-for="(item, index) in blocks">
+          <div class="float-left" :key="item.id">
+            <div
+              class="item"
+              :class="{ active: curBlockIndex === index }"
+              @click="curBlockIndex = index"
+            >
+              <render-vod-v1
+                v-if="item.sign === 'pc-vod-v1'"
+                :config="item.config_render"
+              ></render-vod-v1>
+              <render-live-v1
+                v-if="item.sign === 'pc-live-v1'"
+                :config="item.config_render"
+              ></render-live-v1>
+              <render-book-v1
+                v-if="item.sign === 'pc-book-v1'"
+                :config="item.config_render"
+              ></render-book-v1>
+              <render-topic-v1
+                v-if="item.sign === 'pc-topic-v1'"
+                :config="item.config_render"
+              ></render-topic-v1>
+              <render-learn-path-v1
+                v-if="item.sign === 'pc-learnPath-v1'"
+                :config="item.config_render"
+              ></render-learn-path-v1>
+              <render-ms-v1
+                v-if="item.sign === 'pc-ms-v1'"
+                :config="item.config_render"
+              ></render-ms-v1>
+              <render-tg-v1
+                v-if="item.sign === 'pc-tg-v1'"
+                :config="item.config_render"
+              ></render-tg-v1>
+
+              <div class="item-options" v-if="curBlockIndex === index">
+                <div class="btn-item" @click="blockDestroy(index, item)">
+                  <i class="el-icon-delete-solid"></i>
+                </div>
+                <div class="btn-item" @click="blockCopy(index, item)">
+                  <i class="el-icon-document-copy"></i>
+                </div>
+                <div
+                  class="btn-item"
+                  v-if="index !== 0"
+                  @click="moveTop(index, item)"
+                >
+                  <i class="el-icon-arrow-up"></i>
+                </div>
+                <div
+                  class="btn-item"
+                  v-if="index !== blocks.length - 1"
+                  @click="moveBottom(index, item)"
+                >
+                  <i class="el-icon-arrow-down"></i>
                 </div>
               </div>
             </div>
-          </template>
+          </div>
+        </template>
 
-          <!-- 友情链接 -->
-          <render-link></render-link>
-        </div>
-      </draggable>
-
-      <div class="config-box" v-if="curBlockIndex !== null">
-        <config-setting
-          :block="blocks[curBlockIndex]"
-          @update="getData()"
-        ></config-setting>
+        <!-- 友情链接 -->
+        <render-link></render-link>
       </div>
+    </draggable>
+
+    <div class="config-box" v-if="curBlockIndex !== null">
+      <div class="float-left mb-15">
+        <el-button class="ml-15 mt-15" @click="curBlockIndex = null">
+          <i class="el-icon-close"></i><span class="ml-5">关闭配置</span>
+        </el-button>
+      </div>
+      <config-setting
+        :block="blocks[curBlockIndex]"
+        @update="getData()"
+      ></config-setting>
     </div>
   </div>
 </template>
@@ -659,7 +648,7 @@ export default {
 }
 
 .top-box {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
@@ -672,6 +661,7 @@ export default {
   padding-right: 30px;
   background-color: white;
   line-height: 56px;
+  border-bottom: 1px solid #f2f2f2;
 
   .btn-back {
     font-size: 14px;
@@ -700,7 +690,7 @@ export default {
 }
 
 .blocks-box {
-  position: fixed;
+  position: absolute;
   top: 56px;
   left: 0;
   bottom: 0;
@@ -708,6 +698,8 @@ export default {
   background-color: white;
   box-sizing: border-box;
   padding: 30px;
+  overflow-y: auto;
+  border-right: 1px solid #f2f2f2;
 
   .title {
     width: 100%;
@@ -760,8 +752,6 @@ export default {
   box-sizing: border-box;
   overflow-y: auto;
   overflow-x: auto;
-  padding-left: 50px;
-  padding-right: 50px;
 
   .pc-box {
     width: 1200px;
@@ -781,6 +771,8 @@ export default {
       height: auto;
       float: left;
       cursor: pointer;
+      border: 2px solid #f6f6f6;
+      box-sizing: border-box;
 
       &.active {
         border: 2px solid @primary-color;
@@ -788,10 +780,11 @@ export default {
 
       .item-options {
         position: absolute;
-        top: 0;
-        right: -36px;
-        width: 36px;
-        height: 144px;
+        z-index: 9;
+        top: -36px;
+        left: -2px;
+        width: auto;
+        height: 36px;
 
         .btn-item {
           color: white;
@@ -808,11 +801,11 @@ export default {
 
           &:first-child {
             border-top-left-radius: 2px;
-            border-top-right-radius: 2px;
+            border-bottom-left-radius: 2px;
           }
 
           &:last-child {
-            border-bottom-left-radius: 2px;
+            border-top-right-radius: 2px;
             border-bottom-right-radius: 2px;
           }
         }
@@ -823,11 +816,14 @@ export default {
 
 .config-box {
   position: absolute;
+  z-index: 10;
   top: 56px;
   right: 0;
   bottom: 0;
   width: 400px;
   box-sizing: border-box;
   background-color: white;
+  border-left: 1px solid #f2f2f2;
+  overflow-y: auto;
 }
 </style>

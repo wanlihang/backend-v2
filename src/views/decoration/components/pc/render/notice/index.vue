@@ -49,5 +49,7 @@ export default {
   color: #de7a0b;
   line-height: 22px;
   cursor: pointer;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
 </style>
