@@ -603,6 +603,30 @@ const routes = [
           title: 'title.miaosha.orders.index'
         }
       },
+      {
+        path: '/miaosha/goods/index',
+        component: () => import('@/views/miaosha/goods/index'),
+        name: 'MiaoshaGoods',
+        meta: {
+          title: 'title.miaosha.goods.index'
+        }
+      },
+      {
+        path: '/miaosha/goods/create',
+        component: () => import('@/views/miaosha/goods/create'),
+        name: 'MiaoshaGoodsCreate',
+        meta: {
+          title: 'title.miaosha.goods.create'
+        }
+      },
+      {
+        path: '/miaosha/goods/update',
+        component: () => import('@/views/miaosha/goods/update'),
+        name: 'MiaoshaGoodsUpdate',
+        meta: {
+          title: 'title.miaosha.goods.update'
+        }
+      },
     ]
   },
   {

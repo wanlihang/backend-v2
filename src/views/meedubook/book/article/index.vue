@@ -16,7 +16,7 @@
           <div class="d-flex ml-15">
             <div class="filter-label">章节</div>
             <div class="flex-1 ml-15">
-              <el-select v-model="filter.cid">
+              <el-select v-model="filter.chapter_id">
                 <el-option
                   v-for="(item, index) in filterData.chapters"
                   :key="index"
