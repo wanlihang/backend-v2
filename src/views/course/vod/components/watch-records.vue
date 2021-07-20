@@ -129,6 +129,8 @@ export default {
       pagination: {
         page: 1,
         size: 10,
+        sort: "id",
+        order: "desc",
       },
       filter: {
         user_id: null,

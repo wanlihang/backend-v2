@@ -78,7 +78,7 @@
             width="200"
           >
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="150">
+          <el-table-column fixed="right" label="操作" width="200">
             <template slot-scope="scope">
               <el-link
                 type="primary"
@@ -92,7 +92,31 @@
                 查看
               </el-link>
               <el-link
-                class="ml-10"
+                type="primary"
+                class="ml-5"
+                @click="
+                  $router.push({
+                    name: 'CourseVideos',
+                    query: { course_id: scope.row.id },
+                  })
+                "
+              >
+                视频
+              </el-link>
+              <el-link
+                type="primary"
+                class="ml-5"
+                @click="
+                  $router.push({
+                    name: 'CourseAttach',
+                    query: { course_id: scope.row.id },
+                  })
+                "
+              >
+                附件
+              </el-link>
+              <el-link
+                class="ml-5"
                 type="danger"
                 @click="destory(scope.row.id)"
               >
@@ -100,7 +124,7 @@
               </el-link>
               <el-link
                 type="primary"
-                class="ml-10"
+                class="ml-5"
                 @click="
                   $router.push({
                     name: 'VodUpdate',
