@@ -69,7 +69,7 @@
             </div>
           </div>
 
-          <div class="block-item" sign="mp-wechat">
+          <!-- <div class="block-item" sign="mp-wechat">
             <div class="btn">
               <div class="icon">
                 <img
@@ -80,7 +80,7 @@
               </div>
               <div class="name">微信公众号</div>
             </div>
-          </div>
+          </div> -->
 
           <div class="block-item" sign="h5-vod-v1">
             <div class="btn">
@@ -271,6 +271,10 @@
                 v-else-if="item.sign === 'mp-wechat'"
                 :config="item.config_render"
               ></render-mp-wechat>
+              <render-image-group
+                v-else-if="item.sign === 'image-group'"
+                :config="item.config_render"
+              ></render-image-group>
 
               <div class="item-options" v-if="curBlock === index">
                 <div class="btn-item" @click="blockDestroy(index, item)">
@@ -323,6 +327,7 @@ import RenderMsV1 from "./components/h5/render/ms-v1.vue";
 import ConfigSetting from "./components/h5/config/index.vue";
 import RenderBlank from "./components/h5/render/blank.vue";
 import RenderMpWechat from "./components/h5/render/mp-wechat";
+import RenderImageGroup from "./components/h5/render/image-group";
 
 export default {
   components: {
@@ -339,6 +344,7 @@ export default {
     ConfigSetting,
     RenderBlank,
     RenderMpWechat,
+    RenderImageGroup,
   },
   data() {
     return {
@@ -506,6 +512,28 @@ export default {
         defaultConfig = {
           name: "微信公众号名称",
           desc: "微信公众号简介",
+        };
+      } else if (blockSign === "image-group") {
+        defaultConfig = {
+          v: "v-4",
+          items: [
+            {
+              src: null,
+              url: null,
+            },
+            {
+              src: null,
+              url: null,
+            },
+            {
+              src: null,
+              url: null,
+            },
+            {
+              src: null,
+              url: null,
+            },
+          ],
         };
       }
       // 创建block

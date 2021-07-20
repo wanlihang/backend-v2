@@ -62,6 +62,11 @@
       :block="block"
       @update="update"
     ></mp-wechat-set>
+    <image-group-set
+      v-else-if="block.sign === 'image-group'"
+      :block="block"
+      @update="update"
+    ></image-group-set>
   </div>
 </template>
 <script>
@@ -77,6 +82,7 @@ import TgV1Set from "./tg-v1.vue";
 import CodeSet from "./code.vue";
 import BlankSet from "./blank.vue";
 import MpWechatSet from "./mp-wechat.vue";
+import ImageGroupSet from "./image-group.vue";
 
 export default {
   components: {
@@ -92,6 +98,7 @@ export default {
     CodeSet,
     BlankSet,
     MpWechatSet,
+    ImageGroupSet,
   },
   props: ["block"],
   methods: {
