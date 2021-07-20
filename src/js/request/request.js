@@ -785,6 +785,25 @@ const Api = {
             return destroy(`/backend/addons/MiaoSha/goods/${id}`);
         },
     },
+    Multishare:{
+        Poster:{
+            List() {
+                return get(`/backend/addons/multi_level_share/poster/index`,);
+            },
+            Store(params) {
+                return post(`/backend/addons/multi_level_share/poster/create`, params);
+            },
+            Detail(id) {
+                return get(`/backend/addons/multi_level_share/poster/${id}`);
+            },
+            Update(id, params) {
+                return put(`/backend/addons/multi_level_share/poster/${id}`, params);
+            },
+            Destory(id) {
+                return destroy(`/backend/addons/multi_level_share/poster/${id}`);
+            },
+        },
+    },
     TuanGou: {
         List(params) {
             return get(`/backend/addons/TuanGou/goods/index`, params);

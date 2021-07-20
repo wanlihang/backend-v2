@@ -86,6 +86,15 @@ const zh = {
                 }
             },
         },
+        multi_level_share:{
+            name: '三级分销',
+            poster: {
+                name: '海报',
+                index: '海报',
+                create: '创建海报',
+                update: '编辑海报'
+            },
+        },
         wechat: {
             messagereply: {
                 index: '微信公众号消息回复',
