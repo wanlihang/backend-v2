@@ -41,17 +41,44 @@ const zh = {
                 edit: '编辑用户标签'
             }
         },
-        miaosha:{
-            name:'秒杀',
-            orders:{
-                name:'订单',
-                index:'秒杀订单'
+        miaosha: {
+            name: '秒杀',
+            orders: {
+                name: '订单',
+                index: '秒杀订单'
             },
-            goods:{
-                name:'商品',
-                index:'秒杀商品',
+            goods: {
+                name: '商品',
+                index: '秒杀商品',
                 create: '创建秒杀商品',
                 update: '编辑秒杀商品'
+            },
+        },
+        tuangou: {
+            name: '团购',
+            goods: {
+                name: '商品',
+                index: '团购商品',
+                create: '创建团购商品',
+                update: '编辑团购商品',
+                order: '团购商品订单',
+                refund: '团购商品退款订单',
+                tuanorder: '团列表',
+            },
+        },
+        learningpath:{
+            name: '学习路径',
+            path: {
+                name: '路径',
+                index: '学习路径',
+                create: '创建学习路径',
+                update: '编辑学习路径'
+            },
+            step: {
+                name: '步骤',
+                index: '学习步骤',
+                create: '创建学习步骤',
+                update: '编辑学习步骤'
             },
         },
         wechat: {
@@ -109,27 +136,27 @@ const zh = {
             create: '添加电子书',
             update: '编辑电子书',
         },
-        meedubook:{
-            book:{
+        meedubook: {
+            book: {
                 index: '电子书',
                 create: '添加电子书',
-                update: '编辑电子书', 
-                comment:'电子书评论',
-                category:{
+                update: '编辑电子书',
+                comment: '电子书评论',
+                category: {
                     index: '电子书分类管理',
                     create: '添加电子书分类',
-                    update: '编辑电子书分类',  
+                    update: '编辑电子书分类',
                 },
                 chapter: {
                     index: '电子书章节管理',
                     create: '创建电子书章节',
                     update: '编辑电子书章节'
                 },
-                article:{
+                article: {
                     index: '电子书文章管理',
                     create: '创建电子书文章',
                     update: '编辑电子书文章',
-                    comment:'电子书文章评论'
+                    comment: '电子书文章评论'
                 }
             }
         },

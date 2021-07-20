@@ -92,7 +92,32 @@ export default [
                 name: 'title.miaosha.orders.name',
                 key: 'MiaoshaOrders'
             },
-
+        ]
+    },
+    {
+        name: 'title.tuangou.name',
+        key: 'Tuangou',
+        children: [
+            {
+                name: 'title.tuangou.goods.name',
+                key: 'TuangouGoods'
+            },
+            
+        ]
+    },
+    {
+        name: 'title.learningpath.name',
+        key: 'Learning',
+        children: [
+            {
+                name: 'title.learningpath.path.name',
+                key: 'LearningPath'
+            },
+            {
+                name: 'title.learningpath.step.name',
+                key: 'LearningStep'
+            },
+            
         ]
     },
     {

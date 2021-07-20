@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="创建秒杀商品"></back-bar>
+    <back-bar class="mb-30" title="编辑团购商品"></back-bar>
     <div class="float-left">
       <div class="form-box broder-top-left-radius">
         <el-form ref="form" :model="course" :rules="rules" label-width="200px">
@@ -16,6 +16,7 @@
                 <select-resource
                   v-bind:show="msg"
                   @change="change"
+                  :selectedIds="this.course.goods_id"
                   :enabled-resource="types"
                 ></select-resource>
               </div>
@@ -24,11 +25,11 @@
           <el-form-item label="商品名" prop="goods_title">
             <el-input v-model="course.goods_title" class="w-100"></el-input>
           </el-form-item>
-          <el-form-item label="商品原价" prop="goods_charge">
+          <el-form-item label="商品原价" prop="original_charge">
             <el-input
               type="number"
               placeholder="单位：元"
-              v-model="course.goods_charge"
+              v-model="course.original_charge"
               class="w-200px"
             ></el-input>
           </el-form-item>
@@ -42,20 +43,33 @@
             ></upload-image>
           </el-form-item>
           <el-form-item prop="desc" label="详细介绍">
-            <wang-editor class="w-100" v-model="course.desc"></wang-editor>
+            <wang-editor
+              v-if="course.desc"
+              class="w-100"
+              v-model="course.desc"
+            ></wang-editor>
           </el-form-item>
-          <el-form-item label="秒杀价格" prop="charge">
+          <el-form-item label="价格" prop="charge">
             <el-input
               type="number"
               v-model="course.charge"
               class="w-200px"
+              placeholder="单位：元"
             ></el-input>
-            <div class="helper ml-30">单位：元，只能设置为整数。</div>
           </el-form-item>
-          <el-form-item label="秒杀数量" prop="num">
+          <el-form-item label="人数" prop="people_num">
             <el-input
               type="number"
-              v-model="course.num"
+              v-model="course.people_num"
+              placeholder="组团上限"
+              class="w-200px"
+            ></el-input>
+          </el-form-item>
+          <el-form-item label="有效期" prop="time_limit">
+            <el-input
+              type="number"
+              v-model="course.time_limit"
+              placeholder="单位：天"
               class="w-200px"
             ></el-input>
           </el-form-item>
@@ -63,19 +77,19 @@
             <el-date-picker
               v-model="course.started_at"
               type="datetime"
-              format="yyyy-MM-dd HH:mm"
-              value-format="yyyy-MM-dd HH:mm"
+              format="yyyy-MM-dd hh:mm"
+              value-format="yyyy-MM-dd hh:mm"
               placeholder="请选择日期"
               :picker-options="expireTimeOption"
             >
             </el-date-picker>
           </el-form-item>
-          <el-form-item label="结束时间" prop="end_at">
+          <el-form-item label="结束时间" prop="ended_at">
             <el-date-picker
-              v-model="course.end_at"
+              v-model="course.ended_at"
               type="datetime"
-              format="yyyy-MM-dd HH:mm"
-              value-format="yyyy-MM-dd HH:mm"
+              format="yyyy-MM-dd hh:mm"
+              value-format="yyyy-MM-dd hh:mm"
               placeholder="请选择日期"
               :picker-options="expireTimeOption"
             >
@@ -83,7 +97,11 @@
           </el-form-item>
 
           <el-form-item prop="page_title" label="秒杀页面标题">
-            <el-input class="w-100" v-model="course.page_title"></el-input>
+            <el-input
+              class="w-100"
+              placeholder="pc或者手机打开团购页面显示的标题"
+              v-model="course.page_title"
+            ></el-input>
           </el-form-item>
         </el-form>
       </div>
@@ -96,7 +114,7 @@
             >
           </div>
           <div class="ml-24">
-            <el-button @click="$router.push({ name: 'MiaoshaGoods' })"
+            <el-button @click="$router.push({ name: 'TuangouGoods' })"
               >取消</el-button
             >
           </div>
@@ -123,17 +141,21 @@ export default {
       },
       msg: false,
       course: {
+        id: this.$route.query.id,
         started_at: null,
-        end_at: null,
+        ended_at: null,
         goods_title: null,
+        other_id: null,
+        original_charge: null,
         goods_thumb: null,
+        time_limit: null,
         charge: null,
         goods_charge: null,
         goods_id: null,
+        people_num: null,
         goods_type: null,
         page_title: null,
         desc: null,
-        num: null,
       },
       rules: {
         goods_type: [
@@ -157,7 +179,7 @@ export default {
             trigger: "blur",
           },
         ],
-        goods_charge: [
+        original_charge: [
           {
             required: true,
             message: "商品原价不能为空",
@@ -171,17 +193,24 @@ export default {
             trigger: "blur",
           },
         ],
-        num: [
+        time_limit: [
           {
             required: true,
-            message: "秒杀数量不能为空",
+            message: "有效期不能为空",
+            trigger: "blur",
+          },
+        ],
+        people_num: [
+          {
+            required: true,
+            message: "人数不能为空",
             trigger: "blur",
           },
         ],
         page_title: [
           {
             required: true,
-            message: "秒杀页面标题不能为空",
+            message: "页面标题不能为空",
             trigger: "blur",
           },
         ],
@@ -199,7 +228,7 @@ export default {
             trigger: "blur",
           },
         ],
-        end_at: [
+        ended_at: [
           {
             required: true,
             message: "请选择开始时间",
@@ -227,25 +256,48 @@ export default {
   },
   mounted() {
     this.params();
+    this.detail();
   },
   methods: {
     change(v1) {
       var data = v1;
       this.course.goods_id = data.id;
+      this.course.other_id = data.id;
       this.course.goods_type = data.resource_type;
       this.course.goods_title = data.title;
       this.course.goods_charge = data.original_charge;
+      this.course.original_charge = data.original_charge;
       this.course.goods_thumb = data.thumb;
       this.msg = false;
     },
     params() {
-      this.$api.Miaosha.Goods.Create(this.filter).then((res) => {
+      this.$api.TuanGou.Create(this.filter).then((res) => {
         var data = res.data.types;
         var typeids = "";
         for (var i = 0; i < data.length; i++) {
           typeids = typeids + data[i].value + ",";
         }
         this.types = typeids;
+      });
+    },
+    detail() {
+      this.$api.TuanGou.Detail(this.course.id).then((res) => {
+        var data = res.data.data;
+        this.course.goods_id = data.other_id;
+        this.course.charge = data.charge;
+        this.course.goods_type = data.goods_type;
+        this.course.desc = data.desc;
+        this.course.ended_at = data.ended_at;
+        this.course.other_id = data.other_id;
+        this.course.goods_thumb = data.goods_thumb;
+        this.course.goods_title = data.goods_title;
+        this.course.goods_type_text = data.goods_type_text;
+        this.course.time_limit = data.time_limit;
+        this.course.people_num = data.people_num;
+        this.course.page_title = data.page_title;
+        this.course.started_at = data.started_at;
+        this.course.goods_charge = data.original_charge;
+        this.course.original_charge=data.original_charge;
       });
     },
     selgoods() {
@@ -263,10 +315,10 @@ export default {
         return;
       }
       this.loading = true;
-      this.$api.Miaosha.Goods.Store(this.course)
+      this.$api.TuanGou.Update(this.course.id, this.course)
         .then(() => {
           this.$message.success(this.$t("common.success"));
-          this.$router.push({ name: "MiaoshaGoods" });
+          this.$router.push({ name: "TuangouGoods" });
         })
         .catch((e) => {
           this.loading = false;

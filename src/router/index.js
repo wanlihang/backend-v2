@@ -627,6 +627,78 @@ const routes = [
           title: 'title.miaosha.goods.update'
         }
       },
+      {
+        path: '/tuangou/goods/index',
+        component: () => import('@/views/tuangou/goods/index'),
+        name: 'TuangouGoods',
+        meta: {
+          title: 'title.tuangou.goods.index'
+        }
+      },
+      {
+        path: '/tuangou/goods/create',
+        component: () => import('@/views/tuangou/goods/create'),
+        name: 'TuangouGoodsCreate',
+        meta: {
+          title: 'title.tuangou.goods.create'
+        }
+      },
+      {
+        path: '/tuangou/goods/update',
+        component: () => import('@/views/tuangou/goods/update'),
+        name: 'TuangouMoodsUpdate',
+        meta: {
+          title: 'title.tuangou.goods.update'
+        }
+      },
+      {
+        path: '/tuangou/goods/order',
+        component: () => import('@/views/tuangou/goods/order'),
+        name: 'TuangouGoodsOrder',
+        meta: {
+          title: 'title.tuangou.goods.order'
+        }
+      },
+      {
+        path: '/tuangou/goods/refund',
+        component: () => import('@/views/tuangou/goods/refund'),
+        name: 'TuangouGoodsRefund',
+        meta: {
+          title: 'title.tuangou.goods.refund'
+        }
+      },
+      {
+        path: '/tuangou/goods/tuanorder',
+        component: () => import('@/views/tuangou/goods/tuanorder'),
+        name: 'TuangouGoodsTuanorder',
+        meta: {
+          title: 'title.tuangou.goods.tuanorder'
+        }
+      },
+      {
+        path: '/learningpath/path/index',
+        component: () => import('@/views/learningpath/path/index'),
+        name: 'LearningPath',
+        meta: {
+          title: 'title.learningpath.path.index'
+        }
+      },
+      {
+        path: '/learningpath/path/create',
+        component: () => import('@/views/learningpath/path/create'),
+        name: 'LearningPathCreate',
+        meta: {
+          title: 'title.learningpath.path.create'
+        }
+      },
+      {
+        path: '/learningpath/path/update',
+        component: () => import('@/views/learningpath/path/update'),
+        name: 'LearningPathUpdate',
+        meta: {
+          title: 'title.learningpath.path.update'
+        }
+      },
     ]
   },
   {

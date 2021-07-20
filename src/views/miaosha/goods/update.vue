@@ -4,39 +4,21 @@
     <div class="float-left">
       <div class="form-box broder-top-left-radius">
         <el-form ref="form" :model="course" :rules="rules" label-width="200px">
-          <el-form-item prop="type" label="类型">
-            <div class="d-flex">
-              <div>
-                <el-select
-                  v-model="course.goods_type"
-                  @change="getgoods(course.goods_type)"
-                >
-                  <el-option
-                    v-for="(item, index) in types"
-                    :key="index"
-                    :label="item.name"
-                    :value="item.value"
-                  >
-                  </el-option>
-                </el-select>
-              </div>
-            </div>
-          </el-form-item>
           <el-form-item prop="goods_id" label="商品">
             <div class="d-flex">
               <div>
-                <el-select
-                  v-model="course.goods_id"
-                  @change="selgoods(course.goods_id)"
+                <el-button @click="selgoods"> 选择商品 </el-button>
+                <span
+                  v-if="this.course.goods_id"
+                  style="color: red; margin-left: 4px"
+                  >已选择</span
                 >
-                  <el-option
-                    v-for="(item, index) in goods"
-                    :key="index"
-                    :label="item.title"
-                    :value="item.id"
-                  >
-                  </el-option>
-                </el-select>
+                <select-resource
+                  v-bind:show="msg"
+                  @change="change"
+                  :selectedIds="this.course.goods_id"
+                  :enabled-resource="types"
+                ></select-resource>
               </div>
             </div>
           </el-form-item>
@@ -131,17 +113,20 @@
 <script>
 import WangEditor from "@/components/wangeditor";
 import UploadImage from "@/components/upload-image";
+import SelectResource from "@/components/select-resources/index";
 
 export default {
   components: {
     WangEditor,
     UploadImage,
+    SelectResource,
   },
   data() {
     return {
       filter: {
         type: "",
       },
+      msg: false,
       course: {
         id: this.$route.query.id,
         started_at: null,
@@ -242,8 +227,7 @@ export default {
           return date.getTime() < Date.now();
         },
       },
-      types: [],
-      goods: [],
+      types: "",
       loading: false,
     };
   },
@@ -252,16 +236,33 @@ export default {
     this.detail();
   },
   methods: {
+    change(v1) {
+      var data = v1;
+      this.course.goods_id = data.id;
+      this.course.goods_type = data.resource_type;
+      this.course.goods_title = data.title;
+      this.course.goods_charge = data.original_charge;
+      this.course.goods_thumb = data.thumb;
+      this.msg = false;
+    },
     params() {
       this.$api.Miaosha.Goods.Create(this.filter).then((res) => {
-        this.types = res.data.types;
+        var data = res.data.types;
+        var typeids = "";
+        for (var i = 0; i < data.length; i++) {
+          typeids = typeids + data[i].value + ",";
+        }
+        this.types = typeids;
       });
+    },
+    selgoods() {
+      this.msg = true;
     },
     detail() {
       this.$api.Miaosha.Goods.Detail(this.course.id).then((res) => {
         var data = res.data;
+        this.course.goods_id = data.goods_id;
         this.course.charge = data.charge;
-        this.getgoods(data.goods_type);
         this.course.goods_type = data.goods_type;
         this.course.desc = data.desc;
         this.course.end_at = data.end_at;
@@ -275,22 +276,7 @@ export default {
         this.course.goods_charge = data.original_charge;
       });
     },
-    getgoods(item) {
-      this.filter.type = item;
-      this.$api.Miaosha.Goods.Create(this.filter).then((res) => {
-        this.goods = res.data.data;
-      });
-    },
-    selgoods(item) {
-      var data = this.goods;
-      for (var i = 0; i < data.length; i++) {
-        if (data[i].id == item) {
-          this.course.goods_title = data[i].title;
-          this.course.goods_charge = data[i].charge;
-          this.course.goods_thumb = data[i].thumb;
-        }
-      }
-    },
+    getgoods(item) {},
     formValidate() {
       this.$refs["form"].validate((valid) => {
         if (valid) {
