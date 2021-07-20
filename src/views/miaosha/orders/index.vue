@@ -5,12 +5,12 @@
         <div class="d-flex">
           <div class="filter-label">课程</div>
           <div class="flex-1 ml-15">
-            <el-select v-model="filter.category_id">
+            <el-select v-model="filter.type">
               <el-option
                 v-for="(item, index) in filterData.courses"
                 :key="index"
                 :label="item.goods_type_text"
-                :value="item.id"
+                :value="item.goods_type"
               >
               </el-option>
             </el-select>
@@ -19,11 +19,11 @@
         <div class="d-flex ml-15">
           <div class="filter-label">课程</div>
           <div class="flex-1 ml-15">
-            <el-select v-model="filter.category_id">
+            <el-select v-model="filter.gid">
               <el-option
-                v-for="(item, index) in filterData.courses"
+                v-for="(item, index) in activeItemList"
                 :key="index"
-                :label="item.name"
+                :label="item.goods_title"
                 :value="item.id"
               >
               </el-option>
@@ -46,7 +46,7 @@
         </div>
 
         <div class="ml-15">
-          <el-button @click="getQuestion" type="primary" plain>筛选</el-button>
+          <el-button @click="getResults" type="primary" plain>筛选</el-button>
           <el-button @click="paginationReset">清空</el-button>
         </div>
       </div>
@@ -55,62 +55,45 @@
       <div class="float-left">
         <el-table :data="results" stripe class="float-left">
           <el-table-column prop="id" label="ID" width="80"> </el-table-column>
+          <el-table-column label="商品ID" width="80">
+            <template slot-scope="scope">
+              <span v-if="scope.row.goods">{{
+                scope.row.goods.goods_id
+              }}</span>
+              <span style="color: red" v-else>已删除</span>
+            </template>
+          </el-table-column>
           <el-table-column prop="user_id" label="用户ID" width="80">
           </el-table-column>
-          <el-table-column prop="category.name" label="分类" width="100">
+          <el-table-column prop="user.nick_name" label="用户" width="150">
           </el-table-column>
-          <el-table-column label="用户" width="120">
+          <el-table-column label="商品类型" width="150">
             <template slot-scope="scope">
-              <div class="user-item">
-                <!-- <div class="avatar">
-                  <img :src="scope.row.user.avatar" width="40" height="40" />
-                </div> -->
-                <div class="nickname">{{ scope.row.user.nick_name }}</div>
-              </div>
+              <span v-if="scope.row.goods">{{
+                scope.row.goods.goods_type_text
+              }}</span>
+              <span style="color: red" v-else>已删除</span>
             </template>
           </el-table-column>
-          <el-table-column prop="title" label="标题"> </el-table-column>
-          <el-table-column label="浏览" width="80">
+          <el-table-column prop="goods.goods_title" label="商品">
             <template slot-scope="scope">
-              <span>{{ scope.row.view_times }}次</span>
+              <span v-if="scope.row.goods">{{
+                scope.row.goods.goods_title
+              }}</span>
+              <span style="color: red" v-else>已删除</span>
             </template>
           </el-table-column>
-          <el-table-column label="点赞" width="80">
+          <el-table-column label="秒杀价" width="120">
             <template slot-scope="scope">
-              <span>{{ scope.row.vote_count }}次</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="答案" width="80">
-            <template slot-scope="scope">
-              <span>{{ scope.row.answer_count }}个</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="积分" width="100">
-            <template slot-scope="scope">
-              <span>{{ scope.row.credit1 }}积分</span>
+              <span>{{ scope.row.charge }}元</span>
             </template>
           </el-table-column>
           <el-table-column label="状态" width="100">
             <template slot-scope="scope">
-              <span v-if="scope.row.status == 1" style="color: red">{{
-                scope.row.status_text
-              }}</span>
-              <span v-else>{{ scope.row.status_text }}</span>
-            </template>
-          </el-table-column>
-
-          <el-table-column fixed="right" label="操作" width="80">
-            <template slot-scope="scope">
-              <el-link
-                type="primary"
-                @click="
-                  $router.push({
-                    name: 'QuestionAnswer',
-                    query: { id: scope.row.id },
-                  })
-                "
-                >回答</el-link
+              <span v-if="scope.row.status == 0" style="color: red"
+                >未支付</span
               >
+              <span v-else>已支付</span>
             </template>
           </el-table-column>
         </el-table>
@@ -141,9 +124,9 @@ export default {
         size: 10,
       },
       filter: {
-        user_id: null,
-        category_id: null,
-        status: "",
+        type: null,
+        gid: null,
+        status: -1,
       },
       total: 0,
       loading: false,
@@ -153,7 +136,12 @@ export default {
       },
       filterData: {
         courses: [],
+        goods: [],
         status: [
+          {
+            id: -1,
+            name: "全部",
+          },
           {
             id: 0,
             name: "未支付",
@@ -166,26 +154,33 @@ export default {
       },
     };
   },
+  computed: {
+    activeItemList: function () {
+      return this.filterData.goods.filter((item, index) => {
+        return item.goods_type == this.filter.type;
+      });
+    },
+  },
   mounted() {
-    this.getQuestion();
+    this.getResults();
   },
   methods: {
     paginationReset() {
       this.pagination.page = 1;
-      this.filter.category_id = null;
-      this.filter.user_id = null;
-      this.filter.status = "";
-      this.getQuestion();
+      this.filter.type = null;
+      this.filter.gid = null;
+      this.filter.status = -1;
+      this.getResults();
     },
     paginationSizeChange(size) {
       this.pagination.size = size;
-      this.getQuestion();
+      this.getResults();
     },
     paginationPageChange(page) {
       this.pagination.page = page;
-      this.getQuestion();
+      this.getResults();
     },
-    getQuestion() {
+    getResults() {
       if (this.loading) {
         return;
       }
@@ -198,7 +193,7 @@ export default {
         this.results = res.data.data.data;
         this.total = res.data.data.total;
         this.filterData.courses = res.data.types;
-        this.filterData.goods= res.data.goods;
+        this.filterData.goods = res.data.goods;
       });
     },
     destoryMulti() {
@@ -221,7 +216,7 @@ export default {
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));
-              this.getQuestion();
+              this.getResults();
             })
             .catch((e) => {
               this.loading = false;
