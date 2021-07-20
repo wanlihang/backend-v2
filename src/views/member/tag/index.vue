@@ -1,5 +1,7 @@
 <template>
   <div class="meedu-main-body">
+    <back-bar class="mb-30" title="标签管理"></back-bar>
+
     <div class="float-left mb-30">
       <el-button
         @click="$router.push({ name: 'MemberTagCreate' })"

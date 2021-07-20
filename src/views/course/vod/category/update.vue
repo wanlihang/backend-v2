@@ -27,14 +27,14 @@
     <div class="bottom-menus">
       <div class="bottom-menus-box">
         <div>
-          <el-button @click="formValidate" :loading="loading" type="primary"
-            >保存</el-button
-          >
+          <el-button @click="formValidate" :loading="loading" type="primary">
+            保存
+          </el-button>
         </div>
         <div class="ml-24">
-          <el-button @click="$router.push({ name: 'CourseCategories' })"
-            >取消</el-button
-          >
+          <el-button @click="$router.back()">
+            取消
+          </el-button>
         </div>
       </div>
     </div>

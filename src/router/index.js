@@ -196,6 +196,14 @@ const routes = [
         }
       },
       {
+        path: '/course/vod/:id/view',
+        component: () => import('@/views/course/vod/detail'),
+        name: 'VodView',
+        meta: {
+          title: 'title.course.vod.detail'
+        }
+      },
+      {
         path: '/course/vod/category/index',
         component: () => import('@/views/course/vod/category/index'),
         name: 'CourseCategories',
@@ -289,14 +297,6 @@ const routes = [
         name: 'VideoSubscribe',
         meta: {
           title: 'title.course.vod.video.subscribe'
-        }
-      },
-      {
-        path: '/course/vod/record/index',
-        component: () => import('@/views/course/vod/record/index'),
-        name: 'CourseRecords',
-        meta: {
-          title: 'title.course.vod.record.index'
         }
       },
       {

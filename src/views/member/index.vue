@@ -14,61 +14,58 @@
     </div>
     <div class="float-left">
       <div class="float-left d-flex">
-        <div class="d-flex">
-          <div class="filter-label">关键词</div>
-          <div class="flex-1 ml-10">
-            <el-input
-              class="w-100px"
-              v-model="filter.keywords"
-              placeholder="手机号，昵称"
-              style="width: 200px"
-            ></el-input>
-          </div>
+        <div>
+          <el-input
+            class="w-150px"
+            v-model="filter.keywords"
+            placeholder="关键字"
+          ></el-input>
         </div>
-        <div class="d-flex ml-15">
-          <div class="filter-label">VIP</div>
-          <div class="flex-1 ml-10">
-            <el-select v-model="filter.role_id" class="w-200px">
-              <el-option
-                v-for="(item, index) in filterData.roles"
-                :key="index"
-                :label="item.name"
-                :value="item.id"
-              >
-              </el-option>
-            </el-select>
-          </div>
-        </div>
-        <div class="d-flex ml-15">
-          <div class="filter-label">标签</div>
-          <div class="flex-1 ml-10">
-            <el-select v-model="filter.tag_id" class="w-200px">
-              <el-option
-                v-for="(item, index) in filterData.tags"
-                :key="index"
-                :label="item.name"
-                :value="item.id"
-              >
-              </el-option>
-            </el-select>
-          </div>
-        </div>
-        <div class="d-flex ml-15">
-          <div class="filter-label">注册时间</div>
-          <div class="flex-1 ml-10">
-            <el-date-picker
-              v-model="filter.created_at"
-              type="daterange"
-              align="right"
-              unlink-panels
-              range-separator="至"
-              start-placeholder="开始日期"
-              end-placeholder="结束日期"
+        <div class="ml-10">
+          <el-select
+            v-model="filter.role_id"
+            class="w-150px"
+            placeholder="VIP会员"
+            filterable
+          >
+            <el-option
+              v-for="(item, index) in filterData.roles"
+              :key="index"
+              :label="item.name"
+              :value="item.id"
             >
-            </el-date-picker>
-          </div>
+            </el-option>
+          </el-select>
         </div>
-        <div class="ml-15">
+        <div class="ml-10">
+          <el-select
+            v-model="filter.tag_id"
+            class="w-150px"
+            placeholder="用户标签"
+            filterable
+          >
+            <el-option
+              v-for="(item, index) in filterData.tags"
+              :key="index"
+              :label="item.name"
+              :value="item.id"
+            >
+            </el-option>
+          </el-select>
+        </div>
+        <div class="ml-10">
+          <el-date-picker
+            v-model="filter.created_at"
+            type="daterange"
+            align="right"
+            unlink-panels
+            range-separator="至"
+            start-placeholder="注册开始日期"
+            end-placeholder="注册结束日期"
+          >
+          </el-date-picker>
+        </div>
+        <div class="ml-10">
           <el-button @click="getUser" type="primary" plain>筛选</el-button>
           <el-button @click="paginationReset">清空</el-button>
         </div>
@@ -83,7 +80,7 @@
           @sort-change="sortChange"
           :default-sort="{ prop: 'id', order: 'descending' }"
         >
-          <el-table-column prop="id" sortable label="ID" width="120">
+          <el-table-column prop="id" sortable label="用户ID" width="120">
           </el-table-column>
           <el-table-column label="用户" width="300">
             <template slot-scope="scope">

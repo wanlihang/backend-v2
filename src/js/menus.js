@@ -21,6 +21,10 @@ export default [
                 name: 'title.role',
                 key: 'Role'
             },
+            {
+                name: 'title.singlepage.index',
+                key: 'SinglePage'
+            },
         ],
     },
     {
@@ -59,7 +63,7 @@ export default [
                 name: 'title.wechat.messagereply.index',
                 key: 'MessageReply'
             },
-            
+
         ]
     },
     {
@@ -70,18 +74,10 @@ export default [
                 name: 'title.course.vod.index',
                 key: 'Vod'
             },
-            
-        ]
-    },
-    {
-        name: 'title.singlepage.index',
-        key: 'Single',
-        children: [
             {
-                name: 'title.singlepage.index',
-                key: 'SinglePage'
+                name: 'title.meedubook.book.index',
+                key: 'Meedubook'
             },
-            
         ]
     },
     {
@@ -96,18 +92,7 @@ export default [
                 name: 'title.miaosha.orders.name',
                 key: 'MiaoshaOrders'
             },
-            
-        ]
-    },
-    {
-        name: 'title.meedubook.book.index',
-        key: 'Meedubook',
-        children: [
-            {
-                name: 'title.meedubook.book.index',
-                key: 'Meedubook'
-            },
-            
+
         ]
     },
     {
@@ -118,7 +103,7 @@ export default [
                 name: 'title.wenda.question.index',
                 key: 'Question'
             },
-            
+
         ]
     },
     {
