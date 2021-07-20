@@ -654,9 +654,25 @@ const routes = [
       {
         path: '/tuangou/goods/order',
         component: () => import('@/views/tuangou/goods/order'),
-        name: 'TuangouMoodsOrder',
+        name: 'TuangouGoodsOrder',
         meta: {
           title: 'title.tuangou.goods.order'
+        }
+      },
+      {
+        path: '/tuangou/goods/refund',
+        component: () => import('@/views/tuangou/goods/refund'),
+        name: 'TuangouGoodsRefund',
+        meta: {
+          title: 'title.tuangou.goods.refund'
+        }
+      },
+      {
+        path: '/tuangou/goods/tuanorder',
+        component: () => import('@/views/tuangou/goods/tuanorder'),
+        name: 'TuangouGoodsTuanorder',
+        meta: {
+          title: 'title.tuangou.goods.tuanorder'
         }
       },
     ]

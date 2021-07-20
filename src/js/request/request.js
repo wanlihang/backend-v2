@@ -749,6 +749,27 @@ const Api = {
         Destroy(id) {
             return destroy(`/backend/addons/TuanGou/goods/${id}`);
         },
+        Order:{
+            List(params) {
+                return get(`/backend/addons/TuanGou/orders/index`, params);
+            },
+        },
+        Refund:{
+            List(params) {
+                return get(`/backend/addons/TuanGou/refunds/index`, params);
+            },
+            Complete(id,params) {
+                return get(`/backend/addons/TuanGou/refunds/${id}/handler`,params);
+            },
+        },
+        Tuan:{
+            List(id,params) {
+                return get(`/backend/addons/TuanGou/goods/${id}/items`, params);
+            }, 
+            Complete(params) {
+                return get(`/backend/addons/TuanGou/goods/item/complete`,params);
+            },
+        },
     },
     Exam: {
         Paper: {

@@ -1,87 +1,43 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="团购商品订单"></back-bar>
+    <back-bar class="mb-30" title="团购商品退款订单"></back-bar>
     <div class="float-left mb-30">
       <div class="float-left d-flex">
-        <div class="d-flex">
-          <div class="filter-label">关键字</div>
-          <div class="flex-1 ml-15">
-            <el-input
-              class="w-100"
-              v-model="filter.keywords"
-              placeholder="请输入商品名关键字"
-              style="width: 200px"
-            ></el-input>
-          </div>
-        </div>
-        <div class="d-flex ml-15">
-          <div class="filter-label">用户ID</div>
-          <div class="flex-1 ml-15">
-            <el-input
-              class="w-100"
-              v-model="filter.user_id"
-              placeholder="用户ID"
-              style="width: 200px"
-            ></el-input>
-          </div>
-        </div>
-        <div class="d-flex ml-15">
-          <div class="filter-label">支付状态</div>
-          <div class="flex-1 ml-15">
-            <el-select v-model="filter.status">
-              <el-option
-                v-for="(item, index) in filterData.status"
-                :key="index"
-                :label="item.name"
-                :value="item.id"
-              >
-              </el-option>
-            </el-select>
-          </div>
-        </div>
-
-        <div class="ml-15">
-          <el-button @click="getResults" type="primary" plain>筛选</el-button>
-          <el-button @click="paginationReset">清空</el-button>
-        </div>
+        <div class="d-flex">请拿着支付订单号到相应的支付平台操作退款。</div>
       </div>
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table :data="results" stripe class="float-left">
           <el-table-column prop="id" label="ID" width="80"> </el-table-column>
-          <el-table-column label="商品ID" width="80">
+          <el-table-column label="支付单号">
             <template slot-scope="scope">
-              <span v-if="scope.row.goods">{{ scope.row.goods.other_id }}</span>
-              <span style="color: red" v-else>已删除</span>
+              <span>{{ scope.row.oid }}</span>
             </template>
           </el-table-column>
-          <el-table-column prop="user_id" label="用户ID" width="80">
-          </el-table-column>
-          <el-table-column label="商品">
+          <el-table-column label="支付方式" width="120">
             <template slot-scope="scope">
-              <span v-if="scope.row.goods">{{
-                scope.row.goods.goods_title
-              }}</span>
-              <span style="color: red" v-else>已删除</span>
+              <span>{{ scope.row.system_order.payment_text }}</span>
             </template>
           </el-table-column>
           <el-table-column prop="user.nick_name" label="用户" width="150">
           </el-table-column>
-          <el-table-column label="支付" width="120">
+          <el-table-column label="价格" width="120">
             <template slot-scope="scope">
               <span>￥{{ scope.row.charge }}</span>
             </template>
           </el-table-column>
           <el-table-column label="状态" width="100">
             <template slot-scope="scope">
-              <span v-if="scope.row.status == 0" style="color: red"
-                >未支付</span
-              >
-              <span v-else>已支付</span>
+              <span>{{ scope.row.status_text }}</span>
             </template>
           </el-table-column>
-          <el-table-column prop="user.created_at" label="时间" width="150">
+          <el-table-column fixed="right" label="操作" width="100">
+            <template  slot-scope="scope">
+              <el-link v-if="scope.row.status==0" type="danger"
+              @click="handle(scope.row.id)"
+              >改为已处理</el-link>
+            </template>
           </el-table-column>
         </el-table>
       </div>
@@ -120,50 +76,18 @@ export default {
         page: 1,
         size: 10,
       },
-      filter: {
-        keywords: null,
-        user_id: null,
-        status: null,
-      },
       total: 0,
       loading: false,
       results: [],
-      filterData: {
-        courses: [],
-        goods: [],
-        status: [
-          {
-            id: -1,
-            name: "全部",
-          },
-          {
-            id: 0,
-            name: "未支付",
-          },
-          {
-            id: 1,
-            name: "已支付",
-          },
-        ],
-      },
     };
   },
-  computed: {
-    activeItemList: function () {
-      return this.filterData.goods.filter((item, index) => {
-        return item.goods_type == this.filter.type;
-      });
-    },
-  },
+
   mounted() {
     this.getResults();
   },
   methods: {
     paginationReset() {
       this.pagination.page = 1;
-      this.filter.keywords = null;
-      this.filter.user_id = null;
-      this.filter.status = null;
       this.getResults();
     },
     paginationSizeChange(size) {
@@ -180,13 +104,42 @@ export default {
       }
       this.loading = true;
       let params = {};
-      Object.assign(params, this.filter);
       Object.assign(params, this.pagination);
-      this.$api.TuanGou.Order.List(params).then((res) => {
+      this.$api.TuanGou.Refund.List(params).then((res) => {
         this.loading = false;
         this.results = res.data.data.data;
         this.total = res.data.data.total;
       });
+    },
+    handle(item){
+       this.$confirm("确认操作？", "警告", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          //点击确定按钮的操作
+          if (this.loading) {
+            return;
+          }
+          this.loading = true;
+          var data = {
+            id: item,
+          };
+          this.$api.TuanGou.Refund.Complete(item,data)
+            .then(() => {
+              this.loading = false;
+              this.$message.success(this.$t("common.success"));
+              this.getResults();
+            })
+            .catch((e) => {
+              this.loading = false;
+              this.$message(e.message);
+            });
+        })
+        .catch(() => {
+          //点击删除按钮的操作
+        });
     },
   },
 };

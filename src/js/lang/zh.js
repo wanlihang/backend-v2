@@ -61,6 +61,8 @@ const zh = { //zh
                 create: '创建团购商品',
                 update: '编辑团购商品',
                 order: '团购商品订单',
+                refund: '团购商品退款订单',
+                tuanorder: '团列表',
             },
         },
         wechat: {

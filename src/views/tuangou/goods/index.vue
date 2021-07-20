@@ -8,13 +8,13 @@
         添加
       </el-button>
       <el-button
-        @click="$router.push({ name: 'TuangouMoodsOrder' })"
+        @click="$router.push({ name: 'TuangouGoodsOrder' })"
         type="primary"
       >
         订单
       </el-button>
       <el-button
-        @click="$router.push({ name: 'TuangouGoodsCreate' })"
+        @click="$router.push({ name: 'TuangouGoodsRefund' })"
         type="primary"
       >
         退款
@@ -105,7 +105,7 @@
                 style="margin-left: 5px"
                 @click="
                   $router.push({
-                    name: 'MiaoshaGoodsUpdate',
+                    name: 'TuangouGoodsTuanorder',
                     query: { id: scope.row.id },
                   })
                 "
