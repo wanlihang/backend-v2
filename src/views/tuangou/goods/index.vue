@@ -198,7 +198,7 @@ export default {
             return;
           }
           this.loading = true;
-          this.$api.TuanGou.Destory(item)
+          this.$api.TuanGou.Destroy(item)
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));

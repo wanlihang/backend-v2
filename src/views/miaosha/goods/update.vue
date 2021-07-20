@@ -4,15 +4,20 @@
     <div class="float-left">
       <div class="form-box broder-top-left-radius">
         <el-form ref="form" :model="course" :rules="rules" label-width="200px">
-           <el-form-item prop="goods_id" label="商品">
+          <el-form-item prop="goods_id" label="商品">
             <div class="d-flex">
               <div>
                 <el-button @click="selgoods"> 选择商品 </el-button>
+                <span
+                  v-if="this.course.goods_id"
+                  style="color: red; margin-left: 4px"
+                  >已选择</span
+                >
                 <select-resource
                   v-bind:show="msg"
                   @change="change"
                   :selectedIds="this.course.goods_id"
-                   :enabled-resource="types"
+                  :enabled-resource="types"
                 ></select-resource>
               </div>
             </div>
@@ -245,9 +250,9 @@ export default {
         var data = res.data.types;
         var typeids = "";
         for (var i = 0; i < data.length; i++) {
-          typeids=typeids+data[i].value+",";
+          typeids = typeids + data[i].value + ",";
         }
-        this.types=typeids;
+        this.types = typeids;
       });
     },
     selgoods() {
@@ -271,9 +276,7 @@ export default {
         this.course.goods_charge = data.original_charge;
       });
     },
-    getgoods(item) {
-     
-    },
+    getgoods(item) {},
     formValidate() {
       this.$refs["form"].validate((valid) => {
         if (valid) {

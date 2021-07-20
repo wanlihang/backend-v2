@@ -8,6 +8,11 @@
             <div class="d-flex">
               <div>
                 <el-button @click="selgoods"> 选择商品 </el-button>
+                <span
+                  v-if="this.course.goods_id"
+                  style="color: red; margin-left: 4px"
+                  >已选择</span
+                >
                 <select-resource
                   v-bind:show="msg"
                   @change="change"
@@ -238,10 +243,9 @@ export default {
         var data = res.data.types;
         var typeids = "";
         for (var i = 0; i < data.length; i++) {
-          typeids=typeids+data[i].value+",";
+          typeids = typeids + data[i].value + ",";
         }
-        console.log(typeids)
-        this.types=typeids;
+        this.types = typeids;
       });
     },
     selgoods() {

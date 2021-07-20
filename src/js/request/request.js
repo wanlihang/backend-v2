@@ -740,7 +740,7 @@ const Api = {
         Store(params) {
             return post(`/backend/addons/TuanGou/goods/create`, params);
         },
-        Edit(id) {
+        Detail(id) {
             return get(`/backend/addons/TuanGou/goods/${id}`);
         },
         Update(id, params) {
