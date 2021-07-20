@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body">
-     <back-bar class="mb-30" title="课程视频管理"></back-bar>
+    <back-bar class="mb-30" title="课程视频管理"></back-bar>
     <div class="float-left mb-30">
       <el-button type="danger" @click="destoryMulti()">批量删除</el-button>
       <el-button
@@ -20,24 +20,30 @@
           :data="videos"
           stripe
           class="float-left"
+          @sort-change="sortChange"
+          :default-sort="{ prop: 'published_at', order: 'ascending' }"
           @selection-change="handleSelectionChange"
         >
-          <el-table-column type="selection" width="55"></el-table-column
-          ><!-- 显示选取表格 -->
-          <el-table-column prop="id" label="视频ID" width="80">
+          <el-table-column type="selection" width="55"></el-table-column>
+          <el-table-column prop="id" sortable label="视频ID" width="120">
           </el-table-column>
           <el-table-column prop="title" label="视频"> </el-table-column>
-          <el-table-column label="价格" width="120"
+          <el-table-column property="charge" label="价格" sortable width="120"
             ><template slot-scope="scope">
               <span>￥{{ scope.row.charge }} </span>
             </template>
           </el-table-column>
-          <el-table-column label="时长" width="120"
+          <el-table-column property="duration" label="时长" sortable width="120"
             ><template slot-scope="scope">
               <span>{{ scope.row.duration }}s</span>
             </template>
           </el-table-column>
-          <el-table-column prop="published_at" label="上架时间" width="200">
+          <el-table-column
+            prop="published_at"
+            sortable
+            label="上架时间"
+            width="200"
+          >
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="200">
             <template slot-scope="scope">
@@ -57,7 +63,10 @@
                 @click="
                   $router.push({
                     name: 'VideoSubscribe',
-                    query: {course_id: pagination.cid,video_id: scope.row.id },
+                    query: {
+                      course_id: pagination.cid,
+                      video_id: scope.row.id,
+                    },
                   })
                 "
                 >销售记录</el-link
@@ -82,20 +91,12 @@
           @size-change="paginationSizeChange"
           @current-change="paginationPageChange"
           :current-page="pagination.page"
-          :page-sizes="[10, 20, 50, 100]"
+          :page-sizes="[10, 20, 50, 100, 200, 500]"
           :page-size="pagination.size"
           layout="total, sizes, prev, pager, next, jumper"
           :total="total"
         >
         </el-pagination>
-      </div>
-    </div>
-
-    <div class="bottom-menus">
-      <div class="bottom-menus-box">
-        <div>
-          <el-button @click="$router.push({ name: 'Vod' })">取消</el-button>
-        </div>
       </div>
     </div>
   </div>
@@ -107,7 +108,9 @@ export default {
       pagination: {
         cid: this.$route.query.course_id,
         page: 1,
-        size: 10,
+        size: 100,
+        sort: "id",
+        order: "desc",
       },
       total: 0,
       loading: false,
@@ -133,7 +136,11 @@ export default {
       this.pagination.page = page;
       this.getVideos();
     },
-    //保存选中结果
+    sortChange(column) {
+      this.pagination.sort = column.prop;
+      this.pagination.order = column.order === "ascending" ? "asc" : "desc";
+      this.getVideos();
+    },
     handleSelectionChange(val) {
       var newbox = [];
       for (var i = 0; i < val.length; i++) {
@@ -155,22 +162,22 @@ export default {
       });
     },
     importUser() {},
-    //删除管理员
     destoryMulti() {
+      if (this.spids.ids == "") {
+        this.$message("请选择需要操作的数据");
+        return;
+      }
+
       this.$confirm("确认操作？", "警告", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
       })
         .then(() => {
-          //点击确定按钮的操作
           if (this.loading) {
             return;
           }
-          if(this.spids.ids==""){
-            this.$message("请选择需要操作的数据");
-            return;
-          }
+
           this.loading = true;
           this.$api.Course.Vod.Videos.DestoryMulti(this.spids)
             .then(() => {
@@ -183,9 +190,7 @@ export default {
               this.$message(e.message);
             });
         })
-        .catch(() => {
-          //点击删除按钮的操作
-        });
+        .catch(() => {});
     },
   },
 };
