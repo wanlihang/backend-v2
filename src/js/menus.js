@@ -89,6 +89,10 @@ export default [
         key: 'Miaosha',
         children: [
             {
+                name: 'title.miaosha.goods.name',
+                key: 'MiaoshaGoods'
+            },
+            {
                 name: 'title.miaosha.orders.name',
                 key: 'MiaoshaOrders'
             },

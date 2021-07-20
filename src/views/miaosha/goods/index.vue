@@ -1,44 +1,35 @@
 <template>
   <div class="meedu-main-body">
     <div class="float-left mb-30">
+      <el-button
+        @click="$router.push({ name: 'MiaoshaGoodsCreate' })"
+        type="primary"
+      >
+        添加
+      </el-button>
+    </div>
+    <div class="float-left">
       <div class="float-left d-flex">
         <div class="d-flex">
-          <div class="filter-label">课程</div>
+          <div class="filter-label">关键字</div>
+          <div class="flex-1 ml-15">
+            <el-input
+              class="w-200px"
+              v-model="filter.keywords"
+              placeholder="关键字搜索"
+            ></el-input>
+          </div>
+        </div>
+
+        <div class="d-flex ml-15">
+          <div class="filter-label">商品类型</div>
           <div class="flex-1 ml-15">
             <el-select v-model="filter.type">
               <el-option
                 v-for="(item, index) in filterData.courses"
                 :key="index"
-                :label="item.goods_type_text"
-                :value="item.goods_type"
-              >
-              </el-option>
-            </el-select>
-          </div>
-        </div>
-        <div class="d-flex ml-15">
-          <div class="filter-label">课程</div>
-          <div class="flex-1 ml-15">
-            <el-select v-model="filter.gid">
-              <el-option
-                v-for="(item, index) in activeItemList"
-                :key="index"
-                :label="item.goods_title"
-                :value="item.id"
-              >
-              </el-option>
-            </el-select>
-          </div>
-        </div>
-        <div class="d-flex ml-15">
-          <div class="filter-label">支付状态</div>
-          <div class="flex-1 ml-15">
-            <el-select v-model="filter.status">
-              <el-option
-                v-for="(item, index) in filterData.status"
-                :key="index"
                 :label="item.name"
-                :value="item.id"
+                :value="item.value"
               >
               </el-option>
             </el-select>
@@ -51,49 +42,54 @@
         </div>
       </div>
     </div>
-    <div class="float-left" v-loading="loading">
+    <div class="float-left mt-30" v-loading="loading">
       <div class="float-left">
         <el-table :data="results" stripe class="float-left">
           <el-table-column prop="id" label="ID" width="80"> </el-table-column>
-          <el-table-column label="商品ID" width="80">
+          <el-table-column prop="goods_id" label="商品ID" width="80">
+          </el-table-column>
+          <el-table-column prop="goods_type_text" label="类型" width="160">
+          </el-table-column>
+          <el-table-column prop="goods_title" label="商品"> </el-table-column>
+          <el-table-column label="价格" width="150">
             <template slot-scope="scope">
-              <span v-if="scope.row.goods">{{
-                scope.row.goods.goods_id
-              }}</span>
-              <span style="color: red" v-else>已删除</span>
-            </template>
-          </el-table-column>
-          <el-table-column prop="user_id" label="用户ID" width="80">
-          </el-table-column>
-          <el-table-column prop="user.nick_name" label="用户" width="150">
-          </el-table-column>
-          <el-table-column label="商品类型" width="150">
-            <template slot-scope="scope">
-              <span v-if="scope.row.goods">{{
-                scope.row.goods.goods_type_text
-              }}</span>
-              <span style="color: red" v-else>已删除</span>
-            </template>
-          </el-table-column>
-          <el-table-column  label="商品">
-            <template slot-scope="scope">
-              <span v-if="scope.row.goods">{{
-                scope.row.goods.goods_title
-              }}</span>
-              <span style="color: red" v-else>已删除</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="秒杀价" width="120">
-            <template slot-scope="scope">
-              <span>{{ scope.row.charge }}元</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="状态" width="100">
-            <template slot-scope="scope">
-              <span v-if="scope.row.status == 0" style="color: red"
-                >未支付</span
+              <span
+                >￥{{ scope.row.charge }}/<span
+                  style="text-decoration: line-through"
+                  >￥{{ scope.row.original_charge }}</span
+                ></span
               >
-              <span v-else>已支付</span>
+            </template>
+          </el-table-column>
+
+          <el-table-column label="库存" width="100">
+            <template slot-scope="scope">
+              <span
+                >{{ scope.row.over_num }}/<span>{{ scope.row.num }}</span></span
+              >
+            </template>
+          </el-table-column>
+          <el-table-column label="时间" width="170">
+            <template slot-scope="scope">
+              <span>{{ scope.row.started_at }}-{{ scope.row.end_at }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column fixed="right" label="操作" width="120">
+            <template slot-scope="scope">
+              <el-link type="danger" @click="destory(scope.row.id)"
+                >删除</el-link
+              >
+              <el-link
+                type="primary"
+                style="margin-left: 5px"
+                @click="
+                  $router.push({
+                    name: 'MiaoshaGoodsUpdate',
+                    query: { id: scope.row.id },
+                  })
+                "
+                >编辑</el-link
+              >
             </template>
           </el-table-column>
         </el-table>
@@ -125,39 +121,17 @@ export default {
       },
       filter: {
         type: null,
-        gid: null,
-        status: -1,
+        keywords: null,
       },
       total: 0,
       loading: false,
       results: [],
       filterData: {
         courses: [],
-        goods: [],
-        status: [
-          {
-            id: -1,
-            name: "全部",
-          },
-          {
-            id: 0,
-            name: "未支付",
-          },
-          {
-            id: 1,
-            name: "已支付",
-          },
-        ],
       },
     };
   },
-  computed: {
-    activeItemList: function () {
-      return this.filterData.goods.filter((item, index) => {
-        return item.goods_type == this.filter.type;
-      });
-    },
-  },
+
   mounted() {
     this.getResults();
   },
@@ -165,8 +139,7 @@ export default {
     paginationReset() {
       this.pagination.page = 1;
       this.filter.type = null;
-      this.filter.gid = null;
-      this.filter.status = -1;
+      this.filter.keywords = null;
       this.getResults();
     },
     paginationSizeChange(size) {
@@ -185,15 +158,40 @@ export default {
       let params = {};
       Object.assign(params, this.filter);
       Object.assign(params, this.pagination);
-      this.$api.Miaosha.Orders.List(params).then((res) => {
+      this.$api.Miaosha.Goods.List(params).then((res) => {
         this.loading = false;
         this.results = res.data.data.data;
         this.total = res.data.data.total;
         this.filterData.courses = res.data.types;
-        this.filterData.goods = res.data.goods;
       });
     },
-    
+    destory(item) {
+      this.$confirm("确认操作？", "警告", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          //点击确定按钮的操作
+          if (this.loading) {
+            return;
+          }
+          this.loading = true;
+          this.$api.Miaosha.Goods.Destory(item)
+            .then(() => {
+              this.loading = false;
+              this.$message.success(this.$t("common.success"));
+              this.getResults();
+            })
+            .catch((e) => {
+              this.loading = false;
+              this.$message(e.message);
+            });
+        })
+        .catch(() => {
+          //点击删除按钮的操作
+        });
+    },
   },
 };
 </script>

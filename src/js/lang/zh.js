@@ -46,6 +46,12 @@ const zh = { //zh
                 name:'订单',
                 index:'秒杀订单'
             },
+            goods:{
+                name:'商品',
+                index:'秒杀商品',
+                create: '创建秒杀商品',
+                update: '编辑秒杀商品'
+            },
         },
         wechat: {
             messagereply: {

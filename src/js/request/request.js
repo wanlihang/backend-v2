@@ -84,6 +84,26 @@ const Api = {
                 return get(`/backend/addons/MiaoSha/orders/index`, params);
             } 
         },
+        Goods:{
+            List(params) {
+                return get(`/backend/addons/MiaoSha/goods/index`, params);
+            },
+            Destory(id) {
+                return destroy(`/backend/addons/MiaoSha/goods//${id}`);
+            },
+            Store(params) {
+                return post(`/backend/addons/MiaoSha/goods/create`, params);
+            },
+            Create(params) {
+                return get(`/backend/addons/MiaoSha/goods/create`, params);
+            },
+            Detail(id) {
+                return get(`/backend/addons/MiaoSha/goods/${id}`);
+            },
+            Update(id, params) {
+                return put(`/backend/addons/MiaoSha/goods/${id}`, params);
+            }
+        },
     },
     System: {
         Config: {
