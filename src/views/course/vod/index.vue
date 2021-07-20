@@ -104,6 +104,18 @@
                 视频
               </el-link>
               <el-link
+                type="primary"
+                class="ml-5"
+                @click="
+                  $router.push({
+                    name: 'CourseAttach',
+                    query: { course_id: scope.row.id },
+                  })
+                "
+              >
+                附件
+              </el-link>
+              <el-link
                 class="ml-5"
                 type="danger"
                 @click="destory(scope.row.id)"

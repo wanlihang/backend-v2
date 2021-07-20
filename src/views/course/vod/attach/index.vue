@@ -1,5 +1,5 @@
 <template>
- <div class="meedu-main-body">
+  <div class="meedu-main-body">
     <back-bar class="mb-30" title="课程附件管理"></back-bar>
     <div class="float-left mb-30">
       <el-button
@@ -16,8 +16,7 @@
     <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table :data="attach" stripe class="float-left">
-          <el-table-column prop="id" label="ID" width="120">
-          </el-table-column>
+          <el-table-column prop="id" label="ID" width="120"> </el-table-column>
           <el-table-column prop="name" label="附件名" width="250">
           </el-table-column>
 
@@ -26,9 +25,9 @@
               <span>{{ scope.row.path }} </span>
             </template>
           </el-table-column>
-           <el-table-column label="下载次数" width="150"
+          <el-table-column label="下载次数" width="150"
             ><template slot-scope="scope">
-              <span>{{ scope.row.download_times}}次 </span>
+              <span>{{ scope.row.download_times }}次 </span>
             </template>
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="80">
@@ -42,14 +41,6 @@
             </template>
           </el-table-column>
         </el-table>
-      </div>
-    </div>
-
-    <div class="bottom-menus">
-      <div class="bottom-menus-box">
-        <div>
-          <el-button @click="$router.push({ name: 'Vod' })">取消</el-button>
-        </div>
       </div>
     </div>
   </div>
@@ -74,12 +65,10 @@ export default {
         return;
       }
       this.loading = true;
-      this.$api.Course.Vod.Attach.List(this.box).then(
-        (res) => {
-          this.loading = false;
-          this.attach = res.data.data;
-        }
-      );
+      this.$api.Course.Vod.Attach.List(this.box).then((res) => {
+        this.loading = false;
+        this.attach = res.data.data;
+      });
     },
     importUser() {},
     //删除管理员

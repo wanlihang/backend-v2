@@ -26,8 +26,8 @@
 </template>
 
 <script>
-import SubUsers from "./sub-users.vue";
-import WatchRecords from "./watch-records.vue";
+import SubUsers from "./components/sub-users.vue";
+import WatchRecords from "./components/watch-records.vue";
 
 export default {
   components: {
