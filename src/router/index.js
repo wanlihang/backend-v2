@@ -627,6 +627,38 @@ const routes = [
           title: 'title.miaosha.goods.update'
         }
       },
+      {
+        path: '/tuangou/goods/index',
+        component: () => import('@/views/tuangou/goods/index'),
+        name: 'TuangouGoods',
+        meta: {
+          title: 'title.tuangou.goods.index'
+        }
+      },
+      {
+        path: '/tuangou/goods/create',
+        component: () => import('@/views/tuangou/goods/create'),
+        name: 'TuangouGoodsCreate',
+        meta: {
+          title: 'title.tuangou.goods.create'
+        }
+      },
+      {
+        path: '/tuangou/goods/update',
+        component: () => import('@/views/tuangou/goods/update'),
+        name: 'TuangouMoodsUpdate',
+        meta: {
+          title: 'title.tuangou.goods.update'
+        }
+      },
+      {
+        path: '/tuangou/goods/order',
+        component: () => import('@/views/tuangou/goods/order'),
+        name: 'TuangouMoodsOrder',
+        meta: {
+          title: 'title.tuangou.goods.order'
+        }
+      },
     ]
   },
   {

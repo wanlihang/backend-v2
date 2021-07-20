@@ -100,6 +100,17 @@ export default [
         ]
     },
     {
+        name: 'title.tuangou.name',
+        key: 'Tuangou',
+        children: [
+            {
+                name: 'title.tuangou.goods.name',
+                key: 'TuangouGoods'
+            },
+            
+        ]
+    },
+    {
         name: 'title.meedubook.book.index',
         key: 'Meedubook',
         children: [
