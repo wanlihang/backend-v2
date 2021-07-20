@@ -27,7 +27,7 @@
             <template slot="label">
               <form-label
                 text="排序值"
-                helper="请填写数字，小数靠前，大数靠后"
+                helper="请填写整数，小数靠前，大数靠后"
               ></form-label>
             </template>
             <el-input v-model="form.sort" class="w-200px"></el-input>

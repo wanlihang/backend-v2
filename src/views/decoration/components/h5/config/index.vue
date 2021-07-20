@@ -31,7 +31,9 @@
       @update="update"
     ></topic-v1-set>
     <learn-path-v1-set
-      v-else-if="block.sign === 'h5-learnPath-v1' || block.sign === 'pc-learnPath-v1'"
+      v-else-if="
+        block.sign === 'h5-learnPath-v1' || block.sign === 'pc-learnPath-v1'
+      "
       :block="block"
       @update="update"
     ></learn-path-v1-set>
@@ -45,6 +47,11 @@
       :block="block"
       @update="update"
     ></tg-v1-set>
+    <code-set
+      v-else-if="block.sign === 'code'"
+      :block="block"
+      @update="update"
+    ></code-set>
   </div>
 </template>
 <script>
@@ -57,6 +64,7 @@ import TopicV1Set from "./topic-v1.vue";
 import LearnPathV1Set from "./learnPath-v1.vue";
 import MsV1Set from "./ms-v1.vue";
 import TgV1Set from "./tg-v1.vue";
+import CodeSet from "./code.vue";
 
 export default {
   components: {
@@ -69,6 +77,7 @@ export default {
     LearnPathV1Set,
     MsV1Set,
     TgV1Set,
+    CodeSet,
   },
   props: ["block"],
   methods: {

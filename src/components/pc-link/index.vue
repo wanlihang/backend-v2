@@ -139,3 +139,16 @@ export default {
   },
 };
 </script>
+
+<style lang="less" scoped>
+.func-link-item {
+  width: 100%;
+  height: auto;
+  float: left;
+  margin-bottom: 15px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+</style>

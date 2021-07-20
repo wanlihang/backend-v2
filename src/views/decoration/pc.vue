@@ -118,6 +118,19 @@
             <div class="name">团购</div>
           </div>
         </div>
+
+        <div class="block-item" sign="code">
+          <div class="btn">
+            <div class="icon">
+              <img
+                src="@/assets/images/decoration/h5/code.png"
+                width="44"
+                height="44"
+              />
+            </div>
+            <div class="name">代码块</div>
+          </div>
+        </div>
       </draggable>
     </div>
 
@@ -172,6 +185,10 @@
                 v-if="item.sign === 'pc-tg-v1'"
                 :config="item.config_render"
               ></render-tg-v1>
+              <render-code
+                v-if="item.sign === 'code'"
+                :config="item.config_render"
+              ></render-code>
 
               <div class="item-options" v-if="curBlockIndex === index">
                 <div class="btn-item" @click="blockDestroy(index, item)">
@@ -233,6 +250,7 @@ import RenderLearnPathV1 from "./components/pc/render/learn-path-v1.vue";
 import RenderMsV1 from "./components/pc/render/ms-v1.vue";
 import RenderTgV1 from "./components/pc/render/tg-v1.vue";
 import ConfigSetting from "./components/h5/config/index.vue";
+import RenderCode from "./components/pc/render/code";
 
 export default {
   components: {
@@ -249,6 +267,7 @@ export default {
     RenderMsV1,
     RenderTgV1,
     ConfigSetting,
+    RenderCode,
   },
   data() {
     return {
@@ -539,6 +558,10 @@ export default {
               original_charge: 0,
             },
           ],
+        };
+      } else if (blockSign === "code") {
+        defaultConfig = {
+          html: null,
         };
       }
 
