@@ -923,6 +923,30 @@ const routes = [
           title: 'title.live.course.users.index'
         }
       },
+      {
+        path: '/live/course/video/index',
+        component: () => import('@/views/live/course/video/index'),
+        name: 'LiveCourseVideo',
+        meta: {
+          title: 'title.live.course.video.index'
+        }
+      },
+      {
+        path: '/live/course/video/create',
+        component: () => import('@/views/live/course/video/create'),
+        name: 'LiveCourseVideoCreate',
+        meta: {
+          title: 'title.live.course.video.create'
+        }
+      },
+      {
+        path: '/live/course/video/update',
+        component: () => import('@/views/live/course/video/update'),
+        name: 'LiveCourseVideoUpdate',
+        meta: {
+          title: 'title.live.course.video.update'
+        }
+      },
     ]
   },
   {
