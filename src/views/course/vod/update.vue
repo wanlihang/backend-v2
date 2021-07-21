@@ -2,156 +2,192 @@
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="编辑录播课程"></back-bar>
 
+    <div class="center-tabs mb-30">
+      <div>
+        <el-tabs v-model="tab.active">
+          <el-tab-pane
+            :label="item.name"
+            :name="item.key"
+            v-for="(item, index) in tab.list"
+            :key="index"
+          ></el-tab-pane>
+        </el-tabs>
+      </div>
+    </div>
+
     <div class="float-left" v-if="course">
       <el-form ref="form" :model="course" :rules="rules" label-width="200px">
-        <el-form-item prop="category_id" label="所属分类">
-          <div class="d-flex">
-            <div>
-              <el-select v-model="course.category_id">
-                <el-option
-                  v-for="(item, index) in categories"
-                  :key="index"
-                  :label="item.name"
-                  :value="item.id"
+        <div class="float-left" v-show="tab.active === 'base'">
+          <el-form-item prop="category_id" label="所属分类">
+            <div class="d-flex">
+              <div>
+                <el-select v-model="course.category_id">
+                  <el-option
+                    v-for="(item, index) in categories"
+                    :key="index"
+                    :label="item.name"
+                    :value="item.id"
+                  >
+                  </el-option>
+                </el-select>
+              </div>
+              <div class="ml-15">
+                <el-link
+                  type="primary"
+                  @click="$router.push({ name: 'CourseCategories' })"
                 >
-                </el-option>
-              </el-select>
+                  分类管理
+                </el-link>
+              </div>
             </div>
-            <div class="ml-15">
-              <el-link
-                type="primary"
-                @click="$router.push({ name: 'CourseCategories' })"
-              >
-                分类管理
-              </el-link>
+          </el-form-item>
+
+          <el-form-item label="课程名" prop="title">
+            <el-input v-model="course.title" class="w-500px"></el-input>
+          </el-form-item>
+
+          <el-form-item prop="thumb" label="课程封面">
+            <upload-image
+              v-model="course.thumb"
+              helper="长宽比4:3，建议尺寸：400x300像素"
+              width="400"
+              height="300"
+              name="上传封面"
+            ></upload-image>
+          </el-form-item>
+
+          <el-form-item label="免费" prop="is_free">
+            <div class="d-flex">
+              <div>
+                <el-switch
+                  v-model="course.is_free"
+                  :active-value="1"
+                  :inactive-value="0"
+                >
+                </el-switch>
+              </div>
+              <div class="ml-10">
+                <helper-text text="用户无需购买即可观看"></helper-text>
+              </div>
             </div>
-          </div>
-        </el-form-item>
+          </el-form-item>
 
-        <el-form-item label="课程名" prop="title">
-          <el-input v-model="course.title" class="w-100"></el-input>
-        </el-form-item>
-
-        <el-form-item prop="thumb" label="课程封面">
-          <upload-image
-            v-model="course.thumb"
-            helper="长宽比4:3，建议尺寸：400x300像素"
-            width="400"
-            height="300"
-            name="上传封面"
-          ></upload-image>
-        </el-form-item>
-
-        <el-form-item label="免费" prop="is_free">
-          <el-switch
-            v-model="course.is_free"
-            :active-value="1"
-            :inactive-value="0"
-          >
-          </el-switch>
-        </el-form-item>
-
-        <el-form-item label="价格" prop="charge" v-if="course.is_free === 0">
-          <div class="d-flex">
-            <div>
-              <el-input
-                type="number"
-                placeholder="单位：元"
-                v-model="course.charge"
-                class="w-200px"
-              ></el-input>
-            </div>
-            <div class="ml-15">
-              <helper-text
-                text="价格最小单位为：元，不支持小数。"
-              ></helper-text>
-            </div>
-          </div>
-        </el-form-item>
-
-        <el-form-item label="上架时间" prop="published_at">
-          <div class="d-flex">
-            <div>
-              <el-date-picker
-                v-model="course.published_at"
-                type="datetime"
-                format="yyyy-MM-dd HH:mm"
-                value-format="yyyy-MM-dd HH:mm"
-                placeholder="请选择日期"
-                :picker-options="expireTimeOption"
-              >
-              </el-date-picker>
-            </div>
-            <div class="ml-15">
-              <div class="helper-text">
+          <el-form-item label="价格" prop="charge" v-if="course.is_free === 0">
+            <div class="d-flex">
+              <div>
+                <el-input
+                  type="number"
+                  placeholder="单位：元"
+                  v-model="course.charge"
+                  class="w-200px"
+                ></el-input>
+              </div>
+              <div class="ml-15">
                 <helper-text
-                  text="上架时间决定课程的排名，时间越早排名越靠后。另外，如果上架时间是未来时间，那么只有时间到了用户才能看到该课程。"
+                  text="价格最小单位为：元，不支持小数。"
                 ></helper-text>
               </div>
             </div>
-          </div>
-        </el-form-item>
+          </el-form-item>
 
-        <el-form-item label="显示" prop="is_show">
-          <div class="d-flex">
-            <div>
-              <el-switch
-                v-model="course.is_show"
-                :active-value="1"
-                :inactive-value="0"
-              >
-              </el-switch>
-            </div>
-            <div class="ml-15">
-              <div class="helper-text">
-                <helper-text text="控制用户是否能看到该课程。"></helper-text>
+          <el-form-item label="上架时间" prop="published_at">
+            <div class="d-flex">
+              <div>
+                <el-date-picker
+                  v-model="course.published_at"
+                  type="datetime"
+                  format="yyyy-MM-dd HH:mm"
+                  value-format="yyyy-MM-dd HH:mm"
+                  placeholder="请选择日期"
+                  :picker-options="expireTimeOption"
+                >
+                </el-date-picker>
+              </div>
+              <div class="ml-15">
+                <div class="helper-text">
+                  <helper-text
+                    text="上架时间决定课程的排名，时间越早排名越靠后。另外，如果上架时间是未来时间，那么只有时间到了用户才能看到该课程。"
+                  ></helper-text>
+                </div>
               </div>
             </div>
-          </div>
-        </el-form-item>
+          </el-form-item>
 
-        <el-form-item label="评论控制" prop="comment_status">
-          <el-select v-model="course.comment_status">
-            <el-option
-              v-for="(item, index) in comments"
-              :key="index"
-              :label="item.name"
-              :value="item.id"
-            >
-            </el-option>
-          </el-select>
-        </el-form-item>
+          <el-form-item label="显示" prop="is_show">
+            <div class="d-flex">
+              <div>
+                <el-switch
+                  v-model="course.is_show"
+                  :active-value="1"
+                  :inactive-value="0"
+                >
+                </el-switch>
+              </div>
+              <div class="ml-15">
+                <div class="helper-text">
+                  <helper-text text="控制用户是否能看到该课程。"></helper-text>
+                </div>
+              </div>
+            </div>
+          </el-form-item>
 
-        <el-form-item prop="short_description" label="简短介绍">
-          <el-input
-            class="w-100"
-            type="textarea"
-            v-model="course.short_description"
-          ></el-input>
-        </el-form-item>
+          <el-form-item prop="short_description" label="简短介绍">
+            <el-input
+              class="w-500px"
+              type="textarea"
+              rows="4"
+              v-model="course.short_description"
+              placeholder="简短介绍"
+            ></el-input>
+          </el-form-item>
 
-        <el-form-item prop="original_desc" label="详细介绍">
-          <wang-editor
-            class="w-100"
-            v-model="course.original_desc"
-          ></wang-editor>
-        </el-form-item>
+          <el-form-item prop="original_desc" label="详细介绍">
+            <wang-editor
+              class="w-100"
+              v-model="course.original_desc"
+            ></wang-editor>
+          </el-form-item>
+        </div>
 
-        <el-form-item label="SEO描述">
-          <el-input
-            class="w-100"
-            type="textarea"
-            v-model="course.seo_description"
-          ></el-input>
-        </el-form-item>
+        <div class="float-left" v-show="tab.active === 'dev'">
+          <el-form-item label="评论控制" prop="comment_status">
+            <el-select class="w-200px" v-model="course.comment_status">
+              <el-option
+                v-for="(item, index) in comments"
+                :key="index"
+                :label="item.name"
+                :value="item.id"
+              >
+              </el-option>
+            </el-select>
+          </el-form-item>
 
-        <el-form-item label="SEO关键字">
-          <el-input
-            class="w-100"
-            type="textarea"
-            v-model="course.seo_keywords"
-          ></el-input>
-        </el-form-item>
+          <el-form-item label="SEO描述">
+            <el-input
+              class="w-400px"
+              type="textarea"
+              v-model="course.seo_description"
+              placeholder="SEO描述"
+            ></el-input>
+          </el-form-item>
+
+          <el-form-item label="SEO关键字">
+            <el-input
+              class="w-400px"
+              type="textarea"
+              v-model="course.seo_keywords"
+              placeholder="SEO关键字"
+            ></el-input>
+          </el-form-item>
+
+          <el-form-item label="Slug" prop="slug">
+            <el-input
+              v-model="course.slug"
+              class="w-400px"
+              placeholder="Slug"
+            ></el-input>
+          </el-form-item>
+        </div>
       </el-form>
 
       <div class="bottom-menus">
@@ -182,6 +218,19 @@ export default {
     return {
       id: null,
       course: null,
+      tab: {
+        active: "base",
+        list: [
+          {
+            name: "基础信息",
+            key: "base",
+          },
+          {
+            name: "可选信息",
+            key: "dev",
+          },
+        ],
+      },
       rules: {
         category_id: [
           {
@@ -215,13 +264,6 @@ export default {
           {
             required: true,
             message: "课程名不能为空",
-            trigger: "blur",
-          },
-        ],
-        comment_status: [
-          {
-            required: true,
-            message: "评论开关不能为空",
             trigger: "blur",
           },
         ],

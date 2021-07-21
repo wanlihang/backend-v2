@@ -1,205 +1,300 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="编辑课程视频"></back-bar>
-    <div class="float-left">
-      <el-form ref="form" :model="video" :rules="rules" label-width="200px">
-        <el-form-item label="视频名" prop="title">
-          <el-input v-model="video.title" class="w-100"></el-input>
-        </el-form-item>
-        <el-form-item label="上架时间" prop="published_at">
-          <form-label
-            style="margin-left: -12px"
-            helper="该字段决定前台视频排序，时间越早越靠前"
-          ></form-label>
+    <back-bar class="mb-30" title="编辑录播视频"></back-bar>
 
-          <el-date-picker
-            class="w-200px"
-            v-model="video.published_at"
-            type="datetime"
-            align="right"
-            placeholder="请选择日期"
+    <div class="center-tabs mb-30">
+      <div>
+        <el-tabs v-model="tab.active">
+          <el-tab-pane
+            :label="item.name"
+            :name="item.key"
+            v-for="(item, index) in tab.list"
+            :key="index"
+          ></el-tab-pane>
+        </el-tabs>
+      </div>
+    </div>
+
+    <div class="float-left" v-if="course && video">
+      <el-form ref="form" :model="video" :rules="rules" label-width="200px">
+        <div class="float-left" v-show="tab.active === 'base'">
+          <el-form-item label="视频">
+            <el-button type="primary" @click="showUploadVideoWin = true">
+              重新上传视频
+            </el-button>
+          </el-form-item>
+
+          <el-form-item label="所属章节">
+            <div class="d-flex">
+              <div>
+                <el-select
+                  class="w-300px"
+                  filterable
+                  clearable
+                  v-model="video.chapter_id"
+                >
+                  <el-option
+                    v-for="(item, index) in chapters"
+                    :key="index"
+                    :label="item.title"
+                    :value="item.id"
+                  >
+                  </el-option>
+                </el-select>
+              </div>
+              <div class="ml-10">
+                <el-link
+                  @click="
+                    $router.push({
+                      name: 'CourseChapters',
+                      query: { course_id: course_id },
+                    })
+                  "
+                  type="primary"
+                  >章节管理</el-link
+                >
+              </div>
+            </div>
+          </el-form-item>
+
+          <el-form-item label="视频名" prop="title">
+            <el-input
+              v-model="video.title"
+              class="w-600px"
+              placeholder="请输入视频名"
+            ></el-input>
+          </el-form-item>
+
+          <el-form-item label="上架时间" prop="published_at">
+            <div class="d-flex">
+              <div>
+                <el-date-picker
+                  class="w-200px"
+                  v-model="video.published_at"
+                  type="datetime"
+                  align="right"
+                  placeholder="请选择日期"
+                >
+                </el-date-picker>
+              </div>
+              <div class="ml-10">
+                <helper-text
+                  text="上架时间决定了录播课程下视频排名，时间越早越靠前。上架时间如果是未来时间，则需等到时间到达后用户才可查看。"
+                ></helper-text>
+              </div>
+            </div>
+          </el-form-item>
+
+          <el-form-item label="价格" prop="charge" v-if="course.is_free !== 1">
+            <div class="d-flex">
+              <div>
+                <el-input
+                  v-model="video.charge"
+                  class="w-200px"
+                  placeholder="请输入整数"
+                ></el-input>
+              </div>
+              <div class="ml-10">
+                <helper-text
+                  text="最小单位：元。不支持小数。价格为0的话意味着该视频可以免费观看。价格大于0则需要用户购买视频/购买课程之后才能观看。"
+                ></helper-text>
+              </div>
+            </div>
+          </el-form-item>
+
+          <el-form-item label="视频时长" prop="duration">
+            <div class="d-flex">
+              <div>
+                <input-duration v-model="video.duration"></input-duration>
+              </div>
+              <div class="ml-10">
+                <helper-text
+                  text="视频时长必须准确无误，否则影响学员观看进度的计算。"
+                ></helper-text>
+              </div>
+            </div>
+          </el-form-item>
+
+          <el-form-item
+            label="试看"
+            prop="free_seconds"
+            v-if="course.is_free !== 1 && video.charge > 0"
           >
-          </el-date-picker>
-        </el-form-item>
-        <el-form-item label="章节">
-          <el-select v-model="video.chapter_id" class="w-100">
-            <el-option
-              v-for="(item, index) in chapters"
-              :key="index"
-              :label="item.title"
-              :value="item.id"
-            >
-            </el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="价格" prop="charge">
-          <el-input
-            type="number"
-            v-model="video.charge"
-            class="w-200px"
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="禁止购买" prop="is_ban_sell">
-          <el-switch
-            v-model="video.is_ban_sell"
-            :active-value="1"
-            :inactive-value="0"
+            <div class="d-flex">
+              <div>
+                <el-input-number
+                  v-model="video.free_seconds"
+                  :min="0"
+                  label="秒"
+                  size="small"
+                ></el-input-number>
+              </div>
+              <div class="ml-10">
+                <div class="helper-text">秒</div>
+              </div>
+              <div class="ml-15">
+                <helper-text
+                  text="如果用户未购买课程将可以观看当前配置的秒数，从视频开头计算。配置为0即为无法试看。"
+                ></helper-text>
+              </div>
+            </div>
+          </el-form-item>
+        </div>
+
+        <div class="float-left" v-show="tab.active === 'dev'">
+          <el-form-item
+            label="禁止购买"
+            prop="is_ban_sell"
+            v-if="course.is_free !== 1"
           >
-          </el-switch>
-        </el-form-item>
-        <el-form-item label="显示" prop="is_show">
-          <el-switch
-            v-model="video.is_show"
-            :active-value="1"
-            :inactive-value="0"
-          >
-          </el-switch>
-        </el-form-item>
-        <el-form-item label="禁止快进" prop="ban_drag">
-          <el-switch
-            v-model="video.ban_drag"
-            :active-value="1"
-            :inactive-value="0"
-          >
-          </el-switch>
-        </el-form-item>
-        <el-form-item label="上传视频" prop="tencent_video_id">
-          <upload-video
-            name="上传视频"
-            helper="请上传MP4格式视频"
-            v-model="video.tencent_video_id"
-          ></upload-video>
-        </el-form-item>
-        <el-form-item label="视频时长" prop="duration">
-          <el-input type="number" v-model="hour" style="width: 80px"></el-input
-          >时
-          <el-input type="number" v-model="min" style="width: 80px"></el-input
-          >分
-          <el-input
-            type="number"
-            v-model="second"
-            style="width: 80px"
-          ></el-input
-          >秒
-        </el-form-item>
-        <el-form-item label="试看时长" prop="free_seconds">
-          <el-input
-            type="number"
-            v-model="r_hour"
-            style="width: 80px"
-          ></el-input
-          >时
-          <el-input type="number" v-model="r_min" style="width: 80px"></el-input
-          >分
-          <el-input
-            type="number"
-            v-model="r_second"
-            style="width: 80px"
-          ></el-input
-          >秒
-        </el-form-item>
-        <el-form-item label="评论开关" prop="comment_status">
-          <el-select v-model="video.comment_status">
-            <el-option
-              v-for="(item, index) in comments"
-              :key="index"
-              :label="item.name"
-              :value="item.id"
-            >
-            </el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="SEO描述">
-          <el-input
-            class="w-100"
-            type="textarea"
-            v-model="video.seo_description"
-            placeholder="SEO描述"
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="SEO关键字">
-          <el-input
-            class="w-100"
-            type="textarea"
-            v-model="video.seo_keywords"
-            placeholder="SEO关键字"
-          ></el-input>
-        </el-form-item>
+            <div class="d-flex">
+              <div>
+                <el-switch
+                  v-model="video.is_ban_sell"
+                  :active-value="1"
+                  :inactive-value="0"
+                >
+                </el-switch>
+              </div>
+              <div class="ml-10">
+                <helper-text
+                  text="该字段控制用户是否可以直接购买该视频。如果禁止购买，那么用户观看该视频的话则必须先购买该视频所属录播课程。"
+                ></helper-text>
+              </div>
+            </div>
+          </el-form-item>
+
+          <el-form-item label="显示" prop="is_show">
+            <div class="d-flex">
+              <div>
+                <el-switch
+                  v-model="video.is_show"
+                  :active-value="1"
+                  :inactive-value="0"
+                >
+                </el-switch>
+              </div>
+              <div class="ml-10">
+                <helper-text
+                  text="该字段控制用户是否可以看到该视频。"
+                ></helper-text>
+              </div>
+            </div>
+          </el-form-item>
+
+          <el-form-item label="禁止快进" prop="ban_drag">
+            <div class="d-flex">
+              <div>
+                <el-switch
+                  v-model="video.ban_drag"
+                  :active-value="1"
+                  :inactive-value="0"
+                >
+                </el-switch>
+              </div>
+              <div class="ml-10">
+                <helper-text
+                  text="该字段控制用户播放该视频时是否可以快进播放。"
+                ></helper-text>
+              </div>
+            </div>
+          </el-form-item>
+
+          <el-form-item label="评论开关" prop="comment_status">
+            <el-select v-model="video.comment_status">
+              <el-option
+                v-for="(item, index) in comments"
+                :key="index"
+                :label="item.name"
+                :value="item.id"
+              >
+              </el-option>
+            </el-select>
+          </el-form-item>
+
+          <el-form-item label="SEO描述">
+            <el-input
+              class="w-300px"
+              type="textarea"
+              v-model="video.seo_description"
+              placeholder="SEO描述"
+            ></el-input>
+          </el-form-item>
+
+          <el-form-item label="SEO关键字">
+            <el-input
+              class="w-300px"
+              type="textarea"
+              v-model="video.seo_keywords"
+              placeholder="SEO关键字"
+            ></el-input>
+          </el-form-item>
+
+          <el-form-item label="阿里云视频文件ID" prop="aliyun_video_id">
+            <el-input
+              v-model="video.aliyun_video_id"
+              class="w-300px"
+              placeholder="阿里云视频文件ID"
+            ></el-input>
+          </el-form-item>
+
+          <el-form-item label="腾讯云视频文件ID" prop="tencent_video_id">
+            <el-input
+              v-model="video.tencent_video_id"
+              class="w-300px"
+              placeholder="腾讯云视频文件ID"
+            ></el-input>
+          </el-form-item>
+
+          <el-form-item label="视频URL" prop="url">
+            <el-input
+              v-model="video.url"
+              class="w-300px"
+              placeholder="视频URL"
+            ></el-input>
+          </el-form-item>
+        </div>
       </el-form>
     </div>
 
     <div class="bottom-menus">
       <div class="bottom-menus-box">
         <div>
-          <el-button @click="formValidate" :loading="loading" type="primary"
-            >保存</el-button
-          >
+          <el-button @click="formValidate" :loading="loading" type="primary">
+            保存
+          </el-button>
         </div>
         <div class="ml-24">
-          <el-button
-            @click="
-              $router.push({
-                name: 'CourseVideos',
-                query: { course_id: video.course_id },
-              })
-            "
-            >取消</el-button
-          >
+          <el-button @click="$router.back()">取消</el-button>
         </div>
       </div>
     </div>
+
+    <upload-video
+      :show="showUploadVideoWin"
+      @close="showUploadVideoWin = false"
+      @change="uploadVideoChange"
+    ></upload-video>
   </div>
 </template>
 <script>
+import InputDuration from "@/components/input-duration";
 import UploadVideo from "@/components/upload-video";
 
 export default {
   components: {
+    InputDuration,
     UploadVideo,
   },
   data() {
     return {
-      video: {
-        course_id: this.$route.query.course_id,
-        published_at: null,
-        aliyun_video_id: "",
-        sort: null,
-        title: null,
-        charge: 0,
-        comment_status: 2,
-        is_show: 1,
-        is_ban_sell: 1,
-        ban_drag: 0,
-        chapter_id: null,
-        duration: this.hour * 3600 + this.min * 60 + this.second,
-        free_seconds: this.r_hour * 3600 + this.r_min * 60 + this.r_second,
-        description: "",
-        short_description: "",
-        tencent_video_id: "",
-        player_h5: "xg",
-        url: "",
-        player_pc: "xg",
-        seo_description: "",
-        seo_keywords: "",
-      },
-      box: {
-        course_id: this.$route.query.course_id,
-      },
-      hour: 0,
-      min: 0,
-      second: 0,
-      r_hour: 0,
-      r_min: 0,
-      r_second: 0,
+      showUploadVideoWin: false,
+      course_id: this.$route.query.course_id,
+      video_id: this.$route.query.id,
+      course: null,
+      video: null,
       chapters: [],
       rules: {
-        sort: [
-          {
-            required: true,
-            message: "升序不能为空",
-            trigger: "blur",
-          },
-        ],
         title: [
           {
             required: true,
@@ -221,31 +316,17 @@ export default {
             trigger: "blur",
           },
         ],
-        is_show: [
-          {
-            required: true,
-            message: "请选择是否显示",
-            trigger: "blur",
-          },
-        ],
-        is_ban_sell: [
-          {
-            required: true,
-            message: "请选择是否禁止购买",
-            trigger: "blur",
-          },
-        ],
-        ban_drag: [
-          {
-            required: true,
-            message: "请选择是否禁止快进",
-            trigger: "blur",
-          },
-        ],
-        time: [
+        duration: [
           {
             required: true,
             message: "视频时长不能为空",
+            trigger: "blur",
+          },
+        ],
+        free_seconds: [
+          {
+            required: true,
+            message: "试看秒数不能为空",
             trigger: "blur",
           },
         ],
@@ -261,25 +342,45 @@ export default {
         },
         {
           id: 2,
-          name: "订阅后可评论",
+          name: "购买后可评论",
         },
       ],
       loading: false,
+      tab: {
+        active: "base",
+        list: [
+          {
+            name: "基础信息",
+            key: "base",
+          },
+          {
+            name: "可选信息",
+            key: "dev",
+          },
+        ],
+      },
     };
   },
   mounted() {
-    this.start();
+    this.getCreateParams();
+    this.getCourse();
+    this.getVideo();
   },
   methods: {
-    start() {
-      this.$api.Course.Vod.Videos.Create(this.video.course_id, this.box)
-        .then((res) => {
-          this.chapters = res.data.chapters;
-        })
-        .catch((e) => {
-          this.loading = false;
-          this.$message.error(e.message);
-        });
+    getCreateParams() {
+      this.$api.Course.Vod.Videos.Create(this.course_id).then((res) => {
+        this.chapters = res.data.chapters;
+      });
+    },
+    getVideo() {
+      this.$api.Course.Vod.Videos.Detail(this.video_id).then((res) => {
+        this.video = res.data.video;
+      });
+    },
+    getCourse() {
+      this.$api.Course.Vod.Detail(this.course_id).then((res) => {
+        this.course = res.data;
+      });
     },
     formValidate() {
       this.$refs["form"].validate((valid) => {
@@ -293,19 +394,31 @@ export default {
         return;
       }
       this.loading = true;
-      this.$api.Course.Vod.videos
-        .Store(this.video)
+      this.$api.Course.Vod.Videos.Update(this.video_id, this.video)
         .then(() => {
           this.$message.success(this.$t("common.success"));
-          this.$router.push({
-            name: "Coursevideos",
-            query: { course_id: this.video.course_id },
-          });
+          this.$router.back();
         })
         .catch((e) => {
           this.loading = false;
           this.$message.error(e.message);
         });
+    },
+    uploadVideoChange(video) {
+      this.video.duration = video.duration;
+      // this.video.title = video.title;
+
+      if (video.storage_driver === "aliyun") {
+        this.video.aliyun_video_id = video.storage_file_id;
+        this.video.tencent_video_id = null;
+        this.video.url = null;
+      } else if (video.storage_driver === "tencent") {
+        this.video.tencent_video_id = video.storage_file_id;
+        this.video.aliyun_video_id = null;
+        this.video.url = null;
+      }
+
+      this.showUploadVideoWin = false;
     },
   },
 };

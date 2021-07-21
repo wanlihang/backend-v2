@@ -162,7 +162,7 @@ export default {
       pagination: {
         page: 1,
         size: 10,
-        sort: "created_at",
+        sort: "id",
         order: "desc",
       },
       filter: {
