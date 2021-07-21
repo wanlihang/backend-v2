@@ -417,6 +417,26 @@ const Api = {
                         return get(`/backend/addons/zhibo/course/${id}/users`, params);
                     },
                 },
+                Video: {
+                    List(params) {
+                        return get(`/backend/addons/zhibo/course_video/index`, params);
+                    },
+                    Create() {
+                        return get(`/backend/addons/zhibo/course_video/create`);
+                    },
+                    Store(params) {
+                        return post(`/backend/addons/zhibo/course_video/create`, params);
+                    },
+                    Destory(id) {
+                        return destroy(`/backend/addons/zhibo/course_video/${id}`);
+                    },
+                    Detail(id) {
+                        return get(`/backend/addons/zhibo/course_video/${id}`);
+                    },
+                    Update(id, params) {
+                        return put(`/backend/addons/zhibo/course_video/${id}`, params);
+                    },
+                },
             },
             Teacher: {
                 List(params) {

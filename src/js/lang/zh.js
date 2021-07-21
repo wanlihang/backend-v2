@@ -122,6 +122,11 @@ const zh = {
                 users:{
                     index: '直播课程订阅用户',
                 },
+                video:{
+                    index: '直播课程内容安排',
+                    create: '创建直播课程内容安排',
+                    update: '编辑直播课程内容安排',
+                },
             },
             teacher: {
                 name: '讲师',
