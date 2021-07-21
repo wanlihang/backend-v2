@@ -119,10 +119,10 @@ const zh = {
                     create: '创建直播课程章节',
                     update: '编辑直播课程章节',
                 },
-                users:{
+                users: {
                     index: '直播课程订阅用户',
                 },
-                video:{
+                video: {
                     index: '直播课程内容安排',
                     create: '创建直播课程内容安排',
                     update: '编辑直播课程内容安排',
@@ -141,6 +141,13 @@ const zh = {
                 create: '微信公众号添加规则',
                 update: '微信公众号编辑规则',
             },
+        },
+        codeExchanger: {
+            name: '兑换码',
+            index: '兑换商品',
+            create: '创建兑换商品',
+            update: '编辑兑换商品',
+            codes: '兑换码'
         },
         wenda: {
             question: {

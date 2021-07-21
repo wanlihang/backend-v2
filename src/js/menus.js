@@ -149,6 +149,17 @@ export default [
         ]
     },
     {
+        name: 'title.codeExchanger.name',
+        key: 'Exchanger',
+        children: [
+            {
+                name: 'title.codeExchanger.index',
+                key: 'CodeExchanger'
+            },
+            
+        ]
+    },
+    {
         name: 'title.wendaname',
         key: 'Wenda',
         children: [

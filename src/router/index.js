@@ -6,8 +6,7 @@ import index from '@/views/index/index'
 
 Vue.use(VueRouter)
 
-const routes = [
-  {
+const routes = [{
     path: '/',
     name: 'Login',
     component: () => import('@/views/login/login.vue'),
@@ -18,8 +17,7 @@ const routes = [
   {
     path: '/Home',
     component: AppLayout,
-    children: [
-      {
+    children: [{
         path: '/dashboard',
         component: index,
         name: 'Dashboard',
@@ -929,6 +927,38 @@ const routes = [
         name: 'LiveCourseVideoUpdate',
         meta: {
           title: 'title.live.course.video.update'
+        }
+      },
+      {
+        path: '/codeExchanger/index',
+        component: () => import('@/views/codeExchanger/index'),
+        name: 'CodeExchanger',
+        meta: {
+          title: 'title.codeExchanger.index'
+        }
+      },
+      {
+        path: '/codeExchanger/create',
+        component: () => import('@/views/codeExchanger/create'),
+        name: 'CodeExchangerCreate',
+        meta: {
+          title: 'title.codeExchanger.create'
+        }
+      },
+      {
+        path: '/codeExchanger/update',
+        component: () => import('@/views/codeExchanger/update'),
+        name: 'CodeExchangerUpdate',
+        meta: {
+          title: 'title.codeExchanger.update'
+        }
+      },
+      {
+        path: '/codeExchanger/codes',
+        component: () => import('@/views/codeExchanger/codes'),
+        name: 'CodeExchangerCodes',
+        meta: {
+          title: 'title.codeExchanger.codes'
         }
       },
     ]
