@@ -114,6 +114,11 @@ const zh = {
                     create: '创建直播课程分类',
                     update: '编辑直播课程分类',
                 },
+                chapter: {
+                    index: '直播课程章节',
+                    create: '创建直播课程章节',
+                    update: '编辑直播课程章节',
+                },
             },
             teacher: {
                 name: '讲师',

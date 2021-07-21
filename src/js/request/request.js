@@ -395,6 +395,23 @@ const Api = {
                         return put(`/backend/addons/zhibo/course_category/${id}`, params);
                     },
                 },
+                Chapter:{
+                    List(params) {
+                        return get(`/backend/addons/zhibo/course_chapter/index`, params);
+                    },
+                    Store(params) {
+                        return post(`/backend/addons/zhibo/course_chapter/create`, params);
+                    },
+                    Destory(id) {
+                        return destroy(`/backend/addons/zhibo/course_chapter/${id}`);
+                    },
+                    Detail(id) {
+                        return get(`/backend/addons/zhibo/course_chapter/${id}`);
+                    },
+                    Update(id, params) {
+                        return put(`/backend/addons/zhibo/course_chapter/${id}`, params);
+                    },
+                },
             },
             Teacher:{
                 List(params) {

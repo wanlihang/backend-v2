@@ -112,7 +112,7 @@
                 style="margin-left: 5px"
                 @click="
                   $router.push({
-                    name: 'LiveCourseUpdate',
+                    name: 'LiveCourseChapter',
                     query: { id: scope.row.id },
                   })
                 "
@@ -211,7 +211,7 @@ export default {
       let params = {};
       Object.assign(params, this.filter);
       Object.assign(params, this.pagination);
-      console.log(this.filter)
+      console.log(this.filter);
       this.$api.Course.Live.Course.List(params).then((res) => {
         this.loading = false;
         this.results = res.data.data.data;
