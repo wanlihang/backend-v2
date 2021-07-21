@@ -819,6 +819,30 @@ const routes = [
           title: 'title.live.teacher.update'
         }
       },
+      {
+        path: '/live/course/index',
+        component: () => import('@/views/live/course/index'),
+        name: 'LiveCourse',
+        meta: {
+          title: 'title.live.course.index'
+        }
+      },
+      {
+        path: '/live/course/create',
+        component: () => import('@/views/live/course/create'),
+        name: 'LiveCourseCreate',
+        meta: {
+          title: 'title.live.course.create'
+        }
+      },
+      {
+        path: '/live/course/update',
+        component: () => import('@/views/live/course/update'),
+        name: 'LiveCourseUpdate',
+        meta: {
+          title: 'title.live.course.update'
+        }
+      },
     ]
   },
   {
