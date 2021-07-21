@@ -1,0 +1,314 @@
+<template>
+  <div class="meedu-main-body">
+    <back-bar class="mb-30" title="兑换码"></back-bar>
+    <div class="float-left mb-30">
+      <el-button @click="destorymulti()" type="danger"> 删除 </el-button>
+      <el-button @click="getnum(10)" type="primary"> 生成10个 </el-button>
+      <el-button @click="getnum(50)" type="primary"> 生成50个 </el-button>
+      <el-button @click="importcode()" type="primary">
+        导出未使用兑换码
+      </el-button>
+    </div>
+    <div class="float-left">
+      <div class="float-left d-flex">
+        <div class="d-flex">
+          <div class="filter-label">搜索</div>
+          <div class="flex-1 ml-15">
+            <el-input
+              class="w-200px"
+              v-model="filter.code"
+              placeholder="兑换码"
+            ></el-input>
+          </div>
+        </div>
+
+        <div class="d-flex ml-15">
+          <div class="filter-label">UID</div>
+          <div class="flex-1 ml-15">
+            <el-input
+              class="w-200px"
+              v-model="filter.user_id"
+              placeholder="请选择用户"
+            ></el-input>
+          </div>
+        </div>
+
+        <div class="ml-15">
+          <el-button @click="getResults" type="primary" plain>筛选</el-button>
+          <el-button @click="paginationReset">清空</el-button>
+        </div>
+      </div>
+    </div>
+    <div class="float-left mt-30" v-loading="loading">
+      <div class="float-left">
+        <el-table
+          :data="results"
+          @selection-change="handleSelectionChange"
+          stripe
+          class="float-left"
+        >
+          <el-table-column type="selection" width="55"></el-table-column
+          ><!-- 显示选取表格 -->
+          <el-table-column prop="id" label="ID" width="80"> </el-table-column>
+          <el-table-column prop="code" label="兑换码"> </el-table-column>
+          <el-table-column label="使用" width="200">
+            <template slot-scope="scope">
+              <span v-if="scope.row.is_used == 0">否</span>
+              <span v-else>是</span>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+
+      <div class="float-left mt-30 text-center">
+        <el-pagination
+          @size-change="paginationSizeChange"
+          @current-change="paginationPageChange"
+          :current-page="pagination.page"
+          :page-sizes="[10, 20, 50, 100]"
+          :page-size="pagination.size"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="total"
+        >
+        </el-pagination>
+      </div>
+      <div class="bottom-menus">
+        <div class="bottom-menus-box">
+          <div>
+            <el-button @click="$router.back()">取消</el-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      pagination: {
+        gid: this.$route.query.id,
+        page: 1,
+        size: 10,
+      },
+      filter: {
+        code: "",
+        user_id: "",
+      },
+      spids: {
+        ids: [],
+      },
+      popbox: {
+        gid: this.$route.query.id,
+        count: null,
+      },
+      total: 0,
+      loading: false,
+      results: [],
+    };
+  },
+
+  mounted() {
+    this.getResults();
+  },
+  methods: {
+    paginationReset() {
+      this.pagination.page = 1;
+      this.filter.code = "";
+      this.filter.user_id = "";
+      this.getResults();
+    },
+    paginationSizeChange(size) {
+      this.pagination.size = size;
+      this.getResults();
+    },
+    paginationPageChange(page) {
+      this.pagination.page = page;
+      this.getResults();
+    },
+    //保存选中结果
+    handleSelectionChange(val) {
+      var newbox = [];
+      for (var i = 0; i < val.length; i++) {
+        newbox.push(val[i].id);
+      }
+      this.spids.ids = newbox;
+    },
+    getResults() {
+      if (this.loading) {
+        return;
+      }
+      this.loading = true;
+      let params = {};
+      Object.assign(params, this.filter);
+      Object.assign(params, this.pagination);
+      this.$api.CodeExchanger.Codes.List(params).then((res) => {
+        this.loading = false;
+        this.results = res.data.data.data;
+        this.total = res.data.data.total;
+      });
+    },
+    destorymulti() {
+      this.$confirm("确认操作？", "警告", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          //点击确定按钮的操作
+          if (this.loading) {
+            return;
+          }
+          if (this.spids.ids == "") {
+            this.$message("请选择需要操作的数据");
+            return;
+          }
+          this.loading = true;
+          this.$api.CodeExchanger.Codes.DestoryMulti(this.spids)
+            .then(() => {
+              this.loading = false;
+              this.$message.success(this.$t("common.success"));
+              this.getResults();
+            })
+            .catch((e) => {
+              this.loading = false;
+              this.$message(e.message);
+            });
+        })
+        .catch(() => {
+          //点击删除按钮的操作
+        });
+    },
+    getnum(item) {
+      this.$confirm("确认操作？", "警告", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          //点击确定按钮的操作
+          if (this.loading) {
+            return;
+          }
+          this.loading = true;
+          this.popbox.count = item;
+          this.$api.CodeExchanger.Codes.Generate(this.popbox)
+            .then(() => {
+              this.loading = false;
+              this.$message.success(this.$t("common.success"));
+              this.getResults();
+            })
+            .catch((e) => {
+              this.loading = false;
+              this.$message(e.message);
+            });
+        })
+        .catch(() => {
+          //点击删除按钮的操作
+        });
+    },
+    importcode() {
+      const XLSX = require("xlsx");
+      // 将一个sheet转成最终的excel文件的blob对象，然后利用URL.createObjectURL下载
+      function sheet2blob(sheet, sheetName) {
+        sheetName = sheetName || "sheet1";
+        var workbook = {
+          SheetNames: [sheetName],
+          Sheets: {},
+        };
+        workbook.Sheets[sheetName] = sheet;
+        // 生成excel的配置项
+        var wopts = {
+          bookType: "xlsx", // 要生成的文件类型
+          bookSST: false, // 是否生成Shared String Table，官方解释是，如果开启生成速度会下降，但在低版本IOS设备上有更好的兼容性
+          type: "binary",
+        };
+        var wbout = XLSX.write(workbook, wopts);
+        var blob = new Blob([s2ab(wbout)], {
+          type: "application/octet-stream",
+        });
+        // 字符串转ArrayBuffer
+        function s2ab(s) {
+          var buf = new ArrayBuffer(s.length);
+          var view = new Uint8Array(buf);
+          for (var i = 0; i != s.length; ++i) view[i] = s.charCodeAt(i) & 0xff;
+          return buf;
+        }
+        return blob;
+      }
+
+      function openDownloadDialog(url, saveName) {
+        if (typeof url == "object" && url instanceof Blob) {
+          url = URL.createObjectURL(url); // 创建blob地址
+        }
+        var aLink = document.createElement("a");
+        aLink.href = url;
+        aLink.download = saveName || ""; // HTML5新增的属性，指定保存文件名，可以不要后缀，注意，file:///模式下不会生效
+        var event;
+        if (window.MouseEvent) event = new MouseEvent("click");
+        else {
+          event = document.createEvent("MouseEvents");
+          event.initMouseEvent(
+            "click",
+            true,
+            false,
+            window,
+            0,
+            0,
+            0,
+            0,
+            0,
+            false,
+            false,
+            false,
+            false,
+            0,
+            null
+          );
+        }
+        aLink.dispatchEvent(event);
+      }
+
+      this.$api.CodeExchanger.Codes.Export().then((res) => {
+        let header = [["兑换码"]];
+        res.data.forEach((item) => {
+          header.push([item.code]);
+        });
+        let sheet = XLSX.utils.aoa_to_sheet(header);
+        openDownloadDialog(sheet2blob(sheet), "兑换码.xlsx");
+      });
+    },
+  },
+};
+</script>
+
+<style lang="less" scoped>
+.filter-box {
+  width: 100%;
+  height: auto;
+  float: left;
+  box-sizing: border-box;
+  padding: 30px;
+  border-radius: 15px;
+  margin-bottom: 15px;
+  background-color: white;
+
+  .filter-label {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.7);
+  }
+}
+.user-item {
+  width: auto;
+  display: flex;
+  align-items: center;
+  .avatar {
+    margin-right: 10px;
+  }
+  .nickname {
+    font-size: 15px;
+    font-weight: normal;
+  }
+}
+</style>

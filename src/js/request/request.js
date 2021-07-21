@@ -548,8 +548,37 @@ const Api = {
                 },
                 Users(id, params) {
                     return get(`/backend/addons/meedu_topics/topic/${id}/users`, params);
-                }
-            }
+                },
+                Comment(params) {
+                    return get(`/backend/addons/meedu_topics/comment`, params);
+                },
+                DestoryComment(id) {
+                    return destroy(`/backend/addons/meedu_topics/comment/${id}`);
+                },
+                CommentCheck(params) {
+                    return post(`/backend/addons/meedu_topics/comment/check`, params);
+                },
+            },
+            Category:{
+                List() {
+                    return get(`/backend/addons/meedu_topics/category/index`);
+                },
+                Create() {
+                    return get(`/backend/addons/meedu_topics/category/create`);
+                },
+                Store(params) {
+                    return post(`/backend/addons/meedu_topics/category/create`, params);
+                },
+                Destory(id) {
+                    return destroy(`/backend/addons/meedu_topics/category/${id}`);
+                },
+                Detail(id) {
+                    return get(`/backend/addons/meedu_topics/category/${id}`);
+                },
+                Update(id, params) {
+                    return put(`/backend/addons/meedu_topics/category/${id}`, params);
+                },
+            },
         },
         LearnPath: {
             Path: {
@@ -756,6 +785,41 @@ const Api = {
             }
         },
     },
+    CodeExchanger:{
+        List(params) {
+            return get(`/backend/addons/CodeExchanger/goods`, params);
+        },
+        Create(params) {
+            return get(`/backend/addons/CodeExchanger/goods/create`, params);
+        },
+        Store(params) {
+            return post(`/backend/addons/CodeExchanger/goods/create`, params);
+        },
+        Destory(id) {
+            return destroy(`/backend/addons/CodeExchanger/goods/${id}`);
+        },
+        Detail(id) {
+            return get(`/backend/addons/CodeExchanger/goods/${id}`);
+        },
+        Update(id, params) {
+            return put(`/backend/addons/CodeExchanger/goods/${id}`, params);
+        },
+        Codes:{
+            List(params) {
+                return get(`/backend/addons/CodeExchanger/codes`, params);
+            },
+            DestoryMulti(params) {
+                return post(`/backend/addons/CodeExchanger/code/delete/multi`, params);
+            },
+            Generate(params) {
+                return post(`/backend/addons/CodeExchanger/code/generate`, params);
+            },
+            Export(){
+                return get(`/backend/addons/CodeExchanger/code/export`);
+            },
+        },
+    },
+    
     Wenda: {
         Question: {
             List(params) {

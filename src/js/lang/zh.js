@@ -122,7 +122,7 @@ const zh = {
                 users: {
                     index: '直播课程订阅用户',
                 },
-                video:{
+                video: {
                     index: '直播课程内容安排',
                     create: '创建直播课程内容安排',
                     update: '编辑直播课程内容安排',
@@ -140,6 +140,25 @@ const zh = {
                 index: '微信公众号消息回复',
                 create: '微信公众号添加规则',
                 update: '微信公众号编辑规则',
+            },
+        },
+        codeExchanger: {
+            name: '兑换码',
+            index: '兑换商品',
+            create: '创建兑换商品',
+            update: '编辑兑换商品',
+            codes: '兑换码'
+        },
+        topic: {
+            name: '图文',
+            index: '话题',
+            create: '创建话题文章',
+            update: '编辑话题文章',
+            comment: '话题文章评论',
+            category:{
+                index: '话题分类管理',
+                create: '创建话题分类',
+                update: '编辑话题分类',
             },
         },
         wenda: {
