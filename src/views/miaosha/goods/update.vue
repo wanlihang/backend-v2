@@ -101,7 +101,7 @@
             >
           </div>
           <div class="ml-24">
-            <el-button @click="$router.push({ name: 'MiaoshaGoods' })"
+            <el-button @click="$router.back()"
               >取消</el-button
             >
           </div>
@@ -292,7 +292,7 @@ export default {
       this.$api.Miaosha.Goods.Update(this.course.id, this.course)
         .then(() => {
           this.$message.success(this.$t("common.success"));
-          this.$router.push({ name: "MiaoshaGoods" });
+          this.$router.back();
         })
         .catch((e) => {
           this.loading = false;

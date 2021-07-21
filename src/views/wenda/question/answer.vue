@@ -52,7 +52,7 @@
     <div class="bottom-menus">
       <div class="bottom-menus-box">
         <div>
-          <el-button @click="$router.push({ name: 'Question' })"
+          <el-button @click="$router.back()"
             >取消</el-button
           >
         </div>

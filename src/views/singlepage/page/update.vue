@@ -142,7 +142,7 @@ export default {
       this.$api.Singlepage.Page.Update(this.user.id,this.user)
         .then(() => {
           this.$message.success(this.$t("common.success"));
-          this.$router.push({ name: "SinglePage" });
+          this.$router.back();
         })
         .catch((e) => {
           this.loading = false;
