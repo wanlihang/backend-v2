@@ -2,7 +2,7 @@
   <div class="meedu-main-body">
     <div class="float-left mb-30">
       <el-button
-        @click="$router.push({ name: 'LiveCourseCreate' })"
+        @click="$router.push({ name: 'LiveCourseCategory' })"
         type="primary"
       >
         直播课程分类

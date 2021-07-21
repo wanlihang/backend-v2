@@ -843,6 +843,30 @@ const routes = [
           title: 'title.live.course.update'
         }
       },
+      {
+        path: '/live/course/category/index',
+        component: () => import('@/views/live/course/category/index'),
+        name: 'LiveCourseCategory',
+        meta: {
+          title: 'title.live.course.category.index'
+        }
+      },
+      {
+        path: '/live/course/category/create',
+        component: () => import('@/views/live/course/category/create'),
+        name: 'LiveCourseCategoryCreate',
+        meta: {
+          title: 'title.live.course.category.create'
+        }
+      },
+      {
+        path: '/live/course/category/update',
+        component: () => import('@/views/live/course/category/update'),
+        name: 'LiveCourseCategoryUpdate',
+        meta: {
+          title: 'title.live.course.category.update'
+        }
+      },
     ]
   },
   {

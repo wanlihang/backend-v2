@@ -107,7 +107,12 @@ const zh = {
                 name: '课程',
                 index: '直播课程',
                 create: '创建直播课程',
-                update: '编辑直播课程'
+                update: '编辑直播课程',
+                category:{
+                    index: '直播课程分类',
+                    create: '创建直播课程分类',
+                    update: '编辑直播课程分类',
+                },
             },
             teacher: {
                 name: '讲师',
