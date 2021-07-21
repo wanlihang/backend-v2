@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="创建分销商品"></back-bar>
+    <back-bar class="mb-30" title="编辑分销商品"></back-bar>
     <div class="float-left">
       <div class="form-box broder-top-left-radius">
         <el-form ref="form" :model="course" :rules="rules" label-width="200px">
