@@ -4,6 +4,10 @@
       <el-button @click="$router.push({ name: 'VodCreate' })" type="primary">
         添加
       </el-button>
+
+      <el-button @click="$router.push({ name: 'VodImport' })" type="primary">
+        视频批量导入
+      </el-button>
     </div>
     <div class="float-left">
       <div class="float-left d-flex">

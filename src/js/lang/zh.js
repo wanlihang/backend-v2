@@ -160,6 +160,7 @@ const zh = {
                 create: '添加录播课程',
                 update: '编辑录播课程',
                 detail: '录播课程详情',
+                'video-import': '视频批量导入',
                 category: {
                     index: '课程分类管理',
                     create: '创建课程分类',

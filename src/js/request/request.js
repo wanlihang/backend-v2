@@ -377,6 +377,9 @@ const Api = {
                 WatchRecords(id, params) {
                     return get(`/backend/api/v1/video/${id}/watch/records`, params);
                 },
+                ImportAct(params){
+                    return post(`/backend/api/v1/video/import`, params);
+                },
                 Comment: {
                     List(params) {
                         return get(`/backend/api/v1/video_comment`, params);

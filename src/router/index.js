@@ -180,6 +180,14 @@ const routes = [
         }
       },
       {
+        path: '/course/vod/video-import',
+        component: () => import('@/views/course/vod/video/import.vue'),
+        name: 'VodImport',
+        meta: {
+          title: 'title.course.vod.video-import'
+        }
+      },
+      {
         path: '/course/vod/create',
         component: () => import('@/views/course/vod/create'),
         name: 'VodCreate',
