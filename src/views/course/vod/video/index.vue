@@ -70,18 +70,28 @@
                     },
                   })
                 "
-                >销售记录</el-link
+                >销售</el-link
               >
               <el-link
                 style="margin-left: 5px"
                 type="primary"
                 @click="
                   $router.push({
-                    name: 'VideosUpdate',
-                    query: { course_id: pagination.cid, id: scope.row.id },
+                    name: 'VideoWatchRecords',
+                    query: { course_id: scope.row.course_id, id: scope.row.id },
                   })
                 "
-                >用户观看</el-link
+                >观看</el-link
+              ><el-link
+                style="margin-left: 5px"
+                type="primary"
+                @click="
+                  $router.push({
+                    name: 'VideoComments',
+                    query: { course_id: scope.row.course_id, id: scope.row.id },
+                  })
+                "
+                >评论</el-link
               >
             </template>
           </el-table-column>

@@ -1,15 +1,28 @@
 <template>
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="添加课程附件"></back-bar>
+
     <div class="float-left">
-      <el-form ref="form" :model="user" :rules="rules" label-width="200px">
+      <el-form ref="form" :model="form" :rules="rules" label-width="200px">
         <el-form-item label="附件名" prop="name">
-          <el-input v-model="user.name" class="w-200px"></el-input>
+          <el-input v-model="form.name" class="w-300px"></el-input>
         </el-form-item>
         <el-form-item label="附件" prop="file">
-          <input type="file" id="cover" class="w-200px" />
-          <div class="helper">
-            仅支持zip,pdf,jpeg,jpg,gif,png,md,doc,txt,csv格式文件
+          <div class="d-flex">
+            <div>
+              <el-button type="primary" @click="$refs['file'].click()">
+                <span>上传附件</span>
+                <span class="ml-10" v-if="file.name">{{ file.name }}</span>
+              </el-button>
+              <div style="display: none">
+                <input type="file" ref="file" @change="fileChange" />
+              </div>
+            </div>
+            <div class="ml-10">
+              <helper-text
+                text="支持zip,pdf,jpeg,jpg,gif,png,md,doc,txt,csv格式文件"
+              ></helper-text>
+            </div>
           </div>
         </el-form-item>
       </el-form>
@@ -18,20 +31,12 @@
     <div class="bottom-menus">
       <div class="bottom-menus-box">
         <div>
-          <el-button
-            @click="
-              $router.push({
-                name: 'CourseAttach',
-                query: { course_id: user.course_id },
-              })
-            "
-            >取消</el-button
-          >
+          <el-button @click="formValidate" :loading="loading" type="primary">
+            保存
+          </el-button>
         </div>
         <div class="ml-15">
-          <el-button @click="formValidate" :loading="loading" type="primary"
-            >保存</el-button
-          >
+          <el-button @click="$router.back()">取消</el-button>
         </div>
       </div>
     </div>
@@ -41,7 +46,7 @@
 export default {
   data() {
     return {
-      user: {
+      form: {
         course_id: this.$route.query.course_id,
         name: null,
       },
@@ -55,12 +60,19 @@ export default {
           },
         ],
       },
-
       loading: false,
+      file: {
+        name: null,
+      },
     };
   },
-  mounted() {},
   methods: {
+    fileChange(e) {
+      if (e.target.files.length === 0) {
+        return;
+      }
+      this.form.name = this.file.name = e.target.files[0].name;
+    },
     formValidate() {
       this.$refs["form"].validate((valid) => {
         if (valid) {
@@ -74,16 +86,15 @@ export default {
       }
       this.loading = true;
       const formData = new FormData();
-      formData.append("file", document.getElementById("cover").files[0]);
-      formData.append("name", this.user.name);
-      formData.append("course_id", this.user.course_id);
+
+      formData.append("file", this.$refs['file'].files[0]);
+      formData.append("name", this.form.name);
+      formData.append("course_id", this.form.course_id);
+
       this.$api.Course.Vod.Attach.Store(formData)
         .then(() => {
           this.$message.success(this.$t("common.success"));
-          this.$router.push({
-            name: "CourseAttach",
-            query: { course_id: this.user.course_id },
-          });
+          this.$router.back();
         })
         .catch((e) => {
           this.loading = false;

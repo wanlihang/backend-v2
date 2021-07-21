@@ -178,6 +178,14 @@ const routes = [{
         }
       },
       {
+        path: '/course/vod/video-import',
+        component: () => import('@/views/course/vod/video/import.vue'),
+        name: 'VodImport',
+        meta: {
+          title: 'title.course.vod.video-import'
+        }
+      },
+      {
         path: '/course/vod/create',
         component: () => import('@/views/course/vod/create'),
         name: 'VodCreate',
@@ -295,6 +303,22 @@ const routes = [{
         name: 'VideoSubscribe',
         meta: {
           title: 'title.course.vod.video.subscribe'
+        }
+      },
+      {
+        path: '/course/vod/video/watch-records',
+        component: () => import('@/views/course/vod/video/watch-records'),
+        name: 'VideoWatchRecords',
+        meta: {
+          title: 'title.course.vod.video.watch-records'
+        }
+      },
+      {
+        path: '/course/vod/video/comments',
+        component: () => import('@/views/course/vod/video/comments'),
+        name: 'VideoComments',
+        meta: {
+          title: 'title.course.vod.video.comments'
         }
       },
       {

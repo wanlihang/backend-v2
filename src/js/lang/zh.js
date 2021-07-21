@@ -167,6 +167,7 @@ const zh = {
                 create: '添加录播课程',
                 update: '编辑录播课程',
                 detail: '录播课程详情',
+                'video-import': '视频批量导入',
                 category: {
                     index: '课程分类管理',
                     create: '创建课程分类',
@@ -185,10 +186,12 @@ const zh = {
                     index: '观看记录',
                 },
                 video: {
-                    index: '课程视频管理',
-                    create: '创建课程视频',
-                    update: '编辑课程视频',
-                    subscribe: '课程视频销售记录',
+                    index: '视频管理',
+                    create: '创建视频',
+                    update: '编辑视频',
+                    subscribe: '视频销售记录',
+                    'watch-records': '视频观看记录',
+                    comments: "视频评论"
                 },
             },
         },

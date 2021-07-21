@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="用户批量导入"></back-bar>
+    <back-bar class="mb-30" title="视频批量导入"></back-bar>
 
     <div class="user-import-box">
       <div class="float-left d-flex mb-15">
@@ -12,10 +12,10 @@
         <div class="ml-30">
           <el-link
             type="primary"
-            href="https://www.yuque.com/meedu/fvvkbf/qtkixc"
+            href="https://www.yuque.com/meedu/fvvkbf/pxe3go"
             target="_blank"
           >
-            点击链接下载「用户批量导入模板」
+            点击链接下载「视频批量导入模板」
           </el-link>
         </div>
       </div>
@@ -81,7 +81,7 @@ export default {
         // 请求导入api
         this.$refs.form.reset();
 
-        this.$api.Member.Import({ users: parseData })
+        this.$api.Course.Vod.Videos.ImportAct({ data: parseData })
           .then(() => {
             this.loading = false;
             this.$message.success("导入成功");

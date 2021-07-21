@@ -291,6 +291,14 @@ const Api = {
             SubUsersDel(id, params) {
                 return get(`/backend/api/v1/course/${id}/subscribe/delete`, params);
             },
+            Comment: {
+                List(params) {
+                    return get(`/backend/api/v1/course_comment`, params);
+                },
+                Destroy(params) {
+                    return post(`/backend/api/v1/course_comment/delete`, params);
+                }
+            },
             Categories: {
                 List(params) {
                     return get(`/backend/api/v1/courseCategory`, params);
@@ -365,6 +373,20 @@ const Api = {
                 },
                 Subscribe(id, params) {
                     return get(`/backend/api/v1/video/${id}/subscribes`, params);
+                },
+                WatchRecords(id, params) {
+                    return get(`/backend/api/v1/video/${id}/watch/records`, params);
+                },
+                ImportAct(params){
+                    return post(`/backend/api/v1/video/import`, params);
+                },
+                Comment: {
+                    List(params) {
+                        return get(`/backend/api/v1/video_comment`, params);
+                    },
+                    Destroy(params) {
+                        return post(`/backend/api/v1/video_comment/delete`, params);
+                    }
                 },
             },
         },
@@ -926,7 +948,7 @@ const Api = {
     Multishare: {
         Poster: {
             List() {
-                return get(`/backend/addons/multi_level_share/poster/index`, );
+                return get(`/backend/addons/multi_level_share/poster/index`,);
             },
             Store(params) {
                 return post(`/backend/addons/multi_level_share/poster/create`, params);

@@ -4,6 +4,10 @@
       <el-button @click="$router.push({ name: 'VodCreate' })" type="primary">
         添加
       </el-button>
+
+      <el-button @click="$router.push({ name: 'VodImport' })" type="primary">
+        视频批量导入
+      </el-button>
     </div>
     <div class="float-left">
       <div class="float-left d-flex">
@@ -69,11 +73,23 @@
               </div>
             </template>
           </el-table-column>
-          <el-table-column label="价格" prop="charge" sortable width="200">
+          <el-table-column property="charge" label="价格" sortable width="200">
+            <template slot-scope="scope"> {{ scope.row.charge }}元 </template>
           </el-table-column>
           <el-table-column
             label="订阅人数"
-            prop="user_count"
+            property="user_count"
+            sortable
+            width="200"
+          >
+            <template slot-scope="scope">
+              {{ scope.row.user_count }}人
+            </template>
+          </el-table-column>
+
+          <el-table-column
+            label="上架时间"
+            property="published_at"
             sortable
             width="200"
           >
@@ -116,13 +132,6 @@
                 附件
               </el-link>
               <el-link
-                class="ml-5"
-                type="danger"
-                @click="destory(scope.row.id)"
-              >
-                删除
-              </el-link>
-              <el-link
                 type="primary"
                 class="ml-5"
                 @click="
@@ -133,6 +142,13 @@
                 "
               >
                 编辑
+              </el-link>
+              <el-link
+                class="ml-5"
+                type="danger"
+                @click="destory(scope.row.id)"
+              >
+                删除
               </el-link>
             </template>
           </el-table-column>
