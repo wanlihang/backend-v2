@@ -1,9 +1,29 @@
 <template>
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="编辑电子书"></back-bar>
-    <div class="float-left">
-      <div class="form-box broder-top-left-radius">
-        <el-form ref="form" :model="course" :rules="rules" label-width="200px">
+
+    <div class="center-tabs mb-30">
+      <div>
+        <el-tabs v-model="tab.active">
+          <el-tab-pane
+            :label="item.name"
+            :name="item.key"
+            v-for="(item, index) in tab.list"
+            :key="index"
+          ></el-tab-pane>
+        </el-tabs>
+      </div>
+    </div>
+
+    <div class="float-left" v-if="course">
+      <el-form
+        ref="form"
+        :model="course"
+        :rules="rules"
+        class="float-left"
+        label-width="200px"
+      >
+        <div class="float-left" v-show="tab.active === 'base'">
           <el-form-item prop="cid" label="分类">
             <div class="d-flex">
               <div>
@@ -17,89 +37,176 @@
                   </el-option>
                 </el-select>
               </div>
+              <div class="ml-10">
+                <el-link
+                  type="primary"
+                  @click="$router.push({ name: 'MeedubookCategory' })"
+                  >分类管理</el-link
+                >
+              </div>
             </div>
           </el-form-item>
+
           <el-form-item label="书名" prop="name">
-            <el-input v-model="course.name" class="w-100"></el-input>
+            <el-input
+              v-model="course.name"
+              class="w-500px"
+              placeholder="书名"
+            ></el-input>
           </el-form-item>
+
+          <el-form-item label="上架时间" prop="published_at">
+            <div class="d-flex">
+              <div>
+                <el-date-picker
+                  v-model="course.published_at"
+                  type="datetime"
+                  format="yyyy-MM-dd HH:mm"
+                  value-format="yyyy-MM-dd HH:mm"
+                  placeholder="请选择日期"
+                  :picker-options="expireTimeOption"
+                >
+                </el-date-picker>
+              </div>
+              <div class="ml-10">
+                <helper-text
+                  text="上架时间决定了电子书的排名，时间越早排名越靠后。如果是未来时间，则必须等到时间达到用户才能看到。"
+                ></helper-text>
+              </div>
+            </div>
+          </el-form-item>
+
           <el-form-item prop="thumb" label="封面">
             <upload-image
               v-model="course.thumb"
-              helper="长宽比4:3，建议尺寸：400x300像素"
-              width="400"
-              height="300"
+              helper="长宽比3:4，建议尺寸：300x400像素"
+              width="300"
+              height="400"
               name="上传封面"
             ></upload-image>
           </el-form-item>
+
           <el-form-item label="价格" prop="charge">
-            <el-input
-              type="number"
-              placeholder="单位：元"
-              v-model="course.charge"
-              class="w-200px"
-            ></el-input>
+            <div class="d-flex">
+              <div>
+                <el-input
+                  type="number"
+                  placeholder="单位：元"
+                  v-model="course.charge"
+                  class="w-200px"
+                ></el-input>
+              </div>
+              <div class="ml-10">
+                <helper-text
+                  text="最小单位：元。不支持小数。价格为0意味着用户可免费直接观看。"
+                ></helper-text>
+              </div>
+            </div>
           </el-form-item>
-          <el-form-item label="订阅人数" prop="count">
-            <el-input v-model="course.user_count" class="w-200px"></el-input>
-          </el-form-item>
-          <el-form-item label="上架时间" prop="published_at">
-            <el-date-picker
-              v-model="course.published_at"
-              type="datetime"
-              format="yyyy-MM-dd HH:mm"
-              value-format="yyyy-MM-dd HH:mm"
-              placeholder="请选择日期"
-              :picker-options="expireTimeOption"
-            >
-            </el-date-picker>
-          </el-form-item>
-          <el-form-item label="显示" prop="is_show">
-            <el-switch
-              v-model="course.is_show"
-              :active-value="1"
-              :inactive-value="0"
-            >
-            </el-switch>
-          </el-form-item>
-          <el-form-item label="会员免费" prop="is_show">
-            <el-switch
-              v-model="course.is_vip_free"
-              :active-value="1"
-              :inactive-value="0"
-            >
-            </el-switch>
+
+          <el-form-item
+            label="会员免费"
+            prop="is_vip_free"
+            v-if="course.charge > 0"
+          >
+            <div class="d-flex">
+              <div>
+                <el-switch
+                  v-model="course.is_vip_free"
+                  :active-value="1"
+                  :inactive-value="0"
+                >
+                </el-switch>
+              </div>
+              <div class="ml-10">
+                <helper-text
+                  text="如果开启该选项，则购买VIP会员的用户可以无需购买即可观看该电子书。"
+                ></helper-text>
+              </div>
+            </div>
           </el-form-item>
 
           <el-form-item prop="short_desc" label="简短介绍">
-            <el-input
-              class="w-100"
-              type="textarea"
-              v-model="course.short_desc"
-            ></el-input>
+            <div class="d-flex">
+              <div>
+                <el-input
+                  class="w-400px"
+                  rows="4"
+                  type="textarea"
+                  v-model="course.short_desc"
+                  placeholder="简短介绍"
+                ></el-input>
+              </div>
+              <div class="ml-10">
+                <helper-text
+                  text="该值会在电子书列表显示，建议不要超过120个字。"
+                ></helper-text>
+              </div>
+            </div>
           </el-form-item>
+
           <el-form-item prop="original_desc" label="详细介绍">
             <wang-editor
               class="w-100"
-              v-if="course.original_desc"
               v-model="course.original_desc"
             ></wang-editor>
           </el-form-item>
+        </div>
+
+        <div class="float-left" v-show="tab.active === 'dev'">
+          <el-form-item label="订阅人数" prop="count">
+            <div class="d-flex">
+              <div>
+                <el-input
+                  v-model="course.user_count"
+                  class="w-200px"
+                ></el-input>
+              </div>
+              <div class="ml-10">
+                <helper-text
+                  text="订阅人数是用户端可看到的数值，可手动指定该值。该值会随着购买人数的增加而增加。"
+                ></helper-text>
+              </div>
+            </div>
+          </el-form-item>
+
+          <el-form-item label="显示" prop="is_show">
+            <div class="d-flex">
+              <div>
+                <el-switch
+                  v-model="course.is_show"
+                  :active-value="1"
+                  :inactive-value="0"
+                >
+                </el-switch>
+              </div>
+              <div class="ml-10">
+                <helper-text
+                  text="控制用户是否能够看到该电子书。"
+                ></helper-text>
+              </div>
+            </div>
+          </el-form-item>
+
           <el-form-item label="SEO描述">
             <el-input
-              class="w-100"
+              class="w-400px"
+              rows="4"
               type="textarea"
               v-model="course.seo_description"
             ></el-input>
           </el-form-item>
+
           <el-form-item label="SEO关键字">
             <el-input
-              class="w-100"
+              class="w-400px"
+              rows="4"
               type="textarea"
               v-model="course.seo_keywords"
             ></el-input>
           </el-form-item>
-        </el-form>
-      </div>
+        </div>
+      </el-form>
 
       <div class="bottom-menus">
         <div class="bottom-menus-box">
@@ -109,9 +216,7 @@
             >
           </div>
           <div class="ml-24">
-            <el-button @click="$router.push({ name: 'Meedubook' })"
-              >取消</el-button
-            >
+            <el-button @click="$router.back()">取消</el-button>
           </div>
         </div>
       </div>
@@ -129,22 +234,8 @@ export default {
   },
   data() {
     return {
-      course: {
-        id: this.$route.query.id,
-        published_at: null,
-        is_show: 0,
-        charge: null,
-        name: null,
-        cid: null,
-        is_vip_free: 0,
-        thumb: null,
-        short_desc: null,
-        original_desc: null,
-        render_desc: null,
-        user_count: null,
-        seo_description: "",
-        seo_keywords: "",
-      },
+      book_id: this.$route.query.id,
+      course: null,
       rules: {
         cid: [
           {
@@ -167,24 +258,10 @@ export default {
             trigger: "blur",
           },
         ],
-        is_show: [
-          {
-            required: true,
-            message: "请选择显示",
-            trigger: "blur",
-          },
-        ],
         name: [
           {
             required: true,
             message: "书名不能为空",
-            trigger: "blur",
-          },
-        ],
-        is_vip_free: [
-          {
-            required: true,
-            message: "请选择会员免费",
             trigger: "blur",
           },
         ],
@@ -212,18 +289,29 @@ export default {
       },
       expireTimeOption: {
         disabledDate(date) {
-          // 当天可选：date.getTime() < Date.now() - 24 * 60 * 60 * 1000
-          //超过此刻可选
           return date.getTime() < Date.now();
         },
       },
       categories: [],
       loading: false,
+      tab: {
+        active: "base",
+        list: [
+          {
+            name: "基础信息",
+            key: "base",
+          },
+          {
+            name: "可选信息",
+            key: "dev",
+          },
+        ],
+      },
     };
   },
   mounted() {
     this.params();
-    this.detail();
+    this.getDetail();
   },
   methods: {
     params() {
@@ -231,22 +319,9 @@ export default {
         this.categories = res.data.categories;
       });
     },
-    detail() {
-      this.$api.Meedubook.Book.Detail(this.course.id).then((res) => {
-        var data = res.data;
-        this.course.original_desc = data.original_desc;
-        this.course.name = data.name;
-        this.course.render_desc = data.render_desc;
-        this.course.cid = data.cid;
-        this.course.charge = data.charge;
-        this.course.seo_description = data.seo_description;
-        this.course.seo_keywords = data.seo_keywords;
-        this.course.short_desc = data.short_desc;
-        this.course.thumb = data.thumb;
-        this.course.is_show = data.is_show;
-        this.course.published_at = data.published_at;
-        this.course.user_count = data.user_count;
-        this.course.is_vip_free = data.is_vip_free;
+    getDetail() {
+      this.$api.Meedubook.Book.Detail(this.book_id).then((res) => {
+        this.course = res.data;
       });
     },
     formValidate() {
@@ -262,10 +337,10 @@ export default {
       }
       this.loading = true;
       this.course.render_desc = this.course.original_desc;
-      this.$api.Meedubook.Book.Update(this.course.id,this.course)
+      this.$api.Meedubook.Book.Update(this.book_id, this.course)
         .then(() => {
           this.$message.success(this.$t("common.success"));
-          this.$router.push({ name: "Meedubook" });
+          this.$router.back();
         })
         .catch((e) => {
           this.loading = false;

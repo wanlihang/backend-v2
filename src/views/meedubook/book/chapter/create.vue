@@ -1,17 +1,28 @@
 <template>
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="创建电子书章节"></back-bar>
+
     <div class="float-left">
       <el-form ref="form" :model="chapter" :rules="rules" label-width="200px">
         <el-form-item label="章节名" prop="name">
           <el-input v-model="chapter.name" class="w-200px"></el-input>
         </el-form-item>
+
         <el-form-item label="升序" prop="sort">
-          <el-input
-            type="number"
-            v-model="chapter.sort"
-            class="w-200px"
-          ></el-input>
+          <div class="d-flex">
+            <div>
+              <el-input
+                type="number"
+                v-model="chapter.sort"
+                class="w-200px"
+              ></el-input>
+            </div>
+            <div class="ml-10">
+              <helper-text
+                text="请输入整数。小数靠前，大数靠后。"
+              ></helper-text>
+            </div>
+          </div>
         </el-form-item>
       </el-form>
     </div>
@@ -24,15 +35,7 @@
           >
         </div>
         <div class="ml-24">
-          <el-button
-            @click="
-              $router.push({
-                name: 'MeedubookChapter',
-                query: { bid: chapter.bid },
-              })
-            "
-            >取消</el-button
-          >
+          <el-button @click="$router.back()">取消</el-button>
         </div>
       </div>
     </div>
@@ -85,10 +88,7 @@ export default {
       this.$api.Meedubook.Book.Chapters.Store(this.chapter)
         .then(() => {
           this.$message.success(this.$t("common.success"));
-          this.$router.push({
-            name: "MeedubookChapter",
-            query: {bid: this.chapter.bid },
-          });
+          this.$router.back();
         })
         .catch((e) => {
           this.loading = false;

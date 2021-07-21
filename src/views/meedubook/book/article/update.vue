@@ -1,65 +1,122 @@
 <template>
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="编辑电子书文章"></back-bar>
-    <div class="float-left">
-      <div class="form-box broder-top-left-radius">
-        <el-form ref="form" :model="course" :rules="rules" label-width="200px">
-          <el-form-item prop="book_cid" label="章节">
-            <div class="d-flex">
-              <div>
-                <el-select v-model="course.book_cid">
-                  <el-option
-                    v-for="(item, index) in chapters"
-                    :key="index"
-                    :label="item.name"
-                    :value="item.id"
-                  >
-                  </el-option>
-                </el-select>
-              </div>
-            </div>
-          </el-form-item>
-          <el-form-item label="标题" prop="name">
-            <el-input
-              v-model="course.title"
-              class="w-100"
-              placeholder="请输入标题"
-            ></el-input>
-          </el-form-item>
-          <el-form-item label="价格" prop="charge">
-            <el-input
-              type="number"
-              placeholder="单位：元"
-              v-model="course.charge"
-              class="w-200px"
-            ></el-input>
-            <div class="helper ml-30">价格为0即视为试看，可免费阅读</div>
-          </el-form-item>
-          <el-form-item label="显示" prop="is_show">
-            <el-switch
-              v-model="course.is_show"
-              :active-value="true"
-              :inactive-value="false"
-            >
-            </el-switch>
-          </el-form-item>
-          <el-form-item label="上架时间" prop="published_at">
-            <el-date-picker
-              v-model="course.published_at"
-              type="datetime"
-              format="yyyy-MM-dd HH:mm"
-              value-format="yyyy-MM-dd HH:mm"
-              placeholder="请选择日期"
-              :picker-options="expireTimeOption"
-            >
-            </el-date-picker>
-          </el-form-item>
 
-          <el-form-item prop="render_content" label="内容">
-            <mavon-editor :content="course.original_content" class="w-100" v-on:change="getcontent"></mavon-editor>
-          </el-form-item>
-        </el-form>
-      </div>
+    <div class="float-left" v-if="article && book">
+      <el-form
+        ref="form"
+        class="float-left"
+        :model="article"
+        :rules="rules"
+        label-width="200px"
+      >
+        <el-form-item prop="book_cid" label="章节">
+          <div class="d-flex">
+            <div>
+              <el-select class="w-300px" v-model="article.book_cid">
+                <el-option
+                  v-for="(item, index) in chapters"
+                  :key="index"
+                  :label="item.name"
+                  :value="item.id"
+                >
+                </el-option>
+              </el-select>
+            </div>
+            <div class="ml-10">
+              <el-link
+                type="primary"
+                @click="
+                  $router.push({
+                    name: 'MeedubookChapter',
+                    query: { bid: book_id },
+                  })
+                "
+                >章节管理</el-link
+              >
+            </div>
+          </div>
+        </el-form-item>
+        <el-form-item label="标题" prop="title">
+          <el-input
+            v-model="article.title"
+            class="w-600px"
+            placeholder="请输入标题"
+          ></el-input>
+        </el-form-item>
+
+        <el-form-item label="上架时间" prop="published_at">
+          <div class="d-flex">
+            <div>
+              <el-date-picker
+                v-model="article.published_at"
+                type="datetime"
+                format="yyyy-MM-dd HH:mm"
+                value-format="yyyy-MM-dd HH:mm"
+                placeholder="请选择日期"
+                :picker-options="expireTimeOption"
+              >
+              </el-date-picker>
+            </div>
+            <div class="ml-10">
+              <helper-text
+                text="上架时间决定了电子书下文章的排序，时间越早越靠前。如果是未来时间，则需要等到时间到达用户才可以看到该篇文章。"
+              ></helper-text>
+            </div>
+          </div>
+        </el-form-item>
+
+        <el-form-item label="试看" prop="charge" v-if="book.charge > 0">
+          <div class="d-flex">
+            <div>
+              <el-switch
+                v-model="article.charge"
+                :active-value="1"
+                :inactive-value="0"
+              >
+              </el-switch>
+            </div>
+            <div class="ml-10">
+              <helper-text
+                text="开启试看的话未购买电子书用户可直接浏览该篇文章。"
+              ></helper-text>
+            </div>
+          </div>
+        </el-form-item>
+
+        <el-form-item label="显示" prop="is_show">
+          <div class="d-flex">
+            <div>
+              <el-switch
+                v-model="article.is_show"
+                :active-value="1"
+                :inactive-value="0"
+              >
+              </el-switch>
+            </div>
+            <div class="ml-10">
+              <helper-text text="控制用户是否可以看到该篇文章。"></helper-text>
+            </div>
+          </div>
+        </el-form-item>
+
+        <el-form-item prop="render_content" label="文章内容">
+          <div class="d-flex">
+            <div>
+              <mavon-editor
+                :content="article.original_content"
+                class="w-700px"
+                @change="getcontent"
+              ></mavon-editor>
+            </div>
+            <div class="ml-10">
+              <helper-text
+                text="为了更好的阅读体验，仅支持 Markdown 语法。"
+              ></helper-text>
+            </div>
+          </div>
+        </el-form-item>
+      </el-form>
 
       <div class="bottom-menus">
         <div class="bottom-menus-box">
@@ -69,15 +126,7 @@
             >
           </div>
           <div class="ml-24">
-            <el-button
-              @click="
-                $router.push({
-                  name: 'MeedubookArticle',
-                  query: { bid: book_id },
-                })
-              "
-              >取消</el-button
-            >
+            <el-button @click="$router.back()">取消</el-button>
           </div>
         </div>
       </div>
@@ -93,44 +142,14 @@ export default {
   },
   data() {
     return {
-      book_id: this.$route.query.book_id,
-      course: {
-        bid: this.$route.query.book_id,
-        id: this.$route.query.id,
-        published_at: null,
-        is_show: false,
-        charge: null,
-        title: null,
-        book_cid: null,
-        original_content: null,
-        render_content: null,
-      },
+      article_id: this.$route.query.id,
+      book_id: this.$route.query.bid,
+      article: null,
       rules: {
-        book_cid: [
-          {
-            required: true,
-            message: "章节不能为空",
-            trigger: "blur",
-          },
-        ],
-        charge: [
-          {
-            required: true,
-            message: "价格不能为空",
-            trigger: "blur",
-          },
-        ],
         published_at: [
           {
             required: true,
             message: "上架时间不能为空",
-            trigger: "blur",
-          },
-        ],
-        is_show: [
-          {
-            required: true,
-            message: "请选择显示",
             trigger: "blur",
           },
         ],
@@ -141,7 +160,6 @@ export default {
             trigger: "blur",
           },
         ],
-
         render_content: [
           {
             required: true,
@@ -152,45 +170,37 @@ export default {
       },
       expireTimeOption: {
         disabledDate(date) {
-          // 当天可选：date.getTime() < Date.now() - 24 * 60 * 60 * 1000
-          //超过此刻可选
           return date.getTime() < Date.now();
         },
       },
       chapters: [],
       loading: false,
+      book: null
     };
   },
   mounted() {
     this.params();
-    this.detail();
+    this.getDetail();
+    this.getBook();
   },
   methods: {
-    getcontent: function (pureContent, renderContent) {
-      this.course.original_content = pureContent;
-      this.course.render_content = renderContent;
-    },
-    detail() {
-      this.$api.Meedubook.Book.Article.Detail(this.course.id).then((res) => {
-        var data = res.data;
-        this.course.original_content = data.original_content;
-        this.course.render_content = data.render_content;
-        if (data.is_show == 1) {
-          this.course.is_show = true;
-        } else {
-          this.course.is_show = false;
-        }
-        this.course.published_at = data.published_at;
-        this.course.charge = data.charge;
-        this.course.book_cid = data.book_cid;
-        this.course.bid = data.bid;
-        this.book_id = data.bid;
-        this.course.title = data.title;
-      });
+    getcontent(pureContent, renderContent) {
+      this.article.original_content = pureContent;
+      this.article.render_content = renderContent;
     },
     params() {
       this.$api.Meedubook.Book.Article.Create().then((res) => {
         this.chapters = res.data.chapters[this.book_id];
+      });
+    },
+    getDetail() {
+      this.$api.Meedubook.Book.Article.Detail(this.article_id).then((res) => {
+        this.article = res.data;
+      });
+    },
+    getBook() {
+      this.$api.Meedubook.Book.Detail(this.book_id).then((res) => {
+        this.book = res.data;
       });
     },
     formValidate() {
@@ -205,13 +215,10 @@ export default {
         return;
       }
       this.loading = true;
-      this.$api.Meedubook.Book.Article.Update(this.course.id, this.course)
+      this.$api.Meedubook.Book.Article.Update(this.article_id, this.article)
         .then(() => {
           this.$message.success(this.$t("common.success"));
-          this.$router.push({
-            name: "MeedubookArticle",
-            query: { bid: this.book_id },
-          });
+          this.$router.back();
         })
         .catch((e) => {
           this.loading = false;

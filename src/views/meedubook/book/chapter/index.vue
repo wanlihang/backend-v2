@@ -16,8 +16,7 @@
     <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table :data="chapters" stripe class="float-left">
-            <el-table-column prop="id" label="ID" width="150">
-          </el-table-column>
+          <el-table-column prop="id" label="ID" width="150"> </el-table-column>
           <el-table-column prop="sort" label="升序" width="150">
           </el-table-column>
 
@@ -49,14 +48,6 @@
         </el-table>
       </div>
     </div>
-
-    <div class="bottom-menus">
-      <div class="bottom-menus-box">
-        <div>
-          <el-button @click="$router.push({ name: 'Meedubook' })">取消</el-button>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 <script>
@@ -79,15 +70,11 @@ export default {
         return;
       }
       this.loading = true;
-      this.$api.Meedubook.Book.Chapters.List( this.box).then(
-        (res) => {
-          this.loading = false;
-          this.chapters = res.data;
-        }
-      );
+      this.$api.Meedubook.Book.Chapters.List(this.box).then((res) => {
+        this.loading = false;
+        this.chapters = res.data;
+      });
     },
-    importUser() {},
-    //删除管理员
     destory(id) {
       this.$confirm("确认操作？", "警告", {
         confirmButtonText: "确定",

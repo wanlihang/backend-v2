@@ -3,12 +3,6 @@
     <div class="float-left">
       <div class="float-left mb-30">
         <el-button
-          @click="$router.push({ name: 'MeedubookCategory' })"
-          type="primary"
-        >
-          电子书分类
-        </el-button>
-        <el-button
           @click="$router.push({ name: 'MeedubookCreate' })"
           type="primary"
         >
@@ -17,30 +11,23 @@
       </div>
       <div class="float-left">
         <div class="float-left d-flex">
-          <div class="d-flex">
-            <div class="filter-label">搜索</div>
-            <div class="flex-1 ml-15">
-              <el-input
-                class="w-100"
-                v-model="filter.key"
-                placeholder="书名搜索"
-                style="width: 200px"
-              ></el-input>
-            </div>
+          <div>
+            <el-input
+              class="w-200px"
+              v-model="filter.key"
+              placeholder="关键字"
+            ></el-input>
           </div>
-          <div class="d-flex ml-15">
-            <div class="filter-label">分类</div>
-            <div class="flex-1 ml-15">
-              <el-select v-model="filter.cid">
-                <el-option
-                  v-for="(item, index) in filterData.categories"
-                  :key="index"
-                  :label="item.name"
-                  :value="item.id"
-                >
-                </el-option>
-              </el-select>
-            </div>
+          <div class="ml-10">
+            <el-select v-model="filter.cid" class="w-200px" placeholder="分类">
+              <el-option
+                v-for="(item, index) in filterData.categories"
+                :key="index"
+                :label="item.name"
+                :value="item.id"
+              >
+              </el-option>
+            </el-select>
           </div>
           <div class="ml-15">
             <el-button @click="getBook" type="primary" plain>筛选</el-button>
@@ -50,36 +37,65 @@
       </div>
       <div class="float-left mt-30" v-loading="loading">
         <div class="float-left">
-          <el-table :data="mbooks" stripe class="float-left">
-            <el-table-column prop="id" label="ID" width="80"> </el-table-column>
-            <el-table-column prop="category.name" label="分类" width="100">
+          <el-table
+            :data="mbooks"
+            @sort-change="sortChange"
+            :default-sort="{ prop: 'id', order: 'descending' }"
+            stripe
+            class="float-left"
+          >
+            <el-table-column prop="id" sortable label="ID" width="120">
             </el-table-column>
-            <el-table-column prop="name" label="名字"> </el-table-column>
-            <el-table-column label="价格" width="120">
+            <el-table-column prop="category.name" label="分类" width="150">
+            </el-table-column>
+            <el-table-column label="电子书" width="500">
+              <template slot-scope="scope">
+                <div class="d-flex">
+                  <div>
+                    <img :src="scope.row.thumb" width="84" height="112" />
+                  </div>
+                  <div class="ml-10">
+                    {{ scope.row.name }}
+                  </div>
+                </div>
+              </template>
+            </el-table-column>
+            <el-table-column
+              label="价格"
+              property="charge"
+              sortable
+              width="250"
+            >
               <template slot-scope="scope">
                 <span>{{ scope.row.charge }}元</span>
               </template>
             </el-table-column>
-            <el-table-column label="浏览" width="120">
+            <el-table-column
+              label="浏览"
+              property="view_times"
+              sortable
+              width="150"
+            >
               <template slot-scope="scope">
                 <span>{{ scope.row.view_times }}次</span>
               </template>
             </el-table-column>
-            <el-table-column label="订阅" width="100">
+            <el-table-column
+              label="订阅"
+              property="user_count"
+              sortable
+              width="200"
+            >
               <template slot-scope="scope">
                 <span>{{ scope.row.user_count }}人</span>
               </template>
             </el-table-column>
-            <el-table-column prop="published_at" label="上架时间" width="180">
+            <el-table-column prop="published_at" label="上架时间" sortable>
             </el-table-column>
             <el-table-column fixed="right" label="操作" width="200">
               <template slot-scope="scope">
-                <el-link type="danger" @click="destory(scope.row.id)"
-                  >删除</el-link
-                >
                 <el-link
                   type="primary"
-                  style="margin-left: 5px"
                   @click="
                     $router.push({
                       name: 'MeedubookUpdate',
@@ -89,19 +105,14 @@
                   >编辑</el-link
                 >
                 <el-link
-                  type="primary"
-                  style="margin-left: 10px"
-                  @click="
-                    $router.push({
-                      name: 'MeedubookChapter',
-                      query: { bid: scope.row.id },
-                    })
-                  "
-                  >章节</el-link
+                  class="ml-5"
+                  type="danger"
+                  @click="destory(scope.row.id)"
+                  >删除</el-link
                 >
                 <el-link
                   type="primary"
-                  style="margin-left: 5px"
+                  class="ml-5"
                   @click="
                     $router.push({
                       name: 'MeedubookArticle',
@@ -112,7 +123,7 @@
                 >
                 <el-link
                   type="primary"
-                  style="margin-left: 5px"
+                  class="ml-5"
                   @click="
                     $router.push({
                       name: 'MeedubookComment',
@@ -150,6 +161,8 @@ export default {
       pagination: {
         page: 1,
         size: 10,
+        sort: "id",
+        order: "desc",
       },
       filter: {
         key: null,

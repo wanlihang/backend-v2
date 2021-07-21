@@ -1,17 +1,27 @@
 <template>
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="编辑电子书分类"></back-bar>
+
     <div class="float-left">
       <el-form ref="form" :model="user" :rules="rules" label-width="200px">
-          <el-form-item label="分类名" prop="name">
+        <el-form-item label="分类名" prop="name">
           <el-input v-model="user.name" class="w-200px"></el-input>
         </el-form-item>
         <el-form-item label="升序" prop="sort">
-          <el-input
-            type="number"
-            v-model="user.sort"
-            class="w-200px"
-          ></el-input>
+          <div class="d-flex">
+            <div>
+              <el-input
+                type="number"
+                v-model="user.sort"
+                class="w-200px"
+              ></el-input>
+            </div>
+            <div class="ml-10">
+              <helper-text
+                text="请输入整数。小数靠前，大数靠后。"
+              ></helper-text>
+            </div>
+          </div>
         </el-form-item>
       </el-form>
     </div>
@@ -24,9 +34,7 @@
           >
         </div>
         <div class="ml-24">
-          <el-button @click="$router.push({ name: 'CourseCategories' })"
-            >取消</el-button
-          >
+          <el-button @click="$router.back()">取消</el-button>
         </div>
       </div>
     </div>
@@ -87,7 +95,7 @@ export default {
       this.$api.Meedubook.Book.Categories.Update(this.user.id, this.user)
         .then(() => {
           this.$message.success(this.$t("common.success"));
-          this.$router.push({ name: "MeedubookCategory" });
+          this.$router.back();
         })
         .catch((e) => {
           this.loading = false;
