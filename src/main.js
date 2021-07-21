@@ -6,26 +6,34 @@ import router from './router';
 import store from './store';
 import api from './js/request/request';
 import i18n from './js/i18n';
+import utils from './js/utils';
 
+// 全局样式
 import './assets/common/variable.less';
 
+// markdown编辑器
 import mavonEditor from "mavon-editor";
 import "mavon-editor/dist/css/index.css";
-Vue.use(mavonEditor);
 
-// 组件注册
+// 全局组件
 import FormLabelComp from '@/components/form-label';
 import BackBar from '@/components/back-bar';
 import HelperText from '@/components/helper-text';
 
 
 Vue.use(ElementUI);
+
+// 组件注册
+Vue.use(mavonEditor);
 Vue.component('FormLabel', FormLabelComp);
 Vue.component('BackBar', BackBar);
 Vue.component('HelperText', HelperText);
-Vue.config.productionTip = false
+
+Vue.config.productionTip = false;
+
 // api挂载
 Vue.prototype.$api = api;
+Vue.prototype.$utils = utils;
 
 new Vue({
   router,

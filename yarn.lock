@@ -2757,6 +2757,13 @@ core-util-is@1.0.2, core-util-is@~1.0.0:
   resolved "https://registry.npm.taobao.org/core-util-is/download/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
   integrity sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=
 
+cos-js-sdk-v5@0.5.27:
+  version "0.5.27"
+  resolved "https://registry.nlark.com/cos-js-sdk-v5/download/cos-js-sdk-v5-0.5.27.tgz#22759bc32b3f0c63caf3328400140f97f50fe6b3"
+  integrity sha1-InWbwys/DGPK8zKEABQPl/UP5rM=
+  dependencies:
+    xmldom "^0.1.27"
+
 cosmiconfig@^5.0.0:
   version "5.2.1"
   resolved "https://registry.npm.taobao.org/cosmiconfig/download/cosmiconfig-5.2.1.tgz#040f726809c591e77a17c0a3626ca45b4f168b1a"
@@ -3646,7 +3653,7 @@ event-pubsub@4.3.0:
   resolved "https://registry.npm.taobao.org/event-pubsub/download/event-pubsub-4.3.0.tgz?cache=0&sync_timestamp=1606361549058&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fevent-pubsub%2Fdownload%2Fevent-pubsub-4.3.0.tgz#f68d816bc29f1ec02c539dc58c8dd40ce72cb36e"
   integrity sha1-9o2Ba8KfHsAsU53FjI3UDOcss24=
 
-eventemitter3@^4.0.0:
+eventemitter3@^4.0.0, eventemitter3@^4.0.7:
   version "4.0.7"
   resolved "https://registry.npm.taobao.org/eventemitter3/download/eventemitter3-4.0.7.tgz?cache=0&sync_timestamp=1598517714257&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Feventemitter3%2Fdownload%2Feventemitter3-4.0.7.tgz#2de9b68f6528d5644ef5c59526a1b4a07306169f"
   integrity sha1-Lem2j2Uo1WRO9cWVJqG0oHMGFp8=
@@ -5075,6 +5082,11 @@ js-queue@2.0.2:
   integrity sha1-C+WQM4+QOzbHPTPDGIOoIUEs1II=
   dependencies:
     easy-stack "^1.0.1"
+
+js-sha1@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.npm.taobao.org/js-sha1/download/js-sha1-0.6.0.tgz#adbee10f0e8e18aa07cdea807cf08e9183dbc7f9"
+  integrity sha1-rb7hDw6OGKoHzeqAfPCOkYPbx/k=
 
 js-tokens@^4.0.0:
   version "4.0.0"
@@ -8351,6 +8363,17 @@ vm-browserify@^1.0.1:
   resolved "https://registry.npm.taobao.org/vm-browserify/download/vm-browserify-1.1.2.tgz#78641c488b8e6ca91a75f511e7a3b32a86e5dda0"
   integrity sha1-eGQcSIuObKkadfUR56OzKobl3aA=
 
+vod-js-sdk-v6@^1.4.12:
+  version "1.4.12"
+  resolved "https://registry.nlark.com/vod-js-sdk-v6/download/vod-js-sdk-v6-1.4.12.tgz#e617349771b4b3c2e1dbaf55f0ea062e80c59da2"
+  integrity sha1-5hc0l3G0s8Lh269V8OoGLoDFnaI=
+  dependencies:
+    axios "^0.21.1"
+    cos-js-sdk-v5 "0.5.27"
+    eventemitter3 "^4.0.7"
+    js-sha1 "^0.6.0"
+    uuid "^3.3.2"
+
 vue-cli-plugin-style-resources-loader@^0.1.5:
   version "0.1.5"
   resolved "https://registry.npm.taobao.org/vue-cli-plugin-style-resources-loader/download/vue-cli-plugin-style-resources-loader-0.1.5.tgz#3e95f4df41f5408e1255664690698c0533648109"
@@ -8718,6 +8741,11 @@ xlsx@^0.17.0:
     ssf "~0.11.2"
     wmf "~1.0.1"
     word "~0.3.0"
+
+xmldom@^0.1.27:
+  version "0.1.31"
+  resolved "https://registry.nlark.com/xmldom/download/xmldom-0.1.31.tgz#b76c9a1bd9f0a9737e5a72dc37231cf38375e2ff"
+  integrity sha1-t2yaG9nwqXN+WnLcNyMc84N14v8=
 
 xss@^1.0.6:
   version "1.0.9"

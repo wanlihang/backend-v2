@@ -76,6 +76,14 @@ const Api = {
             List(params) {
                 return get(`/backend/api/v1/media/images`, params);
             }
+        },
+        Video: {
+            List(params) {
+                return get(`/backend/api/v1/media/videos/index`, params);
+            },
+            Store(params) {
+                return post(`/backend/api/v1/media/videos/create`, params);
+            }
         }
     },
     Miaosha: {
@@ -241,6 +249,17 @@ const Api = {
             Update(id, params) {
                 return put(`/backend/api/v1/announcement/${id}`, params);
             }
+        },
+        VideoUpload: {
+            AliyunTokenRefresh(params) {
+                return post(`/backend/api/v1/video/token/aliyun/refresh`, params);
+            },
+            AliyunTokenCreate(params) {
+                return post(`/backend/api/v1/video/token/aliyun/create`, params);
+            },
+            TencentToken(params) {
+                return post(`/backend/api/v1/video/token/tencent`, params);
+            }
         }
     },
     Course: {
@@ -329,8 +348,8 @@ const Api = {
                 List(params) {
                     return get(`/backend/api/v1/video`, params);
                 },
-                Create(id, params) {
-                    return get(`/backend/api/v1/course_chapter/${id}`, params);
+                Create(id) {
+                    return get(`/backend/api/v1/course_chapter/${id}`);
                 },
                 Store(params) {
                     return post(`/backend/api/v1/video`, params);
@@ -338,11 +357,11 @@ const Api = {
                 DestoryMulti(params) {
                     return post(`/backend/api/v1/video/delete/multi`, params);
                 },
-                Detail(id, ids) {
-                    return get(`/backend/api/v1/video/${id}/${ids}`);
+                Detail(id) {
+                    return get(`/backend/api/v1/video/${id}`);
                 },
-                Update(id, ids, params) {
-                    return put(`/backend/api/v1/video/${id}/${ids}`, params);
+                Update(id, params) {
+                    return put(`/backend/api/v1/video/${id}`, params);
                 },
                 Subscribe(id, params) {
                     return get(`/backend/api/v1/video/${id}/subscribes`, params);

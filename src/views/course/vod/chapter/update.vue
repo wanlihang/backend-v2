@@ -4,14 +4,23 @@
     <div class="float-left">
       <el-form ref="form" :model="chapter" :rules="rules" label-width="200px">
         <el-form-item label="章节名" prop="title">
-          <el-input v-model="chapter.title" class="w-200px"></el-input>
+          <el-input v-model="chapter.title" class="w-300px"></el-input>
         </el-form-item>
         <el-form-item label="升序" prop="sort">
-          <el-input
-            type="number"
-            v-model="chapter.sort"
-            class="w-200px"
-          ></el-input>
+          <div class="d-flex">
+            <div>
+              <el-input
+                type="number"
+                v-model="chapter.sort"
+                class="w-300px"
+              ></el-input>
+            </div>
+            <div class="ml-10">
+              <helper-text
+                text="请输入整数。小数排在前面，大数排在后面。"
+              ></helper-text>
+            </div>
+          </div>
         </el-form-item>
       </el-form>
     </div>
@@ -24,15 +33,7 @@
           >
         </div>
         <div class="ml-24">
-          <el-button
-            @click="
-              $router.push({
-                name: 'CourseChapters',
-                query: { course_id: chapter.course_id },
-              })
-            "
-            >取消</el-button
-          >
+          <el-button @click="$router.back()">取消</el-button>
         </div>
       </div>
     </div>
@@ -101,10 +102,7 @@ export default {
       )
         .then(() => {
           this.$message.success(this.$t("common.success"));
-          this.$router.push({
-            name: "CourseChapters",
-            query: { course_id: this.chapter.course_id },
-          });
+          this.$router.back();
         })
         .catch((e) => {
           this.loading = false;

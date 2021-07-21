@@ -4,7 +4,9 @@
       @change="change"
       enabled-resource="vod,video,vip,book,live,topic,learnPath,paper,practice,mock-paper"
     ></select-resource> -->
-    <user-add></user-add>
+    <!-- <user-add></user-add> -->
+
+    <upload-video :show="true"></upload-video>
   </div>
 </template>
 
@@ -15,11 +17,12 @@
 // import H5Link from "@/components/h5-link/index";
 // import SelectVod from '@/components/select-vod';
 // import SelectResource from "@/components/select-resources/index";
-import UserAdd from '@/components/user-add';
+// import UserAdd from '@/components/user-add';
+import UploadVideo from "@/components/upload-video";
 
 export default {
   components: {
-    UserAdd,
+    UploadVideo,
   },
   data() {
     return {
