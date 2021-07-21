@@ -388,10 +388,75 @@ const Api = {
                 Update(id, params) {
                     return put(`/backend/addons/zhibo/course/${id}`, params);
                 },
-                Users(id, params) {
-                    return get(`/backend/addons/zhibo/course/${id}/users`, params);
-                }
-            }
+                Comment(params) {
+                    return get(`/backend/addons/zhibo/course_comment`, params);
+                },
+                CommentDestoryMulti(params) {
+                    return post(`/backend/addons/zhibo/course_comment/delete`, params);
+                },
+                CommentCheck(params) {
+                    return post(`/backend/addons/zhibo/course_comment/check`, params);
+                },
+                Category: {
+                    List() {
+                        return get(`/backend/addons/zhibo/course_category/index`);
+                    },
+                    Store(params) {
+                        return post(`/backend/addons/zhibo/course_category/create`, params);
+                    },
+                    Destory(id) {
+                        return destroy(`/backend/addons/zhibo/course_category/${id}`);
+                    },
+                    Detail(id) {
+                        return get(`/backend/addons/zhibo/course_category/${id}`);
+                    },
+                    Update(id, params) {
+                        return put(`/backend/addons/zhibo/course_category/${id}`, params);
+                    },
+                },
+                Chapter: {
+                    List(params) {
+                        return get(`/backend/addons/zhibo/course_chapter/index`, params);
+                    },
+                    Store(params) {
+                        return post(`/backend/addons/zhibo/course_chapter/create`, params);
+                    },
+                    Destory(id) {
+                        return destroy(`/backend/addons/zhibo/course_chapter/${id}`);
+                    },
+                    Detail(id) {
+                        return get(`/backend/addons/zhibo/course_chapter/${id}`);
+                    },
+                    Update(id, params) {
+                        return put(`/backend/addons/zhibo/course_chapter/${id}`, params);
+                    },
+                },
+                Users: {
+                    List(id, params) {
+                        return get(`/backend/addons/zhibo/course/${id}/users`, params);
+                    },
+                },
+            },
+            Teacher: {
+                List(params) {
+                    return get(`/backend/addons/zhibo/teacher/index`, params);
+                },
+                Create() {
+                    return get(`/backend/addons/zhibo/teacher/create`);
+                },
+                Store(params) {
+                    return post(`/backend/addons/zhibo/teacher/create`, params);
+                },
+                Destory(id) {
+                    return destroy(`/backend/addons/zhibo/teacher/${id}`);
+                },
+                Detail(id) {
+                    return get(`/backend/addons/zhibo/teacher/${id}`);
+                },
+                Update(id, params) {
+                    return put(`/backend/addons/zhibo/teacher/${id}`, params);
+                },
+            },
         },
         Book: {
             Book: {
@@ -802,6 +867,45 @@ const Api = {
         },
         Destroy(id) {
             return destroy(`/backend/addons/MiaoSha/goods/${id}`);
+        },
+    },
+    Multishare: {
+        Poster: {
+            List() {
+                return get(`/backend/addons/multi_level_share/poster/index`, );
+            },
+            Store(params) {
+                return post(`/backend/addons/multi_level_share/poster/create`, params);
+            },
+            Detail(id) {
+                return get(`/backend/addons/multi_level_share/poster/${id}`);
+            },
+            Update(id, params) {
+                return put(`/backend/addons/multi_level_share/poster/${id}`, params);
+            },
+            Destory(id) {
+                return destroy(`/backend/addons/multi_level_share/poster/${id}`);
+            },
+        },
+        Goods: {
+            List(params) {
+                return get(`/backend/addons/multi_level_share/goods/index`, params);
+            },
+            Create() {
+                return get(`/backend/addons/multi_level_share/goods/create`);
+            },
+            Store(params) {
+                return post(`/backend/addons/multi_level_share/goods/create`, params);
+            },
+            Detail(id) {
+                return get(`/backend/addons/multi_level_share/goods/${id}`);
+            },
+            Update(id, params) {
+                return put(`/backend/addons/multi_level_share/goods/${id}`, params);
+            },
+            Destory(id) {
+                return destroy(`/backend/addons/multi_level_share/goods/${id}`);
+            },
         },
     },
     TuanGou: {

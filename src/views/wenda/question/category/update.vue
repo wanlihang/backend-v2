@@ -21,7 +21,7 @@
           >
         </div>
         <div class="ml-24">
-          <el-button @click="$router.push({ name: 'QuestionCategory' })"
+          <el-button @click="$router.back()"
             >取消</el-button
           >
         </div>
@@ -87,7 +87,7 @@ export default {
         .Update(this.user.id,this.user)
         .then(() => {
           this.$message.success(this.$t("common.success"));
-          this.$router.push({ name: "QuestionCategory" });
+          this.$router.back();
         })
         .catch((e) => {
           this.loading = false;

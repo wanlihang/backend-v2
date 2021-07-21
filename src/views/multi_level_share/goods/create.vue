@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="编辑秒杀商品"></back-bar>
+    <back-bar class="mb-30" title="创建分销商品"></back-bar>
     <div class="float-left">
       <div class="form-box broder-top-left-radius">
         <el-form ref="form" :model="course" :rules="rules" label-width="200px">
@@ -16,7 +16,6 @@
                 <select-resource
                   v-bind:show="msg"
                   @change="change"
-                  :selectedIds="this.course.goods_id"
                   :enabled-resource="types"
                 ></select-resource>
               </div>
@@ -25,7 +24,7 @@
           <el-form-item label="商品名" prop="goods_title">
             <el-input v-model="course.goods_title" class="w-100"></el-input>
           </el-form-item>
-          <el-form-item label="商品原价" prop="goods_charge">
+          <el-form-item label="商品价格" prop="goods_charge">
             <el-input
               type="number"
               placeholder="单位：元"
@@ -42,53 +41,24 @@
               name="上传封面"
             ></upload-image>
           </el-form-item>
-          <el-form-item prop="desc" label="详细介绍">
-            <wang-editor
-              v-if="course.desc"
-              class="w-100"
-              v-model="course.desc"
-            ></wang-editor>
-          </el-form-item>
-          <el-form-item label="秒杀价格" prop="charge">
+          <el-form-item label="一级奖励" prop="reward">
             <el-input
               type="number"
-              v-model="course.charge"
-              class="w-200px"
-            ></el-input>
-            <div class="helper ml-30">单位：元，只能设置为整数。</div>
-          </el-form-item>
-          <el-form-item label="秒杀数量" prop="num">
-            <el-input
-              type="number"
-              v-model="course.num"
+              placeholder="单位：元"
+              v-model="course.reward"
               class="w-200px"
             ></el-input>
           </el-form-item>
-          <el-form-item label="开始时间" prop="started_at">
-            <el-date-picker
-              v-model="course.started_at"
-              type="datetime"
-              format="yyyy-MM-dd HH:mm"
-              value-format="yyyy-MM-dd HH:mm"
-              placeholder="请选择日期"
-              :picker-options="expireTimeOption"
-            >
-            </el-date-picker>
+          <el-form-item label="二级奖励" prop="reward2">
+            <el-input
+              type="number"
+               placeholder="单位：元"
+              v-model="course.reward2"
+              class="w-200px"
+            ></el-input>
           </el-form-item>
-          <el-form-item label="结束时间" prop="end_at">
-            <el-date-picker
-              v-model="course.end_at"
-              type="datetime"
-              format="yyyy-MM-dd HH:mm"
-              value-format="yyyy-MM-dd HH:mm"
-              placeholder="请选择日期"
-              :picker-options="expireTimeOption"
-            >
-            </el-date-picker>
-          </el-form-item>
-
-          <el-form-item prop="page_title" label="秒杀页面标题">
-            <el-input class="w-100" v-model="course.page_title"></el-input>
+          <el-form-item prop="reward3" label="三级奖励">
+            <el-input  type="number"  placeholder="单位：元" class="w-200px" v-model="course.reward3"></el-input>
           </el-form-item>
         </el-form>
       </div>
@@ -111,13 +81,11 @@
   </div>
 </template>
 <script>
-import WangEditor from "@/components/wangeditor";
 import UploadImage from "@/components/upload-image";
 import SelectResource from "@/components/select-resources/index";
 
 export default {
   components: {
-    WangEditor,
     UploadImage,
     SelectResource,
   },
@@ -128,18 +96,14 @@ export default {
       },
       msg: false,
       course: {
-        id: this.$route.query.id,
-        started_at: null,
-        end_at: null,
+        reward: null,
+        reward2: null,
         goods_title: null,
         goods_thumb: null,
-        charge: null,
         goods_charge: null,
         goods_id: null,
         goods_type: null,
-        page_title: null,
-        desc: null,
-        num: null,
+        reward3: null,
       },
       rules: {
         goods_type: [
@@ -149,10 +113,10 @@ export default {
             trigger: "blur",
           },
         ],
-        charge: [
+        reward: [
           {
             required: true,
-            message: "价格不能为空",
+            message: "一级奖励不能为空",
             trigger: "blur",
           },
         ],
@@ -166,7 +130,7 @@ export default {
         goods_charge: [
           {
             required: true,
-            message: "商品原价不能为空",
+            message: "商品价格不能为空",
             trigger: "blur",
           },
         ],
@@ -177,17 +141,17 @@ export default {
             trigger: "blur",
           },
         ],
-        num: [
+        reward2: [
           {
             required: true,
-            message: "秒杀数量不能为空",
+            message: "二级奖励不能为空",
             trigger: "blur",
           },
         ],
-        page_title: [
+        reward3: [
           {
             required: true,
-            message: "秒杀页面标题不能为空",
+            message: "三级奖励不能为空",
             trigger: "blur",
           },
         ],
@@ -195,27 +159,6 @@ export default {
           {
             required: true,
             message: "请上传商品封面",
-            trigger: "blur",
-          },
-        ],
-        started_at: [
-          {
-            required: true,
-            message: "请选择开始时间",
-            trigger: "blur",
-          },
-        ],
-        end_at: [
-          {
-            required: true,
-            message: "请选择开始时间",
-            trigger: "blur",
-          },
-        ],
-        desc: [
-          {
-            required: true,
-            message: "详细介绍不能为空",
             trigger: "blur",
           },
         ],
@@ -227,13 +170,12 @@ export default {
           return date.getTime() < Date.now();
         },
       },
-      types: "",
+      types: null,
       loading: false,
     };
   },
   mounted() {
     this.params();
-    this.detail();
   },
   methods: {
     change(v1) {
@@ -246,7 +188,7 @@ export default {
       this.msg = false;
     },
     params() {
-      this.$api.Miaosha.Goods.Create(this.filter).then((res) => {
+      this.$api.Multishare.Goods.Create(this.filter).then((res) => {
         var data = res.data.types;
         var typeids = "";
         for (var i = 0; i < data.length; i++) {
@@ -258,25 +200,6 @@ export default {
     selgoods() {
       this.msg = true;
     },
-    detail() {
-      this.$api.Miaosha.Goods.Detail(this.course.id).then((res) => {
-        var data = res.data;
-        this.course.goods_id = data.goods_id;
-        this.course.charge = data.charge;
-        this.course.goods_type = data.goods_type;
-        this.course.desc = data.desc;
-        this.course.end_at = data.end_at;
-        this.course.goods_id = data.goods_id;
-        this.course.goods_thumb = data.goods_thumb;
-        this.course.goods_title = data.goods_title;
-        this.course.goods_type_text = data.goods_type_text;
-        this.course.num = data.num;
-        this.course.page_title = data.page_title;
-        this.course.started_at = data.started_at;
-        this.course.goods_charge = data.original_charge;
-      });
-    },
-    getgoods(item) {},
     formValidate() {
       this.$refs["form"].validate((valid) => {
         if (valid) {
@@ -289,7 +212,7 @@ export default {
         return;
       }
       this.loading = true;
-      this.$api.Miaosha.Goods.Update(this.course.id, this.course)
+      this.$api.Multishare.Goods.Store(this.course)
         .then(() => {
           this.$message.success(this.$t("common.success"));
           this.$router.back();

@@ -86,6 +86,50 @@ const zh = {
                 }
             },
         },
+        multi_level_share: {
+            name: '三级分销',
+            poster: {
+                name: '海报',
+                index: '海报',
+                create: '创建海报',
+                update: '编辑海报'
+            },
+            goods: {
+                name: '分销商品',
+                index: '分销商品',
+                create: '创建分销商品',
+                update: '编辑分销商品'
+            },
+        },
+        live: {
+            name: '直播',
+            course: {
+                name: '课程',
+                index: '直播课程',
+                create: '创建直播课程',
+                update: '编辑直播课程',
+                comment: '直播课程评论',
+                category: {
+                    index: '直播课程分类',
+                    create: '创建直播课程分类',
+                    update: '编辑直播课程分类',
+                },
+                chapter: {
+                    index: '直播课程章节',
+                    create: '创建直播课程章节',
+                    update: '编辑直播课程章节',
+                },
+                users:{
+                    index: '直播课程订阅用户',
+                },
+            },
+            teacher: {
+                name: '讲师',
+                index: '直播讲师',
+                create: '创建直播讲师',
+                update: '编辑直播讲师'
+            },
+        },
         wechat: {
             messagereply: {
                 index: '微信公众号消息回复',

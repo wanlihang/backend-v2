@@ -1,0 +1,307 @@
+<template>
+  <div class="meedu-main-body">
+    <back-bar class="mb-30" title="直播课程评论"></back-bar>
+    <div class="float-left mb-30">
+      <el-button @click="destorymulti()" type="danger"> 删除 </el-button>
+      <el-button @click="approve()" type="danger"> 审核通过 </el-button>
+      <el-button @click="refuse()" type="danger"> 审核拒绝 </el-button>
+    </div>
+    <div class="float-left">
+      <div class="float-left d-flex">
+        <div class="d-flex">
+          <div class="filter-label">UID</div>
+          <div class="flex-1 ml-15">
+            <el-input
+              class="w-200px"
+              v-model="filter.user_id"
+              placeholder="UID"
+            ></el-input>
+          </div>
+        </div>
+        <div class="d-flex ml-15">
+          <div class="filter-label">课程</div>
+          <div class="flex-1 ml-15">
+            <el-select v-model="filter.course_id">
+              <el-option
+                v-for="(item, index) in filterData.courses"
+                :key="index"
+                :label="item.title"
+                :value="item.id"
+              >
+              </el-option>
+            </el-select>
+          </div>
+        </div>
+
+        <div class="ml-15">
+          <el-button @click="getResults" type="primary" plain>筛选</el-button>
+          <el-button @click="paginationReset">清空</el-button>
+        </div>
+      </div>
+    </div>
+    <div class="float-left mt-30" v-loading="loading">
+      <div class="float-left">
+        <el-table
+          :data="results"
+          stripe
+          @selection-change="handleSelectionChange"
+          class="float-left"
+        >
+          <el-table-column type="selection" width="55"></el-table-column
+          ><!-- 显示选取表格 -->
+          <el-table-column prop="id" label="ID" width="80"> </el-table-column>
+          <el-table-column prop="user_id" label="用户ID" width="80">
+          </el-table-column>
+          <el-table-column prop="user.nick_name" label="用户" width="150">
+          </el-table-column>
+          <el-table-column label="课程">
+            <template slot-scope="scope">
+              <span v-if="scope.row.course">{{ scope.row.course.title }}</span>
+              <span style="color: red" v-else>已删除</span>
+            </template>
+          </el-table-column>
+
+          <el-table-column label="状态" width="100">
+            <template slot-scope="scope">
+              <span v-if="scope.row.is_check != 1" style="color: red"
+                >拒绝</span
+              >
+              <span v-else>通过</span>
+            </template>
+          </el-table-column>
+          <el-table-column
+            prop="user.created_at"
+            label="时间"
+            width="150"
+          ></el-table-column>
+          <el-table-column prop="user.created_at" label="内容">
+            <template slot-scope="scope">
+              <div v-html="scope.row.content"></div>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+
+      <div class="float-left mt-30 text-center">
+        <el-pagination
+          @size-change="paginationSizeChange"
+          @current-change="paginationPageChange"
+          :current-page="pagination.page"
+          :page-sizes="[10, 20, 50, 100]"
+          :page-size="pagination.size"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="total"
+        >
+        </el-pagination>
+      </div>
+      <div class="bottom-menus">
+        <div class="bottom-menus-box">
+          <div>
+            <el-button @click="$router.back()">取消</el-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      pagination: {
+        page: 1,
+        size: 10,
+      },
+      filter: {
+        course_id: null,
+        user_id: null,
+      },
+      total: 0,
+      spids: {
+        ids: [],
+        status: null,
+      },
+      loading: false,
+      results: [],
+      filterData: {
+        courses: [],
+      },
+    };
+  },
+  computed: {
+    activeItemList: function () {
+      return this.filterData.goods.filter((item, index) => {
+        return item.goods_type == this.filter.type;
+      });
+    },
+  },
+  mounted() {
+    this.getResults();
+  },
+  methods: {
+    paginationReset() {
+      this.pagination.page = 1;
+      this.filter.course_id = null;
+      this.filter.user_id = null;
+      this.getResults();
+    },
+    paginationSizeChange(size) {
+      this.pagination.size = size;
+      this.getResults();
+    },
+    paginationPageChange(page) {
+      this.pagination.page = page;
+      this.getResults();
+    },
+    //保存选中结果
+    handleSelectionChange(val) {
+      var newbox = [];
+      for (var i = 0; i < val.length; i++) {
+        newbox.push(val[i].id);
+      }
+      this.spids.ids = newbox;
+    },
+    getResults() {
+      if (this.loading) {
+        return;
+      }
+      this.loading = true;
+      let params = {};
+      Object.assign(params, this.filter);
+      Object.assign(params, this.pagination);
+      this.$api.Course.Live.Course.Comment(params).then((res) => {
+        this.loading = false;
+        this.results = res.data.data.data;
+        this.total = res.data.data.total;
+        this.filterData.courses = res.data.courses;
+      });
+    },
+    destorymulti() {
+      this.$confirm("确认操作？", "警告", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          //点击确定按钮的操作
+          if (this.loading) {
+            return;
+          }
+          if (this.spids.ids == "") {
+            this.$message("请选择需要操作的数据");
+            return;
+          }
+          this.loading = true;
+          this.$api.Course.Live.Course.CommentDestoryMulti(this.spids)
+            .then(() => {
+              this.loading = false;
+              this.$message.success(this.$t("common.success"));
+              this.getResults();
+            })
+            .catch((e) => {
+              this.loading = false;
+              this.$message(e.message);
+            });
+        })
+        .catch(() => {
+          //点击删除按钮的操作
+        });
+    },
+    approve() {
+      this.$confirm("确认操作？", "警告", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          //点击确定按钮的操作
+          if (this.loading) {
+            return;
+          }
+          if (this.spids.ids == "") {
+            this.$message("请选择需要操作的数据");
+            return;
+          }
+          this.loading = true;
+          this.spids.status = 1;
+          this.$api.Course.Live.Course.CommentCheck(this.spids)
+            .then(() => {
+              this.loading = false;
+              this.$message.success(this.$t("common.success"));
+              this.getResults();
+            })
+            .catch((e) => {
+              this.loading = false;
+              this.$message(e.message);
+            });
+        })
+        .catch(() => {
+          //点击删除按钮的操作
+        });
+    },
+    refuse() {
+      this.$confirm("确认操作？", "警告", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          //点击确定按钮的操作
+          if (this.loading) {
+            return;
+          }
+          if (this.spids.ids == "") {
+            this.$message("请选择需要操作的数据");
+            return;
+          }
+          this.loading = true;
+          this.spids.status = 0;
+          this.$api.Course.Live.Course.CommentDestoryMulti(this.spids)
+            .then(() => {
+              this.loading = false;
+              this.$message.success(this.$t("common.success"));
+              this.getResults();
+            })
+            .catch((e) => {
+              this.loading = false;
+              this.$message(e.message);
+            });
+        })
+        .catch(() => {
+          //点击删除按钮的操作
+        });
+    },
+  },
+};
+</script>
+
+<style lang="less" scoped>
+.filter-box {
+  width: 100%;
+  height: auto;
+  float: left;
+  box-sizing: border-box;
+  padding: 30px;
+  border-radius: 15px;
+  margin-bottom: 15px;
+  background-color: white;
+
+  .filter-label {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.7);
+  }
+}
+.user-item {
+  width: auto;
+  display: flex;
+  align-items: center;
+  .avatar {
+    margin-right: 10px;
+  }
+  .nickname {
+    font-size: 15px;
+    font-weight: normal;
+  }
+}
+</style>

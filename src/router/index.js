@@ -747,6 +747,166 @@ const routes = [
           title: 'title.learningpath.step.relation.update'
         }
       },
+      {
+        path: '/multi_level_share/poster/index',
+        component: () => import('@/views/multi_level_share/poster/index'),
+        name: 'MultiPoster',
+        meta: {
+          title: 'title.multi_level_share.poster.index'
+        }
+      },
+      {
+        path: '/multi_level_share/poster/create',
+        component: () => import('@/views/multi_level_share/poster/create'),
+        name: 'MultiPosterCreate',
+        meta: {
+          title: 'title.multi_level_share.poster.create'
+        }
+      },
+      {
+        path: '/multi_level_share/poster/update',
+        component: () => import('@/views/multi_level_share/poster/update'),
+        name: 'MultiPosterUpdate',
+        meta: {
+          title: 'title.multi_level_share.poster.update'
+        }
+      },
+      {
+        path: '/multi_level_share/goods/index',
+        component: () => import('@/views/multi_level_share/goods/index'),
+        name: 'ShareGoods',
+        meta: {
+          title: 'title.multi_level_share.goods.index'
+        }
+      },
+      {
+        path: '/multi_level_share/goods/create',
+        component: () => import('@/views/multi_level_share/goods/create'),
+        name: 'ShareGoodsCreate',
+        meta: {
+          title: 'title.multi_level_share.goods.create'
+        }
+      },
+      {
+        path: '/multi_level_share/goods/update',
+        component: () => import('@/views/multi_level_share/goods/update'),
+        name: 'ShareGoodsUpdate',
+        meta: {
+          title: 'title.multi_level_share.goods.update'
+        }
+      },
+      {
+        path: '/live/teacher/index',
+        component: () => import('@/views/live/teacher/index'),
+        name: 'LiveTeacher',
+        meta: {
+          title: 'title.live.teacher.index'
+        }
+      },
+      {
+        path: '/live/teacher/create',
+        component: () => import('@/views/live/teacher/create'),
+        name: 'LiveTeacherCreate',
+        meta: {
+          title: 'title.live.teacher.create'
+        }
+      },
+      {
+        path: '/live/teacher/update',
+        component: () => import('@/views/live/teacher/update'),
+        name: 'LiveTeacherUpdate',
+        meta: {
+          title: 'title.live.teacher.update'
+        }
+      },
+      {
+        path: '/live/course/index',
+        component: () => import('@/views/live/course/index'),
+        name: 'LiveCourse',
+        meta: {
+          title: 'title.live.course.index'
+        }
+      },
+      {
+        path: '/live/course/create',
+        component: () => import('@/views/live/course/create'),
+        name: 'LiveCourseCreate',
+        meta: {
+          title: 'title.live.course.create'
+        }
+      },
+      {
+        path: '/live/course/update',
+        component: () => import('@/views/live/course/update'),
+        name: 'LiveCourseUpdate',
+        meta: {
+          title: 'title.live.course.update'
+        }
+      },
+      {
+        path: '/live/course/comment',
+        component: () => import('@/views/live/course/comment'),
+        name: 'LiveCourseComment',
+        meta: {
+          title: 'title.live.course.comment'
+        }
+      },
+      {
+        path: '/live/course/category/index',
+        component: () => import('@/views/live/course/category/index'),
+        name: 'LiveCourseCategory',
+        meta: {
+          title: 'title.live.course.category.index'
+        }
+      },
+      {
+        path: '/live/course/category/create',
+        component: () => import('@/views/live/course/category/create'),
+        name: 'LiveCourseCategoryCreate',
+        meta: {
+          title: 'title.live.course.category.create'
+        }
+      },
+      {
+        path: '/live/course/category/update',
+        component: () => import('@/views/live/course/category/update'),
+        name: 'LiveCourseCategoryUpdate',
+        meta: {
+          title: 'title.live.course.category.update'
+        }
+      },
+      {
+        path: '/live/course/chapter/index',
+        component: () => import('@/views/live/course/chapter/index'),
+        name: 'LiveCourseChapter',
+        meta: {
+          title: 'title.live.course.chapter.index'
+        }
+      },
+      {
+        path: '/live/course/chapter/create',
+        component: () => import('@/views/live/course/chapter/create'),
+        name: 'LiveCourseChapterCreate',
+        meta: {
+          title: 'title.live.course.chapter.create'
+        }
+      },
+      {
+        path: '/live/course/chapter/update',
+        component: () => import('@/views/live/course/chapter/update'),
+        name: 'LiveCourseChapterUpdate',
+        meta: {
+          title: 'title.live.course.chapter.update'
+        }
+      },
+      {
+        path: '/live/course/users/index',
+        component: () => import('@/views/live/course/users/index'),
+        name: 'LiveCourseUsers',
+        meta: {
+          title: 'title.live.course.users.index'
+        }
+      },
     ]
   },
   {

@@ -121,6 +121,34 @@ export default [
         ]
     },
     {
+        name: 'title.multi_level_share.name',
+        key: 'Multi_level_share',
+        children: [
+            {
+                name: 'title.multi_level_share.poster.name',
+                key: 'MultiPoster'
+            },
+            {
+                name: 'title.multi_level_share.goods.name',
+                key: 'ShareGoods'
+            },
+        ]
+    },
+    {
+        name: 'title.live.name',
+        key: 'Live',
+        children: [
+            {
+                name: 'title.live.course.name',
+                key: 'LiveCourse'
+            },
+            {
+                name: 'title.live.teacher.name',
+                key: 'LiveTeacher'
+            },
+        ]
+    },
+    {
         name: 'title.wendaname',
         key: 'Wenda',
         children: [
