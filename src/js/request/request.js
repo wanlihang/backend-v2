@@ -758,10 +758,10 @@ const Api = {
                     return get(`/backend/addons/meedu_books/article_comment/index`, params);
                 },
                 Destorycomment(id) {
-                    return destroy(`/backend/addons/meedu_books/article_comme/${id}`);
+                    return destroy(`/backend/addons/meedu_books/article_comment/${id}`);
                 },
                 CommentMulti(params) {
-                    return post(`/backend/addons/meedu_books/book_comment/checked`, params);
+                    return post(`/backend/addons/meedu_books/article_comment/checked`, params);
                 },
             },
         },
