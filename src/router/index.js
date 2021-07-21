@@ -795,6 +795,30 @@ const routes = [
           title: 'title.multi_level_share.goods.update'
         }
       },
+      {
+        path: '/live/teacher/index',
+        component: () => import('@/views/live/teacher/index'),
+        name: 'LiveTeacher',
+        meta: {
+          title: 'title.live.teacher.index'
+        }
+      },
+      {
+        path: '/live/teacher/create',
+        component: () => import('@/views/live/teacher/create'),
+        name: 'LiveTeacherCreate',
+        meta: {
+          title: 'title.live.teacher.create'
+        }
+      },
+      {
+        path: '/live/teacher/update',
+        component: () => import('@/views/live/teacher/update'),
+        name: 'LiveTeacherUpdate',
+        meta: {
+          title: 'title.live.teacher.update'
+        }
+      },
     ]
   },
   {

@@ -1,29 +1,43 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="编辑海报"></back-bar>
+    <back-bar class="mb-30" title="编辑直播讲师"></back-bar>
     <div class="float-left">
       <div class="form-box broder-top-left-radius">
         <el-form ref="form" :model="course" :rules="rules" label-width="200px">
-          <el-form-item label="升序" prop="sort">
-            <el-input
-              type="number"
-              v-model="course.sort"
-              class="w-200px"
-            ></el-input>
-          </el-form-item>
-          <el-form-item label="海报名" prop="name">
+          <el-form-item label="讲师名" prop="name">
             <el-input v-model="course.name" class="w-200px"></el-input>
           </el-form-item>
+          <el-form-item label="邮箱" prop="username">
+            <el-input v-model="course.username" class="w-200px"></el-input>
+            <div class="helper ml-30">用于教师登录</div>
+          </el-form-item>
+          <el-form-item label="密码" prop="password">
+            <el-input v-model="course.password" class="w-200px"></el-input>
+          </el-form-item>
+          <el-form-item label="隐藏" prop="is_hidden">
+            <el-switch
+              v-model="course.is_hidden"
+              :active-value="1"
+              :inactive-value="0"
+            >
+            </el-switch>
+          </el-form-item>
 
-          <el-form-item prop="thumb" label="海报">
+          <el-form-item prop="avatar" label="头像">
             <upload-image
-              v-model="course.thumb"
+              v-model="course.avatar"
+              helper="长宽比4:4，建议尺寸：400x400像素"
               width="400"
-              name="上传海报"
+              height="400"
+              name="上传头像"
             ></upload-image>
           </el-form-item>
-          <el-form-item label="参数" prop="config">
-            <el-input type="textarea" v-model="course.config" class="w-100"></el-input>
+          <el-form-item label="简介" prop="short_desc">
+            <el-input
+              type="textarea"
+              v-model="course.short_desc"
+              class="w-100"
+            ></el-input>
           </el-form-item>
         </el-form>
       </div>
@@ -36,9 +50,7 @@
             >
           </div>
           <div class="ml-24">
-            <el-button @click="$router.back()"
-              >取消</el-button
-            >
+            <el-button @click="$router.back()">取消</el-button>
           </div>
         </div>
       </div>
@@ -57,37 +69,52 @@ export default {
       course: {
         id: this.$route.query.id,
         name: null,
-        config: null,
-        sort: null,
-        thumb: null,
+        short_desc: null,
+        is_hidden: 0,
+        username: null,
+        password: null,
+        avatar: null,
       },
       rules: {
         name: [
           {
             required: true,
-            message: "海报名不能为空",
+            message: "讲师名不能为空",
             trigger: "blur",
           },
         ],
-        config: [
+        short_desc: [
           {
             required: true,
-            message: "参数不能为空",
+            message: "简介不能为空",
             trigger: "blur",
           },
         ],
-        sort: [
+        is_hidden: [
           {
             required: true,
-            message: "升序不能为空",
+            message: "请选择是否隐藏",
             trigger: "blur",
           },
         ],
-
-        thumb: [
+        password: [
           {
             required: true,
-            message: "请上传海报",
+            message: "密码不能为空",
+            trigger: "blur",
+          },
+        ],
+        username: [
+          {
+            required: true,
+            message: "邮箱不能为空",
+            trigger: "blur",
+          },
+        ],
+        avatar: [
+          {
+            required: true,
+            message: "请上传头像",
             trigger: "blur",
           },
         ],
@@ -108,12 +135,14 @@ export default {
   },
   methods: {
     detail() {
-      this.$api.Multishare.Poster.Detail(this.course.id).then((res) => {
+      this.$api.Course.Live.Teacher.Detail(this.course.id).then((res) => {
         var data = res.data;
         this.course.name = data.name;
-        this.course.sort = data.sort;
-        this.course.config = data.config;
-        this.course.thumb = data.thumb;
+        this.course.username = data.username;
+        this.course.is_hidden = data.is_hidden;
+        this.course.avatar = data.avatar;
+        this.course.password = data.password;
+        this.course.short_desc = data.short_desc;
       });
     },
     formValidate() {
@@ -128,7 +157,7 @@ export default {
         return;
       }
       this.loading = true;
-      this.$api.Multishare.Poster.Update(this.course.id, this.course)
+      this.$api.Course.Live.Teacher.Update(this.course.id, this.course)
         .then(() => {
           this.$message.success(this.$t("common.success"));
           this.$router.back();

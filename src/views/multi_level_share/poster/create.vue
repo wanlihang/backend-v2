@@ -18,10 +18,8 @@
           <el-form-item prop="thumb" label="海报">
             <upload-image
               v-model="course.thumb"
-              helper="长宽比4:3，建议尺寸：400x300像素"
               width="400"
-              height="300"
-              name="上传封面"
+              name="上传海报"
             ></upload-image>
           </el-form-item>
           <el-form-item label="参数" prop="config">
@@ -38,7 +36,7 @@
             >
           </div>
           <div class="ml-24">
-            <el-button @click="$router.push({ name: 'MultiPoster' })"
+            <el-button @click="$router.back()"
               >取消</el-button
             >
           </div>
@@ -121,7 +119,7 @@ export default {
       this.$api.Multishare.Poster.Store(this.course)
         .then(() => {
           this.$message.success(this.$t("common.success"));
-          this.$router.push({ name: "MultiPoster" });
+          this.$router.back();
         })
         .catch((e) => {
           this.loading = false;

@@ -101,6 +101,21 @@ const zh = {
                 update: '编辑分销商品'
             },
         },
+        live: {
+            name: '直播',
+            course: {
+                name: '课程',
+                index: '直播课程',
+                create: '创建直播课程',
+                update: '编辑直播课程'
+            },
+            teacher: {
+                name: '讲师',
+                index: '直播讲师',
+                create: '创建直播讲师',
+                update: '编辑直播讲师'
+            },
+        },
         wechat: {
             messagereply: {
                 index: '微信公众号消息回复',

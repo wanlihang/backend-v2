@@ -135,6 +135,20 @@ export default [
         ]
     },
     {
+        name: 'title.live.name',
+        key: 'Live',
+        children: [
+            {
+                name: 'title.live.course.name',
+                key: 'LiveCourse'
+            },
+            {
+                name: 'title.live.teacher.name',
+                key: 'LiveTeacher'
+            },
+        ]
+    },
+    {
         name: 'title.wendaname',
         key: 'Wenda',
         children: [

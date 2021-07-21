@@ -372,7 +372,27 @@ const Api = {
                 Users(id, params) {
                     return get(`/backend/addons/zhibo/course/${id}/users`, params);
                 }
-            }
+            },
+            Teacher:{
+                List(params) {
+                    return get(`/backend/addons/zhibo/teacher/index`, params);
+                },
+                Create() {
+                    return get(`/backend/addons/zhibo/teacher/create`);
+                },
+                Store(params) {
+                    return post(`/backend/addons/zhibo/teacher/create`, params);
+                },
+                Destory(id) {
+                    return destroy(`/backend/addons/zhibo/teacher/${id}`);
+                },
+                Detail(id) {
+                    return get(`/backend/addons/zhibo/teacher/${id}`);
+                },
+                Update(id, params) {
+                    return put(`/backend/addons/zhibo/teacher/${id}`, params);
+                },
+            },
         },
         Book: {
             Book: {
