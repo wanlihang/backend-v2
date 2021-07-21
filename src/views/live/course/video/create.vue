@@ -2,44 +2,59 @@
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="创建直播课程内容安排"></back-bar>
     <div class="float-left">
-      <div class="form-box broder-top-left-radius">
-        <el-form ref="form" :model="course" :rules="rules" label-width="200px">
-          <el-form-item label="章节" prop="chapter_id">
-            <el-select v-model="course.chapter_id">
-              <el-option
-                v-for="(item, index) in filterData.chapters"
-                :key="index"
-                :label="item.name"
-                :value="item.id"
+      <el-form
+        ref="form"
+        class="float-left"
+        :model="course"
+        :rules="rules"
+        label-width="200px"
+      >
+        <el-form-item label="章节" prop="chapter_id">
+          <div class="d-flex">
+            <div>
+              <el-select class="w-300px" v-model="course.chapter_id">
+                <el-option
+                  v-for="(item, index) in filterData.chapters"
+                  :key="index"
+                  :label="item.name"
+                  :value="item.id"
+                >
+                </el-option>
+              </el-select>
+            </div>
+            <div class="ml-10">
+              <el-link
+                type="primary"
+                @click="
+                  $router.push({
+                    name: 'LiveCourseChapter',
+                    query: { id: course.course_id },
+                  })
+                "
+                >章节管理</el-link
               >
-              </el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="标题" prop="title">
-            <el-input v-model="course.title" class="w-100"></el-input>
-          </el-form-item>
-          <el-form-item label="直播时间" prop="published_at">
-            <el-date-picker
-              v-model="course.published_at"
-              type="datetime"
-              format="yyyy-MM-dd HH:mm"
-              value-format="yyyy-MM-dd HH:mm"
-              placeholder="请选择日期"
-              :picker-options="expireTimeOption"
-            >
-            </el-date-picker>
-          </el-form-item>
-          <el-form-item label="是否显示" prop="is_show">
-            <el-switch
-              v-model="course.is_show"
-              :active-value="1"
-              :inactive-value="0"
-            >
-            </el-switch>
-          </el-form-item>
-        </el-form>
-      </div>
-
+            </div>
+          </div>
+        </el-form-item>
+        <el-form-item label="直播标题" prop="title">
+          <el-input
+            v-model="course.title"
+            class="w-600px"
+            placeholder="直播标题"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="直播时间" prop="published_at">
+          <el-date-picker
+            v-model="course.published_at"
+            type="datetime"
+            format="yyyy-MM-dd HH:mm"
+            value-format="yyyy-MM-dd HH:mm"
+            placeholder="请选择日期"
+            :picker-options="expireTimeOption"
+          >
+          </el-date-picker>
+        </el-form-item>
+      </el-form>
       <div class="bottom-menus">
         <div class="bottom-menus-box">
           <div>
@@ -81,13 +96,6 @@ export default {
             trigger: "blur",
           },
         ],
-        is_show: [
-          {
-            required: true,
-            message: "请选择是否显示",
-            trigger: "blur",
-          },
-        ],
         published_at: [
           {
             required: true,
@@ -98,8 +106,6 @@ export default {
       },
       expireTimeOption: {
         disabledDate(date) {
-          // 当天可选：date.getTime() < Date.now() - 24 * 60 * 60 * 1000
-          //超过此刻可选
           return date.getTime() < Date.now();
         },
       },

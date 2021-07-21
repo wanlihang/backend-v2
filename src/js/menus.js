@@ -75,6 +75,10 @@ export default [
                 key: 'Vod'
             },
             {
+                name: 'title.live.name',
+                key: 'LiveCourse'
+            },
+            {
                 name: 'title.meedubook.book.index',
                 key: 'Meedubook'
             },
@@ -102,7 +106,7 @@ export default [
                 name: 'title.tuangou.goods.name',
                 key: 'TuangouGoods'
             },
-            
+
         ]
     },
     {
@@ -117,7 +121,7 @@ export default [
                 name: 'title.learningpath.step.name',
                 key: 'LearningStep'
             },
-            
+
         ]
     },
     {
@@ -135,20 +139,6 @@ export default [
         ]
     },
     {
-        name: 'title.live.name',
-        key: 'Live',
-        children: [
-            {
-                name: 'title.live.course.name',
-                key: 'LiveCourse'
-            },
-            {
-                name: 'title.live.teacher.name',
-                key: 'LiveTeacher'
-            },
-        ]
-    },
-    {
         name: 'title.codeExchanger.name',
         key: 'Exchanger',
         children: [
@@ -156,7 +146,7 @@ export default [
                 name: 'title.codeExchanger.index',
                 key: 'CodeExchanger'
             },
-            
+
         ]
     },
     {
@@ -167,7 +157,7 @@ export default [
                 name: 'title.topic.name',
                 key: 'Topic'
             },
-            
+
         ]
     },
     {

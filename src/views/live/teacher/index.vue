@@ -1,5 +1,7 @@
 <template>
   <div class="meedu-main-body">
+    <back-bar class="mb-30" title="讲师管理"></back-bar>
+
     <div class="float-left mb-30">
       <el-button
         @click="$router.push({ name: 'LiveTeacherCreate' })"
@@ -11,18 +13,29 @@
     <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table :data="results" stripe class="float-left">
-          <el-table-column prop="id" label="TID" width="100"> </el-table-column>
-
-          <el-table-column prop="name" label="姓名" width="300">
+          <el-table-column prop="id" label="讲师ID" width="120">
           </el-table-column>
-          <el-table-column label="课程" width="80">
+          <el-table-column label="讲师" width="300">
+            <template slot-scope="scope">
+              <div class="d-flex">
+                <div>
+                  <img :src="scope.row.avatar" width="40" height="40" />
+                </div>
+                <div class="ml-10">
+                  {{ scope.row.name }}
+                </div>
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column label="课程" width="150">
             <template slot-scope="scope">
               <span>{{ scope.row.courses_count }}个</span>
             </template>
           </el-table-column>
           <el-table-column label="账号">
             <template slot-scope="scope">
-              <span>{{ scope.row.username }}/{{ scope.row.password }}</span>
+              <div class="mb-15">账号：{{ scope.row.username }}</div>
+              <div>密码：{{ scope.row.password }}</div>
             </template>
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="150">
@@ -76,22 +89,22 @@ export default {
   },
 
   mounted() {
-    this.getResults();
+    this.getData();
   },
   methods: {
     paginationReset() {
       this.pagination.page = 1;
-      this.getResults();
+      this.getData();
     },
     paginationSizeChange(size) {
       this.pagination.size = size;
-      this.getResults();
+      this.getData();
     },
     paginationPageChange(page) {
       this.pagination.page = page;
-      this.getResults();
+      this.getData();
     },
-    getResults() {
+    getData() {
       if (this.loading) {
         return;
       }
@@ -120,11 +133,11 @@ export default {
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));
-              this.getResults();
+              this.getData();
             })
             .catch((e) => {
               this.loading = false;
-              this.$message(e.message);
+              this.$message.warning(e.message);
             });
         })
         .catch(() => {
@@ -134,33 +147,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less" scoped>
-.filter-box {
-  width: 100%;
-  height: auto;
-  float: left;
-  box-sizing: border-box;
-  padding: 30px;
-  border-radius: 15px;
-  margin-bottom: 15px;
-  background-color: white;
-
-  .filter-label {
-    font-size: 14px;
-    color: rgba(0, 0, 0, 0.7);
-  }
-}
-.user-item {
-  width: auto;
-  display: flex;
-  align-items: center;
-  .avatar {
-    margin-right: 10px;
-  }
-  .nickname {
-    font-size: 15px;
-    font-weight: normal;
-  }
-}
-</style>

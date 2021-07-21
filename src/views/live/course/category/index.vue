@@ -1,6 +1,7 @@
 <template>
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="直播课程分类"></back-bar>
+    
     <div class="float-left mb-30">
       <el-button
         @click="$router.push({ name: 'LiveCourseCategoryCreate' })"
@@ -11,12 +12,12 @@
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
-        <el-table :data="results" stripe class="float-left">
+        <el-table :data="list" stripe class="float-left">
           <el-table-column prop="id" label="ID" width="100"> </el-table-column>
           <el-table-column prop="sort" label="升序" width="100">
           </el-table-column>
           <el-table-column prop="name" label="课程名"> </el-table-column>
-          <el-table-column label="课程" width="120">
+          <el-table-column label="下属课程" width="150">
             <template slot-scope="scope">
               <span>{{ scope.row.courses_count }}个</span>
             </template>
@@ -41,13 +42,6 @@
           </el-table-column>
         </el-table>
       </div>
-      <div class="bottom-menus">
-        <div class="bottom-menus-box">
-          <div>
-            <el-button @click="$router.back()">取消</el-button>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </template>
@@ -57,22 +51,22 @@ export default {
   data() {
     return {
       loading: false,
-      results: [],
+      list: [],
     };
   },
 
   mounted() {
-    this.getResults();
+    this.getData();
   },
   methods: {
-    getResults() {
+    getData() {
       if (this.loading) {
         return;
       }
       this.loading = true;
       this.$api.Course.Live.Course.Category.List().then((res) => {
         this.loading = false;
-        this.results = res.data;
+        this.list = res.data;
       });
     },
     destory(item) {
@@ -91,11 +85,11 @@ export default {
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));
-              this.getResults();
+              this.getData();
             })
             .catch((e) => {
               this.loading = false;
-              this.$message(e.message);
+              this.$message.warning(e.message);
             });
         })
         .catch(() => {
@@ -105,33 +99,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less" scoped>
-.filter-box {
-  width: 100%;
-  height: auto;
-  float: left;
-  box-sizing: border-box;
-  padding: 30px;
-  border-radius: 15px;
-  margin-bottom: 15px;
-  background-color: white;
-
-  .filter-label {
-    font-size: 14px;
-    color: rgba(0, 0, 0, 0.7);
-  }
-}
-.user-item {
-  width: auto;
-  display: flex;
-  align-items: center;
-  .avatar {
-    margin-right: 10px;
-  }
-  .nickname {
-    font-size: 15px;
-    font-weight: normal;
-  }
-}
-</style>

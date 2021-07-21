@@ -2,46 +2,58 @@
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="创建直播讲师"></back-bar>
     <div class="float-left">
-      <div class="form-box broder-top-left-radius">
-        <el-form ref="form" :model="course" :rules="rules" label-width="200px">
-          <el-form-item label="讲师名" prop="name">
-            <el-input v-model="course.name" class="w-200px"></el-input>
-          </el-form-item>
-          <el-form-item label="邮箱" prop="username">
-            <el-input v-model="course.username" class="w-200px"></el-input>
-            <div class="helper ml-30">用于教师登录</div>
-          </el-form-item>
-          <el-form-item label="密码" prop="password">
-            <el-input v-model="course.password" class="w-200px"></el-input>
-          </el-form-item>
-          <el-form-item label="隐藏" prop="is_hidden">
-            <el-switch
-              v-model="course.is_hidden"
-              :active-value="1"
-              :inactive-value="0"
-            >
-            </el-switch>
-          </el-form-item>
+      <el-form
+        ref="form"
+        class="float-left"
+        :model="teacher"
+        :rules="rules"
+        label-width="200px"
+      >
+        <el-form-item label="讲师名" prop="name">
+          <el-input v-model="teacher.name" class="w-200px"></el-input>
+        </el-form-item>
 
-          <el-form-item prop="avatar" label="头像">
-            <upload-image
-              v-model="course.avatar"
-              helper="长宽比4:4，建议尺寸：400x400像素"
-              width="400"
-              height="400"
-              name="上传头像"
-            ></upload-image>
-          </el-form-item>
-          <el-form-item label="简介" prop="short_desc">
-            <el-input
-              type="textarea"
-              v-model="course.short_desc"
-              class="w-100"
-            ></el-input>
-          </el-form-item>
-        </el-form>
-      </div>
+        <el-form-item prop="avatar" label="头像">
+          <upload-image
+            v-model="teacher.avatar"
+            helper="长宽比1:1 推荐尺寸200x200"
+            width="100"
+            height="100"
+            name="讲师头像"
+          ></upload-image>
+        </el-form-item>
 
+        <el-form-item label="邮箱" prop="username">
+          <div class="d-flex">
+            <div>
+              <el-input v-model="teacher.username" class="w-200px"></el-input>
+            </div>
+            <div class="ml-10">
+              <helper-text text="用于讲师客户端登录"></helper-text>
+            </div>
+          </div>
+        </el-form-item>
+        <el-form-item label="密码" prop="password">
+          <div class="d-flex">
+            <div>
+              <el-input v-model="teacher.password" class="w-200px"></el-input>
+            </div>
+            <div class="ml-10">
+              <helper-text text="用于讲师客户端登录"></helper-text>
+            </div>
+          </div>
+        </el-form-item>
+
+        <el-form-item label="简介" prop="short_desc">
+          <el-input
+            type="textarea"
+            v-model="teacher.short_desc"
+            class="w-400px"
+            rows="4"
+            placeholder="简介"
+          ></el-input>
+        </el-form-item>
+      </el-form>
       <div class="bottom-menus">
         <div class="bottom-menus-box">
           <div>
@@ -66,7 +78,7 @@ export default {
   },
   data() {
     return {
-      course: {
+      teacher: {
         name: null,
         short_desc: null,
         is_hidden: 0,
@@ -118,18 +130,9 @@ export default {
           },
         ],
       },
-      expireTimeOption: {
-        disabledDate(date) {
-          // 当天可选：date.getTime() < Date.now() - 24 * 60 * 60 * 1000
-          //超过此刻可选
-          return date.getTime() < Date.now();
-        },
-      },
-      types: null,
       loading: false,
     };
   },
-  mounted() {},
   methods: {
     formValidate() {
       this.$refs["form"].validate((valid) => {
@@ -143,7 +146,7 @@ export default {
         return;
       }
       this.loading = true;
-      this.$api.Course.Live.Teacher.Store(this.course)
+      this.$api.Course.Live.Teacher.Store(this.teacher)
         .then(() => {
           this.$message.success(this.$t("common.success"));
           this.$router.back();

@@ -8,11 +8,20 @@
             <el-input v-model="course.name" class="w-200px"></el-input>
           </el-form-item>
           <el-form-item label="排序" prop="sort">
-            <el-input
-              type="number"
-              v-model="course.sort"
-              class="w-200px"
-            ></el-input>
+            <div class="d-flex">
+              <div>
+                <el-input
+                  type="number"
+                  v-model="course.sort"
+                  class="w-200px"
+                ></el-input>
+              </div>
+              <div class="ml-10">
+                <helper-text
+                  text="请输入整数。小数排在前，大数排在后。"
+                ></helper-text>
+              </div>
+            </div>
           </el-form-item>
         </el-form>
       </div>
@@ -58,14 +67,6 @@ export default {
           },
         ],
       },
-      expireTimeOption: {
-        disabledDate(date) {
-          // 当天可选：date.getTime() < Date.now() - 24 * 60 * 60 * 1000
-          //超过此刻可选
-          return date.getTime() < Date.now();
-        },
-      },
-      types: null,
       loading: false,
     };
   },

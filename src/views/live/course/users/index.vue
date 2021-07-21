@@ -4,15 +4,26 @@
     <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table :data="results" stripe class="float-left">
-          <el-table-column prop="user_id" label="用户ID" width="100"> </el-table-column>
-          <el-table-column prop="user.nick_name" label="用户" >
+          <el-table-column prop="user_id" label="用户ID" width="150">
           </el-table-column>
-           <el-table-column label="价格" >
-               <template slot-scope="scope">
+          <el-table-column label="用户">
+            <template slot-scope="scope">
+              <div class="d-flex" v-if="scope.row.user">
+                <div>
+                  <img :src="scope.row.user.avatar" width="40" height="40" />
+                </div>
+                <div class="ml-10">{{ scope.row.user.nick_name }}</div>
+              </div>
+              <span class="c-red" v-else>用户不存在</span>
+            </template>
+          </el-table-column>
+          <el-table-column label="价格" width="200">
+            <template slot-scope="scope">
               <span>￥{{ scope.row.charge }}</span>
             </template>
           </el-table-column>
-          <el-table-column prop="created_at" label="订阅时间" width="180"> </el-table-column>
+          <el-table-column prop="created_at" label="订阅时间" width="200">
+          </el-table-column>
         </el-table>
       </div>
       <div class="float-left mt-30 text-center">
@@ -27,13 +38,6 @@
         >
         </el-pagination>
       </div>
-      <div class="bottom-menus">
-        <div class="bottom-menus-box">
-          <div>
-            <el-button @click="$router.back()">取消</el-button>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </template>
@@ -47,7 +51,7 @@ export default {
         page: 1,
         size: 10,
       },
-      total:0,
+      total: 0,
       loading: false,
       results: [],
     };

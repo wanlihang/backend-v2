@@ -17,8 +17,8 @@
     <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table :data="results" stripe class="float-left">
-          <el-table-column prop="id" label="ID" width="100"> </el-table-column>
-          <el-table-column prop="sort" label="排序" width="100">
+          <el-table-column prop="id" label="ID" width="120"> </el-table-column>
+          <el-table-column prop="sort" label="排序" width="120">
           </el-table-column>
           <el-table-column prop="name" label="章节名"> </el-table-column>
           <el-table-column fixed="right" label="操作" width="150">
@@ -99,7 +99,7 @@ export default {
             })
             .catch((e) => {
               this.loading = false;
-              this.$message(e.message);
+              this.$message.warning(e.message);
             });
         })
         .catch(() => {
@@ -109,33 +109,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less" scoped>
-.filter-box {
-  width: 100%;
-  height: auto;
-  float: left;
-  box-sizing: border-box;
-  padding: 30px;
-  border-radius: 15px;
-  margin-bottom: 15px;
-  background-color: white;
-
-  .filter-label {
-    font-size: 14px;
-    color: rgba(0, 0, 0, 0.7);
-  }
-}
-.user-item {
-  width: auto;
-  display: flex;
-  align-items: center;
-  .avatar {
-    margin-right: 10px;
-  }
-  .nickname {
-    font-size: 15px;
-    font-weight: normal;
-  }
-}
-</style>

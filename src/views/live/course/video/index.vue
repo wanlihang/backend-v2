@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="直播课程内容安排"></back-bar>
+    <back-bar class="mb-30" title="直播安排"></back-bar>
     <div class="float-left mb-30">
       <el-button
         @click="
@@ -17,10 +17,12 @@
     <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table :data="results" stripe class="float-left">
+          <el-table-column prop="id" label="ID" width="120"> </el-table-column>
           <el-table-column prop="name" label="标题">
             <template slot-scope="scope">
-              <span style="color: grey">{{ scope.row.chapter.name }}</span>
-              <span>/{{ scope.row.title }}</span>
+              <span>{{ scope.row.chapter.name }}</span>
+              <span class="mx-5">/</span>
+              <span>{{ scope.row.title }}</span>
             </template>
           </el-table-column>
           <el-table-column prop="published_at" label="直播时间" width="180">
@@ -91,7 +93,7 @@
                     name: 'LiveCourseVideoUpdate',
                     query: {
                       id: scope.row.id,
-                      course_id: pagination.course_id,
+                      course_id: scope.row.course_id,
                     },
                   })
                 "
@@ -112,13 +114,6 @@
           :total="total"
         >
         </el-pagination>
-      </div>
-      <div class="bottom-menus">
-        <div class="bottom-menus-box">
-          <div>
-            <el-button @click="$router.back()">取消</el-button>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -199,33 +194,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less" scoped>
-.filter-box {
-  width: 100%;
-  height: auto;
-  float: left;
-  box-sizing: border-box;
-  padding: 30px;
-  border-radius: 15px;
-  margin-bottom: 15px;
-  background-color: white;
-
-  .filter-label {
-    font-size: 14px;
-    color: rgba(0, 0, 0, 0.7);
-  }
-}
-.user-item {
-  width: auto;
-  display: flex;
-  align-items: center;
-  .avatar {
-    margin-right: 10px;
-  }
-  .nickname {
-    font-size: 15px;
-    font-weight: normal;
-  }
-}
-</style>
