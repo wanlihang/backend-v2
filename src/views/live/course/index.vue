@@ -134,7 +134,7 @@
                 style="margin-left: 5px"
                 @click="
                   $router.push({
-                    name: 'LiveCourseUpdate',
+                    name: 'LiveCourseUsers',
                     query: { id: scope.row.id },
                   })
                 "

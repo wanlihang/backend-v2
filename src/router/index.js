@@ -899,6 +899,14 @@ const routes = [
           title: 'title.live.course.chapter.update'
         }
       },
+      {
+        path: '/live/course/users/index',
+        component: () => import('@/views/live/course/users/index'),
+        name: 'LiveCourseUsers',
+        meta: {
+          title: 'title.live.course.users.index'
+        }
+      },
     ]
   },
   {

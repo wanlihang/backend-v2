@@ -372,13 +372,13 @@ const Api = {
                 Comment(params) {
                     return get(`/backend/addons/zhibo/course_comment`, params);
                 },
-                CommentDestoryMulti(params){
+                CommentDestoryMulti(params) {
                     return post(`/backend/addons/zhibo/course_comment/delete`, params);
                 },
-                CommentCheck(params){
+                CommentCheck(params) {
                     return post(`/backend/addons/zhibo/course_comment/check`, params);
                 },
-                Category:{
+                Category: {
                     List() {
                         return get(`/backend/addons/zhibo/course_category/index`);
                     },
@@ -395,7 +395,7 @@ const Api = {
                         return put(`/backend/addons/zhibo/course_category/${id}`, params);
                     },
                 },
-                Chapter:{
+                Chapter: {
                     List(params) {
                         return get(`/backend/addons/zhibo/course_chapter/index`, params);
                     },
@@ -412,8 +412,13 @@ const Api = {
                         return put(`/backend/addons/zhibo/course_chapter/${id}`, params);
                     },
                 },
+                Users: {
+                    List(id, params) {
+                        return get(`/backend/addons/zhibo/course/${id}/users`, params);
+                    },
+                },
             },
-            Teacher:{
+            Teacher: {
                 List(params) {
                     return get(`/backend/addons/zhibo/teacher/index`, params);
                 },
@@ -845,10 +850,10 @@ const Api = {
             return destroy(`/backend/addons/MiaoSha/goods/${id}`);
         },
     },
-    Multishare:{
-        Poster:{
+    Multishare: {
+        Poster: {
             List() {
-                return get(`/backend/addons/multi_level_share/poster/index`,);
+                return get(`/backend/addons/multi_level_share/poster/index`, );
             },
             Store(params) {
                 return post(`/backend/addons/multi_level_share/poster/create`, params);
@@ -863,7 +868,7 @@ const Api = {
                 return destroy(`/backend/addons/multi_level_share/poster/${id}`);
             },
         },
-        Goods:{
+        Goods: {
             List(params) {
                 return get(`/backend/addons/multi_level_share/goods/index`, params);
             },
