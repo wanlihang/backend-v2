@@ -1009,6 +1009,30 @@ const routes = [{
           title: 'title.topic.update'
         }
       },
+      {
+        path: '/topic/category/index',
+        component: () => import('@/views/topic/category/index'),
+        name: 'TopicCategory',
+        meta: {
+          title: 'title.topic.category.index'
+        }
+      },
+      {
+        path: '/topic/category/create',
+        component: () => import('@/views/topic/category/create'),
+        name: 'TopicCategoryCreate',
+        meta: {
+          title: 'title.topic.category.create'
+        }
+      },
+      {
+        path: '/topic/category/update',
+        component: () => import('@/views/topic/category/update'),
+        name: 'TopicCategoryUpdate',
+        meta: {
+          title: 'title.topic.category.update'
+        }
+      },
     ]
   },
   {

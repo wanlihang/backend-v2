@@ -549,7 +549,27 @@ const Api = {
                 Users(id, params) {
                     return get(`/backend/addons/meedu_topics/topic/${id}/users`, params);
                 }
-            }
+            },
+            Category:{
+                List() {
+                    return get(`/backend/addons/meedu_topics/category/index`);
+                },
+                Create() {
+                    return get(`/backend/addons/meedu_topics/category/create`);
+                },
+                Store(params) {
+                    return post(`/backend/addons/meedu_topics/category/create`, params);
+                },
+                Destory(id) {
+                    return destroy(`/backend/addons/meedu_topics/category/${id}`);
+                },
+                Detail(id) {
+                    return get(`/backend/addons/meedu_topics/category/${id}`);
+                },
+                Update(id, params) {
+                    return put(`/backend/addons/meedu_topics/category/${id}`, params);
+                },
+            },
         },
         LearnPath: {
             Path: {
@@ -790,6 +810,7 @@ const Api = {
             },
         },
     },
+    
     Wenda: {
         Question: {
             List(params) {

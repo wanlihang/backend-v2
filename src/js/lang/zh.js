@@ -154,6 +154,11 @@ const zh = {
             index: '话题',
             create: '创建话题文章',
             update: '编辑话题文章',
+            category:{
+                index: '话题分类管理',
+                create: '创建话题分类',
+                update: '编辑话题分类',
+            },
         },
         wenda: {
             question: {
