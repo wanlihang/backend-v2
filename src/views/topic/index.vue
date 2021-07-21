@@ -32,14 +32,28 @@
       <div class="float-left">
         <el-table :data="results" stripe class="float-left">
           <el-table-column prop="id" label="ID" width="80"> </el-table-column>
-          <el-table-column prop="category.name" label="分类" width="160">
+          <el-table-column prop="category.name" label="分类" width="120">
           </el-table-column>
           <el-table-column prop="title" label="标题"> </el-table-column>
-          <el-table-column label="价格" width="120">
+          <el-table-column label="价格" width="100">
             <template slot-scope="scope">
                 <span v-if="scope.row.charge==0">免费</span>
               <span style="color:red;" v-else>￥{{ scope.row.charge }}</span>
             </template>
+          </el-table-column>
+           <el-table-column label="浏览" width="100">
+            <template slot-scope="scope">
+              <span >{{ scope.row.view_times }}次</span>
+            </template>
+          </el-table-column>
+            <el-table-column label="付费" width="80">
+            <template slot-scope="scope">
+              <span >{{ scope.row.user_count }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column prop="comments_count" label="评论" width="80">
+          </el-table-column>
+          <el-table-column prop="vote_count" label="点赞" width="80">
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="250">
             <template slot-scope="scope">
