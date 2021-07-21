@@ -79,6 +79,18 @@ export default {
     this.getResults();
   },
   methods: {
+    paginationReset() {
+      this.pagination.page = 1;
+      this.getResults();
+    },
+    paginationSizeChange(size) {
+      this.pagination.size = size;
+      this.getResults();
+    },
+    paginationPageChange(page) {
+      this.pagination.page = page;
+      this.getResults();
+    },
     getResults() {
       if (this.loading) {
         return;
