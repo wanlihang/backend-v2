@@ -35,7 +35,7 @@
             <el-table-column prop="id" label="ID" width="80"> </el-table-column>
             <el-table-column prop="user_id" label="用户ID" width="80">
             </el-table-column>
-            <el-table-column prop="user.nick_name" label="用户ID" width="150">
+            <el-table-column prop="user.nick_name" label="用户" width="150">
             </el-table-column>
             <el-table-column label="评论内容">
               <template slot-scope="scope">

@@ -87,7 +87,7 @@
                 style="margin-left: 5px"
                 @click="
                   $router.push({
-                    name: 'TopicUpdate',
+                    name: 'TopicOrder',
                     query: { id: scope.row.id },
                   })
                 "

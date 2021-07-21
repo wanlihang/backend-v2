@@ -1041,6 +1041,14 @@ const routes = [{
           title: 'title.topic.comment'
         }
       },
+      {
+        path: '/topic/order',
+        component: () => import('@/views/topic/order'),
+        name: 'TopicOrder',
+        meta: {
+          title: 'title.topic.order'
+        }
+      },
     ]
   },
   {

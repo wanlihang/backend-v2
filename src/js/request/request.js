@@ -549,6 +549,9 @@ const Api = {
                 Users(id, params) {
                     return get(`/backend/addons/meedu_topics/topic/${id}/users`, params);
                 },
+                Order(params) {
+                    return get(`/backend/addons/meedu_topics/orders`, params);
+                },
                 Comment(params) {
                     return get(`/backend/addons/meedu_topics/comment`, params);
                 },
