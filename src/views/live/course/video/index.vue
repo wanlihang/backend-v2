@@ -58,37 +58,19 @@
               <el-link
                 type="primary"
                 style="margin-left: 5px"
-                v-if="scope.row.status==1"
-                @click="
-                  $router.push({
-                    name: 'LiveCourseVideoUpdate',
-                    query: {
-                      id: scope.row.id,
-                      course_id: pagination.course_id,
-                    },
-                  })
-                "
+                v-if="scope.row.status == 1"
                 >继续直播</el-link
               >
               <el-link
                 type="primary"
                 style="margin-left: 5px"
-                v-if="scope.row.status==0"
-                @click="
-                  $router.push({
-                    name: 'LiveCourseVideoUpdate',
-                    query: {
-                      id: scope.row.id,
-                      course_id: pagination.course_id,
-                    },
-                  })
-                "
+                v-if="scope.row.status == 0"
                 >开始直播</el-link
               >
               <el-link
                 type="primary"
                 style="margin-left: 5px"
-                v-if="scope.row.status==1"
+                v-if="scope.row.status == 1"
                 @click="
                   $router.push({
                     name: 'LiveCourseVideoUpdate',
@@ -103,7 +85,7 @@
               <el-link
                 type="primary"
                 style="margin-left: 5px"
-                v-if="scope.row.status==1"
+                v-if="scope.row.status == 1"
                 @click="
                   $router.push({
                     name: 'LiveCourseVideoUpdate',
