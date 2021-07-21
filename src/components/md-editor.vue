@@ -5,7 +5,7 @@
       :value="content"
       :boxShadow="false"
       :transition="false"
-      :subfield="false"
+      :subfield="true"
       :toolbars="toolbars"
       :placeholder="placeholder"
       :autofocus="false"

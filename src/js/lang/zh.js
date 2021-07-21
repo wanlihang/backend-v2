@@ -149,6 +149,12 @@ const zh = {
             update: '编辑兑换商品',
             codes: '兑换码'
         },
+        topic: {
+            name: '图文',
+            index: '话题',
+            create: '创建话题文章',
+            update: '编辑话题文章',
+        },
         wenda: {
             question: {
                 index: '问题',

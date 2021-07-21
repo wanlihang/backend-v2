@@ -985,6 +985,30 @@ const routes = [{
           title: 'title.codeExchanger.codes'
         }
       },
+      {
+        path: '/topic/index',
+        component: () => import('@/views/topic/index'),
+        name: 'Topic',
+        meta: {
+          title: 'title.topic.index'
+        }
+      },
+      {
+        path: '/topic/create',
+        component: () => import('@/views/topic/create'),
+        name: 'TopicCreate',
+        meta: {
+          title: 'title.topic.create'
+        }
+      },
+      {
+        path: '/topic/update',
+        component: () => import('@/views/topic/update'),
+        name: 'TopicUpdate',
+        meta: {
+          title: 'title.topic.update'
+        }
+      },
     ]
   },
   {

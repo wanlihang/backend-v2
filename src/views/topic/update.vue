@@ -1,13 +1,13 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="编辑电子书文章"></back-bar>
+    <back-bar class="mb-30" title="编辑话题文章"></back-bar>
     <div class="float-left">
       <div class="form-box broder-top-left-radius">
         <el-form ref="form" :model="course" :rules="rules" label-width="200px">
-          <el-form-item prop="book_cid" label="章节">
+          <el-form-item prop="cid" label="分类">
             <div class="d-flex">
               <div>
-                <el-select v-model="course.book_cid">
+                <el-select v-model="course.cid">
                   <el-option
                     v-for="(item, index) in chapters"
                     :key="index"
@@ -16,6 +16,17 @@
                   >
                   </el-option>
                 </el-select>
+              </div>
+              <div class="ml-10">
+                <el-link
+                  @click="
+                    $router.push({
+                      name: 'TopicCategory',
+                    })
+                  "
+                  type="primary"
+                  >分类管理</el-link
+                >
               </div>
             </div>
           </el-form-item>
@@ -26,14 +37,12 @@
               placeholder="请输入标题"
             ></el-input>
           </el-form-item>
-          <el-form-item label="价格" prop="charge">
-            <el-input
-              type="number"
-              placeholder="单位：元"
-              v-model="course.charge"
-              class="w-200px"
-            ></el-input>
-            <div class="helper ml-30">价格为0即视为试看，可免费阅读</div>
+          <el-form-item prop="thumb" label="封面">
+            <upload-image
+              v-model="course.thumb"
+              width="400"
+              name="上传封面"
+            ></upload-image>
           </el-form-item>
           <el-form-item label="显示" prop="is_show">
             <el-switch
@@ -43,9 +52,26 @@
             >
             </el-switch>
           </el-form-item>
-          <el-form-item label="上架时间" prop="published_at">
+          <el-form-item label="价格">
+            <el-input
+              type="number"
+              placeholder="单位：元"
+              v-model="course.charge"
+              class="w-200px"
+            ></el-input>
+          </el-form-item>
+          <el-form-item label="会员免费" v-if="course.charge > 0">
+            <el-switch
+              v-model="course.is_vip_free"
+              :active-value="true"
+              :inactive-value="false"
+            >
+            </el-switch>
+          </el-form-item>
+
+          <el-form-item label="排序时间" prop="sorted_at">
             <el-date-picker
-              v-model="course.published_at"
+              v-model="course.sorted_at"
               type="datetime"
               format="yyyy-MM-dd HH:mm"
               value-format="yyyy-MM-dd HH:mm"
@@ -54,13 +80,39 @@
             >
             </el-date-picker>
           </el-form-item>
+          <el-form-item prop="free_content_render" label="免费内容">
+            <mavon-editor
+              class="w-100"
+              :content="course.free_content"
+              v-on:change="getfreecontent"
+            ></mavon-editor>
+          </el-form-item>
+          <el-form-item prop="render_content" label="文章内容">
+            <mavon-editor
+              :content="course.original_content"
+              class="w-100"
+              v-on:change="getcontent"
+            ></mavon-editor>
+          </el-form-item>
 
-          <el-form-item prop="render_content" label="内容">
-            <mavon-editor :content="course.original_content" class="w-100" v-on:change="getcontent"></mavon-editor>
+          <el-form-item label="SEO关键字">
+            <el-input
+              class="w-100"
+              type="textarea"
+              v-model="course.seo_keywords"
+              placeholder="SEO关键字"
+            ></el-input>
+          </el-form-item>
+          <el-form-item label="SEO描述">
+            <el-input
+              class="w-100"
+              type="textarea"
+              v-model="course.seo_description"
+              placeholder="SEO描述"
+            ></el-input>
           </el-form-item>
         </el-form>
       </div>
-
       <div class="bottom-menus">
         <div class="bottom-menus-box">
           <div>
@@ -69,15 +121,7 @@
             >
           </div>
           <div class="ml-24">
-            <el-button
-              @click="
-                $router.push({
-                  name: 'MeedubookArticle',
-                  query: { bid: book_id },
-                })
-              "
-              >取消</el-button
-            >
+            <el-button @click="$router.back()">取消</el-button>
           </div>
         </div>
       </div>
@@ -86,47 +130,48 @@
 </template>
 <script>
 import MavonEditor from "@/components/md-editor";
+import UploadImage from "@/components/upload-image";
 
 export default {
   components: {
     MavonEditor,
+    UploadImage,
   },
   data() {
     return {
-      book_id: this.$route.query.book_id,
       course: {
-        bid: this.$route.query.book_id,
         id: this.$route.query.id,
-        published_at: null,
+        cid: null,
+        free_content: null,
+        thumb: null,
+        free_content_render: null,
+        is_need_login: 0,
         is_show: false,
+        is_vip_free: false,
         charge: null,
         title: null,
-        book_cid: null,
+        seo_description: null,
+        seo_keywords: null,
+        sorted_at: null,
         original_content: null,
         render_content: null,
       },
       rules: {
-        book_cid: [
+        cid: [
           {
             required: true,
-            message: "章节不能为空",
+            message: "分类不能为空",
             trigger: "blur",
           },
         ],
-        charge: [
+        thumb: [
           {
             required: true,
-            message: "价格不能为空",
+            message: "请上传封面",
             trigger: "blur",
           },
         ],
-        published_at: [
-          {
-            required: true,
-            message: "上架时间不能为空",
-            trigger: "blur",
-          },
-        ],
+
         is_show: [
           {
             required: true,
@@ -170,27 +215,38 @@ export default {
       this.course.original_content = pureContent;
       this.course.render_content = renderContent;
     },
-    detail() {
-      this.$api.Meedubook.Book.Article.Detail(this.course.id).then((res) => {
-        var data = res.data;
-        this.course.original_content = data.original_content;
-        this.course.render_content = data.render_content;
-        if (data.is_show == 1) {
-          this.course.is_show = true;
-        } else {
-          this.course.is_show = false;
-        }
-        this.course.published_at = data.published_at;
-        this.course.charge = data.charge;
-        this.course.book_cid = data.book_cid;
-        this.course.bid = data.bid;
-        this.book_id = data.bid;
-        this.course.title = data.title;
-      });
+    getfreecontent: function (pureContent, renderContent) {
+      this.course.free_content = pureContent;
+      this.course.free_content_render = renderContent;
     },
     params() {
-      this.$api.Meedubook.Book.Article.Create().then((res) => {
-        this.chapters = res.data.chapters[this.book_id];
+      this.$api.Course.Topic.Topic.Create().then((res) => {
+        this.chapters = res.data;
+      });
+    },
+    detail() {
+      this.$api.Course.Topic.Topic.Detail(this.course.id).then((res) => {
+        var data = res.data;
+        this.course.cid = data.cid;
+        this.course.charge = data.charge;
+        this.course.free_content = data.free_content;
+        this.course.thumb = data.thumb;
+        this.course.free_content_render = data.free_content_render;
+        this.course.is_need_login = data.is_need_login;
+        if (data.is_show == 1) {
+          this.course.is_show = true;
+        }
+        if (data.is_vip_free == 1) {
+          this.course.is_vip_free = true;
+        }
+        this.course.title = data.title;
+        this.course.goods_title = data.goods_title;
+        this.course.seo_description = data.seo_description;
+        this.course.seo_keywords = data.seo_keywords;
+        this.course.page_title = data.page_title;
+        this.course.sorted_at = data.sorted_at;
+        this.course.original_content = data.original_content;
+        this.course.render_content = data.render_content;
       });
     },
     formValidate() {
@@ -205,13 +261,10 @@ export default {
         return;
       }
       this.loading = true;
-      this.$api.Meedubook.Book.Article.Update(this.course.id, this.course)
+      this.$api.Course.Topic.Topic.Update(this.course.id, this.course)
         .then(() => {
           this.$message.success(this.$t("common.success"));
-          this.$router.push({
-            name: "MeedubookArticle",
-            query: { bid: this.book_id },
-          });
+          this.$router.back();
         })
         .catch((e) => {
           this.loading = false;
