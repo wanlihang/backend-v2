@@ -10,34 +10,31 @@
           })
         "
         type="primary"
-        >添加</el-button
       >
+        添加
+      </el-button>
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table :data="attach" stripe class="float-left">
           <el-table-column prop="id" label="ID" width="120"> </el-table-column>
-          <el-table-column prop="name" label="附件名" width="250">
-          </el-table-column>
-
-          <el-table-column label="路径"
-            ><template slot-scope="scope">
-              <span>{{ scope.row.path }} </span>
-            </template>
+          <el-table-column prop="name" label="附件名"> </el-table-column>
+          <el-table-column prop="path" label="路径" width="500">
           </el-table-column>
           <el-table-column label="下载次数" width="150"
             ><template slot-scope="scope">
               <span>{{ scope.row.download_times }}次 </span>
             </template>
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="80">
+          <el-table-column fixed="right" label="操作" width="100">
             <template slot-scope="scope">
               <el-link
                 style="margin-right: 10px"
                 type="danger"
-                @click="destory(scope.row.id)"
-                >删除</el-link
+                @click="delItem(scope.row.id)"
               >
+                删除
+              </el-link>
             </template>
           </el-table-column>
         </el-table>
@@ -45,6 +42,7 @@
     </div>
   </div>
 </template>
+
 <script>
 export default {
   data() {
@@ -70,19 +68,16 @@ export default {
         this.attach = res.data.data;
       });
     },
-    importUser() {},
-    //删除管理员
-    destory(id) {
+    delItem(id) {
+      if (this.loading) {
+        return;
+      }
       this.$confirm("确认操作？", "警告", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
       })
         .then(() => {
-          //点击确定按钮的操作
-          if (this.loading) {
-            return;
-          }
           this.loading = true;
           this.$api.Course.Vod.Attach.Destory(id)
             .then(() => {
@@ -95,9 +90,7 @@ export default {
               this.$message(e.message);
             });
         })
-        .catch(() => {
-          //点击删除按钮的操作
-        });
+        .catch(() => {});
     },
   },
 };

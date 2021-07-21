@@ -119,7 +119,7 @@ const zh = {
                     create: '创建直播课程章节',
                     update: '编辑直播课程章节',
                 },
-                users:{
+                users: {
                     index: '直播课程订阅用户',
                 },
             },
@@ -173,10 +173,12 @@ const zh = {
                     index: '观看记录',
                 },
                 video: {
-                    index: '课程视频管理',
-                    create: '创建课程视频',
-                    update: '编辑课程视频',
-                    subscribe: '课程视频销售记录',
+                    index: '视频管理',
+                    create: '创建视频',
+                    update: '编辑视频',
+                    subscribe: '视频销售记录',
+                    'watch-records': '视频观看记录',
+                    comments: "视频评论"
                 },
             },
         },

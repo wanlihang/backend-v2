@@ -3,7 +3,7 @@
     <div class="float-left">
       <div class="float-left d-flex">
         <div>
-          <el-button type="danger" @click="delRecords()">删除</el-button>
+          <el-button @click="delRecords()">删除</el-button>
         </div>
         <div class="ml-10">
           <el-select

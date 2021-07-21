@@ -21,6 +21,7 @@
         :id="id"
         v-else-if="tabActive === 'watch-records'"
       ></watch-records>
+      <comments :id="id" v-else-if="tabActive === 'comments'"></comments>
     </div>
   </div>
 </template>
@@ -28,32 +29,34 @@
 <script>
 import SubUsers from "./components/sub-users.vue";
 import WatchRecords from "./components/watch-records.vue";
+import Comments from "./components/vod-comments.vue";
 
 export default {
   components: {
     SubUsers,
     WatchRecords,
+    Comments
   },
   data() {
     return {
-      id: null,
+      id: this.$route.params.id,
       tabActive: "sub-users",
       tabs: [
         {
-          name: "订阅用户",
+          name: "购买用户",
           key: "sub-users",
         },
         {
           name: "观看记录",
           key: "watch-records",
         },
+        {
+          name: "课程评论",
+          key: "comments",
+        },
       ],
     };
   },
-  mounted() {
-    this.id = this.$route.params.id;
-  },
-  methods: {},
 };
 </script>
 

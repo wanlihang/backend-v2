@@ -300,6 +300,22 @@ const routes = [
         }
       },
       {
+        path: '/course/vod/video/watch-records',
+        component: () => import('@/views/course/vod/video/watch-records'),
+        name: 'VideoWatchRecords',
+        meta: {
+          title: 'title.course.vod.video.watch-records'
+        }
+      },
+      {
+        path: '/course/vod/video/comments',
+        component: () => import('@/views/course/vod/video/comments'),
+        name: 'VideoComments',
+        meta: {
+          title: 'title.course.vod.video.comments'
+        }
+      },
+      {
         path: '/singlepage/index',
         component: () => import('@/views/singlepage/page/index'),
         name: 'SinglePage',
