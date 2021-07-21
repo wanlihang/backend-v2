@@ -14,7 +14,6 @@
               class="w-200px"
             ></el-input>
           </el-form-item>
-
           <el-form-item label="显示" prop="is_show">
             <el-switch
               v-model="course.is_show"

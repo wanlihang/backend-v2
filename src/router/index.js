@@ -844,6 +844,14 @@ const routes = [
         }
       },
       {
+        path: '/live/course/comment',
+        component: () => import('@/views/live/course/comment'),
+        name: 'LiveCourseComment',
+        meta: {
+          title: 'title.live.course.comment'
+        }
+      },
+      {
         path: '/live/course/category/index',
         component: () => import('@/views/live/course/category/index'),
         name: 'LiveCourseCategory',

@@ -8,7 +8,7 @@
         直播课程分类
       </el-button>
       <el-button
-        @click="$router.push({ name: 'LiveCourseCreate' })"
+        @click="$router.push({ name: 'LiveCourseComment' })"
         type="primary"
       >
         直播课程评论

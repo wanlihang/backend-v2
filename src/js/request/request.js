@@ -369,6 +369,15 @@ const Api = {
                 Update(id, params) {
                     return put(`/backend/addons/zhibo/course/${id}`, params);
                 },
+                Comment(params) {
+                    return get(`/backend/addons/zhibo/course_comment`, params);
+                },
+                CommentDestoryMulti(params){
+                    return post(`/backend/addons/zhibo/course_comment/delete`, params);
+                },
+                CommentCheck(params){
+                    return post(`/backend/addons/zhibo/course_comment/check`, params);
+                },
                 Category:{
                     List() {
                         return get(`/backend/addons/zhibo/course_category/index`);

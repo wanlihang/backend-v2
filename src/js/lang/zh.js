@@ -108,7 +108,8 @@ const zh = {
                 index: '直播课程',
                 create: '创建直播课程',
                 update: '编辑直播课程',
-                category:{
+                comment: '直播课程评论',
+                category: {
                     index: '直播课程分类',
                     create: '创建直播课程分类',
                     update: '编辑直播课程分类',
