@@ -548,7 +548,16 @@ const Api = {
                 },
                 Users(id, params) {
                     return get(`/backend/addons/meedu_topics/topic/${id}/users`, params);
-                }
+                },
+                Comment(params) {
+                    return get(`/backend/addons/meedu_topics/comment`, params);
+                },
+                DestoryComment(id) {
+                    return destroy(`/backend/addons/meedu_topics/comment/${id}`);
+                },
+                CommentCheck(params) {
+                    return post(`/backend/addons/meedu_topics/comment/check`, params);
+                },
             },
             Category:{
                 List() {

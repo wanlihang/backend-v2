@@ -1033,6 +1033,14 @@ const routes = [{
           title: 'title.topic.category.update'
         }
       },
+      {
+        path: '/topic/comment',
+        component: () => import('@/views/topic/comment'),
+        name: 'TopicComment',
+        meta: {
+          title: 'title.topic.comment'
+        }
+      },
     ]
   },
   {

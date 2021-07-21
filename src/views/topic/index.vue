@@ -76,7 +76,7 @@
                 style="margin-left: 5px"
                 @click="
                   $router.push({
-                    name: 'TopicUpdate',
+                    name: 'TopicComment',
                     query: { id: scope.row.id },
                   })
                 "
