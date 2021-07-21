@@ -44,7 +44,7 @@
             </el-table-column>
             <el-table-column label="状态" width="80">
               <template slot-scope="scope">
-                <span v-if="scope.row.is_check == 0">拒绝</span>
+                <span style="color:red;" v-if="scope.row.is_check == 0">拒绝</span>
                 <span v-else>通过</span>
               </template>
             </el-table-column>
@@ -190,7 +190,7 @@ export default {
           }
           this.spids.is_check = 1;
           this.loading = true;
-          this.$api.Course.Topic.Topic.CommentMulti(this.spids)
+          this.$api.Course.Topic.Topic.CommentCheck(this.spids)
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));
@@ -223,7 +223,7 @@ export default {
           }
           this.spids.is_check = 0;
           this.loading = true;
-          this.$api.Course.Topic.Topic.CommentMulti(this.spids)
+          this.$api.Course.Topic.Topic.CommentCheck(this.spids)
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));
