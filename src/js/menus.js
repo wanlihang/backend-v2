@@ -1,5 +1,4 @@
-export default [
-    {
+export default [{
         name: 'title.dashboard',
         key: 'Dashboard',
         children: [],
@@ -9,8 +8,7 @@ export default [
         name: 'title.coursename',
         key: 'Course',
         icon: 'icon-icon-lesson',
-        children: [
-            {
+        children: [{
                 name: 'title.topic.name',
                 key: 'Topic'
             },
@@ -36,12 +34,10 @@ export default [
         name: 'title.member.index',
         key: 'Member',
         icon: 'icon-icon-me-n',
-        children: [
-            {
-                name: 'title.member.index',
-                key: 'MemberIndex',
-            }
-        ]
+        children: [{
+            name: 'title.member.index',
+            key: 'MemberIndex',
+        }]
     },
     {
         name: 'title.finance',
@@ -71,8 +67,7 @@ export default [
         name: 'title.operate',
         key: 'Operate',
         icon: 'icon-icon-operate',
-        children: [
-            {
+        children: [{
                 name: 'title.codeExchanger.index',
                 key: 'CodeExchanger'
             },
@@ -114,8 +109,7 @@ export default [
         name: 'title.decoration',
         key: 'Decoration',
         icon: 'icon-icon-decorate',
-        children: [
-            {
+        children: [{
                 name: 'title.decoration_pc',
                 key: 'DecorationPC',
             },
@@ -134,8 +128,7 @@ export default [
         name: 'title.system',
         key: 'System',
         icon: 'icon-icon-setting-n',
-        children: [
-            {
+        children: [{
                 name: 'title.system-administrator',
                 key: 'SystemAdministrator',
             },
