@@ -1,25 +1,23 @@
 <template>
-  <el-container>
-    <el-header>
-      <h1>创建</h1>
-    </el-header>
-    <!-- el-form表单 -->
-    <el-form
-      :model="addForm"
-      :rules="UserRules"
-      ref="UserRef"
-      label-width="100px"
-    >
-      <div class="row">
+  <div class="meedu-main-body">
+    <back-bar class="mb-30" title="批量生成优惠码"></back-bar>
+    <div class="float-left">
+      <el-form
+        ref="form"
+        class="float-left"
+        :model="course"
+        :rules="rules"
+        label-width="200px"
+      >
         <el-form-item label="统一前缀" prop="prefix">
-          <el-input v-model="addForm.prefix"></el-input>
+          <el-input v-model="course.prefix"></el-input>
         </el-form-item>
         <el-form-item label="生成数量" prop="num">
-          <el-input type="number" v-model="addForm.num"></el-input>
+          <el-input type="number" v-model="course.num"></el-input>
         </el-form-item>
         <el-form-item label="到期时间" prop="expired_at">
           <el-date-picker
-            v-model="addForm.expired_at"
+            v-model="course.expired_at"
             type="datetime"
             format="yyyy-MM-dd HH:mm"
             value-format="yyyy-MM-dd HH:mm"
@@ -29,30 +27,38 @@
           </el-date-picker>
         </el-form-item>
         <el-form-item label="面值" prop="money">
-          <el-input type="number" v-model="addForm.money"></el-input>
+          <el-input type="number" v-model="course.money"></el-input>
         </el-form-item>
+      </el-form>
+      <div class="bottom-menus">
+        <div class="bottom-menus-box">
+          <div>
+            <el-button @click="formValidate" :loading="loading" type="primary"
+              >保存</el-button
+            >
+          </div>
+          <div class="ml-24">
+            <el-button @click="$router.back()">取消</el-button>
+          </div>
+        </div>
       </div>
-    </el-form>
-
-    <el-footer>
-      <el-button @click="dialogClose()"> 取消 </el-button>
-      <el-button type="primary" @click="addUserForm()">确认生成</el-button>
-    </el-footer>
-  </el-container>
+    </div>
+  </div>
 </template>
+
 <script>
 export default {
   name: "Create_code",
   data() {
     return {
       loading: false,
-      addForm: {
+      course: {
         prefix: "",
         expired_at: "",
         money: "",
         num: "",
       },
-      UserRules: {
+      rules: {
         prefix: [
           {
             required: true,
@@ -92,84 +98,28 @@ export default {
     };
   },
   methods: {
-    //清空表单
-    clearForm() {
-      this.addForm.prefix = "";
-      this.addForm.expired_at = "";
-      this.addForm.money = "";
-      this.addForm.num = "";
-    },
-    //关闭按钮
-    dialogClose() {
-      this.clearForm();
-      this.$router.push({ name: "Promocode" });
-    },
-    //确定
-    addUserForm() {
-      this.$refs.UserRef.validate(async (valid) => {
-        if (!valid) return;
-        this.loading = true;
-        const { data: res } = await this.$api.Order.PromoCode.CreateMulti(
-          this.addForm
-        ).then((resp) => {
-          if (resp.status == 0) {
-            this.$message.success("添加成功");
-            this.$router.push({ name: "Promocode" });
-            this.clearForm();
-          } else {
-            this.$message.error(resp.message);
-          }
-          this.loading = false;
-        });
+    formValidate() {
+      this.$refs["form"].validate((valid) => {
+        if (valid) {
+          this.confirm();
+        }
       });
+    },
+    confirm() {
+      if (this.loading) {
+        return;
+      }
+      this.loading = true;
+      this.$api.Order.PromoCode.CreateMulti(this.course)
+        .then(() => {
+          this.$message.success(this.$t("common.success"));
+          this.$router.back();
+        })
+        .catch((e) => {
+          this.loading = false;
+          this.$message.error(e.message);
+        });
     },
   },
 };
 </script>
-<style  lang="less" scoped>
-.el-form-item__label {
-  text-align: left;
-}
-.row {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  padding-left: 0px;
-  box-sizing: border-box;
-  .el-input {
-    width: 190px;
-    margin-right: 12px;
-  }
-  span {
-    font-size: 14px;
-    color: #606266;
-    line-height: 40px;
-    padding: 0 12px 0 0;
-    box-sizing: border-box;
-  }
-}
-.el-switch {
-  margin: 20px;
-}
-.el-textarea__inner {
-  position: relative;
-  background-color: #fff;
-  border-radius: 4px;
-  border: 1px solid #eee;
-  line-height: 1.5;
-  font-size: 14px;
-  -webkit-transition: all 0.2s linear;
-  transition: all 0.2s linear;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-appearance: none;
-  font-family: inherit;
-  vertical-align: top;
-  outline: none;
-  width: 750px;
-  height: 120px;
-}
-.el-footer {
-  margin-top: 20px;
-}
-</style>
