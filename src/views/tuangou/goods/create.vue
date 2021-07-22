@@ -109,9 +109,7 @@
             >
           </div>
           <div class="ml-24">
-            <el-button @click="$router.push({ name: 'TuangouGoods' })"
-              >取消</el-button
-            >
+            <el-button @click="$router.back()">取消</el-button>
           </div>
         </div>
       </div>
@@ -291,7 +289,7 @@ export default {
       this.$api.TuanGou.Store(this.course)
         .then(() => {
           this.$message.success(this.$t("common.success"));
-          this.$router.push({ name: "TuangouGoods" });
+          this.$router.back();
         })
         .catch((e) => {
           this.loading = false;

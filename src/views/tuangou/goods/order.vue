@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="团购商品订单"></back-bar>
+    <!-- <back-bar class="mb-30" title="团购商品订单"></back-bar> -->
     <div class="float-left mb-30">
       <div class="float-left d-flex">
         <div class="d-flex">
@@ -66,7 +66,17 @@
               <span style="color: red" v-else>已删除</span>
             </template>
           </el-table-column>
-          <el-table-column prop="user.nick_name" label="用户" width="150">
+          <el-table-column label="用户" :width="300">
+            <template slot-scope="scope">
+              <div class="d-flex" v-if="scope.row.user">
+                <div>
+                  <img :src="scope.row.user.avatar" width="40" height="40" />
+                </div>
+                <div class="ml-10">
+                  {{ scope.row.user.nick_name }}
+                </div>
+              </div>
+            </template>
           </el-table-column>
           <el-table-column label="支付" width="120">
             <template slot-scope="scope">
@@ -81,7 +91,7 @@
               <span v-else>已支付</span>
             </template>
           </el-table-column>
-          <el-table-column prop="user.created_at" label="时间" width="150">
+          <el-table-column prop="user.created_at" label="时间" width="160">
           </el-table-column>
         </el-table>
       </div>
@@ -97,16 +107,6 @@
           :total="total"
         >
         </el-pagination>
-      </div>
-
-      <div class="bottom-menus">
-        <div class="bottom-menus-box">
-          <div>
-            <el-button @click="$router.push({ name: 'TuangouGoods' })"
-              >取消</el-button
-            >
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -192,32 +192,3 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
-.filter-box {
-  width: 100%;
-  height: auto;
-  float: left;
-  box-sizing: border-box;
-  padding: 30px;
-  border-radius: 15px;
-  margin-bottom: 15px;
-  background-color: white;
-
-  .filter-label {
-    font-size: 14px;
-    color: rgba(0, 0, 0, 0.7);
-  }
-}
-.user-item {
-  width: auto;
-  display: flex;
-  align-items: center;
-  .avatar {
-    margin-right: 10px;
-  }
-  .nickname {
-    font-size: 15px;
-    font-weight: normal;
-  }
-}
-</style>

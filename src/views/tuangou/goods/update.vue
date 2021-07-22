@@ -114,9 +114,7 @@
             >
           </div>
           <div class="ml-24">
-            <el-button @click="$router.push({ name: 'TuangouGoods' })"
-              >取消</el-button
-            >
+            <el-button @click="$router.back()">取消</el-button>
           </div>
         </div>
       </div>
@@ -297,7 +295,7 @@ export default {
         this.course.page_title = data.page_title;
         this.course.started_at = data.started_at;
         this.course.goods_charge = data.original_charge;
-        this.course.original_charge=data.original_charge;
+        this.course.original_charge = data.original_charge;
       });
     },
     selgoods() {
@@ -318,7 +316,7 @@ export default {
       this.$api.TuanGou.Update(this.course.id, this.course)
         .then(() => {
           this.$message.success(this.$t("common.success"));
-          this.$router.push({ name: "TuangouGoods" });
+          this.$router.back();
         })
         .catch((e) => {
           this.loading = false;
