@@ -1081,6 +1081,46 @@ const routes = [{
           title: 'title.topic.order'
         }
       },
+      {
+        path: '/exam/paper/index',
+        component: () => import('@/views/exam/paper/index'),
+        name: 'ExamPaper',
+        meta: {
+          title: 'title.exam.paper.index'
+        }
+      },
+      {
+        path: '/exam/paper/create',
+        component: () => import('@/views/exam/paper/create'),
+        name: 'ExamPaperCreate',
+        meta: {
+          title: 'title.exam.paper.create'
+        }
+      },
+      {
+        path: '/exam/paper/update',
+        component: () => import('@/views/exam/paper/update'),
+        name: 'ExamPaperUpdate',
+        meta: {
+          title: 'title.exam.paper.update'
+        }
+      },
+      {
+        path: '/exam/paper/userpaper',
+        component: () => import('@/views/exam/paper/userpaper'),
+        name: 'ExamPaperUserpaper',
+        meta: {
+          title: 'title.exam.paper.userpaper'
+        }
+      },
+      {
+        path: '/exam/paper/stat',
+        component: () => import('@/views/exam/paper/statistics'),
+        name: 'ExamPaperStat',
+        meta: {
+          title: 'title.exam.paper.stat'
+        }
+      },
     ]
   },
   {

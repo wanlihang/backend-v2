@@ -106,6 +106,15 @@ export default [{
         ]
     },
     {
+        name: 'title.exam.name',
+        key: 'Exam',
+        icon: 'icon-icon-operate',
+        children: [{
+            name: 'title.exam.paper.index',
+            key: 'ExamPaper',
+        }]
+    },
+    {
         name: 'title.decoration',
         key: 'Decoration',
         icon: 'icon-icon-decorate',

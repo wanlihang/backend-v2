@@ -1107,7 +1107,7 @@ const Api = {
             Store(params) {
                 return post(`/backend/addons/Paper/paper/create`, params);
             },
-            Edit(id) {
+            Detail(id) {
                 return get(`/backend/addons/Paper/paper/${id}`);
             },
             Update(id, params) {
@@ -1115,6 +1115,12 @@ const Api = {
             },
             Destroy(id) {
                 return destroy(`/backend/addons/Paper/paper/${id}`);
+            },
+            Userpaper(id,params) {
+                return get(`/backend/addons/Paper/paper/${id}/userPaper`, params);
+            },
+            Stat(id,params) {
+                return get(`/backend/addons/Paper/paper/${id}/statistics`, params);
             },
         },
         Practice: {

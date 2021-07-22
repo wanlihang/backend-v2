@@ -149,7 +149,7 @@ export default {
       this.$api.Member.Store(this.user)
         .then(() => {
           this.$message.success(this.$t("common.success"));
-          this.$router.push({ name: "MemberIndex" });
+          this.$router.back();
         })
         .catch((e) => {
           this.loading = false;

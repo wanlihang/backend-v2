@@ -238,6 +238,17 @@ const zh = {
                 }
             }
         },
+        exam: {
+            name: '考试',
+            paper: {
+                name: '试卷',
+                index: '试卷',
+                create: '创建试卷',
+                update: '编辑试卷',
+                userpaper: '考试记录',
+                stat: '分数统计',
+            },
+        },
         coursename: '课程',
         finance: '财务'
     },
