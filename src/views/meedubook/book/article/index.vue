@@ -49,11 +49,22 @@
           >
             <el-table-column prop="id" label="ID" sortable width="120">
             </el-table-column>
-            <el-table-column prop="chapter.name" label="章节" width="240">
+
+            <el-table-column label="标题" width="500">
+              <template slot-scope="scope">
+                <template v-if="scope.row.chapter">
+                  <span>{{ scope.row.chapter.name }}</span>
+                  <span class="mx-5"></span>
+                </template>
+                <span>{{ scope.row.title }}</span>
+              </template>
             </el-table-column>
-            <el-table-column prop="title" label="标题" width="500">
-            </el-table-column>
-            <el-table-column label="浏览" sortable property="view_times" width="150">
+            <el-table-column
+              label="浏览"
+              sortable
+              property="view_times"
+              width="150"
+            >
               <template slot-scope="scope">
                 <span>{{ scope.row.view_times }}次</span>
               </template>

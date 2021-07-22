@@ -80,8 +80,8 @@
             <upload-image
               v-model="course.thumb"
               helper="长宽比3:4，建议尺寸：300x400像素"
-              width="300"
-              height="400"
+              width="90"
+              height="120"
               name="上传封面"
             ></upload-image>
           </el-form-item>

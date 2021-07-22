@@ -547,7 +547,6 @@ const Api = {
                 }
             }
         },
-
         Topic: {
             Topic: {
                 List(params) {
@@ -728,6 +727,17 @@ const Api = {
             },
             Update(id, params) {
                 return put(`/backend/addons/meedu_books/book/${id}`, params);
+            },
+            Users: {
+                List(id, params) {
+                    return get(`/backend/addons/meedu_books/book/${id}/users`, params);
+                },
+                Add(id, params) {
+                    return post(`/backend/addons/meedu_books/book/${id}/user/add`, params);
+                },
+                Del(id, params) {
+                    return post(`/backend/addons/meedu_books/book/${id}/user/del`, params);
+                },
             },
             Categories: {
                 List() {
