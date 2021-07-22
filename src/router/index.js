@@ -1105,6 +1105,14 @@ const routes = [{
           title: 'title.exam.paper.update'
         }
       },
+      {
+        path: '/exam/paper/userpaper',
+        component: () => import('@/views/exam/paper/userpaper'),
+        name: 'ExamPaperUserpaper',
+        meta: {
+          title: 'title.exam.paper.userpaper'
+        }
+      },
     ]
   },
   {

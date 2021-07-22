@@ -1116,6 +1116,9 @@ const Api = {
             Destroy(id) {
                 return destroy(`/backend/addons/Paper/paper/${id}`);
             },
+            Userpaper(id,params) {
+                return get(`/backend/addons/Paper/paper/${id}/userPaper`, params);
+            },
         },
         Practice: {
             List(params) {
