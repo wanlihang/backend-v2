@@ -62,7 +62,7 @@ const zh = {
                 update: '编辑团购课程',
                 order: '团购订单',
                 refund: '团购退款订单',
-                
+                tuanorder:'团列表',
             },
         },
         learningpath: {
