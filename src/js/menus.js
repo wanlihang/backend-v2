@@ -108,7 +108,7 @@ export default [{
     {
         name: 'title.exam.name',
         key: 'Exam',
-        icon: 'icon-icon-operate',
+        icon: 'icon-icon-exam-n',
         children: [{
             name: 'title.exam.paper.index',
             key: 'ExamPaper',
