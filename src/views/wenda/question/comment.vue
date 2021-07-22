@@ -7,7 +7,17 @@
           <el-table-column prop="id" label="ID" width="80"> </el-table-column>
           <el-table-column prop="user_id" label="用户ID" width="80">
           </el-table-column>
-          <el-table-column prop="user.nick_name" label="用户" width="120">
+          <el-table-column label="用户" :width="300">
+            <template slot-scope="scope">
+              <div class="d-flex" v-if="scope.row.user">
+                <div>
+                  <img :src="scope.row.user.avatar" width="40" height="40" />
+                </div>
+                <div class="ml-10">
+                  {{ scope.row.user.nick_name }}
+                </div>
+              </div>
+            </template>
           </el-table-column>
           <el-table-column label="内容"
             ><template slot-scope="scope">
@@ -25,17 +35,6 @@
             </template>
           </el-table-column>
         </el-table>
-      </div>
-    </div>
-
-    <div class="bottom-menus">
-      <div class="bottom-menus-box">
-        <div>
-          <el-button @click="$router.push({  name: 'QuestionAnswer',
-                    query: { id: box.id },})"
-            >取消</el-button
-          >
-        </div>
       </div>
     </div>
   </div>
@@ -88,7 +87,7 @@ export default {
             })
             .catch((e) => {
               this.loading = false;
-              this.$message(e.message);
+              this.$message.error(e.message);
             });
         })
         .catch(() => {
@@ -98,34 +97,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less" scoped>
-.user-item {
-  width: auto;
-  display: flex;
-  align-items: center;
-  .avatar {
-    margin-right: 10px;
-  }
-  .nickname {
-    font-size: 15px;
-    font-weight: normal;
-  }
-}
-
-.filter-box {
-  width: 100%;
-  height: auto;
-  float: left;
-  box-sizing: border-box;
-  padding: 30px;
-  border-radius: 15px;
-  margin-bottom: 15px;
-  background-color: white;
-
-  .filter-label {
-    font-size: 14px;
-    color: rgba(0, 0, 0, 0.7);
-  }
-}
-</style>

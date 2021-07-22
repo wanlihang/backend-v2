@@ -1,11 +1,14 @@
 <template>
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="编辑分类"></back-bar>
-  <div class="float-left">
-
+    <div class="float-left">
       <el-form ref="form" :model="user" :rules="rules" label-width="200px">
         <el-form-item label="排序" prop="sort">
-          <el-input type="number" v-model="user.sort" class="w-200px"></el-input>
+          <el-input
+            type="number"
+            v-model="user.sort"
+            class="w-200px"
+          ></el-input>
         </el-form-item>
         <el-form-item label="分类名" prop="name">
           <el-input v-model="user.name" class="w-200px"></el-input>
@@ -15,17 +18,14 @@
 
     <div class="bottom-menus">
       <div class="bottom-menus-box">
-         <div>
+        <div>
           <el-button @click="formValidate" :loading="loading" type="primary"
             >保存</el-button
           >
         </div>
         <div class="ml-24">
-          <el-button @click="$router.back()"
-            >取消</el-button
-          >
+          <el-button @click="$router.back()">取消</el-button>
         </div>
-       
       </div>
     </div>
   </div>
@@ -35,7 +35,7 @@ export default {
   data() {
     return {
       user: {
-        id:this.$route.query.id,
+        id: this.$route.query.id,
         sort: 0,
         name: null,
       },
@@ -54,7 +54,6 @@ export default {
             trigger: "blur",
           },
         ],
-        
       },
 
       loading: false,
@@ -83,8 +82,7 @@ export default {
         return;
       }
       this.loading = true;
-      this.$api.Wenda.Question.Cate
-        .Update(this.user.id,this.user)
+      this.$api.Wenda.Question.Cate.Update(this.user.id, this.user)
         .then(() => {
           this.$message.success(this.$t("common.success"));
           this.$router.back();
