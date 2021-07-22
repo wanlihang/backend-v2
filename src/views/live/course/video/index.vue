@@ -79,7 +79,7 @@
                 class="ml-5"
                 @click="
                   $router.push({
-                    name: 'LiveCourseVideoUpdate',
+                    name: 'LiveCourseVideoWatchusers',
                     query: {
                       id: scope.row.id,
                       course_id: pagination.course_id,

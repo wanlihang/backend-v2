@@ -483,6 +483,9 @@ const Api = {
                     Stop(params) {
                         return get(`/backend/addons/zhibo/zhibo/stop`, params);
                     },
+                    Watch(params) {
+                        return get(`/backend/addons/zhibo/course_video/watch/users`, params);
+                    },
                 },
             },
             Teacher: {

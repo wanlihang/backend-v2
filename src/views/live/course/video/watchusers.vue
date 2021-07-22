@@ -1,6 +1,9 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="直播课程订阅用户"></back-bar>
+    <back-bar class="mb-30" title="观看用户"></back-bar>
+    <div class="float-left mb-30">
+      <el-button @click="getResults()" type="primary"> 刷新数据 </el-button>
+    </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table :data="results" stripe class="float-left">
@@ -17,12 +20,7 @@
               <span class="c-red" v-else>用户不存在</span>
             </template>
           </el-table-column>
-          <el-table-column label="价格" width="200">
-            <template slot-scope="scope">
-              <span>￥{{ scope.row.charge }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column prop="created_at" label="订阅时间" width="200">
+          <el-table-column prop="duration" label="观看时长" width="200">
           </el-table-column>
         </el-table>
       </div>
@@ -47,7 +45,8 @@ export default {
   data() {
     return {
       pagination: {
-        id: this.$route.query.id,
+        video_id: this.$route.query.id,
+        course_id: this.$route.query.course_id,
         page: 1,
         size: 10,
       },
@@ -80,13 +79,11 @@ export default {
       this.loading = true;
       let params = {};
       Object.assign(params, this.pagination);
-      this.$api.Course.Live.Course.Users.List(this.pagination.id, params).then(
-        (res) => {
-          this.loading = false;
-          this.results = res.data.data.data;
-          this.total = res.data.data.total;
-        }
-      );
+      this.$api.Course.Live.Course.Video.Watch(params).then((res) => {
+        this.loading = false;
+        this.results = res.data.data.data;
+        this.total = res.data.data.total;
+      });
     },
   },
 };
