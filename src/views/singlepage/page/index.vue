@@ -115,8 +115,7 @@ export default {
             return;
           }
           this.loading = true;
-          this.$api.Singlepage.Page
-            .Destory(id)
+          this.$api.Singlepage.Page.Destory(id)
             .then(() => {
               this.loading = false;
               this.$message.success("删除成功");
@@ -124,7 +123,7 @@ export default {
             })
             .catch((e) => {
               this.loading = false;
-              this.$message(e.message);
+              this.$message.error(e.message);
             });
         })
         .catch(() => {
@@ -135,33 +134,3 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
-.user-item {
-  width: auto;
-  display: flex;
-  align-items: center;
-  .avatar {
-    margin-right: 10px;
-  }
-  .nickname {
-    font-size: 15px;
-    font-weight: normal;
-  }
-}
-
-.filter-box {
-  width: 100%;
-  height: auto;
-  float: left;
-  box-sizing: border-box;
-  padding: 30px;
-  border-radius: 15px;
-  margin-bottom: 15px;
-  background-color: white;
-
-  .filter-label {
-    font-size: 14px;
-    color: rgba(0, 0, 0, 0.7);
-  }
-}
-</style>

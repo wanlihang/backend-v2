@@ -50,14 +50,7 @@
           >
         </div>
         <div class="ml-24">
-          <el-button
-            @click="
-              $router.push({
-                name: 'MessageReply',
-              })
-            "
-            >取消</el-button
-          >
+          <el-button @click="$router.back()">取消</el-button>
         </div>
       </div>
     </div>
@@ -157,9 +150,7 @@ export default {
       this.$api.Wechat.Reply.Update(this.reply.id, this.reply)
         .then(() => {
           this.$message.success(this.$t("common.success"));
-          this.$router.push({
-            name: "MessageReply",
-          });
+          this.$router.back();
         })
         .catch((e) => {
           this.loading = false;

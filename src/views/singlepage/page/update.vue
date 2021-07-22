@@ -18,7 +18,11 @@
           <el-input v-model="user.seo_description" class="w-200px"></el-input>
         </el-form-item>
         <el-form-item label="内容" prop="content">
-          <wang-editor v-if="user.content" class="w-100" v-model="user.content"></wang-editor>
+          <wang-editor
+            v-if="user.content"
+            class="w-100"
+            v-model="user.content"
+          ></wang-editor>
         </el-form-item>
         <el-form-item prop="is_inherit" label="继承布局">
           <el-switch
@@ -39,9 +43,7 @@
           >
         </div>
         <div class="ml-24">
-          <el-button @click="$router.push({ name: 'SinglePage' })"
-            >取消</el-button
-          >
+          <el-button @click="$router.back()">取消</el-button>
         </div>
       </div>
     </div>
@@ -122,8 +124,8 @@ export default {
         this.user.content = data.content;
         this.user.seo_description = data.seo_description;
         this.user.seo_keywords = data.seo_keywords;
-        this.user.sign= data.sign;
-        this.user.title= data.title;
+        this.user.sign = data.sign;
+        this.user.title = data.title;
         this.user.url = data.url;
       });
     },
@@ -139,7 +141,7 @@ export default {
         return;
       }
       this.loading = true;
-      this.$api.Singlepage.Page.Update(this.user.id,this.user)
+      this.$api.Singlepage.Page.Update(this.user.id, this.user)
         .then(() => {
           this.$message.success(this.$t("common.success"));
           this.$router.back();

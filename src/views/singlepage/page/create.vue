@@ -18,10 +18,7 @@
           <el-input v-model="user.seo_description" class="w-200px"></el-input>
         </el-form-item>
         <el-form-item label="内容" prop="content">
-          <wang-editor
-              class="w-100"
-              v-model="user.content"
-            ></wang-editor>
+          <wang-editor class="w-100" v-model="user.content"></wang-editor>
         </el-form-item>
         <el-form-item prop="is_inherit" label="继承布局">
           <el-switch
@@ -42,9 +39,7 @@
           >
         </div>
         <div class="ml-24">
-          <el-button @click="$router.back()"
-            >取消</el-button
-          >
+          <el-button @click="$router.back()">取消</el-button>
         </div>
       </div>
     </div>
@@ -56,7 +51,6 @@ import WangEditor from "@/components/wangeditor";
 export default {
   components: {
     WangEditor,
- 
   },
   data() {
     return {
@@ -64,8 +58,8 @@ export default {
         sign: null,
         title: null,
         seo_keywords: null,
-        seo_description:null,
-        content:null,
+        seo_description: null,
+        content: null,
         is_inherit: 1,
       },
       rules: {
@@ -129,8 +123,7 @@ export default {
         return;
       }
       this.loading = true;
-      this.$api.Singlepage.Page
-        .Store(this.user)
+      this.$api.Singlepage.Page.Store(this.user)
         .then(() => {
           this.$message.success(this.$t("common.success"));
           this.$router.back();
