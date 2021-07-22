@@ -10,10 +10,14 @@
         label-width="200px"
       >
         <el-form-item label="统一前缀" prop="prefix">
-          <el-input v-model="course.prefix"></el-input>
+          <el-input class="w-200px" v-model="course.prefix"></el-input>
         </el-form-item>
         <el-form-item label="生成数量" prop="num">
-          <el-input type="number" v-model="course.num"></el-input>
+          <el-input
+            class="w-200px"
+            type="number"
+            v-model="course.num"
+          ></el-input>
         </el-form-item>
         <el-form-item label="到期时间" prop="expired_at">
           <el-date-picker
@@ -27,7 +31,11 @@
           </el-date-picker>
         </el-form-item>
         <el-form-item label="面值" prop="money">
-          <el-input type="number" v-model="course.money"></el-input>
+          <el-input
+            class="w-200px"
+            type="number"
+            v-model="course.money"
+          ></el-input>
         </el-form-item>
       </el-form>
       <div class="bottom-menus">

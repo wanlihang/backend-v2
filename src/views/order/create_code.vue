@@ -11,23 +11,27 @@
       >
         <el-form-item label="优惠码" prop="code">
           <el-input
+            class="w-200px"
             v-model="course.code"
             placeholder="请勿使用U或者u开头"
           ></el-input>
         </el-form-item>
         <el-form-item label="到期时间" prop="expired_at">
-          <el-date-picker
-            v-model="course.expired_at"
-            type="datetime"
-            format="yyyy-MM-dd HH:mm"
-            value-format="yyyy-MM-dd HH:mm"
-            placeholder="请选择日期"
-            :picker-options="expireTimeOption"
-          >
-          </el-date-picker>
+          <div>
+            <el-date-picker
+              v-model="course.expired_at"
+              type="datetime"
+              format="yyyy-MM-dd HH:mm"
+              value-format="yyyy-MM-dd HH:mm"
+              placeholder="请选择日期"
+              :picker-options="expireTimeOption"
+            >
+            </el-date-picker>
+          </div>
         </el-form-item>
         <el-form-item label="抵扣金额" prop="invited_user_reward">
           <el-input
+            class="w-200px"
             type="number"
             v-model="course.invited_user_reward"
             placeholder="要求：整数。单位：元"
@@ -35,6 +39,7 @@
         </el-form-item>
         <el-form-item label="可使用次数" prop="use_times">
           <el-input
+            class="w-200px"
             type="number"
             v-model="course.use_times"
             placeholder="0=不限制"
