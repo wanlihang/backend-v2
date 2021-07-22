@@ -17,9 +17,9 @@
           :default-sort="{ prop: 'id', order: 'descending' }"
         >
           <el-table-column prop="id" label="ID" width="120"> </el-table-column>
-          <el-table-column prop="name" label="姓名" width="120">
+          <el-table-column prop="name" label="姓名" width="200">
           </el-table-column>
-          <el-table-column prop="email" label="邮箱" width="230">
+          <el-table-column prop="email" label="登录邮箱" width="220">
           </el-table-column>
           <el-table-column sortable="" label="登录日志"
             ><template slot-scope="scope">
@@ -162,34 +162,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less" scoped>
-.user-item {
-  width: auto;
-  display: flex;
-  align-items: center;
-  .avatar {
-    margin-right: 10px;
-  }
-  .nickname {
-    font-size: 15px;
-    font-weight: normal;
-  }
-}
-
-.filter-box {
-  width: 100%;
-  height: auto;
-  float: left;
-  box-sizing: border-box;
-  padding: 30px;
-  border-radius: 15px;
-  margin-bottom: 15px;
-  background-color: white;
-
-  .filter-label {
-    font-size: 14px;
-    color: rgba(0, 0, 0, 0.7);
-  }
-}
-</style>

@@ -6,7 +6,7 @@
         <el-form-item label="角色">
           <div class="d-flex">
             <div>
-              <el-select multiple v-model="user.role_id">
+              <el-select multiple class="w-300px" v-model="user.role_id">
                 <el-option
                   v-for="(item, index) in roles"
                   :key="index"
@@ -27,15 +27,15 @@
           </div>
         </el-form-item>
         <el-form-item label="姓名" prop="name">
-          <el-input v-model="user.name" class="w-200px"></el-input>
+          <el-input v-model="user.name" class="w-300px"></el-input>
         </el-form-item>
 
         <el-form-item label="邮箱" prop="email">
-          <el-input v-model="user.email" class="w-200px"></el-input>
+          <el-input v-model="user.email" class="w-300px"></el-input>
         </el-form-item>
 
         <el-form-item label="密码" prop="password">
-          <el-input v-model="user.password" class="w-200px"></el-input>
+          <el-input v-model="user.password" class="w-300px"></el-input>
         </el-form-item>
 
         <el-form-item prop="is_ban_login" label="禁止登录">
@@ -57,7 +57,7 @@
           >
         </div>
         <div class="ml-24">
-          <el-button @click="$router.push({ name: 'SystemAdministrator' })"
+          <el-button @click="$router.back()"
             >取消</el-button
           >
         </div>
@@ -130,7 +130,7 @@ export default {
         .Store(this.user)
         .then(() => {
           this.$message.success(this.$t("common.success"));
-          this.$router.push({ name: "SystemAdministrator" });
+          this.$router.back();
         })
         .catch((e) => {
           this.loading = false;

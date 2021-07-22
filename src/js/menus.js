@@ -129,16 +129,16 @@ export default [
         key: 'System',
         children: [
             {
+                name: 'title.system-administrator',
+                key: 'SystemAdministrator',
+            },
+            {
                 name: 'title.system-config',
                 key: 'SystemConfig',
             },
             {
                 name: 'title.system-application',
                 key: 'SystemApplication',
-            },
-            {
-                name: 'title.system-administrator',
-                key: 'SystemAdministrator',
             }
         ]
     },
