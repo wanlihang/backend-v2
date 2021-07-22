@@ -20,7 +20,10 @@
               <span class="c-red" v-else>用户不存在</span>
             </template>
           </el-table-column>
-          <el-table-column prop="duration" label="观看时长" width="200">
+          <el-table-column label="观看时长" width="200">
+            <template slot-scope="scope">
+              <span>{{ getHMS(scope.row.duration) }}</span>
+            </template>
           </el-table-column>
         </el-table>
       </div>
@@ -71,6 +74,21 @@ export default {
     paginationPageChange(page) {
       this.pagination.page = page;
       this.getResults();
+    },
+    getHMS(time) {
+      const hour =
+        parseInt(time / 3600) < 10
+          ? "0" + parseInt(time / 3600)
+          : parseInt(time / 3600);
+      const min =
+        parseInt((time % 3600) / 60) < 10
+          ? "0" + parseInt((time % 3600) / 60)
+          : parseInt((time % 3600) / 60);
+      const sec =
+        parseInt((time % 3600) % 60) < 10
+          ? "0" + parseInt((time % 3600) % 60)
+          : parseInt((time % 3600) % 60);
+      return hour + ":" + min + ":" + sec;
     },
     getResults() {
       if (this.loading) {
