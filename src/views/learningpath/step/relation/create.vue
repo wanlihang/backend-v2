@@ -59,10 +59,7 @@
             >
           </div>
           <div class="ml-24">
-            <el-button @click="$router.push({ name: 'Steprelation' ,
-             query: {
-              id: course.step_id,
-            },})"
+            <el-button @click="$router.back()"
               >取消</el-button
             >
           </div>
@@ -180,12 +177,7 @@ export default {
       this.$api.Course.LearnPath.Step.Relation.Store(this.course)
         .then(() => {
           this.$message.success(this.$t("common.success"));
-          this.$router.push({
-            name: "Steprelation",
-            query: {
-              id: this.course.step_id,
-            },
-          });
+          this.$router.back();
         })
         .catch((e) => {
           this.loading = false;
