@@ -11,7 +11,7 @@
           <el-input
             class="w-200px"
             v-model="filter.user_id"
-            placeholder="UID"
+            placeholder="用户ID"
           ></el-input>
         </div>
 
@@ -103,7 +103,7 @@ export default {
     },
     paginationReset() {
       this.pagination.page = 1;
-      this.filter.user_id = 0;
+      this.filter.user_id = null;
       this.getResults();
     },
     paginationSizeChange(size) {

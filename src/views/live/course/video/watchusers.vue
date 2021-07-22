@@ -22,7 +22,7 @@
           </el-table-column>
           <el-table-column label="观看时长" width="200">
             <template slot-scope="scope">
-              <span>{{ getHMS(scope.row.duration) }}</span>
+              <duration-text :duration="scope.row.duration"></duration-text>
             </template>
           </el-table-column>
         </el-table>
@@ -44,7 +44,12 @@
 </template>
 
 <script>
+import DurationText from "@/components/duration-text";
+
 export default {
+  components: {
+    DurationText,
+  },
   data() {
     return {
       pagination: {
@@ -74,21 +79,6 @@ export default {
     paginationPageChange(page) {
       this.pagination.page = page;
       this.getResults();
-    },
-    getHMS(time) {
-      const hour =
-        parseInt(time / 3600) < 10
-          ? "0" + parseInt(time / 3600)
-          : parseInt(time / 3600);
-      const min =
-        parseInt((time % 3600) / 60) < 10
-          ? "0" + parseInt((time % 3600) / 60)
-          : parseInt((time % 3600) / 60);
-      const sec =
-        parseInt((time % 3600) % 60) < 10
-          ? "0" + parseInt((time % 3600) % 60)
-          : parseInt((time % 3600) % 60);
-      return hour + ":" + min + ":" + sec;
     },
     getResults() {
       if (this.loading) {
