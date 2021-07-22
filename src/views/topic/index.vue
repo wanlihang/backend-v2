@@ -2,7 +2,7 @@
   <div class="meedu-main-body">
     <div class="float-left mb-30">
       <el-button @click="$router.push({ name: 'TopicCreate' })" type="primary">
-        添加文章
+        添加
       </el-button>
     </div>
     <div class="float-left">
