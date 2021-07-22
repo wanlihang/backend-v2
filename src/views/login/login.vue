@@ -1,34 +1,12 @@
 <template>
   <div>
-    <!-- 切换语言 -->
-    <el-dropdown
-      class="languagebox"
-      size="small"
-      placement="bottom"
-      trigger="click"
-      @command="batchOperate"
-    >
-      <el-button class="search-btn">
-        <img src="../../assets/login/yuyan@2x.png" />
-        <span>{{ $t("login.langtext") }}</span>
-      </el-button>
-      <el-dropdown-menu
-        slot="dropdown"
-        class="sellanguage"
-        style="margin-right: 30px"
-      >
-        <el-dropdown-item command="changezh">简体中文</el-dropdown-item>
-        <el-dropdown-item command="changeen">English</el-dropdown-item>
-      </el-dropdown-menu>
-    </el-dropdown>
-    <!-- 一个提交按钮对应一个el-form    model表单数据对象  rules表单验证规则 -->
     <div class="login-container">
       <div class="left_content"></div>
       <div class="right_content">
         <el-form
-          :model="ruleForm2"
-          :rules="rules2"
-          ref="ruleForm2"
+          :model="form"
+          :rules="rules"
+          ref="form"
           label-position="left"
           label-width="0px"
           class="demo-ruleForm login-page"
@@ -37,7 +15,7 @@
           <el-form-item prop="username">
             <el-input
               type="text"
-              v-model="ruleForm2.username"
+              v-model="form.username"
               auto-complete="off"
               :placeholder="$t('login.tipmes1')"
             ></el-input>
@@ -45,17 +23,16 @@
           <el-form-item prop="password">
             <el-input
               type="password"
-              v-model="ruleForm2.password"
+              v-model="form.password"
               auto-complete="off"
               :placeholder="$t('login.tipmes2')"
             ></el-input>
           </el-form-item>
-          <!-- <el-checkbox v-model="checked" class="rememberme">记住密码</el-checkbox> -->
           <el-form-item style="width: 100%">
             <el-button
               type="primary"
               style="width: 100%"
-              @click="handleSubmit"
+              @click="formValidate"
               :loading="logining"
               >{{ $t("login.login") }}</el-button
             >
@@ -66,7 +43,6 @@
   </div>
 </template>
 <script>
-import Utils from "@/js/utils";
 import { mapMutations } from "vuex";
 
 export default {
@@ -74,17 +50,12 @@ export default {
   data() {
     return {
       logining: false,
-      ruleForm2: {
+      form: {
         username: "",
         password: "",
       },
       checked: true,
-      lang: localStorage.getItem("LANGUAGE") || "zh",
-    };
-  },
-  computed: {
-    rules2() {
-      const rules2 = {
+      rules: {
         username: [
           {
             required: true,
@@ -99,26 +70,31 @@ export default {
             trigger: "blur",
           },
         ],
-      };
-      // 清空表单验证信息
-      return rules2;
-    },
+      },
+    };
   },
   methods: {
     ...mapMutations(["loginHandle"]),
+    formValidate() {
+      this.$refs["form"].validate((valid) => {
+        if (valid) {
+          this.handleSubmit();
+        }
+      });
+    },
     handleSubmit() {
       if (this.loading) {
         return;
       }
       this.loading = true;
-      this.$api.Auth.Login(this.ruleForm2)
+      this.$api.Auth.Login(this.form)
         .then((resp) => {
           let token = resp.data.token;
-          Utils.saveToken(token);
+
+          this.$utils.saveToken(token);
 
           this.$api.Administrator.Detail().then((res) => {
             this.loginHandle(res.data);
-
             this.$router.push({ name: "Dashboard" });
           });
         })
@@ -126,41 +102,6 @@ export default {
           this.loading = false;
           this.$message.error(e.message);
         });
-    },
-    batchOperate(command) {
-      switch (command) {
-        case "changezh":
-          this.changezh();
-          break;
-        case "changeen":
-          this.changeen();
-          break;
-      }
-    },
-    changezh() {
-      this.lang = "zh";
-      this.$i18n.locale = this.lang;
-      localStorage.setItem("LANGUAGE", this.lang);
-      var temp = this.rules2;
-      this.rules2 = temp;
-    },
-    changeen() {
-      this.lang = "en";
-      this.$i18n.locale = this.lang;
-      localStorage.setItem("LANGUAGE", this.lang);
-      var temp = this.rules2;
-      this.rules2 = temp;
-    },
-    changeLanguage() {
-      if (this.lang === "zh") {
-        this.lang = "en";
-        this.$i18n.locale = this.lang;
-        localStorage.setItem("LANGUAGE", this.lang);
-      } else {
-        this.lang = "zh";
-        this.$i18n.locale = this.lang;
-        localStorage.setItem("LANGUAGE", this.lang);
-      }
     },
   },
 };
@@ -170,13 +111,13 @@ export default {
 #app {
   position: relative;
 }
+
 .login-container {
   width: 1000px;
   height: 600px;
   background: #ffffff;
   box-shadow: 20px 20px 100px 0px rgba(85, 102, 119, 0.1);
   border-radius: 4px;
-  -webkit-border-radius: 4px;
   display: flex;
   flex-direction: row;
   position: absolute;
@@ -187,6 +128,7 @@ export default {
   margin: auto;
   overflow: hidden;
 }
+
 .left_content {
   width: 471px;
   height: 100%;
@@ -194,6 +136,7 @@ export default {
   background-size: 100% 100%;
   box-sizing: border-box;
 }
+
 .right_content {
   width: 529px;
   height: 100%;
@@ -243,55 +186,5 @@ label.el-checkbox.rememberme {
 }
 .el-form-item {
   margin-bottom: 50px !important;
-}
-.languagebox {
-  float: right;
-  width: 140px;
-  height: 26px;
-  display: flex;
-  flex-direction: row;
-  box-sizing: border-box;
-  justify-content: flex-end;
-  align-items: center;
-  cursor: pointer;
-  margin-top: 30px;
-  padding-right: 30px;
-  .el-button {
-    width: 140px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    border: none;
-  }
-  img {
-    width: 26px;
-    height: 26px;
-    margin-right: 10px;
-  }
-  span {
-    font-size: 16px;
-    font-family: PingFangSC-Regular, PingFang SC;
-    font-weight: 400;
-    color: #666666;
-    vertical-align: super;
-  }
-}
-.el-dropdown-menu {
-  width: 166px;
-  background: #ffffff;
-  box-shadow: 0px 4px 10px 0px rgba(102, 102, 102, 0.2);
-  border-radius: 8px;
-  border: none;
-  box-sizing: border-box;
-  margin-top: 20px;
-  padding: 20px 0px;
-  .el-dropdown-menu__item {
-    text-align: center;
-    font-size: 16px;
-    font-family: PingFangSC-Regular, PingFang SC;
-    font-weight: 400;
-    color: #666666;
-    line-height: 36px;
-  }
 }
 </style>
