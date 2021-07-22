@@ -150,8 +150,12 @@ export default {
         this.loading = false;
         this.list = res.data.data.data;
         this.total = res.data.data.total;
-        
-        this.filterData.categories = res.data.statusMap;
+        var item={
+          text:'全部',
+          id:-1
+        }
+        this.filterData.categories.push(item)
+        this.filterData.categories.push(res.data.statusMap);
       });
     },
     destory(item) {
