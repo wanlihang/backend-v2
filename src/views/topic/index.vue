@@ -202,6 +202,11 @@ export default {
       this.pagination.page = page;
       this.getData();
     },
+    sortChange(column) {
+      this.pagination.sort = column.prop;
+      this.pagination.order = column.order === "ascending" ? "asc" : "desc";
+      this.getData();
+    },
     getData() {
       if (this.loading) {
         return;

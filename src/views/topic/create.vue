@@ -1,13 +1,33 @@
 <template>
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="创建话题文章"></back-bar>
+
+    <div class="center-tabs mb-30">
+      <div>
+        <el-tabs v-model="tab.active">
+          <el-tab-pane
+            :label="item.name"
+            :name="item.key"
+            v-for="(item, index) in tab.list"
+            :key="index"
+          ></el-tab-pane>
+        </el-tabs>
+      </div>
+    </div>
+
     <div class="float-left">
-      <div class="form-box broder-top-left-radius">
-        <el-form ref="form" :model="course" :rules="rules" label-width="200px">
+      <el-form
+        ref="form"
+        class="float-left"
+        :model="topic"
+        :rules="rules"
+        label-width="200px"
+      >
+        <div class="float-left" v-show="tab.active === 'base'">
           <el-form-item prop="cid" label="分类">
             <div class="d-flex">
               <div>
-                <el-select v-model="course.cid">
+                <el-select v-model="topic.cid">
                   <el-option
                     v-for="(item, index) in chapters"
                     :key="index"
@@ -30,84 +50,148 @@
               </div>
             </div>
           </el-form-item>
+
           <el-form-item label="标题" prop="title">
             <el-input
-              v-model="course.title"
-              class="w-100"
+              v-model="topic.title"
+              class="w-600px"
               placeholder="请输入标题"
             ></el-input>
           </el-form-item>
           <el-form-item prop="thumb" label="封面">
             <upload-image
-              v-model="course.thumb"
-              width="400"
-              name="上传封面"
+              v-model="topic.thumb"
+              width="200"
+              height="150"
+              helper="建议尺寸400x300 宽高比4:3"
             ></upload-image>
           </el-form-item>
-          <el-form-item label="显示" prop="is_show">
-            <el-switch
-              v-model="course.is_show"
-              :active-value="true"
-              :inactive-value="false"
-            >
-            </el-switch>
-          </el-form-item>
+
           <el-form-item label="价格">
-            <el-input
-              type="number"
-              placeholder="单位：元"
-              v-model="course.charge"
-              class="w-200px"
-            ></el-input>
-          </el-form-item>
-          <el-form-item label="会员免费" v-if="course.charge > 0">
-            <el-switch
-              v-model="course.is_vip_free"
-              :active-value="true"
-              :inactive-value="false"
-            >
-            </el-switch>
+            <div class="d-flex">
+              <div>
+                <el-input
+                  type="number"
+                  placeholder="价格"
+                  v-model="topic.charge"
+                  class="w-200px"
+                ></el-input>
+              </div>
+              <div class="ml-10">
+                <helper-text
+                  text="最小单位：元。不支持小数。价格为0意味着文章免费可直接观看。"
+                ></helper-text>
+              </div>
+            </div>
           </el-form-item>
 
-          <el-form-item label="排序时间" prop="sorted_at">
-            <el-date-picker
-              v-model="course.sorted_at"
-              type="datetime"
-              format="yyyy-MM-dd HH:mm"
-              value-format="yyyy-MM-dd HH:mm"
-              placeholder="请选择日期"
-              :picker-options="expireTimeOption"
-            >
-            </el-date-picker>
+          <el-form-item label="VIP免费" v-if="topic.charge > 0">
+            <div class="d-flex">
+              <div>
+                <el-switch
+                  v-model="topic.is_vip_free"
+                  :active-value="true"
+                  :inactive-value="false"
+                >
+                </el-switch>
+              </div>
+              <div class="ml-10">
+                <helper-text
+                  text="开启VIP免费的话，购买VIP会员的用户可无需购买直接观看文章。"
+                ></helper-text>
+              </div>
+            </div>
           </el-form-item>
-          <el-form-item prop="free_content_render" label="免费内容">
+
+          <el-form-item
+            prop="free_content"
+            label="免费内容"
+            v-if="topic.charge > 0"
+          >
+            <div class="d-flex">
+              <div>
+                <mavon-editor
+                  class="w-600px"
+                  :content="topic.free_content"
+                  @change="getfreecontent"
+                ></mavon-editor>
+              </div>
+              <div class="ml-10">
+                <helper-text
+                  text="文章收费下未购买用户可以看到的内容。"
+                ></helper-text>
+              </div>
+            </div>
+          </el-form-item>
+
+          <el-form-item prop="original_content" label="文章内容">
             <mavon-editor
-              class="w-100"
-              v-on:change="getfreecontent"
+              :content="topic.original_content"
+              class="w-600px"
+              @change="getcontent"
             ></mavon-editor>
           </el-form-item>
-          <el-form-item prop="render_content" label="文章内容">
-            <mavon-editor class="w-100" v-on:change="getcontent"></mavon-editor>
+        </div>
+
+        <div class="float-left" v-show="tab.active === 'dev'">
+          <el-form-item label="显示" prop="is_show">
+            <div class="d-flex">
+              <div>
+                <el-switch
+                  v-model="topic.is_show"
+                  :active-value="1"
+                  :inactive-value="0"
+                >
+                </el-switch>
+              </div>
+              <div class="ml-10">
+                <helper-text text="控制文章是否可以被用户看到。"></helper-text>
+              </div>
+            </div>
+          </el-form-item>
+
+          <el-form-item label="排序" prop="sorted_at">
+            <div class="d-flex">
+              <div>
+                <el-date-picker
+                  v-model="topic.sorted_at"
+                  type="datetime"
+                  format="yyyy-MM-dd HH:mm"
+                  value-format="yyyy-MM-dd HH:mm"
+                  placeholder="请选择日期"
+                >
+                </el-date-picker>
+              </div>
+              <div class="ml-10">
+                <helper-text
+                  text="控制文章在用户端的显示顺序，时间越早越靠后"
+                ></helper-text>
+              </div>
+            </div>
           </el-form-item>
 
           <el-form-item label="SEO关键字">
             <el-input
-              class="w-100"
+              class="w-400px"
+              rows="3"
               type="textarea"
-              v-model="course.seo_keywords"
+              v-model="topic.seo_keywords"
               placeholder="SEO关键字"
             ></el-input>
           </el-form-item>
+
           <el-form-item label="SEO描述">
             <el-input
-              class="w-100"
+              class="w-400px"
+              rows="3"
               type="textarea"
-              v-model="course.seo_description"
+              v-model="topic.seo_description"
               placeholder="SEO描述"
             ></el-input>
           </el-form-item>
-        </el-form>
-      </div>
+        </div>
+      </el-form>
+
       <div class="bottom-menus">
         <div class="bottom-menus-box">
           <div>
@@ -134,15 +218,15 @@ export default {
   },
   data() {
     return {
-      course: {
+      topic: {
         cid: null,
         free_content: null,
         thumb: null,
         free_content_render: null,
         is_need_login: 0,
-        is_show: false,
-        is_vip_free: false,
-        charge: null,
+        is_show: 1,
+        is_vip_free: 0,
+        charge: 0,
         title: null,
         seo_description: null,
         seo_keywords: null,
@@ -165,14 +249,6 @@ export default {
             trigger: "blur",
           },
         ],
-
-        is_show: [
-          {
-            required: true,
-            message: "请选择显示",
-            trigger: "blur",
-          },
-        ],
         title: [
           {
             required: true,
@@ -180,7 +256,6 @@ export default {
             trigger: "blur",
           },
         ],
-
         render_content: [
           {
             required: true,
@@ -189,15 +264,21 @@ export default {
           },
         ],
       },
-      expireTimeOption: {
-        disabledDate(date) {
-          // 当天可选：date.getTime() < Date.now() - 24 * 60 * 60 * 1000
-          //超过此刻可选
-          return date.getTime() < Date.now();
-        },
-      },
       chapters: [],
       loading: false,
+      tab: {
+        active: "base",
+        list: [
+          {
+            name: "基础信息",
+            key: "base",
+          },
+          {
+            name: "可选信息",
+            key: "dev",
+          },
+        ],
+      },
     };
   },
   mounted() {
@@ -205,12 +286,12 @@ export default {
   },
   methods: {
     getcontent: function (pureContent, renderContent) {
-      this.course.original_content = pureContent;
-      this.course.render_content = renderContent;
+      this.topic.original_content = pureContent;
+      this.topic.render_content = renderContent;
     },
     getfreecontent: function (pureContent, renderContent) {
-      this.course.free_content = pureContent;
-      this.course.free_content_render = renderContent;
+      this.topic.free_content = pureContent;
+      this.topic.free_content_render = renderContent;
     },
     params() {
       this.$api.Course.Topic.Topic.Create().then((res) => {
@@ -229,7 +310,7 @@ export default {
         return;
       }
       this.loading = true;
-      this.$api.Course.Topic.Topic.Store(this.course)
+      this.$api.Course.Topic.Topic.Store(this.topic)
         .then(() => {
           this.$message.success(this.$t("common.success"));
           this.$router.back();

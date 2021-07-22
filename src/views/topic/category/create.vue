@@ -8,11 +8,20 @@
         </el-form-item>
 
         <el-form-item label="升序" prop="sort">
-          <el-input
-            type="number"
-            v-model="user.sort"
-            class="w-200px"
-          ></el-input>
+          <div class="d-flex">
+            <div>
+              <el-input
+                type="number"
+                v-model="user.sort"
+                class="w-200px"
+              ></el-input>
+            </div>
+            <div class="ml-10">
+              <helper-text
+                text="请输入整数。小数排在前，大数排在后。"
+              ></helper-text>
+            </div>
+          </div>
         </el-form-item>
       </el-form>
     </div>
@@ -36,7 +45,7 @@ export default {
   data() {
     return {
       user: {
-        sort: 0,
+        sort: null,
         name: null,
       },
       rules: {

@@ -14,7 +14,6 @@
           <el-table-column prop="id" label="ID" width="150"> </el-table-column>
           <el-table-column prop="sort" label="升序" width="150">
           </el-table-column>
-
           <el-table-column label="分类名"
             ><template slot-scope="scope">
               <span>{{ scope.row.name }} </span>
@@ -43,7 +42,6 @@
         </el-table>
       </div>
     </div>
-
   </div>
 </template>
 <script>
@@ -100,7 +98,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less" scoped>
-
-</style>
