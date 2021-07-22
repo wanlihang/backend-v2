@@ -419,6 +419,7 @@ const Api = {
                 CommentCheck(params) {
                     return post(`/backend/addons/zhibo/course_comment/check`, params);
                 },
+
                 Category: {
                     List() {
                         return get(`/backend/addons/zhibo/course_category/index`);
@@ -456,6 +457,12 @@ const Api = {
                 Users: {
                     List(id, params) {
                         return get(`/backend/addons/zhibo/course/${id}/users`, params);
+                    },
+                    Add(id, params) {
+                        return post(`/backend/addons/zhibo/course/${id}/user/add`, params);
+                    },
+                    Del(id, params) {
+                        return post(`/backend/addons/zhibo/course/${id}/user/del`, params);
                     },
                 },
                 Video: {

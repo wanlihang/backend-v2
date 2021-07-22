@@ -11,7 +11,7 @@
         @click="$router.push({ name: 'LiveCourseCreate' })"
         type="primary"
       >
-        添加课程
+        添加
       </el-button>
     </div>
     <div class="float-left">
