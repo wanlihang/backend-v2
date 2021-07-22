@@ -102,7 +102,7 @@ const routes = [{
         component: () => import('@/views/system/config'),
         name: 'SystemConfig',
         meta: {
-          title: 'title.config'
+          title: 'title.system-config'
         }
       },
       {
@@ -694,7 +694,7 @@ const routes = [{
         component: () => import('@/views/tuangou/goods/tuanorder'),
         name: 'TuangouGoodsTuanorder',
         meta: {
-          title: 'title.tuangou.goods.tuanorder'
+          title: 'title.tuangou.goods.orders'
         }
       },
       {

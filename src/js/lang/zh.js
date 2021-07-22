@@ -3,19 +3,20 @@ import zhLocale from 'element-ui/lib/locale/lang/zh-CN' //引入element语言包
 const zh = {
     title: {
         login: '登录',
-        dashboard: '首页概览',
-        renovation: '装修',
-        computer_terminal: "电脑端",
-        mobile_terminal: "移动端",
+        dashboard: '主面板',
+        decoration: '装修',
+        decoration_pc: "电脑端",
+        decoration_h5: "移动端",
         role: 'VIP会员',
-        order: '订单列表',
+        order: '全站订单',
         promocode: '优惠码',
         promocode_import: '批量导入',
         withdrawOrders: '余额提现',
         system: '系统',
-        wendaname: '问答',
-        config: '系统配置',
-        wechatname: '微信公众号',
+        qa: '问答',
+        operate: '运营',
+        'system-config': '系统配置',
+        'mp-wechat': '微信公众号',
         'system-administrator': '管理员',
         'system-adminroles': '管理员角色',
         createadmin: '添加管理员',
@@ -44,32 +45,30 @@ const zh = {
         miaosha: {
             name: '秒杀',
             orders: {
-                name: '订单',
                 index: '秒杀订单'
             },
             goods: {
-                name: '商品',
-                index: '秒杀商品',
-                create: '创建秒杀商品',
-                update: '编辑秒杀商品'
+                index: '秒杀课程',
+                create: '创建秒杀课程',
+                update: '编辑秒杀课程'
             },
         },
         tuangou: {
             name: '团购',
+            orders: '团购订单',
             goods: {
-                name: '商品',
-                index: '团购商品',
-                create: '创建团购商品',
-                update: '编辑团购商品',
-                order: '团购商品订单',
-                refund: '团购商品退款订单',
-                tuanorder: '团列表',
+                index: '团购课程',
+                create: '创建团购课程',
+                update: '编辑团购课程',
+                order: '团购订单',
+                refund: '团购退款订单',
+                
             },
         },
         learningpath: {
             name: '学习路径',
             path: {
-                name: '路径',
+                name: '学习路径',
                 index: '学习路径',
                 create: '创建学习路径',
                 update: '编辑学习路径'
@@ -89,22 +88,20 @@ const zh = {
         multi_level_share: {
             name: '三级分销',
             poster: {
-                name: '海报',
-                index: '海报',
-                create: '创建海报',
-                update: '编辑海报'
+                index: '分销海报',
+                create: '创建分销海报',
+                update: '编辑分销海报'
             },
             goods: {
-                name: '分销商品',
-                index: '分销商品',
-                create: '创建分销商品',
-                update: '编辑分销商品'
+                index: '分销课程',
+                create: '创建分销课程',
+                update: '编辑分销课程'
             },
         },
         live: {
-            name: '直播',
+            name: '直播课',
             course: {
-                name: '课程',
+                name: '直播课',
                 index: '直播课程',
                 create: '创建直播课程',
                 update: '编辑直播课程',
@@ -137,34 +134,34 @@ const zh = {
         },
         wechat: {
             messagereply: {
-                index: '微信公众号消息回复',
-                create: '微信公众号添加规则',
-                update: '微信公众号编辑规则',
+                index: '公众号消息回复',
+                create: '公众号添加规则',
+                update: '公众号编辑规则',
             },
         },
         codeExchanger: {
             name: '兑换码',
-            index: '兑换商品',
-            create: '创建兑换商品',
-            update: '编辑兑换商品',
+            index: '兑换码',
+            create: '创建兑换码',
+            update: '编辑兑换码',
             codes: '兑换码'
         },
         topic: {
             name: '图文',
-            index: '话题',
-            create: '创建话题文章',
-            update: '编辑话题文章',
+            index: '图文列表',
+            create: '创建图文文章',
+            update: '编辑图文文章',
             order: '购买用户订单',
-            comment: '话题文章评论',
+            comment: '图文文章评论',
             category: {
-                index: '话题分类管理',
-                create: '创建话题分类',
-                update: '编辑话题分类',
+                index: '图文分类管理',
+                create: '创建图文分类',
+                update: '编辑图文分类',
             },
         },
         wenda: {
             question: {
-                index: '问题',
+                index: '用户问答',
                 answer: '问题回答',
                 comment: '问题评论',
                 category: {
@@ -176,7 +173,7 @@ const zh = {
         },
         course: {
             vod: {
-                index: '录播',
+                index: '录播课',
                 create: '添加录播课程',
                 update: '编辑录播课程',
                 detail: '录播课程详情',
@@ -209,9 +206,9 @@ const zh = {
             },
         },
         singlepage: {
-            index: '单页',
-            create: '添加电子书',
-            update: '编辑电子书',
+            index: '单页面',
+            create: '添加单页面',
+            update: '编辑单页面',
         },
         meedubook: {
             book: {
@@ -243,10 +240,10 @@ const zh = {
     commen: {
         Locale: "zhLocale",
         logintitle: '首页',
-        indextitle: "首页概览",
+        indextitle: "主面板",
         operation_management: "运营管理",
-        computer_terminal: "电脑端",
-        mobile_terminal: "移动端",
+        decoration_pc: "电脑端",
+        decoration_h5: "移动端",
         micro_page: "微页面",
         comment_management: "评论管理",
         system_configuration: "系统配置",
@@ -300,7 +297,7 @@ const zh = {
         start_time: '开始',
         end_time: '结束时间',
     },
-    computer_terminal: {
+    decoration_pc: {
         tab1: "首页展示",
         tab2: "幻灯片",
         tab3: "公告",

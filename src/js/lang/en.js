@@ -3,9 +3,9 @@ const en = { //en
     title: {
         login: 'Login',
         dashboard: 'Home Page Overview',
-        renovation:'Renovation',
-        computer_terminal: "DecorationPC",
-        mobile_terminal: "DecorationMobile",
+        decoration:'Renovation',
+        decoration_pc: "DecorationPC",
+        decoration_h5: "DecorationMobile",
         role:'VIP Members',
     },
     commen: {
@@ -13,8 +13,8 @@ const en = { //en
         logintitle:'Home page',
         indextitle: "Home Page Overview",
         operation_management: "Operation Management",
-        computer_terminal: "Computer Terminal",
-        mobile_terminal: "Mobile Terminal",
+        decoration_pc: "Computer Terminal",
+        decoration_h5: "Mobile Terminal",
         micro_page: "Micro Page",
         comment_management: "Comment Management",
         system_configuration:"System Configuration",
@@ -68,7 +68,7 @@ const en = { //en
         start_time: "Start",
         end_time: "End time",
     },
-    computer_terminal: {
+    decoration_pc: {
         tab1: "Home page display",
         tab2: "Slide",
         tab3: "Notice",
