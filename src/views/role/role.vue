@@ -1,73 +1,104 @@
 <template>
-  <el-container class="member_content">
-    <el-header>
-      <el-button type="primary" @click="addVipform()">{{$t("member.btn_add") }}</el-button>
-    </el-header>
-    <el-main class="main_content">
-      <div
-        class="el_item"
-        v-for="(item, index) in memberbox"
-        :key="index"
-        v-show="item.is_show == 1"
-      >
-        <div class="name">{{ item.name }}</div>
-        <div class="days">{{ item.expire_days }}{{$t("member.day") }}</div>
-        <div class="charge">{{$t("member.currency") }}{{ item.charge }}</div>
-        <div class="options">
-          <el-button type="danger" @click="del_Meberitem(item.id)">
-            {{$t("member.btn_del") }}
-          </el-button>
-          <el-button type="warning" @click="editVipform(item.id)">
-            {{$t("member.btn_edit") }}
-          </el-button>
-        </div>
+  <div class="meedu-main-body">
+    <div class="float-left mb-30">
+      <el-button @click="$router.push({ name: 'Addrole' })" type="primary">
+        {{ $t("member.btn_add") }}
+      </el-button>
+    </div>
+    <div class="float-left" v-loading="loading">
+      <div class="float-left">
+        <el-table :data="results" stripe class="float-left">
+          <el-table-column prop="id" label="ID" width="80"> </el-table-column>
+          <el-table-column prop="name" label="角色名"> </el-table-column>
+          <el-table-column prop="expire_days" label="天数"> </el-table-column>
+          <el-table-column label="价格">
+            <template slot-scope="scope">
+              <span> ￥{{ scope.row.charge }} </span>
+            </template>
+          </el-table-column>
+          <el-table-column fixed="right" label="操作" width="140">
+            <template slot-scope="scope">
+              <el-link type="danger" @click="del_Meberitem(scope.row.id)">
+                删除
+              </el-link>
+              <el-link
+                type="primary"
+                class="ml-5"
+                @click="
+                  $router.push({
+                    name: 'Editrole',
+                    query: {
+                      id: scope.row.id,
+                    },
+                  })
+                "
+              >
+                编辑
+              </el-link>
+            </template>
+          </el-table-column>
+        </el-table>
       </div>
-    </el-main>
-  </el-container>
+      <div class="float-left mt-30 text-center">
+        <el-pagination
+          @size-change="paginationSizeChange"
+          @current-change="paginationPageChange"
+          :current-page="pagination.page"
+          :page-sizes="[10, 20, 50, 100]"
+          :page-size="pagination.size"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="total"
+        >
+        </el-pagination>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
 export default {
   name: "vip_member",
   data() {
     return {
+      pagination: {
+        page: 1,
+        size: 10,
+      },
+      total: 0,
       loading: false,
-      dialogAddvisible: false,
-      page: 1,
-      addForm: {},
-      memberbox: [],
+      results: [],
     };
   },
   created() {
-    this.getmemberinfo(1);
+    this.getResults();
   },
   methods: {
-    //添加
-    addVipform() {
-      this.$router.push({ name: "Addrole" });
+    firstPageLoad() {
+      this.pagination.page = 1;
+      this.getResults();
     },
-    //编辑
-    editVipform(id) {
-      this.$router.push({
-        name: "Editrole",
-        query: {
-          id: id,
-        },
-      });
+    paginationReset() {
+      this.pagination.page = 1;
+      this.getResults();
     },
-    //获取会员信息
-    getmemberinfo(p) {
+    paginationSizeChange(size) {
+      this.pagination.size = size;
+      this.getResults();
+    },
+    paginationPageChange(page) {
+      this.pagination.page = page;
+      this.getResults();
+    },
+    getResults() {
+      if (this.loading) {
+        return;
+      }
       this.loading = true;
-      var data = {
-        page: p,
-        total: 0,
-        size: 10,
-      };
-      this.$api.Role.List(data).then((resp) => {
-        if (resp.status == 0) {
-          this.page = resp.data.current_page + 1;
-          this.memberbox = resp.data.data;
-        }
+      let params = {};
+      Object.assign(params, this.pagination);
+      this.$api.Role.List(params).then((res) => {
         this.loading = false;
+        this.results = res.data.data;
+        this.total = res.data.total;
       });
     },
     //删除会员
@@ -80,84 +111,21 @@ export default {
         .then(() => {
           //点击确定按钮的操作
           this.loading = true;
-          this.$api.Role.Destory(id).then((resp) => {
-            if (resp.status == 0) {
-              this.$message.error("删除成功");
-              this.getmemberinfo(1);
-            } else {
-              this.$message.error(resp.message);
-            }
-            this.loading = false;
-          });
+          this.$api.Role.Destory(id)
+            .then(() => {
+              this.loading = false;
+              this.$message.success(this.$t("common.success"));
+              this.getResults();
+            })
+            .catch((e) => {
+              this.loading = false;
+              this.$message.error(e.message);
+            });
         })
         .catch(() => {
           //点击删除按钮的操作
         });
     },
-    //刷新页面
-    refresh() {
-      console.log("刷新页面");
-    },
-    addDialogClose() {
-      //刷新页面
-      this.refresh();
-      this.dialogAddvisible = false;
-    },
   },
 };
 </script>
-<style lang="less" scoped>
-div {
-  box-sizing: border-box;
-}
-.main_content {
-  width: 100%;
-  height: auto;
-  float: left;
-  .el_item {
-    width: 300px;
-    height: auto;
-    float: left;
-    background-color: rgba(0, 0, 0, 0.05);
-    padding: 15px 30px;
-    border-radius: 20px;
-    margin-right: 30px;
-    margin-bottom: 30px;
-    .name {
-      width: 100%;
-      height: auto;
-      float: left;
-      color: #333;
-      text-align: center;
-      margin-bottom: 50px;
-      font-size: 24px;
-      font-weight: 700;
-      margin-top: 30px;
-    }
-    .days {
-      width: 100%;
-      height: auto;
-      float: left;
-      color: #333;
-      text-align: center;
-      margin-bottom: 50px;
-      font-size: 18px;
-    }
-    .charge {
-      width: 100%;
-      height: auto;
-      float: left;
-      font-size: 30px;
-      color: red;
-      text-align: center;
-    }
-    .options {
-      width: 100%;
-      height: auto;
-      float: left;
-      text-align: right;
-      margin-top: 30px;
-    }
-  }
-}
-</style>
