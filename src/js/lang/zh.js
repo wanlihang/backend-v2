@@ -123,6 +123,7 @@ const zh = {
                     index: '直播课程内容安排',
                     create: '创建直播课程内容安排',
                     update: '编辑直播课程内容安排',
+                    play: '开播'
                 },
             },
             teacher: {
