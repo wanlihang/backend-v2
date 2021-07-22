@@ -7,62 +7,103 @@
     </div>
     <div class="float-left">
       <div class="float-left d-flex">
-        <div class="d-flex">
-          <div class="filter-label">分类</div>
-          <div class="flex-1 ml-15">
-            <el-select v-model="filter.category_id">
-              <el-option
-                v-for="(item, index) in filterData.courses"
-                :key="index"
-                :label="item.name"
-                :value="item.id"
-              >
-              </el-option>
-            </el-select>
-          </div>
+        <div class="ml-10">
+          <el-input
+            class="w-200px"
+            v-model="filter.keywords"
+            placeholder="请输入关键字"
+          ></el-input>
+        </div>
+
+        <div class="ml-10">
+          <el-select
+            placeholder="文章分类"
+            class="w-200px"
+            v-model="filter.category_id"
+          >
+            <el-option
+              v-for="(item, index) in filterData.courses"
+              :key="index"
+              :label="item.name"
+              :value="item.id"
+            >
+            </el-option>
+          </el-select>
         </div>
 
         <div class="ml-15">
-          <el-button @click="getResults" type="primary" plain>筛选</el-button>
+          <el-button @click="getData" type="primary" plain>筛选</el-button>
           <el-button @click="paginationReset">清空</el-button>
         </div>
       </div>
     </div>
     <div class="float-left mt-30" v-loading="loading">
       <div class="float-left">
-        <el-table :data="results" stripe class="float-left">
-          <el-table-column prop="id" label="ID" width="80"> </el-table-column>
-          <el-table-column prop="category.name" label="分类" width="120">
+        <el-table
+          :data="list"
+          @sort-change="sortChange"
+          :default-sort="{ prop: 'id', order: 'descending' }"
+          stripe
+          class="float-left"
+        >
+          <el-table-column prop="id" sortable label="ID" width="120">
           </el-table-column>
-          <el-table-column prop="title" label="标题"> </el-table-column>
-          <el-table-column label="价格" width="100">
+          <el-table-column prop="category.name" label="分类" width="200">
+          </el-table-column>
+          <el-table-column label="标题" width="500">
             <template slot-scope="scope">
-                <span v-if="scope.row.charge==0">免费</span>
-              <span style="color:red;" v-else>￥{{ scope.row.charge }}</span>
+              <div class="d-flex">
+                <div>
+                  <img :src="scope.row.thumb" width="120" height="90" />
+                </div>
+                <div class="ml-10">{{ scope.row.title }}</div>
+              </div>
             </template>
           </el-table-column>
-           <el-table-column label="浏览" width="100">
+          <el-table-column label="价格" sortable property="charge" width="200">
             <template slot-scope="scope">
-              <span >{{ scope.row.view_times }}次</span>
+              <span>{{ scope.row.charge }}元</span>
             </template>
           </el-table-column>
-            <el-table-column label="付费" width="80">
+          <el-table-column
+            label="浏览"
+            sortable
+            property="view_times"
+            width="150"
+          >
             <template slot-scope="scope">
-              <span >{{ scope.row.user_count }}</span>
+              <span>{{ scope.row.view_times }}次</span>
             </template>
           </el-table-column>
-          <el-table-column prop="comments_count" label="评论" width="80">
+          <el-table-column
+            label="付费"
+            sortable
+            property="user_count"
+            width="120"
+          >
+            <template slot-scope="scope">
+              <span>{{ scope.row.user_count }}人</span>
+            </template>
           </el-table-column>
-          <el-table-column prop="vote_count" label="点赞" width="80">
+          <el-table-column
+            prop="comments_count"
+            sortable
+            label="评论"
+            width="120"
+          >
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="250">
+          <el-table-column prop="vote_count" sortable label="点赞" width="120">
+          </el-table-column>
+          <el-table-column prop="created_at" sortable label="时间">
+          </el-table-column>
+          <el-table-column fixed="right" label="操作" width="200">
             <template slot-scope="scope">
               <el-link type="danger" @click="destory(scope.row.id)"
                 >删除</el-link
               >
               <el-link
                 type="primary"
-                style="margin-left: 5px"
+                class="ml-5"
                 @click="
                   $router.push({
                     name: 'TopicUpdate',
@@ -73,7 +114,7 @@
               >
               <el-link
                 type="primary"
-                style="margin-left: 5px"
+                class="ml-5"
                 @click="
                   $router.push({
                     name: 'TopicComment',
@@ -84,14 +125,14 @@
               >
               <el-link
                 type="primary"
-                style="margin-left: 5px"
+                class="ml-5"
                 @click="
                   $router.push({
                     name: 'TopicOrder',
                     query: { id: scope.row.id },
                   })
                 "
-                >购买用户</el-link
+                >用户</el-link
               >
             </template>
           </el-table-column>
@@ -121,14 +162,17 @@ export default {
       pagination: {
         page: 1,
         size: 10,
+        sort: "id",
+        order: "desc",
       },
       filter: {
-        category_id: "",
-        user_id: "",
+        category_id: null,
+        user_id: null,
+        keywords: null,
       },
       total: 0,
       loading: false,
-      results: [],
+      list: [],
       filterData: {
         courses: [],
       },
@@ -136,24 +180,29 @@ export default {
   },
 
   mounted() {
-    this.getResults();
+    this.getData();
   },
   methods: {
+    firstPageLoad() {
+      this.pagination.page = 1;
+      this.getData();
+    },
     paginationReset() {
       this.pagination.page = 1;
-      this.filter.category_id = "";
-      this.filter.user_id = "";
-      this.getResults();
+      this.filter.category_id = null;
+      this.filter.user_id = null;
+      this.filter.keywords = null;
+      this.getData();
     },
     paginationSizeChange(size) {
       this.pagination.size = size;
-      this.getResults();
+      this.getData();
     },
     paginationPageChange(page) {
       this.pagination.page = page;
-      this.getResults();
+      this.getData();
     },
-    getResults() {
+    getData() {
       if (this.loading) {
         return;
       }
@@ -163,7 +212,7 @@ export default {
       Object.assign(params, this.pagination);
       this.$api.Course.Topic.Topic.List(params).then((res) => {
         this.loading = false;
-        this.results = res.data.data.data;
+        this.list = res.data.data.data;
         this.total = res.data.data.total;
         this.filterData.courses = res.data.categories;
       });
@@ -184,7 +233,7 @@ export default {
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));
-              this.getResults();
+              this.getData();
             })
             .catch((e) => {
               this.loading = false;
@@ -198,33 +247,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less" scoped>
-.filter-box {
-  width: 100%;
-  height: auto;
-  float: left;
-  box-sizing: border-box;
-  padding: 30px;
-  border-radius: 15px;
-  margin-bottom: 15px;
-  background-color: white;
-
-  .filter-label {
-    font-size: 14px;
-    color: rgba(0, 0, 0, 0.7);
-  }
-}
-.user-item {
-  width: auto;
-  display: flex;
-  align-items: center;
-  .avatar {
-    margin-right: 10px;
-  }
-  .nickname {
-    font-size: 15px;
-    font-weight: normal;
-  }
-}
-</style>
