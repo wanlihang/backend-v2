@@ -11,24 +11,18 @@
     <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table :data="results" stripe class="float-left">
-          <el-table-column prop="name" label="路径名"> </el-table-column>
-          <el-table-column label="价格" width="150">
+          <el-table-column prop="id" label="ID" width="120"> </el-table-column>
+          <el-table-column prop="name" label="路径名" width="500">
+          </el-table-column>
+          <el-table-column label="价格">
             <template slot-scope="scope">
-              <span
-                >￥{{ scope.row.charge }}/<span
-                  style="text-decoration: line-through"
-                  >￥{{ scope.row.original_charge }}</span
-                ></span
-              >
+              <div>现价：{{ scope.row.charge }}元</div>
+              <div class="original-charge">
+                原价：{{ scope.row.original_charge }}元
+              </div>
             </template>
           </el-table-column>
 
-          <el-table-column label="显示" width="80">
-            <template slot-scope="scope">
-              <span v-if="scope.row.is_show == 1">是</span>
-              <span v-else>否</span>
-            </template>
-          </el-table-column>
           <el-table-column fixed="right" label="操作" width="120">
             <template slot-scope="scope">
               <el-link type="danger" @click="destory(scope.row.id)"
@@ -36,7 +30,7 @@
               >
               <el-link
                 type="primary"
-                style="margin-left: 5px"
+                class="ml-5"
                 @click="
                   $router.push({
                     name: 'LearningPathUpdate',
@@ -44,6 +38,17 @@
                   })
                 "
                 >编辑</el-link
+              >
+              <el-link
+                type="primary"
+                class="ml-5"
+                @click="
+                  $router.push({
+                    name: 'LearningStep',
+                    query: { id: scope.row.id },
+                  })
+                "
+                >步骤</el-link
               >
             </template>
           </el-table-column>
@@ -140,3 +145,10 @@ export default {
   },
 };
 </script>
+
+
+<style lang="less" scoped>
+.original-charge {
+  text-decoration: line-through;
+}
+</style>
