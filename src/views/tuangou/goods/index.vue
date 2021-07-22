@@ -8,12 +8,6 @@
         添加
       </el-button>
       <el-button
-        @click="$router.push({ name: 'TuangouGoodsOrder' })"
-        type="primary"
-      >
-        订单
-      </el-button>
-      <el-button
         @click="$router.push({ name: 'TuangouGoodsRefund' })"
         type="primary"
       >

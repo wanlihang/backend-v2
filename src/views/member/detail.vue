@@ -340,14 +340,6 @@
         ></user-video-watch-records-comp>
       </div>
     </div>
-
-    <!-- <div class="bottom-menus">
-      <div class="bottom-menus-box">
-        <div>
-          <el-button @click="$router.back()">取消</el-button>
-        </div>
-      </div>
-    </div> -->
   </div>
 </template>
 
@@ -394,24 +386,25 @@ export default {
           key: "video",
         },
       ];
-      if (this.enabledAddons["Zhibo"]) {
-        types.push({
-          name: "直播",
-          key: "live",
-        });
-      }
-      if (this.enabledAddons["MeeduBooks"]) {
-        types.push({
-          name: "电子书",
-          key: "books",
-        });
-      }
-      if (this.enabledAddons["MeeduTopics"]) {
-        types.push({
-          name: "图文",
-          key: "topics",
-        });
-      }
+
+      // if (this.enabledAddons["Zhibo"]) {
+      //   types.push({
+      //     name: "直播",
+      //     key: "live",
+      //   });
+      // }
+      // if (this.enabledAddons["MeeduBooks"]) {
+      //   types.push({
+      //     name: "电子书",
+      //     key: "books",
+      //   });
+      // }
+      // if (this.enabledAddons["MeeduTopics"]) {
+      //   types.push({
+      //     name: "图文",
+      //     key: "topics",
+      //   });
+      // }
 
       types.push(
         ...[

@@ -79,6 +79,7 @@
  
 <script>
 import Menus from "@/js/menus.js";
+import CONSTANT from "@/js/constant.js";
 import { mapState, mapMutations } from "vuex";
 
 export default {
@@ -93,11 +94,20 @@ export default {
   },
   watch: {
     "$route.name"(newVal) {
-      this.defaultActive = newVal;
+      let activeName =
+        typeof CONSTANT.menuActiveMap[newVal] !== "undefined"
+          ? CONSTANT.menuActiveMap[newVal]
+          : "Dashboard";
+      this.defaultActive = activeName;
     },
   },
   mounted() {
-    this.defaultActive = this.$route.name;
+    console.log(CONSTANT);
+    let activeName =
+      typeof CONSTANT.menuActiveMap[this.$route.name] !== "undefined"
+        ? CONSTANT.menuActiveMap[this.$route.name]
+        : "Dashboard";
+    this.defaultActive = activeName;
   },
   methods: {
     ...mapMutations(["logout"]),
@@ -198,21 +208,13 @@ export default {
   }
 }
 
-// .el-submenu {
-//   width: 100%;
-//   display: inline-block;
-//   text-align: left;
-// }
-
 .el-menu {
-  // border-right: 0;
-
   .el-menu-item {
     box-sizing: border-box;
-    padding-left: 74px!important;
+    padding-left: 74px !important;
 
     &.menu-item {
-      padding-left: 20px!important;
+      padding-left: 20px !important;
     }
 
     &.is-active {
@@ -227,18 +229,5 @@ export default {
   margin-right: 15px;
   color: #555566;
 }
-
-// .el-submenu__title {
-//   font-size: 14px;
-//   font-weight: 400;
-//   color: #555566;
-//   padding-left: 15px !important;
-
-//   &.title {
-//     font-size: 14px;
-//     font-weight: 400;
-//     color: #555566;
-//   }
-// }
 </style>
 
