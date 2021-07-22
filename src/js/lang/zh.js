@@ -17,7 +17,7 @@ const zh = {
         operate: '运营',
         'system-config': '系统配置',
         'mp-wechat': '微信公众号',
-        'system-administrator': '管理员',
+        'system-administrator': '管理人员',
         'system-adminroles': '管理员角色',
         createadmin: '添加管理员',
         updateadmin: '编辑管理员',
