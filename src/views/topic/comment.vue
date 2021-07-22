@@ -2,17 +2,20 @@
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="话题文章评论"></back-bar>
     <div class="float-left">
-      <div class="float-left mb-30">
-        <el-button @click="approve" type="danger"> 批量审核通过 </el-button>
-        <el-button @click="refuse" type="danger"> 批量审核拒绝 </el-button>
-      </div>
       <div class="float-left">
         <div class="float-left d-flex">
-          <div class="d-flex ml-15">
-            <div class="filter-label">UID</div>
-            <div class="flex-1 ml-15">
-              <el-input v-model="filter.user_id" class="w-200px"></el-input>
-            </div>
+          <div>
+            <el-button @click="approve"> 审核通过 </el-button>
+          </div>
+          <div class="ml-10">
+            <el-button @click="refuse"> 审核拒绝 </el-button>
+          </div>
+          <div class="ml-10">
+            <el-input
+              v-model="filter.user_id"
+              class="w-200px"
+              placeholder="用户ID"
+            ></el-input>
           </div>
           <div class="ml-15">
             <el-button @click="getComments" type="primary" plain
@@ -25,17 +28,17 @@
       <div class="float-left mt-30" v-loading="loading">
         <div class="float-left">
           <el-table
-            :data="mbooks"
+            :data="list"
             stripe
             @selection-change="handleSelectionChange"
             class="float-left"
           >
-            <el-table-column type="selection" width="55"></el-table-column
-            ><!-- 显示选取表格 -->
-            <el-table-column prop="id" label="ID" width="80"> </el-table-column>
-            <el-table-column prop="user_id" label="用户ID" width="80">
+            <el-table-column type="selection" width="55"></el-table-column>
+            <el-table-column prop="id" label="ID" width="120">
             </el-table-column>
-            <el-table-column label="用户">
+            <el-table-column prop="user_id" label="用户ID" width="120">
+            </el-table-column>
+            <el-table-column label="用户" width="300">
               <template slot-scope="scope">
                 <div class="d-flex" v-if="scope.row.user">
                   <div>
@@ -48,24 +51,23 @@
                 <span v-else class="c-red">用户不存在</span>
               </template>
             </el-table-column>
-            <el-table-column label="评论内容">
+            <el-table-column label="评论内容" width="500">
               <template slot-scope="scope">
                 <span v-html="scope.row.content"></span>
               </template>
             </el-table-column>
-            <el-table-column label="状态" width="80">
+            <el-table-column label="状态" width="100">
               <template slot-scope="scope">
-                <span style="color: red" v-if="scope.row.is_check == 0"
-                  >拒绝</span
+                <el-tag type="success" v-if="scope.row.is_check == 1"
+                  >通过</el-tag
                 >
-                <span v-else>通过</span>
+                <el-tag v-else type="danger">拒绝</el-tag>
               </template>
             </el-table-column>
-            <el-table-column prop="updated_at" label="时间" width="180">
-            </el-table-column>
+            <el-table-column prop="updated_at" label="时间"> </el-table-column>
             <el-table-column fixed="right" label="操作" width="150">
               <template slot-scope="scope">
-                <el-link type="danger" @click="destory(scope.row.id)"
+                <el-link type="danger" @click="destroy(scope.row.id)"
                   >删除</el-link
                 >
               </template>
@@ -108,7 +110,7 @@ export default {
       },
       total: 0,
       loading: false,
-      mbooks: [],
+      list: [],
     };
   },
   mounted() {
@@ -146,23 +148,22 @@ export default {
       Object.assign(params, this.pagination);
       this.$api.Course.Topic.Topic.Comment(params).then((res) => {
         this.loading = false;
-        this.mbooks = res.data.data.data;
+        this.list = res.data.data.data;
         this.total = res.data.data.total;
       });
     },
-    destory(item) {
+    destroy(item) {
       this.$confirm("确认操作？", "警告", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
       })
         .then(() => {
-          //点击确定按钮的操作
           if (this.loading) {
             return;
           }
           this.loading = true;
-          this.$api.Course.Topic.Topic.Destorycomment(item)
+          this.$api.Course.Topic.Topic.DestroyComment(item)
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));
@@ -173,9 +174,7 @@ export default {
               this.$message.error(e.message);
             });
         })
-        .catch(() => {
-          //点击删除按钮的操作
-        });
+        .catch(() => {});
     },
     approve() {
       this.$confirm("确认操作？", "警告", {
