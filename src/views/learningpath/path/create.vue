@@ -2,62 +2,79 @@
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="创建学习路径"></back-bar>
     <div class="float-left">
-      <div class="form-box broder-top-left-radius">
-        <el-form ref="form" :model="course" :rules="rules" label-width="200px">
-          <el-form-item label="路径名" prop="name">
-            <el-input v-model="course.name" class="w-100"></el-input>
-          </el-form-item>
-         
-          <el-form-item prop="thumb" label="封面">
-            <upload-image
-              v-model="course.thumb"
-              helper="长宽比4:3，建议尺寸：400x300像素"
-              width="400"
-              height="300"
-              name="上传封面"
-            ></upload-image>
-          </el-form-item>
-           <el-form-item label="原价" prop="original_charge">
-            <el-input
-              type="number"
-              placeholder="单位：元"
-              v-model="course.original_charge"
-              class="w-200px"
-            ></el-input>
-          </el-form-item>
-           <el-form-item label="现价" prop="charge">
-            <el-input
-              type="number"
-              placeholder="单位：元"
-              v-model="course.charge"
-              class="w-200px"
-            ></el-input>
-          </el-form-item>
-          <el-form-item prop="desc" label="描述">
-            <wang-editor class="w-100" v-model="course.desc"></wang-editor>
-          </el-form-item>
-           <el-form-item label="显示" prop="is_show">
-            <el-switch
-              v-model="course.is_show"
-              :active-value="true"
-              :inactive-value="false"
-            >
-            </el-switch>
-          </el-form-item>
-        </el-form>
-      </div>
+      <el-form
+        ref="form"
+        class="float-left"
+        :model="course"
+        :rules="rules"
+        label-width="200px"
+      >
+        <el-form-item label="路径名" prop="name">
+          <el-input v-model="course.name" class="w-500px"></el-input>
+        </el-form-item>
+
+        <el-form-item prop="thumb" label="封面">
+          <upload-image
+            v-model="course.thumb"
+            helper="长宽比4:3，建议尺寸：400x300像素"
+            width="200"
+            height="150"
+            name="上传封面"
+          ></upload-image>
+        </el-form-item>
+
+        <el-form-item label="原价" prop="original_charge">
+          <el-input
+            type="number"
+            placeholder="单位：元"
+            v-model="course.original_charge"
+            class="w-200px"
+          ></el-input>
+        </el-form-item>
+
+        <el-form-item label="现价" prop="charge">
+          <el-input
+            type="number"
+            placeholder="单位：元"
+            v-model="course.charge"
+            class="w-200px"
+          ></el-input>
+        </el-form-item>
+        <el-form-item prop="desc" label="描述">
+          <el-input
+            type="textarea"
+            v-model="course.desc"
+            class="w-600px"
+            rows="4"
+            placeholder="描述"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="显示" prop="is_show">
+          <div class="d-flex">
+            <div>
+              <el-switch
+                v-model="course.is_show"
+                :active-value="1"
+                :inactive-value="0"
+              >
+              </el-switch>
+            </div>
+            <div class="ml-10">
+              <helper-text text="该字段控制用户能否看到该路径"></helper-text>
+            </div>
+          </div>
+        </el-form-item>
+      </el-form>
 
       <div class="bottom-menus">
         <div class="bottom-menus-box">
           <div>
-            <el-button @click="formValidate" :loading="loading" type="primary"
-              >保存</el-button
-            >
+            <el-button @click="formValidate" :loading="loading" type="primary">
+              保存
+            </el-button>
           </div>
           <div class="ml-24">
-            <el-button @click="$router.back()"
-              >取消</el-button
-            >
+            <el-button @click="$router.back()">取消</el-button>
           </div>
         </div>
       </div>
@@ -65,12 +82,10 @@
   </div>
 </template>
 <script>
-import WangEditor from "@/components/wangeditor";
 import UploadImage from "@/components/upload-image";
 
 export default {
   components: {
-    WangEditor,
     UploadImage,
   },
   data() {
@@ -82,7 +97,6 @@ export default {
         is_show: 1,
         thumb: null,
         desc: null,
-       
       },
       rules: {
         name: [
@@ -99,14 +113,14 @@ export default {
             trigger: "blur",
           },
         ],
-       original_charge: [
+        original_charge: [
           {
             required: true,
             message: "原价不能为空",
             trigger: "blur",
           },
         ],
-       
+
         thumb: [
           {
             required: true,
@@ -129,19 +143,10 @@ export default {
           },
         ],
       },
-      expireTimeOption: {
-        disabledDate(date) {
-          // 当天可选：date.getTime() < Date.now() - 24 * 60 * 60 * 1000
-          //超过此刻可选
-          return date.getTime() < Date.now();
-        },
-      },
-      types: null,
       loading: false,
     };
   },
-  mounted() {
-  },
+  mounted() {},
   methods: {
     formValidate() {
       this.$refs["form"].validate((valid) => {

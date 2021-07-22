@@ -1,89 +1,59 @@
 <template>
   <div class="meedu-main-body">
+    <back-bar class="mb-30" title="学习步骤"></back-bar>
+
     <div class="float-left mb-30">
       <el-button
-        @click="$router.push({ name: 'LearningStepCreate' })"
+        @click="
+          $router.push({
+            name: 'LearningStepCreate',
+            query: { path_id: id },
+          })
+        "
         type="primary"
       >
         添加
       </el-button>
     </div>
-    <div class="float-left">
-      <div class="float-left d-flex">
-        <div class="d-flex">
-          <div class="filter-label">学习路径</div>
-          <div class="flex-1 ml-15">
-            <el-select v-model="filter.path_id">
-              <el-option
-                v-for="(item, index) in filterData.paths"
-                :key="index"
-                :label="item.name"
-                :value="item.id"
-              >
-              </el-option>
-            </el-select>
-          </div>
-        </div>
-        <div class="ml-15">
-          <el-button @click="getResults()" type="primary" plain>筛选</el-button>
-          <el-button @click="paginationReset">清空</el-button>
-        </div>
-      </div>
-    </div>
-    <div class="float-left mt-30" v-loading="loading">
-      <div class="float-left">
-        <el-table :data="results" stripe class="float-left">
-          <el-table-column prop="sort" label="升序" width="80">
-          </el-table-column>
-          <el-table-column prop="name" label="步骤名"> </el-table-column>
-          <el-table-column label="简述">
-            <template slot-scope="scope">
-              <div v-html="scope.row.desc"></div>
-            </template>
-          </el-table-column>
-          <el-table-column fixed="right" label="操作" width="140">
-            <template slot-scope="scope">
-              <el-link type="danger" @click="destory(scope.row.id)"
-                >删除</el-link
-              >
-              <el-link
-                type="primary"
-                style="margin-left: 5px"
-                @click="
-                  $router.push({
-                    name: 'LearningStepUpdate',
-                    query: { id: scope.row.id },
-                  })
-                "
-                >编辑</el-link
-              >
-              <el-link
-                style="margin-left: 5px"
-                @click="
-                  $router.push({
-                    name: 'Steprelation',
-                    query: { id: scope.row.id },
-                  })
-                "
-                >关联</el-link
-              >
-            </template>
-          </el-table-column>
-        </el-table>
-      </div>
 
-      <div class="float-left mt-30 text-center">
-        <el-pagination
-          @size-change="paginationSizeChange"
-          @current-change="paginationPageChange"
-          :current-page="pagination.page"
-          :page-sizes="[10, 20, 50, 100]"
-          :page-size="pagination.size"
-          layout="total, sizes, prev, pager, next, jumper"
-          :total="total"
-        >
-        </el-pagination>
-      </div>
+    <div class="float-left" v-loading="loading">
+      <el-table :data="list" stripe class="float-left">
+        <el-table-column prop="sort" label="升序" width="120">
+        </el-table-column>
+        <el-table-column prop="name" label="步骤名"> </el-table-column>
+        <el-table-column label="简述" width="500">
+          <template slot-scope="scope">
+            <div v-html="scope.row.desc"></div>
+          </template>
+        </el-table-column>
+        <el-table-column fixed="right" label="操作" width="150">
+          <template slot-scope="scope">
+            <el-link type="danger" @click="destory(scope.row.id)">删除</el-link>
+            <el-link
+              type="primary"
+              class="ml-5"
+              @click="
+                $router.push({
+                  name: 'LearningStepUpdate',
+                  query: { id: scope.row.id },
+                })
+              "
+              >编辑</el-link
+            >
+            <el-link
+              class="ml-5"
+              type="primary"
+              @click="
+                $router.push({
+                  name: 'Steprelation',
+                  query: { id: scope.row.id },
+                })
+              "
+              >课程</el-link
+            >
+          </template>
+        </el-table-column>
+      </el-table>
     </div>
   </div>
 </template>
@@ -92,53 +62,39 @@
 export default {
   data() {
     return {
-      pagination: {
-        page: 1,
-        size: 10,
-      },
-      filter: {
-        path_id: "",
-      },
+      id: this.$route.query.id,
       total: 0,
       loading: false,
-      results: [],
-      filterData: {
-        paths: [],
-      },
+      list: [],
     };
   },
 
   mounted() {
-    this.getResults();
+    this.getData();
   },
   methods: {
     paginationReset() {
       this.pagination.page = 1;
       this.filter.path_id = "";
-      this.getResults();
+      this.getData();
     },
     paginationSizeChange(size) {
       this.pagination.size = size;
-      this.getResults();
+      this.getData();
     },
     paginationPageChange(page) {
       this.pagination.page = page;
-      this.getResults();
+      this.getData();
     },
-    getResults() {
+    getData() {
       if (this.loading) {
         return;
       }
       this.loading = true;
-      let params = {};
-      Object.assign(params, this.filter);
-      Object.assign(params, this.pagination);
+      let params = { path_id: this.id };
       this.$api.Course.LearnPath.Step.List(params).then((res) => {
         this.loading = false;
-        this.results = res.data.data;
-        this.total = res.data.total;
-        this.filterData.paths = res.data.paths;
-        this.filter.path_id = res.data.path_id;
+        this.list = res.data.data;
       });
     },
     destory(item) {
@@ -157,7 +113,7 @@ export default {
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));
-              this.getResults();
+              this.getData();
             })
             .catch((e) => {
               this.loading = false;
