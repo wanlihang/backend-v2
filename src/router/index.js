@@ -962,6 +962,22 @@ const routes = [{
         }
       },
       {
+        path: '/live/course/video/watchusers',
+        component: () => import('@/views/live/course/video/watchusers'),
+        name: 'LiveCourseVideoWatchusers',
+        meta: {
+          title: 'title.live.course.video.watch'
+        }
+      },
+      {
+        path: '/live/course/video/chat',
+        component: () => import('@/views/live/course/video/chat'),
+        name: 'LiveCourseVideoChat',
+        meta: {
+          title: 'title.live.course.video.chat'
+        }
+      },
+      {
         path: '/codeExchanger/index',
         component: () => import('@/views/codeExchanger/index'),
         name: 'CodeExchanger',

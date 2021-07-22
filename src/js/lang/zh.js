@@ -62,7 +62,7 @@ const zh = {
                 update: '编辑团购课程',
                 order: '团购订单',
                 refund: '团购退款订单',
-                tuanorder:'团列表',
+                tuanorder: '团列表',
             },
         },
         learningpath: {
@@ -123,7 +123,9 @@ const zh = {
                     index: '直播课程内容安排',
                     create: '创建直播课程内容安排',
                     update: '编辑直播课程内容安排',
-                    play: '开播'
+                    play: '开播',
+                    watch: '观看用户',
+                    chat: '聊天室内容',
                 },
             },
             teacher: {

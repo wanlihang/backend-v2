@@ -1,24 +1,39 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="团购商品退款订单"></back-bar>
+    <back-bar class="mb-30" title="聊天室内容"></back-bar>
     <div class="float-left mb-30">
+      <el-button @click="firstPageLoad()" type="primary"> 刷新数据 </el-button>
+      <el-button @click="destorymulti()" type="danger"> 批量删除 </el-button>
+    </div>
+    <div class="float-left">
       <div class="float-left d-flex">
-        <div class="d-flex">请拿着支付订单号到相应的支付平台操作退款。</div>
+        <div class="ml-10">
+          <el-input
+            class="w-200px"
+            v-model="filter.user_id"
+            placeholder="UID"
+          ></el-input>
+        </div>
+
+        <div class="ml-10">
+          <el-button @click="firstPageLoad()" type="primary" plain>
+            筛选
+          </el-button>
+          <el-button @click="paginationReset()">清空</el-button>
+        </div>
       </div>
     </div>
-    <div class="float-left" v-loading="loading">
+    <div class="float-left mt-30" v-loading="loading">
       <div class="float-left">
-        <el-table :data="results" stripe class="float-left">
-          <el-table-column prop="id" label="ID" width="80"> </el-table-column>
-          <el-table-column label="支付单号">
-            <template slot-scope="scope">
-              <span>{{ scope.row.oid }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="支付方式" width="120">
-            <template slot-scope="scope">
-              <span>{{ scope.row.system_order.payment_text }}</span>
-            </template>
+        <el-table
+          :data="results"
+          stripe
+          @selection-change="handleSelectionChange"
+          class="float-left"
+        >
+          <el-table-column type="selection" width="55"></el-table-column
+          ><!-- 显示选取表格 -->
+          <el-table-column prop="user_id" label="用户ID" width="150">
           </el-table-column>
           <el-table-column label="用户">
             <template slot-scope="scope">
@@ -26,36 +41,20 @@
                 <div>
                   <img :src="scope.row.user.avatar" width="40" height="40" />
                 </div>
-                <div class="ml-10">
-                  {{ scope.row.user.nick_name }}
-                </div>
+                <div class="ml-10">{{ scope.row.user.nick_name }}</div>
               </div>
-              <span v-else class="c-red">用户不存在</span>
+              <span class="c-red" v-else>用户不存在</span>
             </template>
           </el-table-column>
-          <el-table-column label="价格" width="120">
+          <el-table-column label="内容">
             <template slot-scope="scope">
-              <span>￥{{ scope.row.charge }}</span>
+              <div v-html="scope.row.content"></div>
             </template>
           </el-table-column>
-          <el-table-column label="状态" width="100">
-            <template slot-scope="scope">
-              <span>{{ scope.row.status_text }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column fixed="right" label="操作" width="100">
-            <template slot-scope="scope">
-              <el-link
-                v-if="scope.row.status == 0"
-                type="danger"
-                @click="handle(scope.row.id)"
-                >改为已处理</el-link
-              >
-            </template>
+          <el-table-column prop="created_at" label="时间" width="200">
           </el-table-column>
         </el-table>
       </div>
-
       <div class="float-left mt-30 text-center">
         <el-pagination
           @size-change="paginationSizeChange"
@@ -77,8 +76,16 @@ export default {
   data() {
     return {
       pagination: {
+        video_id: this.$route.query.id,
+        course_id: this.$route.query.course_id,
         page: 1,
         size: 10,
+      },
+      filter: {
+        user_id: null,
+      },
+      spids: {
+        ids: [],
       },
       total: 0,
       loading: false,
@@ -90,8 +97,13 @@ export default {
     this.getResults();
   },
   methods: {
+    firstPageLoad() {
+      this.pagination.page = 1;
+      this.getResults();
+    },
     paginationReset() {
       this.pagination.page = 1;
+      this.filter.user_id = 0;
       this.getResults();
     },
     paginationSizeChange(size) {
@@ -102,20 +114,32 @@ export default {
       this.pagination.page = page;
       this.getResults();
     },
+    //保存选中结果
+    handleSelectionChange(val) {
+      var newbox = [];
+      for (var i = 0; i < val.length; i++) {
+        newbox.push(val[i].id);
+      }
+      this.spids.ids = newbox;
+    },
     getResults() {
       if (this.loading) {
         return;
       }
       this.loading = true;
       let params = {};
-      Object.assign(params, this.pagination);
-      this.$api.TuanGou.Refund.List(params).then((res) => {
+      Object.assign(params, this.filter, this.pagination);
+      this.$api.Course.Live.Course.Video.Chat(
+        this.pagination.course_id,
+        this.pagination.video_id,
+        params
+      ).then((res) => {
         this.loading = false;
-        this.results = res.data.data.data;
-        this.total = res.data.data.total;
+        this.results = res.data.data;
+        this.total = res.data.total;
       });
     },
-    handle(item) {
+    destorymulti() {
       this.$confirm("确认操作？", "警告", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -126,11 +150,12 @@ export default {
           if (this.loading) {
             return;
           }
+          if (this.spids.ids == "") {
+            this.$message("请选择需要操作的数据");
+            return;
+          }
           this.loading = true;
-          var data = {
-            id: item,
-          };
-          this.$api.TuanGou.Refund.Complete(item, data)
+          this.$api.Course.Live.Course.Video.ChatDestoryMulti(this.spids)
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));
