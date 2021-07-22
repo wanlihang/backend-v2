@@ -52,7 +52,7 @@
           <el-table-column prop="id" label="ID" width="80"> </el-table-column>
           <el-table-column prop="user_id" label="用户ID" width="80">
           </el-table-column>
-          <el-table-column label="用户" :width="300">
+          <el-table-column label="用户">
             <template slot-scope="scope">
               <div class="d-flex" v-if="scope.row.user">
                 <div>
@@ -62,6 +62,7 @@
                   {{ scope.row.user.nick_name }}
                 </div>
               </div>
+              <span class="c-red" v-else>用户不存在</span>
             </template>
           </el-table-column>
           <el-table-column label="课程">

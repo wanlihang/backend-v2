@@ -72,7 +72,7 @@
           </el-table-column>
           <el-table-column prop="category.name" label="分类" width="100">
           </el-table-column>
-          <el-table-column label="用户" :width="300">
+          <el-table-column label="用户">
             <template slot-scope="scope">
               <div class="d-flex" v-if="scope.row.user">
                 <div>
@@ -82,6 +82,7 @@
                   {{ scope.row.user.nick_name }}
                 </div>
               </div>
+              <span v-else class="c-red">用户不存在</span>
             </template>
           </el-table-column>
           <el-table-column prop="title" label="标题"> </el-table-column>

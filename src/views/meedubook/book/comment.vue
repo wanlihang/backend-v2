@@ -36,7 +36,7 @@
           <el-table-column prop="id" label="ID" width="120"> </el-table-column>
           <el-table-column prop="user_id" label="用户ID" width="120">
           </el-table-column>
-          <el-table-column label="用户" width="300">
+          <el-table-column label="用户">
             <template slot-scope="scope">
               <div class="d-flex" v-if="scope.row.user">
                 <div>
