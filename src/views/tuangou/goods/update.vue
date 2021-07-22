@@ -16,6 +16,7 @@
                 <select-resource
                   v-bind:show="msg"
                   @change="change"
+                  @close="close"
                   :selectedIds="this.course.goods_id"
                   :enabled-resource="types"
                 ></select-resource>
@@ -257,6 +258,9 @@ export default {
     this.detail();
   },
   methods: {
+    close() {
+      this.msg = false;
+    },
     change(v1) {
       var data = v1;
       this.course.goods_id = data.id;
