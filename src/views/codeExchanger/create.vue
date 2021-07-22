@@ -14,7 +14,7 @@
                   >已选择</span
                 >
                 <select-resource
-                  v-bind:show="msg"
+                  :show="msg"
                   @change="change"
                   :enabled-resource="types"
                 ></select-resource>
