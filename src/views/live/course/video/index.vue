@@ -40,7 +40,7 @@
               </el-tag>
             </template>
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="300">
+          <el-table-column fixed="right" label="操作" width="200">
             <template slot-scope="scope">
               <el-link type="danger" @click="destory(scope.row.id)">
                 删除
@@ -77,7 +77,6 @@
               <el-link
                 type="primary"
                 class="ml-5"
-                v-if="scope.row.status == 1"
                 @click="
                   $router.push({
                     name: 'LiveCourseVideoUpdate',
@@ -92,7 +91,6 @@
               <el-link
                 type="primary"
                 class="ml-5"
-                v-if="scope.row.status == 1"
                 @click="
                   $router.push({
                     name: 'LiveCourseVideoUpdate',
