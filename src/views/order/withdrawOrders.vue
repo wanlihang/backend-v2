@@ -1,119 +1,166 @@
 <template>
-  <el-container>
-    <el-main class="main_content">
-      <div class="row">
-        <label>UID</label>
-        <el-input
-          style="width: 200px; margin-right: 10px"
-          v-model="user_id"
-        ></el-input>
-        <label>会员</label>
-        <el-select
-          v-model="status"
-          placeholder="请选择"
-          style="width: 200px; margin-right: 20px"
-        >
-          <el-option
-            v-for="(item, index) in groups"
-            :key="index"
-            :label="item.name"
-            :value="item.key"
-          >
-          </el-option>
-        </el-select>
-        <el-button type="primary" class="search" @click="search()"
-          >搜索</el-button
-        >
-        <el-button class="reset" @click="reset()">重置</el-button>
+  <div class="meedu-main-body">
+    <div class="float-left mb-30">
+      <el-button @click="destorymulti()" type="danger"> 批量操作 </el-button>
+    </div>
+    <div class="float-left">
+      <div class="float-left d-flex">
+        <div class="ml-10">
+          <el-input
+            class="w-200px"
+            v-model="filter.user_id"
+            placeholder="UID"
+          ></el-input>
+        </div>
+        <div class="d-flex ml-15">
+          <div class="filter-label">会员</div>
+          <div class="flex-1 ml-15">
+            <el-select v-model="filter.status">
+              <el-option
+                v-for="(item, index) in filterData.groups"
+                :key="index"
+                :label="item.name"
+                :value="item.key"
+              >
+              </el-option>
+            </el-select>
+          </div>
+        </div>
+        <div class="ml-10">
+          <el-button @click="firstPageLoad()" type="primary" plain>
+            筛选
+          </el-button>
+          <el-button @click="paginationReset()">清空</el-button>
+        </div>
       </div>
-      <div class="row">
-        <el-button type="danger" @click="deleteMulti()">批量操作</el-button>
+    </div>
+    <div class="float-left mt-30" v-loading="loading">
+      <div class="float-left">
+        <el-table
+          :data="results"
+          stripe
+          @selection-change="handleSelectionChange"
+          class="float-left"
+        >
+          <el-table-column type="selection" width="55"></el-table-column
+          ><!-- 显示选取表格 -->
+          <el-table-column prop="id" label="ID" width="80"> </el-table-column>
+          <el-table-column prop="user_id" label="用户ID" width="80">
+          </el-table-column>
+          <el-table-column label="用户">
+            <template slot-scope="scope">
+              <div v-if="users[scope.row.user_id]" class="d-flex">
+                <div>
+                  <img
+                    :src="users[scope.row.user_id].avatar"
+                    width="40"
+                    height="40"
+                  />
+                </div>
+                <div class="ml-10">
+                  {{ users[scope.row.user_id].nick_name }}
+                </div>
+              </div>
+              <span v-else class="c-red">用户已删除</span>
+            </template>
+          </el-table-column>
+          <el-table-column label="金额" width="100">
+            <template slot-scope="scope">
+              <span>{{ scope.row.before_balance }}元</span>
+            </template>
+          </el-table-column>
+          <el-table-column prop="channel" label="渠道" width="100">
+          </el-table-column>
+          <el-table-column prop="channel_name" label="渠道姓名" width="100">
+          </el-table-column>
+          <el-table-column prop="channel_account" label="渠道账号">
+          </el-table-column>
+          <el-table-column prop="created_at" label="创建时间">
+          </el-table-column>
+        </el-table>
       </div>
-      <el-table
-        :data="dataList"
-        stripe
-        style="width: 100%"
-        @selection-change="handleSelectionChange"
-      >
-        <el-table-column type="selection" width="55"></el-table-column
-        ><!-- 显示选取表格 -->
-        <el-table-column prop="id" label="ID"> </el-table-column>
-        <el-table-column prop="user_id" label="用户ID"> </el-table-column>
-        <el-table-column prop="nick_name" label="用户"> </el-table-column>
-        <el-table-column label="金额">
-          <template slot-scope="scope">
-            <span>{{ scope.row.before_balance }}元</span>
-          </template>
-        </el-table-column>
-        <el-table-column prop="channel" label="渠道"> </el-table-column>
-        <el-table-column prop="channel_name" label="渠道姓名">
-        </el-table-column>
-        <el-table-column prop="channel_account" label="渠道账号">
-        </el-table-column>
-        <el-table-column prop="created_at" label="创建时间"> </el-table-column>
-      </el-table>
-      <el-pagination
-        style="margin-top: 20px"
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page="page"
-        :page-sizes="[5, 10, 20, 40]"
-        :page-size="pagesize"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="total"
-      >
-      </el-pagination>
-    </el-main>
-  </el-container>
+      <div class="float-left mt-30 text-center">
+        <el-pagination
+          @size-change="paginationSizeChange"
+          @current-change="paginationPageChange"
+          :current-page="pagination.page"
+          :page-sizes="[10, 20, 50, 100]"
+          :page-size="pagination.size"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="total"
+        >
+        </el-pagination>
+      </div>
+    </div>
+  </div>
 </template>
+
 
 <script>
 export default {
   data() {
     return {
       name: "Orderlist",
-      page: 1,
+      pagination: {
+        page: 1,
+        size: 10,
+      },
+      filter: {
+        user_id: null,
+        status: -1,
+        keywords: "",
+      },
+      filterData: {
+        groups: [
+          {
+            name: "全部",
+            key: -1,
+          },
+          {
+            name: "已提交",
+            key: 0,
+          },
+          {
+            name: "成功",
+            key: 1,
+          },
+          {
+            name: "失败",
+            key: 2,
+          },
+        ],
+      },
       total: 0,
       loading: false,
-      user_id: "",
-      pagesize: 10,
-      status: -1,
-      keywords: "",
-      ids: [],
-      dataList: [],
-      rolesList: [],
-      groups: [
-        {
-          name: "全部",
-          key: -1,
-        },
-        {
-          name: "已提交",
-          key: 0,
-        },
-        {
-          name: "成功",
-          key: 1,
-        },
-        {
-          name: "失败",
-          key: 2,
-        },
-      ],
+      spids: {
+        ids: [],
+      },
+      results: [],
+      users: [],
     };
   },
   created() {
-    this.getList(1);
+    this.getResults();
   },
   methods: {
-    // 初始页currentPage、初始每页数据数pagesize和数据data
-    handleSizeChange: function (size) {
-      this.pagesize = size;
-      this.getList(this.page);
+    firstPageLoad() {
+      this.pagination.page = 1;
+      this.getResults();
     },
-    handleCurrentChange: function (currentPage) {
-      this.page = currentPage;
-      this.getList(this.page);
+    paginationReset() {
+      this.pagination.page = 1;
+      this.filter.user_id = "";
+      this.filter.status = -1;
+      this.filter.keywords = "";
+      this.getResults();
+    },
+    paginationSizeChange(size) {
+      this.pagination.size = size;
+      this.getResults();
+    },
+    paginationPageChange(page) {
+      this.pagination.page = page;
+      this.getResults();
     },
     //保存选中结果
     handleSelectionChange(val) {
@@ -121,99 +168,54 @@ export default {
       for (var i = 0; i < val.length; i++) {
         newbox.push(val[i].id);
       }
-      this.ids = newbox;
+      this.spids.ids = newbox;
     },
     //获取order列表
-    getList(p) {
+    getResults() {
+      if (this.loading) {
+        return;
+      }
       this.loading = true;
-      var data = {
-        page: p,
-        total: this.total,
-        size: this.pagesize,
-        user_id: this.user_id,
-        status: this.status,
-        keywords: this.keywords,
-      };
-      this.$api.Order.WithdrawOrders.WithdrawOrders(data).then((resp) => {
-        if (resp.status == 0) {
-          this.page = resp.data.orders.current_page;
-          var orders = resp.data.orders;
-          var users = resp.data.users;
-          this.total = orders.total;
-          this.dataList = orders.data;
-          for (var i = 0; i < this.dataList.length; i++) {
-            var showkey = this.dataList[i].user_id;
-            this.parseJson(users, showkey);
-          }
-        }
+      let params = {};
+      Object.assign(params, this.filter, this.pagination);
+      this.$api.Order.WithdrawOrders.WithdrawOrders(params).then((res) => {
         this.loading = false;
+        this.results = res.data.orders.data;
+        this.users = res.data.users;
+        this.total = res.data.orders.total;
       });
     },
-    //搜索box
-    parseJson(data, index) {
-      if (typeof data[index] === "undefined") {
-        return "";
-      }
-      for (var i = 0; i < this.dataList.length; i++) {
-        if (this.dataList[i].user_id == index) {
-          this.dataList[i]["nick_name"] = data[index].nick_name;
-        }
-      }
-    },
-    //重置
-    reset() {
-      this.user_id = "";
-      this.keywords = "";
-      this.pagesize = 10;
-      this.status = -1;
-      this.total = 0;
-      this.getList(1);
-    },
-    //搜索
-    search() {
-      this.getList(1);
-    },
-    //批量删除
-    deleteMulti() {
+    destorymulti() {
       this.$confirm("确认操作？", "警告", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
-      })
-        .then(() => {
-          //点击确定按钮的操作
-          this.loading = true;
-          var data = {
-            ids: this.ids,
-          };
-          //批量操作函数
-          console.log(data);
-          this.loading = false;
-        })
-        .catch(() => {
-          //点击删除按钮的操作
-        });
+      }).then(() => {
+        //点击确定按钮的操作
+        if (this.loading) {
+          return;
+        }
+        if (this.spids.ids == "") {
+          this.$message.error("请选择需要操作的数据");
+          return;
+        }
+        this.loading = true;
+        this.loading = false;
+        //   this.$api.Course.Live.Course.Video.ChatDestoryMulti(this.spids)
+        //     .then(() => {
+        //       this.loading = false;
+        //       this.$message.success(this.$t("common.success"));
+        //       this.getResults();
+        //     })
+        //     .catch((e) => {
+        //       this.loading = false;
+        //       this.$message.error(e.message);
+        //     });
+        // })
+        // .catch(() => {
+        //   //点击删除按钮的操作
+      });
     },
   },
 };
 </script>
-<style  lang="less" scoped>
-.main_content {
-  width: 100%;
-  .row {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    padding-left: 20px;
-    box-sizing: border-box;
-    margin-bottom: 20px;
-    label {
-      margin-right: 10px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      white-space: nowrap;
-    }
-  }
-}
-</style>
