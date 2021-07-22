@@ -93,7 +93,7 @@
                 class="ml-5"
                 @click="
                   $router.push({
-                    name: 'LiveCourseVideoUpdate',
+                    name: 'LiveCourseVideoChat',
                     query: {
                       id: scope.row.id,
                       course_id: scope.row.course_id,

@@ -486,6 +486,12 @@ const Api = {
                     Watch(params) {
                         return get(`/backend/addons/zhibo/course_video/watch/users`, params);
                     },
+                    Chat(id, ids, params) {
+                        return get(`/backend/addons/zhibo/chat/${id}/${ids}`, params);
+                    },
+                    ChatDestoryMulti(params) {
+                        return post(`/backend/addons/zhibo/chat/delete`, params);
+                    },
                 },
             },
             Teacher: {
@@ -990,7 +996,7 @@ const Api = {
     Multishare: {
         Poster: {
             List() {
-                return get(`/backend/addons/multi_level_share/poster/index`,);
+                return get(`/backend/addons/multi_level_share/poster/index`, );
             },
             Store(params) {
                 return post(`/backend/addons/multi_level_share/poster/create`, params);
