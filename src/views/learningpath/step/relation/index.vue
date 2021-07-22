@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="学习步骤关联"></back-bar>
+    <back-bar class="mb-30" title="已关联课程"></back-bar>
     <div class="float-left mb-30">
       <el-button
         @click="
@@ -17,18 +17,28 @@
     <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table :data="results" stripe class="float-left">
-          <el-table-column prop="id" label="ID" width="80"> </el-table-column>
-          <el-table-column prop="sort" label="升序" width="80">
+          <el-table-column prop="id" label="ID" width="120"> </el-table-column>
+          <el-table-column prop="sort" label="升序" width="120">
           </el-table-column>
           <el-table-column prop="type_text" label="类型" width="120">
           </el-table-column>
-          <el-table-column prop="name" label="课程"> </el-table-column>
-          <el-table-column label="价格" width="150">
+          <el-table-column label="课程" width="500">
+            <template slot-scope="scope">
+              <div class="d-flex">
+                <div>
+                  <img :src="scope.row.thumb" width="120" height="90" />
+                </div>
+                <div class="ml-10">
+                  {{ scope.row.name }}
+                </div>
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column label="价格">
             <template slot-scope="scope">
               <span>￥{{ scope.row.charge }}</span>
             </template>
           </el-table-column>
-
           <el-table-column fixed="right" label="操作" width="120">
             <template slot-scope="scope">
               <el-link type="danger" @click="destory(scope.row.id)"
@@ -40,7 +50,7 @@
                 @click="
                   $router.push({
                     name: 'SteprelationUpdate',
-                    query: { id: scope.row.id, step_id: pagination.step_id },
+                    query: { id: scope.row.id },
                   })
                 "
                 >编辑</el-link
@@ -70,6 +80,7 @@
 export default {
   data() {
     return {
+      step_id: this.$route.query.id,
       pagination: {
         step_id: this.$route.query.id,
         page: 1,
@@ -80,7 +91,6 @@ export default {
       results: [],
     };
   },
-
   mounted() {
     this.getResults();
   },

@@ -1,56 +1,79 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="创建步骤关联"></back-bar>
+    <back-bar class="mb-30" title="添加课程"></back-bar>
     <div class="float-left">
-      <div class="form-box broder-top-left-radius">
-        <el-form ref="form" :model="course" :rules="rules" label-width="200px">
-          <el-form-item prop="other_id" label="课程">
-            <div class="d-flex">
-              <div>
-                <el-button @click="selgoods"> 选择课程 </el-button>
-                <span
-                  v-if="this.course.other_id"
-                  style="color: red; margin-left: 4px"
-                  >已选择</span
-                >
-                <select-resource
-                  v-bind:show="msg"
-                  @close="close"
-                  @change="change"
-                  :enabled-resource="types"
-                ></select-resource>
-              </div>
+      <el-form
+        ref="form"
+        class="float-left"
+        :model="form"
+        :rules="rules"
+        label-width="200px"
+      >
+        <el-form-item prop="other_id" label="课程">
+          <div class="d-flex">
+            <div>
+              <el-button type="primary" @click="showSelectResourceWin = true">
+                请选择关联课程 <span v-if="form.name">「{{ form.name }}」</span>
+              </el-button>
+              <select-resource
+                :show="showSelectResourceWin"
+                @close="showSelectResourceWin = false"
+                @change="change"
+                enabled-resource="vod,book,live,paper,practice"
+              ></select-resource>
             </div>
-          </el-form-item>
-          <el-form-item label="课程名" prop="name">
-            <el-input v-model="course.name" class="w-100"></el-input>
-          </el-form-item>
-          <el-form-item prop="thumb" label="课程封面">
-            <upload-image
-              v-model="course.thumb"
-              helper="长宽比4:3，建议尺寸：400x300像素"
-              width="400"
-              height="300"
-              name="上传封面"
-            ></upload-image>
-          </el-form-item>
-          <el-form-item label="课程价格" prop="charge">
-            <el-input
-              type="number"
-              placeholder="单位：元"
-              v-model="course.charge"
-              class="w-200px"
-            ></el-input>
-          </el-form-item>
-          <el-form-item label="升序" prop="sort">
-            <el-input
-              type="number"
-              v-model="course.sort"
-              class="w-200px"
-            ></el-input>
-          </el-form-item>
-        </el-form>
-      </div>
+          </div>
+        </el-form-item>
+        <el-form-item label="课程名" prop="name">
+          <el-input
+            v-model="form.name"
+            class="w-600px"
+            placeholder="课程名"
+          ></el-input>
+        </el-form-item>
+        <el-form-item prop="thumb" label="课程封面">
+          <upload-image
+            v-model="form.thumb"
+            helper="长宽比4:3，建议尺寸：400x300像素"
+            width="200"
+            height="150"
+            name="上传封面"
+          ></upload-image>
+        </el-form-item>
+        <el-form-item label="课程价格" prop="charge">
+          <div class="d-flex">
+            <div>
+              <el-input
+                type="number"
+                placeholder="单位：元"
+                v-model="form.charge"
+                class="w-200px"
+              ></el-input>
+            </div>
+            <div class="ml-10">
+              <helper-text
+                text="最小单位：元。不支持小数。该价格仅作为参考，无实际意义。"
+              ></helper-text>
+            </div>
+          </div>
+        </el-form-item>
+        <el-form-item label="升序" prop="sort">
+          <div class="d-flex">
+            <div>
+              <el-input
+                type="number"
+                v-model="form.sort"
+                class="w-200px"
+              ></el-input>
+            </div>
+            <div class="ml-10">
+              <helper-text
+                text="请输入整数。小数排在前，大数排在后。"
+              ></helper-text>
+            </div>
+          </div>
+        </el-form-item>
+      </el-form>
 
       <div class="bottom-menus">
         <div class="bottom-menus-box">
@@ -60,9 +83,7 @@
             >
           </div>
           <div class="ml-24">
-            <el-button @click="$router.back()"
-              >取消</el-button
-            >
+            <el-button @click="$router.back()">取消</el-button>
           </div>
         </div>
       </div>
@@ -80,7 +101,7 @@ export default {
   },
   data() {
     return {
-      course: {
+      form: {
         step_id: this.$route.query.step_id,
         name: null,
         other_id: null,
@@ -89,25 +110,23 @@ export default {
         type: null,
         thumb: null,
       },
-      types: null,
-      msg: false,
+      showSelectResourceWin: false,
       categories: [],
       rules: {
         other_id: [
           {
             required: true,
-            message: "课程不能为空",
+            message: "请选择课程",
             trigger: "blur",
           },
         ],
         name: [
           {
             required: true,
-            message: "步骤名不能为空",
+            message: "请输入课程名",
             trigger: "blur",
           },
         ],
-
         sort: [
           {
             required: true,
@@ -130,41 +149,31 @@ export default {
           },
         ],
       },
-      expireTimeOption: {
-        disabledDate(date) {
-          // 当天可选：date.getTime() < Date.now() - 24 * 60 * 60 * 1000
-          //超过此刻可选
-          return date.getTime() < Date.now();
-        },
-      },
       loading: false,
     };
   },
-  mounted() {
-    this.params();
-  },
   methods: {
-    close() {
-      this.msg = false;
-    },
-    change(v1) {
-      console.log(v1);
-      var data = v1;
-      this.course.other_id = data.id;
-      this.course.type = data.resource_type;
+    change(data) {
+      // 选中课程基础信息
+      this.form.other_id = data.id;
+      this.form.name = data.title;
+      this.form.charge = data.original_charge;
+      this.form.thumb = data.thumb;
+
       if (data.resource_type == "vod") {
-        this.course.type = "course";
+        this.form.type = "course";
+      } else if (data.resource_type === "paper") {
+        this.form.type = "paper_paper";
+      } else if (data.resource_type === "practice") {
+        this.form.type = "paper_practice";
+      } else {
+        this.form.type = data.resource_type;
       }
-      this.course.name = data.title;
-      this.course.charge = data.original_charge;
-      this.course.thumb = data.thumb;
-      this.msg = false;
-    },
-    params() {
-      this.types = "vod,book,live,paper,practice,";
+
+      this.showSelectResourceWin = false;
     },
     selgoods() {
-      this.msg = true;
+      this.showSelectResourceWin = true;
     },
     formValidate() {
       this.$refs["form"].validate((valid) => {
@@ -178,7 +187,7 @@ export default {
         return;
       }
       this.loading = true;
-      this.$api.Course.LearnPath.Step.Relation.Store(this.course)
+      this.$api.Course.LearnPath.Step.Relation.Store(this.form)
         .then(() => {
           this.$message.success(this.$t("common.success"));
           this.$router.back();
