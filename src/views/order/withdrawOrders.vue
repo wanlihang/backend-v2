@@ -5,7 +5,7 @@
     </div>
     <div class="float-left">
       <div class="float-left d-flex">
-        <div class="ml-10">
+        <div>
           <el-input
             class="w-200px"
             v-model="filter.user_id"
