@@ -18,8 +18,11 @@
     <div class="float-left">
       <div class="float-left d-flex">
         <div>
-          <el-input
-            class="w-200px"
+           <span slot="label" style="font-size:14px;">
+            <form-label text="优惠码" helper="优惠码的 U 前缀是用户专属邀请码预留的，请勿在自定义优惠码中使用！"></form-label>
+          </span>
+          <el-input  
+            class="ml-10 w-200px"
             v-model="filter.key"
             placeholder="支持优惠码模糊搜索"
           ></el-input>

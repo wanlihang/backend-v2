@@ -193,7 +193,6 @@ export default {
   methods: {
     close() {
       this.$emit("close");
-      this.show=false;
     },
     confirm() {
       if (this.selectedResult === null) {
