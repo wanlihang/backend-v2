@@ -117,7 +117,7 @@ export default {
             this.$router.push({ name: "Promocode" });
             this.clearForm();
           } else {
-            this.$message(resp.message);
+            this.$message.error(resp.message);
           }
           this.loading = false;
         });

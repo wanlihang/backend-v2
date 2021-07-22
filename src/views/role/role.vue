@@ -82,10 +82,10 @@ export default {
           this.loading = true;
           this.$api.Role.Destory(id).then((resp) => {
             if (resp.status == 0) {
-              this.$message("删除成功");
+              this.$message.error("删除成功");
               this.getmemberinfo(1);
             } else {
-              this.$message(resp.message);
+              this.$message.error(resp.message);
             }
             this.loading = false;
           });

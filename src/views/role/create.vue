@@ -127,7 +127,7 @@ export default {
               this.$router.push({ name: "Role" });
               this.clearForm();
             } else {
-              this.$message(resp.message);
+              this.$message.error(resp.message);
             }
             this.loading = false;
           }

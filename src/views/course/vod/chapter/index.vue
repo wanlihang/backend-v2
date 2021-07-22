@@ -98,7 +98,7 @@ export default {
             })
             .catch((e) => {
               this.loading = false;
-              this.$message(e.message);
+              this.$message.error(e.message);
             });
         })
         .catch(() => {

@@ -88,7 +88,7 @@ export default {
           this.addForm.charge=data.charge;
           this.addForm.description=data.description;
         } else {
-          this.$message(resp.message);
+          this.$message.error(resp.message);
         }
         this.loading = false;
       });
@@ -117,7 +117,7 @@ export default {
               this.$message.success("保存成功");
               this.$router.push({ name: "Role" });
             } else {
-              this.$message(resp.message);
+              this.$message.error(resp.message);
             }
             this.loading = false;
           }

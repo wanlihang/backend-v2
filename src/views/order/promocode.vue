@@ -170,10 +170,10 @@ export default {
           };
           this.$api.Order.PromoCode.DestroyMulti(data).then((resp) => {
             if (resp.status == 0) {
-              this.$message("删除成功");
+              this.$message.error("删除成功");
               this.getList(1);
             } else {
-              this.$message(resp.message);
+              this.$message.error(resp.message);
             }
             this.loading = false;
           });
