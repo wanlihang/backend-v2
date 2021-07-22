@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="用户批量导入"></back-bar>
+    <back-bar class="mb-30" title="优惠码批量导入"></back-bar>
 
     <div class="user-import-box">
       <div class="float-left d-flex mb-15">
