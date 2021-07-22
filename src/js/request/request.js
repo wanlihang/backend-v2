@@ -1097,7 +1097,7 @@ const Api = {
             Store(params) {
                 return post(`/backend/addons/Paper/paper/create`, params);
             },
-            Edit(id) {
+            Detail(id) {
                 return get(`/backend/addons/Paper/paper/${id}`);
             },
             Update(id, params) {

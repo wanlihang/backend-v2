@@ -1,14 +1,8 @@
 <template>
   <div class="meedu-main-body">
     <div class="float-left mb-30">
-      <!-- <el-button
-        @click="$router.push({ name: 'LiveCourseComment' })"
-        type="primary"
-      >
-        直播课程评论
-      </el-button> -->
       <el-button
-        @click="$router.push({ name: 'LiveCourseCreate' })"
+        @click="$router.push({ name: 'ExamPaperCreate' })"
         type="primary"
       >
         添加
@@ -27,42 +21,6 @@
               :key="index"
               :label="item.name"
               :value="item.id"
-            >
-            </el-option>
-          </el-select>
-        </div>
-
-        <div class="ml-10">
-          <el-select
-            class="w-200px"
-            placeholder="讲师"
-            v-model="filter.teacher_id"
-          >
-            <el-option
-              v-for="(item, index) in filterData.teachers"
-              :key="index"
-              :label="item.name"
-              :value="item.id"
-            >
-            </el-option>
-          </el-select>
-        </div>
-
-        <div class="ml-10">
-          <el-input
-            class="w-200px"
-            v-model="filter.keywords"
-            placeholder="请输入关键字"
-          ></el-input>
-        </div>
-
-        <div class="ml-10">
-          <el-select class="w-200px" placeholder="状态" v-model="filter.status">
-            <el-option
-              v-for="(item, index) in filterData.statusList"
-              :key="index"
-              :label="item.name"
-              :value="item.key"
             >
             </el-option>
           </el-select>
@@ -89,33 +47,19 @@
           </el-table-column>
           <el-table-column prop="category.name" label="分类" width="150">
           </el-table-column>
-          <el-table-column prop="teacher.name" label="讲师" width="160">
-          </el-table-column>
-          <el-table-column prop="title" label="课程名" width="500">
-          </el-table-column>
-          <el-table-column label="价格" property="charge" sortable width="100">
+          <el-table-column prop="title" label="标题"> </el-table-column>
+          <el-table-column label="及格/总分" width="100">
             <template slot-scope="scope">
-              <span>{{ scope.row.charge }}元</span>
+              <span style="color: red">{{ scope.row.pass_score }}分</span>
+              <span>/{{ scope.row.score }}分</span>
             </template>
           </el-table-column>
-          <el-table-column
-            label="人数"
-            property="join_user_times"
-            sortable
-            width="120"
-          >
+          <el-table-column label="时长" width="100">
             <template slot-scope="scope">
-              <span>{{ scope.row.join_user_times }}人</span>
+              <span>{{ scope.row.expired_minutes }}m</span>
             </template>
           </el-table-column>
-          <el-table-column label="状态" width="100">
-            <template slot-scope="scope">
-              <span>{{ scope.row.status_text }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="上架时间" prop="published_at" sortable>
-          </el-table-column>
-          <el-table-column fixed="right" label="操作" width="200">
+          <el-table-column fixed="right" label="操作" width="350">
             <template slot-scope="scope">
               <el-link type="danger" @click="destory(scope.row.id)"
                 >删除</el-link
@@ -125,7 +69,7 @@
                 class="ml-5"
                 @click="
                   $router.push({
-                    name: 'LiveCourseUpdate',
+                    name: 'ExamPaperUpdate',
                     query: { id: scope.row.id },
                   })
                 "
@@ -136,22 +80,44 @@
                 class="ml-5"
                 @click="
                   $router.push({
-                    name: 'LiveCourseVideo',
+                    name: 'ExamPaperUpdate',
                     query: { id: scope.row.id },
                   })
                 "
-                >直播</el-link
+                >题目设置</el-link
               >
               <el-link
                 type="primary"
                 class="ml-5"
                 @click="
                   $router.push({
-                    name: 'LiveCourseUsers',
+                    name: 'ExamPaperUpdate',
                     query: { id: scope.row.id },
                   })
                 "
-                >用户</el-link
+                >订阅用户</el-link
+              >
+              <el-link
+                type="primary"
+                class="ml-5"
+                @click="
+                  $router.push({
+                    name: 'ExamPaperUpdate',
+                    query: { id: scope.row.id },
+                  })
+                "
+                >分数统计</el-link
+              >
+              <el-link
+                type="primary"
+                class="ml-5"
+                @click="
+                  $router.push({
+                    name: 'ExamPaperUpdate',
+                    query: { id: scope.row.id },
+                  })
+                "
+                >考试记录</el-link
               >
             </template>
           </el-table-column>
@@ -186,65 +152,55 @@ export default {
       },
       filter: {
         category_id: null,
-        teacher_id: null,
-        keywords: null,
-        status: -1,
       },
       total: 0,
       loading: false,
       list: [],
       filterData: {
         categories: [],
-        teachers: [],
-        statusList: [],
       },
     };
   },
 
   mounted() {
-    this.getData();
+    this.getResults();
   },
   methods: {
     firstPageLoad() {
       this.pagination.page = 1;
-      this.getData();
+      this.getResults();
     },
     paginationReset() {
       this.pagination.page = 1;
-      this.filter.teacher_id = null;
       this.filter.category_id = null;
-      this.filter.keywords = null;
-      this.filter.status = -1;
-      this.getData();
+      this.getResults();
     },
     paginationSizeChange(size) {
       this.pagination.size = size;
-      this.getData();
+      this.getResults();
     },
     paginationPageChange(page) {
       this.pagination.page = page;
-      this.getData();
+      this.getResults();
     },
     sortChange(column) {
       this.pagination.sort = column.prop;
       this.pagination.order = column.order === "ascending" ? "asc" : "desc";
-      this.getData();
+      this.getResults();
     },
-    getData() {
+    getResults() {
       if (this.loading) {
         return;
       }
       this.loading = true;
       let params = {};
       Object.assign(params, this.filter, this.pagination);
-      this.$api.Course.Live.Course.List(params).then((res) => {
+      this.$api.Exam.Paper.List(params).then((res) => {
         this.loading = false;
         this.list = res.data.data.data;
         this.total = res.data.data.total;
 
         this.filterData.categories = res.data.categories;
-        this.filterData.teachers = res.data.teachers;
-        this.filterData.statusList = res.data.statusList;
       });
     },
     destory(item) {
@@ -259,11 +215,11 @@ export default {
             return;
           }
           this.loading = true;
-          this.$api.Course.Live.Course.Destory(item)
+          this.$api.Exam.Paper.Destory(item)
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));
-              this.getData();
+              this.getResults();
             })
             .catch((e) => {
               this.loading = false;
