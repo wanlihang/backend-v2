@@ -59,19 +59,6 @@
           </el-table-column>
         </el-table>
       </div>
-
-      <div class="float-left mt-30 text-center">
-        <el-pagination
-          @size-change="paginationSizeChange"
-          @current-change="paginationPageChange"
-          :current-page="pagination.page"
-          :page-sizes="[10, 20, 50, 100]"
-          :page-size="pagination.size"
-          layout="total, sizes, prev, pager, next, jumper"
-          :total="total"
-        >
-        </el-pagination>
-      </div>
     </div>
   </div>
 </template>
@@ -86,28 +73,15 @@ export default {
         page: 1,
         size: 10,
       },
-      total: 0,
       loading: false,
       results: [],
     };
   },
   mounted() {
-    this.getResults();
+    this.getData();
   },
   methods: {
-    paginationReset() {
-      this.pagination.page = 1;
-      this.getResults();
-    },
-    paginationSizeChange(size) {
-      this.pagination.size = size;
-      this.getResults();
-    },
-    paginationPageChange(page) {
-      this.pagination.page = page;
-      this.getResults();
-    },
-    getResults() {
+    getData() {
       if (this.loading) {
         return;
       }
@@ -118,7 +92,6 @@ export default {
       this.$api.Course.LearnPath.Step.Relation.List(params).then((res) => {
         this.loading = false;
         this.results = res.data.data;
-        this.total = res.data.total;
       });
     },
     destory(item) {
@@ -137,7 +110,7 @@ export default {
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));
-              this.getResults();
+              this.getData();
             })
             .catch((e) => {
               this.loading = false;

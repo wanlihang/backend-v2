@@ -23,6 +23,17 @@
             </template>
           </el-table-column>
 
+          <el-table-column label="步骤" width="200">
+            <template slot-scope="scope">
+              <span>{{ scope.row.steps_count }}个步骤</span>
+            </template>
+          </el-table-column>
+          <el-table-column label="课程" width="200">
+            <template slot-scope="scope">
+              <span>{{ scope.row.courses_count }}个课程</span>
+            </template>
+          </el-table-column>
+
           <el-table-column fixed="right" label="操作" width="120">
             <template slot-scope="scope">
               <el-link type="danger" @click="destory(scope.row.id)"
