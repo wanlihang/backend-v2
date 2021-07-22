@@ -27,7 +27,7 @@
     <div class="float-left mt-30" v-loading="loading">
       <div class="float-left">
         <el-table
-          :data="mbooks"
+          :data="list"
           stripe
           @selection-change="handleSelectionChange"
           class="float-left"
@@ -36,7 +36,7 @@
           <el-table-column prop="id" label="ID" width="120"> </el-table-column>
           <el-table-column prop="user_id" label="用户ID" width="120">
           </el-table-column>
-          <el-table-column label="用户">
+          <el-table-column label="用户" width="300">
             <template slot-scope="scope">
               <div class="d-flex" v-if="scope.row.user">
                 <div>
@@ -56,12 +56,12 @@
           </el-table-column>
           <el-table-column label="状态" width="100">
             <template slot-scope="scope">
-              <span class="c-red" v-if="scope.row.is_check == 0">拒绝</span>
-              <span v-else>通过</span>
+              <el-tag type="danger" v-if="scope.row.is_check !== 1">拒绝</el-tag>
+              <el-tag type="success" v-else>通过</el-tag>
             </template>
           </el-table-column>
           <el-table-column prop="updated_at" label="时间"> </el-table-column>
-          <el-table-column fixed="right" label="操作" width="150">
+          <el-table-column fixed="right" label="操作" width="100">
             <template slot-scope="scope">
               <el-link type="danger" @click="destory(scope.row.id)"
                 >删除</el-link
@@ -105,7 +105,7 @@ export default {
       },
       total: 0,
       loading: false,
-      mbooks: [],
+      list: [],
     };
   },
   mounted() {
@@ -143,7 +143,7 @@ export default {
       Object.assign(params, this.pagination);
       this.$api.Meedubook.Book.Comments(params).then((res) => {
         this.loading = false;
-        this.mbooks = res.data.data.data;
+        this.list = res.data.data.data;
         this.total = res.data.data.total;
       });
     },
@@ -221,7 +221,7 @@ export default {
           }
           this.spids.is_check = 0;
           this.loading = true;
-          this.$api.Meedubook.Book.Article.CommentMulti(this.spids)
+          this.$api.Meedubook.Book.CommentMulti(this.spids)
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));
