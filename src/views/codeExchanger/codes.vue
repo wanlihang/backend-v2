@@ -154,7 +154,7 @@ export default {
             return;
           }
           if (this.spids.ids == "") {
-            this.$message("请选择需要操作的数据");
+            this.$message.error("请选择需要操作的数据");
             return;
           }
           this.loading = true;

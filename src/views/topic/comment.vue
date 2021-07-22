@@ -170,7 +170,7 @@ export default {
             })
             .catch((e) => {
               this.loading = false;
-              this.$message(e.message);
+              this.$message.error(e.message);
             });
         })
         .catch(() => {
@@ -189,7 +189,7 @@ export default {
             return;
           }
           if (this.spids.ids == "") {
-            this.$message("请选择需要操作的数据");
+            this.$message.error("请选择需要操作的数据");
             return;
           }
           this.spids.is_check = 1;
@@ -222,7 +222,7 @@ export default {
             return;
           }
           if (this.spids.ids == "") {
-            this.$message("请选择需要操作的数据");
+            this.$message.error("请选择需要操作的数据");
             return;
           }
           this.spids.is_check = 0;

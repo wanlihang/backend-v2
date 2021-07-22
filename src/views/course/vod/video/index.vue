@@ -180,7 +180,7 @@ export default {
     importUser() {},
     destoryMulti() {
       if (this.spids.ids == "") {
-        this.$message("请选择需要操作的数据");
+        this.$message.error("请选择需要操作的数据");
         return;
       }
 
@@ -203,7 +203,7 @@ export default {
             })
             .catch((e) => {
               this.loading = false;
-              this.$message(e.message);
+              this.$message.error(e.message);
             });
         })
         .catch(() => {});
