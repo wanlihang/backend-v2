@@ -126,6 +126,17 @@
                   class="ml-5"
                   @click="
                     $router.push({
+                      name: 'MeedubookUsers',
+                      query: { bid: scope.row.id },
+                    })
+                  "
+                  >用户</el-link
+                >
+                <el-link
+                  type="primary"
+                  class="ml-5"
+                  @click="
+                    $router.push({
                       name: 'MeedubookComment',
                       query: { bid: scope.row.id },
                     })
