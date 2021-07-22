@@ -52,7 +52,17 @@
           <el-table-column prop="id" label="ID" width="80"> </el-table-column>
           <el-table-column prop="user_id" label="用户ID" width="80">
           </el-table-column>
-          <el-table-column prop="user.nick_name" label="用户" width="150">
+          <el-table-column label="用户" :width="300">
+            <template slot-scope="scope">
+              <div class="d-flex" v-if="scope.row.user">
+                <div>
+                  <img :src="scope.row.user.avatar" width="40" height="40" />
+                </div>
+                <div class="ml-10">
+                  {{ scope.row.user.nick_name }}
+                </div>
+              </div>
+            </template>
           </el-table-column>
           <el-table-column label="课程">
             <template slot-scope="scope">
@@ -94,13 +104,6 @@
         >
         </el-pagination>
       </div>
-      <div class="bottom-menus">
-        <div class="bottom-menus-box">
-          <div>
-            <el-button @click="$router.back()">取消</el-button>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </template>
@@ -129,13 +132,7 @@ export default {
       },
     };
   },
-  computed: {
-    activeItemList: function () {
-      return this.filterData.goods.filter((item, index) => {
-        return item.goods_type == this.filter.type;
-      });
-    },
-  },
+
   mounted() {
     this.getResults();
   },
@@ -265,7 +262,7 @@ export default {
             })
             .catch((e) => {
               this.loading = false;
-              this.$message(e.message);
+              this.$message.error(e.message);
             });
         })
         .catch(() => {
@@ -276,32 +273,3 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
-.filter-box {
-  width: 100%;
-  height: auto;
-  float: left;
-  box-sizing: border-box;
-  padding: 30px;
-  border-radius: 15px;
-  margin-bottom: 15px;
-  background-color: white;
-
-  .filter-label {
-    font-size: 14px;
-    color: rgba(0, 0, 0, 0.7);
-  }
-}
-.user-item {
-  width: auto;
-  display: flex;
-  align-items: center;
-  .avatar {
-    margin-right: 10px;
-  }
-  .nickname {
-    font-size: 15px;
-    font-weight: normal;
-  }
-}
-</style>
