@@ -72,13 +72,6 @@
         >
         </el-pagination>
       </div>
-      <div class="bottom-menus">
-        <div class="bottom-menus-box">
-          <div>
-            <el-button @click="$router.back()">取消</el-button>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </template>
@@ -173,7 +166,7 @@ export default {
             })
             .catch((e) => {
               this.loading = false;
-              this.$message(e.message);
+              this.$message.error(e.message);
             });
         })
         .catch(() => {
@@ -201,7 +194,7 @@ export default {
             })
             .catch((e) => {
               this.loading = false;
-              this.$message(e.message);
+              this.$message.error(e.message);
             });
         })
         .catch(() => {
@@ -283,32 +276,3 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
-.filter-box {
-  width: 100%;
-  height: auto;
-  float: left;
-  box-sizing: border-box;
-  padding: 30px;
-  border-radius: 15px;
-  margin-bottom: 15px;
-  background-color: white;
-
-  .filter-label {
-    font-size: 14px;
-    color: rgba(0, 0, 0, 0.7);
-  }
-}
-.user-item {
-  width: auto;
-  display: flex;
-  align-items: center;
-  .avatar {
-    margin-right: 10px;
-  }
-  .nickname {
-    font-size: 15px;
-    font-weight: normal;
-  }
-}
-</style>

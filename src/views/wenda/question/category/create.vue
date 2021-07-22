@@ -24,9 +24,7 @@
           >
         </div>
         <div class="ml-24">
-          <el-button @click="$router.back()"
-            >取消</el-button
-          >
+          <el-button @click="$router.back()">取消</el-button>
         </div>
       </div>
     </div>

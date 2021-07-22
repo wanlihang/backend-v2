@@ -33,7 +33,6 @@
               class="w-200px"
             ></el-input>
           </el-form-item>
-          
         </el-form>
       </div>
 
@@ -102,13 +101,6 @@ export default {
             trigger: "blur",
           },
         ],
-      },
-      expireTimeOption: {
-        disabledDate(date) {
-          // 当天可选：date.getTime() < Date.now() - 24 * 60 * 60 * 1000
-          //超过此刻可选
-          return date.getTime() < Date.now();
-        },
       },
       types: "",
       loading: false,

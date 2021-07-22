@@ -57,15 +57,23 @@
           <el-table-column prop="id" label="ID" width="80"> </el-table-column>
           <el-table-column label="商品ID" width="80">
             <template slot-scope="scope">
-              <span v-if="scope.row.goods">{{
-                scope.row.goods.goods_id
-              }}</span>
+              <span v-if="scope.row.goods">{{ scope.row.goods.goods_id }}</span>
               <span style="color: red" v-else>已删除</span>
             </template>
           </el-table-column>
           <el-table-column prop="user_id" label="用户ID" width="80">
           </el-table-column>
-          <el-table-column prop="user.nick_name" label="用户" width="150">
+          <el-table-column label="用户" :width="300">
+            <template slot-scope="scope">
+              <div class="d-flex" v-if="scope.row.user">
+                <div>
+                  <img :src="scope.row.user.avatar" width="40" height="40" />
+                </div>
+                <div class="ml-10">
+                  {{ scope.row.user.nick_name }}
+                </div>
+              </div>
+            </template>
           </el-table-column>
           <el-table-column label="商品类型" width="150">
             <template slot-scope="scope">
@@ -75,7 +83,7 @@
               <span style="color: red" v-else>已删除</span>
             </template>
           </el-table-column>
-          <el-table-column  label="商品">
+          <el-table-column label="商品">
             <template slot-scope="scope">
               <span v-if="scope.row.goods">{{
                 scope.row.goods.goods_title
@@ -193,37 +201,7 @@ export default {
         this.filterData.goods = res.data.goods;
       });
     },
-    
   },
 };
 </script>
 
-<style lang="less" scoped>
-.filter-box {
-  width: 100%;
-  height: auto;
-  float: left;
-  box-sizing: border-box;
-  padding: 30px;
-  border-radius: 15px;
-  margin-bottom: 15px;
-  background-color: white;
-
-  .filter-label {
-    font-size: 14px;
-    color: rgba(0, 0, 0, 0.7);
-  }
-}
-.user-item {
-  width: auto;
-  display: flex;
-  align-items: center;
-  .avatar {
-    margin-right: 10px;
-  }
-  .nickname {
-    font-size: 15px;
-    font-weight: normal;
-  }
-}
-</style>

@@ -23,7 +23,11 @@
             ></upload-image>
           </el-form-item>
           <el-form-item label="参数" prop="config">
-            <el-input type="textarea" v-model="course.config" class="w-100"></el-input>
+            <el-input
+              type="textarea"
+              v-model="course.config"
+              class="w-100"
+            ></el-input>
           </el-form-item>
         </el-form>
       </div>
@@ -36,9 +40,7 @@
             >
           </div>
           <div class="ml-24">
-            <el-button @click="$router.back()"
-              >取消</el-button
-            >
+            <el-button @click="$router.back()">取消</el-button>
           </div>
         </div>
       </div>
@@ -92,14 +94,6 @@ export default {
           },
         ],
       },
-      expireTimeOption: {
-        disabledDate(date) {
-          // 当天可选：date.getTime() < Date.now() - 24 * 60 * 60 * 1000
-          //超过此刻可选
-          return date.getTime() < Date.now();
-        },
-      },
-      types: null,
       loading: false,
     };
   },

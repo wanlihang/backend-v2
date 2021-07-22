@@ -55,7 +55,7 @@
             >
           </div>
           <div class="ml-24">
-            <el-button @click="$router.push({ name: 'LearningPath' })"
+            <el-button @click="$router.back()"
               >取消</el-button
             >
           </div>
@@ -158,7 +158,7 @@ export default {
       this.$api.Course.LearnPath.Path.Store(this.course)
         .then(() => {
           this.$message.success(this.$t("common.success"));
-          this.$router.push({ name: "LearningPath" });
+          this.$router.back();
         })
         .catch((e) => {
           this.loading = false;

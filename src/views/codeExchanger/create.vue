@@ -100,13 +100,6 @@ export default {
           },
         ],
       },
-      expireTimeOption: {
-        disabledDate(date) {
-          // 当天可选：date.getTime() < Date.now() - 24 * 60 * 60 * 1000
-          //超过此刻可选
-          return date.getTime() < Date.now();
-        },
-      },
       types: null,
       loading: false,
     };

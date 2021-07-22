@@ -694,7 +694,7 @@ const routes = [{
         component: () => import('@/views/tuangou/goods/tuanorder'),
         name: 'TuangouGoodsTuanorder',
         meta: {
-          title: 'title.tuangou.goods.orders'
+          title: 'title.tuangou.goods.tuanorder'
         }
       },
       {
