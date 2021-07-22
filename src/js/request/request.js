@@ -377,7 +377,7 @@ const Api = {
                 WatchRecords(id, params) {
                     return get(`/backend/api/v1/video/${id}/watch/records`, params);
                 },
-                ImportAct(params){
+                ImportAct(params) {
                     return post(`/backend/api/v1/video/import`, params);
                 },
                 Comment: {
@@ -477,6 +477,12 @@ const Api = {
                     Update(id, params) {
                         return put(`/backend/addons/zhibo/course_video/${id}`, params);
                     },
+                    Play(params) {
+                        return get(`/backend/addons/zhibo/zhibo/getParams`, params);
+                    },
+                    Stop(params) {
+                        return get(`/backend/addons/zhibo/zhibo/stop`, params);
+                    },
                 },
             },
             Teacher: {
@@ -562,7 +568,7 @@ const Api = {
                     return post(`/backend/addons/meedu_topics/comment/check`, params);
                 },
             },
-            Category:{
+            Category: {
                 List() {
                     return get(`/backend/addons/meedu_topics/category/index`);
                 },
@@ -788,7 +794,7 @@ const Api = {
             }
         },
     },
-    CodeExchanger:{
+    CodeExchanger: {
         List(params) {
             return get(`/backend/addons/CodeExchanger/goods`, params);
         },
@@ -807,7 +813,7 @@ const Api = {
         Update(id, params) {
             return put(`/backend/addons/CodeExchanger/goods/${id}`, params);
         },
-        Codes:{
+        Codes: {
             List(params) {
                 return get(`/backend/addons/CodeExchanger/codes`, params);
             },
@@ -817,12 +823,12 @@ const Api = {
             Generate(params) {
                 return post(`/backend/addons/CodeExchanger/code/generate`, params);
             },
-            Export(){
+            Export() {
                 return get(`/backend/addons/CodeExchanger/code/export`);
             },
         },
     },
-    
+
     Wenda: {
         Question: {
             List(params) {

@@ -25,27 +25,29 @@
               <span>{{ scope.row.title }}</span>
             </template>
           </el-table-column>
-          <el-table-column prop="published_at" label="直播时间" width="180">
+          <el-table-column prop="published_at" label="直播时间" width="200">
           </el-table-column>
           <el-table-column label="状态" width="100">
             <template slot-scope="scope">
-              <span style="color: green" v-if="scope.row.status == 1">{{
-                scope.row.status_text
-              }}</span>
-              <span style="color: red" v-else-if="scope.row.status == 2">{{
-                scope.row.status_text
-              }}</span>
-              <span v-else>{{ scope.row.status_text }}</span>
+              <el-tag type="success" v-if="scope.row.status == 1">
+                {{ scope.row.status_text }}
+              </el-tag>
+              <el-tag v-else-if="scope.row.status == 2">
+                {{ scope.row.status_text }}
+              </el-tag>
+              <el-tag v-else type="info">
+                {{ scope.row.status_text }}
+              </el-tag>
             </template>
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="300">
             <template slot-scope="scope">
-              <el-link type="danger" @click="destory(scope.row.id)"
-                >删除</el-link
-              >
+              <el-link type="danger" @click="destory(scope.row.id)">
+                删除
+              </el-link>
               <el-link
                 type="primary"
-                style="margin-left: 5px"
+                class="ml-5"
                 @click="
                   $router.push({
                     name: 'LiveCourseVideoUpdate',
@@ -55,23 +57,26 @@
                     },
                   })
                 "
-                >编辑</el-link
+              >
+                编辑
+              </el-link>
+              <el-link
+                type="primary"
+                class="ml-5"
+                @click="
+                  $router.push({
+                    name: 'LiveCourseVideoPlay',
+                    query: {
+                      video_id: scope.row.id,
+                      course_id: pagination.course_id,
+                    },
+                  })
+                "
+                >开播</el-link
               >
               <el-link
                 type="primary"
-                style="margin-left: 5px"
-                v-if="scope.row.status == 1"
-                >继续直播</el-link
-              >
-              <el-link
-                type="primary"
-                style="margin-left: 5px"
-                v-if="scope.row.status == 0"
-                >开始直播</el-link
-              >
-              <el-link
-                type="primary"
-                style="margin-left: 5px"
+                class="ml-5"
                 v-if="scope.row.status == 1"
                 @click="
                   $router.push({
@@ -82,11 +87,11 @@
                     },
                   })
                 "
-                >观看用户</el-link
+                >观看</el-link
               >
               <el-link
                 type="primary"
-                style="margin-left: 5px"
+                class="ml-5"
                 v-if="scope.row.status == 1"
                 @click="
                   $router.push({
@@ -97,7 +102,7 @@
                     },
                   })
                 "
-                >聊天室</el-link
+                >讨论</el-link
               >
             </template>
           </el-table-column>
