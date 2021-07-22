@@ -28,7 +28,17 @@
           <el-table-column type="selection" width="55"></el-table-column>
           <el-table-column prop="id" sortable label="视频ID" width="120">
           </el-table-column>
-          <el-table-column prop="title" label="视频"> </el-table-column>
+          <el-table-column label="视频" widt="500">
+            <template slot-scope="scope">
+              <template>
+                <template v-if="scope.row.chapter">
+                  <span>{{ scope.row.chapter.title }}</span>
+                  <span class="mx-5">/</span>
+                </template>
+                <span>{{ scope.row.title }}</span>
+              </template>
+            </template>
+          </el-table-column>
           <el-table-column property="charge" label="价格" sortable width="120"
             ><template slot-scope="scope">
               <span>￥{{ scope.row.charge }} </span>
@@ -39,12 +49,7 @@
               <duration-text :duration="scope.row.duration"></duration-text>
             </template>
           </el-table-column>
-          <el-table-column
-            prop="published_at"
-            sortable
-            label="上架时间"
-            width="200"
-          >
+          <el-table-column prop="published_at" sortable label="上架时间">
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="200">
             <template slot-scope="scope">
@@ -211,34 +216,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less" scoped>
-.user-item {
-  width: auto;
-  display: flex;
-  align-items: center;
-  .avatar {
-    margin-right: 10px;
-  }
-  .nickname {
-    font-size: 15px;
-    font-weight: normal;
-  }
-}
-
-.filter-box {
-  width: 100%;
-  height: auto;
-  float: left;
-  box-sizing: border-box;
-  padding: 30px;
-  border-radius: 15px;
-  margin-bottom: 15px;
-  background-color: white;
-
-  .filter-label {
-    font-size: 14px;
-    color: rgba(0, 0, 0, 0.7);
-  }
-}
-</style>
