@@ -11,44 +11,37 @@
             </div>
           </div>
           <div class="ml-15">
-            <el-button @click="getResults" type="primary" plain
-              >筛选</el-button
-            >
+            <el-button @click="getResults" type="primary" plain>筛选</el-button>
             <el-button @click="paginationReset">清空</el-button>
           </div>
         </div>
       </div>
       <div class="float-left mt-30" v-loading="loading">
         <div class="float-left">
-          <el-table
-            :data="mbooks"
-            stripe
-            class="float-left"
-          >
-         
+          <el-table :data="mbooks" stripe class="float-left">
             <el-table-column prop="id" label="ID" width="80"> </el-table-column>
             <el-table-column prop="user_id" label="用户ID" width="80">
             </el-table-column>
-            <el-table-column prop="user.nick_name" label="用户">
+            <el-table-column label="用户" :width="300">
+              <template slot-scope="scope">
+                <div class="d-flex" v-if="scope.row.user">
+                  <div>
+                    <img :src="scope.row.user.avatar" width="40" height="40" />
+                  </div>
+                  <div class="ml-10">
+                    {{ scope.row.user.nick_name }}
+                  </div>
+                </div>
+              </template>
             </el-table-column>
             <el-table-column label="价格">
               <template slot-scope="scope">
-                <span>{{scope.row.charge}}元</span>
+                <span>{{ scope.row.charge }}元</span>
               </template>
             </el-table-column>
             <el-table-column prop="updated_at" label="时间" width="180">
             </el-table-column>
-            
           </el-table>
-        </div>
-      </div>
-    </div>
-    <div class="bottom-menus">
-      <div class="bottom-menus-box">
-        <div>
-          <el-button @click="$router.back()"
-            >取消</el-button
-          >
         </div>
       </div>
     </div>
@@ -103,26 +96,9 @@ export default {
         this.total = res.data.data.total;
       });
     },
-    
-    
   },
 };
 </script>
 
 <style lang="less" scoped>
-.filter-box {
-  width: 100%;
-  height: auto;
-  float: left;
-  box-sizing: border-box;
-  padding: 30px;
-  border-radius: 15px;
-  margin-bottom: 15px;
-  background-color: white;
-
-  .filter-label {
-    font-size: 14px;
-    color: rgba(0, 0, 0, 0.7);
-  }
-}
 </style>
