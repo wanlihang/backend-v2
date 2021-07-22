@@ -82,7 +82,7 @@ export default {
         size: 10,
       },
       filter: {
-        user_id: 0,
+        user_id: null,
       },
       spids: {
         ids: [],
