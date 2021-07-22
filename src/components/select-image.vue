@@ -63,9 +63,8 @@
               @size-change="paginationSizeChange"
               @current-change="paginationPageChange"
               :current-page="pagination.page"
-              :page-sizes="[10, 20, 50, 100]"
               :page-size="pagination.size"
-              layout="total, sizes, prev, pager, next, jumper"
+              layout="total, prev, pager, next, jumper"
               :total="total"
             >
             </el-pagination>
@@ -81,8 +80,6 @@
 </template>
 
 <script>
-import Utils from "@/js/utils";
-
 export default {
   props: ["show", "from"],
   data() {
@@ -110,7 +107,7 @@ export default {
     },
     uploadHeaders() {
       return {
-        Authorization: "Bearer " + Utils.getToken(),
+        Authorization: "Bearer " + this.$utils.getToken(),
       };
     },
   },
@@ -123,6 +120,11 @@ export default {
     },
   },
   methods: {
+    resetLoad() {
+      this.pagination.page = 1;
+      this.pagination.from = 0;
+      this.getToken();
+    },
     paginationSizeChange(size) {
       this.pagination.size = size;
       this.getData();
@@ -159,7 +161,7 @@ export default {
       this.$emit("selected", this.imageUrl);
     },
     uploadSuccessEvt() {
-      this.getData();
+      this.resetLoad();
     },
   },
   beforeDestroy() {
@@ -280,6 +282,7 @@ export default {
     .body {
       width: 100%;
       height: auto;
+      min-height: 417px;
       box-sizing: border-box;
       padding: 15px;
       float: left;
