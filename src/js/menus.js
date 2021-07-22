@@ -3,10 +3,12 @@ export default [
         name: 'title.dashboard',
         key: 'Dashboard',
         children: [],
+        icon: 'icon-icon-study-n',
     },
     {
         name: 'title.coursename',
         key: 'Course',
+        icon: 'icon-icon-lesson',
         children: [
             {
                 name: 'title.topic.name',
@@ -33,6 +35,7 @@ export default [
     {
         name: 'title.member.index',
         key: 'Member',
+        icon: 'icon-icon-me-n',
         children: [
             {
                 name: 'title.member.index',
@@ -43,6 +46,7 @@ export default [
     {
         name: 'title.finance',
         key: 'Finance',
+        icon: 'icon-icon-money-n',
         children: [
 
             {
@@ -66,6 +70,7 @@ export default [
     {
         name: 'title.operate',
         key: 'Operate',
+        icon: 'icon-icon-operate',
         children: [
             {
                 name: 'title.codeExchanger.index',
@@ -108,6 +113,7 @@ export default [
     {
         name: 'title.decoration',
         key: 'Decoration',
+        icon: 'icon-icon-decorate',
         children: [
             {
                 name: 'title.decoration_pc',
@@ -127,6 +133,7 @@ export default [
     {
         name: 'title.system',
         key: 'System',
+        icon: 'icon-icon-setting-n',
         children: [
             {
                 name: 'title.system-administrator',

@@ -10,6 +10,7 @@ import utils from './js/utils';
 
 // 全局样式
 import './assets/common/variable.less';
+import './assets/common/iconfont/iconfont.css';
 
 // markdown编辑器
 import mavonEditor from "mavon-editor";

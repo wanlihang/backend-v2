@@ -41,7 +41,8 @@
                   :key="item.key"
                 >
                   <template slot="title">
-                    <span slot="title">{{ $t(item.name) }}</span>
+                    <i class="iconfont" :class="item.icon"></i
+                    >{{ $t(item.name) }}
                   </template>
                   <!-- 子菜单 -->
                   <el-menu-item
@@ -58,7 +59,10 @@
                   :index="item.key"
                   :key="item.key"
                 >
-                  <span slot="title"> {{ $t(item.name) }}</span>
+                  <template slot="title">
+                    <i class="iconfont" :class="item.icon"></i
+                    >{{ $t(item.name) }}
+                  </template>
                 </el-menu-item>
               </template>
             </el-menu>
@@ -204,17 +208,24 @@ export default {
   // border-right: 0;
 
   .el-menu-item {
-    // width: 100%;
-    // text-align: left;
-    // font-size: 14px;
-    // font-weight: 400;
-    // color: #555566;
+    box-sizing: border-box;
+    padding-left: 74px!important;
+
+    &.menu-item {
+      padding-left: 20px!important;
+    }
 
     &.is-active {
       background-color: @primary-color;
       color: #fff;
     }
   }
+}
+
+.iconfont {
+  font-size: 24px;
+  margin-right: 15px;
+  color: #555566;
 }
 
 // .el-submenu__title {

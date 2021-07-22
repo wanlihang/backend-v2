@@ -137,7 +137,7 @@ const zh = {
         },
         wechat: {
             messagereply: {
-                index: '公众号消息回复',
+                index: '公众号消息',
                 create: '公众号添加规则',
                 update: '公众号编辑规则',
             },
