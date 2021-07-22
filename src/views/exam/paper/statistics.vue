@@ -2,12 +2,7 @@
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="分数统计"></back-bar>
     <div class="float-left mb-30">
-      <el-button
-        @click="$router.push({ name: 'ExamPaperCreate' })"
-        type="primary"
-      >
-        导出成绩
-      </el-button>
+      <el-button @click="exportXlsx()" type="primary"> 导出成绩 </el-button>
     </div>
     <div class="float-left">
       <div>
@@ -74,6 +69,7 @@
 </template>
 
 <script>
+import Utils from "@/js/utils.js";
 export default {
   data() {
     return {
@@ -131,6 +127,46 @@ export default {
         this.pass_score = res.data.pass_score;
         this.total_score = res.data.total_score;
         this.stat = res.data.stat;
+      });
+    },
+    exportXlsx() {
+      this.loading = true;
+      let params = {};
+      Object.assign(params, this.pagination);
+      this.$api.Exam.Paper.Stat(this.pagination.id, params).then((res) => {
+        this.loading = false;
+        let filename = "成绩导出|" + Utils.currentDate() + ".xlsx";
+        let sheetName = "默认";
+
+        let rows = [["用户ID", "用户名", "手机号", "分数", "及格", "时间"]];
+        res.data.data.forEach((item) => {
+          let user = res.data.users[item.user_id];
+          if (typeof user === "undefined") {
+            return;
+          }
+
+          let isPass = item.score >= res.data.pass_score ? "是" : "否";
+
+          rows.push([
+            item.user_id,
+            user.nick_name,
+            user.mobile,
+            item.score,
+            isPass,
+            item.created_at,
+          ]);
+        });
+
+        // 总结
+        rows.push(["", "", ""]);
+        rows.push(["最低分", res.data.stat.min]);
+        rows.push(["最高分", res.data.stat.max]);
+        rows.push(["平均分", res.data.stat.average]);
+        rows.push(["总人数", res.data.total]);
+        rows.push(["及格人数", res.data.stat.pass_count]);
+        rows.push(["及格率", res.data.stat.pass_rate + "%"]);
+
+        Utils.exportExcel(rows, filename, sheetName);
       });
     },
   },
