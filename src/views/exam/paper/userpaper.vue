@@ -68,18 +68,8 @@
           <el-table-column prop="status_text" label="状态" width="80">
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="100">
-            <template slot-scope="scope">
-              <el-link
-                type="primary"
-                class="ml-5"
-                @click="
-                  $router.push({
-                    name: 'ExamPaperUpdate',
-                    query: { id: scope.row.id },
-                  })
-                "
-                >查看</el-link
-              >
+            <template>
+              <el-link type="primary" class="ml-5">查看</el-link>
             </template>
           </el-table-column>
         </el-table>
