@@ -107,7 +107,7 @@ export default {
       },
       filter: {
         user_id: null,
-        status: null,
+        status: -1,
       },
       total: 0,
       loading: false,
@@ -150,7 +150,7 @@ export default {
         this.loading = false;
         this.list = res.data.data.data;
         this.total = res.data.data.total;
-
+        
         this.filterData.categories = res.data.statusMap;
       });
     },
