@@ -4,25 +4,26 @@
     <div class="float-left">
       <el-form ref="form" :model="user" :rules="rules" label-width="200px">
         <el-form-item label="角色名" prop="display_name">
-          <el-input v-model="user.display_name" class="w-200px"></el-input>
+          <el-input v-model="user.display_name" class="w-300px"></el-input>
         </el-form-item>
 
         <el-form-item label="Slug" prop="slug">
-          <el-input v-model="user.slug" class="w-200px"></el-input>
+          <el-input v-model="user.slug" class="w-300px"></el-input>
         </el-form-item>
 
         <el-form-item label="描述" prop="description">
-          <el-input v-model="user.description" class="w-200px"></el-input>
+          <el-input v-model="user.description" class="w-300px"></el-input>
         </el-form-item>
 
-        <div v-for="(item, index) in permissions" :key="index">
-          <h1>{{ index }}</h1>
-          <el-checkbox-group v-model="user.permission_ids">
-            <el-checkbox v-for="it in item" :key="it.id" :label="it.id">{{
-              it.display_name
-            }}</el-checkbox>
-          </el-checkbox-group>
-        </div>
+        <el-form-item label="权限">
+          <el-cascader
+            filterable
+            v-model="selectedPermissions"
+            :options="permissionsTransform"
+            :props="{ multiple: true }"
+            clearable
+          ></el-cascader>
+        </el-form-item>
       </el-form>
     </div>
 
@@ -34,9 +35,7 @@
           >
         </div>
         <div class="ml-24">
-          <el-button @click="$router.push({ name: 'SystemAdminroles' })"
-            >取消</el-button
-          >
+          <el-button @click="$router.back()">取消</el-button>
         </div>
       </div>
     </div>
@@ -75,10 +74,43 @@ export default {
           },
         ],
       },
-      permissions: [],
-
+      permissions: null,
       loading: false,
+      selectedPermissions: [],
     };
+  },
+  computed: {
+    permissionsTransform() {
+      let p = [];
+      if (this.permissions) {
+        for (let i in this.permissions) {
+          let children = [];
+
+          for (let j = 0; j < this.permissions[i].length; j++) {
+            children.push({
+              value: this.permissions[i][j].id,
+              label: this.permissions[i][j].display_name,
+            });
+          }
+
+          p.push({
+            value: i,
+            label: i,
+            children: children,
+          });
+        }
+      }
+
+      return p;
+    },
+    selectedPermissionIds() {
+      let ids = [];
+      this.selectedPermissions.forEach((item) => {
+        ids.push(item[1]);
+      });
+
+      return ids;
+    },
   },
   mounted() {
     this.params();
@@ -101,11 +133,17 @@ export default {
         return;
       }
       this.loading = true;
+
+      let data = {};
+      Object.assign(data, this.user, {
+        permission_ids: this.selectedPermissionIds,
+      });
+
       this.$api.System.adminroles
-        .Store(this.user)
+        .Store(data)
         .then(() => {
           this.$message.success(this.$t("common.success"));
-          this.$router.push({ name: "SystemAdminroles" });
+          this.$router.back();
         })
         .catch((e) => {
           this.loading = false;
