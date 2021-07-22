@@ -570,12 +570,18 @@ const Api = {
                 Comment(params) {
                     return get(`/backend/addons/meedu_topics/comment`, params);
                 },
-                DestoryComment(id) {
+                DestroyComment(id) {
                     return destroy(`/backend/addons/meedu_topics/comment/${id}`);
                 },
                 CommentCheck(params) {
                     return post(`/backend/addons/meedu_topics/comment/check`, params);
                 },
+                AddUser(params) {
+                    return post(`/backend/addons/meedu_topics/order/user/add`, params);
+                },
+                DelUser(params) {
+                    return post(`/backend/addons/meedu_topics/order/user/del`, params);
+                }
             },
             Category: {
                 List() {
@@ -996,7 +1002,7 @@ const Api = {
     Multishare: {
         Poster: {
             List() {
-                return get(`/backend/addons/multi_level_share/poster/index`, );
+                return get(`/backend/addons/multi_level_share/poster/index`,);
             },
             Store(params) {
                 return post(`/backend/addons/multi_level_share/poster/create`, params);
