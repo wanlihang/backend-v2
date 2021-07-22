@@ -102,7 +102,7 @@
                 class="ml-5"
                 @click="
                   $router.push({
-                    name: 'ExamPaperUpdate',
+                    name: 'ExamPaperStat',
                     query: { id: scope.row.id },
                   })
                 "

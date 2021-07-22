@@ -1113,6 +1113,14 @@ const routes = [{
           title: 'title.exam.paper.userpaper'
         }
       },
+      {
+        path: '/exam/paper/stat',
+        component: () => import('@/views/exam/paper/statistics'),
+        name: 'ExamPaperStat',
+        meta: {
+          title: 'title.exam.paper.stat'
+        }
+      },
     ]
   },
   {

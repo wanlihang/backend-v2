@@ -1119,6 +1119,9 @@ const Api = {
             Userpaper(id,params) {
                 return get(`/backend/addons/Paper/paper/${id}/userPaper`, params);
             },
+            Stat(id,params) {
+                return get(`/backend/addons/Paper/paper/${id}/statistics`, params);
+            },
         },
         Practice: {
             List(params) {

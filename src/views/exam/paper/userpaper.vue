@@ -52,7 +52,7 @@
           </el-table-column>
           <el-table-column label="得分">
             <template slot-scope="scope">
-              <span v-if="status === 2">{{ scope.row.score }}分</span>
+              <span v-if="scope.row.status === 2">{{ scope.row.score }}分</span>
               <span style="color: red" v-else>未完成</span>
             </template>
           </el-table-column>
