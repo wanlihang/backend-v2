@@ -16,6 +16,7 @@
                 <select-resource
                   v-bind:show="msg"
                   @change="change"
+                  @close="close"
                   :enabled-resource="types"
                 ></select-resource>
               </div>
@@ -250,6 +251,9 @@ export default {
     this.params();
   },
   methods: {
+    close() {
+      this.msg = false;
+    },
     change(v1) {
       var data = v1;
       this.course.goods_id = data.id;
