@@ -35,7 +35,17 @@
             <el-table-column prop="id" label="ID" width="80"> </el-table-column>
             <el-table-column prop="user_id" label="用户ID" width="80">
             </el-table-column>
-            <el-table-column prop="user.nick_name" label="用户" width="150">
+            <el-table-column label="用户" :width="300">
+              <template slot-scope="scope">
+                <div class="d-flex" v-if="scope.row.user">
+                  <div>
+                    <img :src="scope.row.user.avatar" width="40" height="40" />
+                  </div>
+                  <div class="ml-10">
+                    {{ scope.row.user.nick_name }}
+                  </div>
+                </div>
+              </template>
             </el-table-column>
             <el-table-column label="评论内容">
               <template slot-scope="scope">
@@ -44,7 +54,9 @@
             </el-table-column>
             <el-table-column label="状态" width="80">
               <template slot-scope="scope">
-                <span style="color:red;" v-if="scope.row.is_check == 0">拒绝</span>
+                <span style="color: red" v-if="scope.row.is_check == 0"
+                  >拒绝</span
+                >
                 <span v-else>通过</span>
               </template>
             </el-table-column>
@@ -71,15 +83,6 @@
             :total="total"
           >
           </el-pagination>
-        </div>
-      </div>
-    </div>
-    <div class="bottom-menus">
-      <div class="bottom-menus-box">
-        <div>
-          <el-button @click="$router.back()"
-            >取消</el-button
-          >
         </div>
       </div>
     </div>
@@ -244,19 +247,4 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.filter-box {
-  width: 100%;
-  height: auto;
-  float: left;
-  box-sizing: border-box;
-  padding: 30px;
-  border-radius: 15px;
-  margin-bottom: 15px;
-  background-color: white;
-
-  .filter-label {
-    font-size: 14px;
-    color: rgba(0, 0, 0, 0.7);
-  }
-}
 </style>
