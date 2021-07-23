@@ -1134,8 +1134,8 @@ const Api = {
             Add(id,params) {
                 return post(`/backend/addons/Paper/paper/${id}/user`, params);
             },
-            DestoryUser(id,params) {
-                return post(`/backend/addons/Paper/paper/${id}/user/delete`, params);
+            DestoryUser(id,ids) {
+                return destroy(`/backend/addons/Paper/paper/${id}/user/${ids}`);
             },
             Category: {
                 List(params) {

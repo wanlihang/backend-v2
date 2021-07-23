@@ -123,11 +123,7 @@ export default {
             return;
           }
           this.loading = true;
-          let params = {
-            id: this.pagination.id,
-            user_id: item,
-          };
-          this.$api.Exam.Paper.DestoryUser(this.pagination.id, params)
+          this.$api.Exam.Paper.DestoryUser(this.pagination.id, item)
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));
@@ -148,7 +144,7 @@ export default {
         ids.push(item.mobile);
       });
 
-      this.$api.Exam.Practice.Add(this.pagination.id, {
+      this.$api.Exam.Paper.Add(this.pagination.id, {
         id: this.pagination.id,
         mobiles: ids,
       })
