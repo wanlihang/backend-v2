@@ -64,7 +64,7 @@
                 >编辑</el-link
               >
               <el-link
-                style="margin-left: 5px"
+                class="ml-5"
                 type="primary"
                 @click="
                   $router.push({
@@ -78,7 +78,7 @@
                 >销售</el-link
               >
               <el-link
-                style="margin-left: 5px"
+                class="ml-5"
                 type="primary"
                 @click="
                   $router.push({
@@ -88,7 +88,7 @@
                 "
                 >观看</el-link
               ><el-link
-                style="margin-left: 5px"
+                class="ml-5"
                 type="primary"
                 @click="
                   $router.push({

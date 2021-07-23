@@ -78,7 +78,7 @@
                 >
                 <el-link
                   type="primary"
-                  style="margin-left: 5px"
+                  class="ml-5"
                   @click="
                     $router.push({
                       name: 'MeedubookArticleUpdate',
@@ -89,7 +89,7 @@
                 >
                 <el-link
                   type="primary"
-                  style="margin-left: 5px"
+                  class="ml-5"
                   @click="
                     $router.push({
                       name: 'MeedubookArticleComment',
