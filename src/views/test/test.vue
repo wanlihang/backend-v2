@@ -29,11 +29,6 @@ export default {
       content: "",
       img: "http://public.qiniu.1o1.cc/images/dKeiIHRWoAnqcJRPdn5FrxjToO7E1Hl9tsyWE47Z.jpg",
     };
-  },
-  methods: {
-    change(v1) {
-      console.log(v1);
-    },
-  },
+  }
 };
 </script>
