@@ -18,10 +18,13 @@
     <div class="float-left">
       <div class="float-left d-flex">
         <div>
-           <span slot="label" style="font-size:14px;">
-            <form-label text="优惠码" helper="优惠码的 U 前缀是用户专属邀请码预留的，请勿在自定义优惠码中使用！"></form-label>
+          <span slot="label" style="font-size: 14px">
+            <form-label
+              text="优惠码"
+              helper="优惠码的 U 前缀是用户专属邀请码预留的，请勿在自定义优惠码中使用！"
+            ></form-label>
           </span>
-          <el-input  
+          <el-input
             class="ml-10 w-200px"
             v-model="filter.key"
             placeholder="支持优惠码模糊搜索"
@@ -169,6 +172,10 @@ export default {
       });
     },
     destorymulti() {
+      if (this.spids.ids == "") {
+        this.$message.error("请选择需要操作的数据");
+        return;
+      }
       this.$confirm("确认操作？", "警告", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -179,10 +186,7 @@ export default {
           if (this.loading) {
             return;
           }
-          if (this.spids.ids == "") {
-            this.$message.error("请选择需要操作的数据");
-            return;
-          }
+
           this.loading = true;
           this.$api.Order.PromoCode.DestroyMulti(this.spids)
             .then(() => {

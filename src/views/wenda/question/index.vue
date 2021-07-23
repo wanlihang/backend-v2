@@ -236,6 +236,10 @@ export default {
       });
     },
     destoryMulti() {
+      if (this.spids.ids == "") {
+        this.$message.error("请选择需要操作的数据");
+        return;
+      }
       this.$confirm("确认操作？", "警告", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -246,10 +250,7 @@ export default {
           if (this.loading) {
             return;
           }
-          if (this.spids.ids == "") {
-            this.$message.error("请选择需要操作的数据");
-            return;
-          }
+
           this.loading = true;
           this.$api.Wenda.Question.DestoryMulti(this.spids)
             .then(() => {
