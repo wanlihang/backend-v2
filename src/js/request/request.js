@@ -1128,6 +1128,15 @@ const Api = {
             Stat(id, params) {
                 return get(`/backend/addons/Paper/paper/${id}/statistics`, params);
             },
+            User(id, params) {
+                return get(`/backend/addons/Paper/paper/${id}/user`, params);
+            },
+            Add(id,params) {
+                return post(`/backend/addons/Paper/paper/${id}/user`, params);
+            },
+            DestoryUser(id,params) {
+                return post(`/backend/addons/Paper/paper/${id}/user/delete`, params);
+            },
             Category: {
                 List(params) {
                     return get(`/backend/addons/Paper/paper_category/index`, params);

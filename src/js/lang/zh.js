@@ -246,6 +246,7 @@ const zh = {
                 create: '创建试卷',
                 update: '编辑试卷',
                 userpaper: '考试记录',
+                user: '订阅用户',
                 stat: '分数统计',
                 category: {
                     index: '试卷分类',
