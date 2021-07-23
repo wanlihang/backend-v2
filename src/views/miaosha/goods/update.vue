@@ -1,98 +1,108 @@
 <template>
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="编辑秒杀商品"></back-bar>
-    <div class="float-left">
-      <div class="form-box broder-top-left-radius">
-        <el-form ref="form" :model="course" :rules="rules" label-width="200px">
-          <el-form-item prop="goods_id" label="商品">
-            <div class="d-flex">
-              <div>
-                <el-button @click="selgoods"> 选择商品 </el-button>
-                <span
-                  v-if="this.course.goods_id"
-                  style="color: red; margin-left: 4px"
-                  >已选择</span
-                >
-                <select-resource
-                  v-bind:show="msg"
-                  @change="change"
-                  @close="close"
-                  :selectedIds="this.course.goods_id"
-                  :enabled-resource="types"
-                ></select-resource>
-              </div>
-            </div>
-          </el-form-item>
-          <el-form-item label="商品名" prop="goods_title">
-            <el-input v-model="course.goods_title" class="w-100"></el-input>
-          </el-form-item>
-          <el-form-item label="商品原价" prop="goods_charge">
-            <el-input
-              type="number"
-              placeholder="单位：元"
-              v-model="course.goods_charge"
-              class="w-200px"
-            ></el-input>
-          </el-form-item>
-          <el-form-item prop="goods_thumb" label="商品封面">
-            <upload-image
-              v-model="course.goods_thumb"
-              helper="长宽比4:3，建议尺寸：400x300像素"
-              width="400"
-              height="300"
-              name="上传封面"
-            ></upload-image>
-          </el-form-item>
-          <el-form-item prop="desc" label="详细介绍">
-            <wang-editor
-              v-if="course.desc"
-              class="w-100"
-              v-model="course.desc"
-            ></wang-editor>
-          </el-form-item>
-          <el-form-item label="秒杀价格" prop="charge">
-            <el-input
-              type="number"
-              v-model="course.charge"
-              class="w-200px"
-            ></el-input>
-            <div class="helper ml-30">单位：元，只能设置为整数。</div>
-          </el-form-item>
-          <el-form-item label="秒杀数量" prop="num">
-            <el-input
-              type="number"
-              v-model="course.num"
-              class="w-200px"
-            ></el-input>
-          </el-form-item>
-          <el-form-item label="开始时间" prop="started_at">
-            <el-date-picker
-              v-model="course.started_at"
-              type="datetime"
-              format="yyyy-MM-dd HH:mm"
-              value-format="yyyy-MM-dd HH:mm"
-              placeholder="请选择日期"
-              :picker-options="expireTimeOption"
-            >
-            </el-date-picker>
-          </el-form-item>
-          <el-form-item label="结束时间" prop="end_at">
-            <el-date-picker
-              v-model="course.end_at"
-              type="datetime"
-              format="yyyy-MM-dd HH:mm"
-              value-format="yyyy-MM-dd HH:mm"
-              placeholder="请选择日期"
-              :picker-options="expireTimeOption"
-            >
-            </el-date-picker>
-          </el-form-item>
+    <div class="float-left" v-if="course">
+      <el-form ref="form" :model="course" :rules="rules" label-width="200px">
+        <el-form-item label="商品名" prop="goods_title">
+          <el-input
+            v-model="course.goods_title"
+            class="w-600px"
+            placeholder="商品名"
+          ></el-input>
+        </el-form-item>
 
-          <el-form-item prop="page_title" label="秒杀页面标题">
-            <el-input class="w-100" v-model="course.page_title"></el-input>
-          </el-form-item>
-        </el-form>
-      </div>
+        <el-form-item label="商品原价" prop="original_charge">
+          <el-input
+            type="number"
+            placeholder="原价"
+            v-model="course.original_charge"
+            class="w-200px"
+          ></el-input>
+        </el-form-item>
+
+        <el-form-item prop="goods_thumb" label="商品封面">
+          <upload-image
+            v-model="course.goods_thumb"
+            helper="长宽比4:3，建议尺寸：400x300像素"
+            width="120"
+            height="90"
+          ></upload-image>
+        </el-form-item>
+
+        <el-form-item prop="desc" label="详细介绍">
+          <wang-editor class="w-600px" v-model="course.desc"></wang-editor>
+        </el-form-item>
+
+        <el-form-item label="秒杀价" prop="charge">
+          <div class="d-flex">
+            <div>
+              <el-input
+                type="number"
+                v-model="course.charge"
+                class="w-200px"
+                placeholder="秒杀价"
+              ></el-input>
+            </div>
+            <div class="ml-10">
+              <helper-text text="最小单位：元。不支持小数。"></helper-text>
+            </div>
+          </div>
+        </el-form-item>
+
+        <el-form-item label="库存" prop="num">
+          <el-input
+            type="number"
+            v-model="course.num"
+            class="w-200px"
+            placeholder="库存"
+          ></el-input>
+        </el-form-item>
+
+        <el-form-item label="活动时间" prop="started_at">
+          <div class="d-flex">
+            <div>
+              <el-date-picker
+                v-model="course.started_at"
+                type="datetime"
+                format="yyyy-MM-dd HH:mm"
+                value-format="yyyy-MM-dd HH:mm"
+                placeholder="开始时间"
+                :picker-options="expireTimeOption"
+              >
+              </el-date-picker>
+            </div>
+            <div class="mx-10">
+              <span class="helper-text">至</span>
+            </div>
+            <div>
+              <el-date-picker
+                v-model="course.end_at"
+                type="datetime"
+                format="yyyy-MM-dd HH:mm"
+                value-format="yyyy-MM-dd HH:mm"
+                placeholder="结束时间"
+                :picker-options="expireTimeOption"
+              >
+              </el-date-picker>
+            </div>
+          </div>
+        </el-form-item>
+
+        <el-form-item prop="page_title" label="PC秒杀页面标题">
+          <div class="d-flex">
+            <div>
+              <el-input
+                class="w-500px"
+                v-model="course.page_title"
+                placeholder="PC秒杀页面标题"
+              ></el-input>
+            </div>
+            <div class="ml-10">
+              <helper-text text="PC秒杀页面标题"></helper-text>
+            </div>
+          </div>
+        </el-form-item>
+      </el-form>
 
       <div class="bottom-menus">
         <div class="bottom-menus-box">
@@ -102,9 +112,7 @@
             >
           </div>
           <div class="ml-24">
-            <el-button @click="$router.back()"
-              >取消</el-button
-            >
+            <el-button @click="$router.back()">取消</el-button>
           </div>
         </div>
       </div>
@@ -114,34 +122,16 @@
 <script>
 import WangEditor from "@/components/wangeditor";
 import UploadImage from "@/components/upload-image";
-import SelectResource from "@/components/select-resources/index";
 
 export default {
   components: {
     WangEditor,
     UploadImage,
-    SelectResource,
   },
   data() {
     return {
-      filter: {
-        type: "",
-      },
-      msg: false,
-      course: {
-        id: this.$route.query.id,
-        started_at: null,
-        end_at: null,
-        goods_title: null,
-        goods_thumb: null,
-        charge: null,
-        goods_charge: null,
-        goods_id: null,
-        goods_type: null,
-        page_title: null,
-        desc: null,
-        num: null,
-      },
+      id: this.$route.query.id,
+      course: null,
       rules: {
         goods_type: [
           {
@@ -164,7 +154,7 @@ export default {
             trigger: "blur",
           },
         ],
-        goods_charge: [
+        original_charge: [
           {
             required: true,
             message: "商品原价不能为空",
@@ -182,13 +172,6 @@ export default {
           {
             required: true,
             message: "秒杀数量不能为空",
-            trigger: "blur",
-          },
-        ],
-        page_title: [
-          {
-            required: true,
-            message: "秒杀页面标题不能为空",
             trigger: "blur",
           },
         ],
@@ -223,64 +206,21 @@ export default {
       },
       expireTimeOption: {
         disabledDate(date) {
-          // 当天可选：date.getTime() < Date.now() - 24 * 60 * 60 * 1000
-          //超过此刻可选
           return date.getTime() < Date.now();
         },
       },
-      types: "",
       loading: false,
     };
   },
   mounted() {
-    this.params();
-    this.detail();
+    this.getDetail();
   },
   methods: {
-    close() {
-      this.msg = false;
-    },
-    change(v1) {
-      var data = v1;
-      this.course.goods_id = data.id;
-      this.course.goods_type = data.resource_type;
-      this.course.goods_title = data.title;
-      this.course.goods_charge = data.original_charge;
-      this.course.goods_thumb = data.thumb;
-      this.msg = false;
-    },
-    params() {
-      this.$api.Miaosha.Goods.Create(this.filter).then((res) => {
-        var data = res.data.types;
-        var typeids = "";
-        for (var i = 0; i < data.length; i++) {
-          typeids = typeids + data[i].value + ",";
-        }
-        this.types = typeids;
+    getDetail() {
+      this.$api.Miaosha.Goods.Detail(this.id).then((res) => {
+        this.course = res.data;
       });
     },
-    selgoods() {
-      this.msg = true;
-    },
-    detail() {
-      this.$api.Miaosha.Goods.Detail(this.course.id).then((res) => {
-        var data = res.data;
-        this.course.goods_id = data.goods_id;
-        this.course.charge = data.charge;
-        this.course.goods_type = data.goods_type;
-        this.course.desc = data.desc;
-        this.course.end_at = data.end_at;
-        this.course.goods_id = data.goods_id;
-        this.course.goods_thumb = data.goods_thumb;
-        this.course.goods_title = data.goods_title;
-        this.course.goods_type_text = data.goods_type_text;
-        this.course.num = data.num;
-        this.course.page_title = data.page_title;
-        this.course.started_at = data.started_at;
-        this.course.goods_charge = data.original_charge;
-      });
-    },
-    getgoods(item) {},
     formValidate() {
       this.$refs["form"].validate((valid) => {
         if (valid) {
@@ -293,7 +233,7 @@ export default {
         return;
       }
       this.loading = true;
-      this.$api.Miaosha.Goods.Update(this.course.id, this.course)
+      this.$api.Miaosha.Goods.Update(this.id, this.course)
         .then(() => {
           this.$message.success(this.$t("common.success"));
           this.$router.back();
