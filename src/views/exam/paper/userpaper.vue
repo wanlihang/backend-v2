@@ -155,7 +155,7 @@ export default {
           id:-1
         }
         this.filterData.categories.push(item)
-        this.filterData.categories.push(res.data.statusMap);
+        this.filterData.categories.push(...res.data.statusMap);
       });
     },
     destory(item) {
