@@ -102,7 +102,6 @@ export default {
     },
   },
   mounted() {
-    console.log(CONSTANT);
     let activeName =
       typeof CONSTANT.menuActiveMap[this.$route.name] !== "undefined"
         ? CONSTANT.menuActiveMap[this.$route.name]

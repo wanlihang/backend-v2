@@ -1,7 +1,7 @@
 <template>
   <div class="meedu-main-body">
     <div class="float-left mb-30">
-      <el-button @click="destorymulti()" type="danger"> 批量操作 </el-button>
+      <el-button @click="handleMulti()"> 批量操作 </el-button>
     </div>
     <div class="float-left">
       <div class="float-left d-flex">
@@ -9,22 +9,19 @@
           <el-input
             class="w-200px"
             v-model="filter.user_id"
-            placeholder="UID"
+            placeholder="用户ID"
           ></el-input>
         </div>
-        <div class="d-flex ml-15">
-          <div class="filter-label">会员</div>
-          <div class="flex-1 ml-15">
-            <el-select v-model="filter.status">
-              <el-option
-                v-for="(item, index) in filterData.groups"
-                :key="index"
-                :label="item.name"
-                :value="item.key"
-              >
-              </el-option>
-            </el-select>
-          </div>
+        <div class="ml-10">
+          <el-select class="w-200px" placeholder="状态" v-model="filter.status">
+            <el-option
+              v-for="(item, index) in filterData.groups"
+              :key="index"
+              :label="item.name"
+              :value="item.key"
+            >
+            </el-option>
+          </el-select>
         </div>
         <div class="ml-10">
           <el-button @click="firstPageLoad()" type="primary" plain>
@@ -42,12 +39,19 @@
           @selection-change="handleSelectionChange"
           class="float-left"
         >
-          <el-table-column type="selection" width="55"></el-table-column
-          ><!-- 显示选取表格 -->
-          <el-table-column prop="id" label="ID" width="80"> </el-table-column>
-          <el-table-column prop="user_id" label="用户ID" width="80">
+          <el-table-column
+            type="selection"
+            :selectable="
+              (row) => {
+                return row.status === 0;
+              }
+            "
+            width="55"
+          ></el-table-column>
+          <el-table-column prop="id" label="ID" width="120"> </el-table-column>
+          <el-table-column prop="user_id" label="用户ID" width="120">
           </el-table-column>
-          <el-table-column label="用户">
+          <el-table-column label="用户" width="300">
             <template slot-scope="scope">
               <div v-if="users[scope.row.user_id]" class="d-flex">
                 <div>
@@ -64,21 +68,38 @@
               <span v-else class="c-red">用户已删除</span>
             </template>
           </el-table-column>
-          <el-table-column label="金额" width="100">
+          <el-table-column label="提现金额" width="150">
             <template slot-scope="scope">
               <span>{{ scope.row.before_balance }}元</span>
             </template>
           </el-table-column>
-          <el-table-column prop="channel" label="渠道" width="100">
+          <el-table-column label="打款信息" width="300">
+            <template slot-scope="scope">
+              <div>渠道：{{ scope.row.channel }}</div>
+              <div>姓名：{{ scope.row.channel_name }}</div>
+              <div>账号：{{ scope.row.channel_account }}</div>
+            </template>
           </el-table-column>
-          <el-table-column prop="channel_name" label="渠道姓名" width="100">
+          <el-table-column label="状态" width="150">
+            <template slot-scope="scope">
+              <el-tag v-if="scope.row.status === 0" type="primary"
+                >待处理</el-tag
+              >
+              <el-tag v-else-if="scope.row.status === 2" type="danger"
+                >已驳回</el-tag
+              >
+              <el-tag v-else-if="scope.row.status === 1" type="info"
+                >已处理</el-tag
+              >
+            </template>
           </el-table-column>
-          <el-table-column prop="channel_account" label="渠道账号">
+          <el-table-column prop="remark" label="备注" width="300">
           </el-table-column>
           <el-table-column prop="created_at" label="创建时间">
           </el-table-column>
         </el-table>
       </div>
+
       <div class="float-left mt-30 text-center">
         <el-pagination
           @size-change="paginationSizeChange"
@@ -92,15 +113,38 @@
         </el-pagination>
       </div>
     </div>
+
+    <el-dialog
+      title="提现处理"
+      :visible="showHandleWin"
+      :show-close="false"
+      :close-on-click-modal="false"
+      :close-on-press-escape="false"
+    >
+      <el-form ref="form" :model="form" :rules="rules" label-width="200px">
+        <el-form-item label="状态" prop="status">
+          <el-select v-model="form.status" placeholder="请选择状态">
+            <el-option label="成功" :value="1"></el-option>
+            <el-option label="驳回" :value="2"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="备注" prop="remark">
+          <el-input v-model="form.remark" class="w-400px" placeholder="请输入备注" type="textarea" rows="3"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="showHandleWin = false">取消</el-button>
+        <el-button type="primary" @click="formValidate">确定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
-
 
 <script>
 export default {
   data() {
     return {
-      name: "Orderlist",
+      showHandleWin: false,
       pagination: {
         page: 1,
         size: 10,
@@ -117,15 +161,15 @@ export default {
             key: -1,
           },
           {
-            name: "已提交",
+            name: "待处理",
             key: 0,
           },
           {
-            name: "成功",
+            name: "已处理",
             key: 1,
           },
           {
-            name: "失败",
+            name: "已驳回",
             key: 2,
           },
         ],
@@ -137,41 +181,63 @@ export default {
       },
       results: [],
       users: [],
+      form: {
+        status: null,
+        remark: null,
+      },
+      rules: {
+        status: [
+          {
+            required: true,
+            message: "请选择状态",
+            trigger: "blur",
+          },
+        ],
+        remark: [
+          {
+            required: true,
+            message: "请输入备注",
+            trigger: "blur",
+          },
+        ],
+      },
     };
   },
   created() {
-    this.getResults();
+    this.getData();
   },
   methods: {
     firstPageLoad() {
       this.pagination.page = 1;
-      this.getResults();
+      this.getData();
     },
     paginationReset() {
       this.pagination.page = 1;
       this.filter.user_id = "";
       this.filter.status = -1;
       this.filter.keywords = "";
-      this.getResults();
+      this.getData();
     },
     paginationSizeChange(size) {
       this.pagination.size = size;
-      this.getResults();
+      this.getData();
     },
     paginationPageChange(page) {
       this.pagination.page = page;
-      this.getResults();
+      this.getData();
     },
-    //保存选中结果
     handleSelectionChange(val) {
-      var newbox = [];
-      for (var i = 0; i < val.length; i++) {
-        newbox.push(val[i].id);
+      if (val) {
+        var newbox = [];
+        for (var i = 0; i < val.length; i++) {
+          newbox.push(val[i].id);
+        }
+        this.spids.ids = newbox;
+      } else {
+        this.spids.ids = [];
       }
-      this.spids.ids = newbox;
     },
-    //获取order列表
-    getResults() {
+    getData() {
       if (this.loading) {
         return;
       }
@@ -185,36 +251,34 @@ export default {
         this.total = res.data.orders.total;
       });
     },
-    destorymulti() {
-      this.$confirm("确认操作？", "警告", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning",
-      }).then(() => {
-        //点击确定按钮的操作
-        if (this.loading) {
-          return;
+    handleMulti() {
+      if (this.spids.ids.length === 0) {
+        this.$message.error("请选择需要操作的数据");
+        return;
+      }
+      this.showHandleWin = true;
+    },
+    formValidate() {
+      this.$refs["form"].validate((valid) => {
+        if (valid) {
+          this.submitHandle();
         }
-        if (this.spids.ids == "") {
-          this.$message.error("请选择需要操作的数据");
-          return;
-        }
-        this.loading = true;
-        this.loading = false;
-        //   this.$api.Course.Live.Course.Video.ChatDestoryMulti(this.spids)
-        //     .then(() => {
-        //       this.loading = false;
-        //       this.$message.success(this.$t("common.success"));
-        //       this.getResults();
-        //     })
-        //     .catch((e) => {
-        //       this.loading = false;
-        //       this.$message.error(e.message);
-        //     });
-        // })
-        // .catch(() => {
-        //   //点击删除按钮的操作
       });
+    },
+    submitHandle() {
+      this.$api.Order.WithdrawOrders.Submit({
+        ids: this.spids.ids,
+        status: this.form.status,
+        remark: this.form.remark,
+      })
+        .then(() => {
+          this.$message.success(this.$t("common.success"));
+          this.showHandleWin = false;
+          this.getData();
+        })
+        .catch((e) => {
+          this.$message.error(e.message);
+        });
     },
   },
 };

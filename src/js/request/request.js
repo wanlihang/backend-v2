@@ -68,6 +68,9 @@ const Api = {
             WithdrawOrders(params) {
                 return get(`/backend/api/v1/member/inviteBalance/withdrawOrders`, params);
             },
+            Submit(params){
+                return post(`/backend/api/v1/member/inviteBalance/withdrawOrders`, params);
+            }
         },
 
     },
