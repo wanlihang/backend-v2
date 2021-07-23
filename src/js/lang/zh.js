@@ -9,6 +9,7 @@ const zh = {
         decoration_h5: "移动端",
         role: 'VIP会员',
         order: '全站订单',
+        'order-detail': "订单详情",
         promocode: '优惠码',
         promocode_import: '批量导入',
         withdrawOrders: '余额提现',

@@ -58,6 +58,14 @@ const routes = [{
         }
       },
       {
+        path: '/order/detail',
+        component: () => import('@/views/order/detail'),
+        name: 'OrderDetail',
+        meta: {
+          title: 'title.order-detail'
+        }
+      },
+      {
         path: '/promocode',
         component: () => import('@/views/order/promocode'),
         name: 'Promocode',
