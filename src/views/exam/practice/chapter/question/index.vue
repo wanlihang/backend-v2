@@ -179,7 +179,7 @@ export default {
       });
     },
     destorymulti() {
-      if (this.spids.ids == "") {
+      if (this.spids.qids == "") {
         this.$message.error("请选择需要操作的数据");
         return;
       }

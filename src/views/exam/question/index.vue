@@ -1,6 +1,7 @@
 <template>
   <div class="meedu-main-body">
     <div class="float-left mb-30">
+      <el-button @click="destorymulti()" type="danger"> 批量删除 </el-button>
       <el-button
         @click="
           $router.push({
@@ -9,9 +10,18 @@
         "
         type="primary"
       >
-        添加
+        添加试题
       </el-button>
-      <el-button @click="destorymulti()" type="danger"> 批量删除 </el-button>
+      <el-button
+        @click="
+          $router.push({
+            name: 'ExamQuestionCreate',
+          })
+        "
+        type="primary"
+      >
+        批量导入试题
+      </el-button>
     </div>
     <div class="float-left">
       <div class="float-left d-flex">
@@ -72,13 +82,28 @@
           class="float-left"
         >
           <el-table-column type="selection" width="55"></el-table-column>
-          <el-table-column prop="id" label="ID" width="80"> </el-table-column>
+          <el-table-column prop="id" label="ID" width="100"> </el-table-column>
           <el-table-column prop="category_name" label="分类"> </el-table-column>
           <el-table-column prop="type_text" label="类型"> </el-table-column>
           <el-table-column prop="level_text" label="难度"> </el-table-column>
           <el-table-column label="内容">
             <template slot-scope="scope">
               <div v-html="scope.row.content"></div>
+            </template>
+          </el-table-column>
+          <el-table-column fixed="right" label="操作" width="80">
+            <template slot-scope="scope">
+              <el-link
+                type="primary"
+                class="ml-5"
+                @click="
+                  $router.push({
+                    name: 'ExamQuestionUpdate',
+                    query: { id: scope.row.id },
+                  })
+                "
+                >编辑</el-link
+              >
             </template>
           </el-table-column>
         </el-table>
@@ -112,10 +137,11 @@ export default {
         type: null,
         level: null,
       },
+      total: 0,
       loading: false,
       results: [],
       spids: {
-        qids: [],
+        ids: [],
       },
       filterData: {
         categories: [],
@@ -153,7 +179,7 @@ export default {
       for (var i = 0; i < val.length; i++) {
         newbox.push(val[i].id);
       }
-      this.spids.qids = newbox;
+      this.spids.ids = newbox;
     },
     getResults() {
       if (this.loading) {
@@ -162,10 +188,7 @@ export default {
       this.loading = true;
       let params = {};
       Object.assign(params, this.filter, this.pagination);
-      this.$api.Exam.Practice.Chapter.Question.List(
-        this.pagination.id,
-        params
-      ).then((res) => {
+      this.$api.Exam.Question.List(params).then((res) => {
         this.loading = false;
         this.results = res.data.data.data;
         this.total = res.data.data.total;
@@ -191,10 +214,7 @@ export default {
           }
 
           this.loading = true;
-          this.$api.Exam.Practice.Chapter.Question.DestoryMulti(
-            this.pagination.id,
-            this.spids
-          )
+          this.$api.Exam.Question.DestoryMulti(this.spids)
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));

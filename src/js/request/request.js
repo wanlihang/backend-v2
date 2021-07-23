@@ -1219,7 +1219,7 @@ const Api = {
 
             },
         },
-        Qusetion: {
+        Question: {
             List(params) {
                 return get(`/backend/addons/Paper/question/index`, params);
             },
@@ -1235,8 +1235,8 @@ const Api = {
             Update(id, params) {
                 return put(`/backend/addons/Paper/question/${id}`, params);
             },
-            Destory(id) {
-                return destroy(`/backend/addons/Paper/question/${id}`);
+            DestoryMulti(params) {
+                return post(`/backend/addons/Paper/question/destroy/multi`, params);
             },
         },
         Practice: {
