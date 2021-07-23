@@ -5,6 +5,7 @@ export default {
         Addrole: 'Role',
         Editrole: 'Role',
         Orderlist: 'Orderlist',
+        OrderDetail: 'Orderlist',
         Promocode: 'Promocode',
         Createcode: 'Promocode',
         CreateMulticode: 'Promocode',
