@@ -269,6 +269,19 @@ const zh = {
                     update: '编辑模拟试卷分类',
                 },
             },
+            question: {
+                name: '试题',
+                index: '试题',
+                create: '创建试题',
+                update: '编辑试题',
+                userpaper: '考试记录',
+                import: '批量导入试题',
+                category: {
+                    index: '试题分类',
+                    create: '创建试题分类',
+                    update: '编辑试题分类',
+                },
+            },
             practice: {
                 name: '练习',
                 index: '练习',

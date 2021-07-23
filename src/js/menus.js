@@ -43,6 +43,10 @@ export default [{
         key: 'ExamPractice',
     },
     {
+        name: 'title.exam.question.name',
+        key: 'ExamQuestion',
+    },
+    {
         name: 'title.exam.mockpaper.name',
         key: 'ExamMockpaper',
     }

@@ -165,5 +165,8 @@ export default {
         MockpaperUser: 'ExamMockpaper',
         ExamMockpaperStat: 'ExamMockpaper',
         ExamMockpaperUserpaper: 'ExamMockpaper',
+        ExamQuestion: 'ExamQuestion',
+        ExamQuestionCreate: 'ExamQuestion',
+        ExamQuestionUpdate: 'ExamQuestion',
     }
 }

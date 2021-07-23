@@ -1,12 +1,10 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="章节试题"></back-bar>
     <div class="float-left mb-30">
       <el-button
         @click="
           $router.push({
-            name: 'PracticeChapterQuestionCreate',
-             query: { id: pagination.id },
+            name: 'ExamQuestionCreate',
           })
         "
         type="primary"
@@ -108,7 +106,6 @@ export default {
       pagination: {
         page: 1,
         size: 10,
-        id: this.$route.query.id,
       },
       filter: {
         category_id: null,
@@ -118,7 +115,6 @@ export default {
       loading: false,
       results: [],
       spids: {
-        id: this.$route.query.id,
         qids: [],
       },
       filterData: {
