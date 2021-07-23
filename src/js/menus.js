@@ -41,6 +41,10 @@ export default [{
     {
         name: 'title.exam.practice.index',
         key: 'ExamPractice',
+    },
+    {
+        name: 'title.exam.mockpaper.name',
+        key: 'ExamMockpaper',
     }
     ]
 },

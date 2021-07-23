@@ -1257,6 +1257,30 @@ const routes = [{
           title: 'title.exam.practice.progress',
         }
       },
+      {
+        path: '/exam/mockpaper/index',
+        component: () => import('@/views/exam/mockpaper/index'),
+        name: 'ExamMockpaper',
+        meta: {
+          title: 'title.exam.mockpaper.index'
+        }
+      },
+      {
+        path: '/exam/mockpaper/create',
+        component: () => import('@/views/exam/mockpaper/create'),
+        name: 'ExamMockpaperCreate',
+        meta: {
+          title: 'title.exam.mockpaper.create'
+        }
+      },
+      {
+        path: '/exam/mockpaper/update',
+        component: () => import('@/views/exam/mockpaper/update'),
+        name: 'ExamMockpaperUpdate',
+        meta: {
+          title: 'title.exam.mockpaper.update'
+        }
+      },
     ]
   },
   {

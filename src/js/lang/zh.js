@@ -255,6 +255,20 @@ const zh = {
                     update: '编辑试卷分类',
                 },
             },
+            mockpaper: {
+                name: '模拟',
+                index: '模拟试卷',
+                create: '创建模拟试卷',
+                update: '编辑模拟试卷',
+                userpaper: '考试记录',
+                user: '订阅用户',
+                stat: '分数统计',
+                category: {
+                    index: '模拟试卷分类',
+                    create: '创建模拟试卷分类',
+                    update: '编辑模拟试卷分类',
+                },
+            },
             practice: {
                 name: '练习',
                 index: '练习',
