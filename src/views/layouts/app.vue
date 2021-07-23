@@ -34,7 +34,7 @@
               unique-opened
               @select="menuSelect"
             >
-              <template v-for="(item, index) in menus">
+              <template v-for="(item, index) in activeMenus">
                 <el-submenu
                   v-if="item.children.length > 0"
                   :index="index + ''"
@@ -91,6 +91,49 @@ export default {
   },
   computed: {
     ...mapState(["user"]),
+    activeMenus() {
+      let menus = [];
+      let defaultMenus = Menus;
+
+      if (!this.user) {
+        return menus;
+      }
+
+      for (let i in defaultMenus) {
+        let menuItem = defaultMenus[i];
+
+        if (menuItem.children.length === 0) {
+          // 一级菜单不做权限控制
+          menus.push(menuItem);
+          continue;
+        }
+
+        let children = [];
+
+        for (let j in menuItem.children) {
+          let childrenItem = menuItem.children[j];
+
+          if (childrenItem.permission === "super-slug") {
+            // 超管判断
+            if (this.user.is_super) {
+              children.push(childrenItem);
+            }
+            continue;
+          }
+
+          if (this.user.permissions[childrenItem.permission]) {
+            // 存在权限
+            children.push(childrenItem);
+          }
+        }
+
+        if (children.length > 0) {
+          menus.push(Object.assign({}, menuItem, { children: children }));
+        }
+      }
+
+      return menus;
+    },
   },
   watch: {
     "$route.name"(newVal) {

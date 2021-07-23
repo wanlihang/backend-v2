@@ -10,23 +10,28 @@ export default [{
     icon: 'icon-icon-lesson',
     children: [{
         name: 'title.topic.name',
-        key: 'Topic'
+        key: 'Topic',
+        permission: 'addons.meedu_topics.topic.list'
     },
     {
         name: 'title.course.vod.index',
-        key: 'Vod'
+        key: 'Vod',
+        permission: 'course'
     },
     {
         name: 'title.live.name',
-        key: 'LiveCourse'
+        key: 'LiveCourse',
+        permission: 'addons.Zhibo.course.list'
     },
     {
         name: 'title.meedubook.book.index',
-        key: 'Meedubook'
+        key: 'Meedubook',
+        permission: 'addons.meedu_books.book.list'
     },
     {
         name: 'title.learningpath.path.name',
-        key: 'LearningPath'
+        key: 'LearningPath',
+        permission: 'addons.learnPaths.path.list'
     },
     ]
 },
@@ -37,18 +42,22 @@ export default [{
     children: [{
         name: 'title.exam.paper.index',
         key: 'ExamPaper',
+        permission: 'addons.Paper.paper.list'
     },
     {
         name: 'title.exam.practice.index',
         key: 'ExamPractice',
+        permission: 'addons.Paper.practice.list'
     },
     {
         name: 'title.exam.question.name',
         key: 'ExamQuestion',
+        permission: 'addons.Paper.question.list'
     },
     {
         name: 'title.exam.mockpaper.name',
         key: 'ExamMockpaper',
+        permission: 'addons.Paper.mock_paper.list'
     }
     ]
 },
@@ -59,6 +68,7 @@ export default [{
     children: [{
         name: 'title.member.index',
         key: 'MemberIndex',
+        permission: 'member'
     }]
 },
 {
@@ -69,19 +79,23 @@ export default [{
 
         {
             name: 'title.order',
-            key: 'Orderlist'
+            key: 'Orderlist',
+            permission: 'order'
         },
         {
             name: 'title.miaosha.orders.index',
-            key: 'MiaoshaOrders'
+            key: 'MiaoshaOrders',
+            permission: 'addons.MiaoSha.orders'
         },
         {
             name: 'title.tuangou.orders',
-            key: 'TuangouGoodsOrder'
+            key: 'TuangouGoodsOrder',
+            permission: 'addons.TuanGou.orders'
         },
         {
             name: 'title.withdrawOrders',
-            key: 'WithdrawOrders'
+            key: 'WithdrawOrders',
+            permission: 'member.inviteBalance.withdrawOrders'
         },
     ]
 },
@@ -91,39 +105,48 @@ export default [{
     icon: 'icon-icon-operate',
     children: [{
         name: 'title.codeExchanger.index',
-        key: 'CodeExchanger'
+        key: 'CodeExchanger',
+        permission: 'addons.CodeExchanger.goods.list'
     },
     {
         name: 'title.promocode',
-        key: 'Promocode'
+        key: 'Promocode',
+        permission: 'promoCode'
     },
     {
         name: 'title.role',
-        key: 'Role'
+        key: 'Role',
+        permission: 'role'
     },
     {
         name: 'title.tuangou.goods.index',
-        key: 'TuangouGoods'
+        key: 'TuangouGoods',
+        permission: 'addons.TuanGou.goods.list'
     },
     {
         name: 'title.miaosha.goods.index',
-        key: 'MiaoshaGoods'
+        key: 'MiaoshaGoods',
+        permission: 'addons.MiaoSha.goods.list'
     },
     {
         name: 'title.multi_level_share.goods.index',
-        key: 'ShareGoods'
+        key: 'ShareGoods',
+        permission: 'addons.MultiLevelShare.goods.list'
     },
     {
         name: 'title.multi_level_share.poster.index',
-        key: 'MultiPoster'
+        key: 'MultiPoster',
+        permission: 'addons.MultiLevelShare.poster.list'
     },
     {
         name: 'title.wenda.question.index',
-        key: 'Question'
+        key: 'Question',
+        permission: 'addons.Wenda.question.list'
     },
     {
         name: 'title.wechat.messagereply.index',
-        key: 'MessageReply'
+        key: 'MessageReply',
+        permission: 'mpWechatMessageReply'
     },
     ]
 },
@@ -134,15 +157,18 @@ export default [{
     children: [{
         name: 'title.decoration_pc',
         key: 'DecorationPC',
+        permission: 'viewBlock',
     },
     {
         name: 'title.decoration_h5',
-        key: 'DecorationH5'
+        key: 'DecorationH5',
+        permission: 'viewBlock',
     },
 
     {
         name: 'title.singlepage.index',
-        key: 'SinglePage'
+        key: 'SinglePage',
+        permission: 'addons.SinglePage.page.list',
     },
     ],
 },
@@ -153,14 +179,17 @@ export default [{
     children: [{
         name: 'title.system-administrator',
         key: 'SystemAdministrator',
+        permission: 'administrator',
     },
     {
         name: 'title.system-config',
         key: 'SystemConfig',
+        permission: 'setting'
     },
     {
         name: 'title.system-application',
         key: 'SystemApplication',
+        permission: 'super-slug',
     }
     ]
 },
