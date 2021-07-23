@@ -118,7 +118,7 @@ export default {
         size: 10,
       },
       filter: {
-        course_id: null,
+        course_id: this.$route.query.id,
         user_id: null,
       },
       total: 0,
