@@ -152,5 +152,7 @@ export default {
         PracticeChapterUpdate: 'ExamPractice',
         PracticeChapterQuestion: 'ExamPractice',
         PracticeChapterQuestionCreate: 'ExamPractice',
+        PracticeUser: 'ExamPractice',
+        PracticeProgress: 'ExamPractice',
     }
 }

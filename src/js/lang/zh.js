@@ -258,6 +258,8 @@ const zh = {
                 index: '练习',
                 create: '创建练习',
                 update: '编辑练习',
+                user: '参与用户',
+                progress: '练习进度',
                 category: {
                     index: '练习分类',
                     create: '创建练习分类',

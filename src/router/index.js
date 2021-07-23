@@ -1225,7 +1225,22 @@ const routes = [{
           title: 'title.exam.practice.chapter.question.create'
         }
       },
-      
+      {
+        path: '/exam/practice/user',
+        component: () => import('@/views/exam/practice/user'),
+        name: 'PracticeUser',
+        meta: {
+          title: 'title.exam.practice.user',
+        }
+      },
+      {
+        path: '/exam/practice/progress',
+        component: () => import('@/views/exam/practice/progress'),
+        name: 'PracticeProgress',
+        meta: {
+          title: 'title.exam.practice.progress',
+        }
+      },
     ]
   },
   {
