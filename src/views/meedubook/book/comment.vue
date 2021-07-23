@@ -4,10 +4,20 @@
     <div class="float-left">
       <div class="float-left d-flex">
         <div>
-          <el-button @click="approve"> 审核通过 </el-button>
+          <p-button
+            text="审核通过"
+            p="addons.meedu_books.book.comments.checked"
+            @click="approve"
+          >
+          </p-button>
         </div>
         <div class="ml-10">
-          <el-button @click="refuse"> 审核拒绝 </el-button>
+          <p-button
+            text="审核拒绝"
+            p="addons.meedu_books.book.comments.checked"
+            @click="refuse"
+          >
+          </p-button>
         </div>
         <div class="ml-10">
           <el-input
@@ -65,9 +75,12 @@
           <el-table-column prop="updated_at" label="时间"> </el-table-column>
           <el-table-column fixed="right" label="操作" width="100">
             <template slot-scope="scope">
-              <el-link type="danger" @click="destory(scope.row.id)"
-                >删除</el-link
-              >
+              <p-link
+                text="删除"
+                p="addons.meedu_books.book.comments.delete"
+                type="danger"
+                @click="destory(scope.row.id)"
+              ></p-link>
             </template>
           </el-table-column>
         </el-table>

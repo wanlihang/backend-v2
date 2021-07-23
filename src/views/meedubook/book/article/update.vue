@@ -24,7 +24,9 @@
               </el-select>
             </div>
             <div class="ml-10">
-              <el-link
+              <p-link
+                text="章节管理"
+                p="addons.meedu_books.book_chapter.list"
                 type="primary"
                 @click="
                   $router.push({
@@ -32,8 +34,7 @@
                     query: { bid: book_id },
                   })
                 "
-                >章节管理</el-link
-              >
+              ></p-link>
             </div>
           </div>
         </el-form-item>
@@ -175,7 +176,7 @@ export default {
       },
       chapters: [],
       loading: false,
-      book: null
+      book: null,
     };
   },
   mounted() {

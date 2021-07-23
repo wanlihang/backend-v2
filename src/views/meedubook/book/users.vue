@@ -6,10 +6,18 @@
       <div class="float-left">
         <div class="float-left d-flex">
           <div>
-            <el-button @click="delUser">删除用户</el-button>
+            <p-button
+              text="删除用户"
+              p="addons.meedu_books.book.user.del"
+              @click="delUser"
+            ></p-button>
           </div>
           <div class="ml-10">
-            <el-button @click="showUserAddWin = true">添加用户</el-button>
+            <p-button
+              text="添加用户"
+              p="addons.meedu_books.book.user.add"
+              @click="showUserAddWin = true"
+            ></p-button>
           </div>
           <div class="ml-10">
             <el-input
@@ -178,7 +186,7 @@ export default {
       });
 
       this.$api.Meedubook.Book.Users.Add(this.pagination.id, {
-        user_ids: ids.join(','),
+        user_ids: ids.join(","),
       })
         .then(() => {
           this.$message.success(this.$t("common.success"));

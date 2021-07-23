@@ -2,12 +2,13 @@
   <div class="meedu-main-body">
     <div class="float-left">
       <div class="float-left mb-30">
-        <el-button
+        <p-button
+          text="添加"
+          p="addons.meedu_books.book.store"
           @click="$router.push({ name: 'MeedubookCreate' })"
           type="primary"
         >
-          添加
-        </el-button>
+        </p-button>
       </div>
       <div class="float-left">
         <div class="float-left d-flex">
@@ -94,7 +95,9 @@
             </el-table-column>
             <el-table-column fixed="right" label="操作" width="200">
               <template slot-scope="scope">
-                <el-link
+                <p-link
+                  text="编辑"
+                  p="addons.meedu_books.book.update"
                   type="primary"
                   @click="
                     $router.push({
@@ -102,15 +105,17 @@
                       query: { id: scope.row.id },
                     })
                   "
-                  >编辑</el-link
-                >
-                <el-link
+                ></p-link>
+                <p-link
+                  text="删除"
                   class="ml-5"
                   type="danger"
                   @click="destory(scope.row.id)"
-                  >删除</el-link
-                >
-                <el-link
+                  p="addons.meedu_books.book.delete"
+                ></p-link>
+                <p-link
+                  text="文章"
+                  p="addons.meedu_books.book_article.list"
                   type="primary"
                   class="ml-5"
                   @click="
@@ -119,9 +124,10 @@
                       query: { bid: scope.row.id },
                     })
                   "
-                  >文章</el-link
-                >
-                <el-link
+                ></p-link>
+                <p-link
+                  text="用户"
+                  p="addons.meedu_books.book.users"
                   type="primary"
                   class="ml-5"
                   @click="
@@ -130,9 +136,10 @@
                       query: { bid: scope.row.id },
                     })
                   "
-                  >用户</el-link
-                >
-                <el-link
+                ></p-link>
+                <p-link
+                  text="评论"
+                  p="addons.meedu_books.book.comments.list"
                   type="primary"
                   class="ml-5"
                   @click="
@@ -141,8 +148,7 @@
                       query: { bid: scope.row.id },
                     })
                   "
-                  >评论</el-link
-                >
+                ></p-link>
               </template>
             </el-table-column>
           </el-table>

@@ -3,7 +3,8 @@
     <back-bar class="mb-30" title="电子书文章管理"></back-bar>
     <div class="float-left">
       <div class="float-left mb-30">
-        <el-button
+        <p-button
+          text="添加"
           @click="
             $router.push({
               name: 'MeedubookArticleCreate',
@@ -11,9 +12,9 @@
             })
           "
           type="primary"
+          p="addons.meedu_books.book_article.store"
         >
-          添加
-        </el-button>
+        </p-button>
       </div>
       <div class="float-left">
         <div class="float-left d-flex">
@@ -73,10 +74,15 @@
             </el-table-column>
             <el-table-column fixed="right" label="操作" width="150">
               <template slot-scope="scope">
-                <el-link type="danger" @click="destory(scope.row.id)"
-                  >删除</el-link
-                >
-                <el-link
+                <p-link
+                  text="删除"
+                  p="addons.meedu_books.book_article.delete"
+                  type="danger"
+                  @click="destory(scope.row.id)"
+                ></p-link>
+                <p-link
+                  text="编辑"
+                  p="addons.meedu_books.book_article.update"
                   type="primary"
                   class="ml-5"
                   @click="
@@ -85,9 +91,10 @@
                       query: { bid: filter.book_id, id: scope.row.id },
                     })
                   "
-                  >编辑</el-link
-                >
-                <el-link
+                ></p-link>
+                <p-link
+                  text="评论"
+                  p="addons.meedu_books.book_article.comments.list"
                   type="primary"
                   class="ml-5"
                   @click="
@@ -96,8 +103,7 @@
                       query: { bid: filter.book_id, article_id: scope.row.id },
                     })
                   "
-                  >评论</el-link
-                >
+                ></p-link>
               </template>
             </el-table-column>
           </el-table>

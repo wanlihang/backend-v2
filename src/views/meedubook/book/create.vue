@@ -38,11 +38,12 @@
                 </el-select>
               </div>
               <div class="ml-10">
-                <el-link
+                <p-link
+                  text="分类管理"
+                  p="addons.meedu_books.book_category.list"
                   type="primary"
                   @click="$router.push({ name: 'MeedubookCategory' })"
-                  >分类管理</el-link
-                >
+                ></p-link>
               </div>
             </div>
           </el-form-item>
