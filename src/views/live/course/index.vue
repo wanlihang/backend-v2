@@ -149,7 +149,7 @@
                 p="addons.Zhibo.course_video.list"
               ></p-link>
               <p-link
-                texy="用户"
+                text="用户"
                 type="primary"
                 class="ml-5"
                 @click="
