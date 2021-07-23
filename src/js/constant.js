@@ -158,5 +158,8 @@ export default {
         ExamMockpaper: 'ExamMockpaper',
         ExamMockpaperCreate: 'ExamMockpaper',
         ExamMockpaperUpdate: 'ExamMockpaper',
+        MockpaperCategories: 'ExamMockpaper',
+        MockpaperCategoriesCreate: 'ExamMockpaper',
+        MockpaperCategoriesUpdate: 'ExamMockpaper',
     }
 }

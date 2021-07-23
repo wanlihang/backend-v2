@@ -1152,7 +1152,7 @@ const Api = {
                 Update(id, params) {
                     return put(`/backend/addons/Paper/paper_category/${id}`, params);
                 },
-                Destroy(id) {
+                Destory(id) {
                     return destroy(`/backend/addons/Paper/paper_category/${id}`);
                 },
             },
@@ -1173,7 +1173,7 @@ const Api = {
             Update(id, params) {
                 return put(`/backend/addons/Paper/mock_paper/${id}`, params);
             },
-            Destroy(id) {
+            Destory(id) {
                 return destroy(`/backend/addons/Paper/mock_paper/${id}`);
             },
             Userpaper(id, params) {
@@ -1207,7 +1207,7 @@ const Api = {
                 Update(id, params) {
                     return put(`/backend/addons/Paper/paper_category/${id}`, params);
                 },
-                Destroy(id) {
+                Destory(id) {
                     return destroy(`/backend/addons/Paper/paper_category/${id}`);
                 },
             },
@@ -1260,7 +1260,7 @@ const Api = {
                 Update(id, params) {
                     return put(`/backend/addons/Paper/paper_category/${id}`, params);
                 },
-                Destroy(id) {
+                Destory(id) {
                     return destroy(`/backend/addons/Paper/paper_category/${id}`);
                 },
             },

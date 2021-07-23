@@ -28,7 +28,7 @@
             <div class="ml-15">
               <el-link
                 type="primary"
-                @click="$router.push({ name: 'PaperCategories' })"
+                @click="$router.push({ name: 'MockpaperCategories' })"
               >
                 分类管理
               </el-link>
