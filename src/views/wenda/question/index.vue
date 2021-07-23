@@ -7,56 +7,74 @@
       >
         分类管理
       </el-button>
-      <el-button @click="destoryMulti()" type="danger"> 批量删除 </el-button>
     </div>
     <div class="float-left">
       <div class="float-left d-flex">
-        <div class="d-flex">
-          <div class="filter-label">用户ID</div>
-          <div class="flex-1 ml-15">
-            <el-input
-              class="w-100"
-              v-model="filter.user_id"
-              placeholder="用户ID"
-              style="width: 200px"
-            ></el-input>
-          </div>
-        </div>
-        <div class="d-flex ml-15">
-          <div class="filter-label">分类</div>
-          <div class="flex-1 ml-15">
-            <el-select v-model="filter.category_id">
-              <el-option
-                v-for="(item, index) in filterData.categories"
-                :key="index"
-                :label="item.name"
-                :value="item.id"
-              >
-              </el-option>
-            </el-select>
-          </div>
-        </div>
-        <div class="d-flex ml-15">
-          <div class="filter-label">状态</div>
-          <div class="flex-1 ml-15">
-            <el-select v-model="filter.status">
-              <el-option
-                v-for="(item, index) in filterData.status"
-                :key="index"
-                :label="item.name"
-                :value="item.id"
-              >
-              </el-option>
-            </el-select>
-          </div>
+        <div>
+          <el-input
+            class="w-200px"
+            v-model="filter.keywords"
+            placeholder="关键字"
+          ></el-input>
         </div>
 
-        <div class="ml-15">
-          <el-button @click="getQuestion" type="primary" plain>筛选</el-button>
-          <el-button @click="paginationReset">清空</el-button>
+        <div class="ml-10">
+          <el-input
+            class="w-200px"
+            v-model="filter.user_id"
+            placeholder="用户ID"
+          ></el-input>
+        </div>
+        <div class="ml-10">
+          <el-select
+            placeholder="分类"
+            class="w-200px"
+            v-model="filter.category_id"
+          >
+            <el-option
+              v-for="(item, index) in filterData.categories"
+              :key="index"
+              :label="item.name"
+              :value="item.id"
+            >
+            </el-option>
+          </el-select>
+        </div>
+
+        <div class="ml-10">
+          <el-select placeholder="状态" class="w-200px" v-model="filter.status">
+            <el-option
+              v-for="(item, index) in filterData.status"
+              :key="index"
+              :label="item.name"
+              :value="item.id"
+            >
+            </el-option>
+          </el-select>
+        </div>
+
+        <div class="ml-10">
+          <el-date-picker
+            v-model="filter.created_at"
+            type="daterange"
+            align="right"
+            unlink-panels
+            range-separator="至"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
+          >
+          </el-date-picker>
         </div>
       </div>
+      <div class="float-left mt-30">
+        <el-button @click="destoryMulti()" type="danger"> 批量删除 </el-button>
+        <el-button @click="firstPageLoad()" type="primary" plain
+          >筛选</el-button
+        >
+        <el-button @click="paginationReset()">清空</el-button>
+      </div>
     </div>
+
     <div class="float-left mt-30" v-loading="loading">
       <div class="float-left">
         <el-table
@@ -64,15 +82,17 @@
           stripe
           @selection-change="handleSelectionChange"
           class="float-left"
+          @sort-change="sortChange"
+          :default-sort="{ prop: 'id', order: 'descending' }"
         >
-          <el-table-column type="selection" width="55"></el-table-column
-          ><!-- 显示选取表格 -->
-          <el-table-column prop="id" label="ID" width="80"> </el-table-column>
-          <el-table-column prop="user_id" label="用户ID" width="80">
+          <el-table-column type="selection" width="55"></el-table-column>
+          <el-table-column prop="id" sortable label="ID" width="120">
           </el-table-column>
-          <el-table-column prop="category.name" label="分类" width="100">
+          <el-table-column prop="user_id" sortable label="用户ID" width="120">
           </el-table-column>
-          <el-table-column label="用户">
+          <el-table-column prop="category.name" label="分类" width="200">
+          </el-table-column>
+          <el-table-column label="用户" width="300">
             <template slot-scope="scope">
               <div class="d-flex" v-if="scope.row.user">
                 <div>
@@ -85,36 +105,53 @@
               <span v-else class="c-red">用户不存在</span>
             </template>
           </el-table-column>
-          <el-table-column prop="title" label="标题"> </el-table-column>
-          <el-table-column label="浏览" width="80">
+          <el-table-column prop="title" label="标题" width="500">
+          </el-table-column>
+          <el-table-column
+            label="浏览"
+            sortable
+            property="view_times"
+            width="120"
+          >
             <template slot-scope="scope">
               <span>{{ scope.row.view_times }}次</span>
             </template>
           </el-table-column>
-          <el-table-column label="点赞" width="80">
+          <el-table-column
+            label="点赞"
+            sortable
+            property="vote_count"
+            width="120"
+          >
             <template slot-scope="scope">
               <span>{{ scope.row.vote_count }}次</span>
             </template>
           </el-table-column>
-          <el-table-column label="答案" width="80">
+          <el-table-column
+            label="答案"
+            sortable
+            property="answer_count"
+            width="120"
+          >
             <template slot-scope="scope">
               <span>{{ scope.row.answer_count }}个</span>
             </template>
           </el-table-column>
-          <el-table-column label="积分" width="100">
+          <el-table-column label="积分" sortable property="credit1" width="120">
             <template slot-scope="scope">
               <span>{{ scope.row.credit1 }}积分</span>
             </template>
           </el-table-column>
-          <el-table-column label="状态" width="100">
+          <el-table-column label="状态" width="120">
             <template slot-scope="scope">
-              <span v-if="scope.row.status == 1" style="color: red">{{
-                scope.row.status_text
-              }}</span>
-              <span v-else>{{ scope.row.status_text }}</span>
+              <el-tag v-if="scope.row.status === 1" type="success">
+                {{ scope.row.status_text }}
+              </el-tag>
+              <el-tag type="info" v-else>{{ scope.row.status_text }}</el-tag>
             </template>
           </el-table-column>
-
+          <el-table-column prop="created_at" sortable width="200" label="时间">
+          </el-table-column>
           <el-table-column fixed="right" label="操作" width="80">
             <template slot-scope="scope">
               <el-link
@@ -122,7 +159,7 @@
                 @click="
                   $router.push({
                     name: 'QuestionAnswer',
-                    query: { id: scope.row.id },
+                    query: { id: scope.row.id, status: scope.row.status },
                   })
                 "
                 >回答</el-link
@@ -155,11 +192,15 @@ export default {
       pagination: {
         page: 1,
         size: 10,
+        sort: "id",
+        order: "desc",
       },
       filter: {
         user_id: null,
         category_id: null,
-        status: "",
+        status: -1,
+        created_at: null,
+        keywords: null,
       },
       total: 0,
       loading: false,
@@ -170,6 +211,10 @@ export default {
       filterData: {
         categories: [],
         status: [
+          {
+            id: -1,
+            name: "全部",
+          },
           {
             id: 0,
             name: "未解决",
@@ -183,15 +228,20 @@ export default {
     };
   },
   mounted() {
-    // this.create();
     this.getQuestion();
   },
   methods: {
+    firstPageLoad() {
+      this.pagination.page = 1;
+      this.getQuestion();
+    },
     paginationReset() {
       this.pagination.page = 1;
       this.filter.category_id = null;
       this.filter.user_id = null;
-      this.filter.status = "";
+      this.filter.status = -1;
+      this.filter.keywords = null;
+      this.filter.created_at = null;
       this.getQuestion();
     },
     paginationSizeChange(size) {
@@ -202,7 +252,11 @@ export default {
       this.pagination.page = page;
       this.getQuestion();
     },
-    //保存选中结果
+    sortChange(column) {
+      this.pagination.sort = column.prop;
+      this.pagination.order = column.order === "ascending" ? "asc" : "desc";
+      this.getQuestion();
+    },
     handleSelectionChange(val) {
       var newbox = [];
       for (var i = 0; i < val.length; i++) {

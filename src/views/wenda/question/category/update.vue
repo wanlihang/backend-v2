@@ -1,17 +1,27 @@
 <template>
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="编辑分类"></back-bar>
-    <div class="float-left">
-      <el-form ref="form" :model="user" :rules="rules" label-width="200px">
-        <el-form-item label="排序" prop="sort">
-          <el-input
-            type="number"
-            v-model="user.sort"
-            class="w-200px"
-          ></el-input>
-        </el-form-item>
+    <div class="float-left" v-if="form">
+      <el-form ref="form" :model="form" :rules="rules" label-width="200px">
         <el-form-item label="分类名" prop="name">
-          <el-input v-model="user.name" class="w-200px"></el-input>
+          <el-input v-model="form.name" class="w-200px"></el-input>
+        </el-form-item>
+
+        <el-form-item label="排序" prop="sort">
+          <div class="d-flex">
+            <div>
+              <el-input
+                type="number"
+                v-model="form.sort"
+                class="w-200px"
+              ></el-input>
+            </div>
+            <div class="ml-10">
+              <helper-text
+                text="请输入整数。小数排在前，大数排在后。"
+              ></helper-text>
+            </div>
+          </div>
         </el-form-item>
       </el-form>
     </div>
@@ -34,11 +44,8 @@
 export default {
   data() {
     return {
-      user: {
-        id: this.$route.query.id,
-        sort: 0,
-        name: null,
-      },
+      id: this.$route.query.id,
+      form: null,
       rules: {
         sort: [
           {
@@ -64,10 +71,8 @@ export default {
   },
   methods: {
     detail() {
-      this.$api.Wenda.Question.Cate.Detail(this.user.id).then((res) => {
-        var data = res.data.data;
-        this.user.name = data.name;
-        this.user.sort = data.sort;
+      this.$api.Wenda.Question.Cate.Detail(this.id).then((res) => {
+        this.form = res.data.data;
       });
     },
     formValidate() {
@@ -82,7 +87,7 @@ export default {
         return;
       }
       this.loading = true;
-      this.$api.Wenda.Question.Cate.Update(this.user.id, this.user)
+      this.$api.Wenda.Question.Cate.Update(this.id, this.form)
         .then(() => {
           this.$message.success(this.$t("common.success"));
           this.$router.back();

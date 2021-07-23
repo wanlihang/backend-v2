@@ -4,10 +4,10 @@
     <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table :data="comments" stripe class="float-left">
-          <el-table-column prop="id" label="ID" width="80"> </el-table-column>
-          <el-table-column prop="user_id" label="用户ID" width="80">
+          <el-table-column prop="id" label="ID" width="120"> </el-table-column>
+          <el-table-column prop="user_id" label="用户ID" width="120">
           </el-table-column>
-          <el-table-column label="用户">
+          <el-table-column label="用户" width="300">
             <template slot-scope="scope">
               <div class="d-flex" v-if="scope.row.user">
                 <div>
@@ -20,19 +20,18 @@
               <span v-else class="c-red">用户不存在</span>
             </template>
           </el-table-column>
-          <el-table-column label="内容"
-            ><template slot-scope="scope">
+          <el-table-column label="内容" width="500">
+            <template slot-scope="scope">
               <div v-html="scope.row.original_content"></div>
             </template>
           </el-table-column>
+          <el-table-column label="时间" width="200" prop="created_at">
+          </el-table-column>
           <el-table-column fixed="right" label="操作" width="150">
             <template slot-scope="scope">
-              <el-link
-                style="margin-right: 10px"
-                type="danger"
-                @click="destory(scope.row.id)"
-                >删除</el-link
-              >
+              <el-link type="danger" @click="destory(scope.row.id)">
+                删除
+              </el-link>
             </template>
           </el-table-column>
         </el-table>
@@ -44,10 +43,8 @@
 export default {
   data() {
     return {
-      box: {
-        id: this.$route.query.id,
-        cid: this.$route.query.cid,
-      },
+      id: this.$route.query.id,
+      answer_id: this.$route.query.answer_id,
       loading: false,
       comments: [],
     };
@@ -61,13 +58,11 @@ export default {
         return;
       }
       this.loading = true;
-      this.$api.Wenda.Question.Comment(this.box.cid).then((res) => {
+      this.$api.Wenda.Question.Comment(this.answer_id).then((res) => {
         this.loading = false;
         this.comments = res.data.comments;
       });
     },
-    importUser() {},
-    //删除
     destory(id) {
       this.$confirm("确认操作？", "警告", {
         confirmButtonText: "确定",
@@ -75,7 +70,6 @@ export default {
         type: "warning",
       })
         .then(() => {
-          //点击确定按钮的操作
           if (this.loading) {
             return;
           }

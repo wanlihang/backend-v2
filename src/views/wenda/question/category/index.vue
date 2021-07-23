@@ -15,14 +15,15 @@
     <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table :data="categories" stripe class="float-left">
+          <el-table-column prop="id" label="ID" width="120"> </el-table-column>
+          <el-table-column prop="sort" label="升序" width="120">
+          </el-table-column>
           <el-table-column label="分类名"
             ><template slot-scope="scope">
               <span>{{ scope.row.name }} </span>
             </template>
           </el-table-column>
-          <el-table-column prop="sort" label="升序" width="400">
-          </el-table-column>
-          <el-table-column fixed="right" label="操作" width="150">
+          <el-table-column fixed="right" label="操作" width="100">
             <template slot-scope="scope">
               <el-link
                 style="margin-right: 10px"

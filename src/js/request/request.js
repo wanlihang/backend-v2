@@ -68,7 +68,7 @@ const Api = {
             WithdrawOrders(params) {
                 return get(`/backend/api/v1/member/inviteBalance/withdrawOrders`, params);
             },
-            Submit(params){
+            Submit(params) {
                 return post(`/backend/api/v1/member/inviteBalance/withdrawOrders`, params);
             }
         },
@@ -887,6 +887,9 @@ const Api = {
             DestoryComment(id) {
                 return destroy(`/backend/addons/Wenda/question/answers/comments/${id}`);
             },
+            SetAnswer(questionId, answerId) {
+                return get(`backend/addons/Wenda/question/${questionId}/answers/${answerId}/selected`);
+            },
             Cate: {
                 Destory(id) {
                     return destroy(`/backend/addons/Wenda/category/${id}`);
@@ -1119,13 +1122,13 @@ const Api = {
             Destroy(id) {
                 return destroy(`/backend/addons/Paper/paper/${id}`);
             },
-            Userpaper(id,params) {
+            Userpaper(id, params) {
                 return get(`/backend/addons/Paper/paper/${id}/userPaper`, params);
             },
-            Stat(id,params) {
+            Stat(id, params) {
                 return get(`/backend/addons/Paper/paper/${id}/statistics`, params);
             },
-            Category:{
+            Category: {
                 List(params) {
                     return get(`/backend/addons/Paper/paper_category/index`, params);
                 },
@@ -1163,9 +1166,9 @@ const Api = {
                 return put(`/backend/addons/Paper/practice/${id}`, params);
             },
             Destroy(params) {
-                return post(`/backend/addons/Paper/practice/delete/multi`,params);
+                return post(`/backend/addons/Paper/practice/delete/multi`, params);
             },
-            Category:{
+            Category: {
                 List(params) {
                     return get(`/backend/addons/Paper/paper_category/index`, params);
                 },
