@@ -90,6 +90,7 @@ export default {
         name: null,
         active_routes: null,
         blank: null,
+        url: null
       },
       parentNavs: [],
       rules: {
