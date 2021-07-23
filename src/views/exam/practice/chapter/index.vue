@@ -50,8 +50,8 @@
                 class="ml-5"
                 @click="
                   $router.push({
-                    name: 'PracticeChapterUpdate',
-                    query: { id: scope.row.id, pid: id },
+                    name: 'PracticeChapterQuestion',
+                    query: { id: scope.row.id},
                   })
                 "
                 >试题</el-link
