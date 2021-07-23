@@ -94,7 +94,7 @@
                 class="ml-5"
                 @click="
                   $router.push({
-                    name: 'ExamPracticeUpdate',
+                    name: 'PracticeUser',
                     query: { id: scope.row.id },
                   })
                 "

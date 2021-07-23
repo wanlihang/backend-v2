@@ -1168,6 +1168,19 @@ const Api = {
             Destroy(params) {
                 return post(`/backend/addons/Paper/practice/delete/multi`, params);
             },
+            User(id, params) {
+                return get(`/backend/addons/Paper/practice/${id}/users`, params);
+            },
+            Add(id,params) {
+                return post(`/backend/addons/Paper/practice/${id}/user/insert`, params);
+            },
+            Progress(id,ids){
+                return get(`/backend/addons/Paper/practice/${id}/user/${ids}/progress`);
+            },
+            DestoryUser(id,params) {
+                return post(`/backend/addons/Paper/practice/${id}/user/delete`, params);
+            },
+            
             Category: {
                 List(params) {
                     return get(`/backend/addons/Paper/paper_category/index`, params);
