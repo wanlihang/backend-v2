@@ -2,12 +2,34 @@
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="兑换码"></back-bar>
     <div class="float-left mb-30">
-      <el-button @click="destorymulti()" type="danger"> 批量删除 </el-button>
-      <el-button @click="getnum(10)" type="primary"> 生成10个 </el-button>
-      <el-button @click="getnum(50)" type="primary"> 生成50个 </el-button>
-      <el-button @click="importcode()" type="primary">
-        导出未使用兑换码
-      </el-button>
+      <p-button
+        text="批量删除"
+        @click="destorymulti()"
+        type="danger"
+        p="addons.CodeExchanger.codes.delete.multi"
+      >
+      </p-button>
+      <p-button
+        text="生成10个"
+        @click="getnum(10)"
+        type="primary"
+        p="addons.CodeExchanger.codes.generate"
+      >
+      </p-button>
+      <p-button
+        text="生成50个"
+        @click="getnum(50)"
+        type="primary"
+        p="addons.CodeExchanger.codes.generate"
+      >
+      </p-button>
+      <p-button
+        text="导出未使用兑换码"
+        @click="importcode()"
+        type="primary"
+        p="addons.CodeExchanger.codes.export"
+      >
+      </p-button>
     </div>
     <div class="float-left">
       <div class="float-left d-flex">

@@ -1,12 +1,13 @@
 <template>
   <div class="meedu-main-body">
     <div class="float-left mb-30">
-      <el-button
+      <p-button
+        text="添加"
         @click="$router.push({ name: 'CodeExchangerCreate' })"
         type="primary"
+        p="addons.CodeExchanger.goods.store"
       >
-        添加
-      </el-button>
+      </p-button>
     </div>
     <div class="float-left">
       <div class="float-left d-flex">
@@ -41,9 +42,15 @@
         </el-table-column>
         <el-table-column fixed="right" label="操作" width="150">
           <template slot-scope="scope">
-            <el-link type="danger" @click="destory(scope.row.id)">删除</el-link>
-            <el-link
+            <p-link
+              text="删除"
+              type="danger"
+              @click="destory(scope.row.id)"
+              p="addons.CodeExchanger.goods.delete"
+            ></p-link>
+            <p-link
               type="primary"
+              text="兑换码"
               class="ml-5"
               @click="
                 $router.push({
@@ -51,8 +58,8 @@
                   query: { id: scope.row.id },
                 })
               "
-              >兑换码</el-link
-            >
+              p="addons.CodeExchanger.codes.list"
+            ></p-link>
           </template>
         </el-table-column>
       </el-table>
