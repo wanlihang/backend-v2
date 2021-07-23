@@ -27,7 +27,7 @@ const routes = [{
       },
       {
         path: '/role',
-        component: () => import('@/views/role/role'),
+        component: () => import('@/views/role/index'),
         name: 'Role',
         meta: {
           title: 'title.role'
