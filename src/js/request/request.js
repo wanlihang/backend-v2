@@ -68,7 +68,7 @@ const Api = {
             WithdrawOrders(params) {
                 return get(`/backend/api/v1/member/inviteBalance/withdrawOrders`, params);
             },
-            Submit(params){
+            Submit(params) {
                 return post(`/backend/api/v1/member/inviteBalance/withdrawOrders`, params);
             }
         },
@@ -1022,7 +1022,7 @@ const Api = {
     Multishare: {
         Poster: {
             List() {
-                return get(`/backend/addons/multi_level_share/poster/index`,);
+                return get(`/backend/addons/multi_level_share/poster/index`, );
             },
             Store(params) {
                 return post(`/backend/addons/multi_level_share/poster/create`, params);
@@ -1119,13 +1119,13 @@ const Api = {
             Destroy(id) {
                 return destroy(`/backend/addons/Paper/paper/${id}`);
             },
-            Userpaper(id,params) {
+            Userpaper(id, params) {
                 return get(`/backend/addons/Paper/paper/${id}/userPaper`, params);
             },
-            Stat(id,params) {
+            Stat(id, params) {
                 return get(`/backend/addons/Paper/paper/${id}/statistics`, params);
             },
-            Category:{
+            Category: {
                 List(params) {
                     return get(`/backend/addons/Paper/paper_category/index`, params);
                 },
@@ -1163,9 +1163,9 @@ const Api = {
                 return put(`/backend/addons/Paper/practice/${id}`, params);
             },
             Destroy(params) {
-                return post(`/backend/addons/Paper/practice/delete/multi`,params);
+                return post(`/backend/addons/Paper/practice/delete/multi`, params);
             },
-            Category:{
+            Category: {
                 List(params) {
                     return get(`/backend/addons/Paper/paper_category/index`, params);
                 },
@@ -1183,6 +1183,26 @@ const Api = {
                 },
                 Destroy(id) {
                     return destroy(`/backend/addons/Paper/paper_category/${id}`);
+                },
+            },
+            Chapter: {
+                List(params) {
+                    return get(`/backend/addons/Paper/practice_chapter/index`, params);
+                },
+                Create() {
+                    return get(`/backend/addons/Paper/practice_chapter/create`);
+                },
+                Store(params) {
+                    return post(`/backend/addons/Paper/practice_chapter/create`, params);
+                },
+                Detail(id) {
+                    return get(`/backend/addons/Paper/practice_chapter/${id}`);
+                },
+                Update(id, params) {
+                    return put(`/backend/addons/Paper/practice_chapter/${id}`, params);
+                },
+                DestoryMulti(params) {
+                    return post(`/backend/addons/Paper/practice_chapter/delete/multi`, params);
                 },
             },
         },
