@@ -47,6 +47,12 @@ const Api = {
                 return get(`/backend/api/v1/order`, params);
             },
         },
+        Detail(id) {
+            return get(`/backend/api/v1/order/${id}`);
+        },
+        SetPaid(id) {
+            return get(`/backend/api/v1/order/${id}/finish`);
+        },
         PromoCode: {
             PromoCode(params) {
                 return get(`/backend/api/v1/promoCode`, params);
@@ -1024,7 +1030,7 @@ const Api = {
     Multishare: {
         Poster: {
             List() {
-                return get(`/backend/addons/multi_level_share/poster/index`, );
+                return get(`/backend/addons/multi_level_share/poster/index`,);
             },
             Store(params) {
                 return post(`/backend/addons/multi_level_share/poster/create`, params);
@@ -1130,10 +1136,10 @@ const Api = {
             User(id, params) {
                 return get(`/backend/addons/Paper/paper/${id}/user`, params);
             },
-            Add(id,params) {
+            Add(id, params) {
                 return post(`/backend/addons/Paper/paper/${id}/user`, params);
             },
-            DestoryUser(id,ids) {
+            DestoryUser(id, ids) {
                 return destroy(`/backend/addons/Paper/paper/${id}/user/${ids}`);
             },
             Category: {
@@ -1185,11 +1191,19 @@ const Api = {
             User(id, params) {
                 return get(`/backend/addons/Paper/mock_paper/${id}/users`, params);
             },
+<<<<<<< HEAD
             Add(id,params) {
                 return post(`/backend/addons/Paper/mock_paper/${id}/user/insert`, params);
             },
             DestoryUser(id,params) {
                 return post(`/backend/addons/Paper/mock_paper/${id}/user/delete`, params);
+=======
+            Add(id, params) {
+                return post(`/backend/addons/Paper/mock_paper/${id}/user`, params);
+            },
+            DestoryUser(id, ids) {
+                return destroy(`/backend/addons/Paper/mock_paper/${id}/user/${ids}`);
+>>>>>>> 12fb295f0a8f3d2c48f1e382a9bbb2a0c3a481b3
             },
             Category: {
                 List(params) {
@@ -1235,16 +1249,16 @@ const Api = {
             User(id, params) {
                 return get(`/backend/addons/Paper/practice/${id}/users`, params);
             },
-            Add(id,params) {
+            Add(id, params) {
                 return post(`/backend/addons/Paper/practice/${id}/user/insert`, params);
             },
-            Progress(id,ids){
+            Progress(id, ids) {
                 return get(`/backend/addons/Paper/practice/${id}/user/${ids}/progress`);
             },
-            DestoryUser(id,params) {
+            DestoryUser(id, params) {
                 return post(`/backend/addons/Paper/practice/${id}/user/delete`, params);
             },
-            
+
             Category: {
                 List(params) {
                     return get(`/backend/addons/Paper/paper_category/index`, params);
