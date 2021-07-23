@@ -53,7 +53,7 @@
           <el-table-column label="分数">
             <template slot-scope="scope">
               <span v-if="scope.row.status === 2">{{ scope.row.score }}分</span>
-              <span style="color: red" v-else>未完成</span>
+              <span class="c-red" v-else>未完成</span>
             </template>
           </el-table-column>
           <el-table-column label="用时" width="100">
@@ -62,7 +62,7 @@
                 v-if="status === 2"
                 :duration="scope.row.expired_seconds"
               ></duration-text>
-              <span style="color: red" v-else>未完成</span>
+              <span class="c-red" v-else>未完成</span>
             </template>
           </el-table-column>
           <el-table-column prop="status_text" label="状态" width="80">

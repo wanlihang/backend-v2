@@ -46,7 +46,7 @@
           <el-table-column label="及格">
             <template slot-scope="scope">
               <span v-if="scope.row.score >= pass_score">及格</span>
-              <span style="color: red" v-else>不及格</span>
+              <span class="c-red" v-else>不及格</span>
             </template>
           </el-table-column>
         </el-table>
