@@ -1234,6 +1234,14 @@ const routes = [{
         }
       },
       {
+        path: '/exam/paper/user',
+        component: () => import('@/views/exam/paper/user'),
+        name: 'PaperUser',
+        meta: {
+          title: 'title.exam.paper.user',
+        }
+      },
+      {
         path: '/exam/practice/progress',
         component: () => import('@/views/exam/practice/progress'),
         name: 'PracticeProgress',
