@@ -1,25 +1,24 @@
 <template>
   <div class="meedu-main-body">
+    <back-bar class="mb-30" title="考试记录"></back-bar>
     <div class="float-left mb-30">
-      <el-button
-        @click="$router.push({ name: 'ExamMockpaperCreate' })"
-        type="primary"
-      >
-        添加
-      </el-button>
-    </div>
-    <div class="float-left">
       <div class="float-left d-flex">
-        <div>
-          <el-select
-            class="w-200px"
-            placeholder="分类"
-            v-model="filter.category_id"
-          >
+        <div class="d-flex">
+          <div class="filter-label">用户ID</div>
+          <div class="flex-1 ml-15">
+            <el-input
+              class="w-200px"
+              v-model="filter.user_id"
+              placeholder="用户ID"
+            ></el-input>
+          </div>
+        </div>
+        <div class="d-flex ml-10">
+          <el-select class="w-200px" placeholder="状态" v-model="filter.status">
             <el-option
               v-for="(item, index) in filterData.categories"
               :key="index"
-              :label="item.name"
+              :label="item.text"
               :value="item.id"
             >
             </el-option>
@@ -34,75 +33,39 @@
         </div>
       </div>
     </div>
-    <div class="float-left mt-30" v-loading="loading">
+    <div class="float-left" v-loading="loading">
       <div class="float-left">
-        <el-table
-          :data="list"
-          @sort-change="sortChange"
-          :default-sort="{ prop: 'id', order: 'descending' }"
-          stripe
-          class="float-left"
-        >
-          <el-table-column prop="id" sortable label="ID" width="120">
+        <el-table :data="list" stripe class="float-left">
+          <el-table-column prop="id" label="ID" width="80"> </el-table-column>
+          <el-table-column prop="user_id" label="用户ID" width="80">
           </el-table-column>
-          <el-table-column prop="category.name" label="分类" width="150">
-          </el-table-column>
-          <el-table-column prop="title" label="标题"> </el-table-column>
-          <el-table-column label="时长" width="100">
+          <el-table-column label="用户">
             <template slot-scope="scope">
-              <span>{{ scope.row.expired_minutes }}m</span>
+              <div class="d-flex" v-if="scope.row.user">
+                <div>
+                  <img :src="scope.row.user.avatar" width="40" height="40" />
+                </div>
+                <div class="ml-10">{{ scope.row.user.nick_name }}</div>
+              </div>
+              <span class="c-red" v-else>用户不存在</span>
             </template>
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="300">
+          <el-table-column label="分数">
             <template slot-scope="scope">
-              <el-link type="danger" @click="destory(scope.row.id)"
-                >删除</el-link
-              >
-              <el-link
-                type="primary"
-                class="ml-5"
-                @click="
-                  $router.push({
-                    name: 'ExamMockpaperUpdate',
-                    query: { id: scope.row.id },
-                  })
-                "
-                >编辑</el-link
-              >
-              <el-link
-                type="primary"
-                class="ml-5"
-                @click="
-                  $router.push({
-                    name: 'MockpaperUser',
-                    query: { id: scope.row.id },
-                  })
-                "
-                >订阅用户</el-link
-              >
-              <el-link
-                type="primary"
-                class="ml-5"
-                @click="
-                  $router.push({
-                    name: 'ExamMockpaperStat',
-                    query: { id: scope.row.id },
-                  })
-                "
-                >分数统计</el-link
-              >
-              <el-link
-                type="primary"
-                class="ml-5"
-                @click="
-                  $router.push({
-                    name: 'ExamMockpaperUserpaper',
-                    query: { id: scope.row.id },
-                  })
-                "
-                >考试记录</el-link
-              >
+              <span v-if="scope.row.status === 2">{{ scope.row.score }}分</span>
+              <span style="color: red" v-else>未完成</span>
             </template>
+          </el-table-column>
+          <el-table-column label="用时" width="100">
+            <template slot-scope="scope">
+              <duration-text
+                v-if="status === 2"
+                :duration="scope.row.expired_seconds"
+              ></duration-text>
+              <span style="color: red" v-else>未完成</span>
+            </template>
+          </el-table-column>
+          <el-table-column prop="status_text" label="状态" width="80">
           </el-table-column>
         </el-table>
       </div>
@@ -124,17 +87,22 @@
 </template>
 
 <script>
+import DurationText from "@/components/duration-text";
+
 export default {
+  components: {
+    DurationText,
+  },
   data() {
     return {
       pagination: {
+        id: this.$route.query.id,
         page: 1,
         size: 10,
-        sort: "id",
-        order: "desc",
       },
       filter: {
-        category_id: null,
+        user_id: "",
+        status: -1,
       },
       total: 0,
       loading: false,
@@ -146,22 +114,16 @@ export default {
   },
 
   mounted() {
-    this.params();
     this.getResults();
   },
   methods: {
-    params() {
-      this.$api.Exam.Mockpaper.Create().then((res) => {
-        this.filterData.categories = res.data.categories;
-      });
-    },
     firstPageLoad() {
       this.pagination.page = 1;
       this.getResults();
     },
     paginationReset() {
       this.pagination.page = 1;
-      this.filter.category_id = null;
+      this.filter.user_id = null;
       this.getResults();
     },
     paginationSizeChange(size) {
@@ -172,11 +134,6 @@ export default {
       this.pagination.page = page;
       this.getResults();
     },
-    sortChange(column) {
-      this.pagination.sort = column.prop;
-      this.pagination.order = column.order === "ascending" ? "asc" : "desc";
-      this.getResults();
-    },
     getResults() {
       if (this.loading) {
         return;
@@ -184,10 +141,16 @@ export default {
       this.loading = true;
       let params = {};
       Object.assign(params, this.filter, this.pagination);
-      this.$api.Exam.Mockpaper.List(params).then((res) => {
+      this.$api.Exam.Mockpaper.Userpaper(this.pagination.id, params).then((res) => {
         this.loading = false;
-        this.list = res.data.data;
-        this.total = res.data.total;
+        this.list = res.data.data.data;
+        this.total = res.data.data.total;
+        var item={
+          text:'全部',
+          id:-1
+        }
+        this.filterData.categories.push(item)
+        this.filterData.categories.push(...res.data.statusMap);
       });
     },
     destory(item) {

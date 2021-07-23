@@ -162,5 +162,8 @@ export default {
         MockpaperCategories: 'ExamMockpaper',
         MockpaperCategoriesCreate: 'ExamMockpaper',
         MockpaperCategoriesUpdate: 'ExamMockpaper',
+        MockpaperUser: 'ExamMockpaper',
+        ExamMockpaperStat: 'ExamMockpaper',
+        ExamMockpaperUserpaper: 'ExamMockpaper',
     }
 }

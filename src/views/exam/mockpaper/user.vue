@@ -1,43 +1,18 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="考试记录"></back-bar>
+    <back-bar class="mb-30" title="订阅用户"></back-bar>
     <div class="float-left mb-30">
-      <div class="float-left d-flex">
-        <div class="d-flex">
-          <div class="filter-label">用户ID</div>
-          <div class="flex-1 ml-15">
-            <el-input
-              class="w-200px"
-              v-model="filter.user_id"
-              placeholder="用户ID"
-            ></el-input>
-          </div>
-        </div>
-        <div class="d-flex ml-10">
-          <el-select class="w-200px" placeholder="状态" v-model="filter.status">
-            <el-option
-              v-for="(item, index) in filterData.categories"
-              :key="index"
-              :label="item.text"
-              :value="item.id"
-            >
-            </el-option>
-          </el-select>
-        </div>
-
-        <div class="ml-10">
-          <el-button @click="firstPageLoad()" type="primary" plain>
-            筛选
-          </el-button>
-          <el-button @click="paginationReset()">清空</el-button>
-        </div>
-      </div>
+      <el-button @click="showUserAddWin = true">添加用户</el-button>
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
-        <el-table :data="list" stripe class="float-left">
-          <el-table-column prop="id" label="ID" width="80"> </el-table-column>
+        <el-table :data="results" stripe class="float-left">
           <el-table-column prop="user_id" label="用户ID" width="80">
+          </el-table-column>
+          <el-table-column label="手机号" width="150">
+            <template slot-scope="scope">
+              <span>{{ scope.row.user.mobile }}</span>
+            </template>
           </el-table-column>
           <el-table-column label="用户">
             <template slot-scope="scope">
@@ -50,31 +25,15 @@
               <span class="c-red" v-else>用户不存在</span>
             </template>
           </el-table-column>
-          <el-table-column label="得分">
+          <el-table-column fixed="right" label="操作" width="200">
             <template slot-scope="scope">
-              <span v-if="scope.row.status === 2">{{ scope.row.score }}分</span>
-              <span style="color: red" v-else>未完成</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="用时" width="100">
-            <template slot-scope="scope">
-              <duration-text
-                v-if="status === 2"
-                :duration="scope.row.expired_seconds"
-              ></duration-text>
-              <span style="color: red" v-else>未完成</span>
-            </template>
-          </el-table-column>
-          <el-table-column prop="status_text" label="状态" width="80">
-          </el-table-column>
-          <el-table-column fixed="right" label="操作" width="100">
-            <template>
-              <el-link type="primary" class="ml-5">查看</el-link>
+              <el-link type="danger" @click="destory(scope.row.user_id)"
+                >删除</el-link
+              >
             </template>
           </el-table-column>
         </el-table>
       </div>
-
       <div class="float-left mt-30 text-center">
         <el-pagination
           @size-change="paginationSizeChange"
@@ -88,33 +47,33 @@
         </el-pagination>
       </div>
     </div>
+    <user-add-comp
+      :show="showUserAddWin"
+      @close="showUserAddWin = false"
+      @confirm="userAddChange"
+    ></user-add-comp>
   </div>
 </template>
 
 <script>
-import DurationText from "@/components/duration-text";
+import UserAddComp from "@/components/user-add";
 
 export default {
   components: {
-    DurationText,
+    UserAddComp,
   },
   data() {
     return {
+      showUserAddWin: false,
       pagination: {
-        id: this.$route.query.id,
         page: 1,
         size: 10,
-      },
-      filter: {
-        user_id: null,
-        status: -1,
+        id: this.$route.query.id,
       },
       total: 0,
       loading: false,
-      list: [],
-      filterData: {
-        categories: [],
-      },
+      results: [],
+      electedRows: null,
     };
   },
 
@@ -128,7 +87,6 @@ export default {
     },
     paginationReset() {
       this.pagination.page = 1;
-      this.filter.user_id = null;
       this.getResults();
     },
     paginationSizeChange(size) {
@@ -145,17 +103,12 @@ export default {
       }
       this.loading = true;
       let params = {};
-      Object.assign(params, this.filter, this.pagination);
-      this.$api.Exam.Paper.Userpaper(this.pagination.id, params).then((res) => {
+      Object.assign(params, this.pagination);
+      this.$api.Exam.Mockpaper.User(this.pagination.id, params).then((res) => {
         this.loading = false;
-        this.list = res.data.data.data;
+        this.results = res.data.data.data;
         this.total = res.data.data.total;
-        var item={
-          text:'全部',
-          id:-1
-        }
-        this.filterData.categories.push(item)
-        this.filterData.categories.push(...res.data.statusMap);
+        this.question_count = res.data.question_count;
       });
     },
     destory(item) {
@@ -170,7 +123,11 @@ export default {
             return;
           }
           this.loading = true;
-          this.$api.Exam.Paper.Destory(item)
+          let params = {
+            id: this.pagination.id,
+            user_id: item,
+          };
+          this.$api.Exam.Mockpaper.DestoryUser(this.pagination.id, params)
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));
@@ -183,6 +140,25 @@ export default {
         })
         .catch(() => {
           //点击删除按钮的操作
+        });
+    },
+    userAddChange(rows) {
+      let ids = [];
+      rows.forEach((item) => {
+        ids.push(item.mobile);
+      });
+
+      this.$api.Exam.Mockpaper.Add(this.pagination.id, {
+        id: this.pagination.id,
+        mobiles: ids,
+      })
+        .then(() => {
+          this.$message.success(this.$t("common.success"));
+          this.firstPageLoad();
+          this.showUserAddWin = false;
+        })
+        .catch((e) => {
+          this.$message.error(e.message);
         });
     },
   },

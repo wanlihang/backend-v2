@@ -1305,6 +1305,30 @@ const routes = [{
           title: 'title.exam.mockpaper.category.update'
         }
       },
+      {
+        path: '/exam/mockpaper/user',
+        component: () => import('@/views/exam/mockpaper/user'),
+        name: 'MockpaperUser',
+        meta: {
+          title: 'title.exam.mockpaper.user',
+        }
+      },
+      {
+        path: '/exam/mockpaper/stat',
+        component: () => import('@/views/exam/mockpaper/statistics'),
+        name: 'ExamMockpaperStat',
+        meta: {
+          title: 'title.exam.mockpaper.stat'
+        }
+      },
+      {
+        path: '/exam/mockpaper/userpaper',
+        component: () => import('@/views/exam/mockpaper/userpaper'),
+        name: 'ExamMockpaperUserpaper',
+        meta: {
+          title: 'title.exam.mockpaper.userpaper'
+        }
+      },
     ]
   },
   {

@@ -1177,19 +1177,19 @@ const Api = {
                 return destroy(`/backend/addons/Paper/mock_paper/${id}`);
             },
             Userpaper(id, params) {
-                return get(`/backend/addons/Paper/mock_paper/${id}/userPaper`, params);
+                return get(`/backend/addons/Paper/mock_paper/${id}/records`, params);
             },
             Stat(id, params) {
                 return get(`/backend/addons/Paper/mock_paper/${id}/statistics`, params);
             },
             User(id, params) {
-                return get(`/backend/addons/Paper/mock_paper/${id}/user`, params);
+                return get(`/backend/addons/Paper/mock_paper/${id}/users`, params);
             },
             Add(id,params) {
-                return post(`/backend/addons/Paper/mock_paper/${id}/user`, params);
+                return post(`/backend/addons/Paper/mock_paper/${id}/user/insert`, params);
             },
-            DestoryUser(id,ids) {
-                return destroy(`/backend/addons/Paper/mock_paper/${id}/user/${ids}`);
+            DestoryUser(id,params) {
+                return post(`/backend/addons/Paper/mock_paper/${id}/user/delete`, params);
             },
             Category: {
                 List(params) {
@@ -1210,6 +1210,7 @@ const Api = {
                 Destory(id) {
                     return destroy(`/backend/addons/Paper/paper_category/${id}`);
                 },
+               
             },
         },
         Practice: {
