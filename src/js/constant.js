@@ -162,5 +162,11 @@ export default {
         MockpaperCategories: 'ExamMockpaper',
         MockpaperCategoriesCreate: 'ExamMockpaper',
         MockpaperCategoriesUpdate: 'ExamMockpaper',
+        MockpaperUser: 'ExamMockpaper',
+        ExamMockpaperStat: 'ExamMockpaper',
+        ExamMockpaperUserpaper: 'ExamMockpaper',
+        ExamQuestion: 'ExamQuestion',
+        ExamQuestionCreate: 'ExamQuestion',
+        ExamQuestionUpdate: 'ExamQuestion',
     }
 }

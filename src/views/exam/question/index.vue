@@ -1,24 +1,54 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="考试记录"></back-bar>
     <div class="float-left mb-30">
+      <el-button
+        @click="
+          $router.push({
+            name: 'ExamQuestionCreate',
+          })
+        "
+        type="primary"
+      >
+        添加
+      </el-button>
+      <el-button @click="destorymulti()" type="danger"> 批量删除 </el-button>
+    </div>
+    <div class="float-left">
       <div class="float-left d-flex">
-        <div class="d-flex">
-          <div class="filter-label">用户ID</div>
-          <div class="flex-1 ml-15">
-            <el-input
-              class="w-200px"
-              v-model="filter.user_id"
-              placeholder="用户ID"
-            ></el-input>
-          </div>
-        </div>
-        <div class="d-flex ml-10">
-          <el-select class="w-200px" placeholder="状态" v-model="filter.status">
+        <div>
+          <el-select
+            class="w-200px"
+            placeholder="分类"
+            v-model="filter.category_id"
+          >
             <el-option
               v-for="(item, index) in filterData.categories"
               :key="index"
-              :label="item.text"
+              :label="item.name"
+              :value="item.id"
+            >
+            </el-option>
+          </el-select>
+        </div>
+
+        <div class="ml-10">
+          <el-select class="w-200px" placeholder="类型" v-model="filter.type">
+            <el-option
+              v-for="(item, index) in filterData.types"
+              :key="index"
+              :label="item.name"
+              :value="item.id"
+            >
+            </el-option>
+          </el-select>
+        </div>
+
+        <div class="ml-10">
+          <el-select class="w-200px" placeholder="难度" v-model="filter.level">
+            <el-option
+              v-for="(item, index) in filterData.levels"
+              :key="index"
+              :label="item.name"
               :value="item.id"
             >
             </el-option>
@@ -33,48 +63,26 @@
         </div>
       </div>
     </div>
-    <div class="float-left" v-loading="loading">
+    <div class="float-left mt-30" v-loading="loading">
       <div class="float-left">
-        <el-table :data="list" stripe class="float-left">
+        <el-table
+          :data="results"
+          @selection-change="handleSelectionChange"
+          stripe
+          class="float-left"
+        >
+          <el-table-column type="selection" width="55"></el-table-column>
           <el-table-column prop="id" label="ID" width="80"> </el-table-column>
-          <el-table-column prop="user_id" label="用户ID" width="80">
-          </el-table-column>
-          <el-table-column label="用户">
+          <el-table-column prop="category_name" label="分类"> </el-table-column>
+          <el-table-column prop="type_text" label="类型"> </el-table-column>
+          <el-table-column prop="level_text" label="难度"> </el-table-column>
+          <el-table-column label="内容">
             <template slot-scope="scope">
-              <div class="d-flex" v-if="scope.row.user">
-                <div>
-                  <img :src="scope.row.user.avatar" width="40" height="40" />
-                </div>
-                <div class="ml-10">{{ scope.row.user.nick_name }}</div>
-              </div>
-              <span class="c-red" v-else>用户不存在</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="得分">
-            <template slot-scope="scope">
-              <span v-if="scope.row.status === 2">{{ scope.row.score }}分</span>
-              <span class="c-red" v-else>未完成</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="用时" width="100">
-            <template slot-scope="scope">
-              <duration-text
-                v-if="status === 2"
-                :duration="scope.row.expired_seconds"
-              ></duration-text>
-              <span class="c-red" v-else>未完成</span>
-            </template>
-          </el-table-column>
-          <el-table-column prop="status_text" label="状态" width="80">
-          </el-table-column>
-          <el-table-column fixed="right" label="操作" width="100">
-            <template>
-              <el-link type="primary" class="ml-5">查看</el-link>
+              <div v-html="scope.row.content"></div>
             </template>
           </el-table-column>
         </el-table>
       </div>
-
       <div class="float-left mt-30 text-center">
         <el-pagination
           @size-change="paginationSizeChange"
@@ -92,28 +100,27 @@
 </template>
 
 <script>
-import DurationText from "@/components/duration-text";
-
 export default {
-  components: {
-    DurationText,
-  },
   data() {
     return {
       pagination: {
-        id: this.$route.query.id,
         page: 1,
         size: 10,
       },
       filter: {
-        user_id: null,
-        status: -1,
+        category_id: null,
+        type: null,
+        level: null,
       },
-      total: 0,
       loading: false,
-      list: [],
+      results: [],
+      spids: {
+        qids: [],
+      },
       filterData: {
         categories: [],
+        levels: [],
+        types: [],
       },
     };
   },
@@ -128,7 +135,9 @@ export default {
     },
     paginationReset() {
       this.pagination.page = 1;
-      this.filter.user_id = null;
+      this.filter.level = null;
+      this.filter.category_id = null;
+      this.filter.type = null;
       this.getResults();
     },
     paginationSizeChange(size) {
@@ -139,6 +148,13 @@ export default {
       this.pagination.page = page;
       this.getResults();
     },
+    handleSelectionChange(val) {
+      var newbox = [];
+      for (var i = 0; i < val.length; i++) {
+        newbox.push(val[i].id);
+      }
+      this.spids.qids = newbox;
+    },
     getResults() {
       if (this.loading) {
         return;
@@ -146,19 +162,23 @@ export default {
       this.loading = true;
       let params = {};
       Object.assign(params, this.filter, this.pagination);
-      this.$api.Exam.Paper.Userpaper(this.pagination.id, params).then((res) => {
+      this.$api.Exam.Practice.Chapter.Question.List(
+        this.pagination.id,
+        params
+      ).then((res) => {
         this.loading = false;
-        this.list = res.data.data.data;
+        this.results = res.data.data.data;
         this.total = res.data.data.total;
-        var item={
-          text:'全部',
-          id:-1
-        }
-        this.filterData.categories.push(item)
-        this.filterData.categories.push(...res.data.statusMap);
+        this.filterData.types = res.data.types;
+        this.filterData.categories = res.data.categories;
+        this.filterData.levels = res.data.levels;
       });
     },
-    destory(item) {
+    destorymulti() {
+      if (this.spids.ids == "") {
+        this.$message.error("请选择需要操作的数据");
+        return;
+      }
       this.$confirm("确认操作？", "警告", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -169,8 +189,12 @@ export default {
           if (this.loading) {
             return;
           }
+
           this.loading = true;
-          this.$api.Exam.Paper.Destory(item)
+          this.$api.Exam.Practice.Chapter.Question.DestoryMulti(
+            this.pagination.id,
+            this.spids
+          )
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));

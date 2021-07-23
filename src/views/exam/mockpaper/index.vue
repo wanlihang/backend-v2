@@ -74,7 +74,7 @@
                 class="ml-5"
                 @click="
                   $router.push({
-                    name: 'PaperUser',
+                    name: 'MockpaperUser',
                     query: { id: scope.row.id },
                   })
                 "
@@ -85,7 +85,7 @@
                 class="ml-5"
                 @click="
                   $router.push({
-                    name: 'ExamPaperStat',
+                    name: 'ExamMockpaperStat',
                     query: { id: scope.row.id },
                   })
                 "
@@ -96,7 +96,7 @@
                 class="ml-5"
                 @click="
                   $router.push({
-                    name: 'ExamPaperUserpaper',
+                    name: 'ExamMockpaperUserpaper',
                     query: { id: scope.row.id },
                   })
                 "

@@ -50,7 +50,7 @@
           <el-table-column prop="title" label="标题"> </el-table-column>
           <el-table-column label="及格/总分" width="100">
             <template slot-scope="scope">
-              <span style="color: red">{{ scope.row.pass_score }}分</span>
+              <span class="c-red">{{ scope.row.pass_score }}分</span>
               <span>/{{ scope.row.score }}分</span>
             </template>
           </el-table-column>

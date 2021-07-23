@@ -1030,7 +1030,7 @@ const Api = {
     Multishare: {
         Poster: {
             List() {
-                return get(`/backend/addons/multi_level_share/poster/index`,);
+                return get(`/backend/addons/multi_level_share/poster/index`, );
             },
             Store(params) {
                 return post(`/backend/addons/multi_level_share/poster/create`, params);
@@ -1183,19 +1183,19 @@ const Api = {
                 return destroy(`/backend/addons/Paper/mock_paper/${id}`);
             },
             Userpaper(id, params) {
-                return get(`/backend/addons/Paper/mock_paper/${id}/userPaper`, params);
+                return get(`/backend/addons/Paper/mock_paper/${id}/records`, params);
             },
             Stat(id, params) {
                 return get(`/backend/addons/Paper/mock_paper/${id}/statistics`, params);
             },
             User(id, params) {
-                return get(`/backend/addons/Paper/mock_paper/${id}/user`, params);
+                return get(`/backend/addons/Paper/mock_paper/${id}/users`, params);
             },
             Add(id, params) {
-                return post(`/backend/addons/Paper/mock_paper/${id}/user`, params);
+                return post(`/backend/addons/Paper/mock_paper/${id}/user/insert`, params);
             },
-            DestoryUser(id, ids) {
-                return destroy(`/backend/addons/Paper/mock_paper/${id}/user/${ids}`);
+            DestoryUser(id, params) {
+                return post(`/backend/addons/Paper/mock_paper/${id}/user/delete`, params);
             },
             Category: {
                 List(params) {
@@ -1216,6 +1216,27 @@ const Api = {
                 Destory(id) {
                     return destroy(`/backend/addons/Paper/paper_category/${id}`);
                 },
+
+            },
+        },
+        Qusetion: {
+            List(params) {
+                return get(`/backend/addons/Paper/question/index`, params);
+            },
+            Create() {
+                return get(`/backend/addons/Paper/question/create`);
+            },
+            Store(params) {
+                return post(`/backend/addons/Paper/question/create`, params);
+            },
+            Detail(id) {
+                return get(`/backend/addons/Paper/question/${id}`);
+            },
+            Update(id, params) {
+                return put(`/backend/addons/Paper/question/${id}`, params);
+            },
+            Destory(id) {
+                return destroy(`/backend/addons/Paper/question/${id}`);
             },
         },
         Practice: {
@@ -1306,26 +1327,7 @@ const Api = {
             },
 
         },
-        MockPaper: {
-            List(params) {
-                return get(`/backend/addons/Paper/mock_paper/index`, params);
-            },
-            Create() {
-                return get(`/backend/addons/Paper/mock_paper/create`);
-            },
-            Store(params) {
-                return post(`/backend/addons/Paper/mock_paper/create`, params);
-            },
-            Edit(id) {
-                return get(`/backend/addons/Paper/mock_paper/${id}`);
-            },
-            Update(id, params) {
-                return put(`/backend/addons/Paper/mock_paper/${id}`, params);
-            },
-            Destroy(id) {
-                return destroy(`/backend/addons/Paper/mock_paper/${id}`);
-            },
-        }
+
     },
     SinglePage: {
         List(params) {

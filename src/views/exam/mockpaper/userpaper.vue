@@ -50,7 +50,7 @@
               <span class="c-red" v-else>用户不存在</span>
             </template>
           </el-table-column>
-          <el-table-column label="得分">
+          <el-table-column label="分数">
             <template slot-scope="scope">
               <span v-if="scope.row.status === 2">{{ scope.row.score }}分</span>
               <span class="c-red" v-else>未完成</span>
@@ -66,11 +66,6 @@
             </template>
           </el-table-column>
           <el-table-column prop="status_text" label="状态" width="80">
-          </el-table-column>
-          <el-table-column fixed="right" label="操作" width="100">
-            <template>
-              <el-link type="primary" class="ml-5">查看</el-link>
-            </template>
           </el-table-column>
         </el-table>
       </div>
@@ -106,7 +101,7 @@ export default {
         size: 10,
       },
       filter: {
-        user_id: null,
+        user_id: "",
         status: -1,
       },
       total: 0,
@@ -146,7 +141,7 @@ export default {
       this.loading = true;
       let params = {};
       Object.assign(params, this.filter, this.pagination);
-      this.$api.Exam.Paper.Userpaper(this.pagination.id, params).then((res) => {
+      this.$api.Exam.Mockpaper.Userpaper(this.pagination.id, params).then((res) => {
         this.loading = false;
         this.list = res.data.data.data;
         this.total = res.data.data.total;
@@ -170,7 +165,7 @@ export default {
             return;
           }
           this.loading = true;
-          this.$api.Exam.Paper.Destory(item)
+          this.$api.Exam.Mockpaper.Destory(item)
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));
