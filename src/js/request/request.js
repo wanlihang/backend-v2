@@ -1207,7 +1207,22 @@ const Api = {
                 DestoryMulti(params) {
                     return post(`/backend/addons/Paper/practice_chapter/delete/multi`, params);
                 },
+                Question: {
+                    List(id, params) {
+                        return get(`/backend/addons/Paper/practice_chapter/${id}/questions`, params);
+                    },
+                    Create(id, params) {
+                        return get(`/backend/addons/Paper/practice_chapter/${id}/questions/params`, params);
+                    },
+                    StoreMulti(id, params) {
+                        return post(`/backend/addons/Paper/practice_chapter/${id}/questions`, params);
+                    },
+                    DestoryMulti(id, params) {
+                        return post(`/backend/addons/Paper/practice_chapter/${id}/questions/delete`, params);
+                    },
+                },
             },
+
         },
         MockPaper: {
             List(params) {

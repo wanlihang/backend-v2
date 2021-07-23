@@ -263,11 +263,16 @@ const zh = {
                     create: '创建练习分类',
                     update: '编辑练习分类',
                 },
-                chapter:{
+                chapter: {
                     index: '练习章节',
                     create: '创建练习章节',
                     update: '编辑练习章节',
+                    question: {
+                        index: '章节试题',
+                        create: '创建章节试题',
+                    },
                 },
+
 
             },
         },
