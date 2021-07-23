@@ -44,7 +44,7 @@
             <el-link type="danger" @click="destory(scope.row.id)">删除</el-link>
             <el-link
               type="primary"
-              style="margin-left: 5px"
+              class="ml-5"
               @click="
                 $router.push({
                   name: 'CodeExchangerCodes',

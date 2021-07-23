@@ -94,7 +94,7 @@
           </el-table-column>
           <el-table-column prop="vote_count" sortable label="点赞" width="120">
           </el-table-column>
-          <el-table-column prop="created_at" sortable label="时间">
+          <el-table-column prop="created_at" sortable label="时间" width="200">
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="200">
             <template slot-scope="scope">
