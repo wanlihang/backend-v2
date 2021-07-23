@@ -1,98 +1,114 @@
 <template>
   <div class="meedu-main-body">
-    <!-- <back-bar class="mb-30" title="团购商品订单"></back-bar> -->
-    <div class="float-left mb-30">
-      <div class="float-left d-flex">
-        <div class="d-flex">
-          <div class="filter-label">关键字</div>
-          <div class="flex-1 ml-15">
-            <el-input
-              class="w-100"
-              v-model="filter.keywords"
-              placeholder="请输入商品名关键字"
-              style="width: 200px"
-            ></el-input>
-          </div>
-        </div>
-        <div class="d-flex ml-15">
-          <div class="filter-label">用户ID</div>
-          <div class="flex-1 ml-15">
-            <el-input
-              class="w-100"
-              v-model="filter.user_id"
-              placeholder="用户ID"
-              style="width: 200px"
-            ></el-input>
-          </div>
-        </div>
-        <div class="d-flex ml-15">
-          <div class="filter-label">支付状态</div>
-          <div class="flex-1 ml-15">
-            <el-select v-model="filter.status">
-              <el-option
-                v-for="(item, index) in filterData.status"
-                :key="index"
-                :label="item.name"
-                :value="item.id"
-              >
-              </el-option>
-            </el-select>
-          </div>
-        </div>
-
-        <div class="ml-15">
-          <el-button @click="getResults" type="primary" plain>筛选</el-button>
-          <el-button @click="paginationReset">清空</el-button>
-        </div>
+    <div class="float-left mb-30 d-flex">
+      <div>
+        <el-input
+          placeholder="关键字"
+          class="w-200px"
+          v-model="filter.keywords"
+        ></el-input>
+      </div>
+      <div class="ml-10">
+        <el-input
+          placeholder="用户ID"
+          class="w-200px"
+          v-model="filter.user_id"
+        ></el-input>
+      </div>
+      <div class="ml-10">
+        <el-select class="w-200px" v-model="filter.status">
+          <el-option
+            v-for="(item, index) in filterData.status"
+            :key="index"
+            :label="item.name"
+            :value="item.id"
+          >
+          </el-option>
+        </el-select>
+      </div>
+      <div class="ml-10">
+        <el-date-picker
+          v-model="filter.created_at"
+          type="daterange"
+          align="right"
+          unlink-panels
+          range-separator="至"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+        >
+        </el-date-picker>
+      </div>
+      <div class="ml-10">
+        <el-button @click="firstPageLoad()" type="primary" plain
+          >筛选</el-button
+        >
+        <el-button @click="paginationReset()">清空</el-button>
       </div>
     </div>
+
     <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table :data="results" stripe class="float-left">
-          <el-table-column prop="id" label="ID" width="80"> </el-table-column>
+          <el-table-column prop="id" label="ID" width="120"> </el-table-column>
           <el-table-column label="商品ID" width="80">
             <template slot-scope="scope">
               <span v-if="scope.row.goods">{{ scope.row.goods.other_id }}</span>
-              <span style="color: red" v-else>已删除</span>
+              <span class="c-red" v-else>已删除</span>
             </template>
           </el-table-column>
           <el-table-column prop="user_id" label="用户ID" width="80">
           </el-table-column>
+
           <el-table-column label="商品">
             <template slot-scope="scope">
-              <span v-if="scope.row.goods">{{
-                scope.row.goods.goods_title
-              }}</span>
-              <span style="color: red" v-else>已删除</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="用户">
-            <template slot-scope="scope">
-              <div class="d-flex" v-if="scope.row.user">
-                <div>
-                  <img :src="scope.row.user.avatar" width="40" height="40" />
+              <template v-if="scope.row.goods">
+                <div class="d-flex">
+                  <div>
+                    <img
+                      :src="scope.row.goods.goods_thumb"
+                      width="120"
+                      height="90"
+                    />
+                  </div>
+                  <div class="ml-10">
+                    {{ scope.row.goods.goods_title }}
+                  </div>
                 </div>
-                <div class="ml-10">
-                  {{ scope.row.user.nick_name }}
-                </div>
-              </div>
-              <span v-else class="c-red">用户不存在</span>
+              </template>
+              <span class="c-red" v-else>商品已删除</span>
             </template>
           </el-table-column>
-          <el-table-column label="支付" width="120">
+
+          <el-table-column label="用户" :width="300">
             <template slot-scope="scope">
-              <span>￥{{ scope.row.charge }}</span>
+              <template v-if="scope.row.user">
+                <div class="d-flex" v-if="scope.row.user">
+                  <div>
+                    <img :src="scope.row.user.avatar" width="40" height="40" />
+                  </div>
+                  <div class="ml-10">
+                    {{ scope.row.user.nick_name }}
+                  </div>
+                </div>
+              </template>
+              <span class="c-red" v-else>用户不存在</span>
             </template>
           </el-table-column>
+
+          <el-table-column label="团购价" width="200">
+            <template slot-scope="scope">
+              <span>{{ scope.row.charge }}元</span>
+            </template>
+          </el-table-column>
+
           <el-table-column label="状态" width="100">
             <template slot-scope="scope">
-              <span v-if="scope.row.status == 0" style="color: red"
-                >未支付</span
-              >
-              <span v-else>已支付</span>
+              <el-tag v-if="scope.row.status !== 1" type="info">未支付</el-tag>
+              <el-tag type="success" v-else>已支付</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="user.created_at" label="时间" width="160">
+          
+          <el-table-column prop="created_at" label="时间">
           </el-table-column>
         </el-table>
       </div>
@@ -125,6 +141,7 @@ export default {
         keywords: null,
         user_id: null,
         status: null,
+        created_at: null,
       },
       total: 0,
       loading: false,
@@ -149,33 +166,31 @@ export default {
       },
     };
   },
-  computed: {
-    activeItemList: function () {
-      return this.filterData.goods.filter((item, index) => {
-        return item.goods_type == this.filter.type;
-      });
-    },
-  },
   mounted() {
-    this.getResults();
+    this.getData();
   },
   methods: {
+    firstPageLoad() {
+      this.pagination.page = 1;
+      this.getData();
+    },
     paginationReset() {
       this.pagination.page = 1;
       this.filter.keywords = null;
       this.filter.user_id = null;
       this.filter.status = null;
-      this.getResults();
+      this.filter.created_at = [];
+      this.getData();
     },
     paginationSizeChange(size) {
       this.pagination.size = size;
-      this.getResults();
+      this.getData();
     },
     paginationPageChange(page) {
       this.pagination.page = page;
-      this.getResults();
+      this.getData();
     },
-    getResults() {
+    getData() {
       if (this.loading) {
         return;
       }

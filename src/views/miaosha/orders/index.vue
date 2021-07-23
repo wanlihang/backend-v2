@@ -1,48 +1,46 @@
 <template>
   <div class="meedu-main-body">
-    <div class="float-left mb-30">
-      <div class="float-left d-flex">
-        <div>
-          <el-input
-            placeholder="关键字"
-            class="w-200px"
-            v-model="filter.keywords"
-          ></el-input>
-        </div>
-        <div class="ml-10">
-          <el-input
-            placeholder="用户ID"
-            class="w-200px"
-            v-model="filter.user_id"
-          ></el-input>
-        </div>
-        <div class="ml-10">
-          <el-select class="w-200px" v-model="filter.status">
-            <el-option
-              v-for="(item, index) in filterData.status"
-              :key="index"
-              :label="item.name"
-              :value="item.id"
-            >
-            </el-option>
-          </el-select>
-        </div>
-        <div class="ml-10">
-          <el-date-picker
-            v-model="filter.created_at"
-            type="daterange"
-            align="right"
-            unlink-panels
-            range-separator="至"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期"
+    <div class="float-left mb-30 d-flex">
+      <div>
+        <el-input
+          placeholder="关键字"
+          class="w-200px"
+          v-model="filter.keywords"
+        ></el-input>
+      </div>
+      <div class="ml-10">
+        <el-input
+          placeholder="用户ID"
+          class="w-200px"
+          v-model="filter.user_id"
+        ></el-input>
+      </div>
+      <div class="ml-10">
+        <el-select class="w-200px" v-model="filter.status">
+          <el-option
+            v-for="(item, index) in filterData.status"
+            :key="index"
+            :label="item.name"
+            :value="item.id"
           >
-          </el-date-picker>
-        </div>
-        <div class="ml-10">
-          <el-button @click="getData" type="primary" plain>筛选</el-button>
-          <el-button @click="paginationReset">清空</el-button>
-        </div>
+          </el-option>
+        </el-select>
+      </div>
+      <div class="ml-10">
+        <el-date-picker
+          v-model="filter.created_at"
+          type="daterange"
+          align="right"
+          unlink-panels
+          range-separator="至"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+        >
+        </el-date-picker>
+      </div>
+      <div class="ml-10">
+        <el-button @click="firstPageLoad" type="primary" plain>筛选</el-button>
+        <el-button @click="paginationReset">清空</el-button>
       </div>
     </div>
     <div class="float-left" v-loading="loading">
