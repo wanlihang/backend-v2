@@ -183,16 +183,16 @@ export default {
       if (this.loading) {
         return;
       }
+      if (this.spids.ids == "") {
+        this.$message.warning("请选择需要操作的数据");
+        return;
+      }
       this.$confirm("确认操作？", "警告", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
       })
         .then(() => {
-          if (this.spids.ids == "") {
-            this.$message.warning("请选择需要操作的数据");
-            return;
-          }
           this.spids.is_check = 1;
           this.loading = true;
           this.$api.Meedubook.Book.Article.CommentMulti(this.spids)
@@ -215,16 +215,16 @@ export default {
       if (this.loading) {
         return;
       }
+      if (this.spids.ids == "") {
+        this.$message.warning("请选择需要操作的数据");
+        return;
+      }
       this.$confirm("确认操作？", "警告", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
       })
         .then(() => {
-          if (this.spids.ids == "") {
-            this.$message.warning("请选择需要操作的数据");
-            return;
-          }
           this.spids.is_check = 0;
           this.loading = true;
           this.$api.Meedubook.Book.Article.CommentMulti(this.spids)

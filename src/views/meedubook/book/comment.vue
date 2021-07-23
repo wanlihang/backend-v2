@@ -56,7 +56,9 @@
           </el-table-column>
           <el-table-column label="状态" width="100">
             <template slot-scope="scope">
-              <el-tag type="danger" v-if="scope.row.is_check !== 1">拒绝</el-tag>
+              <el-tag type="danger" v-if="scope.row.is_check !== 1"
+                >拒绝</el-tag
+              >
               <el-tag type="success" v-else>通过</el-tag>
             </template>
           </el-table-column>
@@ -177,16 +179,16 @@ export default {
       if (this.loading) {
         return;
       }
+      if (this.spids.ids == "") {
+        this.$message.warning("请选择需要操作的数据");
+        return;
+      }
       this.$confirm("确认操作？", "警告", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
       })
         .then(() => {
-          if (this.spids.ids == "") {
-            this.$message.warning("请选择需要操作的数据");
-            return;
-          }
           this.spids.is_check = 1;
           this.loading = true;
           this.$api.Meedubook.Book.CommentMulti(this.spids)
@@ -209,16 +211,16 @@ export default {
       if (this.loading) {
         return;
       }
+      if (this.spids.ids == "") {
+        this.$message.warning("请选择需要操作的数据");
+        return;
+      }
       this.$confirm("确认操作？", "警告", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
       })
         .then(() => {
-          if (this.spids.ids == "") {
-            this.$message.warning("请选择需要操作的数据");
-            return;
-          }
           this.spids.is_check = 0;
           this.loading = true;
           this.$api.Meedubook.Book.CommentMulti(this.spids)

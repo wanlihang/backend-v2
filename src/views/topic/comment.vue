@@ -177,6 +177,10 @@ export default {
         .catch(() => {});
     },
     approve() {
+      if (this.spids.ids == "") {
+        this.$message.error("请选择需要操作的数据");
+        return;
+      }
       this.$confirm("确认操作？", "警告", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -187,10 +191,7 @@ export default {
           if (this.loading) {
             return;
           }
-          if (this.spids.ids == "") {
-            this.$message.error("请选择需要操作的数据");
-            return;
-          }
+
           this.spids.is_check = 1;
           this.loading = true;
           this.$api.Course.Topic.Topic.CommentCheck(this.spids)
@@ -210,6 +211,10 @@ export default {
         });
     },
     refuse() {
+      if (this.spids.ids == "") {
+        this.$message.error("请选择需要操作的数据");
+        return;
+      }
       this.$confirm("确认操作？", "警告", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -220,10 +225,7 @@ export default {
           if (this.loading) {
             return;
           }
-          if (this.spids.ids == "") {
-            this.$message.error("请选择需要操作的数据");
-            return;
-          }
+
           this.spids.is_check = 0;
           this.loading = true;
           this.$api.Course.Topic.Topic.CommentCheck(this.spids)

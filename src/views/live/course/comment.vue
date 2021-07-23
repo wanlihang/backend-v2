@@ -118,7 +118,7 @@ export default {
         size: 10,
       },
       filter: {
-        course_id: null,
+        course_id: this.$route.query.id,
         user_id: null,
       },
       total: 0,
@@ -176,6 +176,10 @@ export default {
       });
     },
     destorymulti() {
+      if (this.spids.ids == "") {
+        this.$message.error("请选择需要操作的数据");
+        return;
+      }
       this.$confirm("确认操作？", "警告", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -184,10 +188,6 @@ export default {
         .then(() => {
           //点击确定按钮的操作
           if (this.loading) {
-            return;
-          }
-          if (this.spids.ids == "") {
-            this.$message.error("请选择需要操作的数据");
             return;
           }
           this.loading = true;
@@ -207,6 +207,10 @@ export default {
         });
     },
     approve() {
+      if (this.spids.ids == "") {
+        this.$message.error("请选择需要操作的数据");
+        return;
+      }
       this.$confirm("确认操作？", "警告", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -217,10 +221,7 @@ export default {
           if (this.loading) {
             return;
           }
-          if (this.spids.ids == "") {
-            this.$message.error("请选择需要操作的数据");
-            return;
-          }
+
           this.loading = true;
           this.spids.status = 1;
           this.$api.Course.Live.Course.CommentCheck(this.spids)

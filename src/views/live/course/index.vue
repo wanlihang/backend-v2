@@ -153,6 +153,17 @@
                 "
                 >用户</el-link
               >
+              <el-link
+                type="primary"
+                class="ml-5"
+                @click="
+                  $router.push({
+                    name: 'LiveCourseComment',
+                    query: { id: scope.row.id },
+                  })
+                "
+                >评论</el-link
+              >
             </template>
           </el-table-column>
         </el-table>

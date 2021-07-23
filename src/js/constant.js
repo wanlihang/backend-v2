@@ -133,5 +133,10 @@ export default {
         TopicCategoryUpdate: 'Topic',
         TopicComment: 'Topic',
         TopicOrder: 'Topic',
+        ExamPaper:'ExamPaper',
+        ExamPaperCreate:'ExamPaper',
+        ExamPaperUpdate:'ExamPaper',
+        ExamPaperUserpaper:'ExamPaper',
+        ExamPaperStat:'ExamPaper',
     }
 }
