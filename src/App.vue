@@ -9,9 +9,7 @@ import { mapMutations } from "vuex";
 
 export default {
   data() {
-    return {
-      locollanguage: localStorage.getItem("LANGUAGE") || "zh",
-    };
+    return {};
   },
   methods: {
     ...mapMutations(["loginHandle", "setEnabledAddons"]),

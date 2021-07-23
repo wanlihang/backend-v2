@@ -1,9 +1,13 @@
 <template>
   <div class="meedu-main-body">
     <div class="float-left mb-30">
-      <el-button @click="$router.push({ name: 'TopicCreate' })" type="primary">
-        添加
-      </el-button>
+      <p-button
+        text="添加"
+        @click="$router.push({ name: 'TopicCreate' })"
+        type="primary"
+        p="addons.meedu_topics.topic.store"
+      >
+      </p-button>
     </div>
     <div class="float-left">
       <div class="float-left d-flex">
@@ -96,11 +100,14 @@
           </el-table-column>
           <el-table-column prop="created_at" sortable label="时间" width="200">
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="200">
+          <el-table-column fixed="right" label="操作" width="150">
             <template slot-scope="scope">
-              <el-link type="danger" @click="destory(scope.row.id)"
-                >删除</el-link
-              >
+              <p-link
+                text="删除"
+                type="danger"
+                @click="destory(scope.row.id)"
+                p="addons.meedu_topics.topic.delete"
+              ></p-link>
               <el-link
                 type="primary"
                 class="ml-5"
