@@ -422,7 +422,6 @@ const Api = {
                 CommentCheck(params) {
                     return post(`/backend/addons/zhibo/course_comment/check`, params);
                 },
-
                 Category: {
                     List() {
                         return get(`/backend/addons/zhibo/course_category/index`);
