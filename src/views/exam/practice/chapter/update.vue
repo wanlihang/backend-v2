@@ -1,13 +1,13 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="编辑直播课程章节"></back-bar>
+    <back-bar class="mb-30" title="编辑练习章节"></back-bar>
     <div class="float-left">
       <div class="form-box broder-top-left-radius">
         <el-form ref="form" :model="course" :rules="rules" label-width="200px">
           <el-form-item label="章节名" prop="name">
             <el-input v-model="course.name" class="w-200px"></el-input>
           </el-form-item>
-          <el-form-item label="排序" prop="sort">
+          <el-form-item label="升序" prop="sort">
             <div class="d-flex">
               <div>
                 <el-input
@@ -46,7 +46,7 @@ export default {
   data() {
     return {
       course: {
-        course_id: this.$route.query.course_id,
+        pid: this.$route.query.pid,
         id: this.$route.query.id,
         name: null,
         sort: null,
@@ -75,13 +75,11 @@ export default {
   },
   methods: {
     detail() {
-      this.$api.Course.Live.Course.Chapter.Detail(this.course.id).then(
-        (res) => {
-          var data = res.data;
-          this.course.name = data.name;
-          this.course.sort = data.sort;
-        }
-      );
+      this.$api.Exam.Practice.Chapter.Detail(this.course.id).then((res) => {
+        var data = res.data.data;
+        this.course.name = data.name;
+        this.course.sort = data.sort;
+      });
     },
     formValidate() {
       this.$refs["form"].validate((valid) => {
@@ -95,7 +93,7 @@ export default {
         return;
       }
       this.loading = true;
-      this.$api.Course.Live.Course.Chapter.Update(this.course.id, this.course)
+      this.$api.Exam.Practice.Chapter.Update(this.course.id, this.course)
         .then(() => {
           this.$message.success(this.$t("common.success"));
           this.$router.back();
