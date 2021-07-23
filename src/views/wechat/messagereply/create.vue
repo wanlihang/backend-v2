@@ -1,6 +1,7 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="微信公众号添加规则"></back-bar>
+    <back-bar class="mb-30" title="添加消息回复规则"></back-bar>
+
     <div class="float-left">
       <el-form ref="form" :model="reply" :rules="rules" label-width="200px">
         <el-form-item label="消息类型" prop="type">
@@ -14,11 +15,22 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="匹配规则" v-if="reply.type == 'text'">
-          <el-input v-model="reply.rule" class="w-200px"></el-input>
-          <div class="helper">支持正则表达式</div>
+        <el-form-item label="触发关键字" v-show="reply.type === 'text'">
+          <div class="d-flex">
+            <div>
+              <el-input
+                v-model="reply.rule"
+                class="w-200px"
+                placeholder="请输入触发关键字"
+              ></el-input>
+            </div>
+            <div class="ml-10">
+              <helper-text text="支持正则表达式"></helper-text>
+            </div>
+          </div>
         </el-form-item>
-        <el-form-item label="事件" v-if="reply.type == 'event'">
+
+        <el-form-item label="事件" v-show="reply.type == 'event'">
           <el-select v-model="reply.event_type" class="w-200px">
             <el-option
               v-for="(item, index) in events"
@@ -29,13 +41,17 @@
             </el-option>
           </el-select>
         </el-form-item>
+
         <el-form-item label="事件key" v-if="reply.type == 'event'">
-          <el-input v-model="reply.event_key" class="w-200px"></el-input>
+          <el-input v-model="reply.event_key" class="w-400px"></el-input>
         </el-form-item>
+
         <el-form-item label="回复内容" prop="reply_content">
           <el-input
-            class="w-100"
+            class="w-500px"
             type="textarea"
+            rows="4"
+            placeholder="请输入回复内容"
             v-model="reply.reply_content"
           ></el-input>
         </el-form-item>

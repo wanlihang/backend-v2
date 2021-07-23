@@ -6,44 +6,41 @@
       >
     </div>
     <div class="float-left" v-loading="loading">
-      <div class="float-left">
-        <el-table :data="messages" stripe class="float-left">
-          <el-table-column prop="id" label="ID" width="120"> </el-table-column>
-          <el-table-column prop="type" label="类型" width="120">
-          </el-table-column>
-          <el-table-column label="内容" width="300"
-            ><template slot-scope="scope">
-              <span v-if="scope.row.type == 'event'"
-                >{{ scope.row.event_type }}: {{ scope.row.event_key }}</span
-              >
-              <span v-else>{{ scope.row.rule }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column prop="reply_content" label="回复内容">
-          </el-table-column>
-          <el-table-column fixed="right" label="操作" width="120">
-            <template slot-scope="scope">
-              <el-link
-                style="margin-right: 10px"
-                type="danger"
-                @click="destory(scope.row.id)"
-                >删除</el-link
-              >
-              <el-link
-                type="primary"
-                @click="
-                  $router.push({
-                    name: 'ReplyUpdate',
-                    query: { id: scope.row.id },
-                  })
-                "
-                >编辑</el-link
-              >
-            </template>
-          </el-table-column>
-        </el-table>
-      </div>
-
+      <el-table :data="messages" stripe class="float-left">
+        <el-table-column prop="id" label="ID" width="120"> </el-table-column>
+        <el-table-column label="匹配规则" width="500"
+          ><template slot-scope="scope">
+            <span v-if="scope.row.type == 'event'"
+              >{{ scope.row.type }}@{{ scope.row.event_type }}:{{
+                scope.row.event_key
+              }}</span
+            >
+            <span v-else>{{ scope.row.type }}@{{ scope.row.rule }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="reply_content" label="回复内容">
+        </el-table-column>
+        <el-table-column fixed="right" label="操作" width="100">
+          <template slot-scope="scope">
+            <el-link
+              style="margin-right: 10px"
+              type="danger"
+              @click="destory(scope.row.id)"
+              >删除</el-link
+            >
+            <el-link
+              type="primary"
+              @click="
+                $router.push({
+                  name: 'ReplyUpdate',
+                  query: { id: scope.row.id },
+                })
+              "
+              >编辑</el-link
+            >
+          </template>
+        </el-table-column>
+      </el-table>
       <div class="float-left mt-30 text-center">
         <el-pagination
           @size-change="paginationSizeChange"

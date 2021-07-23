@@ -1,46 +1,67 @@
 <template>
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="微信公众号编辑规则"></back-bar>
-    <div class="float-left">
-      <el-form ref="form" :model="reply" :rules="rules" label-width="200px">
-        <el-form-item label="消息类型" prop="type">
-          <el-select v-model="reply.type" class="w-200px">
-            <el-option
-              v-for="(item, index) in types"
-              :key="index"
-              :label="item.name"
-              :value="item.id"
-            >
-            </el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="匹配规则" v-if="reply.type == 'text'">
-          <el-input v-model="reply.rule" class="w-200px"></el-input>
-          <div class="helper">支持正则表达式</div>
-        </el-form-item>
-        <el-form-item label="事件" v-if="reply.type == 'event'">
-          <el-select v-model="reply.event_type" class="w-200px">
-            <el-option
-              v-for="(item, index) in events"
-              :key="index"
-              :label="item.name"
-              :value="item.id"
-            >
-            </el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="事件key" v-if="reply.type == 'event'">
-          <el-input v-model="reply.event_key" class="w-200px"></el-input>
-        </el-form-item>
-        <el-form-item label="回复内容" prop="reply_content">
-          <el-input
-            class="w-100"
-            type="textarea"
-            v-model="reply.reply_content"
-          ></el-input>
-        </el-form-item>
-      </el-form>
-    </div>
+
+    <el-form
+      ref="form"
+      class="float-left"
+      :model="reply"
+      :rules="rules"
+      label-width="200px"
+      v-if="reply"
+    >
+      <el-form-item label="消息类型" prop="type">
+        <el-select v-model="reply.type" class="w-200px">
+          <el-option
+            v-for="(item, index) in types"
+            :key="index"
+            :label="item.name"
+            :value="item.id"
+          >
+          </el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="触发关键字" v-show="reply.type === 'text'">
+        <div class="d-flex">
+          <div>
+            <el-input
+              v-model="reply.rule"
+              class="w-200px"
+              placeholder="请输入触发关键字"
+            ></el-input>
+          </div>
+          <div class="ml-10">
+            <helper-text text="支持正则表达式"></helper-text>
+          </div>
+        </div>
+      </el-form-item>
+
+      <el-form-item label="事件" v-show="reply.type == 'event'">
+        <el-select v-model="reply.event_type" class="w-200px">
+          <el-option
+            v-for="(item, index) in events"
+            :key="index"
+            :label="item.name"
+            :value="item.id"
+          >
+          </el-option>
+        </el-select>
+      </el-form-item>
+
+      <el-form-item label="事件key" v-if="reply.type == 'event'">
+        <el-input v-model="reply.event_key" class="w-400px"></el-input>
+      </el-form-item>
+
+      <el-form-item label="回复内容" prop="reply_content">
+        <el-input
+          class="w-500px"
+          type="textarea"
+          rows="4"
+          placeholder="请输入回复内容"
+          v-model="reply.reply_content"
+        ></el-input>
+      </el-form-item>
+    </el-form>
 
     <div class="bottom-menus">
       <div class="bottom-menus-box">
@@ -60,14 +81,8 @@
 export default {
   data() {
     return {
-      reply: {
-        id: this.$route.query.id,
-        type: null,
-        rule: null,
-        event_key: null,
-        event_type: null,
-        reply_content: null,
-      },
+      id: this.$route.query.id,
+      reply: null,
       rules: {
         type: [
           {
@@ -122,13 +137,9 @@ export default {
         });
     },
     detail() {
-      this.$api.Wechat.Reply.Detail(this.reply.id)
+      this.$api.Wechat.Reply.Detail(this.id)
         .then((res) => {
-          this.reply.type = res.data.data.type;
-          this.reply.reply_content = res.data.data.reply_content;
-          this.reply.rule = res.data.data.rule;
-          this.reply.event_key = res.data.data.event_key;
-          this.reply.event_type = res.data.data.event_type;
+          this.reply = res.data.data;
         })
         .catch((e) => {
           this.loading = false;
@@ -147,7 +158,7 @@ export default {
         return;
       }
       this.loading = true;
-      this.$api.Wechat.Reply.Update(this.reply.id, this.reply)
+      this.$api.Wechat.Reply.Update(this.id, this.reply)
         .then(() => {
           this.$message.success(this.$t("common.success"));
           this.$router.back();
