@@ -2,7 +2,7 @@
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="兑换码"></back-bar>
     <div class="float-left mb-30">
-      <el-button @click="destorymulti()" type="danger"> 删除 </el-button>
+      <el-button @click="destorymulti()" type="danger"> 批量删除 </el-button>
       <el-button @click="getnum(10)" type="primary"> 生成10个 </el-button>
       <el-button @click="getnum(50)" type="primary"> 生成50个 </el-button>
       <el-button @click="importcode()" type="primary">
@@ -11,30 +11,24 @@
     </div>
     <div class="float-left">
       <div class="float-left d-flex">
-        <div class="d-flex">
-          <div class="filter-label">搜索</div>
-          <div class="flex-1 ml-15">
-            <el-input
-              class="w-200px"
-              v-model="filter.code"
-              placeholder="兑换码"
-            ></el-input>
-          </div>
+        <div>
+          <el-input
+            class="w-200px"
+            v-model="filter.code"
+            placeholder="兑换码"
+          ></el-input>
         </div>
 
-        <div class="d-flex ml-15">
-          <div class="filter-label">UID</div>
-          <div class="flex-1 ml-15">
-            <el-input
-              class="w-200px"
-              v-model="filter.user_id"
-              placeholder="请选择用户"
-            ></el-input>
-          </div>
+        <div class="ml-10">
+          <el-input
+            class="w-200px"
+            v-model="filter.user_id"
+            placeholder="用户ID"
+          ></el-input>
         </div>
 
-        <div class="ml-15">
-          <el-button @click="getResults" type="primary" plain>筛选</el-button>
+        <div class="ml-10">
+          <el-button @click="getData" type="primary" plain>筛选</el-button>
           <el-button @click="paginationReset">清空</el-button>
         </div>
       </div>
@@ -47,16 +41,36 @@
           stripe
           class="float-left"
         >
-          <el-table-column type="selection" width="55"></el-table-column
-          ><!-- 显示选取表格 -->
-          <el-table-column prop="id" label="ID" width="80"> </el-table-column>
-          <el-table-column prop="code" label="兑换码"> </el-table-column>
-          <el-table-column label="使用" width="200">
+          <el-table-column type="selection" width="55"></el-table-column>
+          <el-table-column prop="id" label="ID" width="120"> </el-table-column>
+          <el-table-column prop="code" label="兑换码" width="400">
+          </el-table-column>
+          <el-table-column label="是否使用" width="150">
             <template slot-scope="scope">
-              <span v-if="scope.row.is_used == 0">否</span>
-              <span v-else>是</span>
+              <el-tag v-if="scope.row.is_used === 1" type="danger"
+                >已使用</el-tag
+              >
+              <el-tag v-else typpe="info">未使用</el-tag>
             </template>
           </el-table-column>
+          <el-table-column
+            label="使用用户ID"
+            width="120"
+            prop="user_id"
+          ></el-table-column>
+          <el-table-column label="使用用户" width="200">
+            <template slot-scope="scope">
+              <div class="d-flex" v-if="scope.row.is_used === 1">
+                <div class="d-flex">
+                  <div>
+                    <img :src="scope.row.user.avatar" width="40" height="40" />
+                  </div>
+                  <div class="ml-10">{{ scope.row.user.nick_name }}</div>
+                </div>
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column prop="used_at" label="使用时间"> </el-table-column>
         </el-table>
       </div>
 
@@ -103,24 +117,23 @@ export default {
   },
 
   mounted() {
-    this.getResults();
+    this.getData();
   },
   methods: {
     paginationReset() {
       this.pagination.page = 1;
       this.filter.code = "";
       this.filter.user_id = "";
-      this.getResults();
+      this.getData();
     },
     paginationSizeChange(size) {
       this.pagination.size = size;
-      this.getResults();
+      this.getData();
     },
     paginationPageChange(page) {
       this.pagination.page = page;
-      this.getResults();
+      this.getData();
     },
-    //保存选中结果
     handleSelectionChange(val) {
       var newbox = [];
       for (var i = 0; i < val.length; i++) {
@@ -128,7 +141,7 @@ export default {
       }
       this.spids.ids = newbox;
     },
-    getResults() {
+    getData() {
       if (this.loading) {
         return;
       }
@@ -162,7 +175,7 @@ export default {
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));
-              this.getResults();
+              this.getData();
             })
             .catch((e) => {
               this.loading = false;
@@ -190,7 +203,7 @@ export default {
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));
-              this.getResults();
+              this.getData();
             })
             .catch((e) => {
               this.loading = false;

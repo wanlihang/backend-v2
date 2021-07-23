@@ -1,40 +1,43 @@
 <template>
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="创建兑换商品"></back-bar>
+
     <div class="float-left">
-      <div class="form-box broder-top-left-radius">
-        <el-form ref="form" :model="course" :rules="rules" label-width="200px">
-          <el-form-item prop="goods_id" label="商品">
-            <div class="d-flex">
-              <div>
-                <el-button @click="selgoods"> 选择商品 </el-button>
-                <span
-                  v-if="this.course.goods_id"
-                  style="color: red; margin-left: 4px"
-                  >已选择</span
+      <el-form ref="form" :model="course" :rules="rules" label-width="200px">
+        <el-form-item prop="goods_id" label="商品">
+          <div class="d-flex">
+            <div>
+              <el-button @click="showSelectResWin = true">
+                <span>选择商品</span>
+                <span class="ml-10" v-if="course.title"
+                  >「{{ course.title }}」</span
                 >
-                <select-resource
-                  :show="msg"
-                  @change="change"
-                  @close="close"
-                  :enabled-resource="types"
-                ></select-resource>
-              </div>
+              </el-button>
+              <select-resource
+                :show="showSelectResWin"
+                @change="change"
+                @close="showSelectResWin = false"
+                enabled-resource="vod,video,live,book,paper,practice"
+              ></select-resource>
             </div>
-          </el-form-item>
-          <el-form-item label="商品名" prop="goods_title">
-            <el-input v-model="course.goods_title" class="w-100"></el-input>
-          </el-form-item>
-          <el-form-item label="商品原价" prop="goods_charge">
-            <el-input
-              type="number"
-              placeholder="单位：元"
-              v-model="course.goods_charge"
-              class="w-200px"
-            ></el-input>
-          </el-form-item>
-        </el-form>
-      </div>
+          </div>
+        </el-form-item>
+        <el-form-item label="商品名" prop="goods_title">
+          <el-input
+            v-model="course.goods_title"
+            class="w-600px"
+            placeholder="请输入商品名"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="商品原价" prop="goods_charge">
+          <el-input
+            type="number"
+            placeholder="单位：元"
+            v-model="course.goods_charge"
+            class="w-200px"
+          ></el-input>
+        </el-form-item>
+      </el-form>
 
       <div class="bottom-menus">
         <div class="bottom-menus-box">
@@ -60,6 +63,7 @@ export default {
   },
   data() {
     return {
+      showSelectResWin: false,
       filter: {
         goods_type: "",
       },
@@ -101,40 +105,24 @@ export default {
           },
         ],
       },
-      types: null,
       loading: false,
     };
   },
-  mounted() {
-    this.params();
-  },
   methods: {
-    close() {
-      this.msg = false;
-    },
-    change(v1) {
-      var data = v1;
+    change(data) {
       this.course.goods_id = data.id;
       this.course.goods_type = data.resource_type;
       this.course.goods_title = data.title;
       this.course.goods_charge = data.original_charge;
-      this.msg = false;
-    },
-    params() {
-      this.$api.CodeExchanger.Create(this.filter).then((res) => {
-        var data = res.data.types;
-        var typeids = "";
-        for (var i = 0; i < data.length; i++) {
-          if (data[i].key == "course") {
-            data[i].key = "vod";
-          }
-          typeids = typeids + data[i].key + ",";
-        }
-        this.types = typeids;
-      });
-    },
-    selgoods() {
-      this.msg = true;
+
+      if (data.resource_type === "vod") {
+        this.course.goods_type = "course";
+      } else {
+        this.course.goods_type = data.resource_type;
+      }
+
+      // 关闭窗口
+      this.showSelectResWin = false;
     },
     formValidate() {
       this.$refs["form"].validate((valid) => {
@@ -148,9 +136,6 @@ export default {
         return;
       }
       this.loading = true;
-      if (this.course.goods_type == "vod") {
-        this.course.goods_type = "course";
-      }
       this.$api.CodeExchanger.Store(this.course)
         .then(() => {
           this.$message.success(this.$t("common.success"));
