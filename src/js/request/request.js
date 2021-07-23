@@ -1191,19 +1191,11 @@ const Api = {
             User(id, params) {
                 return get(`/backend/addons/Paper/mock_paper/${id}/users`, params);
             },
-<<<<<<< HEAD
             Add(id,params) {
                 return post(`/backend/addons/Paper/mock_paper/${id}/user/insert`, params);
             },
             DestoryUser(id,params) {
                 return post(`/backend/addons/Paper/mock_paper/${id}/user/delete`, params);
-=======
-            Add(id, params) {
-                return post(`/backend/addons/Paper/mock_paper/${id}/user`, params);
-            },
-            DestoryUser(id, ids) {
-                return destroy(`/backend/addons/Paper/mock_paper/${id}/user/${ids}`);
->>>>>>> 12fb295f0a8f3d2c48f1e382a9bbb2a0c3a481b3
             },
             Category: {
                 List(params) {
