@@ -1,7 +1,12 @@
 <template>
   <div class="d-flex">
     <div>
-      <el-input-number v-model="hour" :min="0" size="small"></el-input-number>
+      <el-input-number
+        :disabled="disabled"
+        v-model="hour"
+        :min="0"
+        size="small"
+      ></el-input-number>
     </div>
     <div class="mx-10">
       <div class="helper-text">时</div>
@@ -9,6 +14,7 @@
     <div>
       <el-input-number
         v-model="minute"
+        :disabled="disabled"
         :min="0"
         :max="59"
         size="small"
@@ -20,6 +26,7 @@
     <div>
       <el-input-number
         v-model="second"
+        :disabled="disabled"
         :min="0"
         :max="59"
         size="small"
@@ -33,7 +40,7 @@
 
 <script>
 export default {
-  props: ["value"],
+  props: ["value", "disabled"],
   data() {
     return {
       hour: 0,

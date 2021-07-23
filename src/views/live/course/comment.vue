@@ -1,39 +1,21 @@
 <template>
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="直播课程评论"></back-bar>
-    <div class="float-left mb-30">
-      <el-button @click="destorymulti()" type="danger"> 删除 </el-button>
-      <el-button @click="approve()" type="danger"> 审核通过 </el-button>
-      <el-button @click="refuse()" type="danger"> 审核拒绝 </el-button>
-    </div>
     <div class="float-left">
       <div class="float-left d-flex">
-        <div class="d-flex">
-          <div class="filter-label">UID</div>
-          <div class="flex-1 ml-15">
-            <el-input
-              class="w-200px"
-              v-model="filter.user_id"
-              placeholder="UID"
-            ></el-input>
-          </div>
+        <div>
+          <el-button @click="destorymulti()" type="danger"> 删除 </el-button>
+          <el-button @click="approve()"> 审核通过 </el-button>
+          <el-button @click="refuse()"> 审核拒绝 </el-button>
         </div>
-        <div class="d-flex ml-15">
-          <div class="filter-label">课程</div>
-          <div class="flex-1 ml-15">
-            <el-select v-model="filter.course_id">
-              <el-option
-                v-for="(item, index) in filterData.courses"
-                :key="index"
-                :label="item.title"
-                :value="item.id"
-              >
-              </el-option>
-            </el-select>
-          </div>
+        <div class="ml-10">
+          <el-input
+            class="w-200px"
+            v-model="filter.user_id"
+            placeholder="用户ID"
+          ></el-input>
         </div>
-
-        <div class="ml-15">
+        <div class="ml-10">
           <el-button @click="getResults" type="primary" plain>筛选</el-button>
           <el-button @click="paginationReset">清空</el-button>
         </div>
@@ -47,12 +29,11 @@
           @selection-change="handleSelectionChange"
           class="float-left"
         >
-          <el-table-column type="selection" width="55"></el-table-column
-          ><!-- 显示选取表格 -->
-          <el-table-column prop="id" label="ID" width="80"> </el-table-column>
-          <el-table-column prop="user_id" label="用户ID" width="80">
+          <el-table-column type="selection" width="55"></el-table-column>
+          <el-table-column prop="id" label="ID" width="120"> </el-table-column>
+          <el-table-column prop="user_id" label="用户ID" width="120">
           </el-table-column>
-          <el-table-column label="用户">
+          <el-table-column label="用户" width="300">
             <template slot-scope="scope">
               <div class="d-flex" v-if="scope.row.user">
                 <div>
@@ -65,31 +46,20 @@
               <span class="c-red" v-else>用户不存在</span>
             </template>
           </el-table-column>
-          <el-table-column label="课程">
-            <template slot-scope="scope">
-              <span v-if="scope.row.course">{{ scope.row.course.title }}</span>
-              <span style="color: red" v-else>已删除</span>
-            </template>
-          </el-table-column>
-
           <el-table-column label="状态" width="100">
             <template slot-scope="scope">
-              <span v-if="scope.row.is_check != 1" style="color: red"
-                >拒绝</span
-              >
-              <span v-else>通过</span>
+              <el-tag v-if="scope.row.is_check != 1" type="danger">
+                拒绝
+              </el-tag>
+              <el-tag type="success" v-else>通过</el-tag>
             </template>
           </el-table-column>
-          <el-table-column
-            prop="user.created_at"
-            label="时间"
-            width="150"
-          ></el-table-column>
-          <el-table-column prop="user.created_at" label="内容">
+          <el-table-column label="内容" width="500">
             <template slot-scope="scope">
               <div v-html="scope.row.content"></div>
             </template>
           </el-table-column>
+          <el-table-column prop="created_at" label="时间"></el-table-column>
         </el-table>
       </div>
 
@@ -246,7 +216,6 @@ export default {
         type: "warning",
       })
         .then(() => {
-          //点击确定按钮的操作
           if (this.loading) {
             return;
           }
@@ -256,7 +225,7 @@ export default {
           }
           this.loading = true;
           this.spids.status = 0;
-          this.$api.Course.Live.Course.CommentDestoryMulti(this.spids)
+          this.$api.Course.Live.Course.CommentCheck(this.spids)
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));
@@ -267,9 +236,7 @@ export default {
               this.$message.error(e.message);
             });
         })
-        .catch(() => {
-          //点击删除按钮的操作
-        });
+        .catch(() => {});
     },
   },
 };

@@ -105,7 +105,7 @@
           <el-form-item label="视频时长" prop="duration">
             <div class="d-flex">
               <div>
-                <input-duration v-model="video.duration"></input-duration>
+                <input-duration :disabled="false" v-model="video.duration"></input-duration>
               </div>
               <div class="ml-10">
                 <helper-text
