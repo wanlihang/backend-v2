@@ -1158,6 +1158,61 @@ const Api = {
                 },
             },
         },
+        Mockpaper: {
+            List(params) {
+                return get(`/backend/addons/Paper/mock_paper/index`, params);
+            },
+            Create() {
+                return get(`/backend/addons/Paper/mock_paper/create`);
+            },
+            Store(params) {
+                return post(`/backend/addons/Paper/mock_paper/create`, params);
+            },
+            Detail(id) {
+                return get(`/backend/addons/Paper/mock_paper/${id}`);
+            },
+            Update(id, params) {
+                return put(`/backend/addons/Paper/mock_paper/${id}`, params);
+            },
+            Destroy(id) {
+                return destroy(`/backend/addons/Paper/mock_paper/${id}`);
+            },
+            Userpaper(id, params) {
+                return get(`/backend/addons/Paper/mock_paper/${id}/userPaper`, params);
+            },
+            Stat(id, params) {
+                return get(`/backend/addons/Paper/mock_paper/${id}/statistics`, params);
+            },
+            User(id, params) {
+                return get(`/backend/addons/Paper/mock_paper/${id}/user`, params);
+            },
+            Add(id,params) {
+                return post(`/backend/addons/Paper/mock_paper/${id}/user`, params);
+            },
+            DestoryUser(id,ids) {
+                return destroy(`/backend/addons/Paper/mock_paper/${id}/user/${ids}`);
+            },
+            Category: {
+                List(params) {
+                    return get(`/backend/addons/Paper/paper_category/index`, params);
+                },
+                Create() {
+                    return get(`/backend/addons/Paper/paper_category/create`);
+                },
+                Store(params) {
+                    return post(`/backend/addons/Paper/paper_category/create`, params);
+                },
+                Detail(id) {
+                    return get(`/backend/addons/Paper/paper_category/${id}`);
+                },
+                Update(id, params) {
+                    return put(`/backend/addons/Paper/paper_category/${id}`, params);
+                },
+                Destroy(id) {
+                    return destroy(`/backend/addons/Paper/paper_category/${id}`);
+                },
+            },
+        },
         Practice: {
             List(params) {
                 return get(`/backend/addons/Paper/practice/index`, params);
