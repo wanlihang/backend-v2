@@ -20,6 +20,8 @@ import "mavon-editor/dist/css/index.css";
 import FormLabelComp from '@/components/form-label';
 import BackBar from '@/components/back-bar';
 import HelperText from '@/components/helper-text';
+import PLink from '@/components/permission/link';
+import PButton from '@/components/permission/btn';
 
 
 Vue.use(ElementUI);
@@ -29,6 +31,8 @@ Vue.use(mavonEditor);
 Vue.component('FormLabel', FormLabelComp);
 Vue.component('BackBar', BackBar);
 Vue.component('HelperText', HelperText);
+Vue.component('PLink', PLink);
+Vue.component('PButton', PButton);
 
 Vue.config.productionTip = false;
 
