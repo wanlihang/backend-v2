@@ -10,61 +10,43 @@
     </div>
     <div class="float-left">
       <div class="float-left d-flex">
-        <div class="d-flex">
-          <div class="filter-label">关键字</div>
-          <div class="flex-1 ml-15">
-            <el-input
-              class="w-200px"
-              v-model="filter.keywords"
-              placeholder="关键字搜索"
-            ></el-input>
-          </div>
-        </div>
-
-        <div class="d-flex ml-15">
-          <div class="filter-label">商品类型</div>
-          <div class="flex-1 ml-15">
-            <el-select v-model="filter.type">
-              <el-option
-                v-for="(item, index) in filterData.courses"
-                :key="index"
-                :label="item.name"
-                :value="item.value"
-              >
-              </el-option>
-            </el-select>
-          </div>
+        <div>
+          <el-input
+            class="w-200px"
+            v-model="filter.keywords"
+            placeholder="关键字搜索"
+          ></el-input>
         </div>
 
         <div class="ml-15">
-          <el-button @click="getResults" type="primary" plain>筛选</el-button>
+          <el-button @click="getData" type="primary" plain>筛选</el-button>
           <el-button @click="paginationReset">清空</el-button>
         </div>
       </div>
     </div>
     <div class="float-left mt-30" v-loading="loading">
       <div class="float-left">
-        <el-table :data="results" stripe class="float-left">
-          <el-table-column prop="id" label="ID" width="80"> </el-table-column>
-          <el-table-column prop="goods_id" label="商品ID" width="80">
+        <el-table :data="list" stripe class="float-left">
+          <el-table-column prop="id" label="ID" width="120"> </el-table-column>
+          <el-table-column prop="goods_id" label="商品ID" width="120">
           </el-table-column>
-          <el-table-column prop="goods_type_text" label="类型" width="160">
+          <el-table-column prop="goods_type_text" label="类型" width="200">
           </el-table-column>
-          <el-table-column prop="goods_title" label="商品"> </el-table-column>
+          <el-table-column prop="goods_title" label="商品" width="400">
+          </el-table-column>
           <el-table-column label="价格" width="150">
             <template slot-scope="scope">
-              <span>￥{{ scope.row.goods_charge }}</span>
+              <span>{{ scope.row.goods_charge }}元</span>
             </template>
           </el-table-column>
           <el-table-column label="奖励1/2/3" width="160">
             <template slot-scope="scope">
-              <span
-                >￥{{ scope.row.reward }}/￥{{ scope.row.reward2 }}/￥{{
-                  scope.row.reward3
-                }}</span
-              >
+              <div>一级：{{ scope.row.reward }}元</div>
+              <div>二级：{{ scope.row.reward2 }}元</div>
+              <div>三级：{{ scope.row.reward3 }}元</div>
             </template>
           </el-table-column>
+          <el-table-column prop="created_at" label="时间"> </el-table-column>
           <el-table-column fixed="right" label="操作" width="120">
             <template slot-scope="scope">
               <el-link type="danger" @click="destory(scope.row.id)"
@@ -116,7 +98,7 @@ export default {
       },
       total: 0,
       loading: false,
-      results: [],
+      list: [],
       filterData: {
         courses: [],
       },
@@ -124,24 +106,24 @@ export default {
   },
 
   mounted() {
-    this.getResults();
+    this.getData();
   },
   methods: {
     paginationReset() {
       this.pagination.page = 1;
       this.filter.type = null;
       this.filter.keywords = null;
-      this.getResults();
+      this.getData();
     },
     paginationSizeChange(size) {
       this.pagination.size = size;
-      this.getResults();
+      this.getData();
     },
     paginationPageChange(page) {
       this.pagination.page = page;
-      this.getResults();
+      this.getData();
     },
-    getResults() {
+    getData() {
       if (this.loading) {
         return;
       }
@@ -151,7 +133,7 @@ export default {
       Object.assign(params, this.pagination);
       this.$api.Multishare.Goods.List(params).then((res) => {
         this.loading = false;
-        this.results = res.data.data.data;
+        this.list = res.data.data.data;
         this.total = res.data.data.total;
         this.filterData.courses = res.data.types;
       });
@@ -172,7 +154,7 @@ export default {
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));
-              this.getResults();
+              this.getData();
             })
             .catch((e) => {
               this.loading = false;

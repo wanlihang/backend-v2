@@ -1,66 +1,99 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="创建分销商品"></back-bar>
+    <back-bar class="mb-30" title="创建分销课程"></back-bar>
+
     <div class="float-left">
-      <div class="form-box broder-top-left-radius">
-        <el-form ref="form" :model="course" :rules="rules" label-width="200px">
-          <el-form-item prop="goods_id" label="商品">
-            <div class="d-flex">
-              <div>
-                <el-button @click="selgoods"> 选择商品 </el-button>
-                <span
-                  v-if="this.course.goods_id"
-                  style="color: red; margin-left: 4px"
-                  >已选择</span
+      <el-form
+        ref="form"
+        class="float-left"
+        :model="form"
+        :rules="rules"
+        label-width="200px"
+      >
+        <el-form-item prop="goods_id" label="课程">
+          <div class="d-flex">
+            <div>
+              <el-button type="primary" @click="showSelectResWin = true">
+                <span>选择课程</span>
+                <span v-if="form.goods_title"
+                  >已选择课程「{{ form.goods_title }}」</span
                 >
-                <select-resource
-                  v-bind:show="msg"
-                  @change="change"
-                  @close="close"
-                  :enabled-resource="types"
-                ></select-resource>
-              </div>
+              </el-button>
+              <select-resource
+                :show="showSelectResWin"
+                @change="change"
+                @close="showSelectResWin = false"
+                enabled-resource="vod,video,live,book,topic,paper,practice,learnPath,vip"
+              ></select-resource>
             </div>
-          </el-form-item>
-          <el-form-item label="商品名" prop="goods_title">
-            <el-input v-model="course.goods_title" class="w-100"></el-input>
-          </el-form-item>
-          <el-form-item label="商品价格" prop="goods_charge">
-            <el-input
-              type="number"
-              placeholder="单位：元"
-              v-model="course.goods_charge"
-              class="w-200px"
-            ></el-input>
-          </el-form-item>
-          <el-form-item prop="goods_thumb" label="商品封面">
-            <upload-image
-              v-model="course.goods_thumb"
-              width="400"
-              name="上传封面"
-            ></upload-image>
-          </el-form-item>
-          <el-form-item label="一级奖励" prop="reward">
-            <el-input
-              type="number"
-              placeholder="单位：元"
-              v-model="course.reward"
-              class="w-200px"
-            ></el-input>
-          </el-form-item>
-          <el-form-item label="二级奖励" prop="reward2">
-            <el-input
-              type="number"
-               placeholder="单位：元"
-              v-model="course.reward2"
-              class="w-200px"
-            ></el-input>
-          </el-form-item>
-          <el-form-item prop="reward3" label="三级奖励">
-            <el-input  type="number"  placeholder="单位：元" class="w-200px" v-model="course.reward3"></el-input>
-          </el-form-item>
-        </el-form>
-      </div>
+          </div>
+        </el-form-item>
+
+        <el-form-item label="商品名" prop="goods_title">
+          <el-input v-model="form.goods_title" class="w-600px"></el-input>
+        </el-form-item>
+
+        <el-form-item label="商品价格" prop="goods_charge">
+          <el-input
+            type="number"
+            placeholder="单位：元"
+            v-model="form.goods_charge"
+            class="w-200px"
+          ></el-input>
+        </el-form-item>
+        <el-form-item prop="goods_thumb" label="商品封面">
+          <upload-image
+            v-model="form.goods_thumb"
+            width="120"
+            height="90"
+          ></upload-image>
+        </el-form-item>
+        <el-form-item label="一级奖励" prop="reward">
+          <div class="d-flex">
+            <div>
+              <el-input
+                type="number"
+                placeholder="一级分销奖励"
+                v-model="form.reward"
+                class="w-200px"
+              ></el-input>
+            </div>
+            <div class="ml-10">
+              <helper-text text="最小单位：元。不支持小数。"></helper-text>
+            </div>
+          </div>
+        </el-form-item>
+        <el-form-item label="二级奖励" prop="reward2">
+          <div class="d-flex">
+            <div>
+              <el-input
+                type="number"
+                placeholder="二级分销奖励"
+                v-model="form.reward2"
+                class="w-200px"
+              ></el-input>
+            </div>
+            <div class="ml-10">
+              <helper-text text="最小单位：元。不支持小数。"></helper-text>
+            </div>
+          </div>
+        </el-form-item>
+        <el-form-item prop="reward3" label="三级奖励">
+          <div class="d-flex">
+            <div>
+              <el-input
+                type="number"
+                placeholder="三级分销奖励"
+                class="w-200px"
+                v-model="form.reward3"
+              ></el-input>
+            </div>
+            <div class="ml-10">
+              <helper-text text="最小单位：元。不支持小数。"></helper-text>
+            </div>
+          </div>
+        </el-form-item>
+      </el-form>
 
       <div class="bottom-menus">
         <div class="bottom-menus-box">
@@ -70,9 +103,7 @@
             >
           </div>
           <div class="ml-24">
-            <el-button @click="$router.back()"
-              >取消</el-button
-            >
+            <el-button @click="$router.back()">取消</el-button>
           </div>
         </div>
       </div>
@@ -90,19 +121,19 @@ export default {
   },
   data() {
     return {
+      showSelectResWin: false,
       filter: {
-        type: "",
+        type: null,
       },
-      msg: false,
-      course: {
+      form: {
         reward: null,
         reward2: null,
+        reward3: null,
         goods_title: null,
         goods_thumb: null,
         goods_charge: null,
         goods_id: null,
         goods_type: null,
-        reward3: null,
       },
       rules: {
         goods_type: [
@@ -162,45 +193,18 @@ export default {
           },
         ],
       },
-      expireTimeOption: {
-        disabledDate(date) {
-          // 当天可选：date.getTime() < Date.now() - 24 * 60 * 60 * 1000
-          //超过此刻可选
-          return date.getTime() < Date.now();
-        },
-      },
-      types: null,
       loading: false,
     };
   },
-  mounted() {
-    this.params();
-  },
   methods: {
-    close() {
-      this.msg = false;
-    },
-    change(v1) {
-      var data = v1;
-      this.course.goods_id = data.id;
-      this.course.goods_type = data.resource_type;
-      this.course.goods_title = data.title;
-      this.course.goods_charge = data.original_charge;
-      this.course.goods_thumb = data.thumb;
-      this.msg = false;
-    },
-    params() {
-      this.$api.Multishare.Goods.Create(this.filter).then((res) => {
-        var data = res.data.types;
-        var typeids = "";
-        for (var i = 0; i < data.length; i++) {
-          typeids = typeids + data[i].value + ",";
-        }
-        this.types = typeids;
-      });
-    },
-    selgoods() {
-      this.msg = true;
+    change(data) {
+      this.form.goods_id = data.id;
+      this.form.goods_title = data.title;
+      this.form.goods_charge = data.original_charge;
+      this.form.goods_thumb = data.thumb;
+      this.form.goods_type = data.resource_type;
+
+      this.showSelectResWin = false;
     },
     formValidate() {
       this.$refs["form"].validate((valid) => {
@@ -214,7 +218,7 @@ export default {
         return;
       }
       this.loading = true;
-      this.$api.Multishare.Goods.Store(this.course)
+      this.$api.Multishare.Goods.Store(this.form)
         .then(() => {
           this.$message.success(this.$t("common.success"));
           this.$router.back();
