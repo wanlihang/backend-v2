@@ -247,6 +247,23 @@ const zh = {
                 update: '编辑试卷',
                 userpaper: '考试记录',
                 stat: '分数统计',
+                category: {
+                    index: '试卷分类',
+                    create: '创建试卷分类',
+                    update: '编辑试卷分类',
+                },
+            },
+            practice: {
+                name: '练习',
+                index: '练习',
+                create: '创建练习',
+                update: '编辑练习',
+                category: {
+                    index: '练习分类',
+                    create: '创建练习分类',
+                    update: '编辑练习分类',
+                },
+
             },
         },
         coursename: '课程',

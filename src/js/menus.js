@@ -110,9 +110,14 @@ export default [{
         key: 'Exam',
         icon: 'icon-icon-exam-n',
         children: [{
-            name: 'title.exam.paper.index',
-            key: 'ExamPaper',
-        }]
+                name: 'title.exam.paper.index',
+                key: 'ExamPaper',
+            },
+            {
+                name: 'title.exam.practice.index',
+                key: 'ExamPractice',
+            }
+        ]
     },
     {
         name: 'title.decoration',
