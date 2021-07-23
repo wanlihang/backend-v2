@@ -1106,6 +1106,30 @@ const routes = [{
         }
       },
       {
+        path: '/exam/paper/category/index',
+        component: () => import('@/views/exam/paper/category/index'),
+        name: 'PaperCategories',
+        meta: {
+          title: 'title.exam.paper.category.index'
+        }
+      },
+      {
+        path: '/exam/paper/category/create',
+        component: () => import('@/views/exam/paper/category/create'),
+        name: 'PaperCategoriesCreate',
+        meta: {
+          title: 'title.exam.paper.category.create'
+        }
+      },
+      {
+        path: '/exam/paper/category/update',
+        component: () => import('@/views/exam/paper/category/update'),
+        name: 'PaperCategoriesUpdate',
+        meta: {
+          title: 'title.exam.paper.category.update'
+        }
+      },
+      {
         path: '/exam/paper/userpaper',
         component: () => import('@/views/exam/paper/userpaper'),
         name: 'ExamPaperUserpaper',
@@ -1119,6 +1143,54 @@ const routes = [{
         name: 'ExamPaperStat',
         meta: {
           title: 'title.exam.paper.stat'
+        }
+      },
+      {
+        path: '/exam/practice/index',
+        component: () => import('@/views/exam/practice/index'),
+        name: 'ExamPractice',
+        meta: {
+          title: 'title.exam.practice.index'
+        }
+      },
+      {
+        path: '/exam/practice/create',
+        component: () => import('@/views/exam/practice/create'),
+        name: 'ExamPracticeCreate',
+        meta: {
+          title: 'title.exam.practice.create'
+        }
+      },
+      {
+        path: '/exam/practice/update',
+        component: () => import('@/views/exam/practice/update'),
+        name: 'ExamPracticeUpdate',
+        meta: {
+          title: 'title.exam.practice.update'
+        }
+      },
+      {
+        path: '/exam/practice/category/index',
+        component: () => import('@/views/exam/practice/category/index'),
+        name: 'PracticeCategories',
+        meta: {
+          title: 'title.exam.practice.category.index'
+        }
+      },
+      {
+        path: '/exam/practice/category/create',
+        component: () => import('@/views/exam/practice/category/create'),
+        name: 'PracticeCategoriesCreate',
+        meta: {
+          title: 'title.exam.practice.category.create'
+        }
+      },
+      {
+        path: '/exam/practice/category/update',
+        component: () => import('@/views/exam/practice/category/update'),
+        name: 'PracticeCategoriesUpdate',
+        meta: {
+          title: 'title.exam.practice.category.update'
         }
       },
     ]

@@ -136,7 +136,16 @@ export default {
         ExamPaper:'ExamPaper',
         ExamPaperCreate:'ExamPaper',
         ExamPaperUpdate:'ExamPaper',
+        PaperCategories:'ExamPaper',
+        PaperCategoriesCreate:'ExamPaper',
+        PaperCategoriesUpdate:'ExamPaper',
         ExamPaperUserpaper:'ExamPaper',
         ExamPaperStat:'ExamPaper',
+        ExamPractice:'ExamPractice',
+        ExamPracticeCreate:'ExamPractice',
+        ExamPracticeUpdate:'ExamPractice',
+        PracticeCategories:'ExamPractice',
+        PracticeCategoriesCreate:'ExamPractice',
+        PracticeCategoriesUpdate:'ExamPractice',
     }
 }
