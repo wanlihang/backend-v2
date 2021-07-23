@@ -178,11 +178,9 @@ export default {
     },
     handleClickBtnE(index) {
       this.flagE = index + 1;
-      //console.log(this.flagE);
       this.getZXTdata();
     },
     getZXTdata() {
-      console.log(this.flagE + this.start_at + this.end_at);
       this.loading = true;
       var uid = "userRegister";
       if (this.flagE == 2) {
@@ -199,9 +197,7 @@ export default {
         end_at: this.end_at,
       };
       this.$api.Stat.Statistic(uid, databox).then((resp) => {
-        //console.log(resp.status);
         if (resp.status == 0) {
-          //console.log(resp.data);
           this.drawLineChart(resp.data.dataset, resp.data.labels);
         } else if (resp.status == 401) {
           this.$router.push({ path: "/" }); //跳到登录

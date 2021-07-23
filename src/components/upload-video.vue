@@ -397,13 +397,11 @@ export default {
       uploader
         .done()
         .then((doneResult) => {
-          console.log("腾讯云上传结果", doneResult);
           this.upload.fileId = doneResult.fileId;
 
           this.uploadSuccess(doneResult.fileId, "");
         })
         .catch((err) => {
-          console.log(err);
           this.uploadFailHandle("上传视频到腾讯云点播错误");
         });
     },

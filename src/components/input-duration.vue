@@ -73,8 +73,6 @@ export default {
         result = this.hour * 3600 + this.minute * 60 + this.second;
       }
 
-      console.log(result);
-
       this.$emit("input", result);
     },
   },

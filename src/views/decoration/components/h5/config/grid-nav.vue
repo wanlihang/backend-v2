@@ -136,7 +136,6 @@ export default {
       if (this.loading) {
         return;
       }
-      console.log(this.config);
       this.loading = true;
       this.$api.ViewBlock.Update(this.block.id, {
         sort: this.block.sort,
