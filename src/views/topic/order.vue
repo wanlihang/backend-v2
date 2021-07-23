@@ -6,10 +6,18 @@
       <div class="float-left">
         <div class="float-left d-flex">
           <div>
-            <el-button @click="delUser">删除用户</el-button>
+            <p-button
+              text="删除用户"
+              @click="delUser"
+              p="addons.meedu_topics.orders.user.del"
+            ></p-button>
           </div>
           <div class="ml-10">
-            <el-button @click="showUserAddWin = true">添加用户</el-button>
+            <p-button
+              text="添加用户"
+              p="addons.meedu_topics.orders.user.add"
+              @click="showUserAddWin = true"
+            ></p-button>
           </div>
           <div class="ml-10">
             <el-input

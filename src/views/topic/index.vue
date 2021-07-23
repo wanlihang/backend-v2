@@ -108,7 +108,8 @@
                 @click="destory(scope.row.id)"
                 p="addons.meedu_topics.topic.delete"
               ></p-link>
-              <el-link
+              <p-link
+                text="编辑"
                 type="primary"
                 class="ml-5"
                 @click="
@@ -117,9 +118,10 @@
                     query: { id: scope.row.id },
                   })
                 "
-                >编辑</el-link
-              >
-              <el-link
+                p="addons.meedu_topics.topic.update"
+              ></p-link>
+              <p-link
+                text="评论"
                 type="primary"
                 class="ml-5"
                 @click="
@@ -128,9 +130,10 @@
                     query: { id: scope.row.id },
                   })
                 "
-                >评论</el-link
-              >
-              <el-link
+                p="addons.meedu_topics.comments"
+              ></p-link>
+              <p-link
+                text="用户"
                 type="primary"
                 class="ml-5"
                 @click="
@@ -139,8 +142,8 @@
                     query: { id: scope.row.id },
                   })
                 "
-                >用户</el-link
-              >
+                p="addons.meedu_topics.orders"
+              ></p-link>
             </template>
           </el-table-column>
         </el-table>
