@@ -3,7 +3,13 @@
     <back-bar class="mb-30" title="聊天室内容"></back-bar>
     <div class="float-left mb-30">
       <el-button @click="firstPageLoad()" type="primary"> 刷新数据 </el-button>
-      <el-button @click="destorymulti()" type="danger"> 批量删除 </el-button>
+      <p-button
+        text="批量删除"
+        @click="destorymulti()"
+        type="danger"
+        p="addons.Zhibo.chat.delete"
+      >
+      </p-button>
     </div>
     <div class="float-left">
       <div class="float-left d-flex">

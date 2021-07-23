@@ -38,12 +38,13 @@
                 </el-select>
               </div>
               <div class="ml-10">
-                <el-link
+                <p-link
+                  text="分类管理"
                   type="primary"
                   @click="$router.push({ name: 'LiveCourseCategory' })"
+                  p="addons.Zhibo.course_category.list"
                 >
-                  分类管理
-                </el-link>
+                </p-link>
               </div>
             </div>
           </el-form-item>
@@ -62,12 +63,13 @@
                 </el-select>
               </div>
               <div class="ml-10">
-                <el-link
+                <p-link
+                  text="讲师管理"
                   type="primary"
                   @click="$router.push({ name: 'LiveTeacher' })"
+                  p="addons.Zhibo.teacher.list"
                 >
-                  讲师管理
-                </el-link>
+                </p-link>
               </div>
             </div>
           </el-form-item>

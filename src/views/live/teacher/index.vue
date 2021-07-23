@@ -3,12 +3,13 @@
     <back-bar class="mb-30" title="讲师管理"></back-bar>
 
     <div class="float-left mb-30">
-      <el-button
+      <p-button
+        text="添加"
         @click="$router.push({ name: 'LiveTeacherCreate' })"
         type="primary"
+        p="addons.Zhibo.teacher.store"
       >
-        添加
-      </el-button>
+      </p-button>
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
@@ -40,10 +41,14 @@
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="150">
             <template slot-scope="scope">
-              <el-link type="danger" @click="destory(scope.row.id)"
-                >删除</el-link
-              >
-              <el-link
+              <p-link
+                text="删除"
+                type="danger"
+                @click="destory(scope.row.id)"
+                p="addons.Zhibo.teacher.delete"
+              ></p-link>
+              <p-link
+                text="编辑"
                 type="primary"
                 class="ml-5"
                 @click="
@@ -52,8 +57,8 @@
                     query: { id: scope.row.id },
                   })
                 "
-                >编辑</el-link
-              >
+                p="addons.Zhibo.teacher.update"
+              ></p-link>
             </template>
           </el-table-column>
         </el-table>

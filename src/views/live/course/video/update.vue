@@ -23,16 +23,17 @@
               </el-select>
             </div>
             <div class="ml-10">
-              <el-link
+              <p-link
+                text="章节管理"
+                p="addons.Zhibo.course_chapter.list"
                 type="primary"
                 @click="
                   $router.push({
                     name: 'LiveCourseChapter',
-                    query: { id: course_id },
+                    query: { id: course.course_id },
                   })
                 "
-                >章节管理</el-link
-              >
+              ></p-link>
             </div>
           </div>
         </el-form-item>

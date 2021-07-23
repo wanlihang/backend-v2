@@ -7,12 +7,13 @@
       >
         直播课程评论
       </el-button> -->
-      <el-button
+      <p-button
+        text="添加"
         @click="$router.push({ name: 'LiveCourseCreate' })"
         type="primary"
+        p="addons.Zhibo.course.store"
       >
-        添加
-      </el-button>
+      </p-button>
     </div>
     <div class="float-left">
       <div class="float-left d-flex">
@@ -117,10 +118,14 @@
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="200">
             <template slot-scope="scope">
-              <el-link type="danger" @click="destory(scope.row.id)"
-                >删除</el-link
-              >
-              <el-link
+              <p-link
+                text="删除"
+                type="danger"
+                @click="destory(scope.row.id)"
+                p="addons.Zhibo.course.delete"
+              ></p-link>
+              <p-link
+                text="编辑"
                 type="primary"
                 class="ml-5"
                 @click="
@@ -129,9 +134,10 @@
                     query: { id: scope.row.id },
                   })
                 "
-                >编辑</el-link
-              >
-              <el-link
+                p="addons.Zhibo.course.update"
+              ></p-link>
+              <p-link
+                text="直播"
                 type="primary"
                 class="ml-5"
                 @click="
@@ -140,9 +146,10 @@
                     query: { id: scope.row.id },
                   })
                 "
-                >直播</el-link
-              >
-              <el-link
+                p="addons.Zhibo.course_video.list"
+              ></p-link>
+              <p-link
+                texy="用户"
                 type="primary"
                 class="ml-5"
                 @click="
@@ -151,9 +158,10 @@
                     query: { id: scope.row.id },
                   })
                 "
-                >用户</el-link
-              >
-              <el-link
+                p="addons.Zhibo.course.users"
+              ></p-link>
+              <p-link
+                text="评论"
                 type="primary"
                 class="ml-5"
                 @click="
@@ -162,8 +170,8 @@
                     query: { id: scope.row.id },
                   })
                 "
-                >评论</el-link
-              >
+                p="addons.Zhibo.course_comment"
+              ></p-link>
             </template>
           </el-table-column>
         </el-table>

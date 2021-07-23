@@ -2,7 +2,8 @@
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="直播安排"></back-bar>
     <div class="float-left mb-30">
-      <el-button
+      <p-button
+        text="添加"
         @click="
           $router.push({
             name: 'LiveCourseVideoCreate',
@@ -10,9 +11,9 @@
           })
         "
         type="primary"
+        p="addons.Zhibo.course_video.store"
       >
-        添加
-      </el-button>
+      </p-button>
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
@@ -42,10 +43,15 @@
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="200">
             <template slot-scope="scope">
-              <el-link type="danger" @click="destory(scope.row.id)">
-                删除
-              </el-link>
-              <el-link
+              <p-link
+                text="删除"
+                type="danger"
+                @click="destory(scope.row.id)"
+                p="addons.Zhibo.course_video.delete"
+              >
+              </p-link>
+              <p-link
+                text="编辑"
                 type="primary"
                 class="ml-5"
                 @click="
@@ -57,10 +63,11 @@
                     },
                   })
                 "
+                p="addons.Zhibo.course_video.update"
               >
-                编辑
-              </el-link>
-              <el-link
+              </p-link>
+              <p-link
+                text="开播"
                 type="primary"
                 class="ml-5"
                 @click="
@@ -72,9 +79,10 @@
                     },
                   })
                 "
-                >开播</el-link
-              >
-              <el-link
+                p="addons.Zhibo.zhibo.open"
+              ></p-link>
+              <p-link
+                text="观看"
                 type="primary"
                 class="ml-5"
                 @click="
@@ -86,9 +94,10 @@
                     },
                   })
                 "
-                >观看</el-link
-              >
-              <el-link
+                p="addons.Zhibo.course_video.watch.users"
+              ></p-link>
+              <p-link
+                text="讨论"
                 type="primary"
                 class="ml-5"
                 @click="
@@ -100,8 +109,8 @@
                     },
                   })
                 "
-                >讨论</el-link
-              >
+                p="addons.Zhibo.chat.list"
+              ></p-link>
             </template>
           </el-table-column>
         </el-table>

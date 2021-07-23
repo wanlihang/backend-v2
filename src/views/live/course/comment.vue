@@ -4,9 +4,25 @@
     <div class="float-left">
       <div class="float-left d-flex">
         <div>
-          <el-button @click="destorymulti()" type="danger"> 删除 </el-button>
-          <el-button @click="approve()"> 审核通过 </el-button>
-          <el-button @click="refuse()"> 审核拒绝 </el-button>
+          <p-button
+            text="删除"
+            p="addons.Zhibo.course_comment.delete.multi"
+            @click="destorymulti()"
+            type="danger"
+          >
+          </p-button>
+          <p-button
+            text="审核通过"
+            p="addons.Zhibo.course_comment.check"
+            @click="approve()"
+          >
+          </p-button>
+          <p-button
+            text="审核拒绝"
+            p="addons.Zhibo.course_comment.check"
+            @click="refuse()"
+          >
+          </p-button>
         </div>
         <div class="ml-10">
           <el-input

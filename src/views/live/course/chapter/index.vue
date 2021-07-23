@@ -2,7 +2,9 @@
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="直播课程章节"></back-bar>
     <div class="float-left mb-30">
-      <el-button
+      <p-button
+        text="添加"
+        p="addons.Zhibo.course_chapter.store"
         @click="
           $router.push({
             name: 'LiveCourseChapterCreate',
@@ -11,8 +13,7 @@
         "
         type="primary"
       >
-        添加
-      </el-button>
+      </p-button>
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
@@ -23,10 +24,14 @@
           <el-table-column prop="name" label="章节名"> </el-table-column>
           <el-table-column fixed="right" label="操作" width="150">
             <template slot-scope="scope">
-              <el-link type="danger" @click="destory(scope.row.id)"
-                >删除</el-link
-              >
-              <el-link
+              <p-link
+                text="删除"
+                p="addons.Zhibo.course_chapter.delete"
+                type="danger"
+                @click="destory(scope.row.id)"
+              ></p-link>
+              <p-link
+                text="编辑"
                 type="primary"
                 class="ml-5"
                 @click="
@@ -35,8 +40,8 @@
                     query: { id: scope.row.id, course_id: id },
                   })
                 "
-                >编辑</el-link
-              >
+                p="addons.Zhibo.course_chapter.update"
+              ></p-link>
             </template>
           </el-table-column>
         </el-table>
