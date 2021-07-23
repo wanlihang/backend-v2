@@ -18,24 +18,42 @@
     <div class="float-left">
       <div class="float-left d-flex">
         <div>
-          <span slot="label" style="font-size: 14px">
-            <form-label
-              text="优惠码"
-              helper="优惠码的 U 前缀是用户专属邀请码预留的，请勿在自定义优惠码中使用！"
-            ></form-label>
-          </span>
           <el-input
-            class="ml-10 w-200px"
+            class="w-150px"
             v-model="filter.key"
-            placeholder="支持优惠码模糊搜索"
+            placeholder="优惠码"
           ></el-input>
         </div>
         <div class="ml-10">
           <el-input
-            class="w-200px"
+            class="w-150px"
             v-model="filter.user_id"
-            placeholder="UID"
+            placeholder="用户ID"
           ></el-input>
+        </div>
+        <div class="ml-10">
+          <el-date-picker
+            v-model="filter.expired_at"
+            type="daterange"
+            align="right"
+            unlink-panels
+            range-separator="至"
+            start-placeholder="过期时间-开始"
+            end-placeholder="过期时间-结束"
+          >
+          </el-date-picker>
+        </div>
+        <div class="ml-10">
+          <el-date-picker
+            v-model="filter.created_at"
+            type="daterange"
+            align="right"
+            unlink-panels
+            range-separator="至"
+            start-placeholder="创建时间-开始"
+            end-placeholder="创建时间-结束"
+          >
+          </el-date-picker>
         </div>
 
         <div class="ml-10">
@@ -49,47 +67,50 @@
     <div class="float-left mt-30" v-loading="loading">
       <div class="float-left">
         <el-table
-          :data="results"
+          :data="list"
           stripe
           @selection-change="handleSelectionChange"
           class="float-left"
         >
-          <el-table-column type="selection" width="55"></el-table-column
-          ><!-- 显示选取表格 -->
-          <el-table-column prop="id" label="ID" width="80"> </el-table-column>
-          <el-table-column prop="code" label="优惠码"> </el-table-column>
-          <el-table-column prop="invited_user_reward" width="100" label="抵扣">
+          <el-table-column type="selection" width="55"></el-table-column>
+          <el-table-column prop="id" label="ID" width="120"> </el-table-column>
+          <el-table-column
+            prop="invited_user_reward"
+            width="300"
+            label="优惠码"
+          >
             <template slot-scope="scope">
-              <span>{{ scope.row.invited_user_reward }}元</span>
+              <div class="mb-10">{{ scope.row.code }}</div>
+              <div>面值：{{ scope.row.invited_user_reward }}元</div>
+              <div>奖励：{{ scope.row.invite_user_reward }}元</div>
             </template>
           </el-table-column>
-          <el-table-column prop="invite_user_reward" label="奖励" width="100">
+
+          <el-table-column label="可使用次数" width="300">
             <template slot-scope="scope">
-              <span>{{ scope.row.invite_user_reward }}元</span>
+              <el-tag type="danger" v-if="scope.row.use_times === 0">
+                不限制
+              </el-tag>
+              <el-tag type="info" v-else>
+                {{ scope.row.use_times || 0 }}次
+              </el-tag>
             </template>
           </el-table-column>
-          <el-table-column label="可使用" width="80">
+
+          <el-table-column label="已使用次数" width="150">
             <template slot-scope="scope">
-              <span style="color: red" v-if="scope.row.use_times == 0"
-                >不限制</span
-              >
-              <span v-else>{{ scope.row.use_times || 0 }}次</span>
+              {{ scope.row.used_times || 0 }}次
             </template>
           </el-table-column>
-          <el-table-column prop="used_times" label="已使用" width="80" e>
-            <template slot-scope="scope">
-              <span v-if="scope.row.used_times != null"
-                >{{ scope.row.used_times }}次</span
-              >
-              <span v-else>0次</span>
-            </template>
+
+          <el-table-column prop="expired_at" label="过期时间" width="200">
           </el-table-column>
-          <el-table-column prop="created_at" label="创建时间" width="165">
-          </el-table-column>
-          <el-table-column prop="expired_at" label="过期时间" width="165">
+
+          <el-table-column prop="created_at" label="创建时间">
           </el-table-column>
         </el-table>
       </div>
+
       <div class="float-left mt-30 text-center">
         <el-pagination
           @size-change="paginationSizeChange"
@@ -119,36 +140,40 @@ export default {
       filter: {
         user_id: null,
         key: null,
+        created_at: null,
+        expired_at: null,
       },
       spids: {
         ids: [],
       },
       total: 0,
       loading: false,
-      results: [],
+      list: [],
     };
   },
   created() {
-    this.getResults();
+    this.getData();
   },
   methods: {
     firstPageLoad() {
       this.pagination.page = 1;
-      this.getResults();
+      this.getData();
     },
     paginationReset() {
       this.pagination.page = 1;
       this.filter.user_id = null;
       this.filter.key = null;
-      this.getResults();
+      this.filter.created_at = null;
+      this.filter.expired_at = null;
+      this.getData();
     },
     paginationSizeChange(size) {
       this.pagination.size = size;
-      this.getResults();
+      this.getData();
     },
     paginationPageChange(page) {
       this.pagination.page = page;
-      this.getResults();
+      this.getData();
     },
     //保存选中结果
     handleSelectionChange(val) {
@@ -158,7 +183,7 @@ export default {
       }
       this.spids.ids = newbox;
     },
-    getResults() {
+    getData() {
       if (this.loading) {
         return;
       }
@@ -167,7 +192,7 @@ export default {
       Object.assign(params, this.filter, this.pagination);
       this.$api.Order.PromoCode.PromoCode(params).then((res) => {
         this.loading = false;
-        this.results = res.data.data;
+        this.list = res.data.data;
         this.total = res.data.total;
       });
     },
@@ -192,7 +217,7 @@ export default {
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));
-              this.getResults();
+              this.getData();
             })
             .catch((e) => {
               this.loading = false;
