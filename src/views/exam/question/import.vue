@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="优惠码批量导入"></back-bar>
+    <back-bar class="mb-30" title="试题批量导入"></back-bar>
 
     <div class="user-import-box">
       <div class="float-left d-flex mb-15">
@@ -12,10 +12,10 @@
         <div class="ml-30">
           <el-link
             type="primary"
-            href="https://www.yuque.com/meedu/fvvkbf/lpwsry"
+            href="https://www.yuque.com/meedu/rg44n1/ucbqv1"
             target="_blank"
           >
-            点击链接下载「优惠码批量导入模板」
+            点击链接下载「试题批量导入模板」
           </el-link>
         </div>
       </div>
@@ -53,25 +53,22 @@ export default {
       // 处理文件
       let files = e.target.files;
       if (files.length === 0) {
-        this.$message.error("请选择文件");
         return;
       }
       let f = files[0];
       // 文件扩展名检测
       let extension = f.name.split(".");
       extension = extension[extension.length - 1];
-      if (extension !== "xlsx") {
-        this.$message.error("请选择xlsx文件");
+      if (!(extension === "xls" || extension === "xlsx")) {
+        this.$message.error("请选择xls文件,xlsx文件");
         return;
       }
-
-      // 读取数据
       let reader = new FileReader();
       reader.onload = (e) => {
         let data = new Uint8Array(e.target.result);
         let workbook = XLSX.read(data, { type: "array", cellDates: true });
         let parseData = this.parseData(workbook);
-        // parseData.splice(0, 1);
+        parseData.splice(0, 1);
         if (parseData.length === 0) {
           this.$message.error("数据为空");
           return;
@@ -81,8 +78,7 @@ export default {
 
         // 请求导入api
         this.$refs.form.reset();
-
-        this.$api.Order.PromoCode.Import({ data: parseData })
+        this.$api.Exam.Question.Import({ data: parseData })
           .then(() => {
             this.loading = false;
             this.$message.success("导入成功");
@@ -95,6 +91,7 @@ export default {
       };
       reader.readAsArrayBuffer(f);
     },
+
     parseData(workbook) {
       let data = [];
       workbook.SheetNames.forEach(function (sheetName) {

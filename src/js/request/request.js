@@ -1238,6 +1238,9 @@ const Api = {
             DestoryMulti(params) {
                 return post(`/backend/addons/Paper/question/destroy/multi`, params);
             },
+            Import(param) {
+                return post('/backend/addons/Paper/question/import/csv', param);
+            }
         },
         Practice: {
             List(params) {

@@ -1353,6 +1353,14 @@ const routes = [{
           title: 'title.exam.question.update'
         }
       },
+      {
+        path: '/exam/question/import',
+        component: () => import('@/views/exam/question/import'),
+        name: 'ExamQuestionImport',
+        meta: {
+          title: 'title.exam.question.import'
+        }
+      },
     ]
   },
   {

@@ -15,7 +15,7 @@
       <el-button
         @click="
           $router.push({
-            name: 'ExamQuestionCreate',
+            name: 'ExamQuestionImport',
           })
         "
         type="primary"

@@ -168,5 +168,6 @@ export default {
         ExamQuestion: 'ExamQuestion',
         ExamQuestionCreate: 'ExamQuestion',
         ExamQuestionUpdate: 'ExamQuestion',
+        ExamQuestionImport: 'ExamQuestion',
     }
 }
