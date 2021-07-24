@@ -833,6 +833,17 @@ const Api = {
                 return put(`/backend/api/v1/mpWechatMessageReply/${id}`, params);
             }
         },
+        Menu: {
+            Index() {
+                return get(`/backend/api/v1/mpWechat/menu`)
+            },
+            Update(params) {
+                return put(`/backend/api/v1/mpWechat/menu`, params)
+            },
+            Destroy() {
+                return destroy(`/backend/api/v1/mpWechat/menu`);
+            }
+        }
     },
     CodeExchanger: {
         List(params) {
@@ -1030,7 +1041,7 @@ const Api = {
     Multishare: {
         Poster: {
             List() {
-                return get(`/backend/addons/multi_level_share/poster/index`, );
+                return get(`/backend/addons/multi_level_share/poster/index`,);
             },
             Store(params) {
                 return post(`/backend/addons/multi_level_share/poster/create`, params);
@@ -1352,6 +1363,7 @@ const Api = {
             return destroy(`/backend/addons/single_page/page/${id}`);
         },
     },
+
 }
 
 export default Api;

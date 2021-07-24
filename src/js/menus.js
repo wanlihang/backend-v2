@@ -76,7 +76,6 @@ export default [{
     key: 'Finance',
     icon: 'icon-icon-money-n',
     children: [
-
         {
             name: 'title.order',
             key: 'Orderlist',
@@ -164,11 +163,15 @@ export default [{
         key: 'DecorationH5',
         permission: 'viewBlock',
     },
-
     {
         name: 'title.singlepage.index',
         key: 'SinglePage',
         permission: 'addons.SinglePage.page.list',
+    },
+    {
+        name: 'title.mp-wechat-menu',
+        key: 'MpWechatMenu',
+        permission: 'mpWechat.menu',
     },
     ],
 },

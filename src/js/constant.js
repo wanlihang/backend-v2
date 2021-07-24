@@ -169,5 +169,6 @@ export default {
         ExamQuestionCreate: 'ExamQuestion',
         ExamQuestionUpdate: 'ExamQuestion',
         ExamQuestionImport: 'ExamQuestion',
+        MpWechatMenu: 'MpWechatMenu'
     }
 }

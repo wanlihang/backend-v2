@@ -2,6 +2,7 @@ import zhLocale from 'element-ui/lib/locale/lang/zh-CN' //引入element语言包
 
 const zh = {
     title: {
+        'mp-wechat-menu': "公众号菜单",
         login: '登录',
         dashboard: '主面板',
         decoration: '装修',
