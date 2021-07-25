@@ -1,12 +1,13 @@
 <template>
   <div class="meedu-main-body">
     <div class="float-left mb-30">
-      <el-button
+      <p-button
+        text="添加"
+        p="addons.Paper.practice.store"
         @click="$router.push({ name: 'ExamPracticeCreate' })"
         type="primary"
       >
-        添加
-      </el-button>
+      </p-button>
     </div>
     <div class="float-left">
       <div class="float-left d-flex">
