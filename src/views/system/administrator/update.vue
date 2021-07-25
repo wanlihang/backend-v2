@@ -17,12 +17,13 @@
               </el-select>
             </div>
             <div class="ml-15">
-              <el-link
+              <p-link
+                text="角色管理"
+                p="administrator_role"
                 type="primary"
                 @click="$router.push({ name: 'SystemAdminroles' })"
               >
-                角色管理
-              </el-link>
+              </p-link>
             </div>
           </div>
         </el-form-item>
