@@ -1,9 +1,12 @@
 <template>
   <div class="meedu-main-body">
     <div class="float-left mb-30">
-      <el-button @click="$router.push({ name: 'ReplyCreate' })" type="primary"
-        >添加规则</el-button
-      >
+      <p-button
+        text="添加规则"
+        p="mpWechatMessageReply.store"
+        @click="$router.push({ name: 'ReplyCreate' })"
+        type="primary"
+      ></p-button>
     </div>
     <div class="float-left" v-loading="loading">
       <el-table :data="messages" stripe class="float-left">
@@ -22,13 +25,16 @@
         </el-table-column>
         <el-table-column fixed="right" label="操作" width="100">
           <template slot-scope="scope">
-            <el-link
+            <p-link
+              text="删除"
+              p="mpWechatMessageReply.destroy"
               style="margin-right: 10px"
               type="danger"
               @click="destory(scope.row.id)"
-              >删除</el-link
-            >
-            <el-link
+            ></p-link>
+            <p-link
+              text="编辑"
+              p="mpWechatMessageReply.update"
               type="primary"
               @click="
                 $router.push({
@@ -36,8 +42,7 @@
                   query: { id: scope.row.id },
                 })
               "
-              >编辑</el-link
-            >
+            ></p-link>
           </template>
         </el-table-column>
       </el-table>
