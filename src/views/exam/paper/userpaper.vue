@@ -22,32 +22,28 @@
           </el-select>
         </div>
         <div class="ml-10">
-          <div class="ml-10">
-            <el-date-picker
-              v-model="filter.created_at"
-              type="daterange"
-              align="right"
-              unlink-panels
-              range-separator="至"
-              start-placeholder="考试开始时间-起始"
-              end-placeholder="考试开始时间-结束"
-            >
-            </el-date-picker>
-          </div>
+          <el-date-picker
+            v-model="filter.created_at"
+            type="daterange"
+            align="right"
+            unlink-panels
+            range-separator="至"
+            start-placeholder="考试开始时间-起始"
+            end-placeholder="考试开始时间-结束"
+          >
+          </el-date-picker>
         </div>
         <div class="ml-10">
-          <div class="ml-10">
-            <el-date-picker
-              v-model="filter.submit_at"
-              type="daterange"
-              align="right"
-              unlink-panels
-              range-separator="至"
-              start-placeholder="交卷时间-起始"
-              end-placeholder="交卷时间-结束"
-            >
-            </el-date-picker>
-          </div>
+          <el-date-picker
+            v-model="filter.submit_at"
+            type="daterange"
+            align="right"
+            unlink-panels
+            range-separator="至"
+            start-placeholder="交卷时间-起始"
+            end-placeholder="交卷时间-结束"
+          >
+          </el-date-picker>
         </div>
       </div>
       <div class="float-left mt-15">

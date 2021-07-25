@@ -4,24 +4,82 @@
     <div class="float-left mb-30">
       <el-button @click="exportXlsx()" type="primary"> 导出成绩 </el-button>
     </div>
+    <div class="float-left mb-30">
+      <div class="float-left d-flex">
+        <div>
+          <el-date-picker
+            v-model="filter.created_at"
+            type="daterange"
+            align="right"
+            unlink-panels
+            range-separator="至"
+            start-placeholder="考试开始时间-起始"
+            end-placeholder="考试开始时间-结束"
+          >
+          </el-date-picker>
+        </div>
+        <div class="ml-10">
+          <el-date-picker
+            v-model="filter.submit_at"
+            type="daterange"
+            align="right"
+            unlink-panels
+            range-separator="至"
+            start-placeholder="交卷时间-起始"
+            end-placeholder="交卷时间-结束"
+          >
+          </el-date-picker>
+        </div>
+        <div class="ml-10">
+          <el-button @click="firstPageLoad()" type="primary" plain>
+            筛选
+          </el-button>
+          <el-button @click="paginationReset()">清空</el-button>
+        </div>
+      </div>
+    </div>
     <div class="float-left">
-      <div>
-        <span>总分:{{ total_score }}</span>
-        <span class="ml-10">及格分:{{ pass_score }}分</span>
-        <span class="ml-10">最低分:{{ stat.min }}分</span>
-        <span class="ml-10">最高分:{{ stat.max }}分</span>
-        <span class="ml-10">平均分:{{ stat.average }}分</span>
-        <span class="ml-10">及格率:{{ stat.pass_rate }}%</span>
-        <span class="ml-10">及格人数:{{ stat.pass_count }}人</span>
-        <span class="ml-10">总人数:{{ total }}人</span>
+      <div class="d-flex stat-box">
+        <div class="flex-1 stat-item">
+          <div class="name">总分</div>
+          <div class="value">{{ total_score }}分</div>
+        </div>
+        <div class="flex-1 stat-item">
+          <div class="name">及格分</div>
+          <div class="value">{{ pass_score }}分</div>
+        </div>
+        <div class="flex-1 stat-item">
+          <div class="name">最低分</div>
+          <div class="value">{{ stat.min }}分</div>
+        </div>
+        <div class="flex-1 stat-item">
+          <div class="name">最高分</div>
+          <div class="value">{{ stat.max }}分</div>
+        </div>
+        <div class="flex-1 stat-item">
+          <div class="name">平均分</div>
+          <div class="value">{{ stat.average }}分</div>
+        </div>
+        <div class="flex-1 stat-item">
+          <div class="name">及格率</div>
+          <div class="value">{{ stat.pass_rate }}%</div>
+        </div>
+        <div class="flex-1 stat-item">
+          <div class="name">及格人数</div>
+          <div class="value">{{ stat.pass_count }}人</div>
+        </div>
+        <div class="flex-1 stat-item">
+          <div class="name">总人数</div>
+          <div class="value">{{ total }}人</div>
+        </div>
       </div>
     </div>
     <div class="float-left mt-30" v-loading="loading">
       <div class="float-left">
         <el-table :data="list" stripe class="float-left">
-          <el-table-column prop="user_id" label="用户ID" width="80">
+          <el-table-column prop="user_id" label="用户ID" width="120">
           </el-table-column>
-          <el-table-column label="用户">
+          <el-table-column label="用户" width="300">
             <template slot-scope="scope">
               <div v-if="users[scope.row.user_id]" class="d-flex">
                 <div>
@@ -49,6 +107,9 @@
               <span class="c-red" v-else>不及格</span>
             </template>
           </el-table-column>
+          <el-table-column label="开始时间" prop="created_at">
+          </el-table-column>
+          <el-table-column label="交卷时间" prop="submit_at"> </el-table-column>
         </el-table>
       </div>
 
@@ -69,7 +130,6 @@
 </template>
 
 <script>
-import Utils from "@/js/utils.js";
 export default {
   data() {
     return {
@@ -77,6 +137,10 @@ export default {
         id: this.$route.query.id,
         page: 1,
         size: 10,
+      },
+      filter: {
+        created_at: null,
+        submit_at: null,
       },
       pass_score: 0,
       total_score: 0,
@@ -101,6 +165,8 @@ export default {
     },
     paginationReset() {
       this.pagination.page = 1;
+      this.filter.created_at = null;
+      this.filter.submit_at = null;
       this.getResults();
     },
     paginationSizeChange(size) {
@@ -111,14 +177,13 @@ export default {
       this.pagination.page = page;
       this.getResults();
     },
-
     getResults() {
       if (this.loading) {
         return;
       }
       this.loading = true;
       let params = {};
-      Object.assign(params, this.pagination);
+      Object.assign(params, this.pagination, this.filter);
       this.$api.Exam.Paper.Stat(this.pagination.id, params).then((res) => {
         this.loading = false;
         this.list = res.data.data;
@@ -135,7 +200,7 @@ export default {
       Object.assign(params, this.pagination);
       this.$api.Exam.Paper.Stat(this.pagination.id, params).then((res) => {
         this.loading = false;
-        let filename = "成绩导出|" + Utils.currentDate() + ".xlsx";
+        let filename = "成绩导出|" + this.$utils.currentDate() + ".xlsx";
         let sheetName = "默认";
 
         let rows = [["用户ID", "用户名", "手机号", "分数", "及格", "时间"]];
@@ -166,9 +231,46 @@ export default {
         rows.push(["及格人数", res.data.stat.pass_count]);
         rows.push(["及格率", res.data.stat.pass_rate + "%"]);
 
-        Utils.exportExcel(rows, filename, sheetName);
+        this.$utils.exportExcel(rows, filename, sheetName);
       });
     },
   },
 };
 </script>
+
+<style lang="less" scoped>
+.stat-box {
+  width: 100%;
+  height: auto;
+  float: left;
+  box-sizing: border-box;
+  padding: 15px;
+  background-color: rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+
+  .stat-item {
+    text-align: center;
+    border-right: 1px solid rgba(0, 0, 0, 0.05);
+
+    &:last-child {
+      border-right: 0;
+    }
+
+    .name {
+      width: 100%;
+      height: auto;
+      float: left;
+      margin-bottom: 30px;
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.5);
+    }
+    .value {
+      width: 100%;
+      height: auto;
+      float: left;
+      font-size: 24px;
+      font-weight: #333;
+    }
+  }
+}
+</style>
