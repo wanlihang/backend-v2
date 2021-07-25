@@ -203,7 +203,7 @@ export default {
         let filename = "成绩导出|" + this.$utils.currentDate() + ".xlsx";
         let sheetName = "默认";
 
-        let rows = [["用户ID", "用户名", "手机号", "分数", "及格", "时间"]];
+        let rows = [["用户ID", "用户名", "账号", "分数", "及格", "时间"]];
         res.data.data.forEach((item) => {
           let user = res.data.users[item.user_id];
           if (typeof user === "undefined") {
@@ -216,7 +216,7 @@ export default {
             item.user_id,
             user.nick_name,
             user.mobile,
-            item.score,
+            item.score + '分',
             isPass,
             item.created_at,
           ]);
@@ -224,11 +224,12 @@ export default {
 
         // 总结
         rows.push(["", "", ""]);
-        rows.push(["最低分", res.data.stat.min]);
-        rows.push(["最高分", res.data.stat.max]);
-        rows.push(["平均分", res.data.stat.average]);
-        rows.push(["总人数", res.data.total]);
-        rows.push(["及格人数", res.data.stat.pass_count]);
+        rows.push(["最低分", res.data.stat.min + "分"]);
+        rows.push(["最高分", res.data.stat.max + "分"]);
+        rows.push(["平均分", res.data.stat.average + "分"]);
+        rows.push(["总人数", res.data.total + "人"]);
+        rows.push(["及格分", res.data.pass_score + "分"]);
+        rows.push(["及格人数", res.data.stat.pass_count + "人"]);
         rows.push(["及格率", res.data.stat.pass_rate + "%"]);
 
         this.$utils.exportExcel(rows, filename, sheetName);

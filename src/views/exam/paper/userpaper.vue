@@ -118,7 +118,7 @@
             width="200"
           >
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="100">
+          <el-table-column fixed="right" label="操作" width="50">
             <template>
               <p-link
                 text="阅卷"
@@ -232,6 +232,7 @@ export default {
         ];
         statusMap.push(...res.data.statusMap);
         this.filterData.statusMap = statusMap;
+
       });
     },
     destory(item) {

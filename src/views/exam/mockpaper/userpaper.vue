@@ -3,20 +3,17 @@
     <back-bar class="mb-30" title="考试记录"></back-bar>
     <div class="float-left mb-30">
       <div class="float-left d-flex">
-        <div class="d-flex">
-          <div class="filter-label">用户ID</div>
-          <div class="flex-1 ml-15">
-            <el-input
-              class="w-200px"
-              v-model="filter.user_id"
-              placeholder="用户ID"
-            ></el-input>
-          </div>
+        <div>
+          <el-input
+            class="w-200px"
+            v-model="filter.user_id"
+            placeholder="用户ID"
+          ></el-input>
         </div>
-        <div class="d-flex ml-10">
+        <div class="ml-10">
           <el-select class="w-200px" placeholder="状态" v-model="filter.status">
             <el-option
-              v-for="(item, index) in filterData.categories"
+              v-for="(item, index) in filterData.statusMap"
               :key="index"
               :label="item.text"
               :value="item.id"
@@ -35,11 +32,18 @@
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
-        <el-table :data="list" stripe class="float-left">
-          <el-table-column prop="id" label="ID" width="80"> </el-table-column>
-          <el-table-column prop="user_id" label="用户ID" width="80">
+        <el-table
+          :data="list"
+          @sort-change="sortChange"
+          :default-sort="{ prop: 'id', order: 'descending' }"
+          stripe
+          class="float-left"
+        >
+          <el-table-column prop="id" sortable label="ID" width="120">
           </el-table-column>
-          <el-table-column label="用户">
+          <el-table-column prop="user_id" sortable label="用户ID" width="120">
+          </el-table-column>
+          <el-table-column label="用户" width="300">
             <template slot-scope="scope">
               <div class="d-flex" v-if="scope.row.user">
                 <div>
@@ -50,22 +54,26 @@
               <span class="c-red" v-else>用户不存在</span>
             </template>
           </el-table-column>
-          <el-table-column label="分数">
+          <el-table-column label="分数" sortable property="get_score">
             <template slot-scope="scope">
-              <span v-if="scope.row.status === 2">{{ scope.row.score }}分</span>
-              <span class="c-red" v-else>未完成</span>
+              <span v-if="scope.row.status === 1"
+                >{{ scope.row.get_score }}分</span
+              >
             </template>
           </el-table-column>
-          <el-table-column label="用时" width="100">
+          <el-table-column
+            label="用时"
+            width="150"
+            sortable
+            property="use_seconds"
+          >
             <template slot-scope="scope">
-              <duration-text
-                v-if="status === 2"
-                :duration="scope.row.expired_seconds"
-              ></duration-text>
-              <span class="c-red" v-else>未完成</span>
+              <duration-text :duration="scope.row.use_seconds"></duration-text>
             </template>
           </el-table-column>
-          <el-table-column prop="status_text" label="状态" width="80">
+          <el-table-column prop="created_at" sortable label="时间" width="200">
+          </el-table-column>
+          <el-table-column prop="status_text" label="状态" width="100">
           </el-table-column>
         </el-table>
       </div>
@@ -99,6 +107,8 @@ export default {
         id: this.$route.query.id,
         page: 1,
         size: 10,
+        sort: "id",
+        order: "desc",
       },
       filter: {
         user_id: "",
@@ -108,7 +118,20 @@ export default {
       loading: false,
       list: [],
       filterData: {
-        categories: [],
+        statusMap: [
+          {
+            id: -1,
+            text: "全部",
+          },
+          {
+            id: 0,
+            text: "未交卷",
+          },
+          {
+            id: 1,
+            text: "已交卷",
+          },
+        ],
       },
     };
   },
@@ -124,6 +147,7 @@ export default {
     paginationReset() {
       this.pagination.page = 1;
       this.filter.user_id = null;
+      this.filter.status = -1;
       this.getResults();
     },
     paginationSizeChange(size) {
@@ -134,24 +158,26 @@ export default {
       this.pagination.page = page;
       this.getResults();
     },
+    sortChange(column) {
+      this.pagination.sort = column.prop;
+      this.pagination.order = column.order === "ascending" ? "asc" : "desc";
+      this.getResults();
+    },
     getResults() {
       if (this.loading) {
         return;
       }
       this.loading = true;
+      this.list = [];
       let params = {};
       Object.assign(params, this.filter, this.pagination);
-      this.$api.Exam.Mockpaper.Userpaper(this.pagination.id, params).then((res) => {
-        this.loading = false;
-        this.list = res.data.data.data;
-        this.total = res.data.data.total;
-        var item={
-          text:'全部',
-          id:-1
+      this.$api.Exam.Mockpaper.Userpaper(this.pagination.id, params).then(
+        (res) => {
+          this.loading = false;
+          this.list = res.data.data;
+          this.total = res.data.total;
         }
-        this.filterData.categories.push(item)
-        this.filterData.categories.push(...res.data.statusMap);
-      });
+      );
     },
     destory(item) {
       this.$confirm("确认操作？", "警告", {

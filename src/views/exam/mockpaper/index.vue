@@ -12,6 +12,14 @@
     <div class="float-left">
       <div class="float-left d-flex">
         <div>
+          <el-input
+            v-model="filter.keywords"
+            class="w-200px"
+            placeholder="关键字"
+          ></el-input>
+        </div>
+
+        <div class="ml-10">
           <el-select
             class="w-200px"
             placeholder="分类"
@@ -44,17 +52,23 @@
           stripe
           class="float-left"
         >
-          <el-table-column prop="id" sortable label="ID" width="120">
+          <el-table-column prop="id" label="ID" width="120"> </el-table-column>
+          <el-table-column prop="category.name" label="分类" width="200">
           </el-table-column>
-          <el-table-column prop="category.name" label="分类" width="150">
+          <el-table-column prop="title" label="标题" width="500">
           </el-table-column>
-          <el-table-column prop="title" label="标题"> </el-table-column>
-          <el-table-column label="时长" width="100">
+          <el-table-column label="分数" width="150">
             <template slot-scope="scope">
-              <span>{{ scope.row.expired_minutes }}m</span>
+              <div>总分：{{ scope.row.score }}分</div>
+              <div class="c-red">及格：{{ scope.row.pass_score }}分</div>
             </template>
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="300">
+          <el-table-column label="时长">
+            <template slot-scope="scope">
+              <span>{{ scope.row.expired_minutes }}分钟</span>
+            </template>
+          </el-table-column>
+          <el-table-column fixed="right" label="操作" width="220">
             <template slot-scope="scope">
               <p-link
                 text="删除"
@@ -75,7 +89,7 @@
                 "
               ></p-link>
               <p-link
-                text="订阅用户"
+                text="用户"
                 p="addons.Paper.mock_paper.users"
                 type="primary"
                 class="ml-5"
@@ -87,7 +101,7 @@
                 "
               ></p-link>
               <p-link
-                text="分数统计"
+                text="统计"
                 p="addons.Paper.mock_paper.statistics"
                 type="primary"
                 class="ml-5"
@@ -142,6 +156,7 @@ export default {
         order: "desc",
       },
       filter: {
+        keywords: null,
         category_id: null,
       },
       total: 0,
@@ -169,6 +184,7 @@ export default {
     },
     paginationReset() {
       this.pagination.page = 1;
+      this.filter.keywords = null;
       this.filter.category_id = null;
       this.getResults();
     },

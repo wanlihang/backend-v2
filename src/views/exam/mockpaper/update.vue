@@ -2,13 +2,13 @@
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="编辑模拟试卷"></back-bar>
 
-    <div class="float-left">
+    <div class="float-left" v-if="addform">
       <el-form ref="form" :model="addform" :rules="rules" label-width="200px">
         <el-form-item label="标题" prop="title">
           <el-input
             v-model="addform.title"
             placeholder="试卷标题"
-            class="w-100"
+            class="w-600px"
           ></el-input>
         </el-form-item>
 
@@ -28,7 +28,7 @@
             <div class="ml-15">
               <el-link
                 type="primary"
-                @click="$router.push({ name: 'MockpaperCategories' })"
+                @click="$router.push({ name: 'PaperCategories' })"
               >
                 分类管理
               </el-link>
@@ -44,99 +44,168 @@
             class="w-200px"
           ></el-input>
         </el-form-item>
-        <el-form-item>
-          <span slot="label">
-            <form-label
-              text="仅邀请"
-              helper="只有在后台添加的用户才可以参与考试。该使用场景如：老师指定的一批学生科参与考试。"
-            ></form-label>
-          </span>
-          <el-switch
-            v-model="addform.is_invite"
-            :active-value="1"
-            :inactive-value="0"
+
+        <el-form-item label="仅邀请" prop="is_invite">
+          <div class="d-flex">
+            <div>
+              <el-switch
+                v-model="addform.is_invite"
+                :active-value="1"
+                :inactive-value="0"
+              >
+              </el-switch>
+            </div>
+            <div class="ml-10">
+              <helper-text
+                text="开启仅邀请的话，只有后台添加的用户可以参与考试"
+              ></helper-text>
+            </div>
+          </div>
+        </el-form-item>
+
+        <template v-if="addform.is_invite === 0">
+          <el-form-item label="价格" prop="charge">
+            <div class="d-flex">
+              <div>
+                <el-input
+                  type="number"
+                  v-model="addform.charge"
+                  class="w-200px"
+                ></el-input>
+              </div>
+              <div class="ml-10">
+                <helper-text
+                  text="请输入整数。不支持小数。价格大于0则意味着用户可以购买试卷参与。价格为0意味着禁止购买。"
+                ></helper-text>
+              </div>
+            </div>
+          </el-form-item>
+
+          <el-form-item
+            label="VIP免费"
+            prop="is_vip_free"
+            v-if="addform.charge > 0"
           >
-          </el-switch>
-        </el-form-item>
-        <el-form-item v-if="addform.is_invite === 0" prop="charge">
-          <span slot="label">
-            <form-label
-              text="价格"
-              helper="价格大于0的话用户可以购买此试卷参与考试，价格为0的话则为免费"
-            ></form-label>
-          </span>
-          <el-input
-            type="number"
-            v-model="addform.charge"
-            class="w-200px"
-          ></el-input>
-        </el-form-item>
-        <el-form-item v-if="addform.charge > 0" prop="is_vip_free">
-          <span slot="label">
-            <form-label text="VIP免费"></form-label>
-          </span>
-          <el-switch
-            v-model="addform.is_vip_free"
-            :active-value="1"
-            :inactive-value="0"
-          >
-          </el-switch>
-        </el-form-item>
-        <el-form-item>
-          <span slot="label">
-            <form-label text="随机试题分类范围"></form-label>
-          </span>
-          <el-select multiple v-model="addform.rule.category_ids">
-            <el-option
-              v-for="(item, index) in courses"
-              :key="index"
-              :label="item.name"
-              :value="item.id"
-            >
-            </el-option>
-          </el-select>
+            <div class="d-flex">
+              <div>
+                <el-switch
+                  v-model="addform.is_vip_free"
+                  :active-value="1"
+                  :inactive-value="0"
+                >
+                </el-switch>
+              </div>
+              <div class="ml-10">
+                <helper-text
+                  text="设置VIP免费的话，则VIP会员用户可以无需购买直接参与考试。"
+                ></helper-text>
+              </div>
+            </div>
+          </el-form-item>
+        </template>
+
+        <el-form-item label="试题随机范围">
+          <div class="d-flex">
+            <div>
+              <el-select
+                class="w-400px"
+                multiple
+                v-model="addform.rule.category_ids"
+              >
+                <el-option
+                  v-for="(item, index) in courses"
+                  :key="index"
+                  :label="item.name"
+                  :value="item.id"
+                >
+                </el-option>
+              </el-select>
+            </div>
+          </div>
         </el-form-item>
         <el-form-item label="单选题数量">
-          <el-input
-            type="number"
-            v-model="addform.rule.num.choice"
-            class="w-200px"
-          ></el-input>
+          <div class="d-flex">
+            <div>
+              <el-input
+                type="number"
+                v-model="addform.rule.num.choice"
+                class="w-200px"
+              ></el-input>
+            </div>
+            <div class="ml-10">
+              <helper-text text="每次考试抽出的单选题数量"></helper-text>
+            </div>
+          </div>
         </el-form-item>
         <el-form-item label="多选题数量">
-          <el-input
-            type="number"
-            v-model="addform.rule.num.select"
-            class="w-200px"
-          ></el-input>
+          <div class="d-flex">
+            <div>
+              <el-input
+                type="number"
+                v-model="addform.rule.num.select"
+                class="w-200px"
+              ></el-input>
+            </div>
+            <div class="ml-10">
+              <helper-text text="每次考试抽出的多选题数量"></helper-text>
+            </div>
+          </div>
         </el-form-item>
         <el-form-item label="填空题数量">
-          <el-input
-            type="number"
-            v-model="addform.rule.num.input"
-            class="w-200px"
-          ></el-input>
+          <div class="d-flex">
+            <div>
+              <el-input
+                type="number"
+                v-model="addform.rule.num.input"
+                class="w-200px"
+              ></el-input>
+            </div>
+            <div class="ml-10">
+              <helper-text text="每次考试抽出填空题数量"></helper-text>
+            </div>
+          </div>
         </el-form-item>
         <el-form-item label="问答题数量">
-          <el-input
-            type="number"
-            v-model="addform.rule.num.qa"
-            class="w-200px"
-          ></el-input>
+          <div class="d-flex">
+            <div>
+              <el-input
+                type="number"
+                v-model="addform.rule.num.qa"
+                class="w-200px"
+              ></el-input>
+            </div>
+            <div class="ml-10">
+              <helper-text text="每次考试抽出的问答题数量"></helper-text>
+            </div>
+          </div>
         </el-form-item>
         <el-form-item label="判断题数量">
-          <el-input
-            type="number"
-            v-model="addform.rule.num.judge"
-            class="w-200px"
-          ></el-input>
+          <div class="d-flex">
+            <div>
+              <el-input
+                type="number"
+                v-model="addform.rule.num.judge"
+                class="w-200px"
+              ></el-input>
+            </div>
+            <div class="ml-10">
+              <helper-text text="每次考试抽出的判断题数量"></helper-text>
+            </div>
+          </div>
         </el-form-item>
         <el-form-item label="题帽题数量">
-          <el-input
-            type="number"
-            v-model="addform.rule.num.cap"
-            class="w-200px"
-          ></el-input>
+          <div class="d-flex">
+            <div>
+              <el-input
+                type="number"
+                v-model="addform.rule.num.cap"
+                class="w-200px"
+              ></el-input>
+            </div>
+            <div class="ml-10">
+              <helper-text text="每次考试抽出的题帽题数量"></helper-text>
+            </div>
+          </div>
         </el-form-item>
       </el-form>
     </div>
@@ -159,28 +228,8 @@
 export default {
   data() {
     return {
-      addform: {
-        id: this.$route.query.id,
-        pass_score: null,
-        thumb: null,
-        title: null,
-        is_vip_free: null,
-        expired_minutes: null,
-        is_invite: null,
-        charge: 0,
-        category_id: null,
-        rule: {
-          category_ids: [],
-          num: {
-            choice: 0,
-            select: 0,
-            input: 0,
-            qa: 0,
-            judge: 0,
-            cap: 0,
-          },
-        },
-      },
+      id: this.$route.query.id,
+      addform: null,
       rules: {
         title: [
           {
@@ -196,26 +245,10 @@ export default {
             trigger: "blur",
           },
         ],
-
         expired_minutes: [
           {
             required: true,
             message: "时间不能为空",
-            trigger: "blur",
-          },
-        ],
-
-        charge: [
-          {
-            required: true,
-            message: "价格不能为空",
-            trigger: "blur",
-          },
-        ],
-        is_vip_free: [
-          {
-            required: true,
-            message: "请选择是否会员免费",
             trigger: "blur",
           },
         ],
@@ -237,9 +270,11 @@ export default {
       });
     },
     detail() {
-      this.$api.Exam.Mockpaper.Detail(this.addform.id).then((res) => {
-        this.addform = res.data;
-        this.addform.rule = JSON.parse(res.data.rule);
+      this.$api.Exam.Mockpaper.Detail(this.id).then((res) => {
+        let data = res.data;
+        data.rule = JSON.parse(data.rule);
+
+        this.addform = data;
       });
     },
     formValidate() {
@@ -254,8 +289,11 @@ export default {
         return;
       }
       this.loading = true;
-      this.addform.rule = JSON.stringify(this.addform.rule);
-      this.$api.Exam.Mockpaper.Update(this.addform.id, this.addform)
+      let data = {};
+      Object.assign(data, this.addform);
+      data.rule = JSON.stringify(data.rule);
+
+      this.$api.Exam.Mockpaper.Update(this.id, data)
         .then(() => {
           this.$message.success(this.$t("common.success"));
           this.$router.back();

@@ -1258,30 +1258,6 @@ const routes = [{
     }
   },
   {
-    path: '/exam/mockpaper/category/index',
-    component: () => import('@/views/exam/mockpaper/category/index'),
-    name: 'MockpaperCategories',
-    meta: {
-      title: 'title.exam.mockpaper.category.index'
-    }
-  },
-  {
-    path: '/exam/mockpaper/category/create',
-    component: () => import('@/views/exam/mockpaper/category/create'),
-    name: 'MockpaperCategoriesCreate',
-    meta: {
-      title: 'title.exam.mockpaper.category.create'
-    }
-  },
-  {
-    path: '/exam/mockpaper/category/update',
-    component: () => import('@/views/exam/mockpaper/category/update'),
-    name: 'MockpaperCategoriesUpdate',
-    meta: {
-      title: 'title.exam.mockpaper.category.update'
-    }
-  },
-  {
     path: '/exam/mockpaper/user',
     component: () => import('@/views/exam/mockpaper/user'),
     name: 'MockpaperUser',
