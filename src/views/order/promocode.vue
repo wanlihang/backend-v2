@@ -1,19 +1,34 @@
 <template>
   <div class="meedu-main-body">
     <div class="float-left mb-30">
-      <el-button @click="destorymulti()" type="danger"> 批量删除 </el-button>
-      <el-button @click="$router.push({ name: 'Createcode' })" type="primary">
-        添加
-      </el-button>
-      <el-button @click="$router.push({ name: 'CodeImport' })" type="primary">
-        批量导入
-      </el-button>
-      <el-button
+      <p-button
+        text="批量删除"
+        p="promoCode.destroy.multi"
+        @click="destorymulti()"
+        type="danger"
+      >
+      </p-button>
+      <p-button
+        text="添加"
+        p="promoCode.store"
+        @click="$router.push({ name: 'Createcode' })"
+        type="primary"
+      >
+      </p-button>
+      <p-button
+        text="批量导入"
+        p="promoCode.import"
+        @click="$router.push({ name: 'CodeImport' })"
+        type="primary"
+      >
+      </p-button>
+      <p-button
+        text="批量生成"
+        p="promoCode.generator"
         @click="$router.push({ name: 'CreateMulticode' })"
         type="primary"
       >
-        批量生成
-      </el-button>
+      </p-button>
     </div>
     <div class="float-left">
       <div class="float-left d-flex">
