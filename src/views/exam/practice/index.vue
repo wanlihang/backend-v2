@@ -27,14 +27,11 @@
           </el-select>
         </div>
         <div class="d-flex ml-10">
-          <!-- <div class="filter-label">搜索</div> -->
-          <div class="flex-1 ml-15">
-            <el-input
-              class="w-200px"
-              v-model="filter.key"
-              placeholder="搜索"
-            ></el-input>
-          </div>
+          <el-input
+            class="w-200px"
+            v-model="filter.key"
+            placeholder="搜索"
+          ></el-input>
         </div>
         <div class="ml-10">
           <el-button @click="firstPageLoad()" type="primary" plain>
@@ -44,6 +41,7 @@
         </div>
       </div>
     </div>
+
     <div class="float-left mt-30" v-loading="loading">
       <div class="float-left">
         <el-table
@@ -55,15 +53,18 @@
         >
           <el-table-column prop="id" sortable label="ID" width="120">
           </el-table-column>
-          <el-table-column prop="category.name" label="分类" width="150">
+          <el-table-column prop="category.name" label="分类" width="200">
           </el-table-column>
-          <el-table-column prop="name" label="练习名"> </el-table-column>
-          <el-table-column label="题目数" width="100">
+          <el-table-column prop="name" label="练习名" width="500">
+          </el-table-column>
+          <el-table-column label="题目数">
             <template slot-scope="scope">
               <span>{{ scope.row.question_count }}个</span>
             </template>
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="300">
+          <el-table-column prop="created_at" label="创建" width="200">
+          </el-table-column>
+          <el-table-column fixed="right" label="操作" width="200">
             <template slot-scope="scope">
               <p-link
                 text="删除"
@@ -96,7 +97,7 @@
                 "
               ></p-link>
               <p-link
-                text="参与用户"
+                text="用户"
                 p="addons.Paper.practice.users"
                 type="primary"
                 class="ml-5"

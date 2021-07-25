@@ -20,7 +20,7 @@
             <div class="ml-15">
               <el-link
                 type="primary"
-                @click="$router.push({ name: 'PracticeCategories' })"
+                @click="$router.push({ name: 'PaperCategories' })"
               >
                 分类管理
               </el-link>
@@ -28,50 +28,68 @@
           </div>
         </el-form-item>
         <el-form-item label="练习名" prop="name">
-          <el-input v-model="addform.name" class="w-100"></el-input>
+          <el-input v-model="addform.name" class="w-600px"></el-input>
         </el-form-item>
 
-        <el-form-item>
-          <span slot="label">
-            <form-label
-              text="免费"
-              helper="所有人都可以参与考试。"
-            ></form-label>
-          </span>
-          <el-switch
-            v-model="addform.is_free"
-            :active-value="1"
-            :inactive-value="0"
+        <el-form-item label="免费" prop="is_free">
+          <div class="d-flex">
+            <div>
+              <el-switch
+                v-model="addform.is_free"
+                :active-value="1"
+                :inactive-value="0"
+              >
+              </el-switch>
+            </div>
+            <div class="ml-10">
+              <helper-text
+                text="开启免费的话所有用户都可直接参与练习。"
+              ></helper-text>
+            </div>
+          </div>
+        </el-form-item>
+
+        <template v-if="addform.is_free === 0">
+          <el-form-item label="价格" prop="charge">
+            <div class="d-flex">
+              <div>
+                <el-input
+                  type="number"
+                  placeholder="价格"
+                  v-model="addform.charge"
+                  class="w-200px"
+                ></el-input>
+              </div>
+              <div class="ml-10">
+                <helper-text
+                  text="请输入整数。不支持小数。价格大于0意味着用户需要购买之后才能参与练习。价格为0即禁止购买。"
+                ></helper-text>
+              </div>
+            </div>
+          </el-form-item>
+
+          <el-form-item
+            label="VIP免费"
+            prop="is_vip_free"
+            v-if="addform.charge > 0"
           >
-          </el-switch>
-        </el-form-item>
-        <el-form-item v-if="addform.is_free === 0">
-          <span slot="label">
-            <form-label
-              text="会员可参与"
-              helper="VIP用户可直接参与考试。"
-            ></form-label>
-          </span>
-          <el-switch
-            v-model="addform.is_vip_free"
-            :active-value="1"
-            :inactive-value="0"
-          >
-          </el-switch>
-        </el-form-item>
-        <el-form-item v-if="addform.is_free === 0">
-          <span slot="label">
-            <form-label
-              text="价格"
-              helper="价格大于0的话用户可以购买此练习参与练习，价格为0的话则禁止通过购买参与"
-            ></form-label>
-          </span>
-          <el-input
-            type="number"
-            v-model="addform.charge"
-            class="w-200px"
-          ></el-input>
-        </el-form-item>
+            <div class="d-flex">
+              <div>
+                <el-switch
+                  v-model="addform.is_vip_free"
+                  :active-value="1"
+                  :inactive-value="0"
+                >
+                </el-switch>
+              </div>
+              <div class="ml-10">
+                <helper-text
+                  text="开启VIP会员免费的话，VIP用户将直接参与练习。"
+                ></helper-text>
+              </div>
+            </div>
+          </el-form-item>
+        </template>
       </el-form>
     </div>
 
@@ -96,8 +114,8 @@ export default {
       addform: {
         thumb: null,
         name: null,
-        is_vip_free: null,
-        is_free: null,
+        is_vip_free: 0,
+        is_free: 0,
         charge: null,
         category_id: null,
       },

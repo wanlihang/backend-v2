@@ -1170,30 +1170,6 @@ const routes = [{
     }
   },
   {
-    path: '/exam/practice/category/index',
-    component: () => import('@/views/exam/practice/category/index'),
-    name: 'PracticeCategories',
-    meta: {
-      title: 'title.exam.practice.category.index'
-    }
-  },
-  {
-    path: '/exam/practice/category/create',
-    component: () => import('@/views/exam/practice/category/create'),
-    name: 'PracticeCategoriesCreate',
-    meta: {
-      title: 'title.exam.practice.category.create'
-    }
-  },
-  {
-    path: '/exam/practice/category/update',
-    component: () => import('@/views/exam/practice/category/update'),
-    name: 'PracticeCategoriesUpdate',
-    meta: {
-      title: 'title.exam.practice.category.update'
-    }
-  },
-  {
     path: '/exam/practice/chapter/index',
     component: () => import('@/views/exam/practice/chapter/index'),
     name: 'PracticeChapter',
