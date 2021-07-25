@@ -1281,7 +1281,7 @@ const Api = {
             Progress(id, ids) {
                 return get(`/backend/addons/Paper/practice/${id}/user/${ids}/progress`);
             },
-            DestoryUser(id, params) {
+            DestroyUser(id, params) {
                 return post(`/backend/addons/Paper/practice/${id}/user/delete`, params);
             },
 

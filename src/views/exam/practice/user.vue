@@ -12,9 +12,9 @@
     <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table :data="results" stripe class="float-left">
-          <el-table-column prop="user_id" label="用户ID" width="80">
+          <el-table-column prop="user_id" label="用户ID" width="120">
           </el-table-column>
-          <el-table-column label="用户">
+          <el-table-column label="用户" width="300">
             <template slot-scope="scope">
               <div class="d-flex" v-if="scope.row.user">
                 <div>
@@ -25,30 +25,38 @@
               <span class="c-red" v-else>用户不存在</span>
             </template>
           </el-table-column>
-          <el-table-column label="已练习" width="100">
+          <el-table-column label="已练习" width="200">
             <template slot-scope="scope">
-              <span>{{ scope.row.submit_count }}题</span>
+              <div>总试题：{{ questionCount }}题</div>
+              <div class="c-red" v-if="practiceProgress[scope.row.user_id]">
+                已练习：{{ practiceProgress[scope.row.user_id].submit_count }}题
+              </div>
+              <div class="c-red" v-else>已练习：0题</div>
             </template>
           </el-table-column>
-          <el-table-column label="练习进度" width="150">
+          <el-table-column label="练习进度">
             <template slot-scope="scope">
-              <span
-                >{{
-                  ((scope.row.submit_count * 100) / question_count).toFixed(2)
-                }}%</span
-              >
+              <div v-if="practiceProgress[scope.row.user_id]">
+                {{
+                  (
+                    (practiceProgress[scope.row.user_id].submit_count * 100) /
+                    questionCount
+                  ).toFixed(2)
+                }}%
+              </div>
+              <div v-else>0%</div>
             </template>
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="200">
+          <el-table-column fixed="right" label="操作" width="100">
             <template slot-scope="scope">
               <p-link
                 text="删除"
                 p="addons.Paper.practice.user.delete"
                 type="danger"
-                @click="destory(scope.row.user_id)"
+                @click="destroy(scope.row.user_id)"
               ></p-link>
               <p-link
-                text="练习进度"
+                text="详细"
                 p="addons.Paper.practice.user.progress"
                 type="primary"
                 class="ml-5"
@@ -86,7 +94,6 @@
 
 <script>
 import UserAddComp from "@/components/user-add";
-import Utils from "@/js/utils.js";
 
 export default {
   components: {
@@ -101,10 +108,11 @@ export default {
         id: this.$route.query.id,
       },
       total: 0,
-      question_count: null,
+      questionCount: 0,
       loading: false,
       results: [],
-      electedRows: null,
+      practiceProgress: [],
+      selectedRows: null,
     };
   },
 
@@ -139,10 +147,11 @@ export default {
         this.loading = false;
         this.results = res.data.data.data;
         this.total = res.data.data.total;
-        this.question_count = res.data.question_count;
+        this.questionCount = res.data.question_count;
+        this.practiceProgress = res.data.progress;
       });
     },
-    destory(item) {
+    destroy(item) {
       this.$confirm("确认操作？", "警告", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -158,7 +167,7 @@ export default {
             id: this.pagination.id,
             user_id: item,
           };
-          this.$api.Exam.Practice.DestoryUser(this.pagination.id, params)
+          this.$api.Exam.Practice.DestroyUser(this.pagination.id, params)
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));
@@ -196,8 +205,7 @@ export default {
       this.loading = true;
       this.$api.Exam.Practice.User(this.pagination.id, {
         page: 1,
-        size: 20000,
-        id: this.pagination.id,
+        size: this.total,
       }).then((resp) => {
         this.loading = false;
 
@@ -209,31 +217,40 @@ export default {
 
         let data = resp.data.data.data;
         let questionCount = resp.data.question_count;
+        let practiceProgress = resp.data.progress;
 
-        let filename = "练习进度|" + Utils.currentDate() + ".xlsx";
+        let filename = "练习进度|" + this.$utils.currentDate() + ".xlsx";
         let sheetName = "sheet1";
 
-        let rows = [["用户ID", "用户名", "手机号", "已练习题目数", "进度"]];
+        let rows = [
+          ["用户ID", "用户名", "手机号", "总题目数", "已练习题目数", "进度"],
+        ];
         data.forEach((item) => {
           if (!item.user) {
             return;
           }
 
-          let p =
-            questionCount === 0
-              ? 0
-              : ((item.submit_count / questionCount) * 100).toFixed(2);
+          let p = 0;
+          if (questionCount > 0 && practiceProgress[item.user_id]) {
+            p = (
+              (practiceProgress[item.user_id].submit_count / questionCount) *
+              100
+            ).toFixed(2);
+          }
 
           rows.push([
             item.user_id,
             item.user.nick_name,
             item.user.mobile,
-            item.submit_count,
+            questionCount,
+            practiceProgress[item.user_id]
+              ? practiceProgress[item.user_id].submit_count
+              : 0,
             p + "%",
           ]);
         });
 
-        Utils.exportExcel(rows, filename, sheetName);
+        this.$utils.exportExcel(rows, filename, sheetName);
       });
     },
   },
