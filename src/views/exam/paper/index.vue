@@ -1,12 +1,13 @@
 <template>
   <div class="meedu-main-body">
     <div class="float-left mb-30">
-      <el-button
+      <p-button
+        text="添加"
+        p="addons.Paper.paper.store"
         @click="$router.push({ name: 'ExamPaperCreate' })"
         type="primary"
       >
-        添加
-      </el-button>
+      </p-button>
     </div>
     <div class="float-left">
       <div class="float-left d-flex">
@@ -69,10 +70,15 @@
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="270">
             <template slot-scope="scope">
-              <el-link type="danger" @click="destroy(scope.row.id)"
-                >删除</el-link
-              >
-              <el-link
+              <p-link
+                text="删除"
+                p="addons.Paper.paper.delete"
+                type="danger"
+                @click="destory(scope.row.id)"
+              ></p-link>
+              <p-link
+                text="编辑"
+                p="addons.Paper.paper.update"
                 type="primary"
                 class="ml-5"
                 @click="
@@ -81,9 +87,10 @@
                     query: { id: scope.row.id },
                   })
                 "
-                >编辑</el-link
-              >
-              <el-link
+              ></p-link>
+              <p-link
+                text="试题"
+                p="addons.Paper.paper.questions.list"
                 type="primary"
                 class="ml-5"
                 @click="
@@ -92,9 +99,11 @@
                     query: { id: scope.row.id },
                   })
                 "
-                >题目</el-link
-              >
-              <el-link
+
+              ></p-link>
+              <p-link
+                text="用户"
+                p="addons.Paper.paper.users"
                 type="primary"
                 class="ml-5"
                 @click="
@@ -103,9 +112,10 @@
                     query: { id: scope.row.id },
                   })
                 "
-                >用户</el-link
-              >
-              <el-link
+              ></p-link>
+              <p-link
+                text="统计"
+                p="addons.Paper.paper.statistics"
                 type="primary"
                 class="ml-5"
                 @click="
@@ -114,9 +124,10 @@
                     query: { id: scope.row.id },
                   })
                 "
-                >统计</el-link
-              >
-              <el-link
+              ></p-link>
+              <p-link
+                text="考试记录"
+                p="addons.Paper.paper.userPaper"
                 type="primary"
                 class="ml-5"
                 @click="
@@ -125,8 +136,7 @@
                     query: { id: scope.row.id },
                   })
                 "
-                >考试记录</el-link
-              >
+              ></p-link>
             </template>
           </el-table-column>
         </el-table>

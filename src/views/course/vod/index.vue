@@ -1,9 +1,13 @@
 <template>
   <div class="meedu-main-body">
     <div class="float-left mb-30">
-      <el-button @click="$router.push({ name: 'VodCreate' })" type="primary">
-        添加
-      </el-button>
+      <p-button
+        text="添加"
+        p="addons.Zhibo.course.store"
+        @click="$router.push({ name: 'VodCreate' })"
+        type="primary"
+      >
+      </p-button>
 
       <el-button @click="$router.push({ name: 'VodImport' })" type="primary">
         视频批量导入
@@ -107,7 +111,9 @@
               >
                 查看
               </el-link>
-              <el-link
+              <p-link
+                text="视频"
+                p="addons.Zhibo.course_video.list"
                 type="primary"
                 class="ml-5"
                 @click="
@@ -117,8 +123,7 @@
                   })
                 "
               >
-                视频
-              </el-link>
+              </p-link>
               <el-link
                 type="primary"
                 class="ml-5"
@@ -131,7 +136,9 @@
               >
                 附件
               </el-link>
-              <el-link
+              <p-link
+                text="编辑"
+                p="addons.Zhibo.course.update"
                 type="primary"
                 class="ml-5"
                 @click="
@@ -141,15 +148,15 @@
                   })
                 "
               >
-                编辑
-              </el-link>
-              <el-link
+              </p-link>
+              <p-link
+                text="删除"
+                p="addons.Zhibo.course.delete"
                 class="ml-5"
                 type="danger"
                 @click="destory(scope.row.id)"
               >
-                删除
-              </el-link>
+              </p-link>
             </template>
           </el-table-column>
         </el-table>

@@ -1,11 +1,12 @@
 <template>
   <div class="meedu-main-body">
     <div class="float-left mb-30">
-      <el-button
+      <p-button
+        text="添加"
+        p="administrator.store"
         @click="$router.push({ name: 'AdministratorCreate' })"
         type="primary"
-        >添加</el-button
-      >
+      ></p-button>
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
@@ -39,13 +40,16 @@
 
           <el-table-column fixed="right" label="操作" width="120">
             <template slot-scope="scope">
-              <el-link
+              <p-link
+                text="删除"
+                p="administrator.destroy"
                 style="margin-right: 10px"
                 type="danger"
                 @click="destory(scope.row.id)"
-                >删除</el-link
-              >
-              <el-link
+              ></p-link>
+              <p-link
+                text="编辑"
+                p="administrator.update"
                 type="primary"
                 @click="
                   $router.push({
@@ -53,14 +57,13 @@
                     query: { id: scope.row.id },
                   })
                 "
-                >编辑</el-link
-              >
+              ></p-link>
             </template>
           </el-table-column>
         </el-table>
       </div>
 
-      <div  class="float-left mt-30 text-center">
+      <div class="float-left mt-30 text-center">
         <el-pagination
           @size-change="paginationSizeChange"
           @current-change="paginationPageChange"

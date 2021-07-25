@@ -2,7 +2,9 @@
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="已关联课程"></back-bar>
     <div class="float-left mb-30">
-      <el-button
+      <p-button
+        text="添加"
+        p="addons.learnPaths.relation.store"
         @click="
           $router.push({
             name: 'SteprelationCreate',
@@ -11,8 +13,7 @@
         "
         type="primary"
       >
-        添加
-      </el-button>
+      </p-button>
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
@@ -41,10 +42,15 @@
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="120">
             <template slot-scope="scope">
-              <el-link type="danger" @click="destory(scope.row.id)"
-                >删除</el-link
-              >
-              <el-link
+              <p-link
+                text="删除"
+                p="addons.learnPaths.relation.update"
+                type="danger"
+                @click="destory(scope.row.id)"
+              ></p-link>
+              <p-link
+                text="编辑"
+                p="addons.learnPaths.relation.delete"
                 type="primary"
                 class="ml-5"
                 @click="
@@ -53,8 +59,7 @@
                     query: { id: scope.row.id },
                   })
                 "
-                >编辑</el-link
-              >
+              ></p-link>
             </template>
           </el-table-column>
         </el-table>

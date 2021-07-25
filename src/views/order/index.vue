@@ -106,7 +106,9 @@
         </el-table-column>
         <el-table-column label="操作" fixed="right" :width="80">
           <template slot-scope="scope">
-            <el-link
+            <p-link
+              text="查看"
+              p="order.detail"
               @click="
                 $router.push({
                   name: 'OrderDetail',
@@ -114,8 +116,7 @@
                 })
               "
               type="primary"
-              >查看</el-link
-            >
+            ></p-link>
           </template>
         </el-table-column>
       </el-table>
@@ -249,7 +250,7 @@ export default {
 
         this.loading = false;
       });
-    }
+    },
   },
 };
 </script>

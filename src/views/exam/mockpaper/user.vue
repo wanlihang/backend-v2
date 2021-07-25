@@ -2,7 +2,11 @@
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="订阅用户"></back-bar>
     <div class="float-left mb-30">
-      <el-button @click="showUserAddWin = true">添加用户</el-button>
+      <p-button
+        text="添加用户"
+        p="addons.Paper.mock_paper.addUser"
+        @click="showUserAddWin = true"
+      ></p-button>
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
@@ -27,9 +31,12 @@
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="200">
             <template slot-scope="scope">
-              <el-link type="danger" @click="destory(scope.row.user_id)"
-                >删除</el-link
-              >
+              <p-link
+                text="删除"
+                p="addons.Paper.mock_paper.delUser"
+                type="danger"
+                @click="destory(scope.row.user_id)"
+              ></p-link>
             </template>
           </el-table-column>
         </el-table>

@@ -1,8 +1,16 @@
 <template>
   <div class="meedu-main-body">
     <div class="float-left mb-30">
-      <el-button @click="destorymulti()" type="danger"> 批量删除 </el-button>
-      <el-button
+      <p-button
+        text="批量删除"
+        p="addons.Paper.question.delete"
+        @click="destorymulti()"
+        type="danger"
+      >
+      </p-button>
+      <p-button
+        text="添加试题"
+        p="addons.Paper.question.store"
         @click="
           $router.push({
             name: 'ExamQuestionCreate',
@@ -10,9 +18,10 @@
         "
         type="primary"
       >
-        添加试题
-      </el-button>
-      <el-button
+      </p-button>
+      <p-button
+        text="批量导入试题"
+        p="addons.Paper.question.import.csv"
         @click="
           $router.push({
             name: 'ExamQuestionImport',
@@ -20,8 +29,7 @@
         "
         type="primary"
       >
-        批量导入试题
-      </el-button>
+      </p-button>
     </div>
     <div class="float-left">
       <div class="float-left d-flex">
@@ -93,7 +101,9 @@
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="80">
             <template slot-scope="scope">
-              <el-link
+              <p-link
+                text="编辑"
+                p="addons.Paper.question.update"
                 type="primary"
                 class="ml-5"
                 @click="
@@ -102,8 +112,7 @@
                     query: { id: scope.row.id },
                   })
                 "
-                >编辑</el-link
-              >
+              ></p-link>
             </template>
           </el-table-column>
         </el-table>

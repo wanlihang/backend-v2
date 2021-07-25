@@ -1,16 +1,21 @@
 <template>
   <div class="meedu-main-body">
     <div class="float-left mb-30">
-      <el-button @click="$router.push({ name: 'MemberCreate' })" type="primary">
-        创建用户
-      </el-button>
-      <el-button
+      <p-button
+        text="创建用户"
+        p="member.store"
+        @click="$router.push({ name: 'MemberCreate' })"
+        type="primary"
+      >
+      </p-button>
+      <p-button
+        text="批量导入"
+        p="member.import"
         @click="$router.push({ name: 'MemberImport' })"
         type="primary"
         class="ml-15"
       >
-        批量导入
-      </el-button>
+      </p-button>
     </div>
     <div class="float-left">
       <div class="float-left d-flex">
@@ -132,7 +137,12 @@
 
           <el-table-column fixed="right" label="操作" width="80">
             <template slot-scope="scope">
-              <el-link type="primary" @click="detail(scope.row)">查看</el-link>
+              <p-link
+                text="查看"
+                p="member.detail"
+                type="primary"
+                @click="detail(scope.row)"
+              ></p-link>
             </template>
           </el-table-column>
         </el-table>

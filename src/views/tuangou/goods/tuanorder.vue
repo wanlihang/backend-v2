@@ -33,12 +33,13 @@
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="100">
             <template slot-scope="scope">
-              <el-link
+              <p-link
+                text="改为已完成"
+                p="addons.TuanGou.goods.complete"
                 v-if="scope.row.status != 1"
                 type="danger"
                 @click="handle(scope.row.id)"
-                >改为已完成</el-link
-              >
+              ></p-link>
             </template>
           </el-table-column>
         </el-table>

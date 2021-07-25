@@ -2,7 +2,9 @@
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="练习章节"></back-bar>
     <div class="float-left mb-30">
-      <el-button
+      <p-button
+        text="添加"
+        p="addons.Paper.practice_chapter.store"
         @click="
           $router.push({
             name: 'PracticeChapterCreate',
@@ -11,9 +13,14 @@
         "
         type="primary"
       >
-        添加
-      </el-button>
-      <el-button @click="destorymulti()" type="danger"> 批量删除 </el-button>
+      </p-button>
+      <p-button
+        text="批量删除"
+        p="addons.Paper.practice_chapter.delete"
+        @click="destorymulti()"
+        type="danger"
+      >
+      </p-button>
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
@@ -35,7 +42,9 @@
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="150">
             <template slot-scope="scope">
-              <el-link
+              <p-link
+                text="编辑"
+                p="addons.Paper.practice_chapter.update"
                 type="primary"
                 @click="
                   $router.push({
@@ -43,19 +52,19 @@
                     query: { id: scope.row.id, pid: id },
                   })
                 "
-                >编辑</el-link
-              >
-              <el-link
+              ></p-link>
+              <p-link
+                text="试题"
+                p="addons.Paper.practice_chapter.questions"
                 type="primary"
                 class="ml-5"
                 @click="
                   $router.push({
                     name: 'PracticeChapterQuestion',
-                    query: { id: scope.row.id},
+                    query: { id: scope.row.id },
                   })
                 "
-                >试题</el-link
-              >
+              ></p-link>
             </template>
           </el-table-column>
         </el-table>

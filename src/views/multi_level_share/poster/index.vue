@@ -1,12 +1,13 @@
 <template>
   <div class="meedu-main-body">
     <div class="float-left mb-30">
-      <el-button
+      <p-button
+        text="添加"
+        p="addons.MultiLevelShare.poster.store"
         @click="$router.push({ name: 'MultiPosterCreate' })"
         type="primary"
       >
-        添加
-      </el-button>
+      </p-button>
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
@@ -17,10 +18,15 @@
           <el-table-column prop="name" label="海报名"> </el-table-column>
           <el-table-column fixed="right" label="操作" width="150">
             <template slot-scope="scope">
-              <el-link type="danger" @click="destory(scope.row.id)"
-                >删除</el-link
-              >
-              <el-link
+              <p-link
+                text="删除"
+                p="addons.MultiLevelShare.poster.delete"
+                type="danger"
+                @click="destory(scope.row.id)"
+              ></p-link>
+              <p-link
+                text="编辑"
+                p="addons.MultiLevelShare.poster.update"
                 type="primary"
                 class="ml-5"
                 @click="
@@ -29,8 +35,7 @@
                     query: { id: scope.row.id },
                   })
                 "
-                >编辑</el-link
-              >
+              ></p-link>
             </template>
           </el-table-column>
         </el-table>

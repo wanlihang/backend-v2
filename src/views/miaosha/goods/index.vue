@@ -1,12 +1,13 @@
 <template>
   <div class="meedu-main-body">
     <div class="float-left mb-30">
-      <el-button
+      <p-button
+        text="添加"
+        p="addons.MiaoSha.goods.store"
         @click="$router.push({ name: 'MiaoshaGoodsCreate' })"
         type="primary"
       >
-        添加
-      </el-button>
+      </p-button>
     </div>
     <div class="float-left">
       <div class="float-left d-flex">
@@ -60,8 +61,15 @@
 
         <el-table-column fixed="right" label="操作" width="100">
           <template slot-scope="scope">
-            <el-link type="danger" @click="destory(scope.row.id)">删除</el-link>
-            <el-link
+            <p-link
+              text="删除"
+              p="addons.MiaoSha.goods.delete"
+              type="danger"
+              @click="destory(scope.row.id)"
+            ></p-link>
+            <p-link
+              text="编辑"
+              p="addons.MiaoSha.goods.update"
               type="primary"
               class="ml-5"
               @click="
@@ -70,8 +78,7 @@
                   query: { id: scope.row.id },
                 })
               "
-              >编辑</el-link
-            >
+            ></p-link>
           </template>
         </el-table-column>
       </el-table>

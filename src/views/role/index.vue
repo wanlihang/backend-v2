@@ -1,9 +1,13 @@
 <template>
   <div class="meedu-main-body">
     <div class="float-left mb-30">
-      <el-button @click="$router.push({ name: 'Addrole' })" type="primary">
-        {{ $t("member.btn_add") }}
-      </el-button>
+      <p-button
+        :text="$t('member.btn_add')"
+        p="role.store"
+        @click="$router.push({ name: 'Addrole' })"
+        type="primary"
+      >
+      </p-button>
     </div>
     <div class="float-left" v-loading="loading">
       <el-table :data="list" stripe class="float-left">
@@ -17,10 +21,16 @@
         </el-table-column>
         <el-table-column fixed="right" label="操作" width="140">
           <template slot-scope="scope">
-            <el-link type="danger" @click="del_Meberitem(scope.row.id)">
-              删除
-            </el-link>
-            <el-link
+            <p-link
+              text="删除"
+              p="role.destro"
+              type="danger"
+              @click="del_Meberitem(scope.row.id)"
+            >
+            </p-link>
+            <p-link
+              text="编辑"
+              p="role.update"
               type="primary"
               class="ml-5"
               @click="
@@ -32,8 +42,7 @@
                 })
               "
             >
-              编辑
-            </el-link>
+            </p-link>
           </template>
         </el-table-column>
       </el-table>

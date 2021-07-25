@@ -118,9 +118,20 @@
             width="200"
           >
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="50">
+          <el-table-column fixed="right" label="操作" width="100">
             <template>
-              <el-link type="primary">查看</el-link>
+              <p-link
+                text="阅卷"
+                p="addons.Paper.paper.userPaper.submit"
+                type="primary"
+                class="ml-5"
+              ></p-link>
+              <p-link
+                text="查看"
+                p="addons.Paper.paper.userPaper.detail"
+                type="primary"
+                class="ml-5"
+              ></p-link>
             </template>
           </el-table-column>
         </el-table>

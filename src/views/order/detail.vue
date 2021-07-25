@@ -3,7 +3,12 @@
     <back-bar class="mb-30" title="订单详情"></back-bar>
 
     <div class="float-left mb-30" v-if="order && order.status !== 9">
-      <el-button type="danger" @click="setPaid">改为已支付</el-button>
+      <p-button
+        text="改为已支付"
+        p="order.finish"
+        type="danger"
+        @click="setPaid"
+      ></p-button>
     </div>
 
     <div class="float-left" v-if="order && user">
