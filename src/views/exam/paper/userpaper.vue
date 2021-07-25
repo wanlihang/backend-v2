@@ -69,7 +69,18 @@
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="100">
             <template>
-              <el-link type="primary" class="ml-5">查看</el-link>
+              <p-link
+                text="阅卷"
+                p="addons.Paper.paper.userPaper.submit"
+                type="primary"
+                class="ml-5"
+              ></p-link>
+              <p-link
+                text="查看"
+                p="addons.Paper.paper.userPaper.detail"
+                type="primary"
+                class="ml-5"
+              ></p-link>
             </template>
           </el-table-column>
         </el-table>
@@ -150,11 +161,11 @@ export default {
         this.loading = false;
         this.list = res.data.data.data;
         this.total = res.data.data.total;
-        var item={
-          text:'全部',
-          id:-1
-        }
-        this.filterData.categories.push(item)
+        var item = {
+          text: "全部",
+          id: -1,
+        };
+        this.filterData.categories.push(item);
         this.filterData.categories.push(...res.data.statusMap);
       });
     },
