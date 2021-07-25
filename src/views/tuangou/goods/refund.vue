@@ -45,12 +45,13 @@
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="100">
             <template slot-scope="scope">
-              <el-link
+              <p-link
+                text="改为已处理"
+                p="addons.TuanGou.refund.handle"
                 v-if="scope.row.status == 0"
                 type="danger"
                 @click="handle(scope.row.id)"
-                >改为已处理</el-link
-              >
+              ></p-link>
             </template>
           </el-table-column>
         </el-table>
