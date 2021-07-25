@@ -11,6 +11,13 @@
     <div class="float-left">
       <div class="float-left d-flex">
         <div>
+          <el-input
+            v-model="filter.keywords"
+            placeholder="关键字"
+            class="w-200px"
+          ></el-input>
+        </div>
+        <div class="ml-10">
           <el-select
             class="w-200px"
             placeholder="分类"
@@ -47,21 +54,22 @@
           </el-table-column>
           <el-table-column prop="category.name" label="分类" width="150">
           </el-table-column>
-          <el-table-column prop="title" label="标题"> </el-table-column>
-          <el-table-column label="及格/总分" width="100">
+          <el-table-column prop="title" label="标题" width="500">
+          </el-table-column>
+          <el-table-column label="分数" width="150">
             <template slot-scope="scope">
-              <span class="c-red">{{ scope.row.pass_score }}分</span>
-              <span>/{{ scope.row.score }}分</span>
+              <div>总分：{{ scope.row.score }}分</div>
+              <div class="c-red">及格：{{ scope.row.pass_score }}分</div>
             </template>
           </el-table-column>
-          <el-table-column label="时长" width="100">
+          <el-table-column label="时长">
             <template slot-scope="scope">
               <span>{{ scope.row.expired_minutes }}m</span>
             </template>
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="350">
+          <el-table-column fixed="right" label="操作" width="270">
             <template slot-scope="scope">
-              <el-link type="danger" @click="destory(scope.row.id)"
+              <el-link type="danger" @click="destroy(scope.row.id)"
                 >删除</el-link
               >
               <el-link
@@ -84,7 +92,7 @@
                     query: { id: scope.row.id },
                   })
                 "
-                >题目设置</el-link
+                >题目</el-link
               >
               <el-link
                 type="primary"
@@ -95,7 +103,7 @@
                     query: { id: scope.row.id },
                   })
                 "
-                >订阅用户</el-link
+                >用户</el-link
               >
               <el-link
                 type="primary"
@@ -106,7 +114,7 @@
                     query: { id: scope.row.id },
                   })
                 "
-                >分数统计</el-link
+                >统计</el-link
               >
               <el-link
                 type="primary"
@@ -152,6 +160,7 @@ export default {
       },
       filter: {
         category_id: null,
+        keywords: null,
       },
       total: 0,
       loading: false,
@@ -173,6 +182,7 @@ export default {
     paginationReset() {
       this.pagination.page = 1;
       this.filter.category_id = null;
+      this.filter.keywords = null;
       this.getResults();
     },
     paginationSizeChange(size) {
@@ -203,19 +213,18 @@ export default {
         this.filterData.categories = res.data.categories;
       });
     },
-    destory(item) {
+    destroy(item) {
       this.$confirm("确认操作？", "警告", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
       })
         .then(() => {
-          //点击确定按钮的操作
           if (this.loading) {
             return;
           }
           this.loading = true;
-          this.$api.Exam.Paper.Destory(item)
+          this.$api.Exam.Paper.Destroy(item)
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));
