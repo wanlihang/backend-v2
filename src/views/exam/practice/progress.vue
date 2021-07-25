@@ -1,14 +1,14 @@
 <template>
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="练习进度"></back-bar>
-    <div class="float-left mt-30" v-loading="loading">
+
+    <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table :data="results" stripe class="float-left">
-          <el-table-column prop="chapter_name" label="章节" >
-          </el-table-column>
-           <el-table-column label="题目数" width="150">
+          <el-table-column prop="chapter_name" label="章节"> </el-table-column>
+          <el-table-column label="题目数" width="150">
             <template slot-scope="scope">
-              <span>{{ scope.row.question_count}}题</span>
+              <span>{{ scope.row.question_count }}题</span>
             </template>
           </el-table-column>
           <el-table-column label="已练习" width="150">
@@ -20,7 +20,10 @@
             <template slot-scope="scope">
               <span
                 >{{
-                  ((scope.row.submit_count * 100) / scope.row.question_count).toFixed(2)
+                  (
+                    (scope.row.submit_count * 100) /
+                    scope.row.question_count
+                  ).toFixed(2)
                 }}%</span
               >
             </template>

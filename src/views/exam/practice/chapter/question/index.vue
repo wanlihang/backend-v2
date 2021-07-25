@@ -81,10 +81,10 @@
           class="float-left"
         >
           <el-table-column type="selection" width="55"></el-table-column>
-          <el-table-column prop="id" label="ID" width="80"> </el-table-column>
-          <el-table-column prop="category_name" label="分类"> </el-table-column>
-          <el-table-column prop="type_text" label="类型"> </el-table-column>
-          <el-table-column prop="level_text" label="难度"> </el-table-column>
+          <el-table-column prop="id" label="ID" width="120"> </el-table-column>
+          <el-table-column prop="category_name" label="分类" width="200"> </el-table-column>
+          <el-table-column prop="type_text" label="类型" width="120"> </el-table-column>
+          <el-table-column prop="level_text" label="难度" width="120"> </el-table-column>
           <el-table-column label="内容">
             <template slot-scope="scope">
               <div v-html="scope.row.content"></div>
@@ -124,6 +124,7 @@ export default {
       },
       loading: false,
       results: [],
+      total: 0,
       spids: {
         id: this.$route.query.id,
         qids: [],
@@ -180,6 +181,7 @@ export default {
         this.loading = false;
         this.results = res.data.data.data;
         this.total = res.data.data.total;
+
         this.filterData.types = res.data.types;
         this.filterData.categories = res.data.categories;
         this.filterData.levels = res.data.levels;
