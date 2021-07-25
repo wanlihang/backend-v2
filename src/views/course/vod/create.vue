@@ -32,12 +32,13 @@
                 </el-select>
               </div>
               <div class="ml-15">
-                <el-link
+                <p-link
+                  text="分类管理"
+                  p="addons.Zhibo.course_category.list"
                   type="primary"
                   @click="$router.push({ name: 'CourseCategories' })"
                 >
-                  分类管理
-                </el-link>
+                </p-link>
               </div>
             </div>
           </el-form-item>

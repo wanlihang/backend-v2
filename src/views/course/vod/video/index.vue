@@ -2,8 +2,15 @@
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="课程视频管理"></back-bar>
     <div class="float-left mb-30">
-      <el-button type="danger" @click="destoryMulti()">删除</el-button>
-      <el-button
+      <p-button
+        text="删除"
+        p="addons.Zhibo.course_video.delete"
+        type="danger"
+        @click="destoryMulti()"
+      ></p-button>
+      <p-button
+        text="添加"
+        p="addons.Zhibo.course_video.store"
         @click="
           $router.push({
             name: 'VideosCreate',
@@ -12,8 +19,7 @@
         "
         type="primary"
       >
-        添加
-      </el-button>
+      </p-button>
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
@@ -53,7 +59,9 @@
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="200">
             <template slot-scope="scope">
-              <el-link
+              <p-link
+                text="编辑"
+                p="addons.Zhibo.course_video.update"
                 type="primary"
                 @click="
                   $router.push({
@@ -61,8 +69,7 @@
                     query: { course_id: pagination.cid, id: scope.row.id },
                   })
                 "
-                >编辑</el-link
-              >
+              ></p-link>
               <el-link
                 class="ml-5"
                 type="primary"
@@ -77,7 +84,9 @@
                 "
                 >销售</el-link
               >
-              <el-link
+              <p-link
+                text="观看"
+                p="addons.Zhibo.course_video.watch.users"
                 class="ml-5"
                 type="primary"
                 @click="
@@ -86,8 +95,10 @@
                     query: { course_id: scope.row.course_id, id: scope.row.id },
                   })
                 "
-                >观看</el-link
-              ><el-link
+              ></p-link
+              ><p-link
+                text="评论"
+                p="addons.Zhibo.course_comment"
                 class="ml-5"
                 type="primary"
                 @click="
@@ -96,8 +107,7 @@
                     query: { course_id: scope.row.course_id, id: scope.row.id },
                   })
                 "
-                >评论</el-link
-              >
+              ></p-link>
             </template>
           </el-table-column>
         </el-table>

@@ -5,7 +5,11 @@
     <div class="float-left mb-30">
       <div class="float-left d-flex">
         <div>
-          <el-button @click="delRecords()">删除</el-button>
+          <p-button
+            text="删除"
+            p="addons.Zhibo.course_comment.delete.multi"
+            @click="delRecords()"
+          ></p-button>
         </div>
         <div class="ml-10">
           <el-input

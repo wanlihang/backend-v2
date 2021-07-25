@@ -43,7 +43,9 @@
                 </el-select>
               </div>
               <div class="ml-10">
-                <el-link
+                <p-link
+                  text="章节管理"
+                  p="addons.Zhibo.course_chapter.list"
                   @click="
                     $router.push({
                       name: 'CourseChapters',
@@ -51,8 +53,7 @@
                     })
                   "
                   type="primary"
-                  >章节管理</el-link
-                >
+                ></p-link>
               </div>
             </div>
           </el-form-item>
@@ -105,7 +106,10 @@
           <el-form-item label="视频时长" prop="duration">
             <div class="d-flex">
               <div>
-                <input-duration :disabled="false" v-model="video.duration"></input-duration>
+                <input-duration
+                  :disabled="false"
+                  v-model="video.duration"
+                ></input-duration>
               </div>
               <div class="ml-10">
                 <helper-text

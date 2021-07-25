@@ -2,12 +2,13 @@
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="录播分类管理"></back-bar>
     <div class="float-left mb-30">
-      <el-button
+      <p-button
+        text="添加"
+        p="addons.Zhibo.course_category.store"
         @click="$router.push({ name: 'CategoriesCreate' })"
         type="primary"
       >
-        添加
-      </el-button>
+      </p-button>
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
@@ -29,13 +30,16 @@
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="150">
             <template slot-scope="scope">
-              <el-link
+              <p-link
+                text="删除"
+                p="addons.Zhibo.course_category.delete"
                 style="margin-right: 10px"
                 type="danger"
                 @click="destory(scope.row.id)"
-                >删除</el-link
-              >
-              <el-link
+              ></p-link>
+              <p-link
+                text="编辑"
+                p="addons.Zhibo.course_category.update"
                 type="primary"
                 @click="
                   $router.push({
@@ -43,8 +47,7 @@
                     query: { id: scope.row.id },
                   })
                 "
-                >编辑</el-link
-              >
+              ></p-link>
             </template>
           </el-table-column>
         </el-table>
