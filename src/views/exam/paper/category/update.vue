@@ -62,13 +62,6 @@ export default {
         parent_id: null,
       },
       rules: {
-        parent_id: [
-          {
-            required: true,
-            message: "请选择父级",
-            trigger: "blur",
-          },
-        ],
         sort: [
           {
             required: true,
@@ -102,7 +95,7 @@ export default {
       this.$api.Exam.Paper.Category.Detail(this.user.id).then((res) => {
         var data = res.data.data;
         this.user.name = data.name;
-        this.user.parent_id = data.parent_id;
+        this.user.parent_id = data.parent_id === 0 ? null : data.parent_id;
         this.user.sort = data.sort;
       });
     },

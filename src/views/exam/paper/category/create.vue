@@ -61,13 +61,6 @@ export default {
         parent_id: null,
       },
       rules: {
-        parent_id: [
-          {
-            required: true,
-            message: "请选择父级",
-            trigger: "blur",
-          },
-        ],
         sort: [
           {
             required: true,
