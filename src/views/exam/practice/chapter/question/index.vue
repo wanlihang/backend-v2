@@ -2,18 +2,25 @@
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="章节试题"></back-bar>
     <div class="float-left mb-30">
-      <el-button
+      <p-button
+        text="添加"
+        p="addons.Paper.practice_chapter.questions.store"
         @click="
           $router.push({
             name: 'PracticeChapterQuestionCreate',
-             query: { id: pagination.id },
+            query: { id: pagination.id },
           })
         "
         type="primary"
       >
-        添加
-      </el-button>
-      <el-button @click="destorymulti()" type="danger"> 批量删除 </el-button>
+      </p-button>
+      <p-button
+        text="批量删除"
+        p="addons.Paper.practice_chapter.questions.delete"
+        @click="destorymulti()"
+        type="danger"
+      >
+      </p-button>
     </div>
     <div class="float-left">
       <div class="float-left d-flex">

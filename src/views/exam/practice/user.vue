@@ -2,7 +2,11 @@
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="参与用户"></back-bar>
     <div class="float-left mb-30">
-      <el-button @click="showUserAddWin = true">添加用户</el-button>
+      <p-button
+        text="添加用户"
+        p="addons.Paper.practice.user.insert"
+        @click="showUserAddWin = true"
+      ></p-button>
       <el-button @click="exportXlsx" type="primary">导出记录</el-button>
     </div>
     <div class="float-left" v-loading="loading">
@@ -37,10 +41,15 @@
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="200">
             <template slot-scope="scope">
-              <el-link type="danger" @click="destory(scope.row.user_id)"
-                >删除</el-link
-              >
-              <el-link
+              <p-link
+                text="删除"
+                p="addons.Paper.practice.user.delete"
+                type="danger"
+                @click="destory(scope.row.user_id)"
+              ></p-link>
+              <p-link
+                text="练习进度"
+                p="addons.Paper.practice.user.progress"
                 type="primary"
                 class="ml-5"
                 @click="
@@ -49,8 +58,7 @@
                     query: { pid: scope.row.user_id, id: pagination.id },
                   })
                 "
-                >练习进度</el-link
-              >
+              ></p-link>
             </template>
           </el-table-column>
         </el-table>
