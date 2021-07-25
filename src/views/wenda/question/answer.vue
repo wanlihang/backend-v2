@@ -41,18 +41,25 @@
         </el-table-column>
         <el-table-column fixed="right" label="操作" width="160">
           <template slot-scope="scope">
-            <el-link type="danger" @click="destory(scope.row.id)">
-              删除
-            </el-link>
-            <el-link
+            <p-link
+              text="删除"
+              p="addons.Wenda.question.answers.delete"
+              type="danger"
+              @click="destory(scope.row.id)"
+            >
+            </p-link>
+            <p-link
+              text="设为答案"
+              p="addons.Wenda.question.answers.setTrue"
               v-if="status !== 1"
               class="ml-10"
               type="primary"
               @click="setAnswer(scope.row.id)"
             >
-              设为答案
-            </el-link>
-            <el-link
+            </p-link>
+            <p-link
+              text="评论"
+              p="addons.Wenda.question.answers.comments"
               class="ml-10"
               type="primary"
               @click="
@@ -62,8 +69,7 @@
                 })
               "
             >
-              评论
-            </el-link>
+            </p-link>
           </template>
         </el-table-column>
       </el-table>

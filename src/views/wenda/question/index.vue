@@ -1,12 +1,13 @@
 <template>
   <div class="meedu-main-body">
     <div class="float-left mb-30">
-      <el-button
+      <p-button
+        text="分类管理"
+        p="addons.Wenda.category.list"
         @click="$router.push({ name: 'QuestionCategory' })"
         type="primary"
       >
-        分类管理
-      </el-button>
+      </p-button>
     </div>
     <div class="float-left">
       <div class="float-left d-flex">
@@ -154,7 +155,9 @@
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="80">
             <template slot-scope="scope">
-              <el-link
+              <p-link
+                text="回答"
+                p="addons.Wenda.question.answers"
                 type="primary"
                 @click="
                   $router.push({
@@ -162,8 +165,7 @@
                     query: { id: scope.row.id, status: scope.row.status },
                   })
                 "
-                >回答</el-link
-              >
+              ></p-link>
             </template>
           </el-table-column>
         </el-table>

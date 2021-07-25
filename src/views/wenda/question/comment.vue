@@ -29,9 +29,13 @@
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="150">
             <template slot-scope="scope">
-              <el-link type="danger" @click="destory(scope.row.id)">
-                删除
-              </el-link>
+              <p-link
+                text="删除"
+                p="addons.Wenda.question.answers.comments.delete"
+                type="danger"
+                @click="destory(scope.row.id)"
+              >
+              </p-link>
             </template>
           </el-table-column>
         </el-table>
