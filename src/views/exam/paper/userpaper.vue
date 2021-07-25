@@ -3,20 +3,17 @@
     <back-bar class="mb-30" title="考试记录"></back-bar>
     <div class="float-left mb-30">
       <div class="float-left d-flex">
-        <div class="d-flex">
-          <div class="filter-label">用户ID</div>
-          <div class="flex-1 ml-15">
-            <el-input
-              class="w-200px"
-              v-model="filter.user_id"
-              placeholder="用户ID"
-            ></el-input>
-          </div>
+        <div>
+          <el-input
+            class="w-200px"
+            v-model="filter.user_id"
+            placeholder="用户ID"
+          ></el-input>
         </div>
-        <div class="d-flex ml-10">
+        <div class="ml-10">
           <el-select class="w-200px" placeholder="状态" v-model="filter.status">
             <el-option
-              v-for="(item, index) in filterData.categories"
+              v-for="(item, index) in filterData.statusMap"
               :key="index"
               :label="item.text"
               :value="item.id"
@@ -24,22 +21,56 @@
             </el-option>
           </el-select>
         </div>
-
         <div class="ml-10">
-          <el-button @click="firstPageLoad()" type="primary" plain>
-            筛选
-          </el-button>
-          <el-button @click="paginationReset()">清空</el-button>
+          <div class="ml-10">
+            <el-date-picker
+              v-model="filter.created_at"
+              type="daterange"
+              align="right"
+              unlink-panels
+              range-separator="至"
+              start-placeholder="考试开始时间-起始"
+              end-placeholder="考试开始时间-结束"
+            >
+            </el-date-picker>
+          </div>
         </div>
+        <div class="ml-10">
+          <div class="ml-10">
+            <el-date-picker
+              v-model="filter.submit_at"
+              type="daterange"
+              align="right"
+              unlink-panels
+              range-separator="至"
+              start-placeholder="交卷时间-起始"
+              end-placeholder="交卷时间-结束"
+            >
+            </el-date-picker>
+          </div>
+        </div>
+      </div>
+      <div class="float-left mt-15">
+        <el-button @click="firstPageLoad()" type="primary" plain>
+          筛选
+        </el-button>
+        <el-button @click="paginationReset()">清空</el-button>
       </div>
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
-        <el-table :data="list" stripe class="float-left">
-          <el-table-column prop="id" label="ID" width="80"> </el-table-column>
-          <el-table-column prop="user_id" label="用户ID" width="80">
+        <el-table
+          :data="list"
+          @sort-change="sortChange"
+          :default-sort="{ prop: 'id', order: 'descending' }"
+          stripe
+          class="float-left"
+        >
+          <el-table-column prop="id" sortable label="ID" width="120">
           </el-table-column>
-          <el-table-column label="用户">
+          <el-table-column prop="user_id" sortable label="用户ID" width="120">
+          </el-table-column>
+          <el-table-column label="用户" width="300">
             <template slot-scope="scope">
               <div class="d-flex" v-if="scope.row.user">
                 <div>
@@ -50,26 +81,50 @@
               <span class="c-red" v-else>用户不存在</span>
             </template>
           </el-table-column>
-          <el-table-column label="得分">
+          <el-table-column label="得分" property="score" sortable width="150">
             <template slot-scope="scope">
               <span v-if="scope.row.status === 2">{{ scope.row.score }}分</span>
-              <span class="c-red" v-else>未完成</span>
             </template>
           </el-table-column>
-          <el-table-column label="用时" width="100">
+          <el-table-column label="用时" width="150">
             <template slot-scope="scope">
               <duration-text
-                v-if="status === 2"
-                :duration="scope.row.expired_seconds"
+                v-if="scope.row.status === 2"
+                :duration="scope.row.used_seconds"
               ></duration-text>
-              <span class="c-red" v-else>未完成</span>
             </template>
           </el-table-column>
-          <el-table-column prop="status_text" label="状态" width="80">
+          <el-table-column prop="status_text" label="状态">
+            <template slot-scope="scope">
+              <el-tag type="info" v-if="scope.row.status === 0">未开始</el-tag>
+              <el-tag type="primary" v-else-if="scope.row.status === 1"
+                >考试中</el-tag
+              >
+              <el-tag type="success" v-else-if="scope.row.status === 2"
+                >已结束</el-tag
+              >
+              <el-tag type="warning" v-else-if="scope.row.status === 3"
+                >阅卷中</el-tag
+              >
+            </template>
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="100">
+          <el-table-column
+            label="开始时间"
+            sortable
+            prop="created_at"
+            width="200"
+          >
+          </el-table-column>
+          <el-table-column
+            label="交卷时间"
+            sortable
+            prop="submit_at"
+            width="200"
+          >
+          </el-table-column>
+          <el-table-column fixed="right" label="操作" width="50">
             <template>
-              <el-link type="primary" class="ml-5">查看</el-link>
+              <el-link type="primary">查看</el-link>
             </template>
           </el-table-column>
         </el-table>
@@ -104,20 +159,23 @@ export default {
         id: this.$route.query.id,
         page: 1,
         size: 10,
+        sort: "id",
+        order: "desc",
       },
       filter: {
         user_id: null,
         status: -1,
+        created_at: null,
+        submit_at: null,
       },
       total: 0,
       loading: false,
       list: [],
       filterData: {
-        categories: [],
+        statusMap: [],
       },
     };
   },
-
   mounted() {
     this.getResults();
   },
@@ -129,6 +187,9 @@ export default {
     paginationReset() {
       this.pagination.page = 1;
       this.filter.user_id = null;
+      this.filter.status = -1;
+      this.filter.submit_at = null;
+      this.filter.created_at = null;
       this.getResults();
     },
     paginationSizeChange(size) {
@@ -137,6 +198,11 @@ export default {
     },
     paginationPageChange(page) {
       this.pagination.page = page;
+      this.getResults();
+    },
+    sortChange(column) {
+      this.pagination.sort = column.prop;
+      this.pagination.order = column.order === "ascending" ? "asc" : "desc";
       this.getResults();
     },
     getResults() {
@@ -150,12 +216,15 @@ export default {
         this.loading = false;
         this.list = res.data.data.data;
         this.total = res.data.data.total;
-        var item={
-          text:'全部',
-          id:-1
-        }
-        this.filterData.categories.push(item)
-        this.filterData.categories.push(...res.data.statusMap);
+
+        let statusMap = [
+          {
+            text: "全部",
+            id: -1,
+          },
+        ];
+        statusMap.push(...res.data.statusMap);
+        this.filterData.statusMap = statusMap;
       });
     },
     destory(item) {
