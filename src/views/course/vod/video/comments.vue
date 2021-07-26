@@ -19,6 +19,23 @@
           ></el-input>
         </div>
         <div class="ml-10">
+          <el-select
+            filterable
+            placeholder="视频"
+            class="w-200px"
+            v-model="filter.video_id"
+            v-el-select-loadmore="loadmore"
+          >
+            <el-option
+              v-for="(item, index) in filterData.videos"
+              :key="index"
+              :label="item.title"
+              :value="item.id"
+            >
+            </el-option>
+          </el-select>
+        </div>
+        <div class="ml-10">
           <el-date-picker
             v-model="filter.created_at"
             type="daterange"
@@ -90,6 +107,22 @@
 </template>
 <script>
 export default {
+  directives: {
+    "el-select-loadmore": {
+      bind(el, binding) {
+        const SELECTWRAP_DOM = el.querySelector(
+          ".el-select-dropdown .el-select-dropdown__wrap"
+        );
+        SELECTWRAP_DOM.addEventListener("scroll", function () {
+          const condition =
+            this.scrollHeight - this.scrollTop <= this.clientHeight;
+          if (condition) {
+            binding.value();
+          }
+        });
+      },
+    },
+  },
   props: ["id"],
   data() {
     return {
@@ -98,9 +131,16 @@ export default {
         size: 10,
       },
       filter: {
-        video_id: this.$route.query.id,
+        video_id: null,
         user_id: null,
         created_at: null,
+      },
+      filterData: {
+        videos: [],
+      },
+      formData: {
+        page: 1,
+        size: 10,
       },
       total: 0,
       loading: false,
@@ -110,6 +150,7 @@ export default {
     };
   },
   mounted() {
+    this.params();
     this.getData();
   },
   methods: {
@@ -119,6 +160,7 @@ export default {
     },
     paginationReset() {
       this.pagination.page = 1;
+      this.filter.video_id = null;
       this.filter.user_id = null;
       this.filter.created_at = null;
       this.getData();
@@ -138,6 +180,18 @@ export default {
     },
     handleSelectionChange(rows) {
       this.selectedRows = rows;
+    },
+    loadmore() {
+      this.formData.page++;
+      this.params();
+    },
+    params() {
+      this.$api.Course.Vod.Videos.List(this.formData).then((res) => {
+        this.filterData.videos = [
+          ...this.filterData.videos,
+          ...res.data.videos.data,
+        ];
+      });
     },
     getData() {
       if (this.loading) {

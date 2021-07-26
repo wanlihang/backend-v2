@@ -8,6 +8,13 @@
         type="primary"
       >
       </p-button>
+      <p-button
+        text="评论"
+        p="addons.Zhibo.course_comment"
+        @click="$router.push({ name: 'VideoComments' })"
+        type="primary"
+      >
+      </p-button>
 
       <el-button @click="$router.push({ name: 'VodImport' })" type="primary">
         视频批量导入
