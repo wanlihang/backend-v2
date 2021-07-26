@@ -3,24 +3,34 @@
     <div class="el_top_row1">
       <div class="el_row_item">
         <span class="item_title">{{ $t("index.day_income") }}</span>
-        <p>{{ dayincome }}</p>
+        <p>{{ list.today_paid_sum }}</p>
         <div class="item_info">
-          <span>{{ $t("index.yes_income") }}：{{ yesincome }}</span>
+          <span
+            >{{ $t("index.yes_income") }}：{{ list.yesterday_paid_sum }}</span
+          >
           <span
             >{{ $t("index.compared_yesterday") }}：<strong
-              >+{{ dayincomerate }}</strong
+              >+{{
+                sumrate(list.today_paid_sum, list.yesterday_paid_sum)
+              }}%</strong
             ></span
           >
         </div>
       </div>
       <div class="el_row_item">
         <span class="item_title">{{ $t("index.day_paid") }}</span>
-        <p>{{ daypaynum }}</p>
+        <p>{{ list.today_paid_user_num }}</p>
         <div class="item_info">
-          <span>{{ $t("index.yes_paid") }}：{{ yespaynum }}</span>
+          <span
+            >{{ $t("index.yes_paid") }}：{{
+              list.yesterday_paid_user_num
+            }}</span
+          >
           <span
             >{{ $t("index.compared_yesterday") }}：<strong
-              >+{{ daypayrate }}</strong
+              >+{{
+                sumrate(list.today_paid_user_num, list.yesterday_paid_user_num)
+              }}%</strong
             ></span
           >
         </div>
@@ -28,19 +38,23 @@
       <div class="el_row_item2">
         <div class="el_item">
           <span>{{ $t("index.allnum") }}</span>
-          <span class="el_item_num">{{ allnum }}</span>
+          <span class="el_item_num">{{ list.user_count }}</span>
           <span style="margin-left: auto"
             >{{ $t("index.day_increase") }}：<strong
-              >+{{ allrate }}</strong
+              >+{{
+                sumrate(list.user_count, list.today_register_user_count)
+              }}%</strong
             ></span
           >
         </div>
         <div class="el_item">
           <span>{{ $t("index.month_income") }}</span>
-          <span class="el_item_num">{{ allincome }}</span>
+          <span class="el_item_num">{{ list.this_month_paid_sum }}</span>
           <span style="margin-left: auto"
             >{{ $t("index.month_increase") }}：<strong
-              >+{{ allincomerate }}</strong
+              >+{{
+                sumrate(list.this_month_paid_sum, list.last_month_paid_sum)
+              }}%</strong
             ></span
           >
         </div>
@@ -113,16 +127,7 @@ export default {
     return {
       logining: false,
       name: "AllSearch",
-      dayincome: 0,
-      yesincome: 0,
-      dayincomerate: 0 + "%",
-      daypaynum: 0,
-      yespaynum: 0,
-      daypayrate: 0 + "%",
-      allnum: 0,
-      allrate: 0 + "%",
-      allincome: 0,
-      allincomerate: 0 + "%",
+      list: [],
       navList: [
         { name: this.$t("index.new_registered_users") },
         { name: this.$t("index.daily_order_creation") },
@@ -146,10 +151,25 @@ export default {
     };
   },
   mounted() {
+    this.getResults();
     this.fun_date(-7);
     this.getZXTdata();
   },
   methods: {
+    getResults() {
+      if (this.loading) {
+        return;
+      }
+      this.loading = true;
+      this.$api.Stat.List().then((res) => {
+        this.loading = false;
+        this.list = res.data;
+      });
+    },
+    sumrate(num1, num2) {
+      let result = (num1 / (num2 | 1)).toFixed(2);
+      return result;
+    },
     fun_date(aa) {
       let date1 = new Date(),
         time1 =
@@ -390,7 +410,7 @@ export default {
     box-shadow: 0px 2px 4px 0px rgba(102, 102, 102, 0.05);
     border-radius: 8px;
     margin-top: 20px;
-    padding: 96px 100px 0px 100px;
+    padding: 66px 100px 30px 100px;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;

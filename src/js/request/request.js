@@ -20,6 +20,9 @@ const Api = {
         }
     },
     Stat: {
+        List() {
+            return get(`/backend/api/v1/dashboard`);
+        },
         Statistic(id, params) {
             return get(`/backend/api/v1/statistic/${id}`, params);
         },
