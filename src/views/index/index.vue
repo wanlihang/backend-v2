@@ -37,18 +37,21 @@
       </div>
       <div class="el_row_item2">
         <div class="el_item">
-          <span style="width:80px;">{{ $t("index.allnum") }}</span>
+          <span style="width: 80px">{{ $t("index.allnum") }}</span>
           <span class="el_item_num">{{ list.user_count }}</span>
           <span style="margin-left: auto"
             >{{ $t("index.day_increase") }}：<strong
               >+{{
-                sumrate(list.user_count, list.today_register_user_count)
+                sumrate(
+                  list.today_register_user_count,
+                  list.user_count - list.today_register_user_count
+                )
               }}%</strong
             ></span
           >
         </div>
         <div class="el_item">
-          <span style="width:80px;">{{ $t("index.month_income") }}</span>
+          <span style="width: 80px">{{ $t("index.month_income") }}</span>
           <span class="el_item_num">{{ list.this_month_paid_sum }}</span>
           <span style="margin-left: auto"
             >{{ $t("index.month_increase") }}：<strong
@@ -91,7 +94,7 @@
       <div class="tit">{{ $t("index.statistical_analysis") }}</div>
       <div class="selchartbox">
         <el-button
-          style="margin-right: 30px;"
+          style="margin-right: 30px"
           :type="flagE === index + 1 ? 'primary' : ''"
           v-for="(item, index) in navList"
           :key="item.id"
@@ -114,7 +117,12 @@
       <el-col class="formbox">
         <div
           id="chartLine"
-          style="width: 100%; height: 252px; margin-left: -30px;margin-bottom:20px;"
+          style="
+            width: 100%;
+            height: 252px;
+            margin-left: -30px;
+            margin-bottom: 20px;
+          "
         ></div>
       </el-col>
     </div>
