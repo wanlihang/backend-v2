@@ -1290,7 +1290,7 @@ const routes = [{
     }
   },
   {
-    path: '/exam/practice/create',
+    path: '/exam/question/create',
     component: () => import('@/views/exam/question/create'),
     name: 'ExamQuestionCreate',
     meta: {

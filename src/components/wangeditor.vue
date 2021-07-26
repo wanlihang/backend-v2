@@ -22,7 +22,13 @@ export default {
     return {
       editor: null,
       showUploadImage: false,
+      content: null,
     };
+  },
+  watch: {
+    content() {
+      this.emitUpdate();
+    }
   },
   mounted() {
     // 自定义菜单
@@ -66,15 +72,15 @@ export default {
     ];
     // 内容更新
     editor.config.onchange = (newHtml) => {
-      this.emitUpdate(newHtml);
+      this.content = newHtml;
     };
     editor.create();
     editor.txt.html(this.value);
     this.editor = editor;
   },
   methods: {
-    emitUpdate(val) {
-      this.$emit("input", val);
+    emitUpdate() {
+      this.$emit("input", this.content);
     },
     uploadImage(imgUrl) {
       this.editor.cmd.do(

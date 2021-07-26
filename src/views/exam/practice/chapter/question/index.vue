@@ -82,12 +82,15 @@
         >
           <el-table-column type="selection" width="55"></el-table-column>
           <el-table-column prop="id" label="ID" width="120"> </el-table-column>
-          <el-table-column prop="category_name" label="分类" width="200"> </el-table-column>
-          <el-table-column prop="type_text" label="类型" width="120"> </el-table-column>
-          <el-table-column prop="level_text" label="难度" width="120"> </el-table-column>
+          <el-table-column prop="category_name" label="分类" width="200">
+          </el-table-column>
+          <el-table-column prop="type_text" label="类型" width="120">
+          </el-table-column>
+          <el-table-column prop="level_text" label="难度" width="120">
+          </el-table-column>
           <el-table-column label="内容">
             <template slot-scope="scope">
-              <div v-html="scope.row.content"></div>
+              <question-render :question="scope.row"></question-render>
             </template>
           </el-table-column>
         </el-table>
@@ -109,7 +112,12 @@
 </template>
 
 <script>
+import QuestionRender from "@/components/question-render";
+
 export default {
+  components: {
+    QuestionRender,
+  },
   data() {
     return {
       pagination: {

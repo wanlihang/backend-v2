@@ -45,6 +45,11 @@ export default [{
         permission: 'addons.Paper.paper.list'
     },
     {
+        name: 'title.exam.mockpaper.name',
+        key: 'ExamMockpaper',
+        permission: 'addons.Paper.mock_paper.list'
+    },
+    {
         name: 'title.exam.practice.index',
         key: 'ExamPractice',
         permission: 'addons.Paper.practice.list'
@@ -54,11 +59,6 @@ export default [{
         key: 'ExamQuestion',
         permission: 'addons.Paper.question.list'
     },
-    {
-        name: 'title.exam.mockpaper.name',
-        key: 'ExamMockpaper',
-        permission: 'addons.Paper.mock_paper.list'
-    }
     ]
 },
 {

@@ -1,0 +1,101 @@
+<template>
+  <div class="float-left" v-if="init">
+    <div class="float-left mb-30">
+      <div class="float-left helper-text mb-10">分数</div>
+      <div class="float-left d-flex">
+        <div>
+          <el-input
+            type="number"
+            class="w-200px"
+            placeholder="分数"
+            v-model="form.score"
+          ></el-input>
+        </div>
+        <div class="ml-10">
+          <helper-text text="请输入整数。不支持小数。"></helper-text>
+        </div>
+        <div class="ml-10">
+          <span class="helper-text">常见分数</span>
+          <el-link class="ml-10" @click="form.score = 1" type="primary"
+            >1分</el-link
+          >
+          <el-link class="ml-10" @click="form.score = 2" type="primary"
+            >2分</el-link
+          >
+          <el-link class="ml-10" @click="form.score = 5" type="primary"
+            >5分</el-link
+          >
+          <el-link class="ml-10" @click="form.score = 10" type="primary"
+            >10分</el-link
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="float-left mb-30">
+      <div class="float-left helper-text mb-10">试题内容</div>
+      <div class="float-left">
+        <wang-editor v-model="form.content" :height="100"></wang-editor>
+      </div>
+    </div>
+
+    <div class="float-left mb-30">
+      <div class="float-left helper-text mb-10">答案</div>
+      <div class="float-left">
+        <span class="helper-text">问答题无标准答案，需要人工介入阅卷。</span>
+      </div>
+    </div>
+
+    <div class="float-left">
+      <div class="float-left helper-text mb-10">解析</div>
+      <div class="float-left">
+        <wang-editor v-model="form.remark" :height="100"></wang-editor>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import wangEditor from "@/components/wangeditor";
+
+export default {
+  components: {
+    wangEditor,
+  },
+  props: ["question", "index"],
+  data() {
+    return {
+      init: false,
+      form: {
+        score: null,
+        content: null,
+        answer: null,
+        remark: null,
+      },
+    };
+  },
+  watch: {
+    "form.score"() {
+      this.update();
+    },
+    "form.content"() {
+      this.update();
+    },
+    "form.remark"() {
+      this.update();
+    },
+  },
+  mounted() {
+    if (this.question) {
+      Object.assign(this.form, this.question);
+    }
+
+    this.init = true;
+  },
+  methods: {
+    update() {
+      this.$emit("change", this.form, this.index);
+    },
+  },
+};
+</script>
