@@ -20,6 +20,7 @@
           <div class="ml-10">
             <el-select
               filterable
+              :filter-method="dataFilter"
               placeholder="图文"
               class="w-200px"
               v-model="filter.topic_id"
@@ -148,6 +149,7 @@ export default {
       loading: false,
       list: [],
       formData: {
+        keywords: null,
         page: 1,
         size: 10,
       },
@@ -158,6 +160,12 @@ export default {
     this.getComments();
   },
   methods: {
+    dataFilter(val) {
+      this.formData.keywords = val;
+      this.$api.Course.Topic.Topic.List(this.formData).then((res) => {
+        this.filterData.topics = res.data.data.data;
+      });
+    },
     loadmore() {
       this.formData.page++;
       this.params();
@@ -166,6 +174,7 @@ export default {
       this.pagination.page = 1;
       this.filter.user_id = null;
       this.filter.topic_id = null;
+      this.formData.keywords = null;
       this.getComments();
     },
     paginationSizeChange(size) {
