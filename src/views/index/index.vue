@@ -154,7 +154,9 @@
           :end-placeholder="$t('index.end_time')"
           :picker-options="pickerOptions"
         />
-        <el-button class="ml-30" @click="getchartsdata()">筛选</el-button>
+        <el-button class="ml-30" @click="getchartsdata()" type="primary" plain>
+          筛选
+        </el-button>
       </div>
       <el-col class="formbox">
         <div

@@ -96,7 +96,14 @@ export default {
     return {
       id: this.$route.query.id,
       loading: false,
-      form: null,
+      form: {
+        name: null,
+        expire_days: null,
+        charge: "",
+        is_show: 1,
+        description: null,
+        weight: 0,
+      },
       rules: {
         name: [
           {
@@ -134,7 +141,7 @@ export default {
   },
   methods: {
     getDetail() {
-      this.$api.Role.Update(this.id).then((res) => {
+      this.$api.Role.Detail(this.id).then((res) => {
         this.form = res.data;
       });
     },

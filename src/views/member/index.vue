@@ -104,7 +104,7 @@
             width="250"
           >
           </el-table-column>
-          <el-table-column prop="mobile" label="手机号" width="200">
+          <el-table-column prop="mobile" label="手机号" width="180">
           </el-table-column>
           <el-table-column label="VIP会员" width="150">
             <template slot-scope="scope">
@@ -112,7 +112,7 @@
               <span v-else></span>
             </template>
           </el-table-column>
-          <el-table-column prop="credit1" sortable label="积分" width="150">
+          <el-table-column prop="credit1" sortable label="积分" width="120">
           </el-table-column>
           <el-table-column label="标签" width="150">
             <template slot-scope="scope">

@@ -79,7 +79,7 @@
               <span v-else class="c-red">数据不完整</span>
             </template>
           </el-table-column>
-          <el-table-column label="课程">
+          <el-table-column label="课程"  width="500">
             <template slot-scope="scope">
               <div class="d-flex">
                 <div>

@@ -93,14 +93,14 @@
             </span>
           </template>
         </el-table-column>
-        <el-table-column prop="order_id" label="订单编号" :width="250">
+        <el-table-column prop="order_id" label="订单编号" :width="200">
         </el-table-column>
         <el-table-column prop="charge" sortable label="支付金额" :width="150">
         </el-table-column>
         <el-table-column prop="status_text" label="支付状态" :width="150">
         </el-table-column>
        
-        <el-table-column prop="updated_at" sortable label="订单创建时间" :width="250">
+        <el-table-column prop="updated_at" sortable label="订单创建时间" :width="220">
         </el-table-column>
         <el-table-column label="操作" fixed="right" :width="80">
           <template slot-scope="scope">

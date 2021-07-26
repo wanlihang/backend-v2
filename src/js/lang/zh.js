@@ -370,7 +370,7 @@ const zh = {
         statistical_analysis: '统计分析',
         query: '查询',
         new_registered_users: '新注册用户',
-        daily_order_creation: '每日添加订单量',
+        daily_order_creation: '每日新增订单量',
         daily_order_payment: "每日支付订单量",
         total_dailypayment_orders: "每日支付订单总额",
         start_time: '开始',
