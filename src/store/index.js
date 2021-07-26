@@ -8,7 +8,8 @@ export default new Vuex.Store({
   state: {
     user: null,
     isLogin: false,
-    enabledAddons: {}
+    enabledAddons: {},
+    enabledAddonsCount: 0
   },
   mutations: {
     loginHandle(state, user) {
@@ -20,8 +21,9 @@ export default new Vuex.Store({
       state.isLogin = false;
       Utils.clearToken();
     },
-    setEnabledAddons(state, addons) {
+    setEnabledAddons(state, addons, count) {
       state.enabledAddons = addons;
+      state.enabledAddonsCount = count;
     }
   },
   actions: {

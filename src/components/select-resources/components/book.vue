@@ -104,7 +104,7 @@ export default {
         return;
       }
       this.loading = true;
-      this.$api.Course.Book.Book.List(this.pagination).then((res) => {
+      this.$api.Meedubook.Book.List(this.pagination).then((res) => {
         this.loading = false;
         this.courses = res.data.data.data;
         this.total = res.data.data.total;

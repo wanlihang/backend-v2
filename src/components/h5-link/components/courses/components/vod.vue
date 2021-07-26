@@ -52,6 +52,8 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   props: ["value"],
   data() {
@@ -68,6 +70,9 @@ export default {
       total: 0,
       courses: [],
     };
+  },
+  computed: {
+    ...mapState(["enabledAddonsCount"]),
   },
   watch: {
     link(newVal) {
@@ -97,7 +102,11 @@ export default {
     },
     tableItemChoice(row) {
       if (row) {
-        this.link = "/pages/course/show?id=" + row.id;
+        if (this.enabledAddonsCount === 0) {
+          this.link = "/course" + row.id + "/" + row.id;
+        } else {
+          this.link = "/pages/course/show?id=" + row.id;
+        }
       }
     },
     getCourse() {

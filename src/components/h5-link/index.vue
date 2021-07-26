@@ -73,17 +73,17 @@ export default {
     };
   },
   computed: {
-    ...mapState(["enabledAddons"]),
+    ...mapState(["enabledAddons", "enabledAddonsCount"]),
     tabs() {
       let tabs = [
         {
           name: "功能",
           key: "func",
         },
-        {
-          name: "课程分类",
-          key: "category",
-        },
+        // {
+        //   name: "课程分类",
+        //   key: "category",
+        // },
         {
           name: "课程",
           key: "course",
@@ -103,7 +103,7 @@ export default {
       let links = [
         {
           name: "录播课程列表",
-          url: "/packageA/vod/index",
+          url: "/packageA/vod/index"
         },
       ];
 
@@ -192,7 +192,14 @@ export default {
         this.$message.warning("请选择链接");
         return;
       }
-      this.$emit("change", this.link);
+
+      let link = this.link;
+
+      if (link === "/packageA/vod/index" && this.enabledAddonsCount === 0) {
+        link = "/courses";
+      }
+
+      this.$emit("change", link);
     },
   },
 };

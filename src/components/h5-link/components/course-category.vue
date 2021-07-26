@@ -144,7 +144,7 @@ export default {
       });
     },
     getBookCategory() {
-      this.$api.Course.Book.Book.Create().then((res) => {
+      this.$api.Meedubook.Book.Create().then((res) => {
         let data = res.data.categories;
         data.forEach((item) => {
           this.links.push({

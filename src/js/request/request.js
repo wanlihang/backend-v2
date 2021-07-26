@@ -530,31 +530,6 @@ const Api = {
                 },
             },
         },
-        Book: {
-            Book: {
-                List(params) {
-                    return get(`/backend/addons/meedu_books/book/index`, params);
-                },
-                Create() {
-                    return get(`/backend/addons/meedu_books/book/create`);
-                },
-                Store(params) {
-                    return post(`/backend/addons/meedu_books/book/create`, params);
-                },
-                Destory(id) {
-                    return destroy(`/backend/addons/meedu_books/book/${id}`);
-                },
-                Detail(id) {
-                    return get(`/backend/addons/meedu_books/book/${id}`);
-                },
-                Update(id, params) {
-                    return put(`/backend/addons/meedu_books/book/${id}`, params);
-                },
-                Users(id, params) {
-                    return get(`/backend/addons/meedu_books/book/${id}/users`, params);
-                }
-            }
-        },
         Topic: {
             Topic: {
                 List(params) {

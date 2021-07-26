@@ -17,14 +17,16 @@ export default {
       // 获取已开启的插件
       this.$api.System.Addons.LocalList().then((res) => {
         let enabledAddons = {};
+        let count = 0;
 
         for (let i = 0; i < res.data.length; i++) {
           if (res.data[i].enabled) {
+            count += 1;
             enabledAddons[res.data[i].sign] = 1;
           }
         }
 
-        this.setEnabledAddons(enabledAddons);
+        this.setEnabledAddons(enabledAddons, count);
       });
     },
   },

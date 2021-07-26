@@ -100,7 +100,7 @@ export default {
         return;
       }
       this.loading = true;
-      this.$api.Exam.MockPaper.List(this.pagination).then((res) => {
+      this.$api.Exam.Mockpaper.List(this.pagination).then((res) => {
         this.loading = false;
         this.courses = res.data.data;
         this.total = res.data.total;
