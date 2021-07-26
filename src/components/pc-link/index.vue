@@ -36,6 +36,11 @@ export default {
     funcLinks() {
       let links = [
         {
+          name: "首页",
+          url: "/",
+          active: "index",
+        },
+        {
           name: "录播课程列表",
           url: "/courses",
           active: "courses,course.show,video.show",

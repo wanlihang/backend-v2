@@ -55,7 +55,11 @@
           </el-form-item>
 
           <el-form-item label="新窗口打开" prop="blank">
-            <el-switch v-model="form.blank"></el-switch>
+            <el-switch
+              v-model="form.blank"
+              :active-value="1"
+              :inactive-value="0"
+            ></el-switch>
           </el-form-item>
         </el-form>
       </div>
