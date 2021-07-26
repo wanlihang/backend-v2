@@ -20,7 +20,7 @@
           <div class="ml-10">
             <el-select
               filterable
-              placeholder="图文分类"
+              placeholder="图文"
               class="w-200px"
               v-model="filter.topic_id"
               v-el-select-loadmore="loadmore"

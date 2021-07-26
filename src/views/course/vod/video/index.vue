@@ -57,7 +57,7 @@
           </el-table-column>
           <el-table-column prop="published_at" sortable label="上架时间">
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="200">
+          <el-table-column fixed="right" label="操作" width="150">
             <template slot-scope="scope">
               <p-link
                 text="编辑"
@@ -92,18 +92,6 @@
                 @click="
                   $router.push({
                     name: 'VideoWatchRecords',
-                    query: { course_id: scope.row.course_id, id: scope.row.id },
-                  })
-                "
-              ></p-link
-              ><p-link
-                text="评论"
-                p="addons.Zhibo.course_comment"
-                class="ml-5"
-                type="primary"
-                @click="
-                  $router.push({
-                    name: 'VideoComments',
                     query: { course_id: scope.row.course_id, id: scope.row.id },
                   })
                 "
