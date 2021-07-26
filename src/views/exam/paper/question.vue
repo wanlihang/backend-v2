@@ -3,7 +3,7 @@
     <back-bar class="mb-30" title="设置习题"></back-bar>
     <div class="float-left mb-30">
       <p-button
-        text="添加习题"
+        text="添加试题"
         p="addons.Paper.paper.questions.add"
         type="primary"
         @click="
@@ -16,53 +16,58 @@
     </div>
     <div class="float-left mb-30">
       <div class="float">
-        <span>总分：{{ totalScore }}分</span>
+        <h2>{{ totalScore }}分</h2>
       </div>
     </div>
     <div class="float-left" v-loading="loading">
-      <div class="float-left">
-        <div
-          class="questions-box"
-          v-for="(list, typeText) in results"
-          :key="typeText"
-        >
-          <div class="title mb-10">
-            {{ typeText }}&nbsp;(共{{ list.length }}题)
-          </div>
-          <el-table :data="list" stripe class="float-left mb-10">
-            <el-table-column prop="id" label="ID" width="100">
-            </el-table-column>
-            <el-table-column label="分数">
-              <template slot-scope="scope">
-                <span>{{ scope.row.score }}分</span>
-              </template>
-            </el-table-column>
-            <el-table-column prop="type_text" label="类型"> </el-table-column>
-            <el-table-column prop="level_text" label="难度"> </el-table-column>
-            <el-table-column label="内容">
-              <template slot-scope="scope">
-                <div v-html="scope.row.content"></div>
-              </template>
-            </el-table-column>
-            <el-table-column fixed="right" label="操作" width="80">
-              <template slot-scope="scope">
-                <p-link
-                  text="删除"
-                  p="addons.Paper.paper.questions.delete"
-                  type="danger"
-                  @click="destory(scope.row.id)"
-                ></p-link>
-              </template>
-            </el-table-column>
-          </el-table>
+      <div
+        class="float-left mb-30"
+        v-for="(list, typeText) in results"
+        :key="typeText"
+      >
+        <div class="float-left mb-10 helper-text">
+          {{ typeText }}&nbsp;(共{{ list.length }}题)
         </div>
+        <el-table :data="list" stripe class="float-left">
+          <el-table-column prop="id" label="试题ID" width="120">
+          </el-table-column>
+          <el-table-column label="分数" width="150">
+            <template slot-scope="scope">
+              <span>{{ scope.row.score }}分</span>
+            </template>
+          </el-table-column>
+          <el-table-column prop="type_text" label="类型" width="200">
+          </el-table-column>
+          <el-table-column prop="level_text" label="难度" width="200">
+          </el-table-column>
+          <el-table-column label="内容">
+            <template slot-scope="scope">
+              <question-render :question="scope.row"></question-render>
+            </template>
+          </el-table-column>
+          <el-table-column fixed="right" label="操作" width="80">
+            <template slot-scope="scope">
+              <p-link
+                text="删除"
+                p="addons.Paper.paper.questions.delete"
+                type="danger"
+                @click="destory(scope.row.id)"
+              ></p-link>
+            </template>
+          </el-table-column>
+        </el-table>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import QuestionRender from "@/components/question-render";
+
 export default {
+  components: {
+    QuestionRender,
+  },
   data() {
     return {
       pagination: {
