@@ -25,7 +25,7 @@
       <div class="float-left">
         <el-table
           :data="videos"
-          stripe
+          
           class="float-left"
           @sort-change="sortChange"
           :default-sort="{ prop: 'published_at', order: 'ascending' }"

@@ -59,7 +59,7 @@
     </div>
     <el-table
       :data="list"
-      stripe
+      
       class="float-left"
       @selection-change="handleSelectionChange"
       v-loading="loading"

@@ -9,7 +9,7 @@
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
-        <el-table :data="s_pages" stripe class="float-left">
+        <el-table :data="s_pages"  class="float-left">
           <el-table-column prop="sign" label="唯一标识" width="150">
           </el-table-column>
           <el-table-column prop="title" label="标题" width="280">

@@ -76,7 +76,7 @@
     </div>
     <div class="float-left mt-30" v-loading="loading">
       <div class="float-left">
-        <el-table :data="list" stripe class="float-left">
+        <el-table :data="list"  class="float-left">
           <el-table-column prop="user_id" label="用户ID" width="120">
           </el-table-column>
           <el-table-column label="用户" width="300">

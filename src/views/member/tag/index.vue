@@ -12,7 +12,7 @@
     </div>
 
     <div class="float-left" v-loading="loading">
-      <el-table :data="list" stripe class="float-left">
+      <el-table :data="list"  class="float-left">
         <el-table-column prop="id" label="ID" width="120"> </el-table-column>
         <el-table-column prop="name" label="标签名"> </el-table-column>
         <el-table-column fixed="right" label="操作" width="120">

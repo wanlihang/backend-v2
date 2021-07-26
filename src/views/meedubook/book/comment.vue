@@ -38,7 +38,7 @@
       <div class="float-left">
         <el-table
           :data="list"
-          stripe
+          
           @selection-change="handleSelectionChange"
           class="float-left"
         >

@@ -9,7 +9,7 @@
       ></p-button>
     </div>
     <div class="float-left" v-loading="loading">
-      <el-table :data="messages" stripe class="float-left">
+      <el-table :data="messages"  class="float-left">
         <el-table-column prop="id" label="ID" width="120"> </el-table-column>
         <el-table-column label="匹配规则" width="500"
           ><template slot-scope="scope">

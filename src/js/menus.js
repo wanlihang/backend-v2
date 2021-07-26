@@ -89,7 +89,7 @@ export default [{
     ]
 },
 {
-    name: 'title.member.index',
+    name: 'title.member.name',
     key: 'Member',
     icon: 'icon-icon-me-n',
     children: [{

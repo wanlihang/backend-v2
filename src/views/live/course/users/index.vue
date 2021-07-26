@@ -30,7 +30,7 @@
       <el-table
         :data="list"
         @selection-change="handleSelectionChange"
-        stripe
+        
         class="float-left mt-30"
       >
         <el-table-column type="selection" width="55"></el-table-column>

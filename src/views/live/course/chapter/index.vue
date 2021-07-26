@@ -17,7 +17,7 @@
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
-        <el-table :data="results" stripe class="float-left">
+        <el-table :data="results"  class="float-left">
           <el-table-column prop="id" label="ID" width="120"> </el-table-column>
           <el-table-column prop="sort" label="排序" width="120">
           </el-table-column>

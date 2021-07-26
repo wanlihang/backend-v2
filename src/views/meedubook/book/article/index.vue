@@ -45,7 +45,7 @@
             :data="mbooks"
             @sort-change="sortChange"
             :default-sort="{ prop: 'published_at', order: 'ascending' }"
-            stripe
+            
             class="float-left"
           >
             <el-table-column prop="id" label="ID" sortable width="120">

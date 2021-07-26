@@ -80,7 +80,7 @@
       <div class="float-left">
         <el-table
           :data="questions"
-          stripe
+          
           @selection-change="handleSelectionChange"
           class="float-left"
           @sort-change="sortChange"

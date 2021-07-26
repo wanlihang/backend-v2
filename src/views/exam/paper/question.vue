@@ -28,7 +28,7 @@
         <div class="float-left mb-10 helper-text">
           {{ typeText }}&nbsp;(共{{ list.length }}题)
         </div>
-        <el-table :data="list" stripe class="float-left">
+        <el-table :data="list"  class="float-left">
           <el-table-column prop="id" label="试题ID" width="120">
           </el-table-column>
           <el-table-column label="分数" width="150">

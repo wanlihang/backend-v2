@@ -35,7 +35,7 @@
       </div>
     </div>
 
-    <el-table :data="list" stripe class="float-left">
+    <el-table :data="list"  class="float-left">
       <el-table-column label="用户ID" prop="user_id" width="120">
       </el-table-column>
       <el-table-column label="用户">

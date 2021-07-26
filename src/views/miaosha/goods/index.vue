@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="float-left mt-30" v-loading="loading">
-      <el-table :data="results" stripe class="float-left">
+      <el-table :data="results"  class="float-left">
         <el-table-column prop="id" label="ID" width="120"> </el-table-column>
         <el-table-column prop="goods_id" label="课程ID" width="120">
         </el-table-column>

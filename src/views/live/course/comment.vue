@@ -59,7 +59,7 @@
       <div class="float-left">
         <el-table
           :data="results"
-          stripe
+          
           @selection-change="handleSelectionChange"
           class="float-left"
         >

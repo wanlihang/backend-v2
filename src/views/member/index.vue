@@ -23,7 +23,7 @@
           <el-input
             class="w-150px"
             v-model="filter.keywords"
-            placeholder="关键字"
+            placeholder="用户列表关键字"
           ></el-input>
         </div>
         <div class="ml-10">
@@ -80,7 +80,7 @@
       <div class="float-left">
         <el-table
           :data="users"
-          stripe
+          
           class="float-left"
           @sort-change="sortChange"
           :default-sort="{ prop: 'id', order: 'descending' }"

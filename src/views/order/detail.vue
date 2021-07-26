@@ -37,7 +37,7 @@
       <div class="panel-box p-0 mt-30 mb-30">
         <div class="panel-header">订单商品</div>
         <div class="panel-body">
-          <el-table :data="order.goods" stripe>
+          <el-table :data="order.goods" >
             <el-table-column prop="id" label="ID" width="120"></el-table-column>
             <el-table-column
               prop="goods_id"
@@ -57,7 +57,7 @@
       <div class="panel-box p-0 mt-30">
         <div class="panel-header">支付记录</div>
         <div class="panel-body">
-          <el-table :data="order.paid_records" stripe>
+          <el-table :data="order.paid_records" >
             <el-table-column prop="id" label="ID" width="120"></el-table-column>
             <el-table-column
               prop="paid_type_text"

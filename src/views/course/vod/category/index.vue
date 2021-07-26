@@ -12,7 +12,7 @@
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
-        <el-table :data="categories" stripe class="float-left">
+        <el-table :data="categories"  class="float-left">
           <el-table-column prop="id" label="ID" width="150"> </el-table-column>
           <el-table-column prop="sort" label="升序" width="150">
           </el-table-column>

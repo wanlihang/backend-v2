@@ -54,7 +54,7 @@
           :data="list"
           @sort-change="sortChange"
           :default-sort="{ prop: 'id', order: 'descending' }"
-          stripe
+          
           class="float-left"
         >
           <el-table-column prop="id" sortable label="ID" width="120">

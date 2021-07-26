@@ -4,20 +4,18 @@
       <div class="float-left d-flex">
         <div>
           <el-input
-            v-model="filter.user_id"
-            class="w-100px"
-            placeholder="用户ID"
-          ></el-input>
-        </div>
-
-        <div class="ml-10">
-          <el-input
             v-model="filter.goods_name"
-            placeholder="商品名"
+            placeholder="商品名称关键字"
             class="w-200px"
           ></el-input>
         </div>
-
+        <!-- <div class="ml-10">
+          <el-input
+            v-model="filter.user_id"
+            class="w-200px"
+            placeholder="用户ID"
+          ></el-input>
+        </div> -->
         <div class="ml-10">
           <el-input
             v-model="filter.order_id"
@@ -66,15 +64,14 @@
     <div class="float-left" v-loading="loading">
       <el-table
         :data="dataList"
-        stripe
         class="float-left"
         @sort-change="sortChange"
         :default-sort="{ prop: 'id', order: 'descending' }"
       >
         <el-table-column prop="id" sortable label="ID" :width="120">
         </el-table-column>
-        <el-table-column prop="user_id" sortable label="用户ID" :width="120">
-        </el-table-column>
+        <!-- <el-table-column prop="user_id" sortable label="用户ID" :width="120">
+        </el-table-column> -->
         <el-table-column label="用户" :width="300">
           <template slot-scope="scope">
             <div class="d-flex" v-if="users[scope.row.user_id]">

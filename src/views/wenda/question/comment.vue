@@ -3,7 +3,7 @@
     <back-bar class="mb-30" title="问题评论"></back-bar>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
-        <el-table :data="comments" stripe class="float-left">
+        <el-table :data="comments"  class="float-left">
           <el-table-column prop="id" label="ID" width="120"> </el-table-column>
           <el-table-column prop="user_id" label="用户ID" width="120">
           </el-table-column>

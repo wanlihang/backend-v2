@@ -14,7 +14,7 @@
       <div class="float-left">
         <el-table
           :data="categories"
-          stripe
+          
           row-key="id"
           :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
           class="float-left"

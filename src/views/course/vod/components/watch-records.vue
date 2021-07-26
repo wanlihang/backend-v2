@@ -44,7 +44,7 @@
       <div class="float-left">
         <el-table
           :data="records"
-          stripe
+          
           class="float-left"
           @sort-change="sortChange"
           :default-sort="{ prop: 'id', order: 'descending' }"

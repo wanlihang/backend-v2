@@ -9,7 +9,7 @@ const zh = {
         decoration_pc: "电脑端",
         decoration_h5: "移动端",
         role: 'VIP会员',
-        order: '全站订单',
+        order: '全部订单',
         'order-detail': "订单详情",
         promocode: '优惠码',
         promocode_import: '批量导入',
@@ -30,7 +30,8 @@ const zh = {
         },
         'system-application': '应用商城',
         member: {
-            index: '用户',
+            name:'用户',
+            index: '用户列表',
             create: '添加用户',
             import: '批量导入',
             detail: '用户详情',

@@ -6,7 +6,7 @@
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
-        <el-table :data="results" stripe class="float-left">
+        <el-table :data="results"  class="float-left">
           <el-table-column prop="user_id" label="用户ID" width="150">
           </el-table-column>
           <el-table-column label="用户">
