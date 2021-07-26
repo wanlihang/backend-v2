@@ -26,14 +26,10 @@
           v-for="(list, typeText) in results"
           :key="typeText"
         >
-          <div class="title">{{ typeText }}&nbsp;(共{{ list.length }}题)</div>
-          <el-table
-            :data="list"
-            @selection-change="handleSelectionChange"
-            stripe
-            class="float-left"
-          >
-            <el-table-column type="selection" width="55"></el-table-column>
+          <div class="title mb-10">
+            {{ typeText }}&nbsp;(共{{ list.length }}题)
+          </div>
+          <el-table :data="list" stripe class="float-left mb-10">
             <el-table-column prop="id" label="ID" width="100">
             </el-table-column>
             <el-table-column label="分数">
@@ -74,9 +70,6 @@ export default {
       },
       loading: false,
       results: [],
-      spids: {
-        ids: [],
-      },
     };
   },
 
@@ -96,13 +89,6 @@ export default {
     },
   },
   methods: {
-    handleSelectionChange(val) {
-      var newbox = [];
-      for (var i = 0; i < val.length; i++) {
-        newbox.push(val[i].id);
-      }
-      this.spids.ids = newbox;
-    },
     getResults() {
       if (this.loading) {
         return;
