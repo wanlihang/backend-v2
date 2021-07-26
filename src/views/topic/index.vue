@@ -18,11 +18,11 @@
     </div>
     <div class="float-left">
       <div class="float-left d-flex">
-        <div class="ml-10">
+        <div>
           <el-input
             class="w-200px"
             v-model="filter.keywords"
-            placeholder="请输入关键字"
+            placeholder="图文关键字"
           ></el-input>
         </div>
 
@@ -110,11 +110,17 @@
           <el-table-column fixed="right" label="操作" width="120">
             <template slot-scope="scope">
               <p-link
-                text="删除"
-                type="danger"
-                @click="destory(scope.row.id)"
-                p="addons.meedu_topics.topic.delete"
+                text="用户"
+                type="primary"
+                @click="
+                  $router.push({
+                    name: 'TopicOrder',
+                    query: { id: scope.row.id },
+                  })
+                "
+                p="addons.meedu_topics.orders"
               ></p-link>
+
               <p-link
                 text="编辑"
                 type="primary"
@@ -128,16 +134,11 @@
                 p="addons.meedu_topics.topic.update"
               ></p-link>
               <p-link
-                text="用户"
-                type="primary"
+                text="删除"
                 class="ml-5"
-                @click="
-                  $router.push({
-                    name: 'TopicOrder',
-                    query: { id: scope.row.id },
-                  })
-                "
-                p="addons.meedu_topics.orders"
+                type="danger"
+                @click="destory(scope.row.id)"
+                p="addons.meedu_topics.topic.delete"
               ></p-link>
             </template>
           </el-table-column>

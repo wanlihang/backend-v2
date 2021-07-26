@@ -33,7 +33,7 @@
             align="right"
             unlink-panels
             range-separator="至"
-            start-placeholder="订单创建开始时间"
+            start-placeholder="订单添加开始时间"
             end-placeholder="结束时间"
           >
           </el-date-picker>

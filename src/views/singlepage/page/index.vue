@@ -25,11 +25,6 @@
             <template slot-scope="scope">
               <el-link
                 style="margin-right: 10px"
-                type="danger"
-                @click="destory(scope.row.id)"
-                >删除</el-link
-              >
-              <el-link
                 type="primary"
                 @click="
                   $router.push({
@@ -38,6 +33,9 @@
                   })
                 "
                 >编辑</el-link
+              >
+              <el-link type="danger" @click="destory(scope.row.id)"
+                >删除</el-link
               >
             </template>
           </el-table-column>

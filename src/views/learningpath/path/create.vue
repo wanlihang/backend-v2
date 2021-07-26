@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="创建学习路径"></back-bar>
+    <back-bar class="mb-30" title="添加学习路径"></back-bar>
     <div class="float-left">
       <el-form
         ref="form"

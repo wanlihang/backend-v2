@@ -65,8 +65,8 @@
             align="right"
             unlink-panels
             range-separator="至"
-            start-placeholder="创建时间-开始"
-            end-placeholder="创建时间-结束"
+            start-placeholder="添加时间-开始"
+            end-placeholder="添加时间-结束"
           >
           </el-date-picker>
         </div>
@@ -121,7 +121,7 @@
           <el-table-column prop="expired_at" label="过期时间" width="200">
           </el-table-column>
 
-          <el-table-column prop="created_at" label="创建时间">
+          <el-table-column prop="created_at" label="添加时间">
           </el-table-column>
         </el-table>
       </div>

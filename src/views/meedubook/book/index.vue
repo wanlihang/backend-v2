@@ -16,7 +16,7 @@
             <el-input
               class="w-200px"
               v-model="filter.key"
-              placeholder="关键字"
+              placeholder="电子书关键字"
             ></el-input>
           </div>
           <div class="ml-10">
@@ -96,28 +96,9 @@
             <el-table-column fixed="right" label="操作" width="200">
               <template slot-scope="scope">
                 <p-link
-                  text="编辑"
-                  p="addons.meedu_books.book.update"
-                  type="primary"
-                  @click="
-                    $router.push({
-                      name: 'MeedubookUpdate',
-                      query: { id: scope.row.id },
-                    })
-                  "
-                ></p-link>
-                <p-link
-                  text="删除"
-                  class="ml-5"
-                  type="danger"
-                  @click="destory(scope.row.id)"
-                  p="addons.meedu_books.book.delete"
-                ></p-link>
-                <p-link
                   text="文章"
                   p="addons.meedu_books.book_article.list"
                   type="primary"
-                  class="ml-5"
                   @click="
                     $router.push({
                       name: 'MeedubookArticle',
@@ -148,6 +129,25 @@
                       query: { bid: scope.row.id },
                     })
                   "
+                ></p-link>
+                <p-link
+                  text="编辑"
+                  class="ml-5"
+                  p="addons.meedu_books.book.update"
+                  type="primary"
+                  @click="
+                    $router.push({
+                      name: 'MeedubookUpdate',
+                      query: { id: scope.row.id },
+                    })
+                  "
+                ></p-link>
+                <p-link
+                  text="删除"
+                  class="ml-5"
+                  type="danger"
+                  @click="destory(scope.row.id)"
+                  p="addons.meedu_books.book.delete"
                 ></p-link>
               </template>
             </el-table-column>

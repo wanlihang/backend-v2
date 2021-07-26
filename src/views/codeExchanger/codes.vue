@@ -269,7 +269,7 @@ export default {
 
       function openDownloadDialog(url, saveName) {
         if (typeof url == "object" && url instanceof Blob) {
-          url = URL.createObjectURL(url); // 创建blob地址
+          url = URL.createObjectURL(url); // 添加blob地址
         }
         var aLink = document.createElement("a");
         aLink.href = url;

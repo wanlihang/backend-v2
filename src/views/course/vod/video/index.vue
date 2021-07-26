@@ -82,7 +82,7 @@
                     },
                   })
                 "
-                >销售</el-link
+                >用户</el-link
               >
               <p-link
                 text="观看"

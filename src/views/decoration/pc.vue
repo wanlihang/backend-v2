@@ -565,7 +565,7 @@ export default {
         };
       }
 
-      // 创建block
+      // 添加block
       this.$api.ViewBlock.Store({
         platform: this.platform,
         page: this.page,

@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="创建秒杀商品"></back-bar>
+    <back-bar class="mb-30" title="添加秒杀商品"></back-bar>
     <div class="float-left">
       <el-form ref="form" :model="course" :rules="rules" label-width="200px">
         <el-form-item prop="goods_id" label="商品">

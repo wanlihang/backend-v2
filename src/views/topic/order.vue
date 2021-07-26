@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="购买用户"></back-bar>
+    <back-bar class="mb-30" title="图文订阅用户"></back-bar>
 
     <div class="float-left">
       <div class="float-left">

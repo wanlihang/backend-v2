@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="创建试题"></back-bar>
+    <back-bar class="mb-30" title="添加试题"></back-bar>
 
     <div class="float-left step-box mb-30">
       <el-steps :active="step" finish-status="finish">

@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="创建习题"></back-bar>
+    <back-bar class="mb-30" title="添加习题"></back-bar>
     <div class="float-left mb-30">
       <el-button @click="addmulti()" type="danger"> 批量添加 </el-button>
     </div>

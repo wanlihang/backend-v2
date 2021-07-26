@@ -54,7 +54,7 @@
           <el-input
             class="w-200px"
             v-model="filter.keywords"
-            placeholder="请输入关键字"
+            placeholder="课程名称关键字"
           ></el-input>
         </div>
 
@@ -130,27 +130,8 @@
           <el-table-column fixed="right" label="操作" width="150">
             <template slot-scope="scope">
               <p-link
-                text="删除"
-                type="danger"
-                @click="destory(scope.row.id)"
-                p="addons.Zhibo.course.delete"
-              ></p-link>
-              <p-link
-                text="编辑"
+                text="排课"
                 type="primary"
-                class="ml-5"
-                @click="
-                  $router.push({
-                    name: 'LiveCourseUpdate',
-                    query: { id: scope.row.id },
-                  })
-                "
-                p="addons.Zhibo.course.update"
-              ></p-link>
-              <p-link
-                text="直播"
-                type="primary"
-                class="ml-5"
                 @click="
                   $router.push({
                     name: 'LiveCourseVideo',
@@ -170,6 +151,26 @@
                   })
                 "
                 p="addons.Zhibo.course.users"
+              ></p-link>
+
+              <p-link
+                text="编辑"
+                type="primary"
+                class="ml-5"
+                @click="
+                  $router.push({
+                    name: 'LiveCourseUpdate',
+                    query: { id: scope.row.id },
+                  })
+                "
+                p="addons.Zhibo.course.update"
+              ></p-link>
+              <p-link
+                text="删除"
+                class="ml-5"
+                type="danger"
+                @click="destory(scope.row.id)"
+                p="addons.Zhibo.course.delete"
               ></p-link>
             </template>
           </el-table-column>

@@ -15,7 +15,7 @@
           <el-input
             v-model="filter.keywords"
             class="w-200px"
-            placeholder="关键字"
+            placeholder="模拟试卷关键字"
           ></el-input>
         </div>
 
@@ -71,28 +71,9 @@
           <el-table-column fixed="right" label="操作" width="220">
             <template slot-scope="scope">
               <p-link
-                text="删除"
-                p="addons.Paper.mock_paper.delete"
-                type="danger"
-                @click="destory(scope.row.id)"
-              ></p-link>
-              <p-link
-                text="编辑"
-                p="addons.Paper.mock_paper.update"
-                type="primary"
-                class="ml-5"
-                @click="
-                  $router.push({
-                    name: 'ExamMockpaperUpdate',
-                    query: { id: scope.row.id },
-                  })
-                "
-              ></p-link>
-              <p-link
                 text="用户"
                 p="addons.Paper.mock_paper.users"
                 type="primary"
-                class="ml-5"
                 @click="
                   $router.push({
                     name: 'MockpaperUser',
@@ -123,6 +104,26 @@
                     query: { id: scope.row.id },
                   })
                 "
+              ></p-link>
+
+              <p-link
+                text="编辑"
+                p="addons.Paper.mock_paper.update"
+                type="primary"
+                class="ml-5"
+                @click="
+                  $router.push({
+                    name: 'ExamMockpaperUpdate',
+                    query: { id: scope.row.id },
+                  })
+                "
+              ></p-link>
+              <p-link
+                text="删除"
+                class="ml-5"
+                p="addons.Paper.mock_paper.delete"
+                type="danger"
+                @click="destory(scope.row.id)"
               ></p-link>
             </template>
           </el-table-column>

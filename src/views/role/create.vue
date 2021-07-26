@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="创建VIP"></back-bar>
+    <back-bar class="mb-30" title="添加VIP"></back-bar>
 
     <div class="float-left">
       <el-form

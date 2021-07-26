@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="直播安排"></back-bar>
+    <back-bar class="mb-30" title="直播排课"></back-bar>
     <div class="float-left mb-30">
       <p-button
         text="添加"
@@ -44,32 +44,8 @@
           <el-table-column fixed="right" label="操作" width="200">
             <template slot-scope="scope">
               <p-link
-                text="删除"
-                type="danger"
-                @click="destory(scope.row.id)"
-                p="addons.Zhibo.course_video.delete"
-              >
-              </p-link>
-              <p-link
-                text="编辑"
-                type="primary"
-                class="ml-5"
-                @click="
-                  $router.push({
-                    name: 'LiveCourseVideoUpdate',
-                    query: {
-                      id: scope.row.id,
-                      course_id: pagination.course_id,
-                    },
-                  })
-                "
-                p="addons.Zhibo.course_video.update"
-              >
-              </p-link>
-              <p-link
                 text="开播"
                 type="primary"
-                class="ml-5"
                 @click="
                   $router.push({
                     name: 'LiveCourseVideoPlay',
@@ -111,6 +87,31 @@
                 "
                 p="addons.Zhibo.chat.list"
               ></p-link>
+
+              <p-link
+                text="编辑"
+                type="primary"
+                class="ml-5"
+                @click="
+                  $router.push({
+                    name: 'LiveCourseVideoUpdate',
+                    query: {
+                      id: scope.row.id,
+                      course_id: pagination.course_id,
+                    },
+                  })
+                "
+                p="addons.Zhibo.course_video.update"
+              >
+              </p-link>
+              <p-link
+                text="删除"
+                class="ml-5"
+                type="danger"
+                @click="destory(scope.row.id)"
+                p="addons.Zhibo.course_video.delete"
+              >
+              </p-link>
             </template>
           </el-table-column>
         </el-table>

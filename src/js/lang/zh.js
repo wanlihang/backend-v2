@@ -31,7 +31,7 @@ const zh = {
         'system-application': '应用商城',
         member: {
             index: '用户',
-            create: '创建用户',
+            create: '添加用户',
             import: '批量导入',
             detail: '用户详情',
             edit: '用户编辑',
@@ -40,7 +40,7 @@ const zh = {
             credit1: '用户积分',
             tag: {
                 index: '用户标签列表',
-                create: '创建用户标签',
+                create: '添加用户标签',
                 edit: '编辑用户标签'
             }
         },
@@ -51,7 +51,7 @@ const zh = {
             },
             goods: {
                 index: '秒杀课程',
-                create: '创建秒杀课程',
+                create: '添加秒杀课程',
                 update: '编辑秒杀课程'
             },
         },
@@ -60,7 +60,7 @@ const zh = {
             orders: '团购订单',
             goods: {
                 index: '团购课程',
-                create: '创建团购课程',
+                create: '添加团购课程',
                 update: '编辑团购课程',
                 order: '团购订单',
                 refund: '团购退款订单',
@@ -72,17 +72,17 @@ const zh = {
             path: {
                 name: '学习路径',
                 index: '学习路径',
-                create: '创建学习路径',
+                create: '添加学习路径',
                 update: '编辑学习路径'
             },
             step: {
                 name: '步骤',
                 index: '学习步骤',
-                create: '创建学习步骤',
+                create: '添加学习步骤',
                 update: '编辑学习步骤',
                 relation: {
                     index: '学习步骤关联',
-                    create: '创建步骤关联',
+                    create: '添加步骤关联',
                     update: '编辑步骤关联',
                 }
             },
@@ -91,12 +91,12 @@ const zh = {
             name: '三级分销',
             poster: {
                 index: '分销海报',
-                create: '创建分销海报',
+                create: '添加分销海报',
                 update: '编辑分销海报'
             },
             goods: {
                 index: '分销课程',
-                create: '创建分销课程',
+                create: '添加分销课程',
                 update: '编辑分销课程'
             },
         },
@@ -105,26 +105,26 @@ const zh = {
             course: {
                 name: '直播课',
                 index: '直播课程',
-                create: '创建直播课程',
+                create: '添加直播课程',
                 update: '编辑直播课程',
                 comment: '直播课程评论',
                 category: {
                     index: '直播课程分类',
-                    create: '创建直播课程分类',
+                    create: '添加直播课程分类',
                     update: '编辑直播课程分类',
                 },
                 chapter: {
                     index: '直播课程章节',
-                    create: '创建直播课程章节',
+                    create: '添加直播课程章节',
                     update: '编辑直播课程章节',
                 },
                 users: {
                     index: '直播课程订阅用户',
                 },
                 video: {
-                    index: '直播课程内容安排',
-                    create: '创建直播课程内容安排',
-                    update: '编辑直播课程内容安排',
+                    index: '直播排课',
+                    create: '添加直播排课',
+                    update: '编辑直播排课',
                     play: '开播',
                     watch: '观看用户',
                     chat: '聊天室内容',
@@ -133,7 +133,7 @@ const zh = {
             teacher: {
                 name: '讲师',
                 index: '直播讲师',
-                create: '创建直播讲师',
+                create: '添加直播讲师',
                 update: '编辑直播讲师'
             },
         },
@@ -147,20 +147,20 @@ const zh = {
         codeExchanger: {
             name: '兑换码',
             index: '兑换码',
-            create: '创建兑换码',
+            create: '添加兑换码',
             update: '编辑兑换码',
             codes: '兑换码'
         },
         topic: {
             name: '图文',
             index: '图文列表',
-            create: '创建图文文章',
-            update: '编辑图文文章',
-            order: '购买用户订单',
+            create: '添加图文',
+            update: '编辑图文',
+            order: '图文订阅用户',
             comment: '图文文章评论',
             category: {
                 index: '图文分类管理',
-                create: '创建图文分类',
+                create: '添加图文分类',
                 update: '编辑图文分类',
             },
         },
@@ -186,12 +186,12 @@ const zh = {
                 comment:'课程评论',
                 category: {
                     index: '课程分类管理',
-                    create: '创建课程分类',
+                    create: '添加课程分类',
                     update: '编辑课程分类'
                 },
                 chapter: {
                     index: '课程章节管理',
-                    create: '创建课程章节',
+                    create: '添加课程章节',
                     update: '编辑课程章节'
                 },
                 attach: {
@@ -203,7 +203,7 @@ const zh = {
                 },
                 video: {
                     index: '视频管理',
-                    create: '创建视频',
+                    create: '添加视频',
                     update: '编辑视频',
                     subscribe: '视频销售记录',
                     'watch-records': '视频观看记录',
@@ -230,12 +230,12 @@ const zh = {
                 },
                 chapter: {
                     index: '电子书章节管理',
-                    create: '创建电子书章节',
+                    create: '添加电子书章节',
                     update: '编辑电子书章节'
                 },
                 article: {
                     index: '电子书文章管理',
-                    create: '创建电子书文章',
+                    create: '添加电子书文章',
                     update: '编辑电子书文章',
                     comment: '电子书文章评论'
                 }
@@ -246,66 +246,66 @@ const zh = {
             paper: {
                 name: '试卷',
                 index: '试卷',
-                create: '创建试卷',
+                create: '添加试卷',
                 update: '编辑试卷',
                 userpaper: '考试记录',
                 user: '订阅用户',
                 stat: '分数统计',
                 question:'设置习题',
-                questionadd:'创建习题',
+                questionadd:'添加习题',
                 marking:'阅卷',
                 category: {
                     index: '试卷分类',
-                    create: '创建试卷分类',
+                    create: '添加试卷分类',
                     update: '编辑试卷分类',
                 },
             },
             mockpaper: {
                 name: '模拟',
                 index: '模拟试卷',
-                create: '创建模拟试卷',
+                create: '添加模拟试卷',
                 update: '编辑模拟试卷',
                 userpaper: '考试记录',
                 user: '订阅用户',
                 stat: '分数统计',
                 category: {
                     index: '模拟试卷分类',
-                    create: '创建模拟试卷分类',
+                    create: '添加模拟试卷分类',
                     update: '编辑模拟试卷分类',
                 },
             },
             question: {
                 name: '试题',
                 index: '试题',
-                create: '创建试题',
+                create: '添加试题',
                 update: '编辑试题',
                 userpaper: '考试记录',
                 import: '批量导入试题',
                 category: {
                     index: '试题分类',
-                    create: '创建试题分类',
+                    create: '添加试题分类',
                     update: '编辑试题分类',
                 },
             },
             practice: {
                 name: '练习',
                 index: '练习',
-                create: '创建练习',
+                create: '添加练习',
                 update: '编辑练习',
                 user: '参与用户',
                 progress: '练习进度',
                 category: {
                     index: '练习分类',
-                    create: '创建练习分类',
+                    create: '添加练习分类',
                     update: '编辑练习分类',
                 },
                 chapter: {
                     index: '练习章节',
-                    create: '创建练习章节',
+                    create: '添加练习章节',
                     update: '编辑练习章节',
                     question: {
                         index: '章节试题',
-                        create: '创建章节试题',
+                        create: '添加章节试题',
                     },
                 },
 
@@ -369,7 +369,7 @@ const zh = {
         statistical_analysis: '统计分析',
         query: '查询',
         new_registered_users: '新注册用户',
-        daily_order_creation: '每日创建订单量',
+        daily_order_creation: '每日添加订单量',
         daily_order_payment: "每日支付订单量",
         total_dailypayment_orders: "每日支付订单总额",
         start_time: '开始',

@@ -95,7 +95,7 @@
           </el-table-column>
           <el-table-column prop="remark" label="备注" width="300">
           </el-table-column>
-          <el-table-column prop="created_at" label="创建时间">
+          <el-table-column prop="created_at" label="添加时间">
           </el-table-column>
         </el-table>
       </div>

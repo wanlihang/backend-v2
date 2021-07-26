@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="创建分销课程"></back-bar>
+    <back-bar class="mb-30" title="添加分销课程"></back-bar>
 
     <div class="float-left">
       <el-form

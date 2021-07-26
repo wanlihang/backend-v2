@@ -14,7 +14,7 @@
       <div class="bottom-menus-box">
         <div>
           <el-button @click="formValidate" :loading="loading" type="primary">
-            创建
+            添加
           </el-button>
         </div>
         <div class="ml-24">

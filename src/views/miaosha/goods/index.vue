@@ -56,7 +56,7 @@
           </template>
         </el-table-column>
 
-        <el-table-column label="创建" prop="created_at" width="200">
+        <el-table-column label="添加" prop="created_at" width="200">
         </el-table-column>
 
         <el-table-column fixed="right" label="操作" width="100">

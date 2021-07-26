@@ -40,7 +40,7 @@
           <el-input
             class="w-200px"
             v-model="filter.keywords"
-            placeholder="关键字"
+            placeholder="课程名称关键字"
           ></el-input>
         </div>
         <div class="ml-10">
@@ -123,7 +123,7 @@
                   })
                 "
               >
-                查看
+                详情
               </el-link>
               <p-link
                 text="视频"

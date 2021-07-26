@@ -37,7 +37,7 @@
       </div>
       <div class="el_row_item2">
         <div class="el_item">
-          <span>{{ $t("index.allnum") }}</span>
+          <span style="width:80px;">{{ $t("index.allnum") }}</span>
           <span class="el_item_num">{{ list.user_count }}</span>
           <span style="margin-left: auto"
             >{{ $t("index.day_increase") }}：<strong
@@ -48,7 +48,7 @@
           >
         </div>
         <div class="el_item">
-          <span>{{ $t("index.month_income") }}</span>
+          <span style="width:80px;">{{ $t("index.month_income") }}</span>
           <span class="el_item_num">{{ list.this_month_paid_sum }}</span>
           <span style="margin-left: auto"
             >{{ $t("index.month_increase") }}：<strong
@@ -91,6 +91,7 @@
       <div class="tit">{{ $t("index.statistical_analysis") }}</div>
       <div class="selchartbox">
         <el-button
+          style="margin-right: 30px;"
           :type="flagE === index + 1 ? 'primary' : ''"
           v-for="(item, index) in navList"
           :key="item.id"
@@ -108,12 +109,12 @@
           :end-placeholder="$t('index.end_time')"
           :picker-options="pickerOptions"
         />
-        <el-button @click="getchartsdata()">{{ $t("index.query") }}</el-button>
+        <el-button class="ml-30" @click="getchartsdata()">筛选</el-button>
       </div>
       <el-col class="formbox">
         <div
           id="chartLine"
-          style="width: 100%; height: 252px; margin-left: -30px"
+          style="width: 100%; height: 252px; margin-left: -30px;margin-bottom:20px;"
         ></div>
       </el-col>
     </div>
@@ -485,26 +486,6 @@ export default {
       display: flex;
       flex-direction: row;
       overflow: hidden;
-      .el-button {
-        padding: 13px 15px;
-        box-sizing: border-box;
-        height: 40px;
-        background: #f1f2f9;
-        border-radius: 4px;
-        border: none;
-        margin-right: 50px;
-        font-size: 14px;
-        font-weight: 400;
-        color: #666666;
-      }
-      .el-button:hover {
-        color: #fff;
-        background: #3ca7fa;
-      }
-      .el-button--primary {
-        color: #fff;
-        background: #3ca7fa;
-      }
     }
     .selcharttimebox {
       margin-top: 50px;
@@ -513,29 +494,6 @@ export default {
       display: flex;
       flex-direction: row;
       overflow: hidden;
-      .el-button {
-        box-sizing: border-box;
-        width: 96px;
-        height: 40px;
-        background: #f1f2f9;
-        border-radius: 4px;
-        border: none;
-        margin-left: 30px;
-        font-size: 14px;
-        font-weight: 400;
-        color: #666666;
-      }
-      .el-button:hover {
-        color: #fff;
-        background: #3ca7fa;
-      }
-      .el-date-editor {
-        width: 224px;
-        height: 40px;
-        background: #ffffff;
-        border-radius: 4px;
-        border: 1px solid #dcdfe6;
-      }
     }
   }
   .bottomcopyright {
@@ -544,8 +502,9 @@ export default {
     margin-top: 50px;
     height: 16px;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 300;
     color: #999999;
+    padding-bottom: 30px;
     line-height: 16px;
   }
 }

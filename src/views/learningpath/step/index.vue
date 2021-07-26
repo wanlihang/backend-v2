@@ -30,11 +30,17 @@
         <el-table-column fixed="right" label="操作" width="150">
           <template slot-scope="scope">
             <p-link
-              type="danger"
-              text="删除"
-              p="addons.learnPaths.step.delete"
-              @click="destory(scope.row.id)"
+              text="课程"
+              p="addons.learnPaths.relation.list"
+              type="primary"
+              @click="
+                $router.push({
+                  name: 'Steprelation',
+                  query: { id: scope.row.id },
+                })
+              "
             ></p-link>
+
             <p-link
               text="编辑"
               p="addons.learnPaths.step.update"
@@ -48,16 +54,11 @@
               "
             ></p-link>
             <p-link
-              text="课程"
-              p="addons.learnPaths.relation.list"
+              type="danger"
               class="ml-5"
-              type="primary"
-              @click="
-                $router.push({
-                  name: 'Steprelation',
-                  query: { id: scope.row.id },
-                })
-              "
+              text="删除"
+              p="addons.learnPaths.step.delete"
+              @click="destory(scope.row.id)"
             ></p-link>
           </template>
         </el-table-column>

@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="创建模拟试卷"></back-bar>
+    <back-bar class="mb-30" title="添加模拟试卷"></back-bar>
 
     <div class="float-left">
       <el-form ref="form" :model="addform" :rules="rules" label-width="200px">

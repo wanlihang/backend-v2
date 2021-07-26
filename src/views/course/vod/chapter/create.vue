@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="创建课程章节"></back-bar>
+    <back-bar class="mb-30" title="添加课程章节"></back-bar>
     <div class="float-left">
       <el-form ref="form" :model="chapter" :rules="rules" label-width="200px">
         <el-form-item label="章节名" prop="title">

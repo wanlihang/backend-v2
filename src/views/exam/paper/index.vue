@@ -14,7 +14,7 @@
         <div>
           <el-input
             v-model="filter.keywords"
-            placeholder="关键字"
+            placeholder="试卷关键字"
             class="w-200px"
           ></el-input>
         </div>
@@ -71,35 +71,15 @@
           <el-table-column fixed="right" label="操作" width="270">
             <template slot-scope="scope">
               <p-link
-                text="删除"
-                p="addons.Paper.paper.delete"
-                type="danger"
-                @click="destory(scope.row.id)"
-              ></p-link>
-              <p-link
-                text="编辑"
-                p="addons.Paper.paper.update"
-                type="primary"
-                class="ml-5"
-                @click="
-                  $router.push({
-                    name: 'ExamPaperUpdate',
-                    query: { id: scope.row.id },
-                  })
-                "
-              ></p-link>
-              <p-link
                 text="试题"
                 p="addons.Paper.paper.questions.list"
                 type="primary"
-                class="ml-5"
                 @click="
                   $router.push({
                     name: 'ExamPaperQuestion',
                     query: { id: scope.row.id },
                   })
                 "
-
               ></p-link>
               <p-link
                 text="用户"
@@ -136,6 +116,26 @@
                     query: { id: scope.row.id },
                   })
                 "
+              ></p-link>
+
+              <p-link
+                text="编辑"
+                p="addons.Paper.paper.update"
+                type="primary"
+                class="ml-5"
+                @click="
+                  $router.push({
+                    name: 'ExamPaperUpdate',
+                    query: { id: scope.row.id },
+                  })
+                "
+              ></p-link>
+              <p-link
+                text="删除"
+                class="ml-5"
+                p="addons.Paper.paper.delete"
+                type="danger"
+                @click="destory(scope.row.id)"
               ></p-link>
             </template>
           </el-table-column>

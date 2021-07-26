@@ -12,6 +12,13 @@
     <div class="float-left">
       <div class="float-left d-flex">
         <div>
+          <el-input
+            class="w-200px"
+            v-model="filter.key"
+            placeholder="练习试卷关键字"
+          ></el-input>
+        </div>
+        <div class="d-flex ml-10">
           <el-select
             class="w-200px"
             placeholder="分类"
@@ -26,13 +33,7 @@
             </el-option>
           </el-select>
         </div>
-        <div class="d-flex ml-10">
-          <el-input
-            class="w-200px"
-            v-model="filter.key"
-            placeholder="搜索"
-          ></el-input>
-        </div>
+
         <div class="ml-10">
           <el-button @click="firstPageLoad()" type="primary" plain>
             筛选
@@ -62,33 +63,14 @@
               <span>{{ scope.row.question_count }}个</span>
             </template>
           </el-table-column>
-          <el-table-column prop="created_at" label="创建" width="200">
+          <el-table-column prop="created_at" label="添加" width="200">
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="200">
             <template slot-scope="scope">
               <p-link
-                text="删除"
-                p="addons.Paper.practice.delete"
-                type="danger"
-                @click="destory(scope.row.id)"
-              ></p-link>
-              <p-link
-                text="编辑"
-                p="addons.Paper.practice.update"
-                type="primary"
-                class="ml-5"
-                @click="
-                  $router.push({
-                    name: 'ExamPracticeUpdate',
-                    query: { id: scope.row.id },
-                  })
-                "
-              ></p-link>
-              <p-link
                 text="章节"
                 p="addons.Paper.practice_chapter.list"
                 type="primary"
-                class="ml-5"
                 @click="
                   $router.push({
                     name: 'PracticeChapter',
@@ -107,6 +89,26 @@
                     query: { id: scope.row.id },
                   })
                 "
+              ></p-link>
+
+              <p-link
+                text="编辑"
+                p="addons.Paper.practice.update"
+                type="primary"
+                class="ml-5"
+                @click="
+                  $router.push({
+                    name: 'ExamPracticeUpdate',
+                    query: { id: scope.row.id },
+                  })
+                "
+              ></p-link>
+              <p-link
+                text="删除"
+                class="ml-5"
+                p="addons.Paper.practice.delete"
+                type="danger"
+                @click="destory(scope.row.id)"
               ></p-link>
             </template>
           </el-table-column>

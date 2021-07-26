@@ -2,7 +2,7 @@
   <div class="meedu-main-body">
     <div class="float-left mb-30">
       <p-button
-        text="创建用户"
+        text="添加用户"
         p="member.store"
         @click="$router.push({ name: 'MemberCreate' })"
         type="primary"

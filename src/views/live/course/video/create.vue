@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="创建直播课程内容安排"></back-bar>
+    <back-bar class="mb-30" title="添加直播课程内容安排"></back-bar>
     <div class="float-left">
       <el-form
         ref="form"

@@ -43,22 +43,22 @@
           <el-table-column fixed="right" label="操作" width="120">
             <template slot-scope="scope">
               <p-link
-                text="删除"
-                p="addons.learnPaths.relation.update"
-                type="danger"
-                @click="destory(scope.row.id)"
-              ></p-link>
-              <p-link
                 text="编辑"
                 p="addons.learnPaths.relation.delete"
                 type="primary"
-                class="ml-5"
                 @click="
                   $router.push({
                     name: 'SteprelationUpdate',
                     query: { id: scope.row.id },
                   })
                 "
+              ></p-link>
+              <p-link
+                text="删除"
+                class="ml-5"
+                p="addons.learnPaths.relation.update"
+                type="danger"
+                @click="destory(scope.row.id)"
               ></p-link>
             </template>
           </el-table-column>
