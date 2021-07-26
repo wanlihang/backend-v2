@@ -32,6 +32,23 @@
           ></el-input>
         </div>
         <div class="ml-10">
+          <el-select
+            filterable
+            placeholder="课程"
+            class="w-200px"
+            v-model="filter.course_id"
+            v-el-select-loadmore="loadmore"
+          >
+            <el-option
+              v-for="(item, index) in filterData.courses"
+              :key="index"
+              :label="item.title"
+              :value="item.id"
+            >
+            </el-option>
+          </el-select>
+        </div>
+        <div class="ml-10">
           <el-button @click="getResults" type="primary" plain>筛选</el-button>
           <el-button @click="paginationReset">清空</el-button>
         </div>
@@ -97,6 +114,22 @@
 
 <script>
 export default {
+  directives: {
+    "el-select-loadmore": {
+      bind(el, binding) {
+        const SELECTWRAP_DOM = el.querySelector(
+          ".el-select-dropdown .el-select-dropdown__wrap"
+        );
+        SELECTWRAP_DOM.addEventListener("scroll", function () {
+          const condition =
+            this.scrollHeight - this.scrollTop <= this.clientHeight;
+          if (condition) {
+            binding.value();
+          }
+        });
+      },
+    },
+  },
   data() {
     return {
       pagination: {
@@ -104,13 +137,17 @@ export default {
         size: 10,
       },
       filter: {
-        course_id: this.$route.query.id,
+        course_id: null,
         user_id: null,
       },
       total: 0,
       spids: {
         ids: [],
         status: null,
+      },
+      formData: {
+        page: 1,
+        size: 10,
       },
       loading: false,
       results: [],
@@ -121,6 +158,7 @@ export default {
   },
 
   mounted() {
+    this.params();
     this.getResults();
   },
   methods: {
@@ -146,6 +184,20 @@ export default {
       }
       this.spids.ids = newbox;
     },
+    loadmore() {
+      this.formData.page++;
+      this.params();
+    },
+    params() {
+      let params = {};
+      Object.assign(params, this.filter, this.formData);
+      this.$api.Course.Live.Course.Comment(params).then((res) => {
+        this.filterData.courses = [
+          ...this.filterData.courses,
+          ...res.data.courses,
+        ];
+      });
+    },
     getResults() {
       if (this.loading) {
         return;
@@ -158,7 +210,7 @@ export default {
         this.loading = false;
         this.results = res.data.data.data;
         this.total = res.data.data.total;
-        this.filterData.courses = res.data.courses;
+        //this.filterData.courses = res.data.courses;
       });
     },
     destorymulti() {

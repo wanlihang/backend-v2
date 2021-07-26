@@ -39,6 +39,7 @@ export default {
         VideoSubscribe: 'Vod',
         VideoWatchRecords: 'Vod',
         VideoComments: 'Vod',
+        CourseComments: 'Vod',
         SinglePage: 'SinglePage',
         SinglePageCreate: 'SinglePage',
         SinglePageUpdate: 'SinglePage',

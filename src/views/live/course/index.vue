@@ -1,17 +1,18 @@
 <template>
   <div class="meedu-main-body">
     <div class="float-left mb-30">
-      <!-- <el-button
-        @click="$router.push({ name: 'LiveCourseComment' })"
-        type="primary"
-      >
-        直播课程评论
-      </el-button> -->
       <p-button
         text="添加"
         @click="$router.push({ name: 'LiveCourseCreate' })"
         type="primary"
         p="addons.Zhibo.course.store"
+      >
+      </p-button>
+      <p-button
+        text="评论"
+        @click="$router.push({ name: 'LiveCourseComment' })"
+        type="primary"
+        p="addons.Zhibo.course_comment"
       >
       </p-button>
     </div>
@@ -116,7 +117,7 @@
           </el-table-column>
           <el-table-column label="上架时间" prop="published_at" sortable>
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="200">
+          <el-table-column fixed="right" label="操作" width="150">
             <template slot-scope="scope">
               <p-link
                 text="删除"
@@ -159,18 +160,6 @@
                   })
                 "
                 p="addons.Zhibo.course.users"
-              ></p-link>
-              <p-link
-                text="评论"
-                type="primary"
-                class="ml-5"
-                @click="
-                  $router.push({
-                    name: 'LiveCourseComment',
-                    query: { id: scope.row.id },
-                  })
-                "
-                p="addons.Zhibo.course_comment"
               ></p-link>
             </template>
           </el-table-column>

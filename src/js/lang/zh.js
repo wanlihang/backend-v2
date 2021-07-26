@@ -183,6 +183,7 @@ const zh = {
                 update: '编辑录播课程',
                 detail: '录播课程详情',
                 'video-import': '视频批量导入',
+                comment:'课程评论',
                 category: {
                     index: '课程分类管理',
                     create: '创建课程分类',
