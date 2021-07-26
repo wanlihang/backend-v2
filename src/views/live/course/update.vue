@@ -89,7 +89,6 @@
                   format="yyyy-MM-dd HH:mm"
                   value-format="yyyy-MM-dd HH:mm"
                   placeholder="请选择日期"
-                  :picker-options="expireTimeOption"
                 >
                 </el-date-picker>
               </div>
@@ -296,11 +295,6 @@ export default {
             key: "dev",
           },
         ],
-      },
-      expireTimeOption: {
-        disabledDate(date) {
-          return date.getTime() < Date.now();
-        },
       },
       types: null,
       categories: [],

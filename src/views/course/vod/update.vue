@@ -100,7 +100,6 @@
                   format="yyyy-MM-dd HH:mm"
                   value-format="yyyy-MM-dd HH:mm"
                   placeholder="请选择日期"
-                  :picker-options="expireTimeOption"
                 >
                 </el-date-picker>
               </div>
@@ -289,11 +288,6 @@ export default {
             trigger: "blur",
           },
         ],
-      },
-      expireTimeOption: {
-        disabledDate(date) {
-          return date.getTime() < Date.now() - 24 * 60 * 60 * 1000;
-        },
       },
       comments: [
         {

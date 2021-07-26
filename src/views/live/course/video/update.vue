@@ -51,7 +51,6 @@
             format="yyyy-MM-dd HH:mm"
             value-format="yyyy-MM-dd HH:mm"
             placeholder="请选择日期"
-            :picker-options="expireTimeOption"
           >
           </el-date-picker>
         </el-form-item>
@@ -100,11 +99,6 @@ export default {
             trigger: "blur",
           },
         ],
-      },
-      expireTimeOption: {
-        disabledDate(date) {
-          return date.getTime() < Date.now();
-        },
       },
       filterData: {
         chapters: [],

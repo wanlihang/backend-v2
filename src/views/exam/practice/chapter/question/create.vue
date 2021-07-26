@@ -111,7 +111,7 @@ export default {
       results: [],
       total: 0,
       spids: {
-        id: parseInt(this.$route.query.id),
+        id: this.$route.query.id,
         qids: [],
       },
       filterData: {
