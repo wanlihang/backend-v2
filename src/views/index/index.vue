@@ -65,27 +65,69 @@
     </div>
     <div class="el_top_row2">
       <div class="tit">{{ $t("index.quick_acsess") }}</div>
-      <a href="" class="el_row2_item">
+      <a
+        @click="
+          $router.push({
+            name: 'Vod',
+          })
+        "
+        class="el_row2_item"
+      >
         <img src="../../assets/home/demand.png" />
         <span>{{ $t("index.demand_course") }}</span>
       </a>
-      <a href="" class="el_row2_item">
+      <a
+        @click="
+          $router.push({
+            name: 'LiveCourse',
+          })
+        "
+        class="el_row2_item"
+      >
         <img src="../../assets/home/live.png" />
         <span>{{ $t("index.live_course") }}</span>
       </a>
-      <a href="" class="el_row2_item">
+      <a
+        @click="
+          $router.push({
+            name: 'Topic',
+          })
+        "
+        class="el_row2_item"
+      >
         <img src="../../assets/home/tuwen.png" />
         <span>{{ $t("index.graphic_course") }}</span>
       </a>
-      <a href="" class="el_row2_item">
+      <a
+        @click="
+          $router.push({
+            name: 'Meedubook',
+          })
+        "
+        class="el_row2_item"
+      >
         <img src="../../assets/home/ebook.png" />
         <span>{{ $t("index.ebook") }}</span>
       </a>
-      <a href="" class="el_row2_item">
+      <a
+        @click="
+          $router.push({
+            name: 'LearningPath',
+          })
+        "
+        class="el_row2_item"
+      >
         <img src="../../assets/home/course.png" />
-        <span>{{ $t("index.curriculum_path") }}</span>
+        <span>学习路径</span>
       </a>
-      <a href="" class="el_row2_item">
+      <a
+        @click="
+          $router.push({
+            name: 'ExamPaper',
+          })
+        "
+        class="el_row2_item"
+      >
         <img src="../../assets/home/testpaper.png" />
         <span>{{ $t("index.testpaper") }}</span>
       </a>
@@ -431,6 +473,9 @@ export default {
     flex-direction: row;
     position: relative;
     justify-content: space-between;
+    a {
+      cursor: pointer;
+    }
     .tit {
       position: absolute;
       height: 16px;
