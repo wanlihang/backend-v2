@@ -26,6 +26,7 @@ export default {
   components: { NavsList },
   data() {
     return {
+      platform: "PC",
       showListWin: false,
       list: [],
     };
@@ -35,7 +36,7 @@ export default {
   },
   methods: {
     getData() {
-      this.$api.System.Navs.List().then((res) => {
+      this.$api.System.Navs.List({ platform: this.platform }).then((res) => {
         this.list = res.data;
       });
     },
