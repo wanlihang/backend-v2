@@ -1146,6 +1146,22 @@ const routes = [{
     }
   },
   {
+    path: '/exam/paper/question',
+    component: () => import('@/views/exam/paper/question'),
+    name: 'ExamPaperQuestion',
+    meta: {
+      title: 'title.exam.paper.question'
+    }
+  },
+  {
+    path: '/exam/paper/questionadd',
+    component: () => import('@/views/exam/paper/questionadd'),
+    name: 'ExamPaperQuestionCreate',
+    meta: {
+      title: 'title.exam.paper.questionadd'
+    }
+  },
+  {
     path: '/exam/practice/index',
     component: () => import('@/views/exam/practice/index'),
     name: 'ExamPractice',

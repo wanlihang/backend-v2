@@ -250,6 +250,8 @@ const zh = {
                 userpaper: '考试记录',
                 user: '订阅用户',
                 stat: '分数统计',
+                question:'设置习题',
+                questionadd:'创建习题',
                 category: {
                     index: '试卷分类',
                     create: '创建试卷分类',

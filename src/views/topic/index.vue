@@ -8,6 +8,13 @@
         p="addons.meedu_topics.topic.store"
       >
       </p-button>
+      <p-button
+        text="评论"
+        @click="$router.push({ name: 'TopicComment' })"
+        type="primary"
+        p="addons.meedu_topics.comments"
+      >
+      </p-button>
     </div>
     <div class="float-left">
       <div class="float-left d-flex">
@@ -100,7 +107,7 @@
           </el-table-column>
           <el-table-column prop="created_at" sortable label="时间" width="200">
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="150">
+          <el-table-column fixed="right" label="操作" width="120">
             <template slot-scope="scope">
               <p-link
                 text="删除"
@@ -119,18 +126,6 @@
                   })
                 "
                 p="addons.meedu_topics.topic.update"
-              ></p-link>
-              <p-link
-                text="评论"
-                type="primary"
-                class="ml-5"
-                @click="
-                  $router.push({
-                    name: 'TopicComment',
-                    query: { id: scope.row.id },
-                  })
-                "
-                p="addons.meedu_topics.comments"
               ></p-link>
               <p-link
                 text="用户"

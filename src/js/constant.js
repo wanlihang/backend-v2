@@ -143,6 +143,8 @@ export default {
         ExamPaperUserpaper: 'ExamPaper',
         ExamPaperStat: 'ExamPaper',
         PaperUser: 'ExamPaper',
+        ExamPaperQuestion: 'ExamPaper',
+        ExamPaperQuestionCreate: 'ExamPaper',
         ExamPractice: 'ExamPractice',
         ExamPracticeCreate: 'ExamPractice',
         ExamPracticeUpdate: 'ExamPractice',

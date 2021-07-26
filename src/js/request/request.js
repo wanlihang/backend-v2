@@ -1041,7 +1041,7 @@ const Api = {
     Multishare: {
         Poster: {
             List() {
-                return get(`/backend/addons/multi_level_share/poster/index`,);
+                return get(`/backend/addons/multi_level_share/poster/index`, );
             },
             Store(params) {
                 return post(`/backend/addons/multi_level_share/poster/create`, params);
@@ -1152,6 +1152,18 @@ const Api = {
             },
             DestoryUser(id, ids) {
                 return destroy(`/backend/addons/Paper/paper/${id}/user/${ids}`);
+            },
+            Question(id, params) {
+                return get(`/backend/addons/Paper/paper/${id}/questions`, params);
+            },
+            QuestionDestroy(id, ids) {
+                return destroy(`/backend/addons/Paper/paper/${id}/questions/${ids}`);
+            },
+            QuestionList(id, params) {
+                return get(`/backend/addons/Paper/paper/${id}/questions`, params);
+            },
+            QuestionStoreMulti(id, params) {
+                return post(`/backend/addons/Paper/paper/${id}/questions`, params);
             },
             Category: {
                 List(params) {
