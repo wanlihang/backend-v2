@@ -145,9 +145,12 @@ export default {
         is_check: null,
       },
       total: 0,
-      topictotal: this.$route.query.id,
       loading: false,
       list: [],
+      formData: {
+        page: 1,
+        size: 10,
+      },
     };
   },
   mounted() {
@@ -156,8 +159,8 @@ export default {
   },
   methods: {
     loadmore() {
-      this.pagination.page++;
-      this.getComments();
+      this.formData.page++;
+      this.params();
     },
     paginationReset() {
       this.pagination.page = 1;
@@ -182,12 +185,11 @@ export default {
       this.spids.ids = newbox;
     },
     params() {
-      var key = {
-        page: 1,
-        size: this.topictotal,
-      };
-      this.$api.Course.Topic.Topic.List(key).then((res) => {
-        this.filterData.topics = res.data.data.data;
+      this.$api.Course.Topic.Topic.List(this.formData).then((res) => {
+        this.filterData.topics = [
+          ...this.filterData.topics,
+          ...res.data.data.data,
+        ];
       });
     },
     getComments() {

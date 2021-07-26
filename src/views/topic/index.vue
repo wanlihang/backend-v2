@@ -10,7 +10,7 @@
       </p-button>
       <p-button
         text="评论"
-        @click="$router.push({ name: 'TopicComment', query: { id: total } })"
+        @click="$router.push({ name: 'TopicComment' })"
         type="primary"
         p="addons.meedu_topics.comments"
       >
