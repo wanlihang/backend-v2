@@ -82,7 +82,7 @@
               </template>
             </el-table-column>
             <el-table-column prop="updated_at" label="时间"> </el-table-column>
-            <el-table-column fixed="right" label="操作" width="150">
+            <el-table-column fixed="right" label="操作" width="80">
               <template slot-scope="scope">
                 <el-link type="danger" @click="destroy(scope.row.id)"
                   >删除</el-link

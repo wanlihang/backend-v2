@@ -107,7 +107,7 @@
           </el-table-column>
           <el-table-column prop="created_at" sortable label="时间" width="200">
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="150">
+          <el-table-column fixed="right" label="操作" width="120">
             <template slot-scope="scope">
               <p-link
                 text="删除"
