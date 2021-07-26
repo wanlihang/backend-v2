@@ -34,6 +34,7 @@
         <div class="ml-10">
           <el-select
             filterable
+            :filter-method="dataFilter"
             placeholder="课程"
             class="w-200px"
             v-model="filter.course_id"
@@ -146,6 +147,8 @@ export default {
         status: null,
       },
       formData: {
+        keywords: null,
+        status: -1,
         page: 1,
         size: 10,
       },
@@ -162,10 +165,19 @@ export default {
     this.getResults();
   },
   methods: {
+    dataFilter(val) {
+      this.formData.keywords = val;
+      let params = {};
+      Object.assign(params, this.filter, this.formData);
+      this.$api.Course.Live.Course.List(params).then((res) => {
+        this.filterData.courses = res.data.data.data;
+      });
+    },
     paginationReset() {
       this.pagination.page = 1;
       this.filter.course_id = null;
       this.filter.user_id = null;
+      this.formData.keywords = null;
       this.getResults();
     },
     paginationSizeChange(size) {
@@ -191,10 +203,10 @@ export default {
     params() {
       let params = {};
       Object.assign(params, this.filter, this.formData);
-      this.$api.Course.Live.Course.Comment(params).then((res) => {
+      this.$api.Course.Live.Course.List(params).then((res) => {
         this.filterData.courses = [
           ...this.filterData.courses,
-          ...res.data.courses,
+          ...res.data.data.data,
         ];
       });
     },
