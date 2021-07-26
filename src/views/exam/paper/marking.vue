@@ -101,12 +101,9 @@ export default {
         return [];
       }
       let list = [];
-
       for (let i = 0; i < this.questions.length; i++) {
         let question = this.questions[i];
-        console.log(question);
         if (question.question === null) {
-          console.log(44);
           continue;
         }
         if (question.question.type === 4) {
