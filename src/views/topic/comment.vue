@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="话题文章评论"></back-bar>
+    <back-bar class="mb-30" title="图文文章评论"></back-bar>
     <div class="float-left">
       <div class="float-left">
         <div class="float-left d-flex">
@@ -16,6 +16,23 @@
               class="w-200px"
               placeholder="用户ID"
             ></el-input>
+          </div>
+          <div class="ml-10">
+            <el-select
+              filterable
+              placeholder="图文分类"
+              class="w-200px"
+              v-model="filter.topic_id"
+              v-el-select-loadmore="loadmore"
+            >
+              <el-option
+                v-for="(item, index) in filterData.topics"
+                :key="index"
+                :label="item.title"
+                :value="item.id"
+              >
+              </el-option>
+            </el-select>
           </div>
           <div class="ml-15">
             <el-button @click="getComments" type="primary" plain
@@ -94,6 +111,22 @@
 
 <script>
 export default {
+  directives: {
+    "el-select-loadmore": {
+      bind(el, binding) {
+        const SELECTWRAP_DOM = el.querySelector(
+          ".el-select-dropdown .el-select-dropdown__wrap"
+        );
+        SELECTWRAP_DOM.addEventListener("scroll", function () {
+          const condition =
+            this.scrollHeight - this.scrollTop <= this.clientHeight;
+          if (condition) {
+            binding.value();
+          }
+        });
+      },
+    },
+  },
   data() {
     return {
       pagination: {
@@ -101,25 +134,35 @@ export default {
         size: 10,
       },
       filter: {
-        topic_id: this.$route.query.id,
+        topic_id: null,
         user_id: null,
+      },
+      filterData: {
+        topics: [],
       },
       spids: {
         ids: [],
         is_check: null,
       },
       total: 0,
+      topictotal: this.$route.query.id,
       loading: false,
       list: [],
     };
   },
   mounted() {
+    this.params();
     this.getComments();
   },
   methods: {
+    loadmore() {
+      this.pagination.page++;
+      this.getComments();
+    },
     paginationReset() {
       this.pagination.page = 1;
       this.filter.user_id = null;
+      this.filter.topic_id = null;
       this.getComments();
     },
     paginationSizeChange(size) {
@@ -137,6 +180,15 @@ export default {
         newbox.push(val[i].id);
       }
       this.spids.ids = newbox;
+    },
+    params() {
+      var key = {
+        page: 1,
+        size: this.topictotal,
+      };
+      this.$api.Course.Topic.Topic.List(key).then((res) => {
+        this.filterData.topics = res.data.data.data;
+      });
     },
     getComments() {
       if (this.loading) {
