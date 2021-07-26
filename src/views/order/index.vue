@@ -68,11 +68,11 @@
         @sort-change="sortChange"
         :default-sort="{ prop: 'id', order: 'descending' }"
       >
-        <el-table-column prop="id" sortable label="ID" :width="120">
+        <el-table-column prop="id" sortable label="ID" :width="100">
         </el-table-column>
         <!-- <el-table-column prop="user_id" sortable label="用户ID" :width="120">
         </el-table-column> -->
-        <el-table-column label="用户" :width="300">
+        <el-table-column label="用户" :width="210">
           <template slot-scope="scope">
             <div class="d-flex" v-if="users[scope.row.user_id]">
               <div>
@@ -86,20 +86,21 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column prop="order_id" label="订单编号" :width="200">
-        </el-table-column>
-        <el-table-column prop="charge" sortable label="总价" :width="120">
-        </el-table-column>
-        <el-table-column prop="status_text" label="状态" :width="100">
-        </el-table-column>
-        <el-table-column label="商品" :width="500">
+         <el-table-column label="商品名称" :width="350">
           <template slot-scope="scope">
             <span v-for="item in scope.row.goods" :key="item.id">
               {{ item.goods_name }}
             </span>
           </template>
         </el-table-column>
-        <el-table-column prop="updated_at" sortable label="时间" :width="200">
+        <el-table-column prop="order_id" label="订单编号" :width="250">
+        </el-table-column>
+        <el-table-column prop="charge" sortable label="支付金额" :width="150">
+        </el-table-column>
+        <el-table-column prop="status_text" label="支付状态" :width="150">
+        </el-table-column>
+       
+        <el-table-column prop="updated_at" sortable label="订单创建时间" :width="250">
         </el-table-column>
         <el-table-column label="操作" fixed="right" :width="80">
           <template slot-scope="scope">

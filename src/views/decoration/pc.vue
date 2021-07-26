@@ -749,7 +749,8 @@ export default {
       .btn {
         display: inline-block;
         cursor: move;
-
+        width: 60px;
+        height: 60px;
         &:hover {
           box-shadow: 0px 4px 8px 0px rgba(102, 102, 102, 0.15);
           border-radius: 8px;
