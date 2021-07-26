@@ -49,7 +49,7 @@
       </el-form>
     </div>
 
-    <div class="float-left" v-show="step === 1">
+    <div class="float-left pl-200" v-show="step === 1">
       <q-choice @change="change" v-if="form.type === 1"></q-choice>
       <q-select @change="change" v-else-if="form.type === 2"></q-select>
       <q-input @change="change" v-else-if="form.type === 3"></q-input>
@@ -70,11 +70,7 @@
             保存
           </el-button>
 
-          <el-button
-            @click="formValidate"
-            v-if="step === 0"
-            :loading="loading"
-          >
+          <el-button @click="formValidate" v-if="step === 0" :loading="loading">
             下一步
           </el-button>
         </div>
@@ -207,12 +203,7 @@ export default {
         return;
       }
 
-      let data = Object.assign({}, this.form);
-      if (data.type === 2) {
-        data.answer = data.answer.join(",");
-      }
-
-      this.$api.Exam.Question.Store(data)
+      this.$api.Exam.Question.Store(this.form)
         .then(() => {
           this.$message.success(this.$t("common.success"));
           this.$router.back();
@@ -228,6 +219,11 @@ export default {
 <style lang="less" scoped>
 .step-box {
   box-sizing: border-box;
-  padding: 30px 100px;
+  padding: 30px 200px;
+}
+
+.pl-200 {
+  padding-left: 200px;
+  box-sizing: border-box;
 }
 </style>

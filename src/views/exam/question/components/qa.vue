@@ -1,7 +1,10 @@
 <template>
   <div class="float-left" v-if="init">
     <div class="float-left mb-30">
-      <div class="float-left helper-text mb-10">分数</div>
+      <div class="float-left helper-text mb-10">
+        <span class="c-red">*</span>
+        <span class="ml-5">分数</span>
+      </div>
       <div class="float-left d-flex">
         <div>
           <el-input
@@ -33,14 +36,24 @@
     </div>
 
     <div class="float-left mb-30">
-      <div class="float-left helper-text mb-10">试题内容</div>
+      <div class="float-left helper-text mb-10">
+        <span class="c-red">*</span>
+        <span class="ml-5">试题内容</span>
+      </div>
       <div class="float-left">
-        <wang-editor v-model="form.content" :height="100"></wang-editor>
+        <wang-editor
+          v-model="form.content"
+          class="w-600px"
+          :height="100"
+        ></wang-editor>
       </div>
     </div>
 
     <div class="float-left mb-30">
-      <div class="float-left helper-text mb-10">答案</div>
+      <div class="float-left helper-text mb-10">
+        <span class="c-red">*</span>
+        <span class="ml-5">答案</span>
+      </div>
       <div class="float-left">
         <span class="helper-text">问答题无标准答案，需要人工介入阅卷。</span>
       </div>
@@ -49,7 +62,11 @@
     <div class="float-left">
       <div class="float-left helper-text mb-10">解析</div>
       <div class="float-left">
-        <wang-editor v-model="form.remark" :height="100"></wang-editor>
+        <wang-editor
+          v-model="form.remark"
+          class="w-600px"
+          :height="100"
+        ></wang-editor>
       </div>
     </div>
   </div>
