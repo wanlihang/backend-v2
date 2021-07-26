@@ -4,9 +4,6 @@
 
     <div class="float-left">
       <el-form ref="form" :model="form" :rules="rules" label-width="200px">
-        <el-form-item label="附件名" prop="name">
-          <el-input v-model="form.name" class="w-300px"></el-input>
-        </el-form-item>
         <el-form-item label="附件" prop="file">
           <div class="d-flex">
             <div>
@@ -24,6 +21,9 @@
               ></helper-text>
             </div>
           </div>
+        </el-form-item>
+        <el-form-item label="附件名" prop="name">
+          <el-input v-model="form.name" class="w-300px"></el-input>
         </el-form-item>
       </el-form>
     </div>
@@ -87,7 +87,7 @@ export default {
       this.loading = true;
       const formData = new FormData();
 
-      formData.append("file", this.$refs['file'].files[0]);
+      formData.append("file", this.$refs["file"].files[0]);
       formData.append("name", this.form.name);
       formData.append("course_id", this.form.course_id);
 

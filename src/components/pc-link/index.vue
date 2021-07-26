@@ -99,6 +99,14 @@ export default {
         });
       }
 
+      if (this.enabledAddons["CodeExchanger"]) {
+        links.push({
+          name: "兑换码",
+          url: "/exchanger",
+          active: "exchanger",
+        });
+      }
+
       if (this.enabledAddons["Paper"]) {
         links.push({
           name: "考试首页",
