@@ -126,7 +126,7 @@
             </template>
           </el-table-column>
 
-          <el-table-column label="备注" width="300">
+          <el-table-column label="备注" >
             <template slot-scope="scope">
               <div
                 v-if="userRemark[scope.row.id]"
