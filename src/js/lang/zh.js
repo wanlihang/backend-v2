@@ -4,7 +4,7 @@ const zh = {
     title: {
         'mp-wechat-menu': "公众号菜单",
         login: '登录',
-        dashboard: '主面板',
+        dashboard: '主页',
         decoration: '装修',
         decoration_pc: "电脑端",
         decoration_h5: "移动端",
@@ -101,7 +101,7 @@ const zh = {
             },
         },
         live: {
-            name: '直播课',
+            name: '直播',
             course: {
                 name: '直播课',
                 index: '直播课程',
@@ -178,7 +178,7 @@ const zh = {
         },
         course: {
             vod: {
-                index: '录播课',
+                index: '录播',
                 create: '添加录播课程',
                 update: '编辑录播课程',
                 detail: '录播课程详情',

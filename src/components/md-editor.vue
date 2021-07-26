@@ -1,6 +1,7 @@
 <template>
-  <div>
+  <div :style="{ height: (height || 300) + 'px' }">
     <mavon-editor
+      style="height: 100%; z-index: 3000"
       ref="mavonEditor"
       :value="content"
       :boxShadow="false"
@@ -36,7 +37,7 @@ export default {
   components: {
     SelectImage,
   },
-  props: ["content", "placeholder"],
+  props: ["content", "placeholder", "height"],
   data() {
     return {
       showUploadImage: false,
@@ -83,7 +84,7 @@ export default {
         subfix: ")",
         str: src,
       };
-      
+
       this.$refs["mavonEditor"].insertText(
         this.$refs["mavonEditor"].getTextareaDom(),
         imgText

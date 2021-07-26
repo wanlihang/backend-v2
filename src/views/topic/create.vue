@@ -109,26 +109,19 @@
             label="免费内容"
             v-if="topic.charge > 0"
           >
-            <div class="d-flex">
-              <div>
-                <mavon-editor
-                  class="w-600px"
-                  :content="topic.free_content"
-                  @change="getfreecontent"
-                ></mavon-editor>
-              </div>
-              <div class="ml-10">
-                <helper-text
-                  text="文章收费下未购买用户可以看到的内容。"
-                ></helper-text>
-              </div>
-            </div>
+            <mavon-editor
+              class="w-100"
+              :height="500"
+              :content="topic.free_content"
+              @change="getfreecontent"
+            ></mavon-editor>
           </el-form-item>
 
           <el-form-item prop="original_content" label="文章内容">
             <mavon-editor
               :content="topic.original_content"
-              class="w-600px"
+              class="w-100"
+              :height="500"
               @change="getcontent"
             ></mavon-editor>
           </el-form-item>

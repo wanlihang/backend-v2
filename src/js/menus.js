@@ -5,34 +5,61 @@ export default [{
     icon: 'icon-icon-study-n',
 },
 {
+    name: 'title.decoration',
+    key: 'Decoration',
+    icon: 'icon-icon-decorate',
+    children: [{
+        name: 'title.decoration_pc',
+        key: 'DecorationPC',
+        permission: 'viewBlock',
+    },
+    {
+        name: 'title.decoration_h5',
+        key: 'DecorationH5',
+        permission: 'viewBlock',
+    },
+    {
+        name: 'title.singlepage.index',
+        key: 'SinglePage',
+        permission: 'addons.SinglePage.page.list',
+    },
+    {
+        name: 'title.mp-wechat-menu',
+        key: 'MpWechatMenu',
+        permission: 'mpWechat.menu',
+    },
+    ],
+},
+{
     name: 'title.coursename',
     key: 'Course',
     icon: 'icon-icon-lesson',
-    children: [{
-        name: 'title.topic.name',
-        key: 'Topic',
-        permission: 'addons.meedu_topics.topic.list'
-    },
-    {
-        name: 'title.course.vod.index',
-        key: 'Vod',
-        permission: 'course'
-    },
-    {
-        name: 'title.live.name',
-        key: 'LiveCourse',
-        permission: 'addons.Zhibo.course.list'
-    },
-    {
-        name: 'title.meedubook.book.index',
-        key: 'Meedubook',
-        permission: 'addons.meedu_books.book.list'
-    },
-    {
-        name: 'title.learningpath.path.name',
-        key: 'LearningPath',
-        permission: 'addons.learnPaths.path.list'
-    },
+    children: [
+        {
+            name: 'title.course.vod.index',
+            key: 'Vod',
+            permission: 'course'
+        },
+        {
+            name: 'title.live.name',
+            key: 'LiveCourse',
+            permission: 'addons.Zhibo.course.list'
+        },
+        {
+            name: 'title.topic.name',
+            key: 'Topic',
+            permission: 'addons.meedu_topics.topic.list'
+        },
+        {
+            name: 'title.meedubook.book.index',
+            key: 'Meedubook',
+            permission: 'addons.meedu_books.book.list'
+        },
+        {
+            name: 'title.learningpath.path.name',
+            key: 'LearningPath',
+            permission: 'addons.learnPaths.path.list'
+        },
     ]
 },
 {
@@ -102,78 +129,48 @@ export default [{
     name: 'title.operate',
     key: 'Operate',
     icon: 'icon-icon-operate',
-    children: [{
-        name: 'title.codeExchanger.index',
-        key: 'CodeExchanger',
-        permission: 'addons.CodeExchanger.goods.list'
-    },
-    {
-        name: 'title.promocode',
-        key: 'Promocode',
-        permission: 'promoCode'
-    },
-    {
-        name: 'title.role',
-        key: 'Role',
-        permission: 'role'
-    },
-    {
-        name: 'title.tuangou.goods.index',
-        key: 'TuangouGoods',
-        permission: 'addons.TuanGou.goods.list'
-    },
-    {
-        name: 'title.miaosha.goods.index',
-        key: 'MiaoshaGoods',
-        permission: 'addons.MiaoSha.goods.list'
-    },
-    {
-        name: 'title.multi_level_share.goods.index',
-        key: 'ShareGoods',
-        permission: 'addons.MultiLevelShare.goods.list'
-    },
-    {
-        name: 'title.multi_level_share.poster.index',
-        key: 'MultiPoster',
-        permission: 'addons.MultiLevelShare.poster.list'
-    },
-    {
-        name: 'title.wenda.question.index',
-        key: 'Question',
-        permission: 'addons.Wenda.question.list'
-    },
-    {
-        name: 'title.wechat.messagereply.index',
-        key: 'MessageReply',
-        permission: 'mpWechatMessageReply'
-    },
+    children: [
+        {
+            name: 'title.role',
+            key: 'Role',
+            permission: 'role'
+        },
+        {
+            name: 'title.tuangou.goods.index',
+            key: 'TuangouGoods',
+            permission: 'addons.TuanGou.goods.list'
+        },
+        {
+            name: 'title.miaosha.goods.index',
+            key: 'MiaoshaGoods',
+            permission: 'addons.MiaoSha.goods.list'
+        },
+        {
+            name: 'title.multi_level_share.goods.index',
+            key: 'ShareGoods',
+            permission: 'addons.MultiLevelShare.goods.list'
+        },
+        {
+            name: 'title.codeExchanger.index',
+            key: 'CodeExchanger',
+            permission: 'addons.CodeExchanger.goods.list'
+        },
+        {
+            name: 'title.promocode',
+            key: 'Promocode',
+            permission: 'promoCode'
+        },
+        {
+            name: 'title.wenda.question.index',
+            key: 'Question',
+            permission: 'addons.Wenda.question.list'
+        },
+        {
+            name: 'title.wechat.messagereply.index',
+            key: 'MessageReply',
+            permission: 'mpWechatMessageReply'
+        },
     ]
-},
-{
-    name: 'title.decoration',
-    key: 'Decoration',
-    icon: 'icon-icon-decorate',
-    children: [{
-        name: 'title.decoration_pc',
-        key: 'DecorationPC',
-        permission: 'viewBlock',
-    },
-    {
-        name: 'title.decoration_h5',
-        key: 'DecorationH5',
-        permission: 'viewBlock',
-    },
-    {
-        name: 'title.singlepage.index',
-        key: 'SinglePage',
-        permission: 'addons.SinglePage.page.list',
-    },
-    {
-        name: 'title.mp-wechat-menu',
-        key: 'MpWechatMenu',
-        permission: 'mpWechat.menu',
-    },
-    ],
 },
 {
     name: 'title.system',

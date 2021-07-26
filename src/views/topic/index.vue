@@ -239,7 +239,7 @@ export default {
             return;
           }
           this.loading = true;
-          this.$api.CodeExchanger.Destory(item)
+          this.$api.Course.Topic.Topic.Destory(item)
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));
