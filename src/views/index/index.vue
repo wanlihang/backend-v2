@@ -173,7 +173,7 @@ export default {
       if (num2 === 0 && num1 === 0) {
         return 0;
       }
-      let result = ((num1 - num2) / num2).toFixed(2);
+      let result = (num1 / num2).toFixed(2);
       return result;
     },
     fun_date(aa) {

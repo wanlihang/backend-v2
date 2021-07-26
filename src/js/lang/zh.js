@@ -253,6 +253,7 @@ const zh = {
                 stat: '分数统计',
                 question:'设置习题',
                 questionadd:'创建习题',
+                marking:'阅卷',
                 category: {
                     index: '试卷分类',
                     create: '创建试卷分类',

@@ -1154,6 +1154,14 @@ const routes = [{
     }
   },
   {
+    path: '/exam/paper/marking',
+    component: () => import('@/views/exam/paper/marking'),
+    name: 'ExamPaperScore',
+    meta: {
+      title: 'title.exam.paper.marking'
+    }
+  },
+  {
     path: '/exam/paper/question',
     component: () => import('@/views/exam/paper/question'),
     name: 'ExamPaperQuestion',

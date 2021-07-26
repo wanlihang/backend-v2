@@ -119,11 +119,20 @@
           >
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="100">
-            <template>
+            <template slot-scope="scope">
               <p-link
                 text="阅卷"
                 p="addons.Paper.paper.userPaper.submit"
                 type="primary"
+                @click="
+                  $router.push({
+                    name: 'ExamPaperScore',
+                    query: {
+                      id: pagination.id,
+                      user_paper_id: scope.row.id,
+                    },
+                  })
+                "
                 class="ml-5"
               ></p-link>
               <p-link
@@ -232,7 +241,6 @@ export default {
         ];
         statusMap.push(...res.data.statusMap);
         this.filterData.statusMap = statusMap;
-
       });
     },
     destory(item) {

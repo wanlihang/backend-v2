@@ -1143,6 +1143,12 @@ const Api = {
             QuestionStoreMulti(id, params) {
                 return post(`/backend/addons/Paper/paper/${id}/questions`, params);
             },
+            Marking(id, ids, params) {
+                return get(`/backend/addons/Paper/paper/${id}/userPaper/${ids}`, params);
+            },
+            SubmitScore(param) {
+                return post(`/backend/addons/Paper/paper/${param.id}/userPaper/${param.user_paper_id}`, param);
+            },
             Category: {
                 List(params) {
                     return get(`/backend/addons/Paper/paper_category/index`, params);
