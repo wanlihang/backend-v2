@@ -218,6 +218,14 @@ const routes = [{
     }
   },
   {
+    path: '/course/vod/components/vod-comments',
+    component: () => import('@/views/course/vod/components/vod-comments'),
+    name: 'CourseComments',
+    meta: {
+      title: 'title.course.vod.comment'
+    }
+  },
+  {
     path: '/course/vod/category/index',
     component: () => import('@/views/course/vod/category/index'),
     name: 'CourseCategories',

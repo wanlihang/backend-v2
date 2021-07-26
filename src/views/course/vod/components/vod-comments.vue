@@ -1,5 +1,6 @@
 <template>
-  <div class="float-left">
+  <div class="meedu-main-body">
+    <back-bar class="mb-30" title="课程评论"></back-bar>
     <div class="float-left">
       <div class="float-left d-flex">
         <div>
@@ -11,6 +12,23 @@
             v-model="filter.user_id"
             placeholder="用户ID"
           ></el-input>
+        </div>
+        <div class="ml-10">
+          <el-select
+            filterable
+            placeholder="课程"
+            class="w-200px"
+            v-model="filter.course_id"
+            v-el-select-loadmore="loadmore"
+          >
+            <el-option
+              v-for="(item, index) in filterData.courses"
+              :key="index"
+              :label="item.title"
+              :value="item.id"
+            >
+            </el-option>
+          </el-select>
         </div>
         <div class="ml-10">
           <el-date-picker
@@ -33,57 +51,76 @@
         </div>
       </div>
     </div>
-    <el-table
-      :data="list"
-      stripe
-      class="float-left"
-      @selection-change="handleSelectionChange"
-      v-loading="loading"
-    >
-      <el-table-column type="selection" width="55"></el-table-column>
-      <el-table-column prop="user_id" label="用户ID" width="120">
-      </el-table-column>
-      <el-table-column label="用户" width="300">
-        <template slot-scope="scope">
-          <div class="d-flex" v-if="users[scope.row.user_id]">
-            <div>
-              <img
-                :src="users[scope.row.user_id].avatar"
-                width="40"
-                height="40"
-              />
-            </div>
-            <div class="ml-10">
-              {{ users[scope.row.user_id].nick_name }}
-            </div>
-          </div>
-        </template>
-      </el-table-column>
-      <el-table-column label="内容">
-        <template slot-scope="scope">
-          <div v-html="scope.row.render_content"></div>
-        </template>
-      </el-table-column>
-      <el-table-column prop="created_at" label="时间" width="200">
-      </el-table-column>
-    </el-table>
-
-    <div class="float-left text-center mt-30">
-      <el-pagination
-        @size-change="paginationSizeChange"
-        @current-change="paginationPageChange"
-        :current-page="pagination.page"
-        :page-sizes="[10, 20, 50, 100]"
-        :page-size="pagination.size"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="total"
-      >
-      </el-pagination>
+    <div class="float-left mt-30" v-loading="loading">
+      <div class="float-left">
+        <el-table
+          :data="list"
+          stripe
+          class="float-left"
+          @selection-change="handleSelectionChange"
+          v-loading="loading"
+        >
+          <el-table-column type="selection" width="55"></el-table-column>
+          <el-table-column prop="user_id" label="用户ID" width="120">
+          </el-table-column>
+          <el-table-column label="用户" width="300">
+            <template slot-scope="scope">
+              <div class="d-flex" v-if="users[scope.row.user_id]">
+                <div>
+                  <img
+                    :src="users[scope.row.user_id].avatar"
+                    width="40"
+                    height="40"
+                  />
+                </div>
+                <div class="ml-10">
+                  {{ users[scope.row.user_id].nick_name }}
+                </div>
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column label="内容">
+            <template slot-scope="scope">
+              <div v-html="scope.row.render_content"></div>
+            </template>
+          </el-table-column>
+          <el-table-column prop="created_at" label="时间" width="200">
+          </el-table-column>
+        </el-table>
+      </div>
+      <div class="float-left text-center mt-30">
+        <el-pagination
+          @size-change="paginationSizeChange"
+          @current-change="paginationPageChange"
+          :current-page="pagination.page"
+          :page-sizes="[10, 20, 50, 100]"
+          :page-size="pagination.size"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="total"
+        >
+        </el-pagination>
+      </div>
     </div>
   </div>
 </template>
 <script>
 export default {
+  directives: {
+    "el-select-loadmore": {
+      bind(el, binding) {
+        const SELECTWRAP_DOM = el.querySelector(
+          ".el-select-dropdown .el-select-dropdown__wrap"
+        );
+        SELECTWRAP_DOM.addEventListener("scroll", function () {
+          const condition =
+            this.scrollHeight - this.scrollTop <= this.clientHeight;
+          if (condition) {
+            binding.value();
+          }
+        });
+      },
+    },
+  },
   props: ["id"],
   data() {
     return {
@@ -92,6 +129,7 @@ export default {
         size: 10,
       },
       filter: {
+        course_id: null,
         user_id: null,
         created_at: null,
       },
@@ -99,10 +137,18 @@ export default {
       loading: false,
       users: [],
       list: [],
+      formData: {
+        page: 1,
+        size: 10,
+      },
+      filterData: {
+        courses: [],
+      },
       selectedRows: null,
     };
   },
   mounted() {
+    this.params();
     this.getData();
   },
   methods: {
@@ -112,6 +158,7 @@ export default {
     },
     paginationReset() {
       this.pagination.page = 1;
+      this.filter.course_id = null;
       this.filter.user_id = null;
       this.filter.created_at = null;
       this.getData();
@@ -131,6 +178,20 @@ export default {
     },
     handleSelectionChange(rows) {
       this.selectedRows = rows;
+    },
+    loadmore() {
+      this.formData.page++;
+      this.params();
+    },
+    params() {
+      let params = {};
+      Object.assign(params, this.formData);
+      this.$api.Course.Vod.List(params).then((res) => {
+        this.filterData.courses = [
+          ...this.filterData.courses,
+          ...res.data.courses.data,
+        ];
+      });
     },
     getData() {
       if (this.loading) {

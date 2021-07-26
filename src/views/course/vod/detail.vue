@@ -21,7 +21,7 @@
         :id="id"
         v-else-if="tabActive === 'watch-records'"
       ></watch-records>
-      <comments :id="id" v-else-if="tabActive === 'comments'"></comments>
+      <!-- <comments :id="id" v-else-if="tabActive === 'comments'"></comments> -->
     </div>
   </div>
 </template>
@@ -29,13 +29,11 @@
 <script>
 import SubUsers from "./components/sub-users.vue";
 import WatchRecords from "./components/watch-records.vue";
-import Comments from "./components/vod-comments.vue";
 
 export default {
   components: {
     SubUsers,
     WatchRecords,
-    Comments
   },
   data() {
     return {
@@ -49,10 +47,6 @@ export default {
         {
           name: "观看记录",
           key: "watch-records",
-        },
-        {
-          name: "课程评论",
-          key: "comments",
         },
       ],
     };
