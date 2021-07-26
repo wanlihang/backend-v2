@@ -1,7 +1,7 @@
 <template>
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="阅卷"></back-bar>
-    <div class="float-left mt-30" v-loading="loading">
+    <div class="float-left" v-loading="loading">
       <div class="float-left">
         <div class="h-panel-body">
           <div class="float-box mb-10">
