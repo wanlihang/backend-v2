@@ -1,7 +1,10 @@
 <template>
   <div class="float-left" v-if="init">
     <div class="float-left mb-30">
-      <div class="float-left helper-text mb-10">分数</div>
+      <div class="float-left helper-text mb-10">
+        <span class="c-red">*</span>
+        <span class="ml-5">分数</span>
+      </div>
       <div class="float-left d-flex">
         <div>
           <el-input
@@ -33,16 +36,45 @@
     </div>
 
     <div class="float-left mb-30">
-      <div class="float-left helper-text mb-10">试题内容</div>
+      <div class="float-left helper-text mb-10">
+        <span class="c-red">*</span>
+        <span class="ml-5">试题内容</span>
+      </div>
       <div class="float-left">
-        <wang-editor v-model="form.content" :height="100"></wang-editor>
+        <wang-editor
+          v-model="form.content"
+          class="w-600px"
+          :height="100"
+        ></wang-editor>
+      </div>
+    </div>
+
+    <div class="float-left mb-30" v-for="(i, index) in length" :key="index">
+      <div class="float-left helper-text mb-10">
+        <span class="c-red">*</span>
+        <span class="ml-5">选项{{ i }}</span>
+      </div>
+      <div class="float-left">
+        <wang-editor
+          :height="100"
+          class="w-600px"
+          v-model="form['option' + i]"
+        ></wang-editor>
       </div>
     </div>
 
     <div class="float-left mb-30">
-      <div class="float-left helper-text mb-10">答案</div>
+      <el-link @click="add" type="primary">增加选项</el-link>
+      <el-link class="ml-10" @click="del" type="danger">删除选项</el-link>
+    </div>
+
+    <div class="float-left mb-30">
+      <div class="float-left helper-text mb-10">
+        <span class="c-red">*</span>
+        <span class="ml-5">答案</span>
+      </div>
       <div class="float-left">
-        <el-select class="w-200px" v-model="form.answer">
+        <el-select class="w-400px" v-model="form.answer">
           <el-option
             v-for="(item, index) in answers"
             :key="index"
@@ -54,22 +86,14 @@
       </div>
     </div>
 
-    <div class="float-left mb-30" v-for="(i, index) in length" :key="index">
-      <div class="float-left helper-text mb-10">选项{{ i }}</div>
-      <div class="float-left">
-        <wang-editor :height="100" v-model="form['option' + i]"></wang-editor>
-      </div>
-    </div>
-
-    <div class="float-left mb-30">
-      <el-button @click="add" type="primary">增加选项</el-button>
-      <el-button @click="del" type="danger">删除选项</el-button>
-    </div>
-
     <div class="float-left">
       <div class="float-left helper-text mb-10">解析</div>
       <div class="float-left">
-        <wang-editor v-model="form.remark" :height="100"></wang-editor>
+        <wang-editor
+          v-model="form.remark"
+          class="w-600px"
+          :height="100"
+        ></wang-editor>
       </div>
     </div>
   </div>
@@ -192,7 +216,7 @@ export default {
         return;
       }
       this.form.answer = null;
-      this.form['option' + this.length] = null;
+      this.form["option" + this.length] = null;
       this.length -= 1;
     },
     update() {

@@ -1,9 +1,16 @@
 <template>
   <div class="float-left" v-if="init">
     <div class="float-left mb-30">
-      <div class="float-left helper-text mb-10">题帽</div>
+      <div class="float-left helper-text mb-10">
+        <span class="c-red">*</span>
+        <span class="ml-5">题帽</span>
+      </div>
       <div class="float-left">
-        <wang-editor v-model="header" :height="100"></wang-editor>
+        <wang-editor
+          v-model="header"
+          class="w-600px"
+          :height="100"
+        ></wang-editor>
       </div>
     </div>
 
@@ -11,6 +18,13 @@
       <div class="question-item" v-for="(item, index) in list" :key="index">
         <div class="btn-close" @click="remove(index)">
           <close-icon></close-icon>
+        </div>
+        <div class="float-left mb-15 helper-text">
+          <span v-if="item.type === 1">单选题</span>
+          <span v-if="item.type === 2">多选题</span>
+          <span v-if="item.type === 3">填空题</span>
+          <span v-if="item.type === 4">问答题</span>
+          <span v-if="item.type === 5">判断题</span>
         </div>
 
         <q-choice
@@ -68,9 +82,23 @@
     </div>
 
     <div class="float-left mb-30">
+      <div class="float-left helper-text mb-10">
+        <span class="c-red">*</span>
+        <span class="ml-5">总分</span>
+      </div>
+      <div class="float-left">
+        <span>{{ form.score }}分</span><span class="helper-text ml-10">自动计算</span>
+      </div>
+    </div>
+
+    <div class="float-left mb-30">
       <div class="float-left helper-text mb-10">解析</div>
       <div class="float-left">
-        <wang-editor v-model="form.remark" :height="100"></wang-editor>
+        <wang-editor
+          v-model="form.remark"
+          class="w-600px"
+          :height="100"
+        ></wang-editor>
       </div>
     </div>
   </div>
@@ -114,6 +142,9 @@ export default {
     };
   },
   watch: {
+    header() {
+      this.update();
+    },
     "form.remark"() {
       this.update();
     },
@@ -230,14 +261,14 @@ export default {
   height: auto;
   float: left;
   box-sizing: border-box;
-  margin-bottom: 15px;
+  margin-bottom: 30px;
   padding: 20px;
   background-color: rgba(0, 0, 0, 0.05);
 
   .btn-close {
     position: absolute;
     left: 0;
-    top: -20px;
+    top: -18px;
   }
 }
 </style>

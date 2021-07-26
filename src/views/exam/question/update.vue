@@ -39,7 +39,7 @@
       </template>
     </div>
 
-    <div class="float-left" v-show="step === 1">
+    <div class="float-left pl-200" v-show="step === 1">
       <template v-if="form">
         <q-choice
           @change="change"
@@ -205,12 +205,7 @@ export default {
         return;
       }
 
-      let data = Object.assign({}, this.form);
-      if (data.type === 2) {
-        data.answer = data.answer.join(",");
-      }
-
-      this.$api.Exam.Question.Update(this.id, data)
+      this.$api.Exam.Question.Update(this.id, this.form)
         .then(() => {
           this.$message.success(this.$t("common.success"));
           this.$router.back();
@@ -226,6 +221,11 @@ export default {
 <style lang="less" scoped>
 .step-box {
   box-sizing: border-box;
-  padding: 30px 100px;
+  padding: 30px 200px;
+}
+
+.pl-200 {
+  padding-left: 200px;
+  box-sizing: border-box;
 }
 </style>

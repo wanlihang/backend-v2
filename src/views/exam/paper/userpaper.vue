@@ -118,7 +118,7 @@
             width="200"
           >
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="50">
+          <el-table-column fixed="right" label="操作" width="100">
             <template>
               <p-link
                 text="阅卷"
