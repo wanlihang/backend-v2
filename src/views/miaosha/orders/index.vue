@@ -46,9 +46,9 @@
     <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table :data="results"  class="float-left">
-          <el-table-column prop="id" label="ID" width="120"> </el-table-column>
+          <el-table-column prop="id" label="ID" width="100"> </el-table-column>
 
-          <el-table-column label="商品ID" width="120">
+          <el-table-column label="商品ID">
             <template slot-scope="scope">
               <span v-if="scope.row.goods">{{ scope.row.goods.goods_id }}</span>
               <span class="c-red" v-else>已删除</span>
@@ -58,7 +58,7 @@
           <el-table-column prop="user_id" label="用户ID" width="120">
           </el-table-column>
 
-          <el-table-column label="商品">
+          <el-table-column label="商品" width="400">
             <template slot-scope="scope">
               <template v-if="scope.row.goods">
                 <div class="d-flex">
@@ -107,7 +107,7 @@
             </template>
           </el-table-column>
 
-          <el-table-column label="时间" prop="created_at"></el-table-column>
+          <el-table-column label="时间" prop="created_at" width="200"></el-table-column>
         </el-table>
       </div>
 
