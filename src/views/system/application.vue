@@ -14,7 +14,7 @@
             <el-table-column prop="name" label="插件"> </el-table-column>
             <el-table-column prop="version" label="版本" width="200">
             </el-table-column>
-            <el-table-column label="操作" width="300">
+            <el-table-column label="操作" width="50">
               <template slot-scope="scope">
                 <template v-if="scope.row.is_buy">
                   <el-link
@@ -55,9 +55,19 @@
       <div class="float-left table-content" v-else-if="tab === 'local'">
         <el-table :data="localList" class="float-left">
           <el-table-column prop="name" label="插件"> </el-table-column>
-          <el-table-column prop="version" label="当前版本" width="200">
+          <el-table-column prop="version" label="本地版本" width="200">
           </el-table-column>
-          <el-table-column label="操作" width="300">
+          <el-table-column prop="version" label="状态" width="150">
+            <template slot-scope="scope">
+              <template v-if="scope.row.enabled">
+                <span class="status-success">
+                  <span class="status-success-icon"></span>
+                  <span class="ml-5">运行中</span>
+                </span>
+              </template>
+            </template>
+          </el-table-column>
+          <el-table-column label="操作" width="50">
             <template slot-scope="scope">
               <el-link
                 v-if="scope.row.enabled"
@@ -227,5 +237,18 @@ export default {
   width: 100%;
   height: auto;
   float: left;
+}
+
+.status-success {
+  font-size: 10px;
+  color: red;
+
+  .status-success-icon {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    background-color: red;
+    border-radius: 50%;
+  }
 }
 </style>
