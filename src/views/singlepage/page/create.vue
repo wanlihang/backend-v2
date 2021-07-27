@@ -2,31 +2,71 @@
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="添加单页"></back-bar>
     <div class="float-left">
-      <el-form ref="form" :model="user" :rules="rules" label-width="200px">
-        <el-form-item label="唯一标识" prop="sign">
-          <el-input v-model="user.sign" class="w-200px"></el-input>
+      <el-form ref="form" :model="form" :rules="rules" label-width="200px">
+        <el-form-item label="页面标识" prop="sign">
+          <div class="d-flex">
+            <div>
+              <el-input v-model="form.sign" class="w-200px"></el-input>
+            </div>
+            <div class="ml-10">
+              <helper-text
+                text="请填写英文字母+数字组合的一串字符串"
+              ></helper-text>
+            </div>
+          </div>
         </el-form-item>
 
         <el-form-item label="标题" prop="title">
-          <el-input v-model="user.title" class="w-200px"></el-input>
+          <div class="d-flex">
+            <div>
+              <el-input v-model="form.title" class="w-600px"></el-input>
+            </div>
+            <div class="ml-10">
+              <helper-text
+                text="指定该页面在浏览器标签栏显示的标题"
+              ></helper-text>
+            </div>
+          </div>
+        </el-form-item>
+
+        <el-form-item prop="is_inherit" label="继承布局">
+          <div class="d-flex">
+            <div>
+              <el-switch
+                v-model="form.is_inherit"
+                :active-value="1"
+                :inactive-value="0"
+              >
+              </el-switch>
+            </div>
+            <div class="ml-10">
+              <helper-text
+                text="是否继承网站已有的布局（头部+导航栏+底部）"
+              ></helper-text>
+            </div>
+          </div>
+        </el-form-item>
+
+        <el-form-item label="页面内容" prop="content">
+          <wang-editor class="w-100" v-model="form.content"></wang-editor>
         </el-form-item>
 
         <el-form-item label="Seo关键字" prop="seo_keywords">
-          <el-input v-model="user.seo_keywords" class="w-200px"></el-input>
+          <el-input
+            type="textarea"
+            rows="4"
+            v-model="form.seo_keywords"
+            class="w-400px"
+          ></el-input>
         </el-form-item>
+
         <el-form-item label="Seo描述" prop="seo_description">
-          <el-input v-model="user.seo_description" class="w-200px"></el-input>
-        </el-form-item>
-        <el-form-item label="内容" prop="content">
-          <wang-editor class="w-100" v-model="user.content"></wang-editor>
-        </el-form-item>
-        <el-form-item prop="is_inherit" label="继承布局">
-          <el-switch
-            v-model="user.is_inherit"
-            :active-value="1"
-            :inactive-value="0"
-          >
-          </el-switch>
+          <el-input
+            type="textarea"
+            rows="4"
+            v-model="form.seo_description"
+            class="w-400px"
+          ></el-input>
         </el-form-item>
       </el-form>
     </div>
@@ -54,7 +94,7 @@ export default {
   },
   data() {
     return {
-      user: {
+      form: {
         sign: null,
         title: null,
         seo_keywords: null,
@@ -66,7 +106,7 @@ export default {
         sign: [
           {
             required: true,
-            message: "唯一标识不能为空",
+            message: "页面标识不能为空",
             trigger: "blur",
           },
         ],
@@ -74,27 +114,6 @@ export default {
           {
             required: true,
             message: "标题不能为空",
-            trigger: "blur",
-          },
-        ],
-        seo_keywords: [
-          {
-            required: true,
-            message: "Seo关键字不能为空",
-            trigger: "blur",
-          },
-        ],
-        is_inherit: [
-          {
-            required: true,
-            message: "请选择继承布局",
-            trigger: "blur",
-          },
-        ],
-        seo_description: [
-          {
-            required: true,
-            message: "Seo描述不能为空",
             trigger: "blur",
           },
         ],
@@ -123,7 +142,7 @@ export default {
         return;
       }
       this.loading = true;
-      this.$api.Singlepage.Page.Store(this.user)
+      this.$api.Singlepage.Page.Store(this.form)
         .then(() => {
           this.$message.success(this.$t("common.success"));
           this.$router.back();
