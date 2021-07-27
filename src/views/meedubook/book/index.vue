@@ -58,7 +58,7 @@
             :default-sort="{ prop: 'id', order: 'descending' }"
             class="float-left"
           >
-            <el-table-column prop="id" sortable label="ID" width="120">
+            <el-table-column prop="id" sortable label="ID" width="100">
             </el-table-column>
             <el-table-column prop="category.name" label="分类">
             </el-table-column>
@@ -78,7 +78,7 @@
               label="价格"
               property="charge"
               sortable
-              width="250"
+              width="100"
             >
               <template slot-scope="scope">
                 <span>{{ scope.row.charge }}元</span>
@@ -88,17 +88,17 @@
               label="浏览"
               property="view_times"
               sortable
-              width="150"
+              width="100"
             >
               <template slot-scope="scope">
                 <span>{{ scope.row.view_times }}次</span>
               </template>
             </el-table-column>
             <el-table-column
-              label="订阅"
+              label="订阅人数"
               property="user_count"
               sortable
-              width="200"
+              width="150"
             >
               <template slot-scope="scope">
                 <span>{{ scope.row.user_count }}人</span>
