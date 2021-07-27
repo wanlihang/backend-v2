@@ -65,6 +65,9 @@
         </div>
       </div>
     </div>
+    <div style="display: none">
+      <img src="https://addons.meedu.vip/api/v1/stat?v=v4.4" />
+    </div>
     <div class="el_top_row2">
       <div class="tit">{{ $t("index.quick_acsess") }}</div>
       <a
