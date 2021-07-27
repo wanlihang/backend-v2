@@ -134,7 +134,7 @@
                 class="ml-5"
                 p="addons.Paper.paper.delete"
                 type="danger"
-                @click="destory(scope.row.id)"
+                @click="destroy(scope.row.id)"
               ></p-link>
             </template>
           </el-table-column>
