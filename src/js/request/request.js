@@ -857,7 +857,6 @@ const Api = {
             },
         },
     },
-
     Wenda: {
         Question: {
             List(params) {
@@ -867,7 +866,7 @@ const Api = {
                 return get(`/backend/addons/Wenda/category/index`);
             },
             DestoryMulti(params) {
-                return post(`backend/addons/Wenda/question/delete`, params);
+                return post(`/backend/addons/Wenda/question/delete`, params);
             },
             Answer(id) {
                 return get(`/backend/addons/Wenda/question/${id}/answers`);
@@ -882,7 +881,7 @@ const Api = {
                 return destroy(`/backend/addons/Wenda/question/answers/comments/${id}`);
             },
             SetAnswer(questionId, answerId) {
-                return get(`backend/addons/Wenda/question/${questionId}/answers/${answerId}/selected`);
+                return get(`/backend/addons/Wenda/question/${questionId}/answers/${answerId}/selected`);
             },
             Cate: {
                 Destory(id) {

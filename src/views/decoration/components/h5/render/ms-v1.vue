@@ -108,16 +108,16 @@ export default {
 
         .ms-title {
           width: 100%;
-          height: 20px;
+          height: 45px;
           font-size: 15px;
           font-weight: 500;
           color: #171923;
           line-height: 20px;
           float: left;
-          white-space: nowrap;
+          word-break: break-all;
           overflow: hidden;
           text-overflow: ellipsis;
-          margin-bottom: 44px;
+          margin-bottom: 19px;
         }
 
         .ms-info {
