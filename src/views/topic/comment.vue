@@ -177,6 +177,7 @@ export default {
   methods: {
     dataFilter(val) {
       this.formData.keywords = val;
+      this.formData.page = 1;
       this.$api.Course.Topic.Topic.List(this.formData).then((res) => {
         this.filterData.topics = res.data.data.data;
       });

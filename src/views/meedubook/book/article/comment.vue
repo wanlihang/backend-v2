@@ -189,6 +189,7 @@ export default {
   methods: {
     dataFilter(val) {
       this.formData.keywords = val;
+      this.formData.page = 1;
       this.$api.Meedubook.Book.Article.List(this.formData).then((res) => {
         this.filterData.articles = res.data.data.data;
       });

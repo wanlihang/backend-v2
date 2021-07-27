@@ -182,6 +182,7 @@ export default {
   methods: {
     dataFilter(val) {
       this.formData.keywords = val;
+      this.formData.page = 1;
       let params = {};
       Object.assign(params, this.filter, this.formData);
       this.$api.Course.Live.Course.List(params).then((res) => {
