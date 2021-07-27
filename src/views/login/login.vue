@@ -30,6 +30,7 @@
           </el-form-item>
           <el-form-item style="width: 100%">
             <el-button
+              @keyup.enter="formValidate"
               type="primary"
               style="width: 100%"
               @click="formValidate"
@@ -71,6 +72,20 @@ export default {
           },
         ],
       },
+    };
+  },
+  created() {
+    var t = this;
+    document.onkeydown = function (e) {
+      var key;
+      if (window.event == undefined) {
+        key = e.keyCode;
+      } else {
+        key = window.event.keyCode;
+      }
+      if (key == 13) {
+        t.formValidate();
+      }
     };
   },
   methods: {
