@@ -325,6 +325,7 @@ export default {
       grid-template-columns: repeat(5, minmax(0, 1fr));
 
       .image-item {
+        height: 200px;
         box-sizing: border-box;
         padding: 10px;
         cursor: pointer;
