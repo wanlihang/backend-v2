@@ -14,9 +14,6 @@
         <div class="course-title">
           {{ item.title }}
         </div>
-        <div class="teacher-info">
-          <span v-if="item.teacher">讲师：{{ item.teacher.name }}</span>
-        </div>
         <div class="course-info">
           <div class="videos-count">{{ item.videos_count }}课时</div>
           <div class="charge">
@@ -88,23 +85,6 @@ export default {
       font-weight: 600;
       color: #333333;
       line-height: 16px;
-    }
-
-    .teacher-info {
-      width: 100%;
-      height: auto;
-      float: left;
-      font-size: 14px;
-      font-weight: 400;
-      color: #666666;
-      line-height: 14px;
-      margin-bottom: 15px;
-      padding-left: 8px;
-      padding-right: 8px;
-
-      .videos-count {
-        margin-left: 20px;
-      }
     }
 
     .course-info {

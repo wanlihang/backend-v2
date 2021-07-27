@@ -506,7 +506,7 @@ export default {
       if (this.curIndex === null) {
         return;
       }
-      this.config.items[this.curIndex].url = url;
+      this.config.items[this.curIndex].url = this.link = url;
     },
   },
 };
