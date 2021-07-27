@@ -11,7 +11,7 @@
               :class="{ active: item.key === pagination.from }"
               v-for="item in fromRows"
               :key="item.key"
-              @click="pagination.from = item.key"
+              @click="selectpage(item.key)"
             >
               {{ item.name }}
             </div>
@@ -86,12 +86,31 @@ export default {
   props: ["show", "from"],
   data() {
     return {
-      fromRows: [],
+      fromRows: [
+        { key: 0, name: "全部图片" },
+        {
+          key: 1,
+          name: "幻灯片",
+        },
+        {
+          key: 2,
+          name: "课程封面",
+        },
+        {
+          key: 3,
+          name: "课程详情页",
+        },
+        {
+          key: 4,
+          name: "文章配图",
+        },
+      ],
       pagination: {
         page: 1,
         size: 10,
         from: 0,
       },
+      upfrom: 0,
       list: [],
       total: 0,
       loading: false,
@@ -104,7 +123,7 @@ export default {
     },
     uploadData() {
       return {
-        from: this.from,
+        from: this.pagination.from,
       };
     },
     uploadHeaders() {
@@ -124,6 +143,10 @@ export default {
     },
   },
   methods: {
+    selectpage(key) {
+      this.pagination.from = key;
+      this.upfrom = key;
+    },
     resetLoad() {
       this.pagination.page = 1;
       this.pagination.from = 0;
@@ -149,8 +172,8 @@ export default {
         this.list = data.data;
         this.total = data.total;
 
-        this.fromRows = res.data.from;
-
+        //this.fromRows = res.data.from;
+        this.pagination.from = this.upfrom;
         this.loading = false;
       });
     },
@@ -319,10 +342,16 @@ export default {
           text-align: center;
 
           img {
+            height: auto;
             border-radius: 3px;
           }
         }
-
+        .image-render {
+          height: 100px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
         .image-name {
           margin-top: 10px;
           white-space: nowrap;
