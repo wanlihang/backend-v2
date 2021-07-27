@@ -111,12 +111,14 @@ export default {
       };
     },
   },
-  mounted() {
-    this.getData();
-  },
   watch: {
     "pagination.from"() {
       this.getData();
+    },
+    show(newVal) {
+      if (newVal) {
+        this.getData();
+      }
     },
   },
   methods: {
