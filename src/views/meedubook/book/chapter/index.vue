@@ -16,7 +16,7 @@
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
-        <el-table :data="chapters"  class="float-left">
+        <el-table :data="chapters" class="float-left">
           <el-table-column prop="id" label="ID" width="150"> </el-table-column>
           <el-table-column prop="sort" label="升序" width="150">
           </el-table-column>
@@ -29,13 +29,6 @@
           <el-table-column fixed="right" label="操作" width="150">
             <template slot-scope="scope">
               <p-link
-                text="删除"
-                p="addons.meedu_books.book_chapter.delete"
-                style="margin-right: 10px"
-                type="danger"
-                @click="destory(scope.row.id)"
-              ></p-link>
-              <p-link
                 text="编辑"
                 p="addons.meedu_books.book_chapter.update"
                 type="primary"
@@ -45,6 +38,13 @@
                     query: { bid: box.bid, id: scope.row.id },
                   })
                 "
+              ></p-link>
+              <p-link
+                text="删除"
+                p="addons.meedu_books.book_chapter.delete"
+                class="ml-5"
+                type="danger"
+                @click="destory(scope.row.id)"
               ></p-link>
             </template>
           </el-table-column>
