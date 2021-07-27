@@ -56,7 +56,6 @@
       <div class="float-left">
         <el-table
           :data="list"
-          
           class="float-left"
           @selection-change="handleSelectionChange"
           v-loading="loading"
@@ -80,6 +79,7 @@
               </div>
             </template>
           </el-table-column>
+          <el-table-column prop="course.title" label="课程"> </el-table-column>
           <el-table-column label="内容">
             <template slot-scope="scope">
               <div v-html="scope.row.render_content"></div>

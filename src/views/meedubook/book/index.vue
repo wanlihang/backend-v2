@@ -9,6 +9,20 @@
           type="primary"
         >
         </p-button>
+        <p-button
+          text="电子书评论"
+          p="addons.meedu_books.book.comments.list"
+          @click="$router.push({ name: 'MeedubookComment' })"
+          type="primary"
+        >
+        </p-button>
+        <p-button
+          text="文章评论"
+          p="addons.meedu_books.book_article.comments.list"
+          @click="$router.push({ name: 'MeedubookArticleComment' })"
+          type="primary"
+        >
+        </p-button>
       </div>
       <div class="float-left">
         <div class="float-left d-flex">
@@ -42,7 +56,6 @@
             :data="mbooks"
             @sort-change="sortChange"
             :default-sort="{ prop: 'id', order: 'descending' }"
-            
             class="float-left"
           >
             <el-table-column prop="id" sortable label="ID" width="120">
@@ -93,7 +106,7 @@
             </el-table-column>
             <el-table-column prop="published_at" label="上架时间" sortable>
             </el-table-column>
-            <el-table-column fixed="right" label="操作" width="200">
+            <el-table-column fixed="right" label="操作" width="150">
               <template slot-scope="scope">
                 <p-link
                   text="文章"
@@ -118,18 +131,7 @@
                     })
                   "
                 ></p-link>
-                <p-link
-                  text="评论"
-                  p="addons.meedu_books.book.comments.list"
-                  type="primary"
-                  class="ml-5"
-                  @click="
-                    $router.push({
-                      name: 'MeedubookComment',
-                      query: { bid: scope.row.id },
-                    })
-                  "
-                ></p-link>
+
                 <p-link
                   text="编辑"
                   class="ml-5"

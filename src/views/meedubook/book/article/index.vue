@@ -45,7 +45,7 @@
             :data="mbooks"
             @sort-change="sortChange"
             :default-sort="{ prop: 'published_at', order: 'ascending' }"
-            
+            stripe
             class="float-left"
           >
             <el-table-column prop="id" label="ID" sortable width="120">
@@ -72,7 +72,7 @@
             </el-table-column>
             <el-table-column prop="published_at" sortable label="上架时间">
             </el-table-column>
-            <el-table-column fixed="right" label="操作" width="150">
+            <el-table-column fixed="right" label="操作" width="120">
               <template slot-scope="scope">
                 <p-link
                   text="删除"
@@ -89,18 +89,6 @@
                     $router.push({
                       name: 'MeedubookArticleUpdate',
                       query: { bid: filter.book_id, id: scope.row.id },
-                    })
-                  "
-                ></p-link>
-                <p-link
-                  text="评论"
-                  p="addons.meedu_books.book_article.comments.list"
-                  type="primary"
-                  class="ml-5"
-                  @click="
-                    $router.push({
-                      name: 'MeedubookArticleComment',
-                      query: { bid: filter.book_id, article_id: scope.row.id },
                     })
                   "
                 ></p-link>

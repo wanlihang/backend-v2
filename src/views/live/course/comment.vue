@@ -2,7 +2,7 @@
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="直播课程评论"></back-bar>
     <div class="float-left">
-      <div class="float-left d-flex">
+      <div class="float-left d-flex mb-10">
         <div>
           <p-button
             text="删除"
@@ -24,7 +24,9 @@
           >
           </p-button>
         </div>
-        <div class="ml-10">
+      </div>
+      <div class="float-left d-flex">
+        <div>
           <el-input
             class="w-200px"
             v-model="filter.user_id"
@@ -50,6 +52,18 @@
           </el-select>
         </div>
         <div class="ml-10">
+          <el-date-picker
+            v-model="filter.created_at"
+            type="daterange"
+            align="right"
+            unlink-panels
+            range-separator="至"
+            start-placeholder="评论时间-开始"
+            end-placeholder="评论时间-结束"
+          >
+          </el-date-picker>
+        </div>
+        <div class="ml-10">
           <el-button @click="getResults" type="primary" plain>筛选</el-button>
           <el-button @click="paginationReset">清空</el-button>
         </div>
@@ -59,7 +73,6 @@
       <div class="float-left">
         <el-table
           :data="results"
-          
           @selection-change="handleSelectionChange"
           class="float-left"
         >
@@ -80,6 +93,7 @@
               <span class="c-red" v-else>用户不存在</span>
             </template>
           </el-table-column>
+          <el-table-column prop="course.title" label="课程"> </el-table-column>
           <el-table-column label="状态" width="100">
             <template slot-scope="scope">
               <el-tag v-if="scope.row.is_check != 1" type="danger">
@@ -88,7 +102,7 @@
               <el-tag type="success" v-else>通过</el-tag>
             </template>
           </el-table-column>
-          <el-table-column label="内容" width="500">
+          <el-table-column label="内容">
             <template slot-scope="scope">
               <div v-html="scope.row.content"></div>
             </template>
@@ -140,6 +154,7 @@ export default {
       filter: {
         course_id: null,
         user_id: null,
+        created_at: null,
       },
       total: 0,
       spids: {
@@ -177,6 +192,7 @@ export default {
       this.pagination.page = 1;
       this.filter.course_id = null;
       this.filter.user_id = null;
+      this.filter.created_at = null;
       this.formData.keywords = null;
       this.getResults();
     },

@@ -3,14 +3,16 @@
     <back-bar class="mb-30" title="图文文章评论"></back-bar>
     <div class="float-left">
       <div class="float-left">
-        <div class="float-left d-flex">
+        <div class="float-left d-flex mb-10">
           <div>
             <el-button @click="approve"> 审核通过 </el-button>
           </div>
           <div class="ml-10">
             <el-button @click="refuse"> 审核拒绝 </el-button>
           </div>
-          <div class="ml-10">
+        </div>
+        <div class="float-left d-flex">
+          <div>
             <el-input
               v-model="filter.user_id"
               class="w-200px"
@@ -35,6 +37,18 @@
               </el-option>
             </el-select>
           </div>
+          <div class="ml-10">
+            <el-date-picker
+              v-model="filter.created_at"
+              type="daterange"
+              align="right"
+              unlink-panels
+              range-separator="至"
+              start-placeholder="评论时间-开始"
+              end-placeholder="评论时间-结束"
+            >
+            </el-date-picker>
+          </div>
           <div class="ml-15">
             <el-button @click="getComments" type="primary" plain
               >筛选</el-button
@@ -47,7 +61,6 @@
         <div class="float-left">
           <el-table
             :data="list"
-            
             @selection-change="handleSelectionChange"
             class="float-left"
           >
@@ -69,7 +82,8 @@
                 <span v-else class="c-red">用户不存在</span>
               </template>
             </el-table-column>
-            <el-table-column label="评论内容" width="500">
+            <el-table-column prop="topic.title" label="图文"> </el-table-column>
+            <el-table-column label="评论内容">
               <template slot-scope="scope">
                 <span v-html="scope.row.content"></span>
               </template>
@@ -137,6 +151,7 @@ export default {
       filter: {
         topic_id: null,
         user_id: null,
+        created_at: null,
       },
       filterData: {
         topics: [],
@@ -174,6 +189,7 @@ export default {
       this.pagination.page = 1;
       this.filter.user_id = null;
       this.filter.topic_id = null;
+      this.filter.created_at = null;
       this.formData.keywords = null;
       this.getComments();
     },
