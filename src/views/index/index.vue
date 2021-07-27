@@ -3,7 +3,7 @@
     <div class="el_top_row1">
       <div class="el_row_item">
         <span class="item_title">{{ $t("index.day_income") }}</span>
-        <p>{{ list.today_paid_sum }}</p>
+        <p>{{ list.today_paid_sum || 0 }}</p>
         <div class="item_info">
           <span
             >{{ $t("index.yes_income") }}：{{ list.yesterday_paid_sum }}</span
@@ -19,7 +19,7 @@
       </div>
       <div class="el_row_item">
         <span class="item_title">{{ $t("index.day_paid") }}</span>
-        <p>{{ list.today_paid_user_num }}</p>
+        <p>{{ list.today_paid_user_num || 0 }}</p>
         <div class="item_info">
           <span
             >{{ $t("index.yes_paid") }}：{{
@@ -37,9 +37,9 @@
       </div>
       <div class="el_row_item2">
         <div class="el_item">
-          <span style="width: 80px">{{ $t("index.allnum") }}</span>
+          <span>{{ $t("index.allnum") }}</span>
           <span class="el_item_num">{{ list.user_count }}</span>
-          <span style="margin-left: auto"
+          <span class="el_item_increase"
             >{{ $t("index.day_increase") }}：<strong
               >+{{
                 sumrate(
@@ -51,9 +51,9 @@
           >
         </div>
         <div class="el_item">
-          <span style="width: 80px">{{ $t("index.month_income") }}</span>
-          <span class="el_item_num">{{ list.this_month_paid_sum }}</span>
-          <span style="margin-left: auto"
+          <span>{{ $t("index.month_income") }}</span>
+          <span class="el_item_num">{{ list.this_month_paid_sum || 0 }}</span>
+          <span class="el_item_increase"
             >{{ $t("index.month_increase") }}：<strong
               >+{{
                 sumrate(list.this_month_paid_sum, list.last_month_paid_sum)
@@ -224,6 +224,9 @@ export default {
         return 100;
       }
       if (num2 === 0 && num1 === 0) {
+        return 0;
+      }
+      if (!num1 || !num2) {
         return 0;
       }
       let result = (num1 / num2).toFixed(2);
@@ -437,6 +440,7 @@ export default {
         align-items: center;
         margin-bottom: 20px;
         span {
+          width: 110px;
           display: block;
           font-size: 16px;
           font-family: PingFangSC-Regular, PingFang SC;
@@ -448,13 +452,17 @@ export default {
           }
         }
         .el_item_num {
+          width: auto;
           font-size: 36px;
-
           font-weight: 600;
           color: #333333;
           line-height: 36px;
-          text-align: center;
+          text-align: left;
           flex: 1;
+        }
+        .el_item_increase {
+          width: 42%;
+          margin-left: auto;
         }
       }
       .el_item:last-of-type {
