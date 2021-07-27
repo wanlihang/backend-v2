@@ -71,7 +71,7 @@
               <template v-if="scope.row.enabled">
                 <span class="status-success">
                   <span class="status-success-icon"></span>
-                  <span class="ml-5">运行中</span>
+                  <span style="color: #66dd7b" class="ml-5">运行中</span>
                 </span>
               </template>
             </template>
@@ -256,7 +256,7 @@ export default {
     display: inline-block;
     width: 5px;
     height: 5px;
-    background-color: red;
+    background-color: #66dd7b;
     border-radius: 50%;
   }
 }
