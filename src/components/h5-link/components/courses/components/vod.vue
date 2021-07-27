@@ -103,7 +103,7 @@ export default {
     tableItemChoice(row) {
       if (row) {
         if (this.enabledAddonsCount === 0) {
-          this.link = "/course" + row.id + "/" + row.id;
+          this.link = "/course/" + row.id + "/" + row.id;
         } else {
           this.link = "/pages/course/show?id=" + row.id;
         }
