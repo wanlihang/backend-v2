@@ -1,9 +1,17 @@
 <template>
   <div class="meedu-main-body" v-loading="loading">
+    <div class="float-left mb-30">
+      <el-alert
+        title="功能模块安装之后并不能直接使用，还需要切换到「本地已安装」列表，找到已安装的功能模块，点击「启用」。"
+        type="error"
+      >
+      </el-alert>
+    </div>
+
     <div class="float-left">
       <el-tabs v-model="tab">
-        <el-tab-pane label="应用商城" name="repository"></el-tab-pane>
-        <el-tab-pane label="已安装应用" name="local"></el-tab-pane>
+        <el-tab-pane label="功能模块" name="repository"></el-tab-pane>
+        <el-tab-pane label="本地已安装" name="local"></el-tab-pane>
       </el-tabs>
     </div>
 
@@ -14,7 +22,7 @@
             <el-table-column prop="name" label="插件"> </el-table-column>
             <el-table-column prop="version" label="版本" width="200">
             </el-table-column>
-            <el-table-column label="操作" width="300">
+            <el-table-column label="操作" width="100">
               <template slot-scope="scope">
                 <template v-if="scope.row.is_buy">
                   <el-link
@@ -33,6 +41,7 @@
                     升级
                   </el-link>
                 </template>
+                <span v-else class="c-red">无权限安装</span>
               </template>
             </el-table-column>
           </el-table>
@@ -55,9 +64,19 @@
       <div class="float-left table-content" v-else-if="tab === 'local'">
         <el-table :data="localList" class="float-left">
           <el-table-column prop="name" label="插件"> </el-table-column>
-          <el-table-column prop="version" label="当前版本" width="200">
+          <el-table-column prop="version" label="本地版本" width="200">
           </el-table-column>
-          <el-table-column label="操作" width="300">
+          <el-table-column prop="version" label="状态" width="150">
+            <template slot-scope="scope">
+              <template v-if="scope.row.enabled">
+                <span class="status-success">
+                  <span class="status-success-icon"></span>
+                  <span class="ml-5">运行中</span>
+                </span>
+              </template>
+            </template>
+          </el-table-column>
+          <el-table-column label="操作" width="50">
             <template slot-scope="scope">
               <el-link
                 v-if="scope.row.enabled"
@@ -227,5 +246,18 @@ export default {
   width: 100%;
   height: auto;
   float: left;
+}
+
+.status-success {
+  font-size: 10px;
+  color: red;
+
+  .status-success-icon {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    background-color: red;
+    border-radius: 50%;
+  }
 }
 </style>

@@ -200,6 +200,7 @@
       </div>
 
       <draggable
+        ref="preview-box"
         class="preview-box"
         draggable=".block-item"
         group="blocks"
@@ -369,7 +370,7 @@ export default {
     this.getData();
   },
   methods: {
-    getData() {
+    getData(toBottom = false) {
       if (this.loading) {
         return;
       }
@@ -380,6 +381,14 @@ export default {
       }).then((res) => {
         this.blocks = res.data;
         this.loading = false;
+
+        if (toBottom) {
+          // 滚动到底部
+          this.$nextTick(() => {
+            let dom = document.querySelector(".bg");
+            dom.scrollTop = dom.scrollHeight;
+          });
+        }
       });
     },
     dragChange(e) {
@@ -536,6 +545,7 @@ export default {
           ],
         };
       }
+
       // 添加block
       this.$api.ViewBlock.Store({
         platform: this.platform,
@@ -545,9 +555,8 @@ export default {
         config: defaultConfig,
       })
         .then(() => {
-          //
           this.loading = false;
-          this.getData();
+          this.getData(true);
         })
         .catch((e) => {
           this.loading = false;
@@ -817,5 +826,6 @@ export default {
   width: 400px;
   box-sizing: border-box;
   background-color: white;
+  overflow-y: auto;
 }
 </style>

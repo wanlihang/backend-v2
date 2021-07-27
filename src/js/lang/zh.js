@@ -28,7 +28,7 @@ const zh = {
         administrator: {
             'change-password': '修改密码'
         },
-        'system-application': '应用商城',
+        'system-application': '功能模块',
         member: {
             name:'用户',
             index: '用户列表',

@@ -135,6 +135,7 @@
     </div>
 
     <draggable
+      ref="preview-box"
       class="preview-box"
       draggable=".block-item"
       group="blocks"
@@ -292,7 +293,7 @@ export default {
     this.getData();
   },
   methods: {
-    getData() {
+    getData(toBottom = false) {
       if (this.loading) {
         return;
       }
@@ -303,6 +304,13 @@ export default {
       }).then((res) => {
         this.blocks = res.data;
         this.loading = false;
+        if (toBottom) {
+          // 滚动到底部
+          this.$nextTick(() => {
+            this.$refs["preview-box"].$el.scrollTop =
+              this.$refs["preview-box"].$el.scrollHeight;
+          });
+        }
       });
     },
     dragChange(e) {
@@ -574,9 +582,8 @@ export default {
         config: defaultConfig,
       })
         .then(() => {
-          //
           this.loading = false;
-          this.getData();
+          this.getData(true);
         })
         .catch((e) => {
           this.loading = false;
