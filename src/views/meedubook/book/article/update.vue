@@ -101,20 +101,12 @@
         </el-form-item>
 
         <el-form-item prop="render_content" label="文章内容">
-          <div class="d-flex">
-            <div>
-              <mavon-editor
-                :content="article.original_content"
-                class="w-700px"
-                @change="getcontent"
-              ></mavon-editor>
-            </div>
-            <div class="ml-10">
-              <helper-text
-                text="为了更好的阅读体验，仅支持 Markdown 语法。"
-              ></helper-text>
-            </div>
-          </div>
+          <mavon-editor
+            :content="article.original_content"
+            class="w-100"
+            :height="500"
+            @change="getcontent"
+          ></mavon-editor>
         </el-form-item>
       </el-form>
 
