@@ -12,7 +12,7 @@ const zh = {
         order: '全部订单',
         'order-detail': "订单详情",
         promocode: '优惠码',
-        promocode_import: '批量导入',
+        promocode_import: '优惠码批量导入',
         withdrawOrders: '余额提现',
         system: '系统',
         qa: '问答',
@@ -281,7 +281,7 @@ const zh = {
                 create: '添加试题',
                 update: '编辑试题',
                 userpaper: '考试记录',
-                import: '批量导入试题',
+                import: '试题批量导入',
                 category: {
                     index: '试题分类',
                     create: '添加试题分类',
