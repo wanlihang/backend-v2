@@ -52,7 +52,9 @@
         </div>
         <div class="el_item">
           <span>{{ $t("index.month_income") }}</span>
-          <span class="el_item_num flex-1">{{ list.this_month_paid_sum || 0 }}</span>
+          <span class="el_item_num flex-1">{{
+            list.this_month_paid_sum || 0
+          }}</span>
           <span class="el_item_increase"
             >{{ $t("index.month_increase") }}：<strong
               >+{{
@@ -77,6 +79,7 @@
         <span>{{ $t("index.demand_course") }}</span>
       </a>
       <a
+        v-if="enabledAddons['Zhibo']"
         @click="
           $router.push({
             name: 'LiveCourse',
@@ -88,6 +91,7 @@
         <span>{{ $t("index.live_course") }}</span>
       </a>
       <a
+        v-if="enabledAddons['MeeduTopics']"
         @click="
           $router.push({
             name: 'Topic',
@@ -99,6 +103,7 @@
         <span>{{ $t("index.graphic_course") }}</span>
       </a>
       <a
+        v-if="enabledAddons['MeeduBooks']"
         @click="
           $router.push({
             name: 'Meedubook',
@@ -110,6 +115,7 @@
         <span>{{ $t("index.ebook") }}</span>
       </a>
       <a
+        v-if="enabledAddons['LearningPaths']"
         @click="
           $router.push({
             name: 'LearningPath',
@@ -121,6 +127,7 @@
         <span>学习路径</span>
       </a>
       <a
+        v-if="enabledAddons['Paper']"
         @click="
           $router.push({
             name: 'ExamPaper',
@@ -175,6 +182,8 @@
 </template>
     
 <script>
+import { mapState } from "vuex";
+
 export default {
   data() {
     return {
@@ -202,6 +211,9 @@ export default {
         "-" +
         new Date().getDate(),
     };
+  },
+  computed: {
+    ...mapState(["enabledAddons"]),
   },
   mounted() {
     this.getResults();
