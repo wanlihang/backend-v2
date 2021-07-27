@@ -4,7 +4,7 @@
       <div class="select-images-title">选择图片</div>
       <div class="select-images-box">
         <div class="category-box">
-          <div class="title">{{ $t("common.group") }}</div>
+          <!-- <div class="title">{{ $t("common.group") }}</div> -->
           <div class="body">
             <div
               class="category-item"
@@ -29,7 +29,7 @@
               :on-success="uploadSuccessEvt"
               accept="image/gif,image/jpeg,image/jpg,image/png"
             >
-              <el-button type="primary">
+              <el-button class="upbtn">
                 {{ $t("common.image.upload") }}
               </el-button>
             </el-upload>
@@ -72,8 +72,10 @@
         </div>
       </div>
       <div class="select-images-footer">
-        <el-button type="primary" @click="confirm"> 确定 </el-button>
-        <el-button @click="close"> 取消 </el-button>
+        <el-button class="footer_btn" type="primary" @click="confirm">
+          确定
+        </el-button>
+        <el-button class="footer_btn ml-30" @click="close"> 取消 </el-button>
       </div>
     </div>
   </div>
@@ -199,7 +201,7 @@ export default {
   height: auto;
   float: left;
   box-sizing: border-box;
-  padding: 30px;
+  padding: 30px 15px 40px 30px;
   font-size: 18px;
   font-weight: 400;
   color: #333333;
@@ -212,15 +214,15 @@ export default {
   float: left;
   display: flex;
   box-sizing: border-box;
-  padding-left: 30px;
+  padding-left: 0px;
   padding-right: 30px;
-  padding-bottom: 30px;
+  padding-bottom: 40px;
 
   .category-box {
-    width: 200px;
+    width: 150px;
     height: auto;
     margin-right: 30px;
-    border: 1px solid rgb(227, 227, 227);
+    border-right: 1px solid #d8d8d8;
     border-radius: 3px;
 
     .title {
@@ -254,11 +256,11 @@ export default {
         cursor: pointer;
         font-size: 15px;
         line-height: 15px;
-        color: rgba(0, 0, 0, 0.6);
+        color: #333333;
 
         &.active {
-          background-color: rgba(0, 0, 0, 0.05);
-          color: rgba(0, 0, 0, 0.7);
+          background-color: rgba(60, 167, 250, 0.1);
+          color: #333333;
         }
       }
     }
@@ -273,6 +275,12 @@ export default {
       float: left;
       margin-bottom: 15px;
       text-align: right;
+      .upbtn {
+        width: 116px;
+        position: absolute;
+        top: 30px;
+        right: 15px;
+      }
     }
 
     .empty-box {
@@ -283,16 +291,15 @@ export default {
 
     .body {
       width: 100%;
+      margin-top: -55px;
       height: auto;
       min-height: 417px;
       box-sizing: border-box;
-      padding: 15px;
+      padding: 0 0px 15px 0px;
       float: left;
       display: grid;
       gap: 15px;
       grid-template-columns: repeat(5, minmax(0, 1fr));
-      border: 1px solid rgb(227, 227, 227);
-      border-radius: 3px;
 
       .image-item {
         box-sizing: border-box;
@@ -340,7 +347,10 @@ export default {
   height: auto;
   float: left;
   box-sizing: border-box;
-  padding: 20px 30px;
-  border-top: 1px solid rgba(0, 0, 0, 0.6);
+  padding: 15px 30px;
+  box-shadow: 0px -2px 4px 0px rgba(102, 102, 102, 0.05);
+  .footer_btn {
+    width: 88px;
+  }
 }
 </style>
