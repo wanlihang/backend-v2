@@ -27,7 +27,7 @@
     </div>
     <div class="float-left mt-30" v-loading="loading">
       <div class="float-left">
-        <el-table :data="list"  class="float-left">
+        <el-table :data="list" class="float-left">
           <el-table-column prop="id" label="ID" width="120"> </el-table-column>
           <el-table-column prop="goods_id" label="商品ID" width="120">
           </el-table-column>
@@ -51,22 +51,22 @@
           <el-table-column fixed="right" label="操作" width="120">
             <template slot-scope="scope">
               <p-link
-                text="删除"
-                p="addons.MultiLevelShare.goods.delete"
-                type="danger"
-                @click="destory(scope.row.id)"
-              ></p-link>
-              <p-link
                 text="编辑"
                 p="addons.MultiLevelShare.goods.update"
                 type="primary"
-                class="ml-5"
                 @click="
                   $router.push({
                     name: 'ShareGoodsUpdate',
                     query: { id: scope.row.id },
                   })
                 "
+              ></p-link>
+              <p-link
+                class="ml-5"
+                text="删除"
+                p="addons.MultiLevelShare.goods.delete"
+                type="danger"
+                @click="destory(scope.row.id)"
               ></p-link>
             </template>
           </el-table-column>

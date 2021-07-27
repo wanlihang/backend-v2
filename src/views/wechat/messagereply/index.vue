@@ -9,7 +9,7 @@
       ></p-button>
     </div>
     <div class="float-left" v-loading="loading">
-      <el-table :data="messages"  class="float-left">
+      <el-table :data="messages" class="float-left">
         <el-table-column prop="id" label="ID" width="120"> </el-table-column>
         <el-table-column label="匹配规则" width="500"
           ><template slot-scope="scope">
@@ -26,13 +26,6 @@
         <el-table-column fixed="right" label="操作" width="100">
           <template slot-scope="scope">
             <p-link
-              text="删除"
-              p="mpWechatMessageReply.destroy"
-              style="margin-right: 10px"
-              type="danger"
-              @click="destory(scope.row.id)"
-            ></p-link>
-            <p-link
               text="编辑"
               p="mpWechatMessageReply.update"
               type="primary"
@@ -42,6 +35,13 @@
                   query: { id: scope.row.id },
                 })
               "
+            ></p-link>
+            <p-link
+              text="删除"
+              p="mpWechatMessageReply.destroy"
+              class="ml-5"
+              type="danger"
+              @click="destory(scope.row.id)"
             ></p-link>
           </template>
         </el-table-column>

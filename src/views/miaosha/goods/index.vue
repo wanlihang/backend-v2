@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="float-left mt-30" v-loading="loading">
-      <el-table :data="results"  class="float-left">
+      <el-table :data="results" class="float-left">
         <el-table-column prop="id" label="ID" width="120"> </el-table-column>
         <el-table-column prop="goods_id" label="课程ID" width="120">
         </el-table-column>
@@ -62,22 +62,22 @@
         <el-table-column fixed="right" label="操作" width="100">
           <template slot-scope="scope">
             <p-link
-              text="删除"
-              p="addons.MiaoSha.goods.delete"
-              type="danger"
-              @click="destory(scope.row.id)"
-            ></p-link>
-            <p-link
               text="编辑"
               p="addons.MiaoSha.goods.update"
               type="primary"
-              class="ml-5"
               @click="
                 $router.push({
                   name: 'MiaoshaGoodsUpdate',
                   query: { id: scope.row.id },
                 })
               "
+            ></p-link>
+            <p-link
+              class="ml-5"
+              text="删除"
+              p="addons.MiaoSha.goods.delete"
+              type="danger"
+              @click="destory(scope.row.id)"
             ></p-link>
           </template>
         </el-table-column>

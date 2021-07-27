@@ -27,7 +27,7 @@
       </div>
     </div>
     <div class="float-left mt-30" v-loading="loading">
-      <el-table :data="list"  class="float-left">
+      <el-table :data="list" class="float-left">
         <el-table-column prop="id" label="ID" width="120"> </el-table-column>
         <el-table-column prop="goods_id" label="商品ID" width="120">
         </el-table-column>
@@ -43,15 +43,8 @@
         <el-table-column fixed="right" label="操作" width="150">
           <template slot-scope="scope">
             <p-link
-              text="删除"
-              type="danger"
-              @click="destory(scope.row.id)"
-              p="addons.CodeExchanger.goods.delete"
-            ></p-link>
-            <p-link
               type="primary"
               text="兑换码"
-              class="ml-5"
               @click="
                 $router.push({
                   name: 'CodeExchangerCodes',
@@ -59,6 +52,13 @@
                 })
               "
               p="addons.CodeExchanger.codes.list"
+            ></p-link>
+            <p-link
+              class="ml-5"
+              text="删除"
+              type="danger"
+              @click="destory(scope.row.id)"
+              p="addons.CodeExchanger.goods.delete"
             ></p-link>
           </template>
         </el-table-column>

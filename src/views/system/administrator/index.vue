@@ -12,7 +12,6 @@
       <div class="float-left">
         <el-table
           :data="users"
-          
           class="float-left"
           @sort-change="sortChange"
           :default-sort="{ prop: 'id', order: 'descending' }"
@@ -41,13 +40,6 @@
           <el-table-column fixed="right" label="操作" width="120">
             <template slot-scope="scope">
               <p-link
-                text="删除"
-                p="administrator.destroy"
-                style="margin-right: 10px"
-                type="danger"
-                @click="destory(scope.row.id)"
-              ></p-link>
-              <p-link
                 text="编辑"
                 p="administrator.update"
                 type="primary"
@@ -57,6 +49,13 @@
                     query: { id: scope.row.id },
                   })
                 "
+              ></p-link>
+              <p-link
+                text="删除"
+                p="administrator.destroy"
+                class="ml-5"
+                type="danger"
+                @click="destory(scope.row.id)"
               ></p-link>
             </template>
           </el-table-column>

@@ -3,7 +3,7 @@
     <back-bar class="mb-30" title="问题回答"></back-bar>
 
     <div class="float-left" v-loading="loading">
-      <el-table :data="answers"  class="float-left">
+      <el-table :data="answers" class="float-left">
         <el-table-column prop="id" label="ID" width="120"> </el-table-column>
         <el-table-column prop="user_id" label="用户ID" width="120">
         </el-table-column>
@@ -42,25 +42,8 @@
         <el-table-column fixed="right" label="操作" width="160">
           <template slot-scope="scope">
             <p-link
-              text="删除"
-              p="addons.Wenda.question.answers.delete"
-              type="danger"
-              @click="destory(scope.row.id)"
-            >
-            </p-link>
-            <p-link
-              text="设为答案"
-              p="addons.Wenda.question.answers.setTrue"
-              v-if="status !== 1"
-              class="ml-10"
-              type="primary"
-              @click="setAnswer(scope.row.id)"
-            >
-            </p-link>
-            <p-link
               text="评论"
               p="addons.Wenda.question.answers.comments"
-              class="ml-10"
               type="primary"
               @click="
                 $router.push({
@@ -68,6 +51,23 @@
                   query: { id: scope.row.question_id, answer_id: scope.row.id },
                 })
               "
+            >
+            </p-link>
+            <p-link
+              text="设为答案"
+              p="addons.Wenda.question.answers.setTrue"
+              v-if="status !== 1"
+              class="ml-5"
+              type="primary"
+              @click="setAnswer(scope.row.id)"
+            >
+            </p-link>
+            <p-link
+              text="删除"
+              class="ml-5"
+              p="addons.Wenda.question.answers.delete"
+              type="danger"
+              @click="destory(scope.row.id)"
             >
             </p-link>
           </template>
