@@ -68,7 +68,7 @@
           @sort-change="sortChange"
           :default-sort="{ prop: 'id', order: 'descending' }"
         >
-          <el-table-column prop="id" sortable label="课程ID" width="100">
+          <el-table-column prop="id" sortable label="ID" width="100">
           </el-table-column>
           <el-table-column label="分类">
             <template slot-scope="scope">
