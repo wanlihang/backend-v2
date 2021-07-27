@@ -64,14 +64,13 @@
       <div class="float-left">
         <el-table
           :data="courses"
-          
           class="float-left"
           @sort-change="sortChange"
           :default-sort="{ prop: 'id', order: 'descending' }"
         >
-          <el-table-column prop="id" sortable label="课程ID" width="120">
+          <el-table-column prop="id" sortable label="课程ID" width="100">
           </el-table-column>
-          <el-table-column label="分类" width="200">
+          <el-table-column label="分类">
             <template slot-scope="scope">
               <span v-if="scope.row.category">
                 {{ scope.row.category.name }}
@@ -79,7 +78,7 @@
               <span v-else class="c-red">数据不完整</span>
             </template>
           </el-table-column>
-          <el-table-column label="课程"  width="500">
+          <el-table-column label="课程" width="400">
             <template slot-scope="scope">
               <div class="d-flex">
                 <div>
@@ -91,14 +90,14 @@
               </div>
             </template>
           </el-table-column>
-          <el-table-column property="charge" label="价格" sortable width="200">
+          <el-table-column property="charge" label="价格" sortable width="100">
             <template slot-scope="scope"> {{ scope.row.charge }}元 </template>
           </el-table-column>
           <el-table-column
             label="订阅人数"
             property="user_count"
             sortable
-            width="200"
+            width="150"
           >
             <template slot-scope="scope">
               {{ scope.row.user_count }}人
@@ -114,22 +113,10 @@
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="200">
             <template slot-scope="scope">
-              <el-link
-                type="primary"
-                @click="
-                  $router.push({
-                    name: 'VodView',
-                    params: { id: scope.row.id },
-                  })
-                "
-              >
-                详情
-              </el-link>
               <p-link
                 text="视频"
                 p="addons.Zhibo.course_video.list"
                 type="primary"
-                class="ml-5"
                 @click="
                   $router.push({
                     name: 'CourseVideos',
@@ -138,18 +125,6 @@
                 "
               >
               </p-link>
-              <el-link
-                type="primary"
-                class="ml-5"
-                @click="
-                  $router.push({
-                    name: 'CourseAttach',
-                    query: { course_id: scope.row.id },
-                  })
-                "
-              >
-                附件
-              </el-link>
               <p-link
                 text="编辑"
                 p="addons.Zhibo.course.update"
@@ -163,6 +138,30 @@
                 "
               >
               </p-link>
+              <el-link
+                class="ml-5"
+                type="primary"
+                @click="
+                  $router.push({
+                    name: 'VodView',
+                    params: { id: scope.row.id },
+                  })
+                "
+              >
+                用户
+              </el-link>
+              <el-link
+                type="primary"
+                class="ml-5"
+                @click="
+                  $router.push({
+                    name: 'CourseAttach',
+                    query: { course_id: scope.row.id },
+                  })
+                "
+              >
+                附件
+              </el-link>
               <p-link
                 text="删除"
                 p="addons.Zhibo.course.delete"

@@ -84,16 +84,14 @@
           :data="list"
           @sort-change="sortChange"
           :default-sort="{ prop: 'id', order: 'descending' }"
-          
           class="float-left"
         >
-          <el-table-column prop="id" sortable label="ID" width="120">
+          <el-table-column prop="id" sortable label="ID" width="100">
           </el-table-column>
-          <el-table-column prop="category.name" label="分类" width="150">
+          <el-table-column prop="category.name" label="分类"> </el-table-column>
+          <el-table-column prop="teacher.name" label="讲师" width="150">
           </el-table-column>
-          <el-table-column prop="teacher.name" label="讲师" width="160">
-          </el-table-column>
-          <el-table-column label="课程" width="500">
+          <el-table-column label="课程" width="400">
             <template slot-scope="scope">
               <div class="d-flex">
                 <div>
@@ -111,7 +109,7 @@
             </template>
           </el-table-column>
           <el-table-column
-            label="人数"
+            label="订阅人数"
             property="join_user_times"
             sortable
             width="120"
@@ -125,7 +123,12 @@
               <span>{{ scope.row.status_text }}</span>
             </template>
           </el-table-column>
-          <el-table-column label="上架时间" prop="published_at" sortable>
+          <el-table-column
+            label="上架时间"
+            prop="published_at"
+            sortable
+            width="200"
+          >
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="150">
             <template slot-scope="scope">
@@ -141,6 +144,18 @@
                 p="addons.Zhibo.course_video.list"
               ></p-link>
               <p-link
+                text="编辑"
+                type="primary"
+                class="ml-5"
+                @click="
+                  $router.push({
+                    name: 'LiveCourseUpdate',
+                    query: { id: scope.row.id },
+                  })
+                "
+                p="addons.Zhibo.course.update"
+              ></p-link>
+              <p-link
                 text="用户"
                 type="primary"
                 class="ml-5"
@@ -153,18 +168,6 @@
                 p="addons.Zhibo.course.users"
               ></p-link>
 
-              <p-link
-                text="编辑"
-                type="primary"
-                class="ml-5"
-                @click="
-                  $router.push({
-                    name: 'LiveCourseUpdate',
-                    query: { id: scope.row.id },
-                  })
-                "
-                p="addons.Zhibo.course.update"
-              ></p-link>
               <p-link
                 text="删除"
                 class="ml-5"

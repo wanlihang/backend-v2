@@ -49,7 +49,6 @@
           :data="list"
           @sort-change="sortChange"
           :default-sort="{ prop: 'id', order: 'descending' }"
-          
           class="float-left"
         >
           <el-table-column prop="id" label="ID" width="120"> </el-table-column>
@@ -71,7 +70,19 @@
           <el-table-column fixed="right" label="操作" width="220">
             <template slot-scope="scope">
               <p-link
+                text="编辑"
+                p="addons.Paper.mock_paper.update"
+                type="primary"
+                @click="
+                  $router.push({
+                    name: 'ExamMockpaperUpdate',
+                    query: { id: scope.row.id },
+                  })
+                "
+              ></p-link>
+              <p-link
                 text="用户"
+                class="ml-5"
                 p="addons.Paper.mock_paper.users"
                 type="primary"
                 @click="
@@ -106,18 +117,6 @@
                 "
               ></p-link>
 
-              <p-link
-                text="编辑"
-                p="addons.Paper.mock_paper.update"
-                type="primary"
-                class="ml-5"
-                @click="
-                  $router.push({
-                    name: 'ExamMockpaperUpdate',
-                    query: { id: scope.row.id },
-                  })
-                "
-              ></p-link>
               <p-link
                 text="删除"
                 class="ml-5"

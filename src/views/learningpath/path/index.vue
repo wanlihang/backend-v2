@@ -13,12 +13,12 @@
       <div class="float-left">
         <el-table :data="results"  class="float-left">
           <el-table-column prop="id" label="ID" width="120"> </el-table-column>
-          <el-table-column prop="name" label="路径名" width="500">
+          <el-table-column prop="name" label="路径名" width="400">
           </el-table-column>
           <el-table-column label="价格">
             <template slot-scope="scope">
               <div>现价：{{ scope.row.charge }}元</div>
-              <div class="original-charge">
+              <div style="color:#666;" class="original-charge">
                 原价：{{ scope.row.original_charge }}元
               </div>
             </template>

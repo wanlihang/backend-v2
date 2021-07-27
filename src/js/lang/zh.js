@@ -182,7 +182,7 @@ const zh = {
                 index: '录播',
                 create: '添加录播课程',
                 update: '编辑录播课程',
-                detail: '录播课程详情',
+                detail: '录播定阅用户',
                 'video-import': '视频批量导入',
                 comment:'课程评论',
                 category: {

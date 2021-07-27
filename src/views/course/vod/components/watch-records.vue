@@ -1,7 +1,7 @@
 <template>
   <div class="float-left">
     <div class="float-left">
-      <div class="float-left d-flex">
+      <div class="float-left d-flex mb-30">
         <div>
           <el-button @click="delRecords()">删除</el-button>
         </div>
@@ -44,7 +44,6 @@
       <div class="float-left">
         <el-table
           :data="records"
-          
           class="float-left"
           @sort-change="sortChange"
           :default-sort="{ prop: 'id', order: 'descending' }"

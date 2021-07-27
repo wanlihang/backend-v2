@@ -1,7 +1,7 @@
 <template>
   <div class="float-left">
     <div class="float-left">
-      <div class="float-left d-flex">
+      <div class="float-left d-flex mb-30">
         <div>
           <el-button type="primary" @click="showUserAddWin = true">
             添加用户
@@ -35,7 +35,7 @@
       </div>
     </div>
 
-    <el-table :data="list"  class="float-left">
+    <el-table :data="list" class="float-left">
       <el-table-column label="用户ID" prop="user_id" width="120">
       </el-table-column>
       <el-table-column label="用户">

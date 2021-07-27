@@ -48,7 +48,6 @@
           :data="list"
           @sort-change="sortChange"
           :default-sort="{ prop: 'id', order: 'descending' }"
-          
           class="float-left"
         >
           <el-table-column prop="id" sortable label="ID" width="120">
@@ -77,6 +76,18 @@
                 @click="
                   $router.push({
                     name: 'ExamPaperQuestion',
+                    query: { id: scope.row.id },
+                  })
+                "
+              ></p-link>
+              <p-link
+                text="编辑"
+                p="addons.Paper.paper.update"
+                type="primary"
+                class="ml-5"
+                @click="
+                  $router.push({
+                    name: 'ExamPaperUpdate',
                     query: { id: scope.row.id },
                   })
                 "
@@ -118,18 +129,6 @@
                 "
               ></p-link>
 
-              <p-link
-                text="编辑"
-                p="addons.Paper.paper.update"
-                type="primary"
-                class="ml-5"
-                @click="
-                  $router.push({
-                    name: 'ExamPaperUpdate',
-                    query: { id: scope.row.id },
-                  })
-                "
-              ></p-link>
               <p-link
                 text="删除"
                 class="ml-5"

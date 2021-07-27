@@ -60,9 +60,9 @@
           >
             <el-table-column prop="id" sortable label="ID" width="120">
             </el-table-column>
-            <el-table-column prop="category.name" label="分类" width="150">
+            <el-table-column prop="category.name" label="分类">
             </el-table-column>
-            <el-table-column label="电子书" width="500">
+            <el-table-column label="电子书" width="400">
               <template slot-scope="scope">
                 <div class="d-flex">
                   <div>
@@ -104,7 +104,12 @@
                 <span>{{ scope.row.user_count }}人</span>
               </template>
             </el-table-column>
-            <el-table-column prop="published_at" label="上架时间" sortable>
+            <el-table-column
+              prop="published_at"
+              label="上架时间"
+              sortable
+              width="200"
+            >
             </el-table-column>
             <el-table-column fixed="right" label="操作" width="150">
               <template slot-scope="scope">
@@ -116,6 +121,18 @@
                     $router.push({
                       name: 'MeedubookArticle',
                       query: { bid: scope.row.id },
+                    })
+                  "
+                ></p-link>
+                <p-link
+                  text="编辑"
+                  class="ml-5"
+                  p="addons.meedu_books.book.update"
+                  type="primary"
+                  @click="
+                    $router.push({
+                      name: 'MeedubookUpdate',
+                      query: { id: scope.row.id },
                     })
                   "
                 ></p-link>
@@ -132,18 +149,6 @@
                   "
                 ></p-link>
 
-                <p-link
-                  text="编辑"
-                  class="ml-5"
-                  p="addons.meedu_books.book.update"
-                  type="primary"
-                  @click="
-                    $router.push({
-                      name: 'MeedubookUpdate',
-                      query: { id: scope.row.id },
-                    })
-                  "
-                ></p-link>
                 <p-link
                   text="删除"
                   class="ml-5"

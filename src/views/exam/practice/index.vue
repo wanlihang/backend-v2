@@ -49,7 +49,6 @@
           :data="list"
           @sort-change="sortChange"
           :default-sort="{ prop: 'id', order: 'descending' }"
-          
           class="float-left"
         >
           <el-table-column prop="id" sortable label="ID" width="120">
@@ -79,6 +78,18 @@
                 "
               ></p-link>
               <p-link
+                text="编辑"
+                p="addons.Paper.practice.update"
+                type="primary"
+                class="ml-5"
+                @click="
+                  $router.push({
+                    name: 'ExamPracticeUpdate',
+                    query: { id: scope.row.id },
+                  })
+                "
+              ></p-link>
+              <p-link
                 text="用户"
                 p="addons.Paper.practice.users"
                 type="primary"
@@ -91,18 +102,6 @@
                 "
               ></p-link>
 
-              <p-link
-                text="编辑"
-                p="addons.Paper.practice.update"
-                type="primary"
-                class="ml-5"
-                @click="
-                  $router.push({
-                    name: 'ExamPracticeUpdate',
-                    query: { id: scope.row.id },
-                  })
-                "
-              ></p-link>
               <p-link
                 text="删除"
                 class="ml-5"

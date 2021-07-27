@@ -54,14 +54,12 @@
           :data="list"
           @sort-change="sortChange"
           :default-sort="{ prop: 'id', order: 'descending' }"
-          
           class="float-left"
         >
-          <el-table-column prop="id" sortable label="ID" width="120">
+          <el-table-column prop="id" sortable label="ID" width="100">
           </el-table-column>
-          <el-table-column prop="category.name" label="分类" width="200">
-          </el-table-column>
-          <el-table-column label="标题" width="500">
+          <el-table-column prop="category.name" label="分类"> </el-table-column>
+          <el-table-column label="标题" width="400">
             <template slot-scope="scope">
               <div class="d-flex">
                 <div>
@@ -71,7 +69,7 @@
               </div>
             </template>
           </el-table-column>
-          <el-table-column label="价格" sortable property="charge" width="200">
+          <el-table-column label="价格" sortable property="charge" width="100">
             <template slot-scope="scope">
               <span>{{ scope.row.charge }}元</span>
             </template>
@@ -80,7 +78,7 @@
             label="浏览"
             sortable
             property="view_times"
-            width="150"
+            width="100"
           >
             <template slot-scope="scope">
               <span>{{ scope.row.view_times }}次</span>
@@ -90,7 +88,7 @@
             label="付费"
             sortable
             property="user_count"
-            width="120"
+            width="100"
           >
             <template slot-scope="scope">
               <span>{{ scope.row.user_count }}人</span>
@@ -100,17 +98,34 @@
             prop="comments_count"
             sortable
             label="评论"
-            width="120"
+            width="100"
           >
           </el-table-column>
-          <el-table-column prop="vote_count" sortable label="点赞" width="120">
+          <el-table-column prop="vote_count" sortable label="点赞" width="100">
           </el-table-column>
-          <el-table-column prop="created_at" sortable label="时间" width="200">
+          <el-table-column
+            prop="created_at"
+            sortable
+            label="上架时间"
+            width="200"
+          >
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="120">
             <template slot-scope="scope">
               <p-link
+                text="编辑"
+                type="primary"
+                @click="
+                  $router.push({
+                    name: 'TopicUpdate',
+                    query: { id: scope.row.id },
+                  })
+                "
+                p="addons.meedu_topics.topic.update"
+              ></p-link>
+              <p-link
                 text="用户"
+                class="ml-5"
                 type="primary"
                 @click="
                   $router.push({
@@ -121,18 +136,6 @@
                 p="addons.meedu_topics.orders"
               ></p-link>
 
-              <p-link
-                text="编辑"
-                type="primary"
-                class="ml-5"
-                @click="
-                  $router.push({
-                    name: 'TopicUpdate',
-                    query: { id: scope.row.id },
-                  })
-                "
-                p="addons.meedu_topics.topic.update"
-              ></p-link>
               <p-link
                 text="删除"
                 class="ml-5"
