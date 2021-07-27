@@ -38,7 +38,7 @@
       <div class="el_row_item2">
         <div class="el_item">
           <span>{{ $t("index.allnum") }}</span>
-          <span class="el_item_num">{{ list.user_count }}</span>
+          <span class="el_item_num flex-1">{{ list.user_count }}</span>
           <span class="el_item_increase"
             >{{ $t("index.day_increase") }}：<strong
               >+{{
@@ -52,7 +52,7 @@
         </div>
         <div class="el_item">
           <span>{{ $t("index.month_income") }}</span>
-          <span class="el_item_num">{{ list.this_month_paid_sum || 0 }}</span>
+          <span class="el_item_num flex-1">{{ list.this_month_paid_sum || 0 }}</span>
           <span class="el_item_increase"
             >{{ $t("index.month_increase") }}：<strong
               >+{{
@@ -458,7 +458,6 @@ export default {
           color: #333333;
           line-height: 36px;
           text-align: left;
-          flex: 1;
         }
         .el_item_increase {
           width: 42%;
