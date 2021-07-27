@@ -195,6 +195,7 @@ export default {
       this.filter.user_id = null;
       this.filter.created_at = null;
       this.formData.keywords = null;
+      this.params();
       this.getResults();
     },
     paginationSizeChange(size) {

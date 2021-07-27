@@ -192,6 +192,7 @@ export default {
       this.filter.topic_id = null;
       this.filter.created_at = null;
       this.formData.keywords = null;
+      this.params();
       this.getComments();
     },
     paginationSizeChange(size) {

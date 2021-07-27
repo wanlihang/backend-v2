@@ -209,6 +209,8 @@ export default {
       this.filter.user_id = null;
       this.filter.created_at = null;
       this.filter.bid = null;
+      this.formData.key = null;
+      this.params();
       this.getComments();
     },
     paginationSizeChange(size) {
