@@ -21,7 +21,7 @@
           <el-table-column prop="id" label="ID" width="100"> </el-table-column>
           <el-table-column prop="created_at" label="拍照时间">
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="150">
+          <el-table-column fixed="right" label="操作" width="250">
             <template slot-scope="scope">
               <el-image
                 style="width: 100px; height: 100px"
