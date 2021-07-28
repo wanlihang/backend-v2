@@ -37,9 +37,9 @@
         <el-table-column prop="id" label="ID" width="100"> </el-table-column>
         <el-table-column prop="other_id" label="商品ID" width="100">
         </el-table-column>
-        <el-table-column prop="goods_type_text" label="类型" width="120">
+        <el-table-column prop="goods_type_text" label="类型"> </el-table-column>
+        <el-table-column prop="goods_title" label="商品" width="400">
         </el-table-column>
-        <el-table-column prop="goods_title" label="商品"> </el-table-column>
         <el-table-column label="价格" width="150">
           <template slot-scope="scope">
             <div>团购价：{{ scope.row.charge }}元</div>
