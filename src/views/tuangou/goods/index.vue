@@ -34,13 +34,12 @@
     </div>
     <div class="float-left mt-30" v-loading="loading">
       <el-table :data="list" class="float-left">
-        <el-table-column prop="id" label="ID" width="120"> </el-table-column>
-        <el-table-column prop="other_id" label="商品ID" width="120">
+        <el-table-column prop="id" label="ID" width="100"> </el-table-column>
+        <el-table-column prop="other_id" label="商品ID" width="100">
         </el-table-column>
-        <el-table-column prop="goods_type_text" label="类型" width="160">
+        <el-table-column prop="goods_type_text" label="类型" width="120">
         </el-table-column>
-        <el-table-column prop="goods_title" label="商品" width="500">
-        </el-table-column>
+        <el-table-column prop="goods_title" label="商品"> </el-table-column>
         <el-table-column label="价格" width="150">
           <template slot-scope="scope">
             <div>团购价：{{ scope.row.charge }}元</div>
@@ -50,7 +49,7 @@
           </template>
         </el-table-column>
 
-        <el-table-column label="成团人数">
+        <el-table-column label="成团人数" width="120">
           <template slot-scope="scope">
             <span>{{ scope.row.people_num }}人</span>
           </template>

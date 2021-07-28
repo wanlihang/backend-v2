@@ -28,12 +28,12 @@
     <div class="float-left mt-30" v-loading="loading">
       <div class="float-left">
         <el-table :data="list" class="float-left">
-          <el-table-column prop="id" label="ID" width="120"> </el-table-column>
-          <el-table-column prop="goods_id" label="商品ID" width="120">
+          <el-table-column prop="id" label="ID" width="100"> </el-table-column>
+          <el-table-column prop="goods_id" label="商品ID" width="100">
           </el-table-column>
-          <el-table-column prop="goods_type_text" label="类型" width="200">
+          <el-table-column prop="goods_type_text" label="类型" width="120">
           </el-table-column>
-          <el-table-column prop="goods_title" label="商品" width="400">
+          <el-table-column prop="goods_title" label="商品">
           </el-table-column>
           <el-table-column label="价格" width="150">
             <template slot-scope="scope">
@@ -47,7 +47,7 @@
               <div>三级：{{ scope.row.reward3 }}元</div>
             </template>
           </el-table-column>
-          <el-table-column prop="created_at" label="时间"> </el-table-column>
+          <el-table-column prop="created_at" label="时间" width="200"> </el-table-column>
           <el-table-column fixed="right" label="操作" width="120">
             <template slot-scope="scope">
               <p-link
