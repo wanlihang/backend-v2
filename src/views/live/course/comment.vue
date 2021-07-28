@@ -245,7 +245,7 @@ export default {
     },
     destorymulti() {
       if (this.spids.ids == "") {
-        this.$message.error("请选择需要操作的数据");
+        this.$message.warning("请选择需要操作的数据");
         return;
       }
       this.$confirm("确认操作？", "警告", {
@@ -276,7 +276,7 @@ export default {
     },
     approve() {
       if (this.spids.ids == "") {
-        this.$message.error("请选择需要操作的数据");
+        this.$message.warning("请选择需要操作的数据");
         return;
       }
       this.$confirm("确认操作？", "警告", {
@@ -309,7 +309,7 @@ export default {
     },
     refuse() {
       if (this.spids.ids == "") {
-        this.$message.error("请选择需要操作的数据");
+        this.$message.warning("请选择需要操作的数据");
         return;
       }
       this.$confirm("确认操作？", "警告", {
