@@ -78,7 +78,7 @@ const routes = [{
         component: () => import('@/views/order/create_code'),
         name: 'Createcode',
         meta: {
-          title: 'title.promocode'
+          title: 'title.promocodecreate'
         }
       },
       {
@@ -86,7 +86,7 @@ const routes = [{
         component: () => import('@/views/order/createmulti_code'),
         name: 'CreateMulticode',
         meta: {
-          title: 'title.promocode'
+          title: 'title.promocode_export'
         }
       },
       {

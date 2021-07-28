@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="批量生成优惠码"></back-bar>
+    <back-bar class="mb-30" title="优惠码批量生成"></back-bar>
 
     <div class="float-left">
       <el-form
