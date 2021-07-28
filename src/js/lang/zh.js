@@ -154,6 +154,10 @@ const zh = {
             update: '编辑兑换码',
             codes: '兑换码'
         },
+        snapshot: {
+            name: '随机拍照',
+            index: '照片',
+        },
         topic: {
             name: '图文',
             index: '图文列表',

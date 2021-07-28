@@ -1095,6 +1095,16 @@ const Api = {
             },
         },
     },
+    Snapshot: {
+        Images: {
+            List(param) {
+                return get('/backend/addons/Snapshot/images', param);
+            },
+            Destory(param) {
+                return post('/backend/addons/Snapshot/images/delete/multi', param);
+            }
+        }
+    },
     Exam: {
         Paper: {
             List(params) {

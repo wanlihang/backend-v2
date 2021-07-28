@@ -1353,6 +1353,14 @@ const routes = [{
           title: '微信公众号菜单'
         }
       },
+      {
+        path: '/snapshot/index',
+        component: () => import('@/views/snapshot/index'),
+        name: 'SnapshotIndex',
+        meta: {
+          title: 'title.snapshot.index'
+        }
+      },
     ]
   },
   {
