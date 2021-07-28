@@ -1361,6 +1361,14 @@ const routes = [{
           title: 'title.snapshot.index'
         }
       },
+      {
+        path: '/snapshot/images',
+        component: () => import('@/views/snapshot/images'),
+        name: 'SnapshotImages',
+        meta: {
+          title: 'title.snapshot.images'
+        }
+      },
     ]
   },
   {

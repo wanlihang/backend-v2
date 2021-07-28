@@ -65,17 +65,7 @@
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="100">
             <template slot-scope="scope">
-              <p-link
-                text="查看"
-                type="primary"
-                @click="
-                  $router.push({
-                    name: 'SnopshotImages',
-                    query: { id: scope.row.id, images: scope.row.images },
-                  })
-                "
-                p="addons.Zhibo.course_video.list"
-              ></p-link>
+              <el-link type="primary" @click="see(scope.row)">查看</el-link>
             </template>
           </el-table-column>
         </el-table>
@@ -176,32 +166,15 @@ export default {
         this.total = res.data.total;
       });
     },
-    destory(item) {
-      this.$confirm("确认操作？", "警告", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning",
-      })
-        .then(() => {
-          //点击确定按钮的操作
-          if (this.loading) {
-            return;
-          }
-          this.loading = true;
-          this.$api.Snapshot.Images.Destory(item)
-            .then(() => {
-              this.loading = false;
-              this.$message.success(this.$t("common.success"));
-              this.getData();
-            })
-            .catch((e) => {
-              this.loading = false;
-              this.$message.error(e.message);
-            });
-        })
-        .catch(() => {
-          //点击删除按钮的操作
-        });
+    see(item) {
+      if (!item.images) {
+        this.$message.warning("暂无照片");
+        return;
+      }
+      this.$router.push({
+        name: "SnapshotImages",
+        query: { rid: item.id,other_id:item.other_id},
+      });
     },
   },
 };

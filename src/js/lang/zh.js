@@ -157,6 +157,7 @@ const zh = {
         snapshot: {
             name: '随机拍照',
             index: '照片',
+            images:'查看照片',
         },
         topic: {
             name: '图文',

@@ -174,5 +174,6 @@ export default {
         ExamQuestionImport: 'ExamQuestion',
         MpWechatMenu: 'MpWechatMenu',
         SnapshotIndex: 'SnapshotIndex',
+        SnapshotImages: 'SnapshotIndex',
     }
 }

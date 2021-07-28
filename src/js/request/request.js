@@ -1100,7 +1100,7 @@ const Api = {
             List(param) {
                 return get('/backend/addons/Snapshot/images', param);
             },
-            Destory(param) {
+            Destorymulti(param) {
                 return post('/backend/addons/Snapshot/images/delete/multi', param);
             }
         }
