@@ -210,8 +210,11 @@ export default {
 
 .select-images {
   position: absolute;
-  top: 10vh;
+  top: 50%;
   left: 50%;
+  width: 1200px;
+  height: 700px;
+  margin-top: -350px;
   margin-left: -600px;
   width: 1200px;
   height: auto;
@@ -233,14 +236,13 @@ export default {
 
 .select-images-box {
   width: 100%;
-  height: auto;
+  height: 540px;
   float: left;
   display: flex;
   box-sizing: border-box;
   padding-left: 0px;
   padding-right: 30px;
   padding-bottom: 40px;
-
   .category-box {
     width: 150px;
     height: auto;
