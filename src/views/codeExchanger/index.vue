@@ -28,14 +28,14 @@
     </div>
     <div class="float-left mt-30" v-loading="loading">
       <el-table :data="list" class="float-left">
-        <el-table-column prop="id" label="ID" width="120"> </el-table-column>
-        <el-table-column prop="goods_id" label="商品ID" width="120">
+        <el-table-column prop="id" label="ID" width="100"> </el-table-column>
+        <el-table-column prop="goods_id" label="商品ID" width="100">
         </el-table-column>
-        <el-table-column prop="goods_type_text" label="课程类型" width="150">
+        <el-table-column prop="goods_type_text" label="课程类型">
         </el-table-column>
-        <el-table-column prop="goods_title" label="商品" width="500">
+        <el-table-column prop="goods_title" label="商品" width="400">
         </el-table-column>
-        <el-table-column label="价格">
+        <el-table-column label="价格" width="150">
           <template slot-scope="scope">
             <span>{{ scope.row.goods_charge }}元</span>
           </template>
