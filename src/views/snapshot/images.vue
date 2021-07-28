@@ -42,6 +42,7 @@ export default {
   data() {
     return {
       rid: this.$route.query.rid,
+      user_id: this.$route.query.user_id,
       other_id: this.$route.query.other_id,
       images: [],
       total: 0,
@@ -72,6 +73,7 @@ export default {
       this.loading = true;
       let params = {
         other_id: this.other_id,
+        user_id: this.user_id,
       };
       this.$api.Snapshot.Images.List(params).then((res) => {
         this.loading = false;

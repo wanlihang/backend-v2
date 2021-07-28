@@ -173,7 +173,7 @@ export default {
       }
       this.$router.push({
         name: "SnapshotImages",
-        query: { rid: item.id,other_id:item.other_id},
+        query: { rid: item.id, other_id: item.other_id, user_id: item.user_id },
       });
     },
   },
