@@ -35,7 +35,7 @@ const zh = {
             name: '用户',
             index: '用户列表',
             create: '添加用户',
-            import: '批量导入',
+            import: '用户批量导入',
             detail: '用户详情',
             edit: '用户编辑',
             tags: '用户标签',
