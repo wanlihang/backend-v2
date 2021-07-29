@@ -150,6 +150,24 @@
         </div>
 
         <div class="float-left" v-show="tab.active === 'dev'">
+          <el-form-item label="推荐" prop="is_rec">
+            <div class="d-flex">
+              <div>
+                <el-switch
+                  v-model="course.is_rec"
+                  :active-value="1"
+                  :inactive-value="0"
+                >
+                </el-switch>
+              </div>
+              <div class="ml-15">
+                <div class="helper-text">
+                  <helper-text text="课程列表过滤使用。"></helper-text>
+                </div>
+              </div>
+            </div>
+          </el-form-item>
+
           <el-form-item label="评论控制" prop="comment_status">
             <el-select class="w-200px" v-model="course.comment_status">
               <el-option
