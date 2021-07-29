@@ -19,10 +19,15 @@ const Api = {
             return put(`/backend/api/v1/administrator/password`, params);
         }
     },
-    Stat: {
-        List() {
+    Dashboard: {
+        Index() {
             return get(`/backend/api/v1/dashboard`);
         },
+        SystemInfo() {
+            return get(`/backend/api/v1/dashboard/system/info`);
+        }
+    },
+    Stat: {
         Statistic(id, params) {
             return get(`/backend/api/v1/statistic/${id}`, params);
         },
@@ -1018,7 +1023,7 @@ const Api = {
     Multishare: {
         Poster: {
             List() {
-                return get(`/backend/addons/multi_level_share/poster/index`, );
+                return get(`/backend/addons/multi_level_share/poster/index`,);
             },
             Store(params) {
                 return post(`/backend/addons/multi_level_share/poster/create`, params);

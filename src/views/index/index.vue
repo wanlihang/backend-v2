@@ -180,7 +180,14 @@
         ></div>
       </el-col>
     </div>
-    <div class="bottomcopyright">Powered By MeEdu</div>
+    <div class="copyright">
+      <p class="mb-10">Powered By MeEdu</p>
+      <p class="info">
+        <span>PHP{{ systemInfo.php_version }} </span>
+        <span class="mx-10">主程序{{ systemInfo.meedu_version }}</span>
+        <span>后管v4.4</span>
+      </p>
+    </div>
   </div>
 </template>
     
@@ -213,6 +220,11 @@ export default {
         (new Date().getMonth() + 1) +
         "-" +
         new Date().getDate(),
+      systemInfo: {
+        laravel_version: null,
+        meedu_version: null,
+        php_version: null,
+      },
     };
   },
   computed: {
@@ -222,6 +234,7 @@ export default {
     this.getResults();
     this.fun_date(-7);
     this.getZXTdata();
+    this.getSystemInfo();
   },
   methods: {
     getResults() {
@@ -229,9 +242,16 @@ export default {
         return;
       }
       this.loading = true;
-      this.$api.Stat.List().then((res) => {
+      this.$api.Dashboard.Index().then((res) => {
         this.loading = false;
         this.list = res.data;
+      });
+    },
+    getSystemInfo() {
+      this.$api.Dashboard.SystemInfo().then((res) => {
+        this.systemInfo.laravel_version = res.data.laravel_version;
+        this.systemInfo.meedu_version = res.data.meedu_version;
+        this.systemInfo.php_version = res.data.php_version;
       });
     },
     sumrate(num1, num2) {
@@ -573,16 +593,21 @@ export default {
       overflow: hidden;
     }
   }
-  .bottomcopyright {
+  .copyright {
     width: 100%;
+    height: auto;
     text-align: center;
     margin-top: 50px;
-    height: 16px;
     font-size: 16px;
     font-weight: 300;
     color: #999999;
     padding-bottom: 30px;
     line-height: 16px;
+    padding-bottom: 15px;
+
+    .info {
+      font-size: 12px;
+    }
   }
 }
 </style>
