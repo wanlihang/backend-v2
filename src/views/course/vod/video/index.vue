@@ -4,13 +4,13 @@
     <div class="float-left mb-30">
       <p-button
         text="删除"
-        p="addons.Zhibo.course_video.delete"
+        p="video.destroy"
         type="danger"
         @click="destoryMulti()"
       ></p-button>
       <p-button
         text="添加"
-        p="addons.Zhibo.course_video.store"
+        p="video.store"
         @click="
           $router.push({
             name: 'VideosCreate',
@@ -25,7 +25,6 @@
       <div class="float-left">
         <el-table
           :data="videos"
-          
           class="float-left"
           @sort-change="sortChange"
           :default-sort="{ prop: 'published_at', order: 'ascending' }"
@@ -61,7 +60,7 @@
             <template slot-scope="scope">
               <p-link
                 text="编辑"
-                p="addons.Zhibo.course_video.update"
+                p="video.update"
                 type="primary"
                 @click="
                   $router.push({
@@ -70,7 +69,9 @@
                   })
                 "
               ></p-link>
-              <el-link
+              <p-link
+                p="video.subscribes"
+                text="用户"
                 class="ml-5"
                 type="primary"
                 @click="
@@ -82,11 +83,10 @@
                     },
                   })
                 "
-                >用户</el-link
-              >
+              ></p-link>
               <p-link
                 text="观看"
-                p="addons.Zhibo.course_video.watch.users"
+                p="video.watch.records"
                 class="ml-5"
                 type="primary"
                 @click="

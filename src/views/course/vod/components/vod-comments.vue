@@ -4,7 +4,11 @@
     <div class="float-left">
       <div class="float-left d-flex">
         <div>
-          <el-button @click="delRecords()">删除</el-button>
+          <p-button
+            text="删除"
+            p="course_comment.destroy"
+            @click="delRecords()"
+          ></p-button>
         </div>
         <div class="ml-10">
           <el-input

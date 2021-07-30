@@ -7,7 +7,7 @@
         <div>
           <p-button
             text="删除"
-            p="addons.Zhibo.course_comment.delete.multi"
+            p="video_comment.destroy"
             @click="delRecords()"
           ></p-button>
         </div>
