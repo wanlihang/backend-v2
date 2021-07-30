@@ -27,12 +27,11 @@
               <span>{{ scope.row.download_times }}次 </span>
             </template>
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="100">
+          <el-table-column fixed="right" label="操作" width="50">
             <template slot-scope="scope">
               <p-link
                 text="删除"
                 p="course_attach.destroy"
-                style="margin-right: 10px"
                 type="danger"
                 @click="delItem(scope.row.id)"
               >

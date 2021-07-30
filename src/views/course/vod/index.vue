@@ -23,9 +23,13 @@
       >
       </p-button>
 
-      <el-button @click="$router.push({ name: 'VodImport' })" type="primary">
-        视频批量导入
-      </el-button>
+      <p-button
+        text="视频批量导入"
+        p="video.import"
+        @click="$router.push({ name: 'VodImport' })"
+        type="primary"
+      >
+      </p-button>
     </div>
     <div class="float-left">
       <div class="float-left d-flex">
