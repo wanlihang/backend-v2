@@ -17,6 +17,7 @@
 
         <el-form-item label="权限">
           <el-cascader
+            class="w-100"
             filterable
             v-model="selectedPermissions"
             :options="permissionsTransform"

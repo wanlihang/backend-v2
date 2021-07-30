@@ -34,7 +34,7 @@
               <div class="ml-15">
                 <p-link
                   text="分类管理"
-                  p="addons.Zhibo.course_category.list"
+                  p="courseCategory"
                   type="primary"
                   @click="$router.push({ name: 'CourseCategories' })"
                 >

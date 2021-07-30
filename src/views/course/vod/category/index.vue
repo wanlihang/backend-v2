@@ -4,7 +4,7 @@
     <div class="float-left mb-30">
       <p-button
         text="添加"
-        p="addons.Zhibo.course_category.store"
+        p="courseCategory.store"
         @click="$router.push({ name: 'CategoriesCreate' })"
         type="primary"
       >
@@ -12,7 +12,7 @@
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
-        <el-table :data="categories"  class="float-left">
+        <el-table :data="categories" class="float-left">
           <el-table-column prop="id" label="ID" width="150"> </el-table-column>
           <el-table-column prop="sort" label="升序" width="150">
           </el-table-column>
@@ -31,15 +31,8 @@
           <el-table-column fixed="right" label="操作" width="150">
             <template slot-scope="scope">
               <p-link
-                text="删除"
-                p="addons.Zhibo.course_category.delete"
-                style="margin-right: 10px"
-                type="danger"
-                @click="destory(scope.row.id)"
-              ></p-link>
-              <p-link
                 text="编辑"
-                p="addons.Zhibo.course_category.update"
+                p="courseCategory.update"
                 type="primary"
                 @click="
                   $router.push({
@@ -47,6 +40,13 @@
                     query: { id: scope.row.id },
                   })
                 "
+              ></p-link>
+              <p-link
+                text="删除"
+                p="courseCategory.destroy"
+                class="ml-5"
+                type="danger"
+                @click="destory(scope.row.id)"
               ></p-link>
             </template>
           </el-table-column>

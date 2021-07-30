@@ -3,29 +3,33 @@
     <div class="float-left mb-30">
       <p-button
         text="添加"
-        p="addons.Zhibo.course.store"
+        p="course.store"
         @click="$router.push({ name: 'VodCreate' })"
         type="primary"
       >
       </p-button>
       <p-button
         text="课程评论"
-        p="addons.Zhibo.course_comment"
+        p="course_comment"
         @click="$router.push({ name: 'CourseComments' })"
         type="primary"
       >
       </p-button>
       <p-button
         text="视频评论"
-        p="addons.Zhibo.course_comment"
+        p="video_comment"
         @click="$router.push({ name: 'VideoComments' })"
         type="primary"
       >
       </p-button>
 
-      <el-button @click="$router.push({ name: 'VodImport' })" type="primary">
-        视频批量导入
-      </el-button>
+      <p-button
+        text="视频批量导入"
+        p="video.import"
+        @click="$router.push({ name: 'VodImport' })"
+        type="primary"
+      >
+      </p-button>
     </div>
     <div class="float-left">
       <div class="float-left d-flex">
@@ -115,7 +119,7 @@
             <template slot-scope="scope">
               <p-link
                 text="视频"
-                p="addons.Zhibo.course_video.list"
+                p="video"
                 type="primary"
                 @click="
                   $router.push({
@@ -127,7 +131,7 @@
               </p-link>
               <p-link
                 text="编辑"
-                p="addons.Zhibo.course.update"
+                p="course.update"
                 type="primary"
                 class="ml-5"
                 @click="
@@ -138,7 +142,9 @@
                 "
               >
               </p-link>
-              <el-link
+              <p-link
+                text="用户"
+                p="course.subscribe_users"
                 class="ml-5"
                 type="primary"
                 @click="
@@ -148,9 +154,10 @@
                   })
                 "
               >
-                用户
-              </el-link>
-              <el-link
+              </p-link>
+              <p-link
+                text="附件"
+                p="course_attach"
                 type="primary"
                 class="ml-5"
                 @click="
@@ -160,11 +167,10 @@
                   })
                 "
               >
-                附件
-              </el-link>
+              </p-link>
               <p-link
                 text="删除"
-                p="addons.Zhibo.course.delete"
+                p="course.destroy"
                 class="ml-5"
                 type="danger"
                 @click="destory(scope.row.id)"

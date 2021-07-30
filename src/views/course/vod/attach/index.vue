@@ -2,7 +2,9 @@
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="课程附件管理"></back-bar>
     <div class="float-left mb-30">
-      <el-button
+      <p-button
+        text="添加"
+        p="course_attach.store"
         @click="
           $router.push({
             name: 'AttachCreate',
@@ -11,12 +13,11 @@
         "
         type="primary"
       >
-        添加
-      </el-button>
+      </p-button>
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
-        <el-table :data="attach"  class="float-left">
+        <el-table :data="attach" class="float-left">
           <el-table-column prop="id" label="ID" width="120"> </el-table-column>
           <el-table-column prop="name" label="附件名"> </el-table-column>
           <el-table-column prop="path" label="路径" width="500">
@@ -26,15 +27,15 @@
               <span>{{ scope.row.download_times }}次 </span>
             </template>
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="100">
+          <el-table-column fixed="right" label="操作" width="50">
             <template slot-scope="scope">
-              <el-link
-                style="margin-right: 10px"
+              <p-link
+                text="删除"
+                p="course_attach.destroy"
                 type="danger"
                 @click="delItem(scope.row.id)"
               >
-                删除
-              </el-link>
+              </p-link>
             </template>
           </el-table-column>
         </el-table>
