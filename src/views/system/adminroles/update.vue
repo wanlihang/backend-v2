@@ -14,6 +14,7 @@
 
         <el-form-item label="权限">
           <el-cascader
+            class="w-100"
             filterable
             v-model="selectedPermissions"
             :options="permissionsTransform"
@@ -70,31 +71,10 @@ export default {
       permissions: null,
       loading: false,
       selectedPermissions: [],
+      permissionsTransform: [],
     };
   },
   computed: {
-    permissionsTransform() {
-      let p = [];
-      if (this.permissions) {
-        for (let i in this.permissions) {
-          let children = [];
-
-          for (let j = 0; j < this.permissions[i].length; j++) {
-            children.push({
-              value: this.permissions[i][j].id,
-              label: this.permissions[i][j].display_name,
-            });
-          }
-
-          p.push({
-            value: i,
-            label: i,
-            children: children,
-          });
-        }
-      }
-      return p;
-    },
     selectedPermissionIds() {
       let ids = [];
       this.selectedPermissions.forEach((item) => {
@@ -112,6 +92,26 @@ export default {
     params() {
       this.$api.System.adminroles.Create().then((res) => {
         this.permissions = res.data.permissions;
+
+        let p = [];
+        for (let i in this.permissions) {
+          let children = [];
+
+          for (let j = 0; j < this.permissions[i].length; j++) {
+            children.push({
+              value: this.permissions[i][j].id,
+              label: this.permissions[i][j].display_name,
+            });
+          }
+
+          p.push({
+            value: i,
+            label: i,
+            children: children,
+          });
+        }
+
+        this.permissionsTransform = p;
       });
     },
     getDetail() {
