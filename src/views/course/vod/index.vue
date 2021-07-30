@@ -166,7 +166,7 @@
               </p-link>
               <p-link
                 text="删除"
-                p="addons.Zhibo.course.delete"
+                p="course.destroy"
                 class="ml-5"
                 type="danger"
                 @click="destory(scope.row.id)"
