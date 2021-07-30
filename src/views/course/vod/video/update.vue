@@ -45,7 +45,7 @@
               <div class="ml-10">
                 <p-link
                   text="章节管理"
-                  p="addons.Zhibo.course_chapter.list"
+                  p="course_chapter"
                   @click="
                     $router.push({
                       name: 'CourseChapters',
