@@ -144,7 +144,7 @@
               </p-link>
               <p-link
                 text="用户"
-                p="course.subscribe_users"
+                p="course.subscribes"
                 class="ml-5"
                 type="primary"
                 @click="
