@@ -30,6 +30,14 @@
         type="primary"
       >
       </p-button>
+
+      <p-button
+        text="阿里云视频加密"
+        p="video.aliyun_hls.list"
+        @click="$router.push({ name: 'CourseVodVideoAliyunHls' })"
+        type="primary"
+      >
+      </p-button>
     </div>
     <div class="float-left">
       <div class="float-left d-flex">
