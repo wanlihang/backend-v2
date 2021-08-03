@@ -157,7 +157,7 @@ const zh = {
         snapshot: {
             name: '随机拍照',
             index: '照片',
-            images:'查看照片',
+            images: '查看照片',
         },
         topic: {
             name: '图文',
@@ -215,7 +215,11 @@ const zh = {
                     update: '编辑视频',
                     subscribe: '视频销售记录',
                     'watch-records': '视频观看记录',
-                    comments: "视频评论"
+                    comments: "视频评论",
+                    hls: {
+                        aliyun: '阿里云视频加密',
+                        tencent: '腾讯云视频加密'
+                    }
                 },
             },
         },

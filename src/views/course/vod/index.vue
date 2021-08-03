@@ -30,6 +30,22 @@
         type="primary"
       >
       </p-button>
+
+      <p-button
+        text="阿里云视频加密"
+        p="video.aliyun_hls.list"
+        @click="$router.push({ name: 'CourseVodVideoAliyunHls' })"
+        type="primary"
+      >
+      </p-button>
+
+      <p-button
+        text="腾讯云视频加密"
+        p="addons.TencentCloudHls.videos"
+        @click="$router.push({ name: 'CourseVodVideoTencentHls' })"
+        type="primary"
+      >
+      </p-button>
     </div>
     <div class="float-left">
       <div class="float-left d-flex">
@@ -144,7 +160,7 @@
               </p-link>
               <p-link
                 text="用户"
-                p="course.subscribe_users"
+                p="course.subscribes"
                 class="ml-5"
                 type="primary"
                 @click="

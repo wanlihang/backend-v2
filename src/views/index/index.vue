@@ -185,20 +185,18 @@
       <p class="info">
         <span>PHP{{ systemInfo.php_version }} </span>
         <span class="mx-10">主程序{{ systemInfo.meedu_version }}</span>
-        <span>后管v4.4.1</span>
+        <span>后管v4.4.3</span>
       </p>
     </div>
   </div>
 </template>
     
 <script>
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 
 export default {
   data() {
     return {
-      logining: false,
-      name: "AllSearch",
       list: [],
       navList: [
         { name: this.$t("index.new_registered_users") },
@@ -231,13 +229,15 @@ export default {
     ...mapState(["enabledAddons"]),
   },
   mounted() {
-    this.getResults();
+    this.getStatData();
     this.fun_date(-7);
     this.getZXTdata();
     this.getSystemInfo();
+    this.getEnabledAddons();
   },
   methods: {
-    getResults() {
+    ...mapMutations(["setEnabledAddons"]),
+    getStatData() {
       if (this.loading) {
         return;
       }
@@ -255,26 +255,26 @@ export default {
       });
     },
     sumrate(num1, num2) {
-      if (num2 === 0 && num1 != 0) {
+      if (typeof num1 !== "number" || typeof num2 !== "number") {
+        return 0;
+      }
+      if (num1 === 0) {
+        // 今天未有增长
+        return 0;
+      }
+      if (num2 === 0) {
+        // 昨天无增长，今天有增长 => 100%
         return 100;
       }
-      if (num2 === 0 && num1 === 0) {
-        return 0;
+
+      if (num1 > num2) {
+        return (num1 - num2).toFixed(4) * 100;
       }
-      if (!num1 || !num2) {
-        return 0;
-      }
-      let result = (num1 / num2).toFixed(2);
-      return result;
+
+      return (num1 / num2).toFixed(4) * 100;
     },
     fun_date(aa) {
-      let date1 = new Date(),
-        time1 =
-          date1.getFullYear() +
-          "-" +
-          (date1.getMonth() + 1) +
-          "-" +
-          date1.getDate(); //time1表示当前时间
+      let date1 = new Date();
       let date2 = new Date(date1);
       date2.setDate(date1.getDate() + aa);
       let time2 =
@@ -314,11 +314,7 @@ export default {
         end_at: this.end_at,
       };
       this.$api.Stat.Statistic(uid, databox).then((resp) => {
-        if (resp.status == 0) {
-          this.drawLineChart(resp.data.dataset, resp.data.labels);
-        } else if (resp.status == 401) {
-          this.$router.push({ path: "/" }); //跳到登录
-        }
+        this.drawLineChart(resp.data.dataset, resp.data.labels);
         this.loading = false;
       });
     },
@@ -336,10 +332,6 @@ export default {
         yset = this.$t("index.new_registered_users");
       }
       myChart.setOption({
-        // title: {
-        //   text: "销量趋势图",
-        //   x: "center",
-        // },
         tooltip: {
           trigger: "axis",
         },
@@ -377,6 +369,22 @@ export default {
             data: val,
           },
         ],
+      });
+    },
+    getEnabledAddons() {
+      // 获取已开启的插件
+      this.$api.System.Addons.LocalList().then((res) => {
+        let enabledAddons = {};
+        let count = 0;
+
+        for (let i = 0; i < res.data.length; i++) {
+          if (res.data[i].enabled) {
+            count += 1;
+            enabledAddons[res.data[i].sign] = 1;
+          }
+        }
+
+        this.setEnabledAddons(enabledAddons, count);
       });
     },
   },
