@@ -1377,6 +1377,14 @@ const routes = [{
       title: 'title.course.vod.video.hls.aliyun'
     }
   },
+  {
+    path: '/course/vod/video/hls/tencent',
+    component: () => import('@/views/course/video/tencent-hls'),
+    name: 'CourseVodVideoTencentHls',
+    meta: {
+      title: 'title.course.vod.video.hls.tencent'
+    }
+  },
   ]
 },
 {

@@ -38,6 +38,14 @@
         type="primary"
       >
       </p-button>
+
+      <p-button
+        text="腾讯云视频加密"
+        p="addons.TencentCloudHls.videos"
+        @click="$router.push({ name: 'CourseVodVideoTencentHls' })"
+        type="primary"
+      >
+      </p-button>
     </div>
     <div class="float-left">
       <div class="float-left d-flex">

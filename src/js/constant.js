@@ -175,5 +175,7 @@ export default {
         MpWechatMenu: 'MpWechatMenu',
         SnapshotIndex: 'SnapshotIndex',
         SnapshotImages: 'SnapshotIndex',
+        CourseVodVideoAliyunHls: 'Vod',
+        CourseVodVideoTencentHls: 'Vod'
     }
 }

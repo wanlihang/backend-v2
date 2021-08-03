@@ -1380,6 +1380,14 @@ const Api = {
         Submit(params) {
             return post(`/backend/addons/AliyunHls/videos/submitTransTask`, params);
         }
+    },
+    TencentHls: {
+        List(params) {
+            return get(`/backend/addons/TencentCloudHls/videos`, params);
+        },
+        Submit(params) {
+            return get(`/backend/addons/TencentCloudHls/videos/submitTransTask`, params);
+        }
     }
 }
 
