@@ -255,17 +255,23 @@ export default {
       });
     },
     sumrate(num1, num2) {
-      if (num2 === 0 && num1 != 0) {
+      if (typeof num1 !== "number" || typeof num2 !== "number") {
+        return 0;
+      }
+      if (num1 === 0) {
+        // 今天未有增长
+        return 0;
+      }
+      if (num2 === 0) {
+        // 昨天无增长，今天有增长 => 100%
         return 100;
       }
-      if (num2 === 0 && num1 === 0) {
-        return 0;
+
+      if (num1 > num2) {
+        return (num1 - num2).toFixed(4) * 100;
       }
-      if (!num1 || !num2) {
-        return 0;
-      }
-      let result = (num1 / num2).toFixed(2);
-      return result;
+
+      return (num1 / num2).toFixed(4) * 100;
     },
     fun_date(aa) {
       let date1 = new Date();
