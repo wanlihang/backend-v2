@@ -72,8 +72,18 @@ export default {
       loading: false,
       selectedPermissions: [],
       permissionsTransform: [],
-      selectedPermissionIds: [],
     };
+  },
+  computed: {
+    selectedPermissionIds() {
+      let selectedIds = [];
+
+      this.selectedPermissions.forEach((item) => {
+        selectedIds.push(item[1]);
+      });
+
+      return selectedIds;
+    },
   },
   mounted() {
     this.params();
@@ -131,13 +141,6 @@ export default {
         });
 
         this.selectedPermissions = selectedPermissions;
-
-        // 计算已选中的id
-        let selectedIds = [];
-        this.selectedPermissions.forEach((item) => {
-          selectedIds.push(item[1]);
-        });
-        this.selectedPermissionIds = selectedIds;
 
         // 加载结束
         this.loading = false;
