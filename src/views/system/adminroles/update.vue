@@ -1,5 +1,5 @@
 <template>
-  <div class="meedu-main-body">
+  <div class="meedu-main-body" v-loading="loading">
     <back-bar class="mb-30" title="编辑管理员角色"></back-bar>
 
     <div class="float-left" v-if="user">
@@ -77,10 +77,10 @@ export default {
   },
   mounted() {
     this.params();
-    this.getDetail();
   },
   methods: {
     params() {
+      this.loading = true;
       this.$api.System.adminroles.Create().then((res) => {
         this.permissions = res.data.permissions;
 
@@ -103,6 +103,8 @@ export default {
         }
 
         this.permissionsTransform = p;
+
+        this.getDetail();
       });
     },
     getDetail() {
@@ -136,6 +138,9 @@ export default {
           selectedIds.push(item[1]);
         });
         this.selectedPermissionIds = selectedIds;
+
+        // 加载结束
+        this.loading = false;
       });
     },
     formValidate() {
