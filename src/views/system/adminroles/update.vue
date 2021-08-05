@@ -72,17 +72,8 @@ export default {
       loading: false,
       selectedPermissions: [],
       permissionsTransform: [],
+      selectedPermissionIds: [],
     };
-  },
-  computed: {
-    selectedPermissionIds() {
-      let ids = [];
-      this.selectedPermissions.forEach((item) => {
-        ids.push(item[1]);
-      });
-
-      return ids;
-    },
   },
   mounted() {
     this.params();
@@ -138,6 +129,13 @@ export default {
         });
 
         this.selectedPermissions = selectedPermissions;
+
+        // 计算已选中的id
+        let selectedIds = [];
+        this.selectedPermissions.forEach((item) => {
+          selectedIds.push(item[1]);
+        });
+        this.selectedPermissionIds = selectedIds;
       });
     },
     formValidate() {
