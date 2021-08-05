@@ -59,7 +59,6 @@
           :data="list"
           @sort-change="sortChange"
           :default-sort="{ prop: 'id', order: 'descending' }"
-          
           class="float-left"
         >
           <el-table-column prop="id" sortable label="ID" width="120">
@@ -139,6 +138,8 @@
                 text="查看"
                 p="addons.Paper.paper.userPaper.detail"
                 type="primary"
+                target="blank"
+                :href="`/backend/addons/Paper/${scope.row.paper_id}/userPaper/${scope.row.id}/render`"
                 class="ml-5"
               ></p-link>
             </template>
