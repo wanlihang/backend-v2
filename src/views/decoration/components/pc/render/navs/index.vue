@@ -1,19 +1,25 @@
 <template>
   <div class="float-left">
     <div class="navs" @click="showListWin = true">
-      <div class="nav-item" v-for="(item, index) in list" :key="index">
-        {{ item.name }}
-        <i class="el-icon-arrow-down" v-if="item.children.length > 0"></i>
-        <div class="nav-children" v-if="item.children.length > 0">
-          <div
-            class="nav-children-item"
-            v-for="(item, index2) in item.children"
-            :key="index2"
-          >
-            {{ item.name }}
-          </div>
+      <template v-if="list.length > 0">
+        <div class="nav-item" v-for="(item, index) in list" :key="index">
+          {{ item.name }}
+          <template v-if="item.children.length > 0">
+            <i class="el-icon-arrow-down"></i>
+            <div class="nav-children">
+              <div
+                class="nav-children-item"
+                v-for="(item, index2) in item.children"
+                :key="index2"
+              >
+                {{ item.name }}
+              </div>
+            </div>
+          </template>
         </div>
-      </div>
+      </template>
+
+      <span class="ml-10 helper-text" v-else>未配置导航栏</span>
     </div>
 
     <navs-list @close="close" :show="showListWin"></navs-list>
@@ -51,7 +57,7 @@ export default {
 <style lang="less" scoped>
 .navs {
   width: 100%;
-  height: auto;
+  height: 50px;
   float: left;
   box-sizing: border-box;
   display: flex;
