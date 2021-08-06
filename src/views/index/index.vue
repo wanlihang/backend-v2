@@ -223,9 +223,19 @@ export default {
       );
     },
     userCountIncRate() {
+      if (
+        typeof this.list.today_register_user_count === "undefined" ||
+        typeof this.list.user_count === "undefined"
+      ) {
+        return 0;
+      }
       return (
-        this.list.today_register_user_count / this.list.user_count
-      ).toFixed(2);
+        parseInt(
+          (this.list.today_register_user_count / this.list.user_count).toFixed(
+            4
+          ) * 10000
+        ) / 100
+      );
     },
     thisMonthPaidRate() {
       return this.sumrate(
@@ -273,7 +283,7 @@ export default {
         return 100;
       }
 
-      return parseInt(((num1 - num2) / num2).toFixed(2) * 100);
+      return parseInt(((num1 - num2) / num2).toFixed(2) * 10000) / 100;
     },
     fun_date(aa) {
       let date1 = new Date();
