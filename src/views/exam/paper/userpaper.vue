@@ -140,7 +140,7 @@
                 p="addons.Paper.paper.userPaper.detail"
                 type="primary"
                 target="blank"
-                :href="`/backend/addons/Paper/${scope.row.paper_id}/userPaper/${scope.row.id}/render`"
+                :href="`/backend/addons/Paper/paper/${scope.row.paper_id}/userPaper/${scope.row.id}/render?token=${config.token}`"
                 class="ml-5"
               ></p-link>
             </template>
@@ -191,6 +191,9 @@ export default {
       list: [],
       filterData: {
         statusMap: [],
+      },
+      config: {
+        token: this.$utils.getToken(),
       },
     };
   },
