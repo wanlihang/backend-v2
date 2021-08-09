@@ -4,7 +4,6 @@
       <div class="select-images-title">选择图片</div>
       <div class="select-images-box">
         <div class="category-box">
-          <!-- <div class="title">{{ $t("common.group") }}</div> -->
           <div class="body">
             <div
               class="category-item"
@@ -48,7 +47,10 @@
               @click="imageUrl = item.url"
             >
               <div class="image-render">
-                <img :src="item.url" width="100" height="100" />
+                <div
+                  class="image-view"
+                  :style="{ 'background-image': 'url(' + item.url + ')' }"
+                ></div>
               </div>
               <div class="image-name">{{ item.name }}</div>
             </div>
@@ -344,16 +346,22 @@ export default {
           float: left;
           text-align: center;
 
-          img {
-            border-radius: 3px;
+          .image-view {
+            width: 100px;
+            height: 100px;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center center;
           }
         }
+
         .image-render {
           height: 100px;
           display: flex;
           justify-content: center;
           align-items: center;
         }
+
         .image-name {
           margin-top: 10px;
           white-space: nowrap;
