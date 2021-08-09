@@ -1373,7 +1373,22 @@ const Api = {
             return destroy(`/backend/addons/single_page/page/${id}`);
         },
     },
-
+    AliyunHls: {
+        List(params) {
+            return get(`/backend/addons/AliyunHls/videos`, params);
+        },
+        Submit(params) {
+            return post(`/backend/addons/AliyunHls/videos/submitTransTask`, params);
+        }
+    },
+    TencentHls: {
+        List(params) {
+            return get(`/backend/addons/TencentCloudHls/videos`, params);
+        },
+        Submit(params) {
+            return get(`/backend/addons/TencentCloudHls/videos/submitTransTask`, params);
+        }
+    }
 }
 
 export default Api;

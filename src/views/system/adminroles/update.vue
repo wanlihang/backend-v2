@@ -1,5 +1,5 @@
 <template>
-  <div class="meedu-main-body">
+  <div class="meedu-main-body" v-loading="loading">
     <back-bar class="mb-30" title="编辑管理员角色"></back-bar>
 
     <div class="float-left" v-if="user">
@@ -14,6 +14,7 @@
 
         <el-form-item label="权限">
           <el-cascader
+            class="w-100"
             filterable
             v-model="selectedPermissions"
             :options="permissionsTransform"
@@ -70,12 +71,30 @@ export default {
       permissions: null,
       loading: false,
       selectedPermissions: [],
+      permissionsTransform: [],
     };
   },
   computed: {
-    permissionsTransform() {
-      let p = [];
-      if (this.permissions) {
+    selectedPermissionIds() {
+      let selectedIds = [];
+
+      this.selectedPermissions.forEach((item) => {
+        selectedIds.push(item[1]);
+      });
+
+      return selectedIds;
+    },
+  },
+  mounted() {
+    this.params();
+  },
+  methods: {
+    params() {
+      this.loading = true;
+      this.$api.System.adminroles.Create().then((res) => {
+        this.permissions = res.data.permissions;
+
+        let p = [];
         for (let i in this.permissions) {
           let children = [];
 
@@ -92,26 +111,10 @@ export default {
             children: children,
           });
         }
-      }
-      return p;
-    },
-    selectedPermissionIds() {
-      let ids = [];
-      this.selectedPermissions.forEach((item) => {
-        ids.push(item[1]);
-      });
 
-      return ids;
-    },
-  },
-  mounted() {
-    this.params();
-    this.getDetail();
-  },
-  methods: {
-    params() {
-      this.$api.System.adminroles.Create().then((res) => {
-        this.permissions = res.data.permissions;
+        this.permissionsTransform = p;
+
+        this.getDetail();
       });
     },
     getDetail() {
@@ -138,6 +141,9 @@ export default {
         });
 
         this.selectedPermissions = selectedPermissions;
+
+        // 加载结束
+        this.loading = false;
       });
     },
     formValidate() {

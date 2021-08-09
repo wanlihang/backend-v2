@@ -121,7 +121,7 @@ export default {
             continue;
           }
 
-          if (this.user.permissions[childrenItem.permission]) {
+          if (typeof this.user.permissions[childrenItem.permission] !== 'undefined') {
             // 存在权限
             children.push(childrenItem);
           }

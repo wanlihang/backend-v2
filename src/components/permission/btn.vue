@@ -10,7 +10,7 @@
     :icon="icon"
     :autofocus="autofocus"
     @click="$emit('click')"
-    v-if="user && user.permissions[p]"
+    v-if="through"
     >{{ text }}</el-button
   >
 </template>
@@ -34,6 +34,12 @@ export default {
   ],
   computed: {
     ...mapState(["user"]),
+    through() {
+      if (!this.user) {
+        return false;
+      }
+      return typeof this.user.permissions[this.p] !== "undefined";
+    }
   },
 };
 </script>
