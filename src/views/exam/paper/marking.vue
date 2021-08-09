@@ -39,7 +39,7 @@
                 <div class="score">
                   <p>请打分：</p>
                   <div>
-                    <el-select class="w-300px" v-model="item.score">
+                    <el-select v-model="score[item.id]">
                       <el-option
                         v-for="(item, index) in scoreList(item.score)"
                         :key="index"
@@ -87,7 +87,7 @@ export default {
         id: this.$route.query.id,
         user_paper_id: this.$route.query.user_paper_id,
       },
-      score: null,
+      score: [],
       userPaper: {},
       questions: [],
       optionLength: 10,
@@ -208,7 +208,7 @@ export default {
       for (let i = 0; i < this.list.length; i++) {
         var item = this.list[i];
         data[item.id] = {
-          score: item.score,
+          score: this.score[item.id],
         };
       }
       this.$api.Exam.Paper.SubmitScore({
