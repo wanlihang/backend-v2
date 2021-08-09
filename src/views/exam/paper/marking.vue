@@ -26,14 +26,13 @@
                 <div class="answer">
                   <p>回答：{{ item.answer }}</p>
                   <template v-if="item.thumbs.length > 0">
-                    <img
+                    <el-image
                       v-for="(img, index) in item.thumbs"
                       :key="index"
                       :src="img"
-                      width="70"
-                      height="70"
-                      @click="imagePreview(index, item.thumbs)"
-                    />
+                      :preview-src-list="item.thumbs"
+                      style="width: 70px; height: 70px"
+                    ></el-image>
                   </template>
                 </div>
 
