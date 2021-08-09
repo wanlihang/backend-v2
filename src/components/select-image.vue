@@ -150,7 +150,7 @@ export default {
     resetLoad() {
       this.pagination.page = 1;
       this.pagination.from = 0;
-      this.getToken();
+      this.getData();
     },
     paginationSizeChange(size) {
       this.pagination.size = size;
@@ -345,7 +345,6 @@ export default {
           text-align: center;
 
           img {
-            height: auto;
             border-radius: 3px;
           }
         }
