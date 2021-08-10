@@ -26,21 +26,20 @@
                 <div class="answer">
                   <p>回答：{{ item.answer }}</p>
                   <template v-if="item.thumbs.length > 0">
-                    <img
+                    <el-image
                       v-for="(img, index) in item.thumbs"
                       :key="index"
                       :src="img"
-                      width="70"
-                      height="70"
-                      @click="imagePreview(index, item.thumbs)"
-                    />
+                      :preview-src-list="item.thumbs"
+                      style="width: 70px; height: 70px"
+                    ></el-image>
                   </template>
                 </div>
 
                 <div class="score">
                   <p>请打分：</p>
                   <div>
-                    <el-select class="w-300px" v-model="item.score">
+                    <el-select v-model="score[item.id]">
                       <el-option
                         v-for="(item, index) in scoreList(item.score)"
                         :key="index"
@@ -88,7 +87,7 @@ export default {
         id: this.$route.query.id,
         user_paper_id: this.$route.query.user_paper_id,
       },
-      score: null,
+      score: [],
       userPaper: {},
       questions: [],
       optionLength: 10,
@@ -209,7 +208,7 @@ export default {
       for (let i = 0; i < this.list.length; i++) {
         var item = this.list[i];
         data[item.id] = {
-          score: item.score,
+          score: this.score[item.id],
         };
       }
       this.$api.Exam.Paper.SubmitScore({

@@ -59,7 +59,6 @@
           :data="list"
           @sort-change="sortChange"
           :default-sort="{ prop: 'id', order: 'descending' }"
-          
           class="float-left"
         >
           <el-table-column prop="id" sortable label="ID" width="120">
@@ -121,6 +120,7 @@
           <el-table-column fixed="right" label="操作" width="100">
             <template slot-scope="scope">
               <p-link
+                v-if="scope.row.status === 3"
                 text="阅卷"
                 p="addons.Paper.paper.userPaper.submit"
                 type="primary"
@@ -139,6 +139,8 @@
                 text="查看"
                 p="addons.Paper.paper.userPaper.detail"
                 type="primary"
+                target="blank"
+                :href="`/backend/addons/Paper/paper/${scope.row.paper_id}/userPaper/${scope.row.id}/render?token=${config.token}`"
                 class="ml-5"
               ></p-link>
             </template>
@@ -189,6 +191,9 @@ export default {
       list: [],
       filterData: {
         statusMap: [],
+      },
+      config: {
+        token: this.$utils.getToken(),
       },
     };
   },
