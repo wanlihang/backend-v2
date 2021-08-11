@@ -48,6 +48,7 @@
                     :key="index"
                     :label="item.name"
                     :value="item.id"
+                    :disabled="item.isLabel"
                   >
                   </el-option>
                 </el-select>
@@ -56,7 +57,7 @@
                 <p-link
                   text="分类管理"
                   type="primary"
-                  @click="$router.push({ name: 'K12CourseCategory' })"
+                  @click="$router.push({ name: 'K12Categories' })"
                   p="addons.XiaoBanKe.course_category.list"
                 >
                 </p-link>
@@ -378,7 +379,7 @@ export default {
     getDetail() {
       this.$api.xiaoBanKe.Course.Edit(this.id).then((res) => {
         this.course = res.data.data;
-        this.course.teacher_ids= res.data.teacher_ids;
+        this.course.teacher_ids = res.data.teacher_ids;
       });
     },
     formValidate() {

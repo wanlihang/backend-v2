@@ -183,5 +183,8 @@ export default {
         K12Course: 'K12Course',
         K12CourseCreate: 'K12Course',
         K12CourseUpdate: 'K12Course',
+        K12Categories: 'K12Course',
+        K12CategoriesCreate: 'K12Course',
+        K12CategoriesUpdate: 'K12Course',
     }
 }

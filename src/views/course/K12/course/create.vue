@@ -44,11 +44,13 @@
               <div>
                 <el-select class="w-300px" v-model="course.category_id">
                   <el-option
-                    v-for="(item, index) in categories"
-                    :key="index"
+                    v-for="item in categories"
+                    :key="item.id"
                     :label="item.name"
                     :value="item.id"
+                    :disabled="item.isLabel"
                   >
+                    
                   </el-option>
                 </el-select>
               </div>
@@ -56,7 +58,7 @@
                 <p-link
                   text="分类管理"
                   type="primary"
-                  @click="$router.push({ name: 'K12CourseCategory' })"
+                  @click="$router.push({ name: 'K12Categories' })"
                   p="addons.XiaoBanKe.course_category.list"
                 >
                 </p-link>
@@ -67,7 +69,11 @@
           <el-form-item label="讲师" prop="teacher_ids">
             <div class="d-flex">
               <div>
-                <el-select class="w-300px" multiple v-model="course.teacher_ids">
+                <el-select
+                  class="w-300px"
+                  multiple
+                  v-model="course.teacher_ids"
+                >
                   <el-option
                     v-for="(item, index) in teachers"
                     :key="index"
@@ -241,19 +247,19 @@ export default {
       course: {
         type: null,
         category_id: null,
-        title: '',
-        thumb: '',
+        title: "",
+        thumb: "",
         charge: null,
         original_charge: null,
-        short_desc: '',
-        original_desc: '',
+        short_desc: "",
+        original_desc: "",
         is_show: 1,
         max_people_num: null,
         start_at: null,
         end_at: null,
         open_at: null,
         over_at: null,
-        teacher_ids: null
+        teacher_ids: null,
       },
       rules: {
         title: [
@@ -359,7 +365,7 @@ export default {
     };
   },
   watch: {
-    'course.type'() {
+    "course.type"() {
       if (this.course.type === 0) {
         this.course.max_people_num = 6;
       } else if (this.course.type === 1) {
@@ -372,7 +378,7 @@ export default {
         // 1v1
         this.course.max_people_num = 1;
       }
-    }
+    },
   },
   mounted() {
     this.create();
