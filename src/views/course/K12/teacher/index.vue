@@ -1,5 +1,6 @@
 <template>
   <div class="meedu-main-body">
+    <back-bar class="mb-30" title="讲师管理"></back-bar>
     <div class="float-left mb-30">
       <p-button
         text="添加"
@@ -13,25 +14,20 @@
       <div class="float-left">
         <el-table :data="list" class="float-left">
           <el-table-column prop="id" label="ID" width="100"> </el-table-column>
-          <el-table-column prop="goods_id" label="商品ID" width="100">
-          </el-table-column>
-          <el-table-column prop="goods_type_text" label="类型">
-          </el-table-column>
-          <el-table-column prop="goods_title" label="商品" width="400">
-          </el-table-column>
-          <el-table-column label="价格" width="150">
+          <el-table-column prop="username" label="用户名"> </el-table-column>
+          <el-table-column label="讲师名" width="400">
             <template slot-scope="scope">
-              <span>{{ scope.row.goods_charge }}元</span>
+              <div class="d-flex">
+                <div>
+                  <img :src="scope.row.avatar" width="120" height="90" />
+                </div>
+                <div class="ml-10">
+                  {{ scope.row.name }}
+                </div>
+              </div>
             </template>
           </el-table-column>
-          <el-table-column label="奖励1/2/3" width="160">
-            <template slot-scope="scope">
-              <div>一级：{{ scope.row.reward }}元</div>
-              <div>二级：{{ scope.row.reward2 }}元</div>
-              <div>三级：{{ scope.row.reward3 }}元</div>
-            </template>
-          </el-table-column>
-          <el-table-column prop="created_at" label="时间" width="200">
+          <el-table-column prop="password" label="密码" width="200">
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="120">
             <template slot-scope="scope">
@@ -85,9 +81,6 @@ export default {
       total: 0,
       loading: false,
       list: [],
-      filterData: {
-        courses: [],
-      },
     };
   },
 
@@ -114,11 +107,10 @@ export default {
       this.loading = true;
       let params = {};
       Object.assign(params, this.pagination);
-      this.$api.Multishare.Goods.List(params).then((res) => {
+      this.$api.xiaoBanKe.Teacher.List(params).then((res) => {
         this.loading = false;
         this.list = res.data.data.data;
         this.total = res.data.data.total;
-        this.filterData.courses = res.data.types;
       });
     },
     destory(item) {
@@ -133,7 +125,7 @@ export default {
             return;
           }
           this.loading = true;
-          this.$api.Multishare.Goods.Destroy(item)
+          this.$api.xiaoBanKe.Teacher.Destroy(item)
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));

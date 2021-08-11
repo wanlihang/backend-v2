@@ -230,7 +230,7 @@ const zh = {
                     update: '编辑大小班',
                 },
                 teacher:{
-                    index: '讲师',
+                    index: '讲师管理',
                     create: '添加讲师',
                     update: '编辑讲师',
                 },
