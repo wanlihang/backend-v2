@@ -239,6 +239,10 @@ const zh = {
                     create: '添加大小班分类',
                     update: '编辑大小班分类',
                 },
+                order:{
+                    index: '大小班订单列表',
+                    teacher: '添加大小班订单讲师',
+                },
 
             },
         },

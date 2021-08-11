@@ -1457,6 +1457,22 @@ const routes = [{
           title: 'title.course.xiaobanke.categories.update'
         }
       },
+      {
+        path: '/K12/XiaoBanKe/order/index',
+        component: () => import('@/views/course/K12/order/index'),
+        name: 'K12CourseOrder',
+        meta: {
+          title: 'title.course.xiaobanke.order.index'
+        }
+      },
+      {
+        path: '/K12/XiaoBanKe/order/teacher',
+        component: () => import('@/views/course/K12/order/teacher'),
+        name: 'K12CourseOrderTeacher',
+        meta: {
+          title: 'title.course.xiaobanke.order.teacher'
+        }
+      },
     ]
   },
   {
@@ -1483,7 +1499,7 @@ const routes = [{
       title: 'Test'
     }
   },
- 
+
 ]
 
 const router = new VueRouter({
