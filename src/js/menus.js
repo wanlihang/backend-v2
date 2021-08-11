@@ -59,6 +59,11 @@ export default [{
                 key: 'LearningPath',
                 permission: 'addons.learnPaths.path.list'
             },
+            {
+                name: 'title.course.xiaobanke.course.index',
+                key: 'K12Course',
+                permission: 'addons.XiaoBanKe.course.list'
+            }
         ]
     },
     {
@@ -200,5 +205,5 @@ export default [{
             }
         ]
     },
-
+    
 ];

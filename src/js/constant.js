@@ -176,6 +176,12 @@ export default {
         SnapshotIndex: 'SnapshotIndex',
         SnapshotImages: 'SnapshotIndex',
         CourseVodVideoAliyunHls: 'Vod',
-        CourseVodVideoTencentHls: 'Vod'
+        CourseVodVideoTencentHls: 'Vod',
+        K12Teacher: 'K12',
+        K12TeacherCreate: 'K12',
+        K12TeacherUpdate: 'K12',
+        K12Course: 'K12Course',
+        K12CourseCreate: 'K12Course',
+        K12CourseUpdate: 'K12Course',
     }
 }

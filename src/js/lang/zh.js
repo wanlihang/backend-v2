@@ -222,6 +222,20 @@ const zh = {
                     }
                 },
             },
+            xiaobanke:{
+                name:'大小班',
+                course:{
+                    index: '大小班',
+                    create: '添加大小班',
+                    update: '编辑大小班',
+                },
+                teacher:{
+                    index: '讲师',
+                    create: '添加讲师',
+                    update: '编辑讲师',
+                },
+
+            },
         },
         singlepage: {
             index: '单页面',
