@@ -15,11 +15,11 @@
         <el-table :data="list" class="float-left">
           <el-table-column prop="id" label="ID" width="100"> </el-table-column>
           <el-table-column prop="username" label="用户名"> </el-table-column>
-          <el-table-column label="讲师名" width="400">
+          <el-table-column label="讲师" width="300">
             <template slot-scope="scope">
               <div class="d-flex">
                 <div>
-                  <img :src="scope.row.avatar" width="120" height="90" />
+                  <img :src="scope.row.avatar" width="40" height="40" />
                 </div>
                 <div class="ml-10">
                   {{ scope.row.name }}
