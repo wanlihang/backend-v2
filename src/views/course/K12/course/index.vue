@@ -70,11 +70,11 @@
         >
           <el-table-column prop="id" sortable label="ID" width="100">
           </el-table-column>
-          <el-table-column prop="type_text" sortable label="类型" width="120">
+          <el-table-column prop="type_text" label="类型" width="120">
           </el-table-column>
           <el-table-column property="category.name" label="分类">
           </el-table-column>
-          <el-table-column label="课程名" width="400">
+          <el-table-column label="课程名" width="500">
             <template slot-scope="scope">
               <div class="d-flex">
                 <div>
@@ -86,24 +86,43 @@
               </div>
             </template>
           </el-table-column>
-          <el-table-column label="价格" property="charge" sortable width="120">
+          <el-table-column property="status_text" label="状态" width="120">
             <template slot-scope="scope">
-              <span>￥{{ scope.row.charge }}/</span>
-              <span class="ori-charge">￥{{ scope.row.original_charge }}</span>
+              <el-tag v-if="scope.row.status === 0" type="info">
+                未开始
+              </el-tag>
+              <el-tag v-else-if="scope.row.status === 1" type="success">
+                招生中
+              </el-tag>
+              <el-tag v-else-if="scope.row.status === 2" type="warning">
+                停止招生
+              </el-tag>
+              <el-tag v-else-if="scope.row.status === 3" type="pramry">
+                已开课
+              </el-tag>
+              <el-tag v-else-if="scope.row.status === 4" type="danger">
+                已结课
+              </el-tag>
             </template>
           </el-table-column>
-          <el-table-column label="已报名/上限" sortable width="140">
+          <el-table-column label="价格" property="charge" width="120">
             <template slot-scope="scope">
-              <span
-                >{{ scope.row.join_people_num || 0 }}/{{
-                  scope.row.max_people_num
-                }}</span
-              >
+              <div>现价：{{ scope.row.charge }}元</div>
+              <div class="ori-charge">
+                原价：{{ scope.row.original_charge }}元
+              </div>
             </template>
           </el-table-column>
-          <el-table-column label="开课/结课" sortable width="350">
+          <el-table-column label="报名" width="120">
             <template slot-scope="scope">
-              <span>{{ scope.row.open_at }}/{{ scope.row.over_at }}</span>
+              <div>报名：{{ scope.row.join_people_num || 0 }}人</div>
+              <div>上限：{{ scope.row.max_people_num }}人</div>
+            </template>
+          </el-table-column>
+          <el-table-column label="时间" sortable width="350">
+            <template slot-scope="scope">
+              <div>开课：{{ scope.row.open_at }}</div>
+              <div>结课：{{ scope.row.over_at }}</div>
             </template>
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="120">

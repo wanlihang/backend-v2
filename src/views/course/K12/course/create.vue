@@ -24,7 +24,7 @@
         label-width="200px"
       >
         <div class="float-left" v-show="tab.active === 'base'">
-          <el-form-item label="类型" prop="type">
+          <el-form-item label="课程类型" prop="type">
             <div class="d-flex">
               <div>
                 <el-select class="w-300px" v-model="course.type">
@@ -50,7 +50,6 @@
                     :value="item.id"
                     :disabled="item.isLabel"
                   >
-                    
                   </el-option>
                 </el-select>
               </div>
@@ -98,61 +97,9 @@
           <el-form-item label="课程名" prop="title">
             <el-input
               v-model="course.title"
-              class="w-600px"
+              class="w-800px"
               placeholder="课程名"
             ></el-input>
-          </el-form-item>
-          <el-form-item label="显示" prop="is_show">
-            <div class="d-flex">
-              <div>
-                <el-switch
-                  v-model="course.is_show"
-                  :active-value="1"
-                  :inactive-value="0"
-                >
-                </el-switch>
-              </div>
-              <div class="ml-10">
-                <helper-text
-                  text="该字段控制用户是否可以看到课程。"
-                ></helper-text>
-              </div>
-            </div>
-          </el-form-item>
-
-          <el-form-item label="开课时间" prop="open_at">
-            <div class="d-flex">
-              <div>
-                <el-date-picker
-                  v-model="course.open_at"
-                  type="datetime"
-                  format="yyyy-MM-dd HH:mm"
-                  value-format="yyyy-MM-dd HH:mm"
-                  placeholder="请选择日期"
-                >
-                </el-date-picker>
-              </div>
-              <div class="ml-10">
-                <helper-text text=""></helper-text>
-              </div>
-            </div>
-          </el-form-item>
-          <el-form-item label="结课时间" prop="over_at">
-            <div class="d-flex">
-              <div>
-                <el-date-picker
-                  v-model="course.over_at"
-                  type="datetime"
-                  format="yyyy-MM-dd HH:mm"
-                  value-format="yyyy-MM-dd HH:mm"
-                  placeholder="请选择日期"
-                >
-                </el-date-picker>
-              </div>
-              <div class="ml-10">
-                <helper-text text=""></helper-text>
-              </div>
-            </div>
           </el-form-item>
 
           <el-form-item prop="thumb" label="课程封面">
@@ -176,11 +123,12 @@
               </div>
               <div class="ml-10">
                 <helper-text
-                  text="最小单位：元。不支持小数。价格为0意味着用户可以直接观看直播，价格大于0则需要用户购买后才能观看直播。"
+                  text="最小单位：元。不支持小数。价格为0意味着免费观看。"
                 ></helper-text>
               </div>
             </div>
           </el-form-item>
+
           <el-form-item label="原价" prop="original_charge">
             <div class="d-flex">
               <div>
@@ -191,9 +139,42 @@
                 ></el-input>
               </div>
               <div class="ml-10">
-                <helper-text
-                  text="最小单位：元。不支持小数。价格为0意味着用户可以直接观看直播，价格大于0则需要用户购买后才能观看直播。"
-                ></helper-text>
+                <helper-text text="最小单位：元。不支持小数。"></helper-text>
+              </div>
+            </div>
+          </el-form-item>
+
+          <el-form-item label="开课时间" prop="open_at">
+            <div class="d-flex">
+              <div>
+                <el-date-picker
+                  v-model="course.open_at"
+                  type="datetime"
+                  format="yyyy-MM-dd HH:mm"
+                  value-format="yyyy-MM-dd HH:mm"
+                  placeholder="请选择日期"
+                >
+                </el-date-picker>
+              </div>
+              <div class="ml-10">
+                <helper-text text="用于提醒用户什么时候开课"></helper-text>
+              </div>
+            </div>
+          </el-form-item>
+          <el-form-item label="结课时间" prop="over_at">
+            <div class="d-flex">
+              <div>
+                <el-date-picker
+                  v-model="course.over_at"
+                  type="datetime"
+                  format="yyyy-MM-dd HH:mm"
+                  value-format="yyyy-MM-dd HH:mm"
+                  placeholder="请选择日期"
+                >
+                </el-date-picker>
+              </div>
+              <div class="ml-10">
+                <helper-text text="用于提醒用户什么时候结课"></helper-text>
               </div>
             </div>
           </el-form-item>
@@ -206,9 +187,7 @@
               rows="3"
             ></el-input>
           </el-form-item>
-        </div>
 
-        <div class="float-left" v-show="tab.active === 'dev'">
           <el-form-item label="详细介绍">
             <wang-editor
               class="w-700px"
@@ -216,14 +195,34 @@
             ></wang-editor>
           </el-form-item>
         </div>
+
+        <div class="float-left" v-show="tab.active === 'dev'">
+          <el-form-item label="显示" prop="is_show">
+            <div class="d-flex">
+              <div>
+                <el-switch
+                  v-model="course.is_show"
+                  :active-value="1"
+                  :inactive-value="0"
+                >
+                </el-switch>
+              </div>
+              <div class="ml-10">
+                <helper-text
+                  text="该字段控制用户是否可以看到课程。"
+                ></helper-text>
+              </div>
+            </div>
+          </el-form-item>
+        </div>
       </el-form>
 
       <div class="bottom-menus">
         <div class="bottom-menus-box">
           <div>
-            <el-button @click="formValidate" :loading="loading" type="primary"
-              >保存</el-button
-            >
+            <el-button @click="formValidate" :loading="loading" type="primary">
+              保存
+            </el-button>
           </div>
           <div class="ml-24">
             <el-button @click="$router.back()">取消</el-button>

@@ -1,6 +1,7 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="大小班订单列表"></back-bar>
+    <back-bar class="mb-30" title="课程订单"></back-bar>
+    
     <div class="float-left mb-30">
       <div class="float-left d-flex">
         <div>
