@@ -15,7 +15,7 @@
       </div>
     </div>
 
-    <div class="float-left mt-30">
+    <div class="float-left mt-30" v-if="course">
       <el-form
         ref="form"
         class="float-left"
@@ -364,7 +364,7 @@ export default {
     getDetail() {
       this.$api.xiaoBanKe.Course.Edit(this.id).then((res) => {
         this.course = res.data.data;
-        this.course.teacher_ids = res.data.teacher_ids;
+        this.$set(this.course, "teacher_ids", res.data.teacher_ids);
       });
     },
     formValidate() {
