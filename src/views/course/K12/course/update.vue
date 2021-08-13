@@ -363,8 +363,10 @@ export default {
     },
     getDetail() {
       this.$api.xiaoBanKe.Course.Edit(this.id).then((res) => {
-        this.course = res.data.data;
-        this.$set(this.course, "teacher_ids", res.data.teacher_ids);
+        let data = res.data.data;
+        data.teacher_ids = res.data.teacher_ids;
+
+        this.course = data;
       });
     },
     formValidate() {
