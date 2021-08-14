@@ -176,6 +176,17 @@ export default {
         SnapshotIndex: 'SnapshotIndex',
         SnapshotImages: 'SnapshotIndex',
         CourseVodVideoAliyunHls: 'Vod',
-        CourseVodVideoTencentHls: 'Vod'
+        CourseVodVideoTencentHls: 'Vod',
+        K12Teacher: 'K12Course',
+        K12TeacherCreate: 'K12Course',
+        K12TeacherUpdate: 'K12Course',
+        K12Course: 'K12Course',
+        K12CourseCreate: 'K12Course',
+        K12CourseUpdate: 'K12Course',
+        K12Categories: 'K12Course',
+        K12CategoriesCreate: 'K12Course',
+        K12CategoriesUpdate: 'K12Course',
+        K12CourseOrder: 'K12Course',
+        K12CourseOrderTeacher: 'K12Course',
     }
 }

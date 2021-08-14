@@ -1023,7 +1023,7 @@ const Api = {
     Multishare: {
         Poster: {
             List() {
-                return get(`/backend/addons/multi_level_share/poster/index`,);
+                return get(`/backend/addons/multi_level_share/poster/index`, );
             },
             Store(params) {
                 return post(`/backend/addons/multi_level_share/poster/create`, params);
@@ -1388,7 +1388,85 @@ const Api = {
         Submit(params) {
             return get(`/backend/addons/TencentCloudHls/videos/submitTransTask`, params);
         }
-    }
+    },
+    xiaoBanKe: {
+        Order: {
+            Index(param) {
+                return get(`/backend/addons/XiaoBanKe/order`, param);
+            },
+            SetTeacherParams(param) {
+                return get(`/backend/addons/XiaoBanKe/order/teacherParams`, param);
+            },
+            SetTeacher(id, param) {
+                return put(`/backend/addons/XiaoBanKe/order/${id}/teacher`, param);
+            }
+        },
+        Dashboard: {
+            Index(param) {
+                return get(`/backend/addons/XiaoBanKe/dashboard`, param);
+            }
+        },
+        CourseCategory: {
+            List(param) {
+                return get(`/backend/addons/XiaoBanKe/course_category`, param);
+            },
+            Create(param) {
+                return get(`/backend/addons/XiaoBanKe/course_category/create`, param);
+            },
+            Store(param) {
+                return post(`/backend/addons/XiaoBanKe/course_category/create`, param);
+            },
+            Edit(id) {
+                return get(`/backend/addons/XiaoBanKe/course_category/${id}`);
+            },
+            Update(id, param) {
+                return put(`/backend/addons/XiaoBanKe/course_category/${id}`, param);
+            },
+            Destroy(id, param) {
+                return destroy(`/backend/addons/XiaoBanKe/course_category/${id}`, param);
+            }
+        },
+        Course: {
+            List(param) {
+                return get(`/backend/addons/XiaoBanKe/course`, param);
+            },
+            Create(param) {
+                return get(`/backend/addons/XiaoBanKe/course/create`, param);
+            },
+            Store(param) {
+                return post(`/backend/addons/XiaoBanKe/course/create`, param);
+            },
+            Edit(id) {
+                return get(`/backend/addons/XiaoBanKe/course/${id}`);
+            },
+            Update(id, param) {
+                return put(`/backend/addons/XiaoBanKe/course/${id}`, param);
+            },
+            Destroy(id, param) {
+                return destroy(`/backend/addons/XiaoBanKe/course/${id}`, param);
+            }
+        },
+        Teacher: {
+            List(param) {
+                return get(`/backend/addons/XiaoBanKe/teacher`, param);
+            },
+            Create(param) {
+                return get(`/backend/addons/XiaoBanKe/teacher/create`, param);
+            },
+            Store(param) {
+                return post(`/backend/addons/XiaoBanKe/teacher/create`, param);
+            },
+            Edit(id) {
+                return get(`/backend/addons/XiaoBanKe/teacher/${id}`);
+            },
+            Update(id, param) {
+                return put(`/backend/addons/XiaoBanKe/teacher/${id}`, param);
+            },
+            Destroy(id, param) {
+                return destroy(`/backend/addons/XiaoBanKe/teacher/${id}`, param);
+            }
+        }
+    },
 }
 
 export default Api;

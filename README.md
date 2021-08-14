@@ -1,22 +1,25 @@
 
-## MeEdu 后台前端项目
+# MeEdu 后台前端项目
 
-#### 限制
+### 常用链接
 
-+ 本项目不限制个人或公司自用。
-+ 在未获得授权的情况下，禁止通过直接销售或者二开之后销售本项目获取经济利益。
+- [MeEdu 官网](https://meedu.vip)
+- [MeEdu 开源程序](https://github.com/Qsnh/meedu)
+- [MeEdu 付费解决方案](https://meedu.vip/price.html)
+- [MeEdu 付费版本演示站](https://meedu.vip/cases.html)
+- [MeEdu 功能概览](https://www.yuque.com/meedu/fvvkbf/gpx5ed)
+- [MeEdu 使用手册](https://www.yuque.com/meedu/fvvkbf)
+- [MeEdu API文档](https://meedu-v2-xiaoteng.doc.coding.io/)
 
-#### 上手
+### 使用限制
 
-安装依赖：
++ 本项目不限制个人，公司等主体自用（举个例子：您通过 MeEdu 搭建线上教育平台出售课程这样的商业行为是允许的）。
++ 在未获得 MeEdu官方(杭州白书科技有限公司) 授权的情况下，禁止通过「**直接销售**」或者「**对本项目二开之后销售**」获取任何形式经济利益。
+
+### 快速上手
 
 ```
 yarn
-```
-
-编译程序：
-
-```
 yarn build
 ```
 
