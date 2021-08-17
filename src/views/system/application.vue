@@ -76,15 +76,16 @@
               </template>
             </template>
           </el-table-column>
-          <el-table-column label="操作" width="50">
+          <el-table-column label="操作" width="100">
             <template slot-scope="scope">
-              <el-link
-                v-if="scope.row.enabled"
-                type="danger"
-                @click="addonsSwitch(scope.row, 0)"
-              >
-                停用
-              </el-link>
+              <template v-if="scope.row.enabled">
+                <el-link type="danger" @click="addonsSwitch(scope.row, 0)">
+                  停用
+                </el-link>
+
+                <el-link class="ml-10" v-if="scope.row.index_url" type="primary"  target="_blank" :href="scope.row.index_url">配置</el-link>
+              </template>
+
               <el-link
                 v-else
                 type="primary"
