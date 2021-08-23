@@ -1261,7 +1261,27 @@ const Api = {
             },
             Import(param) {
                 return post('/backend/addons/Paper/question/import/csv', param);
-            }
+            },
+            Category: {
+                List(params) {
+                    return get(`/backend/addons/Paper/question_category/index`, params);
+                },
+                Create() {
+                    return get(`/backend/addons/Paper/question_category/create`);
+                },
+                Store(params) {
+                    return post(`/backend/addons/Paper/question_category/create`, params);
+                },
+                Detail(id) {
+                    return get(`/backend/addons/Paper/question_category/${id}`);
+                },
+                Update(id, params) {
+                    return put(`/backend/addons/Paper/question_category/${id}`, params);
+                },
+                Destory(id) {
+                    return destroy(`/backend/addons/Paper/question_category/${id}`);
+                },
+            },
         },
         Practice: {
             List(params) {

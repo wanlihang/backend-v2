@@ -13,15 +13,28 @@
       <template v-if="form">
         <el-form ref="form" :model="form" :rules="rules" label-width="200px">
           <el-form-item label="所属分类" prop="category_id">
-            <el-select class="w-200px" v-model="form.category_id">
-              <el-option
-                v-for="(item, index) in presetData.categories"
-                :key="index"
-                :label="item.name"
-                :value="item.id"
-              >
-              </el-option>
-            </el-select>
+            <div class="d-flex">
+              <div>
+                <el-select class="w-200px" v-model="form.category_id">
+                  <el-option
+                    v-for="(item, index) in presetData.categories"
+                    :key="index"
+                    :label="item.name"
+                    :value="item.id"
+                  >
+                  </el-option>
+                </el-select>
+              </div>
+              <div class="ml-10">
+                <p-link
+                  text="分类管理"
+                  type="primary"
+                  @click="$router.push({ name: 'ExamQuestionCategories' })"
+                  p="addons.Paper.question_category.list"
+                >
+                </p-link>
+              </div>
+            </div>
           </el-form-item>
 
           <el-form-item label="试题难度" prop="level">
@@ -86,11 +99,7 @@
             保存
           </el-button>
 
-          <el-button
-            @click="formValidate"
-            v-if="step === 0"
-            :loading="loading"
-          >
+          <el-button @click="formValidate" v-if="step === 0" :loading="loading">
             下一步
           </el-button>
         </div>

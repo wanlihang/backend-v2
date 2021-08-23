@@ -1346,6 +1346,30 @@ const routes = [{
         }
       },
       {
+        path: '/exam/question/category/index',
+        component: () => import('@/views/exam/question/category/index'),
+        name: 'ExamQuestionCategories',
+        meta: {
+          title: 'title.exam.question.category.index'
+        }
+      },
+      {
+        path: '/exam/question/category/create',
+        component: () => import('@/views/exam/question/category/create'),
+        name: 'ExamQuestionCategoriesCreate',
+        meta: {
+          title: 'title.exam.question.category.create'
+        }
+      },
+      {
+        path: '/exam/question/category/update',
+        component: () => import('@/views/exam/question/category/update'),
+        name: 'ExamQuestionCategoriesUpdate',
+        meta: {
+          title: 'title.exam.question.category.update'
+        }
+      },
+      {
         path: '/decoration/mp-wechat-menu',
         name: 'MpWechatMenu',
         component: () => import('@/views/decoration/mp-wechat-menu.vue'),

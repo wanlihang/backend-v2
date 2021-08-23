@@ -100,16 +100,10 @@ export default [{
         name: 'title.member.index',
         key: 'MemberIndex',
         permission: 'member'
-    }]
-},
-{
-    name: 'title.snapshot.name',
-    key: 'Snapshot',
-    icon: 'icon-icon-me-n',
-    children: [{
+    }, {
         name: 'title.snapshot.index',
         key: 'SnapshotIndex',
-        permission: 'SnapshotI'
+        permission: 'addons.Snapshot.images'
     }]
 },
 {

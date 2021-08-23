@@ -188,5 +188,8 @@ export default {
         K12CategoriesUpdate: 'K12Course',
         K12CourseOrder: 'K12Course',
         K12CourseOrderTeacher: 'K12Course',
+        ExamQuestionCategories: 'ExamQuestion',
+        ExamQuestionCategoriesCreate: 'ExamQuestion',
+        ExamQuestionCategoriesUpdate: 'ExamQuestion',
     }
 }
