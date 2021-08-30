@@ -14,7 +14,7 @@
           <div class="path-info">
             <span>{{ item.steps_count }}个步骤</span>
             <span>&dot;</span>
-            <span>{{ item.courses_count }}个课程</span>  
+            <span>{{ item.courses_count }}个课程</span>
           </div>
         </div>
         <div class="path-thumb">
@@ -83,7 +83,6 @@ export default {
       float: left;
       box-sizing: border-box;
       display: flex;
-      align-items: center;
       margin-bottom: 15px;
 
       &:last-child {
@@ -96,12 +95,11 @@ export default {
         .path-title {
           width: 100%;
           height: 20px;
+          float: left;
+          line-height: 20px;
           font-size: 15px;
           font-weight: 600;
           color: #171923;
-          line-height: 20px;
-          float: left;
-          box-sizing: border-box;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -110,13 +108,12 @@ export default {
         .path-desc {
           width: 100%;
           height: 17px;
+          line-height: 17px;
+          float: left;
           font-size: 12px;
           font-weight: 400;
           color: #666666;
-          line-height: 17px;
-          float: left;
-          box-sizing: border-box;
-          white-space: nowrap;
+          word-break: break-all;
           overflow: hidden;
           text-overflow: ellipsis;
           margin-bottom: 27px;
@@ -124,13 +121,11 @@ export default {
 
         .path-info {
           width: 100%;
-          height: 11px;
-          font-size: 11px;
-          font-weight: 400;
-          color: #999999;
-          line-height: 11px;
+          height: auto;
           float: left;
-          box-sizing: border-box;
+          font-size: 11px;
+          line-height: 11px;
+          font-weight: 400;
         }
       }
 
