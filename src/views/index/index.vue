@@ -225,7 +225,9 @@ export default {
     userCountIncRate() {
       if (
         typeof this.list.today_register_user_count === "undefined" ||
-        typeof this.list.user_count === "undefined"
+        typeof this.list.user_count === "undefined" ||
+        isNaN(this.list.today_register_user_count) ||
+        isNaN(this.list.user_count)
       ) {
         return 0;
       }
