@@ -168,7 +168,7 @@
       <p class="info">
         <span>PHP{{ systemInfo.php_version }} </span>
         <span class="mx-10">主程序{{ systemInfo.meedu_version }}</span>
-        <span>后管v4.4.8</span>
+        <span>后管v4.4.10</span>
       </p>
     </div>
   </div>
@@ -225,7 +225,9 @@ export default {
     userCountIncRate() {
       if (
         typeof this.list.today_register_user_count === "undefined" ||
-        typeof this.list.user_count === "undefined"
+        typeof this.list.user_count === "undefined" ||
+        isNaN(this.list.today_register_user_count) ||
+        isNaN(this.list.user_count)
       ) {
         return 0;
       }

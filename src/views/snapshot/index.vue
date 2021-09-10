@@ -3,7 +3,11 @@
     <div class="float-left mb-30">
       <div class="float-left d-flex">
         <div>
-          <el-select class="w-200px" placeholder="课程类型" v-model="filter.type">
+          <el-select
+            class="w-200px"
+            placeholder="课程类型"
+            v-model="filter.type"
+          >
             <el-option
               v-for="(item, index) in filterData.types"
               :key="index"

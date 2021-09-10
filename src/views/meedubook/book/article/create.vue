@@ -70,9 +70,9 @@
           <div class="d-flex">
             <div>
               <el-switch
-                v-model="article.charge"
-                :active-value="1"
-                :inactive-value="0"
+                v-model="form.trySee"
+                :active-value="true"
+                :inactive-value="false"
               >
               </el-switch>
             </div>
@@ -144,6 +144,9 @@ export default {
         original_content: null,
         render_content: null,
       },
+      form: {
+        trySee: false,
+      },
       rules: {
         published_at: [
           {
@@ -172,6 +175,11 @@ export default {
       book: null,
     };
   },
+  watch: {
+    "form.trySee"() {
+      this.article.charge = this.form.trySee ? 0 : 1;
+    },
+  },
   mounted() {
     this.params();
     this.getBook();
@@ -189,9 +197,6 @@ export default {
     getBook() {
       this.$api.Meedubook.Book.Detail(this.book_id).then((res) => {
         this.book = res.data;
-        if (this.book.charge > 0) {
-          this.article.charge = 0;
-        }
       });
     },
     formValidate() {
