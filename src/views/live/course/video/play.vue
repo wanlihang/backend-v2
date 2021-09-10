@@ -145,15 +145,12 @@ export default {
           // 推流地址
           this.push_url = res.data.push_url;
 
+          console.log(this.push_url);
+
           // OBS推流地址解析
-          let obs = this.push_url.split("/");
-          for (let i = 0; i < obs.length; i++) {
-            if (i === obs.length - 1) {
-              this.obs.token = obs[i];
-            } else {
-              this.obs.server = this.obs.server + obs[i] + "/";
-            }
-          }
+          let obs = this.push_url.split("meedu/");
+          this.obs.server = obs[0] + "meedu/";
+          this.obs.token = obs[1];
 
           this.video.service = this.form.service;
 
