@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <router-view />
+    <keep-alive>
+      <router-view v-if="needKeepAlive" />
+    </keep-alive>
+
+    <router-view v-if="!needKeepAlive" />
   </div>
 </template>
 <script>
@@ -8,8 +12,13 @@ import Utils from "@/js/utils";
 import { mapMutations } from "vuex";
 
 export default {
-  data() {
-    return {};
+  computed: {
+    needKeepAlive() {
+      if (typeof this.$route.meta.keepAlive === "undefined") {
+        return false;
+      }
+      return this.$route.meta.keepAlive;
+    },
   },
   methods: {
     ...mapMutations(["loginHandle", "setEnabledAddons"]),
