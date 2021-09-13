@@ -90,7 +90,7 @@ export default {
         color: #333333;
         line-height: 20px;
         margin-bottom: 20px;
-        white-space: nowrap;
+        word-break: break-all;
         overflow: hidden;
         text-overflow: ellipsis;
       }
@@ -130,7 +130,7 @@ export default {
         font-weight: 400;
         color: #666666;
         line-height: 20px;
-        white-space: nowrap;
+        word-break: break-all;
         overflow: hidden;
         text-overflow: ellipsis;
       }

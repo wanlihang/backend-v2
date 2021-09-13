@@ -1,7 +1,7 @@
 <template>
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="课程订单"></back-bar>
-    
+
     <div class="float-left mb-30">
       <div class="float-left d-flex">
         <div>
@@ -75,10 +75,17 @@
               <span>{{ scope.row.charge }}元</span>
             </template>
           </el-table-column>
-          <el-table-column fixed="right" label="讲师" width="120">
+          <el-table-column fixed="right" label="讲师" width="150">
             <template slot-scope="scope">
-              <p-button
-                :text="scope.row.teacher.name"
+              <div class="mb-5">
+                <span v-if="scope.row.teacher">
+                  已设置：<b>{{ scope.row.teacher.name }}</b>
+                </span>
+                <span v-else class="c-red">未设置</span>
+              </div>
+
+              <p-link
+                text="设置/更换"
                 type="primary"
                 @click="
                   $router.push({
@@ -87,7 +94,7 @@
                   })
                 "
                 p="addons.XiaoBanKe.order.setTeacher"
-              ></p-button>
+              ></p-link>
             </template>
           </el-table-column>
         </el-table>
