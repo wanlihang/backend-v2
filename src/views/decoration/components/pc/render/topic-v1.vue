@@ -86,12 +86,11 @@ export default {
         height: auto;
         float: left;
         font-size: 18px;
+        line-height: 24px;
         font-weight: 600;
         color: #333333;
         line-height: 18px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        word-break: break-all;
         margin-bottom: 30px;
       }
 
