@@ -100,10 +100,11 @@ export default {
           height: 20px;
           font-size: 15px;
           font-weight: 600;
+          line-height: 20px;
           color: #171923;
           line-height: 20px;
           float: left;
-          white-space: nowrap;
+          word-break: break-all;
           overflow: hidden;
           text-overflow: ellipsis;
           margin-bottom: 40px;
@@ -121,6 +122,8 @@ export default {
       }
 
       .topic-thumb {
+        width: auto;
+
         img {
           border-radius: 4px;
         }
