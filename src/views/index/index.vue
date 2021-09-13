@@ -3,9 +3,9 @@
     <div class="el_top_row1">
       <div class="el_row_item">
         <span class="item_title">今日收入</span>
-        <p>{{ list.today_paid_sum || 0 }}</p>
+        <p>{{ numberForHuman(list.today_paid_sum || 0) }}</p>
         <div class="item_info">
-          <span>昨日收入：{{ list.yesterday_paid_sum }}</span>
+          <span>昨日收入：{{ numberForHuman(list.yesterday_paid_sum) }}</span>
           <span
             >较昨日：<strong :class="{ 'c-danger': todayPaidRate < 0 }"
               >{{ todayPaidRate }}%</strong
@@ -28,23 +28,27 @@
       <div class="el_row_item2">
         <div class="el_item">
           <span>总用户</span>
-          <span class="el_item_num flex-1">{{ list.user_count }}</span>
-          <span class="el_item_increase"
-            >今日新增：<strong :class="{ 'c-danger': userCountIncRate < 0 }"
-              >{{ userCountIncRate }}%</strong
-            ></span
-          >
+          <span class="el_item_num flex-1">
+            {{ numberForHuman(list.user_count) }}
+          </span>
+          <span class="el_item_increase">
+            今日新增：
+            <strong :class="{ 'c-danger': userCountIncRate < 0 }">
+              {{ userCountIncRate }}%
+            </strong>
+          </span>
         </div>
         <div class="el_item">
           <span>本月收益</span>
-          <span class="el_item_num flex-1">{{
-            list.this_month_paid_sum || 0
-          }}</span>
-          <span class="el_item_increase"
-            >较上月：<strong :class="{ 'c-danger': thisMonthPaidRate < 0 }"
-              >{{ thisMonthPaidRate }}%</strong
-            ></span
-          >
+          <span class="el_item_num flex-1">
+            {{ numberForHuman(list.this_month_paid_sum || 0) }}
+          </span>
+          <span class="el_item_increase">
+            较上月：
+            <strong :class="{ 'c-danger': thisMonthPaidRate < 0 }">
+              {{ thisMonthPaidRate }}%
+            </strong>
+          </span>
         </div>
       </div>
     </div>
@@ -400,6 +404,20 @@ export default {
 
         this.setEnabledAddons(enabledAddons, count);
       });
+    },
+    numberForHuman(num) {
+      if (num >= 100000000) {
+        return (num / 100000000).toFixed(2) + "亿";
+      } else if (num >= 10000000) {
+        return (num / 10000000).toFixed(2) + "千万";
+      } else if (num >= 1000000) {
+        return (num / 1000000).toFixed(2) + "百万";
+      } else if (num >= 10000) {
+        return (num / 10000).toFixed(2) + "万";
+      } else if (num >= 1000) {
+        return (num / 1000).toFixed(2) + "千";
+      }
+      return num;
     },
   },
 };
