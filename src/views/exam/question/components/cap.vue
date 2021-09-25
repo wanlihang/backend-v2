@@ -87,7 +87,8 @@
         <span class="ml-5">总分</span>
       </div>
       <div class="float-left">
-        <span>{{ form.score }}分</span><span class="helper-text ml-10">自动计算</span>
+        <span>{{ form.score }}分</span
+        ><span class="helper-text ml-10">自动计算</span>
       </div>
     </div>
 
@@ -234,10 +235,10 @@ export default {
       // 分数统计
       let score = 0;
       this.list.forEach((item) => {
-        if (!item.score) {
+        if (typeof item.score === "undefined" || item.score === null) {
           return;
         }
-        score += item.score;
+        score += parseInt(item.score);
       });
       this.form.score = score;
 
