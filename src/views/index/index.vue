@@ -172,7 +172,7 @@
       <p class="info">
         <span>PHP{{ systemInfo.php_version }} </span>
         <span class="mx-10">主程序{{ systemInfo.meedu_version }}</span>
-        <span>后管v4.4.12</span>
+        <span>后管v4.4.13</span>
       </p>
     </div>
   </div>
@@ -231,7 +231,8 @@ export default {
         typeof this.list.today_register_user_count === "undefined" ||
         typeof this.list.user_count === "undefined" ||
         isNaN(this.list.today_register_user_count) ||
-        isNaN(this.list.user_count)
+        isNaN(this.list.user_count) ||
+        this.list.user_count === 0
       ) {
         return 0;
       }
