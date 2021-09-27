@@ -183,7 +183,7 @@ const routes = [{
     name: 'Vod',
     meta: {
       title: 'title.course.vod.index',
-      keepAlive: true
+      keepAlive: false
     }
   },
   {
