@@ -7,6 +7,8 @@ import store from './store';
 import api from './js/request/request';
 import i18n from './js/i18n';
 import utils from './js/utils';
+import moment from 'moment'
+
 
 // 全局样式
 import './assets/common/variable.less';
@@ -28,6 +30,10 @@ Vue.use(ElementUI);
 
 // 组件注册
 Vue.use(mavonEditor);
+Vue.prototype.moment = moment;
+Vue.filter('dateFormat', function (dateStr, pattern = 'YYYY-MM-DD HH:mm') {
+  return moment(dateStr).format(pattern);
+})
 Vue.component('FormLabel', FormLabelComp);
 Vue.component('BackBar', BackBar);
 Vue.component('HelperText', HelperText);

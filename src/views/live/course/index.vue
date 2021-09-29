@@ -123,12 +123,10 @@
               <span>{{ scope.row.status_text }}</span>
             </template>
           </el-table-column>
-          <el-table-column
-            label="上架时间"
-            prop="published_at"
-            sortable
-            width="200"
-          >
+          <el-table-column label="上架时间" sortable width="200">
+            <template slot-scope="scope">{{
+              scope.row.published_at | dateFormat
+            }}</template>
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="150">
             <template slot-scope="scope">

@@ -30,7 +30,6 @@
       <el-table
         :data="list"
         @selection-change="handleSelectionChange"
-        
         class="float-left mt-30"
       >
         <el-table-column type="selection" width="55"></el-table-column>
@@ -52,7 +51,10 @@
             <span>￥{{ scope.row.charge }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="created_at" label="订阅时间" width="200">
+        <el-table-column label="订阅时间" width="200">
+          <template slot-scope="scope">{{
+            scope.row.created_at | dateFormat
+          }}</template>
         </el-table-column>
       </el-table>
 
