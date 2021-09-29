@@ -3,7 +3,7 @@
     <back-bar class="mb-30" title="团列表"></back-bar>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
-        <el-table :data="results"  class="float-left">
+        <el-table :data="results" class="float-left">
           <el-table-column prop="id" label="ID" width="80"> </el-table-column>
           <el-table-column label="团长">
             <template slot-scope="scope">
@@ -28,7 +28,7 @@
           </el-table-column>
           <el-table-column label="过期" width="180">
             <template slot-scope="scope">
-              <span>{{ scope.row.expired_at }}</span>
+              <span>{{ scope.row.expired_at | dateFormat }}</span>
             </template>
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="100">

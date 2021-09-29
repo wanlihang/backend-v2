@@ -48,9 +48,9 @@
 
     <div class="float-left" v-loading="loading">
       <div class="float-left">
-        <el-table :data="results"  class="float-left">
+        <el-table :data="results" class="float-left">
           <el-table-column prop="id" label="ID" width="100"> </el-table-column>
-          <el-table-column label="商品ID" >
+          <el-table-column label="商品ID">
             <template slot-scope="scope">
               <span v-if="scope.row.goods">{{ scope.row.goods.other_id }}</span>
               <span class="c-red" v-else>已删除</span>
@@ -107,8 +107,11 @@
               <el-tag type="success" v-else>已支付</el-tag>
             </template>
           </el-table-column>
-          
-          <el-table-column prop="created_at" label="时间" width="200">
+
+          <el-table-column label="时间" width="200">
+            <template slot-scope="scope">{{
+              scope.row.created_at | dateFormat
+            }}</template>
           </el-table-column>
         </el-table>
       </div>

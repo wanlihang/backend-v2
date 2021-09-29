@@ -57,8 +57,8 @@
 
         <el-table-column label="时间" width="200">
           <template slot-scope="scope">
-            <div>开始:{{ scope.row.started_at }}</div>
-            <div>结束:{{ scope.row.ended_at }}</div>
+            <div>开始:{{ scope.row.started_at | dateFormat }}</div>
+            <div>结束:{{ scope.row.ended_at | dateFormat }}</div>
           </template>
         </el-table-column>
 
