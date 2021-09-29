@@ -3,7 +3,7 @@
     <back-bar class="mb-30" title="问题评论"></back-bar>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
-        <el-table :data="comments"  class="float-left">
+        <el-table :data="comments" class="float-left">
           <el-table-column prop="id" label="ID" width="120"> </el-table-column>
           <el-table-column prop="user_id" label="用户ID" width="120">
           </el-table-column>
@@ -25,7 +25,10 @@
               <div v-html="scope.row.original_content"></div>
             </template>
           </el-table-column>
-          <el-table-column label="时间" width="200" prop="created_at">
+          <el-table-column label="时间" width="200">
+            <template slot-scope="scope">{{
+              scope.row.created_at | dateFormat
+            }}</template>
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="150">
             <template slot-scope="scope">

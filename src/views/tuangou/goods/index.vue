@@ -62,7 +62,10 @@
           </template>
         </el-table-column>
 
-        <el-table-column label="添加" prop="created_at" width="200">
+        <el-table-column label="添加" width="200">
+          <template slot-scope="scope">{{
+            scope.row.created_at | dateFormat
+          }}</template>
         </el-table-column>
 
         <el-table-column fixed="right" label="操作" width="150">

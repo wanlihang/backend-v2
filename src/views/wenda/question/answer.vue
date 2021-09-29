@@ -37,7 +37,10 @@
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="时间" width="200" prop="created_at">
+        <el-table-column label="时间" width="200">
+          <template slot-scope="scope">{{
+            scope.row.created_at | dateFormat
+          }}</template>
         </el-table-column>
         <el-table-column fixed="right" label="操作" width="160">
           <template slot-scope="scope">
