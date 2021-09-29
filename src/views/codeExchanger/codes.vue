@@ -60,7 +60,6 @@
         <el-table
           :data="results"
           @selection-change="handleSelectionChange"
-          
           class="float-left"
         >
           <el-table-column type="selection" width="55"></el-table-column>
@@ -92,7 +91,11 @@
               </div>
             </template>
           </el-table-column>
-          <el-table-column prop="used_at" label="使用时间"> </el-table-column>
+          <el-table-column label="使用时间">
+            <template slot-scope="scope">{{
+              scope.row.used_at | dateFormat
+            }}</template>
+          </el-table-column>
         </el-table>
       </div>
 

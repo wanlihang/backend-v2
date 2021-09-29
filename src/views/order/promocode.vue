@@ -83,7 +83,6 @@
       <div class="float-left">
         <el-table
           :data="list"
-          
           @selection-change="handleSelectionChange"
           class="float-left"
         >
@@ -118,10 +117,16 @@
             </template>
           </el-table-column>
 
-          <el-table-column prop="expired_at" label="过期时间" width="200">
+          <el-table-column label="过期时间" width="200">
+            <template slot-scope="scope">{{
+              scope.row.expired_at | dateFormat
+            }}</template>
           </el-table-column>
 
-          <el-table-column prop="created_at" label="添加时间">
+          <el-table-column label="添加时间">
+            <template slot-scope="scope">{{
+              scope.row.created_at | dateFormat
+            }}</template>
           </el-table-column>
         </el-table>
       </div>

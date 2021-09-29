@@ -121,8 +121,8 @@
           </el-table-column>
           <el-table-column label="时间" sortable width="350">
             <template slot-scope="scope">
-              <div>开课：{{ scope.row.open_at }}</div>
-              <div>结课：{{ scope.row.over_at }}</div>
+              <div>开课：{{ scope.row.open_at | dateFormat }}</div>
+              <div>结课：{{ scope.row.over_at | dateFormat }}</div>
             </template>
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="120">

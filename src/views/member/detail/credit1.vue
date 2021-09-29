@@ -4,11 +4,11 @@
       <el-table-column prop="id" label="记录ID" width="120"></el-table-column>
       <el-table-column prop="sum" label="变动" width="200"></el-table-column>
       <el-table-column prop="remark" label="备注"></el-table-column>
-      <el-table-column
-        prop="created_at"
-        label="时间"
-        width="200"
-      ></el-table-column>
+      <el-table-column label="时间" width="200">
+        <template slot-scope="scope">{{
+          scope.row.created_at | dateFormat
+        }}</template></el-table-column
+      >
     </el-table>
 
     <div class="float-left mt-15">

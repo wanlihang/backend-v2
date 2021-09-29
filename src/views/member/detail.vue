@@ -60,7 +60,9 @@
             </div>
             <div class="flex-1 d-flex">
               <div class="info-label">VIP过期时间</div>
-              <div class="flex-1 info-value">{{ user.role_expired_at }}</div>
+              <div class="flex-1 info-value">
+                {{ user.role_expired_at | dateFormat }}
+              </div>
             </div>
           </div>
 
@@ -80,7 +82,7 @@
             <div class="flex-1 d-flex">
               <div class="info-label">邀请维系时间</div>
               <div class="flex-1 info-value">
-                {{ user.invite_user_expired_at }}
+                {{ user.invite_user_expired_at | dateFormat }}
               </div>
             </div>
             <div class="flex-1 d-flex">

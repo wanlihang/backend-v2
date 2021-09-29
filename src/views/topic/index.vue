@@ -103,12 +103,10 @@
           </el-table-column>
           <el-table-column prop="vote_count" sortable label="点赞" width="100">
           </el-table-column>
-          <el-table-column
-            prop="created_at"
-            sortable
-            label="上架时间"
-            width="200"
-          >
+          <el-table-column sortable label="上架时间" width="200">
+            <template slot-scope="scope">{{
+              scope.row.created_at | dateFormat
+            }}</template>
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="120">
             <template slot-scope="scope">

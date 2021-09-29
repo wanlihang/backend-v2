@@ -104,12 +104,10 @@
                 <span>{{ scope.row.user_count }}人</span>
               </template>
             </el-table-column>
-            <el-table-column
-              prop="published_at"
-              label="上架时间"
-              sortable
-              width="200"
-            >
+            <el-table-column label="上架时间" sortable width="200">
+              <template slot-scope="scope">{{
+                scope.row.published_at | dateFormat
+              }}</template>
             </el-table-column>
             <el-table-column fixed="right" label="操作" width="150">
               <template slot-scope="scope">

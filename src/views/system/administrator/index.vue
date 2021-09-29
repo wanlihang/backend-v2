@@ -24,7 +24,7 @@
           <el-table-column sortable="" label="登录日志"
             ><template slot-scope="scope">
               <span
-                >{{ scope.row.last_login_date }} /
+                >{{ scope.row.last_login_date | dateFormat }} /
                 {{ scope.row.last_login_ip }}</span
               >
             </template>

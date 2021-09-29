@@ -86,7 +86,7 @@
             </div>
           </template>
         </el-table-column>
-         <el-table-column label="商品名称" >
+        <el-table-column label="商品名称">
           <template slot-scope="scope">
             <span v-for="item in scope.row.goods" :key="item.id">
               {{ item.goods_name }}
@@ -99,8 +99,11 @@
         </el-table-column>
         <el-table-column prop="status_text" label="支付状态" :width="150">
         </el-table-column>
-       
-        <el-table-column prop="updated_at" sortable label="订单创建时间" :width="220">
+
+        <el-table-column sortable label="订单创建时间" :width="220">
+          <template slot-scope="scope">{{
+            scope.row.updated_at | dateFormat
+          }}</template>
         </el-table-column>
         <el-table-column label="操作" fixed="right" :width="80">
           <template slot-scope="scope">

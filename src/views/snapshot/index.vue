@@ -65,7 +65,10 @@
           <el-table-column prop="type_title" label="资源"> </el-table-column>
           <el-table-column prop="count" label="照片" width="50">
           </el-table-column>
-          <el-table-column prop="last_snap_at" label="最后拍照时间" width="200">
+          <el-table-column label="最后拍照时间" width="200">
+            <template slot-scope="scope">{{
+              scope.row.last_snap_at | dateFormat
+            }}</template>
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="100">
             <template slot-scope="scope">

@@ -15,16 +15,16 @@
           <span v-else>否</span>
         </template>
       </el-table-column>
-      <el-table-column
-        label="开始时间"
-        prop="created_at"
-        :width="200"
-      ></el-table-column>
-      <el-table-column
-        label="看完时间"
-        prop="watched_at"
-        :width="200"
-      ></el-table-column>
+      <el-table-column label="开始时间" :width="200">
+        <template slot-scope="scope">{{
+          scope.row.created_at | dateFormat
+        }}</template></el-table-column
+      >
+      <el-table-column label="看完时间" :width="200">
+        <template slot-scope="scope">{{
+          scope.row.watched_at | dateFormat
+        }}</template>
+      </el-table-column>
     </el-table>
 
     <div class="float-left mt-15">
@@ -68,13 +68,15 @@ export default {
         return;
       }
       this.loading = true;
-      this.$api.Member.UserVideoWatchRecords(this.id, this.pagination).then((res) => {
-        this.loading = false;
+      this.$api.Member.UserVideoWatchRecords(this.id, this.pagination).then(
+        (res) => {
+          this.loading = false;
 
-        this.videos = res.data.videos;
-        this.list = res.data.data.data;
-        this.total = res.data.data.total;
-      });
+          this.videos = res.data.videos;
+          this.list = res.data.data.data;
+          this.total = res.data.data.total;
+        }
+      );
     },
   },
 };
