@@ -25,7 +25,6 @@
       <div class="float-left">
         <el-table
           :data="videos"
-          
           class="float-left"
           @sort-change="sortChange"
           :default-sort="{ prop: 'published_at', order: 'ascending' }"
@@ -55,7 +54,10 @@
               <duration-text :duration="scope.row.duration"></duration-text>
             </template>
           </el-table-column>
-          <el-table-column prop="published_at" sortable label="上架时间">
+          <el-table-column sortable label="上架时间">
+            <template slot-scope="scope">{{
+              scope.row.published_at | dateFormat
+            }}</template>
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="150">
             <template slot-scope="scope">
