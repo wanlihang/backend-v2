@@ -19,7 +19,10 @@
       </el-table-column>
       <el-table-column prop="status_text" label="状态" width="100">
       </el-table-column>
-      <el-table-column prop="created_at" label="时间" width="200">
+      <el-table-column label="时间" width="200">
+        <template slot-scope="scope">{{
+          scope.row.created_at | dateFormat
+        }}</template>
       </el-table-column>
     </el-table>
 

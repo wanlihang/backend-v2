@@ -9,7 +9,11 @@
           <span v-else class="c-red">视频不存在</span>
         </template>
       </el-table-column>
-      <el-table-column label="购买时间" prop="created_at" :width="200"></el-table-column>
+      <el-table-column label="购买时间" :width="200">
+        <template slot-scope="scope">{{
+          scope.row.created_at | dateFormat
+        }}</template>
+      </el-table-column>
     </el-table>
 
     <div class="float-left mt-15">

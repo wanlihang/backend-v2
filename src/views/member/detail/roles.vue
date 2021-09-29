@@ -8,11 +8,20 @@
           <span v-else class="c-red">已删除</span>
         </template>
       </el-table-column>
-      <el-table-column prop="started_at" label="开始时间" width="200">
+      <el-table-column label="开始时间" width="200">
+        <template slot-scope="scope">{{
+          scope.row.started_at | dateFormat
+        }}</template>
       </el-table-column>
-      <el-table-column prop="expired_at" label="结束时间" width="200">
+      <el-table-column label="结束时间" width="200">
+        <template slot-scope="scope">{{
+          scope.row.expired_at | dateFormat
+        }}</template>
       </el-table-column>
-      <el-table-column prop="created_at" label="购买时间" width="200">
+      <el-table-column label="购买时间" width="200">
+        <template slot-scope="scope">{{
+          scope.row.created_at | dateFormat
+        }}</template>
       </el-table-column>
     </el-table>
 
