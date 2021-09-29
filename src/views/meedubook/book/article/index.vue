@@ -70,7 +70,10 @@
                 <span>{{ scope.row.view_times }}次</span>
               </template>
             </el-table-column>
-            <el-table-column prop="published_at" sortable label="上架时间">
+            <el-table-column sortable label="上架时间">
+              <template slot-scope="scope">{{
+                scope.row.published_at | dateFormat
+              }}</template>
             </el-table-column>
             <el-table-column fixed="right" label="操作" width="120">
               <template slot-scope="scope">
