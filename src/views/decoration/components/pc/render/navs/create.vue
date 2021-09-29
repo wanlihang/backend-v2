@@ -37,7 +37,11 @@
           <el-form-item label="链接地址" prop="url">
             <div class="d-flex">
               <div>
-                <el-input v-model="form.url" class="w-200px"></el-input>
+                <el-input
+                  @input="handlerValue"
+                  v-model="form.url"
+                  class="w-200px"
+                ></el-input>
               </div>
               <div class="ml-15">
                 <el-link type="primary" @click="showLinkWin = true">
@@ -51,8 +55,12 @@
             <el-input v-model="form.active_routes" class="w-200px"></el-input>
           </el-form-item>
 
-          <el-form-item label="新窗口打开" prop="blank">
-            <el-switch v-model="form.blank" :active-value="1" :inactive-value="0"></el-switch>
+          <el-form-item label="新窗口打开" prop="blank" v-if="linkStatus">
+            <el-switch
+              v-model="form.blank"
+              :active-value="1"
+              :inactive-value="0"
+            ></el-switch>
           </el-form-item>
         </el-form>
       </div>
@@ -82,6 +90,7 @@ export default {
   data() {
     return {
       loading: false,
+      linkStatus: false,
       showLinkWin: false,
       form: {
         platform: "PC",
@@ -89,8 +98,8 @@ export default {
         sort: null,
         name: null,
         active_routes: null,
-        blank: null,
-        url: null
+        blank: 0,
+        url: null,
       },
       parentNavs: [],
       rules: {
@@ -122,6 +131,17 @@ export default {
     this.getCreateParams();
   },
   methods: {
+    handlerValue() {
+      if (
+        this.form.url.match("https:") ||
+        this.form.url.match("http:") ||
+        this.form.url.match("www")
+      ) {
+        this.linkStatus = true;
+      } else {
+        this.linkStatus = false;
+      }
+    },
     getCreateParams() {
       this.$api.System.Navs.Create().then((res) => {
         this.parentNavs = res.data.navs;
