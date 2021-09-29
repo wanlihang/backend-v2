@@ -17,7 +17,7 @@
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
-        <el-table :data="results"  class="float-left">
+        <el-table :data="results" class="float-left">
           <el-table-column prop="id" label="ID" width="120"> </el-table-column>
           <el-table-column prop="name" label="标题">
             <template slot-scope="scope">
@@ -26,7 +26,10 @@
               <span>{{ scope.row.title }}</span>
             </template>
           </el-table-column>
-          <el-table-column prop="published_at" label="直播时间" width="200">
+          <el-table-column label="直播时间" width="200">
+            <template slot-scope="scope">{{
+              scope.row.published_at | dateFormat
+            }}</template>
           </el-table-column>
           <el-table-column label="状态" width="100">
             <template slot-scope="scope">
