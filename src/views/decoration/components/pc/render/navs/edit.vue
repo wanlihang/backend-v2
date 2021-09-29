@@ -136,11 +136,7 @@ export default {
   },
   methods: {
     handlerValue() {
-      if (
-        this.form.url.match("https:") ||
-        this.form.url.match("http:") ||
-        this.form.url.match("www")
-      ) {
+      if (this.form.url.match("https://") || this.form.url.match("http://")) {
         this.linkStatus = true;
       } else {
         this.linkStatus = false;
@@ -158,11 +154,7 @@ export default {
           data.parent_id = null;
         }
         this.form = data;
-        if (
-          this.form.url.match("https:") ||
-          this.form.url.match("http:") ||
-          this.form.url.match("www")
-        ) {
+        if (this.form.url.match("https://") || this.form.url.match("http://")) {
           this.linkStatus = true;
         } else {
           this.linkStatus = false;
