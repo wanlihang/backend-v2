@@ -32,6 +32,9 @@ Vue.use(ElementUI);
 Vue.use(mavonEditor);
 Vue.prototype.moment = moment;
 Vue.filter('dateFormat', function (dateStr, pattern = 'YYYY-MM-DD HH:mm') {
+  if (!dateStr) {
+    return dateStr;
+  }
   return moment(dateStr).format(pattern);
 })
 Vue.component('FormLabel', FormLabelComp);
