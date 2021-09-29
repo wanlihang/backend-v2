@@ -38,7 +38,6 @@
           <el-table
             :data="list"
             @selection-change="handleSelectionChange"
-            
             class="float-left"
           >
             <el-table-column type="selection" width="55"></el-table-column>
@@ -64,7 +63,11 @@
                 <span>{{ scope.row.charge }}元</span>
               </template>
             </el-table-column>
-            <el-table-column prop="updated_at" label="时间"> </el-table-column>
+            <el-table-column label="时间">
+              <template slot-scope="scope">{{
+                scope.row.updated_at | dateFormat
+              }}</template>
+            </el-table-column>
           </el-table>
         </div>
 
