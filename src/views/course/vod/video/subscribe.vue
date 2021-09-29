@@ -33,7 +33,7 @@
     </div>
     <div class="float-left mt-30" v-loading="loading">
       <div class="float-left">
-        <el-table :data="subscribes"  class="float-left">
+        <el-table :data="subscribes" class="float-left">
           <el-table-column prop="user_id" label="用户ID" width="120">
           </el-table-column>
           <el-table-column label="用户">
@@ -55,7 +55,10 @@
           </el-table-column>
           <el-table-column prop="charge" label="价格" width="200">
           </el-table-column>
-          <el-table-column prop="created_at" label="时间" width="200">
+          <el-table-column label="时间" width="200">
+            <template slot-scope="scope">{{
+              scope.row.created_at | dateFormat
+            }}</template>
           </el-table-column>
         </el-table>
       </div>
