@@ -34,7 +34,7 @@
 
     <div class="float-left mt-30" v-loading="loading">
       <div class="float-left">
-        <el-table :data="list"  class="float-left">
+        <el-table :data="list" class="float-left">
           <el-table-column prop="user_id" label="用户ID" width="120">
           </el-table-column>
           <el-table-column label="用户">
@@ -71,9 +71,15 @@
             </template>
           </el-table-column>
 
-          <el-table-column prop="created_at" label="开始时间" width="200">
+          <el-table-column label="开始时间" width="200">
+            <template slot-scope="scope">{{
+              scope.row.created_at | dateFormat
+            }}</template>
           </el-table-column>
-          <el-table-column prop="watched_at" label="看完时间" width="200">
+          <el-table-column label="看完时间" width="200">
+            <template slot-scope="scope">{{
+              scope.row.watched_at | dateFormat
+            }}</template>
           </el-table-column>
         </el-table>
       </div>

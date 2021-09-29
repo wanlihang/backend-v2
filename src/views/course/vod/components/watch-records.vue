@@ -78,19 +78,15 @@
               <span>{{ scope.row.progress }}%</span>
             </template>
           </el-table-column>
-          <el-table-column
-            prop="created_at"
-            sortable
-            label="开始时间"
-            width="240"
-          >
+          <el-table-column sortable label="开始时间" width="240">
+            <template slot-scope="scope">{{
+              scope.row.created_at | dateFormat
+            }}</template>
           </el-table-column>
-          <el-table-column
-            prop="watched_at"
-            sortable
-            label="看完时间"
-            width="240"
-          >
+          <el-table-column sortable label="看完时间" width="240">
+            <template slot-scope="scope">{{
+              scope.row.watched_at | dateFormat
+            }}</template>
           </el-table-column>
           <el-table-column label="看完" width="80">
             <template slot-scope="scope">

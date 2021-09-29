@@ -60,7 +60,10 @@
           <span>{{ scope.row.charge }}元</span>
         </template>
       </el-table-column>
-      <el-table-column label="订阅时间" prop="created_at" width="200">
+      <el-table-column label="订阅时间" width="200">
+        <template slot-scope="scope">{{
+          scope.row.created_at | dateFormat
+        }}</template>
       </el-table-column>
       <el-table-column label="操作" width="100">
         <template slot-scope="scope">

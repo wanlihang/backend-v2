@@ -89,7 +89,10 @@
               <div v-html="scope.row.render_content"></div>
             </template>
           </el-table-column>
-          <el-table-column prop="created_at" label="时间" width="200">
+          <el-table-column label="时间" width="200">
+            <template slot-scope="scope">{{
+              scope.row.created_at | dateFormat
+            }}</template>
           </el-table-column>
         </el-table>
       </div>
