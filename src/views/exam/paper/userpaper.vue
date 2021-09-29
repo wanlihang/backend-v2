@@ -103,19 +103,15 @@
               >
             </template>
           </el-table-column>
-          <el-table-column
-            label="开始时间"
-            sortable
-            prop="created_at"
-            width="200"
-          >
+          <el-table-column label="开始时间" sortable width="200">
+            <template slot-scope="scope">{{
+              scope.row.created_at | dateFormat
+            }}</template>
           </el-table-column>
-          <el-table-column
-            label="交卷时间"
-            sortable
-            prop="submit_at"
-            width="200"
-          >
+          <el-table-column label="交卷时间" sortable width="200">
+            <template slot-scope="scope">{{
+              scope.row.submit_at | dateFormat
+            }}</template>
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="100">
             <template slot-scope="scope">

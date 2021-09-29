@@ -76,7 +76,7 @@
     </div>
     <div class="float-left mt-30" v-loading="loading">
       <div class="float-left">
-        <el-table :data="list"  class="float-left">
+        <el-table :data="list" class="float-left">
           <el-table-column prop="user_id" label="用户ID" width="120">
           </el-table-column>
           <el-table-column label="用户" width="300">
@@ -107,9 +107,15 @@
               <span class="c-red" v-else>不及格</span>
             </template>
           </el-table-column>
-          <el-table-column label="开始时间" prop="created_at">
+          <el-table-column label="开始时间">
+            <template slot-scope="scope">{{
+              scope.row.created_at | dateFormat
+            }}</template>
           </el-table-column>
-          <el-table-column label="交卷时间" prop="updated_at">
+          <el-table-column label="交卷时间">
+            <template slot-scope="scope">{{
+              scope.row.updated_at | dateFormat
+            }}</template>
           </el-table-column>
         </el-table>
       </div>
@@ -217,7 +223,7 @@ export default {
             item.user_id,
             user.nick_name,
             user.mobile,
-            item.get_score + '分',
+            item.get_score + "分",
             isPass,
             item.updated_at,
           ]);

@@ -36,7 +36,6 @@
           :data="list"
           @sort-change="sortChange"
           :default-sort="{ prop: 'id', order: 'descending' }"
-          
           class="float-left"
         >
           <el-table-column prop="id" sortable label="ID" width="120">
@@ -71,7 +70,10 @@
               <duration-text :duration="scope.row.use_seconds"></duration-text>
             </template>
           </el-table-column>
-          <el-table-column prop="created_at" sortable label="时间" width="200">
+          <el-table-column sortable label="时间" width="200">
+            <template slot-scope="scope">{{
+              scope.row.created_at | dateFormat
+            }}</template>
           </el-table-column>
           <el-table-column prop="status_text" label="状态" width="100">
           </el-table-column>
