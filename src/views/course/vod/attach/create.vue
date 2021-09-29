@@ -71,6 +71,10 @@ export default {
       if (e.target.files.length === 0) {
         return;
       }
+      if (e.target.files[0].size > 10240000) {
+        this.$message.error("上传附件大小不能超过10MB");
+        return;
+      }
       this.form.name = this.file.name = e.target.files[0].name;
     },
     formValidate() {
@@ -86,7 +90,6 @@ export default {
       }
       this.loading = true;
       const formData = new FormData();
-
       formData.append("file", this.$refs["file"].files[0]);
       formData.append("name", this.form.name);
       formData.append("course_id", this.form.course_id);
