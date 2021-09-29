@@ -35,7 +35,6 @@
       <div class="float-left">
         <el-table
           :data="results"
-          
           @selection-change="handleSelectionChange"
           class="float-left"
         >
@@ -95,7 +94,10 @@
           </el-table-column>
           <el-table-column prop="remark" label="备注" width="300">
           </el-table-column>
-          <el-table-column prop="created_at" label="添加时间">
+          <el-table-column label="添加时间">
+            <template slot-scope="scope">{{
+              scope.row.created_at | dateFormat
+            }}</template>
           </el-table-column>
         </el-table>
       </div>
@@ -129,7 +131,13 @@
           </el-select>
         </el-form-item>
         <el-form-item label="备注" prop="remark">
-          <el-input v-model="form.remark" class="w-400px" placeholder="请输入备注" type="textarea" rows="3"></el-input>
+          <el-input
+            v-model="form.remark"
+            class="w-400px"
+            placeholder="请输入备注"
+            type="textarea"
+            rows="3"
+          ></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
