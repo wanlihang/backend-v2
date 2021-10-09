@@ -133,6 +133,7 @@
                   class="w-400px"
                   rows="4"
                   type="textarea"
+                  maxlength="120"
                   v-model="course.short_desc"
                   placeholder="简短介绍"
                 ></el-input>
