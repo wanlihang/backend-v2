@@ -47,10 +47,19 @@
           </div>
         </el-form-item>
 
-        <el-form-item label="页面内容" prop="content">
+        <el-form-item label="页面内容" v-if="richText" prop="content">
+          <div class="changeContent" @click="changeContent">纯文本</div>
           <wang-editor class="w-100" v-model="form.content"></wang-editor>
         </el-form-item>
-
+        <el-form-item label="页面内容" v-else prop="content">
+          <div class="changeContent" @click="changeContent">富文本</div>
+          <el-input
+            type="textarea"
+            rows="4"
+            v-model="form.content"
+            class="w-100"
+          ></el-input>
+        </el-form-item>
         <el-form-item label="Seo关键字" prop="seo_keywords">
           <el-input
             type="textarea"
@@ -102,6 +111,7 @@ export default {
         content: null,
         is_inherit: 1,
       },
+      richText: true,
       rules: {
         sign: [
           {
@@ -136,6 +146,9 @@ export default {
           this.confirm();
         }
       });
+    },
+    changeContent() {
+      this.richText = !this.richText;
     },
     confirm() {
       if (this.loading) {
