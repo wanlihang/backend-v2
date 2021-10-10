@@ -11,7 +11,8 @@ const routes = [{
   name: 'Login',
   component: () => import('@/views/login/login.vue'),
   meta: {
-    title: 'title.login'
+    title: 'title.login',
+    pure: true
   }
 },
 {
@@ -1506,7 +1507,8 @@ const routes = [{
   name: 'DecorationH5',
   component: () => import('@/views/decoration/h5.vue'),
   meta: {
-    title: '移动端装修'
+    title: '移动端装修',
+    pure: true
   }
 },
 {
@@ -1514,7 +1516,8 @@ const routes = [{
   name: 'DecorationPC',
   component: () => import('@/views/decoration/pc.vue'),
   meta: {
-    title: '电脑端装修'
+    title: '电脑端装修',
+    pure: true
   }
 },
 {
@@ -1522,10 +1525,10 @@ const routes = [{
   name: 'Test',
   component: () => import('@/views/test/test.vue'),
   meta: {
-    title: 'Test'
+    title: 'Test',
+    pure: true
   }
 },
-
 ]
 
 const router = new VueRouter({
