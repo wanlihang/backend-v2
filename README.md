@@ -18,6 +18,12 @@
 ### 快速上手
 
 ```
+cp .env.example .env
+```
+
+修改 `.env` 文件中的 `VUE_APP_URL` 的值为您的meedu网站访问地址（后面不需要加斜线）。修改保存后执行下面命令编译：
+
+```
 yarn
 yarn build
 ```
