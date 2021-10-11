@@ -57,6 +57,7 @@
 export default {
   data() {
     return {
+      pageName: "bookChapters-list",
       box: {
         bid: this.$route.query.bid,
       },
@@ -64,8 +65,13 @@ export default {
       chapters: [],
     };
   },
-  mounted() {
+  activated() {
     this.getChapters();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     getChapters() {

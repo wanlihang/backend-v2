@@ -374,7 +374,8 @@ const routes = [{
   component: () => import('@/views/meedubook/book/index'),
   name: 'Meedubook',
   meta: {
-    title: 'title.meedubook.book.index'
+    title: 'title.meedubook.book.index',
+    keepAlive: true
   }
 },
 {
@@ -398,7 +399,8 @@ const routes = [{
   component: () => import('@/views/meedubook/book/comment'),
   name: 'MeedubookComment',
   meta: {
-    title: 'title.meedubook.book.comment'
+    title: 'title.meedubook.book.comment',
+    keepAlive: true
   }
 },
 {
@@ -406,7 +408,8 @@ const routes = [{
   component: () => import('@/views/meedubook/book/users'),
   name: 'MeedubookUsers',
   meta: {
-    title: 'title.meedubook.book.users'
+    title: 'title.meedubook.book.users',
+    keepAlive: true
   }
 },
 {
@@ -414,7 +417,8 @@ const routes = [{
   component: () => import('@/views/meedubook/book/category/index'),
   name: 'MeedubookCategory',
   meta: {
-    title: 'title.meedubook.book.category.index'
+    title: 'title.meedubook.book.category.index',
+    keepAlive: true
   }
 },
 {
@@ -438,7 +442,8 @@ const routes = [{
   component: () => import('@/views/meedubook/book/chapter/index'),
   name: 'MeedubookChapter',
   meta: {
-    title: 'title.meedubook.book.chapter.index'
+    title: 'title.meedubook.book.chapter.index',
+    keepAlive: true
   }
 },
 {
@@ -462,7 +467,8 @@ const routes = [{
   component: () => import('@/views/meedubook/book/article/index'),
   name: 'MeedubookArticle',
   meta: {
-    title: 'title.meedubook.book.article.index'
+    title: 'title.meedubook.book.article.index',
+    keepAlive: true
   }
 },
 {
@@ -486,7 +492,8 @@ const routes = [{
   component: () => import('@/views/meedubook/book/article/comment'),
   name: 'MeedubookArticleComment',
   meta: {
-    title: 'title.meedubook.book.article.comment'
+    title: 'title.meedubook.book.article.comment',
+    keepAlive: true
   }
 },
 {
