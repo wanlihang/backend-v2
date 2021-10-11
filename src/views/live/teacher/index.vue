@@ -83,6 +83,7 @@
 export default {
   data() {
     return {
+      pageName: "liveTeacher-list",
       loading: false,
       pagination: {
         page: 1,
@@ -92,9 +93,13 @@ export default {
       results: [],
     };
   },
-
-  mounted() {
+  activated() {
     this.getData();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     paginationReset() {

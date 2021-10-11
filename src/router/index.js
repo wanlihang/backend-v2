@@ -861,7 +861,8 @@ const routes = [{
   component: () => import('@/views/live/teacher/index'),
   name: 'LiveTeacher',
   meta: {
-    title: 'title.live.teacher.index'
+    title: 'title.live.teacher.index',
+    keepAlive: true
   }
 },
 {
@@ -885,7 +886,8 @@ const routes = [{
   component: () => import('@/views/live/course/index'),
   name: 'LiveCourse',
   meta: {
-    title: 'title.live.course.index'
+    title: 'title.live.course.index',
+    keepAlive: true
   }
 },
 {
@@ -909,7 +911,8 @@ const routes = [{
   component: () => import('@/views/live/course/comment'),
   name: 'LiveCourseComment',
   meta: {
-    title: 'title.live.course.comment'
+    title: 'title.live.course.comment',
+    keepAlive: true
   }
 },
 {
@@ -917,7 +920,8 @@ const routes = [{
   component: () => import('@/views/live/course/category/index'),
   name: 'LiveCourseCategory',
   meta: {
-    title: 'title.live.course.category.index'
+    title: 'title.live.course.category.index',
+    keepAlive: true
   }
 },
 {
@@ -941,7 +945,8 @@ const routes = [{
   component: () => import('@/views/live/course/chapter/index'),
   name: 'LiveCourseChapter',
   meta: {
-    title: 'title.live.course.chapter.index'
+    title: 'title.live.course.chapter.index',
+    keepAlive: true
   }
 },
 {
@@ -965,7 +970,8 @@ const routes = [{
   component: () => import('@/views/live/course/users/index'),
   name: 'LiveCourseUsers',
   meta: {
-    title: 'title.live.course.users.index'
+    title: 'title.live.course.users.index',
+    keepAlive: true
   }
 },
 {
@@ -973,7 +979,8 @@ const routes = [{
   component: () => import('@/views/live/course/video/index'),
   name: 'LiveCourseVideo',
   meta: {
-    title: 'title.live.course.video.index'
+    title: 'title.live.course.video.index',
+    keepAlive: true
   }
 },
 {
@@ -1005,7 +1012,8 @@ const routes = [{
   component: () => import('@/views/live/course/video/watchusers'),
   name: 'LiveCourseVideoWatchusers',
   meta: {
-    title: 'title.live.course.video.watch'
+    title: 'title.live.course.video.watch',
+    keepAlive: true
   }
 },
 {
@@ -1013,7 +1021,8 @@ const routes = [{
   component: () => import('@/views/live/course/video/chat'),
   name: 'LiveCourseVideoChat',
   meta: {
-    title: 'title.live.course.video.chat'
+    title: 'title.live.course.video.chat',
+    keepAlive: true
   }
 },
 {

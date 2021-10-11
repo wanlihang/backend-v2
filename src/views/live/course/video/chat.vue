@@ -83,6 +83,7 @@
 export default {
   data() {
     return {
+      pageName: "liveVideoChat-list",
       pagination: {
         video_id: this.$route.query.id,
         course_id: this.$route.query.course_id,
@@ -100,9 +101,13 @@ export default {
       results: [],
     };
   },
-
-  mounted() {
+  activated() {
     this.getResults();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     firstPageLoad() {

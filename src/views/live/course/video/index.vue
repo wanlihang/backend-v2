@@ -139,6 +139,7 @@
 export default {
   data() {
     return {
+      pageName: "liveVideo-list",
       pagination: {
         course_id: this.$route.query.id,
         keywords: "",
@@ -150,9 +151,13 @@ export default {
       results: [],
     };
   },
-
-  mounted() {
+  activated() {
     this.getResults();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     paginationReset() {
