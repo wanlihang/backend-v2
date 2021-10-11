@@ -127,6 +127,7 @@ export default {
   },
   data() {
     return {
+      pageName: "video-list",
       pagination: {
         cid: this.$route.query.course_id,
         page: 1,
@@ -142,8 +143,13 @@ export default {
       },
     };
   },
-  mounted() {
+  activated() {
     this.getVideos();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     paginationReset() {
