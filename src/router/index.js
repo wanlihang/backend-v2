@@ -349,7 +349,8 @@ const routes = [{
   component: () => import('@/views/singlepage/page/index'),
   name: 'SinglePage',
   meta: {
-    title: 'title.singlepage.index'
+    title: 'title.singlepage.index',
+    keepAlive: true
   }
 },
 {
