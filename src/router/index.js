@@ -1365,7 +1365,8 @@ const routes = [{
   component: () => import('@/views/exam/question/index'),
   name: 'ExamQuestion',
   meta: {
-    title: 'title.exam.question.index'
+    title: 'title.exam.question.index',
+    keepAlive: true
   }
 },
 {
@@ -1397,7 +1398,8 @@ const routes = [{
   component: () => import('@/views/exam/question/category/index'),
   name: 'ExamQuestionCategories',
   meta: {
-    title: 'title.exam.question.category.index'
+    title: 'title.exam.question.category.index',
+    keepAlive: true
   }
 },
 {
