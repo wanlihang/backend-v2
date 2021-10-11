@@ -10,7 +10,7 @@
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
-        <el-table :data="results"  class="float-left">
+        <el-table :data="results" class="float-left">
           <el-table-column prop="user_id" label="用户ID" width="80">
           </el-table-column>
           <el-table-column label="手机号" width="150">
@@ -71,6 +71,7 @@ export default {
   },
   data() {
     return {
+      pageName: "mockpaperUser-list",
       showUserAddWin: false,
       pagination: {
         page: 1,
@@ -83,9 +84,13 @@ export default {
       electedRows: null,
     };
   },
-
-  mounted() {
+  activated() {
     this.getResults();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     firstPageLoad() {
