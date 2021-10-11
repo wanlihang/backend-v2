@@ -56,6 +56,7 @@
 export default {
   data() {
     return {
+      pageName: "vodChapter-list",
       box: {
         course_id: this.$route.query.course_id,
       },
@@ -63,8 +64,13 @@ export default {
       chapters: [],
     };
   },
-  mounted() {
+  activated() {
     this.getChapters();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     getChapters() {

@@ -107,6 +107,7 @@ export default {
   },
   data() {
     return {
+      pageName: "videoRecords-list",
       video_id: this.$route.query.id,
       pagination: {
         course_id: this.$route.query.course_id,
@@ -138,8 +139,13 @@ export default {
       }
     },
   },
-  mounted() {
+  activated() {
     this.getWatchRecords();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     paginationReset() {

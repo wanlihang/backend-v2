@@ -81,6 +81,7 @@
 export default {
   data() {
     return {
+      pageName: "videoSubscribe-list",
       cid: this.$route.query.course_id,
       pagination: {
         video_id: this.$route.query.video_id,
@@ -110,8 +111,13 @@ export default {
       }
     },
   },
-  mounted() {
+  activated() {
     this.getSubscribes();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     paginationReset() {

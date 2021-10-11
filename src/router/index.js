@@ -221,7 +221,8 @@ const routes = [{
   component: () => import('@/views/course/vod/components/vod-comments'),
   name: 'CourseComments',
   meta: {
-    title: 'title.course.vod.comment'
+    title: 'title.course.vod.comment',
+    keepAlive: true
   }
 },
 {
@@ -229,7 +230,8 @@ const routes = [{
   component: () => import('@/views/course/vod/category/index'),
   name: 'CourseCategories',
   meta: {
-    title: 'title.course.vod.category.index'
+    title: 'title.course.vod.category.index',
+    keepAlive: true
   }
 },
 {
@@ -253,7 +255,8 @@ const routes = [{
   component: () => import('@/views/course/vod/chapter/index'),
   name: 'CourseChapters',
   meta: {
-    title: 'title.course.vod.chapter.index'
+    title: 'title.course.vod.chapter.index',
+    keepAlive: true
   }
 },
 {
@@ -319,7 +322,8 @@ const routes = [{
   component: () => import('@/views/course/vod/video/subscribe'),
   name: 'VideoSubscribe',
   meta: {
-    title: 'title.course.vod.video.subscribe'
+    title: 'title.course.vod.video.subscribe',
+    keepAlive: true
   }
 },
 {
@@ -327,7 +331,8 @@ const routes = [{
   component: () => import('@/views/course/vod/video/watch-records'),
   name: 'VideoWatchRecords',
   meta: {
-    title: 'title.course.vod.video.watch-records'
+    title: 'title.course.vod.video.watch-records',
+    keepAlive: true
   }
 },
 {
@@ -335,7 +340,8 @@ const routes = [{
   component: () => import('@/views/course/vod/video/comments'),
   name: 'VideoComments',
   meta: {
-    title: 'title.course.vod.video.comments'
+    title: 'title.course.vod.video.comments',
+    keepAlive: true
   }
 },
 {
