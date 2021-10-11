@@ -212,7 +212,8 @@ const routes = [{
   component: () => import('@/views/course/vod/detail'),
   name: 'VodView',
   meta: {
-    title: 'title.course.vod.detail'
+    title: 'title.course.vod.detail',
+    keepAlive: true
   }
 },
 {
@@ -276,7 +277,8 @@ const routes = [{
   component: () => import('@/views/course/vod/attach/index'),
   name: 'CourseAttach',
   meta: {
-    title: 'title.course.vod.attach.index'
+    title: 'title.course.vod.attach.index',
+    keepAlive: true
   }
 },
 {

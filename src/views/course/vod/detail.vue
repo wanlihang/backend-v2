@@ -37,6 +37,7 @@ export default {
   },
   data() {
     return {
+      pageName: "vodview-list",
       id: this.$route.params.id,
       tabActive: "sub-users",
       tabs: [
@@ -50,6 +51,13 @@ export default {
         },
       ],
     };
+  },
+  activated() {
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
 };
 </script>

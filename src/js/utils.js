@@ -37,7 +37,6 @@ export default {
     },
     scrollTopRecord(page) {
         let pos = document.querySelector(".page-main-body-box").scrollTop;
-        console.log(pos);
         if (pos > 0) {
             window.localStorage.setItem(`meedu-st-${page}`, pos);
         }

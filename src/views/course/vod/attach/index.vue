@@ -48,6 +48,7 @@
 export default {
   data() {
     return {
+      pageName: "attach-list",
       box: {
         course_id: this.$route.query.course_id,
       },
@@ -55,8 +56,13 @@ export default {
       attach: [],
     };
   },
-  mounted() {
+  activated() {
     this.getAttach();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     getAttach() {
