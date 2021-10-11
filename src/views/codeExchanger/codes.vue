@@ -119,6 +119,7 @@
 export default {
   data() {
     return {
+      pageName: "codes-list",
       pagination: {
         gid: this.$route.query.id,
         page: 1,
@@ -140,9 +141,13 @@ export default {
       results: [],
     };
   },
-
-  mounted() {
+  activated() {
     this.getData();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     paginationReset() {

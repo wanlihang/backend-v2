@@ -20,7 +20,7 @@
               <span v-else class="c-red">用户不存在</span>
             </template>
           </el-table-column>
-          <el-table-column label="内容" width="500">
+          <el-table-column label="内容">
             <template slot-scope="scope">
               <div v-html="scope.row.original_content"></div>
             </template>

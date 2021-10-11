@@ -143,6 +143,7 @@
 export default {
   data() {
     return {
+      pageName: "order-list",
       pagination: {
         page: 1,
         size: 10,
@@ -204,8 +205,13 @@ export default {
       this.getList();
     },
   },
-  mounted() {
+  activated() {
     this.getList();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     paginationSizeChange(size) {

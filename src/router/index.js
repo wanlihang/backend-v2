@@ -27,7 +27,8 @@ const routes = [{
   component: () => import('@/views/role/index'),
   name: 'Role',
   meta: {
-    title: 'title.role'
+    title: 'title.role',
+    keepAlive: true
   }
 },
 {
@@ -51,7 +52,8 @@ const routes = [{
   component: () => import('@/views/order/index'),
   name: 'Orderlist',
   meta: {
-    title: 'title.order'
+    title: 'title.order',
+    keepAlive: true
   }
 },
 {
@@ -67,7 +69,8 @@ const routes = [{
   component: () => import('@/views/order/promocode'),
   name: 'Promocode',
   meta: {
-    title: 'title.promocode'
+    title: 'title.promocode',
+    keepAlive: true
   }
 },
 {
@@ -99,7 +102,8 @@ const routes = [{
   component: () => import('@/views/order/withdrawOrders'),
   name: 'WithdrawOrders',
   meta: {
-    title: 'title.withdrawOrders'
+    title: 'title.withdrawOrders',
+    keepAlive: true
   }
 },
 {
@@ -131,7 +135,8 @@ const routes = [{
   component: () => import('@/views/system/administrator/index'),
   name: 'SystemAdministrator',
   meta: {
-    title: 'title.system-administrator'
+    title: 'title.system-administrator',
+    keepAlive: true
   }
 },
 {
@@ -501,7 +506,8 @@ const routes = [{
   component: () => import('@/views/member/index'),
   name: 'MemberIndex',
   meta: {
-    title: 'title.member.index'
+    title: 'title.member.index',
+    keepAlive: true
   }
 },
 {
@@ -589,7 +595,8 @@ const routes = [{
   component: () => import('@/views/wechat/messagereply/index'),
   name: 'MessageReply',
   meta: {
-    title: 'title.wechat.messagereply.index'
+    title: 'title.wechat.messagereply.index',
+    keepAlive: true
   }
 },
 {
@@ -613,7 +620,8 @@ const routes = [{
   component: () => import('@/views/wenda/question/index'),
   name: 'Question',
   meta: {
-    title: 'title.wenda.question.index'
+    title: 'title.wenda.question.index',
+    keepAlive: true
   }
 },
 {
@@ -621,7 +629,8 @@ const routes = [{
   component: () => import('@/views/wenda/question/answer'),
   name: 'QuestionAnswer',
   meta: {
-    title: 'title.wenda.question.answer'
+    title: 'title.wenda.question.answer',
+    keepAlive: true
   }
 },
 {
@@ -637,7 +646,8 @@ const routes = [{
   component: () => import('@/views/wenda/question/category/index'),
   name: 'QuestionCategory',
   meta: {
-    title: 'title.wenda.question.category.index'
+    title: 'title.wenda.question.category.index',
+    keepAlive: true
   }
 },
 {
@@ -661,7 +671,8 @@ const routes = [{
   component: () => import('@/views/miaosha/orders/index'),
   name: 'MiaoshaOrders',
   meta: {
-    title: 'title.miaosha.orders.index'
+    title: 'title.miaosha.orders.index',
+    keepAlive: true
   }
 },
 {
@@ -669,7 +680,8 @@ const routes = [{
   component: () => import('@/views/miaosha/goods/index'),
   name: 'MiaoshaGoods',
   meta: {
-    title: 'title.miaosha.goods.index'
+    title: 'title.miaosha.goods.index',
+    keepAlive: true
   }
 },
 {
@@ -693,7 +705,8 @@ const routes = [{
   component: () => import('@/views/tuangou/goods/index'),
   name: 'TuangouGoods',
   meta: {
-    title: 'title.tuangou.goods.index'
+    title: 'title.tuangou.goods.index',
+    keepAlive: true
   }
 },
 {
@@ -717,7 +730,8 @@ const routes = [{
   component: () => import('@/views/tuangou/goods/order'),
   name: 'TuangouGoodsOrder',
   meta: {
-    title: 'title.tuangou.goods.order'
+    title: 'title.tuangou.goods.order',
+    keepAlive: true
   }
 },
 {
@@ -1033,7 +1047,8 @@ const routes = [{
   component: () => import('@/views/codeExchanger/index'),
   name: 'CodeExchanger',
   meta: {
-    title: 'title.codeExchanger.index'
+    title: 'title.codeExchanger.index',
+    keepAlive: true
   }
 },
 {
@@ -1049,7 +1064,8 @@ const routes = [{
   component: () => import('@/views/codeExchanger/codes'),
   name: 'CodeExchangerCodes',
   meta: {
-    title: 'title.codeExchanger.codes'
+    title: 'title.codeExchanger.codes',
+    keepAlive: true
   }
 },
 {
@@ -1440,7 +1456,7 @@ const routes = [{
   component: () => import('@/views/snapshot/images'),
   name: 'SnapshotImages',
   meta: {
-    title: 'title.snapshot.images'
+    title: 'title.snapshot.images',
   }
 },
 {

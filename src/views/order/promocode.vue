@@ -151,6 +151,7 @@
 export default {
   data() {
     return {
+      pageName: "promocode-list",
       pagination: {
         video_id: this.$route.query.id,
         course_id: this.$route.query.course_id,
@@ -171,8 +172,13 @@ export default {
       list: [],
     };
   },
-  created() {
+  activated() {
     this.getData();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     firstPageLoad() {
