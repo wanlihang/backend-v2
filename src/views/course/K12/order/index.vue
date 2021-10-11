@@ -120,6 +120,7 @@
 export default {
   data() {
     return {
+      pageName: "k12Order-list",
       pagination: {
         course_id: this.$route.query.id,
         page: 1,
@@ -151,9 +152,13 @@ export default {
       },
     };
   },
-
-  mounted() {
+  activated() {
     this.getData();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     firstPageLoad() {

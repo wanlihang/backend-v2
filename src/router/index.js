@@ -1443,7 +1443,8 @@ const routes = [{
   component: () => import('@/views/course/K12/teacher/index'),
   name: 'K12Teacher',
   meta: {
-    title: 'title.course.xiaobanke.teacher.index'
+    title: 'title.course.xiaobanke.teacher.index',
+    keepAlive: true
   }
 },
 {
@@ -1467,7 +1468,8 @@ const routes = [{
   component: () => import('@/views/course/K12/course/index'),
   name: 'K12Course',
   meta: {
-    title: 'title.course.xiaobanke.course.index'
+    title: 'title.course.xiaobanke.course.index',
+    keepAlive: true
   }
 },
 {
@@ -1491,7 +1493,8 @@ const routes = [{
   component: () => import('@/views/course/K12/categories/index'),
   name: 'K12Categories',
   meta: {
-    title: 'title.course.xiaobanke.categories.index'
+    title: 'title.course.xiaobanke.categories.index',
+    keepAlive: true
   }
 },
 {
@@ -1515,7 +1518,8 @@ const routes = [{
   component: () => import('@/views/course/K12/order/index'),
   name: 'K12CourseOrder',
   meta: {
-    title: 'title.course.xiaobanke.order.index'
+    title: 'title.course.xiaobanke.order.index',
+    keepAlive: true
   }
 },
 {
