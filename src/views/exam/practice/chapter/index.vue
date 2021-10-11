@@ -27,7 +27,6 @@
         <el-table
           :data="results"
           @selection-change="handleSelectionChange"
-          
           class="float-left"
         >
           <el-table-column type="selection" width="55"></el-table-column>
@@ -77,6 +76,7 @@
 export default {
   data() {
     return {
+      pageName: "practiceChapter-list",
       id: this.$route.query.id,
       loading: false,
       results: [],
@@ -85,9 +85,13 @@ export default {
       },
     };
   },
-
-  mounted() {
+  activated() {
     this.getResults();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     handleSelectionChange(val) {

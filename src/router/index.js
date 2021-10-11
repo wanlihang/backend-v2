@@ -1219,7 +1219,8 @@ const routes = [{
   component: () => import('@/views/exam/practice/index'),
   name: 'ExamPractice',
   meta: {
-    title: 'title.exam.practice.index'
+    title: 'title.exam.practice.index',
+    keepAlive: true
   }
 },
 {
@@ -1243,7 +1244,8 @@ const routes = [{
   component: () => import('@/views/exam/practice/chapter/index'),
   name: 'PracticeChapter',
   meta: {
-    title: 'title.exam.practice.chapter.index'
+    title: 'title.exam.practice.chapter.index',
+    keepAlive: true
   }
 },
 {
@@ -1267,7 +1269,8 @@ const routes = [{
   component: () => import('@/views/exam/practice/chapter/question/index'),
   name: 'PracticeChapterQuestion',
   meta: {
-    title: 'title.exam.practice.chapter.question.index'
+    title: 'title.exam.practice.chapter.question.index',
+    keepAlive: true
   }
 },
 {
@@ -1284,6 +1287,7 @@ const routes = [{
   name: 'PracticeUser',
   meta: {
     title: 'title.exam.practice.user',
+    keepAlive: true
   }
 },
 {
@@ -1301,6 +1305,7 @@ const routes = [{
   name: 'PracticeProgress',
   meta: {
     title: 'title.exam.practice.progress',
+    keepAlive: true
   }
 },
 {

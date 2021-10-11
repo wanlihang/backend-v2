@@ -11,7 +11,7 @@
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
-        <el-table :data="results"  class="float-left">
+        <el-table :data="results" class="float-left">
           <el-table-column prop="user_id" label="用户ID" width="120">
           </el-table-column>
           <el-table-column label="用户" width="300">
@@ -101,6 +101,7 @@ export default {
   },
   data() {
     return {
+      pageName: "practiceUser-list",
       showUserAddWin: false,
       pagination: {
         page: 1,
@@ -115,9 +116,13 @@ export default {
       selectedRows: null,
     };
   },
-
-  mounted() {
+  activated() {
     this.getResults();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     firstPageLoad() {
