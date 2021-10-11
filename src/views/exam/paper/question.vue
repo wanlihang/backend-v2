@@ -28,7 +28,7 @@
         <div class="float-left mb-10 helper-text">
           {{ typeText }}&nbsp;(共{{ list.length }}题)
         </div>
-        <el-table :data="list"  class="float-left">
+        <el-table :data="list" class="float-left">
           <el-table-column prop="id" label="试题ID" width="120">
           </el-table-column>
           <el-table-column label="分数" width="150">
@@ -70,6 +70,7 @@ export default {
   },
   data() {
     return {
+      pageName: "paperQuestion-list",
       pagination: {
         id: this.$route.query.id,
       },
@@ -77,9 +78,13 @@ export default {
       results: [],
     };
   },
-
-  mounted() {
+  activated() {
     this.getResults();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   computed: {
     totalScore() {

@@ -14,7 +14,6 @@
       <div class="float-left">
         <el-table
           :data="categories"
-          
           row-key="id"
           :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
           class="float-left"
@@ -72,6 +71,7 @@
 export default {
   data() {
     return {
+      pageName: "paperCategory-list",
       pagination: {
         page: 1,
         size: 10,
@@ -82,8 +82,13 @@ export default {
       userRemark: [],
     };
   },
-  mounted() {
+  activated() {
     this.getCategories();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     paginationReset() {

@@ -169,6 +169,7 @@ export default {
   },
   data() {
     return {
+      pageName: "paperRecord-list",
       pagination: {
         id: this.$route.query.id,
         page: 1,
@@ -193,8 +194,13 @@ export default {
       },
     };
   },
-  mounted() {
+  activated() {
     this.getResults();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     firstPageLoad() {

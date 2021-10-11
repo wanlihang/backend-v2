@@ -1125,7 +1125,8 @@ const routes = [{
   component: () => import('@/views/exam/paper/index'),
   name: 'ExamPaper',
   meta: {
-    title: 'title.exam.paper.index'
+    title: 'title.exam.paper.index',
+    keepAlive: true
   }
 },
 {
@@ -1149,7 +1150,8 @@ const routes = [{
   component: () => import('@/views/exam/paper/category/index'),
   name: 'PaperCategories',
   meta: {
-    title: 'title.exam.paper.category.index'
+    title: 'title.exam.paper.category.index',
+    keepAlive: true
   }
 },
 {
@@ -1173,7 +1175,8 @@ const routes = [{
   component: () => import('@/views/exam/paper/userpaper'),
   name: 'ExamPaperUserpaper',
   meta: {
-    title: 'title.exam.paper.userpaper'
+    title: 'title.exam.paper.userpaper',
+    keepAlive: true
   }
 },
 {
@@ -1181,7 +1184,8 @@ const routes = [{
   component: () => import('@/views/exam/paper/statistics'),
   name: 'ExamPaperStat',
   meta: {
-    title: 'title.exam.paper.stat'
+    title: 'title.exam.paper.stat',
+    keepAlive: true
   }
 },
 {
@@ -1197,7 +1201,8 @@ const routes = [{
   component: () => import('@/views/exam/paper/question'),
   name: 'ExamPaperQuestion',
   meta: {
-    title: 'title.exam.paper.question'
+    title: 'title.exam.paper.question',
+    keepAlive: true
   }
 },
 {
@@ -1205,7 +1210,8 @@ const routes = [{
   component: () => import('@/views/exam/paper/questionadd'),
   name: 'ExamPaperQuestionCreate',
   meta: {
-    title: 'title.exam.paper.questionadd'
+    title: 'title.exam.paper.questionadd',
+    keepAlive: true
   }
 },
 {
@@ -1286,6 +1292,7 @@ const routes = [{
   name: 'PaperUser',
   meta: {
     title: 'title.exam.paper.user',
+    keepAlive: true
   }
 },
 {
