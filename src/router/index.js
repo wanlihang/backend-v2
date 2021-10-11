@@ -1054,7 +1054,8 @@ const routes = [{
   component: () => import('@/views/topic/index'),
   name: 'Topic',
   meta: {
-    title: 'title.topic.index'
+    title: 'title.topic.index',
+    keepAlive: true
   }
 },
 {
@@ -1078,7 +1079,8 @@ const routes = [{
   component: () => import('@/views/topic/category/index'),
   name: 'TopicCategory',
   meta: {
-    title: 'title.topic.category.index'
+    title: 'title.topic.category.index',
+    keepAlive: true
   }
 },
 {
@@ -1102,7 +1104,8 @@ const routes = [{
   component: () => import('@/views/topic/comment'),
   name: 'TopicComment',
   meta: {
-    title: 'title.topic.comment'
+    title: 'title.topic.comment',
+    keepAlive: true
   }
 },
 {
@@ -1110,7 +1113,8 @@ const routes = [{
   component: () => import('@/views/topic/order'),
   name: 'TopicOrder',
   meta: {
-    title: 'title.topic.order'
+    title: 'title.topic.order',
+    keepAlive: true
   }
 },
 {
