@@ -18,7 +18,7 @@
     </div>
 
     <div class="float-left" v-loading="loading">
-      <el-table :data="list"  class="float-left">
+      <el-table :data="list" class="float-left">
         <el-table-column prop="sort" label="升序" width="120">
         </el-table-column>
         <el-table-column prop="name" label="步骤名"> </el-table-column>
@@ -71,15 +71,20 @@
 export default {
   data() {
     return {
+      pageName: "learnstep-list",
       id: this.$route.query.id,
       total: 0,
       loading: false,
       list: [],
     };
   },
-
-  mounted() {
+  activated() {
     this.getData();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     paginationReset() {

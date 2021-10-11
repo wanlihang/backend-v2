@@ -741,7 +741,8 @@ const routes = [{
   component: () => import('@/views/learningpath/path/index'),
   name: 'LearningPath',
   meta: {
-    title: 'title.learningpath.path.index'
+    title: 'title.learningpath.path.index',
+    keepAlive: true
   }
 },
 {
@@ -765,7 +766,8 @@ const routes = [{
   component: () => import('@/views/learningpath/step/index'),
   name: 'LearningStep',
   meta: {
-    title: 'title.learningpath.step.index'
+    title: 'title.learningpath.step.index',
+    keepAlive: true
   }
 },
 {
@@ -789,7 +791,8 @@ const routes = [{
   component: () => import('@/views/learningpath/step/relation/index'),
   name: 'Steprelation',
   meta: {
-    title: 'title.learningpath.step.relation.index'
+    title: 'title.learningpath.step.relation.index',
+    keepAlive: true
   }
 },
 {
