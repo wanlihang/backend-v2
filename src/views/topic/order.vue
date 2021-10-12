@@ -154,6 +154,7 @@ export default {
       }
       this.loading = true;
       let params = {};
+      this.filter.topic_id = this.$route.query.id;
       Object.assign(params, this.filter, this.pagination);
       this.$api.Course.Topic.Topic.Order(params).then((res) => {
         this.loading = false;

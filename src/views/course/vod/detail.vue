@@ -52,13 +52,6 @@ export default {
       ],
     };
   },
-  activated() {
-    this.$utils.scrollTopSet(this.pageName);
-  },
-  beforeRouteLeave(to, from, next) {
-    this.$utils.scrollTopRecord(this.pageName);
-    next();
-  },
 };
 </script>
 

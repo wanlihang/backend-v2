@@ -173,6 +173,7 @@ export default {
       }
       this.loading = true;
       let params = {};
+      this.filter.id = this.$route.query.bid;
       Object.assign(params, this.filter);
       Object.assign(params, this.pagination);
       this.$api.Meedubook.Book.Article.List(params).then((res) => {

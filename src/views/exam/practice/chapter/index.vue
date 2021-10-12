@@ -106,6 +106,7 @@ export default {
         return;
       }
       this.loading = true;
+      this.id = this.$route.query.id;
       let params = {
         pid: this.id,
       };

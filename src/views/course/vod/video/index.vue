@@ -182,7 +182,7 @@ export default {
       }
       this.loading = true;
       let params = {};
-      Object.assign(params, this.pagination);
+      Object.assign(params, this.pagination, {cid: this.$route.query.course_id});
       this.$api.Course.Vod.Videos.List(params).then((res) => {
         this.loading = false;
         this.videos = res.data.videos.data;

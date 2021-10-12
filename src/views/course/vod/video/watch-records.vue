@@ -170,6 +170,8 @@ export default {
       }
       this.loading = true;
       let params = {};
+      this.video_id = this.$route.query.id;
+      this.pagination.course_id = this.$route.query.course_id;
       Object.assign(params, this.filter);
       Object.assign(params, this.pagination);
       this.$api.Course.Vod.Videos.WatchRecords(this.video_id, params).then(

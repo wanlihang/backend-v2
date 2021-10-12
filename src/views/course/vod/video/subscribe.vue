@@ -142,6 +142,8 @@ export default {
       }
       this.loading = true;
       let params = {};
+      this.cid = this.$route.query.course_id;
+      this.pagination.video_id = this.$route.query.video_id;
       Object.assign(params, this.filter);
       Object.assign(params, this.pagination);
       this.$api.Course.Vod.Videos.Subscribe(

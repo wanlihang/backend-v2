@@ -70,6 +70,7 @@ export default {
         return;
       }
       this.loading = true;
+      this.box.course_id = this.$route.query.course_id;
       this.$api.Course.Vod.Attach.List(this.box).then((res) => {
         this.loading = false;
         this.attach = res.data.data;

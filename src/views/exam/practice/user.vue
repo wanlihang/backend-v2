@@ -147,6 +147,7 @@ export default {
       }
       this.loading = true;
       let params = {};
+      this.pagination.id = this.$route.query.id;
       Object.assign(params, this.pagination);
       this.$api.Exam.Practice.User(this.pagination.id, params).then((res) => {
         this.loading = false;

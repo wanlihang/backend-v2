@@ -177,6 +177,7 @@ export default {
       this.loading = true;
       this.list = [];
       let params = {};
+      this.pagination.id = this.$route.query.id;
       Object.assign(params, this.filter, this.pagination);
       this.$api.Exam.Mockpaper.Userpaper(this.pagination.id, params).then(
         (res) => {

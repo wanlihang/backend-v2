@@ -98,7 +98,8 @@ export default {
       }
       this.loading = true;
       let params = {};
-
+      this.step_id = this.$route.query.id;
+      this.pagination.step_id = this.$route.query.id;
       Object.assign(params, this.pagination);
       this.$api.Course.LearnPath.Step.Relation.List(params).then((res) => {
         this.loading = false;

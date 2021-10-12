@@ -171,6 +171,8 @@ export default {
       }
       this.loading = true;
       let params = {};
+      this.pagination.id = this.$route.query.id;
+      this.spids.id = this.$route.query.id;
       Object.assign(params, this.filter, this.pagination);
       this.$api.Exam.Paper.QuestionList(this.pagination.id, params).then(
         (res) => {

@@ -105,6 +105,7 @@ export default {
         return;
       }
       this.loading = true;
+      this.id = this.$route.query.id;
       let params = { path_id: this.id };
       this.$api.Course.LearnPath.Step.List(params).then((res) => {
         this.loading = false;

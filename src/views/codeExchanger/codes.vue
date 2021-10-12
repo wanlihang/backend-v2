@@ -178,7 +178,7 @@ export default {
       this.loading = true;
       let params = {};
       Object.assign(params, this.filter);
-      Object.assign(params, this.pagination);
+      Object.assign(params, this.pagination, { gid: this.$route.query.id });
       this.$api.CodeExchanger.Codes.List(params).then((res) => {
         this.loading = false;
         this.results = res.data.data.data;

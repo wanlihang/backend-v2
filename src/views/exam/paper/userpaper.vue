@@ -234,6 +234,7 @@ export default {
       }
       this.loading = true;
       let params = {};
+      this.pagination.id = this.$route.query.id;
       Object.assign(params, this.filter, this.pagination);
       this.$api.Exam.Paper.Userpaper(this.pagination.id, params).then((res) => {
         this.loading = false;

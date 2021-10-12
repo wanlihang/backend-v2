@@ -105,6 +105,8 @@ export default {
         return;
       }
       this.loading = true;
+      this.id = this.$route.query.id;
+      this.status = parseInt(this.$route.query.status);
       this.$api.Wenda.Question.Answer(this.id).then((res) => {
         this.loading = false;
         this.answers = res.data.answers;

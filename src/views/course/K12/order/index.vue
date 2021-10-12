@@ -185,6 +185,7 @@ export default {
       }
       this.loading = true;
       let params = {};
+      this.pagination.course_id = this.$route.query.id;
       Object.assign(params, this.filter, this.pagination);
       this.$api.xiaoBanKe.Order.Index(params).then((res) => {
         this.loading = false;

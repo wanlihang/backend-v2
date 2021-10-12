@@ -215,6 +215,8 @@ export default {
       }
       this.loading = true;
       let params = {};
+      this.pagination.video_id = this.$route.query.id;
+      this.pagination.course_id = this.$route.query.course_id;
       Object.assign(params, this.filter, this.pagination);
       this.$api.Order.PromoCode.PromoCode(params).then((res) => {
         this.loading = false;

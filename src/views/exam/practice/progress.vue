@@ -61,6 +61,8 @@ export default {
       }
       this.loading = true;
       let params = {};
+      this.id = this.$route.query.id;
+      this.pid = this.$route.query.pid;
       Object.assign(params, this.pagination);
       this.$api.Exam.Practice.Progress(this.id, this.pid).then((res) => {
         this.loading = false;

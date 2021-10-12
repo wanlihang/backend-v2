@@ -79,6 +79,7 @@ export default {
         return;
       }
       this.loading = true;
+      this.box.bid = this.$route.query.bid;
       this.$api.Meedubook.Book.Chapters.List(this.box).then((res) => {
         this.loading = false;
         this.chapters = res.data;

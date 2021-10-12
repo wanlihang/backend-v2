@@ -218,7 +218,6 @@ const routes = [{
   name: 'VodView',
   meta: {
     title: 'title.course.vod.detail',
-    keepAlive: true
   }
 },
 {
