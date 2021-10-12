@@ -169,7 +169,7 @@
               <div>
                 <el-input
                   type="textarea"
-                  maxlength="120"
+                  maxlength="150"
                   v-model="course.short_desc"
                   class="w-500px"
                   rows="3"
@@ -177,7 +177,7 @@
               </div>
               <div class="ml-10">
                 <helper-text
-                  text="该值会在课程列表显示，建议不要超过120个字。"
+                  text="该值会在课程列表显示，建议不要超过150个字。"
                 ></helper-text>
               </div>
             </div>

@@ -131,7 +131,7 @@
                 <el-input
                   class="w-400px"
                   rows="4"
-                  maxlength="120"
+                  maxlength="150"
                   type="textarea"
                   v-model="course.short_desc"
                   placeholder="简短介绍"
@@ -139,7 +139,7 @@
               </div>
               <div class="ml-10">
                 <helper-text
-                  text="该值会在电子书列表显示，建议不要超过120个字。"
+                  text="该值会在电子书列表显示，建议不要超过150个字。"
                 ></helper-text>
               </div>
             </div>
