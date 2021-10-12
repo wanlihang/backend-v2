@@ -1,33 +1,28 @@
 <template>
   <div class="meedu-main-body" v-loading="loading">
-    <div v-if="!isLoading">
-      <el-button type="primary" @click="getMenu">拉取微信公众号菜单</el-button>
+    <div class="float-left">
+      <h3>常见问题</h3>
+      <div class="helper-text">
+        1.菜单编辑之后需要点击「更新菜单」按钮将更改同步到微信公众号，这样才是一次正确的菜单更新操作。
+      </div>
+      <div class="helper-text">
+        2.点击「更新菜单」按钮之后，已修改的公众号菜单并不是立马就可以看到，最多需要等待10分钟才会看到最新修改的菜单。
+      </div>
+      <div class="helper-text">
+        3.自定义菜单最多包括3个一级菜单，每个一级菜单最多包含5个二级菜单。
+      </div>
+      <div class="helper-text">
+        4.一级菜单最多4个汉字，二级菜单最多8个汉字，多出来的部分将会以“...”代替。
+      </div>
     </div>
 
-    <template v-if="isLoading">
-      <div class="float-left">
-        <h3>常见问题</h3>
-        <div class="helper-text">
-          1.菜单编辑之后需要点击「更新菜单」按钮将更改同步到微信公众号，这样才是一次正确的菜单更新操作。
-        </div>
-        <div class="helper-text">
-          2.点击「更新菜单」按钮之后，已修改的公众号菜单并不是立马就可以看到，最多需要等待10分钟才会看到最新修改的菜单。
-        </div>
-        <div class="helper-text">
-          3.自定义菜单最多包括3个一级菜单，每个一级菜单最多包含5个二级菜单。
-        </div>
-        <div class="helper-text">
-          4.一级菜单最多4个汉字，二级菜单最多8个汉字，多出来的部分将会以“...”代替。
-        </div>
-      </div>
+    <div class="float-left mt-15 mb-15">
+      <el-button type="primary" @click="getMenu">拉取微信公众号菜单</el-button>
+      <!-- <el-button type="danger" @click="empty">删除当前微信公众号菜单</el-button> -->
+      <el-button type="primary" @click="sync">将菜单更新到微信公众号</el-button>
+    </div>
 
-      <div class="float-left mt-15 mb-15">
-        <el-button type="primary" @click="sync">更新菜单</el-button>
-        <el-button type="danger" @click="empty">删除菜单</el-button>
-      </div>
-    </template>
-
-    <div class="mp-menu-edit-box" v-if="isLoading">
+    <div class="mp-menu-edit-box">
       <div class="menu-render-box">
         <div class="menus">
           <div class="menu-item" v-for="(item, index) in menus" :key="index">
@@ -184,7 +179,6 @@ export default {
     return {
       loading: false,
       menus: [],
-      isLoading: false,
       editItem: {
         index: null,
         pIndex: null,
@@ -214,8 +208,16 @@ export default {
       this.loading = true;
       this.$api.Wechat.Menu.Index()
         .then((res) => {
-          let data = res.data.menu.selfmenu_info.button;
+          this.loading = false;
 
+          let menu = res.data.menu;
+          if (typeof menu.selfmenu_info === "undefined") {
+            // 不是想要的数据
+            return;
+          }
+
+          this.menus = [];
+          let data = menu.selfmenu_info.button;
           data.forEach((item) => {
             if (item.sub_button) {
               item.sub_button = item.sub_button.list;
@@ -225,9 +227,6 @@ export default {
 
             this.menus.push(item);
           });
-
-          this.loading = false;
-          this.isLoading = true;
         })
         .catch((e) => {
           this.$message.error(e.message);
@@ -450,7 +449,6 @@ export default {
             .then(() => {
               this.$message.success(this.$t("common.success"));
               this.loading = false;
-              this.isLoading = false;
               this.menus = [];
             })
             .catch((e) => {
