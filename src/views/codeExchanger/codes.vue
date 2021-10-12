@@ -177,8 +177,10 @@ export default {
       }
       this.loading = true;
       let params = {};
+      this.pagination.gid = this.$route.query.id;
+      this.popbox.gid = this.$route.query.id;
       Object.assign(params, this.filter);
-      Object.assign(params, this.pagination, { gid: this.$route.query.id });
+      Object.assign(params, this.pagination);
       this.$api.CodeExchanger.Codes.List(params).then((res) => {
         this.loading = false;
         this.results = res.data.data.data;
