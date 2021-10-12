@@ -143,6 +143,11 @@ export default {
       },
     };
   },
+  watch: {
+    "$route.query.course_id"() {
+      this.paginationReset();
+    },
+  },
   activated() {
     this.getVideos();
     this.$utils.scrollTopSet(this.pageName);
@@ -154,7 +159,6 @@ export default {
   methods: {
     paginationReset() {
       this.pagination.page = 1;
-      this.getVideos();
     },
     paginationSizeChange(size) {
       this.pagination.size = size;
@@ -182,7 +186,9 @@ export default {
       }
       this.loading = true;
       let params = {};
-      Object.assign(params, this.pagination, {cid: this.$route.query.course_id});
+      Object.assign(params, this.pagination, {
+        cid: this.$route.query.course_id,
+      });
       this.$api.Course.Vod.Videos.List(params).then((res) => {
         this.loading = false;
         this.videos = res.data.videos.data;
