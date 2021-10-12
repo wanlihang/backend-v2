@@ -17,7 +17,7 @@
             </div>
             <div class="ml-10">
               <helper-text
-                text="支持zip,pdf,jpeg,jpg,gif,png,md,doc,txt,csv格式文件"
+                text="支持zip,pdf,jpeg,jpg,gif,png,md,doc,txt,csv格式文件，上传附件大小不能超过10M"
               ></helper-text>
             </div>
           </div>
