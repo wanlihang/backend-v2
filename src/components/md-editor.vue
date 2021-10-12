@@ -1,7 +1,7 @@
 <template>
   <div :style="{ height: (height || 300) + 'px' }">
     <mavon-editor
-      style="height: 100%; z-index: 2001"
+      style="height: 100%; z-index: 1999"
       ref="mavonEditor"
       :value="content"
       :boxShadow="false"
