@@ -20,7 +20,8 @@
         <div class="float-left" v-show="tab.active === 'base'">
           <el-form-item label="视频">
             <el-button type="primary" @click="showUploadVideoWin = true">
-              重新上传视频
+              <span>重新上传视频</span>
+              <span class="ml-10" v-if="video.title">{{ video.title }}</span>
             </el-button>
           </el-form-item>
 
