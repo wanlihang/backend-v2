@@ -282,7 +282,7 @@ export default {
       })
         .then(() => {
           this.loading = true;
-          this.$api.Meedubook.Meedubook.Book.Article.CommentDestoryMulti(
+          this.$api.Meedubook.Book.Article.CommentDestoryMulti(
             this.spids
           )
             .then(() => {
