@@ -5,14 +5,6 @@
       <div class="float-left">
         <div class="float-left d-flex mb-10">
           <div>
-            <el-button @click="approve"> 审核通过 </el-button>
-          </div>
-          <div class="ml-10">
-            <el-button @click="refuse"> 审核拒绝 </el-button>
-          </div>
-        </div>
-        <div class="float-left d-flex">
-          <div>
             <el-input
               v-model="filter.user_id"
               class="w-200px"
@@ -86,14 +78,6 @@
             <el-table-column label="评论内容">
               <template slot-scope="scope">
                 <span v-html="scope.row.content"></span>
-              </template>
-            </el-table-column>
-            <el-table-column label="状态" width="100">
-              <template slot-scope="scope">
-                <el-tag type="success" v-if="scope.row.is_check == 1"
-                  >通过</el-tag
-                >
-                <el-tag v-else type="danger">拒绝</el-tag>
               </template>
             </el-table-column>
             <el-table-column label="时间">
