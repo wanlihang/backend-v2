@@ -204,7 +204,7 @@
             </div>
           </el-form-item>
 
-          <el-form-item label="评论开关" prop="comment_status">
+          <!-- <el-form-item label="评论开关" prop="comment_status">
             <el-select v-model="video.comment_status">
               <el-option
                 v-for="(item, index) in comments"
@@ -214,7 +214,7 @@
               >
               </el-option>
             </el-select>
-          </el-form-item>
+          </el-form-item> -->
 
           <el-form-item label="SEO描述">
             <el-input
@@ -300,7 +300,6 @@ export default {
         published_at: null,
         title: null,
         charge: null,
-        comment_status: 2,
         is_show: 1,
         is_ban_sell: 1,
         ban_drag: 0,

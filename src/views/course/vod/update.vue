@@ -178,18 +178,6 @@
             </div>
           </el-form-item>
 
-          <el-form-item label="评论控制" prop="comment_status">
-            <el-select class="w-200px" v-model="course.comment_status">
-              <el-option
-                v-for="(item, index) in comments"
-                :key="index"
-                :label="item.name"
-                :value="item.id"
-              >
-              </el-option>
-            </el-select>
-          </el-form-item>
-
           <el-form-item label="SEO描述">
             <el-input
               class="w-400px"

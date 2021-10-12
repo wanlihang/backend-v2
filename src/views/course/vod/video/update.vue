@@ -204,17 +204,6 @@
             </div>
           </el-form-item>
 
-          <el-form-item label="评论开关" prop="comment_status">
-            <el-select v-model="video.comment_status">
-              <el-option
-                v-for="(item, index) in comments"
-                :key="index"
-                :label="item.name"
-                :value="item.id"
-              >
-              </el-option>
-            </el-select>
-          </el-form-item>
 
           <el-form-item label="SEO描述">
             <el-input
