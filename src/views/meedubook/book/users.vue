@@ -116,7 +116,7 @@ export default {
   watch: {
     "$route.query.bid"() {
       this.pagination.page = 1;
-      this.user_id = null;
+      this.filter.user_id = null;
     },
   },
   activated() {
@@ -134,7 +134,7 @@ export default {
     },
     paginationReset() {
       this.pagination.page = 1;
-      this.user_id = null;
+      this.filter.user_id = null;
       this.getData();
     },
     paginationSizeChange(size) {
@@ -155,7 +155,7 @@ export default {
       this.loading = true;
       let params = {};
       this.pagination.id = this.$route.query.bid;
-      Object.assign(params, this.pagination);
+      Object.assign(params, this.filter, this.pagination);
       this.$api.Meedubook.Book.Users.List(this.pagination.id, params).then(
         (res) => {
           this.loading = false;
