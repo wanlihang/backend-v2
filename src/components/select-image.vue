@@ -84,6 +84,8 @@
 </template>
 
 <script>
+import config from '@/js/config';
+
 export default {
   props: ["show", "from"],
   data() {
@@ -121,7 +123,7 @@ export default {
   },
   computed: {
     uploadAction() {
-      return "/backend/api/v1/media/image";
+      return config.url + "/backend/api/v1/media/image";
     },
     uploadData() {
       return {
