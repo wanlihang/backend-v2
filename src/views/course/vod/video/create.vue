@@ -21,7 +21,7 @@
           <el-form-item label="视频">
             <el-button type="primary" @click="showUploadVideoWin = true">
               <span>上传视频</span>
-              <span class="ml-10" v-if="video.title">{{ video.title }}</span>
+              <span class="ml-10" v-if="tit">{{ tit }}</span>
             </el-button>
           </el-form-item>
 
@@ -296,6 +296,7 @@ export default {
       showUploadVideoWin: false,
       course_id: this.$route.query.course_id,
       course: null,
+      tit: null,
       video: {
         course_id: this.$route.query.course_id,
         published_at: null,
@@ -426,7 +427,10 @@ export default {
     },
     uploadVideoChange(video) {
       this.video.duration = video.duration;
-      this.video.title = video.title;
+      if (!this.video.title) {
+        this.video.title = video.title;
+      }
+      this.tit = video.title;
 
       if (video.storage_driver === "aliyun") {
         this.video.aliyun_video_id = video.storage_file_id;
