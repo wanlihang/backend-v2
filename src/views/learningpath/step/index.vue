@@ -89,7 +89,7 @@ export default {
   methods: {
     paginationReset() {
       this.pagination.page = 1;
-      this.filter.path_id = "";
+      // this.filter.path_id = "";
       this.getData();
     },
     paginationSizeChange(size) {

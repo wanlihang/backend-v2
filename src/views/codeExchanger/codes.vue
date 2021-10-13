@@ -149,6 +149,14 @@ export default {
     this.$utils.scrollTopRecord(this.pageName);
     next();
   },
+  watch: {
+    "$route.query.id"() {
+      this.pagination.page = 1;
+      this.filter.code = "";
+      this.filter.user_id = "";
+      this.spids.ids = [];
+    },
+  },
   methods: {
     paginationReset() {
       this.pagination.page = 1;

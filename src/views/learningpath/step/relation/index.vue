@@ -83,6 +83,11 @@ export default {
       results: [],
     };
   },
+  watch: {
+    "$route.query.id"() {
+      this.pagination.page = 1;
+    },
+  },
   activated() {
     this.getData();
     this.$utils.scrollTopSet(this.pageName);

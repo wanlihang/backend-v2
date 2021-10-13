@@ -138,6 +138,13 @@ export default {
         this.filter.watched_end_at = null;
       }
     },
+    "$route.query.id"() {
+      this.pagination.page = 1;
+      this.filter.user_id = null;
+      this.watched_at = null;
+      this.filter.watched_start_at = null;
+      this.filter.watched_end_at = null;
+    },
   },
   activated() {
     this.getWatchRecords();

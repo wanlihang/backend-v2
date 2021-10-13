@@ -138,6 +138,13 @@ export default {
       },
     };
   },
+  watch: {
+    "$route.query.id"() {
+      this.pagination.page = 1;
+      this.filter.user_id = null;
+      this.filter.status = -1;
+    },
+  },
   activated() {
     this.getResults();
     this.$utils.scrollTopSet(this.pageName);

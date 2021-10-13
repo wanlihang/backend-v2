@@ -92,6 +92,11 @@ export default {
     this.$utils.scrollTopRecord(this.pageName);
     next();
   },
+  watch: {
+    "$route.query.id"() {
+      this.pagination.page = 1;
+    },
+  },
   methods: {
     firstPageLoad() {
       this.pagination.page = 1;

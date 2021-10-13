@@ -142,7 +142,8 @@ export default {
   },
   watch: {
     "$route.query.bid"() {
-      this.paginationReset();
+      this.pagination.page = 1;
+      this.filter.chapter_id = null;
     },
   },
   activated() {
@@ -157,6 +158,7 @@ export default {
     paginationReset() {
       this.pagination.page = 1;
       this.filter.chapter_id = null;
+      this.getBook();
     },
     paginationSizeChange(size) {
       this.pagination.size = size;
@@ -204,7 +206,6 @@ export default {
               this.loading = false;
               this.$message.success(this.$t("common.success"));
               this.paginationReset();
-              this.getBook();
             })
             .catch((e) => {
               this.loading = false;

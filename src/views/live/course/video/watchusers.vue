@@ -64,6 +64,11 @@ export default {
       results: [],
     };
   },
+  watch: {
+    "$route.query.id"() {
+      this.pagination.page = 1;
+    },
+  },
   activated() {
     this.getResults();
     this.$utils.scrollTopSet(this.pageName);

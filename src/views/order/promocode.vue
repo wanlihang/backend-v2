@@ -172,6 +172,16 @@ export default {
       list: [],
     };
   },
+  watch: {
+    "$route.query.id"() {
+      this.pagination.page = 1;
+      this.filter.user_id = null;
+      this.filter.key = null;
+      this.filter.created_at = null;
+      this.filter.expired_at = null;
+      this.spids.ids = [];
+    },
+  },
   activated() {
     this.getData();
     this.$utils.scrollTopSet(this.pageName);

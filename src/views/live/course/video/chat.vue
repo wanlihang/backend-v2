@@ -101,6 +101,13 @@ export default {
       results: [],
     };
   },
+  watch: {
+    "$route.query.id"() {
+      this.pagination.page = 1;
+      this.user_id = null;
+      this.spids.ids = [];
+    },
+  },
   activated() {
     this.getResults();
     this.$utils.scrollTopSet(this.pageName);

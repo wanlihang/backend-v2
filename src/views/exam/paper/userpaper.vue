@@ -194,6 +194,15 @@ export default {
       },
     };
   },
+  watch: {
+    "$route.query.id"() {
+      this.pagination.page = 1;
+      this.filter.user_id = null;
+      this.filter.status = -1;
+      this.filter.submit_at = null;
+      this.filter.created_at = null;
+    },
+  },
   activated() {
     this.getResults();
     this.$utils.scrollTopSet(this.pageName);

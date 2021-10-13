@@ -110,6 +110,13 @@ export default {
         this.filter.subscribe_end_at = null;
       }
     },
+    "$route.query.video_id"() {
+      this.pagination.page = 1;
+      this.filter.user_id = null;
+      this.subscribed_at = null;
+      this.filter.subscribe_start_at = null;
+      this.filter.subscribe_end_at = null;
+    },
   },
   activated() {
     this.getSubscribes();

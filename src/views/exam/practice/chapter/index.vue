@@ -85,6 +85,11 @@ export default {
       },
     };
   },
+  watch: {
+    "$route.query.id"() {
+      this.spids.ids = [];
+    },
+  },
   activated() {
     this.getResults();
     this.$utils.scrollTopSet(this.pageName);

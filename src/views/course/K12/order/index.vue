@@ -160,6 +160,13 @@ export default {
     this.$utils.scrollTopRecord(this.pageName);
     next();
   },
+  watch: {
+    "$route.query.id"() {
+      this.pagination.page = 1;
+      this.filter.teacher_id = null;
+      this.filter.set_teacher = null;
+    },
+  },
   methods: {
     firstPageLoad() {
       this.pagination.page = 1;

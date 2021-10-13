@@ -113,6 +113,12 @@ export default {
       selectedRows: null,
     };
   },
+  watch: {
+    "$route.query.bid"() {
+      this.pagination.page = 1;
+      this.user_id = null;
+    },
+  },
   activated() {
     this.getData();
     this.$utils.scrollTopSet(this.pageName);

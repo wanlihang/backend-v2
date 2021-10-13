@@ -151,6 +151,12 @@ export default {
       results: [],
     };
   },
+  watch: {
+    "$route.query.id"() {
+      this.pagination.page = 1;
+      this.pagination.keywords = "";
+    },
+  },
   activated() {
     this.getResults();
     this.$utils.scrollTopSet(this.pageName);
@@ -162,6 +168,7 @@ export default {
   methods: {
     paginationReset() {
       this.pagination.page = 1;
+      this.pagination.keywords = "";
       this.getResults();
     },
     paginationSizeChange(size) {

@@ -138,6 +138,15 @@ export default {
     this.$utils.scrollTopRecord(this.pageName);
     next();
   },
+  watch: {
+    "$route.query.id"() {
+      this.pagination.page = 1;
+      this.filter.level = null;
+      this.filter.category_id = null;
+      this.filter.type = null;
+      this.spids.s = [];
+    },
+  },
   methods: {
     firstPageLoad() {
       this.pagination.page = 1;

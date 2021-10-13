@@ -144,6 +144,15 @@ export default {
       },
     };
   },
+  watch: {
+    "$route.query.id"() {
+      this.pagination.page = 1;
+      this.filter.level = null;
+      this.filter.category_id = null;
+      this.filter.type = null;
+      this.spids.qids = [];
+    },
+  },
   activated() {
     this.getResults();
     this.$utils.scrollTopSet(this.pageName);

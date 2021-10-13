@@ -145,7 +145,7 @@ export default {
   },
   watch: {
     "$route.query.course_id"() {
-      this.paginationReset();
+      this.pagination.page = 1;
     },
   },
   activated() {
@@ -159,6 +159,7 @@ export default {
   methods: {
     paginationReset() {
       this.pagination.page = 1;
+      this.getVideos();
     },
     paginationSizeChange(size) {
       this.pagination.size = size;
