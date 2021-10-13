@@ -108,7 +108,7 @@ export default {
   watch: {
     "$route.query.id"() {
       this.pagination.page = 1;
-      this.user_id = null;
+      this.filter.user_id = null;
     },
   },
   activated() {
@@ -126,7 +126,7 @@ export default {
     },
     paginationReset() {
       this.pagination.page = 1;
-      this.user_id = null;
+      this.filter.user_id = null;
       this.getData();
     },
     paginationSizeChange(size) {
