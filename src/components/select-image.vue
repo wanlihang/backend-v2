@@ -46,6 +46,9 @@
               :key="item.id"
               @click="imageUrl = item.url"
             >
+              <div class="sel" v-if="imageUrl === item.url">
+                <img src="../assets/home/selected.png" />
+              </div>
               <div class="image-render">
                 <div
                   class="image-view"
@@ -337,6 +340,18 @@ export default {
         background: #f4fafe;
         box-sizing: border-box;
         cursor: pointer;
+        position: relative;
+        .sel {
+          position: absolute;
+          width: 30px;
+          height: 30px;
+          top: 58px;
+          left: 40px;
+          img {
+            width: 30px;
+            height: 30px;
+          }
+        }
         .image-render,
         .image-name {
           width: 100%;
