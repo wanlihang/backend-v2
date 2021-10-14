@@ -66,7 +66,11 @@
             </el-switch>
 
             <!-- 选择 -->
-            <el-select class="w-300px" v-model="c.value" v-else-if="c.field_type === 'select'">
+            <el-select
+              class="w-300px"
+              v-model="c.value"
+              v-else-if="c.field_type === 'select'"
+            >
               <el-option
                 v-for="(item, index) in c.option_value"
                 :key="index"
@@ -228,7 +232,7 @@ export default {
       }
 
       .input-box {
-        width: 100%;
+        width: 200px;
         height: auto;
         float: left;
         margin-bottom: 15px;
