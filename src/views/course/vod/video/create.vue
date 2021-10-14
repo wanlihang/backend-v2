@@ -398,7 +398,6 @@ export default {
         this.course = res.data;
         if (this.course.is_free === 1) {
           this.video.charge = 0;
-          this.video.ban_drag = 1;
           this.video.free_seconds = 0;
         }
       });
