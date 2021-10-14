@@ -46,13 +46,18 @@
               :key="item.id"
               @click="imageUrl = item.url"
             >
+              <div class="sel" v-if="imageUrl === item.url">
+                <img src="../assets/home/selected.png" />
+              </div>
               <div class="image-render">
                 <div
                   class="image-view"
                   :style="{ 'background-image': 'url(' + item.url + ')' }"
                 ></div>
               </div>
-              <div class="image-name">{{ item.name }}</div>
+              <div class="image-name">
+                <div class="name">{{ item.name }}</div>
+              </div>
             </div>
           </div>
 
@@ -335,6 +340,18 @@ export default {
         background: #f4fafe;
         box-sizing: border-box;
         cursor: pointer;
+        position: relative;
+        .sel {
+          position: absolute;
+          width: 30px;
+          height: 30px;
+          top: 58px;
+          left: 40px;
+          img {
+            width: 30px;
+            height: 30px;
+          }
+        }
         .image-render,
         .image-name {
           width: 100%;
@@ -360,10 +377,18 @@ export default {
           display: flex;
           justify-content: center;
           align-items: center;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          color: rgba(0, 0, 0, 0.7);
+          .name {
+            width: 80px;
+            height: 16px;
+            font-size: 12px;
+            font-weight: 400;
+            color: #333333;
+            line-height: 16px;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
         }
         &.active,
         &:hover {
