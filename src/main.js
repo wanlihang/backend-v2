@@ -50,6 +50,8 @@ Vue.config.productionTip = false;
 Vue.prototype.$api = api;
 Vue.prototype.$utils = utils;
 
+utils.copyright();
+
 new Vue({
   router,
   store,
