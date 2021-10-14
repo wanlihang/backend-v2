@@ -65,7 +65,7 @@
             <el-empty :description="$t('common.none')"></el-empty>
           </div>
 
-          <div class="pagination text-center">
+          <div class="pagination text-center" v-if="pagination.size < total">
             <el-pagination
               @size-change="paginationSizeChange"
               @current-change="paginationPageChange"
@@ -303,7 +303,7 @@ export default {
 
     .optinos {
       width: 100%;
-      height: auto;
+      height: 40px;
       float: left;
       margin-bottom: 15px;
       text-align: right;
@@ -325,7 +325,6 @@ export default {
       width: 100%;
       margin-top: -55px;
       height: auto;
-      min-height: 417px;
       box-sizing: border-box;
       padding: 0;
       float: left;
