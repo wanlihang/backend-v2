@@ -51,7 +51,6 @@
           <div class="float-left">
             <el-table
               :data="users"
-              
               class="float-left"
               @sort-change="sortChange"
               :default-sort="{ prop: 'id', order: 'descending' }"
@@ -72,12 +71,10 @@
               </el-table-column>
               <el-table-column prop="mobile" label="手机号" width="200">
               </el-table-column>
-              <el-table-column
-                prop="created_at"
-                sortable=""
-                label="注册时间"
-                width="200"
-              >
+              <el-table-column sortable="" label="注册时间" width="200">
+                <template slot-scope="scope">
+                  <span>{{ scope.row.created_at | dateFormat }}</span>
+                </template>
               </el-table-column>
             </el-table>
           </div>
