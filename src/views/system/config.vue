@@ -232,7 +232,7 @@ export default {
       }
 
       .input-box {
-        width: 200px;
+        width: 100%;
         height: auto;
         float: left;
         margin-bottom: 15px;
