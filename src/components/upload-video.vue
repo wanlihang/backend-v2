@@ -59,7 +59,10 @@
                 <span>{{ scope.row.size_mb }}MB</span>
               </template>
             </el-table-column>
-            <el-table-column prop="created_at" label="时间" width="200">
+            <el-table-column label="时间" width="200">
+              <template slot-scope="scope">
+                <span>{{ scope.row.created_at | dateFormat }}</span>
+              </template>
             </el-table-column>
           </el-table>
 
