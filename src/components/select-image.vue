@@ -20,7 +20,7 @@
           <div class="optinos">
             <el-upload
               :headers="uploadHeaders"
-              :multiple="false"
+              :multiple="true"
               :action="uploadAction"
               :data="uploadData"
               name="file"
