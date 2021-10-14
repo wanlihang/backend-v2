@@ -224,8 +224,8 @@ export default {
   width: 881px;
   height: 674px;
   background: #ffffff;
-  margin-top: -350px;
-  margin-left: -600px;
+  margin-top: -337px;
+  margin-left: -440.5px;
   box-sizing: border-box;
 }
 
