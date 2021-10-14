@@ -52,7 +52,9 @@
                   :style="{ 'background-image': 'url(' + item.url + ')' }"
                 ></div>
               </div>
-              <div class="image-name">{{ item.name }}</div>
+              <div class="image-name">
+                <div class="name">{{ item.name }}</div>
+              </div>
             </div>
           </div>
 
@@ -360,10 +362,18 @@ export default {
           display: flex;
           justify-content: center;
           align-items: center;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          color: rgba(0, 0, 0, 0.7);
+          .name {
+            width: 80px;
+            height: 16px;
+            font-size: 12px;
+            font-weight: 400;
+            color: #333333;
+            line-height: 16px;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
         }
         &.active,
         &:hover {
