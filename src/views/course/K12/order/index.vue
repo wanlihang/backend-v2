@@ -120,6 +120,7 @@
 export default {
   data() {
     return {
+      pageName: "k12Order-list",
       pagination: {
         course_id: this.$route.query.id,
         page: 1,
@@ -151,9 +152,20 @@ export default {
       },
     };
   },
-
-  mounted() {
+  activated() {
     this.getData();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
+  },
+  watch: {
+    "$route.query.id"() {
+      this.pagination.page = 1;
+      this.filter.teacher_id = null;
+      this.filter.set_teacher = null;
+    },
   },
   methods: {
     firstPageLoad() {
@@ -180,6 +192,7 @@ export default {
       }
       this.loading = true;
       let params = {};
+      this.pagination.course_id = this.$route.query.id;
       Object.assign(params, this.filter, this.pagination);
       this.$api.xiaoBanKe.Order.Index(params).then((res) => {
         this.loading = false;

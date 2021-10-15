@@ -9,7 +9,7 @@
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
-        <el-table :data="s_pages"  class="float-left">
+        <el-table :data="s_pages" class="float-left">
           <el-table-column prop="sign" label="唯一标识" width="150">
           </el-table-column>
           <el-table-column prop="title" label="标题" width="280">
@@ -61,6 +61,7 @@
 export default {
   data() {
     return {
+      pageName: "singlepage-list",
       pagination: {
         page: 1,
         size: 10,
@@ -70,8 +71,13 @@ export default {
       s_pages: [],
     };
   },
-  mounted() {
+  activated() {
     this.getList();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     paginationReset() {

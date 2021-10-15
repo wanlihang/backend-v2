@@ -75,6 +75,7 @@
 export default {
   data() {
     return {
+      pageName: "k12Teacher-list",
       pagination: {
         page: 1,
         size: 10,
@@ -84,9 +85,13 @@ export default {
       list: [],
     };
   },
-
-  mounted() {
+  activated() {
     this.getData();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     paginationReset() {

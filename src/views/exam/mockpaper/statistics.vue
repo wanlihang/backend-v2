@@ -76,7 +76,7 @@
     </div>
     <div class="float-left mt-30" v-loading="loading">
       <div class="float-left">
-        <el-table :data="list"  class="float-left">
+        <el-table :data="list" class="float-left">
           <el-table-column prop="user_id" label="用户ID" width="120">
           </el-table-column>
           <el-table-column label="用户" width="300">
@@ -107,9 +107,15 @@
               <span class="c-red" v-else>不及格</span>
             </template>
           </el-table-column>
-          <el-table-column label="开始时间" prop="created_at">
+          <el-table-column label="开始时间">
+            <template slot-scope="scope">{{
+              scope.row.created_at | dateFormat
+            }}</template>
           </el-table-column>
-          <el-table-column label="交卷时间" prop="updated_at">
+          <el-table-column label="交卷时间">
+            <template slot-scope="scope">{{
+              scope.row.updated_at | dateFormat
+            }}</template>
           </el-table-column>
         </el-table>
       </div>
@@ -134,6 +140,7 @@
 export default {
   data() {
     return {
+      pageName: "mockpaperStat-list",
       pagination: {
         id: this.$route.query.id,
         page: 1,
@@ -155,9 +162,20 @@ export default {
       },
     };
   },
-
-  mounted() {
+  watch: {
+    "$route.query.id"() {
+      this.pagination.page = 1;
+      this.filter.created_at = null;
+      this.filter.submit_at = null;
+    },
+  },
+  activated() {
     this.getResults();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     firstPageLoad() {
@@ -184,6 +202,7 @@ export default {
       }
       this.loading = true;
       let params = {};
+      this.pagination.id = this.$route.query.id;
       Object.assign(params, this.pagination, this.filter);
       this.$api.Exam.Mockpaper.Stat(this.pagination.id, params).then((res) => {
         this.loading = false;
@@ -217,7 +236,7 @@ export default {
             item.user_id,
             user.nick_name,
             user.mobile,
-            item.get_score + '分',
+            item.get_score + "分",
             isPass,
             item.updated_at,
           ]);

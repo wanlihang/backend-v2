@@ -103,19 +103,15 @@
               >
             </template>
           </el-table-column>
-          <el-table-column
-            label="开始时间"
-            sortable
-            prop="created_at"
-            width="200"
-          >
+          <el-table-column label="开始时间" sortable width="200">
+            <template slot-scope="scope">{{
+              scope.row.created_at | dateFormat
+            }}</template>
           </el-table-column>
-          <el-table-column
-            label="交卷时间"
-            sortable
-            prop="submit_at"
-            width="200"
-          >
+          <el-table-column label="交卷时间" sortable width="200">
+            <template slot-scope="scope">{{
+              scope.row.submit_at | dateFormat
+            }}</template>
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="100">
             <template slot-scope="scope">
@@ -173,6 +169,7 @@ export default {
   },
   data() {
     return {
+      pageName: "paperRecord-list",
       pagination: {
         id: this.$route.query.id,
         page: 1,
@@ -197,8 +194,22 @@ export default {
       },
     };
   },
-  mounted() {
+  watch: {
+    "$route.query.id"() {
+      this.pagination.page = 1;
+      this.filter.user_id = null;
+      this.filter.status = -1;
+      this.filter.submit_at = null;
+      this.filter.created_at = null;
+    },
+  },
+  activated() {
     this.getResults();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     firstPageLoad() {
@@ -232,6 +243,7 @@ export default {
       }
       this.loading = true;
       let params = {};
+      this.pagination.id = this.$route.query.id;
       Object.assign(params, this.filter, this.pagination);
       this.$api.Exam.Paper.Userpaper(this.pagination.id, params).then((res) => {
         this.loading = false;

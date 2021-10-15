@@ -37,6 +37,7 @@ export default {
   },
   data() {
     return {
+      pageName: "vodview-list",
       id: this.$route.params.id,
       tabActive: "sub-users",
       tabs: [

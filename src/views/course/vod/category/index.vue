@@ -72,6 +72,7 @@
 export default {
   data() {
     return {
+      pageName: "vodCategory-list",
       pagination: {
         page: 1,
         size: 10,
@@ -82,8 +83,13 @@ export default {
       userRemark: [],
     };
   },
-  mounted() {
+  activated() {
     this.getCategories();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     paginationReset() {

@@ -83,7 +83,6 @@
       <div class="float-left">
         <el-table
           :data="list"
-          
           @selection-change="handleSelectionChange"
           class="float-left"
         >
@@ -118,10 +117,16 @@
             </template>
           </el-table-column>
 
-          <el-table-column prop="expired_at" label="过期时间" width="200">
+          <el-table-column label="过期时间" width="200">
+            <template slot-scope="scope">{{
+              scope.row.expired_at | dateFormat
+            }}</template>
           </el-table-column>
 
-          <el-table-column prop="created_at" label="添加时间">
+          <el-table-column label="添加时间">
+            <template slot-scope="scope">{{
+              scope.row.created_at | dateFormat
+            }}</template>
           </el-table-column>
         </el-table>
       </div>
@@ -146,6 +151,7 @@
 export default {
   data() {
     return {
+      pageName: "promocode-list",
       pagination: {
         video_id: this.$route.query.id,
         course_id: this.$route.query.course_id,
@@ -166,8 +172,23 @@ export default {
       list: [],
     };
   },
-  created() {
+  watch: {
+    "$route.query.id"() {
+      this.pagination.page = 1;
+      this.filter.user_id = null;
+      this.filter.key = null;
+      this.filter.created_at = null;
+      this.filter.expired_at = null;
+      this.spids.ids = [];
+    },
+  },
+  activated() {
     this.getData();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     firstPageLoad() {
@@ -204,6 +225,8 @@ export default {
       }
       this.loading = true;
       let params = {};
+      this.pagination.video_id = this.$route.query.id;
+      this.pagination.course_id = this.$route.query.course_id;
       Object.assign(params, this.filter, this.pagination);
       this.$api.Order.PromoCode.PromoCode(params).then((res) => {
         this.loading = false;

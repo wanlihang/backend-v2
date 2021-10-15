@@ -20,7 +20,8 @@
         <div class="float-left" v-show="tab.active === 'base'">
           <el-form-item label="视频">
             <el-button type="primary" @click="showUploadVideoWin = true">
-              上传视频
+              <span>上传视频</span>
+              <span class="ml-10" v-if="tit">{{ tit }}</span>
             </el-button>
           </el-form-item>
 
@@ -204,7 +205,7 @@
             </div>
           </el-form-item>
 
-          <el-form-item label="评论开关" prop="comment_status">
+          <!-- <el-form-item label="评论开关" prop="comment_status">
             <el-select v-model="video.comment_status">
               <el-option
                 v-for="(item, index) in comments"
@@ -214,7 +215,7 @@
               >
               </el-option>
             </el-select>
-          </el-form-item>
+          </el-form-item> -->
 
           <el-form-item label="SEO描述">
             <el-input
@@ -295,12 +296,12 @@ export default {
       showUploadVideoWin: false,
       course_id: this.$route.query.course_id,
       course: null,
+      tit: null,
       video: {
         course_id: this.$route.query.course_id,
         published_at: null,
         title: null,
         charge: null,
-        comment_status: 2,
         is_show: 1,
         is_ban_sell: 1,
         ban_drag: 0,
@@ -397,7 +398,6 @@ export default {
         this.course = res.data;
         if (this.course.is_free === 1) {
           this.video.charge = 0;
-          this.video.ban_drag = 1;
           this.video.free_seconds = 0;
         }
       });
@@ -426,7 +426,10 @@ export default {
     },
     uploadVideoChange(video) {
       this.video.duration = video.duration;
-      this.video.title = video.title;
+      if (!this.video.title) {
+        this.video.title = video.title;
+      }
+      this.tit = video.title;
 
       if (video.storage_driver === "aliyun") {
         this.video.aliyun_video_id = video.storage_file_id;

@@ -48,6 +48,7 @@
 export default {
   data() {
     return {
+      pageName: "attach-list",
       box: {
         course_id: this.$route.query.course_id,
       },
@@ -55,8 +56,13 @@ export default {
       attach: [],
     };
   },
-  mounted() {
+  activated() {
     this.getAttach();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     getAttach() {
@@ -64,6 +70,7 @@ export default {
         return;
       }
       this.loading = true;
+      this.box.course_id = this.$route.query.course_id;
       this.$api.Course.Vod.Attach.List(this.box).then((res) => {
         this.loading = false;
         this.attach = res.data.data;

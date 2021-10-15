@@ -37,7 +37,10 @@
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="时间" width="200" prop="created_at">
+        <el-table-column label="时间" width="200">
+          <template slot-scope="scope">{{
+            scope.row.created_at | dateFormat
+          }}</template>
         </el-table-column>
         <el-table-column fixed="right" label="操作" width="160">
           <template slot-scope="scope">
@@ -80,6 +83,7 @@
 export default {
   data() {
     return {
+      pageName: "wendaAnswer-list",
       id: this.$route.query.id,
       loading: false,
       answers: [],
@@ -87,8 +91,13 @@ export default {
       status: parseInt(this.$route.query.status),
     };
   },
-  mounted() {
+  activated() {
     this.getData();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     getData() {
@@ -96,6 +105,8 @@ export default {
         return;
       }
       this.loading = true;
+      this.id = this.$route.query.id;
+      this.status = parseInt(this.$route.query.status);
       this.$api.Wenda.Question.Answer(this.id).then((res) => {
         this.loading = false;
         this.answers = res.data.answers;

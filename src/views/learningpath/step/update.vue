@@ -8,12 +8,22 @@
           <el-input v-model="form.name" class="w-500px"></el-input>
         </el-form-item>
         <el-form-item prop="desc" label="描述">
-          <el-input
-            v-model="form.desc"
-            type="textarea"
-            rows="4"
-            class="w-500px"
-          ></el-input>
+          <div class="d-flex">
+            <div>
+              <el-input
+                v-model="form.desc"
+                type="textarea"
+                rows="4"
+                maxlength="150"
+                class="w-500px"
+              ></el-input>
+            </div>
+            <div class="ml-10">
+              <helper-text
+                text="该值会在学习步骤列表显示，建议不要超过150个字。"
+              ></helper-text>
+            </div>
+          </div>
         </el-form-item>
         <el-form-item label="升序" prop="sort">
           <div class="d-flex">

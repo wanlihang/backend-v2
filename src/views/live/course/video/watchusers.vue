@@ -6,7 +6,7 @@
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
-        <el-table :data="results"  class="float-left">
+        <el-table :data="results" class="float-left">
           <el-table-column prop="user_id" label="用户ID" width="150">
           </el-table-column>
           <el-table-column label="用户">
@@ -52,6 +52,7 @@ export default {
   },
   data() {
     return {
+      pageName: "liveVideoWatch-list",
       pagination: {
         video_id: this.$route.query.id,
         course_id: this.$route.query.course_id,
@@ -63,9 +64,18 @@ export default {
       results: [],
     };
   },
-
-  mounted() {
+  watch: {
+    "$route.query.id"() {
+      this.pagination.page = 1;
+    },
+  },
+  activated() {
     this.getResults();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     paginationReset() {
@@ -86,6 +96,8 @@ export default {
       }
       this.loading = true;
       let params = {};
+      this.pagination.video_id = this.$route.query.id;
+      this.pagination.course_id = this.$route.query.course_id;
       Object.assign(params, this.pagination);
       this.$api.Course.Live.Course.Video.Watch(params).then((res) => {
         this.loading = false;

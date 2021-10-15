@@ -132,13 +132,23 @@
           </el-form-item>
 
           <el-form-item prop="short_description" label="简短介绍">
-            <el-input
-              class="w-500px"
-              type="textarea"
-              rows="4"
-              v-model="course.short_description"
-              placeholder="简短介绍"
-            ></el-input>
+            <div class="d-flex">
+              <div>
+                <el-input
+                  class="w-500px"
+                  type="textarea"
+                  rows="4"
+                  maxlength="150"
+                  v-model="course.short_description"
+                  placeholder="简短介绍"
+                ></el-input>
+              </div>
+              <div class="ml-10">
+                <helper-text
+                  text="该值会在课程列表显示，建议不要超过150个字。"
+                ></helper-text>
+              </div>
+            </div>
           </el-form-item>
 
           <el-form-item prop="original_desc" label="详细介绍">
@@ -166,18 +176,6 @@
                 </div>
               </div>
             </div>
-          </el-form-item>
-
-          <el-form-item label="评论控制" prop="comment_status">
-            <el-select class="w-200px" v-model="course.comment_status">
-              <el-option
-                v-for="(item, index) in comments"
-                :key="index"
-                :label="item.name"
-                :value="item.id"
-              >
-              </el-option>
-            </el-select>
           </el-form-item>
 
           <el-form-item label="SEO描述">

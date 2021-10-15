@@ -127,6 +127,7 @@ export default {
   },
   data() {
     return {
+      pageName: "video-list",
       pagination: {
         cid: this.$route.query.course_id,
         page: 1,
@@ -142,8 +143,18 @@ export default {
       },
     };
   },
-  mounted() {
+  watch: {
+    "$route.query.course_id"() {
+      this.pagination.page = 1;
+    },
+  },
+  activated() {
     this.getVideos();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     paginationReset() {
@@ -176,7 +187,9 @@ export default {
       }
       this.loading = true;
       let params = {};
-      Object.assign(params, this.pagination);
+      Object.assign(params, this.pagination, {
+        cid: this.$route.query.course_id,
+      });
       this.$api.Course.Vod.Videos.List(params).then((res) => {
         this.loading = false;
         this.videos = res.data.videos.data;

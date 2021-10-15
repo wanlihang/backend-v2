@@ -139,6 +139,7 @@
 export default {
   data() {
     return {
+      pageName: "liveVideo-list",
       pagination: {
         course_id: this.$route.query.id,
         keywords: "",
@@ -150,13 +151,24 @@ export default {
       results: [],
     };
   },
-
-  mounted() {
+  watch: {
+    "$route.query.id"() {
+      this.pagination.page = 1;
+      this.pagination.keywords = "";
+    },
+  },
+  activated() {
     this.getResults();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     paginationReset() {
       this.pagination.page = 1;
+      this.pagination.keywords = "";
       this.getResults();
     },
     paginationSizeChange(size) {
@@ -173,6 +185,7 @@ export default {
       }
       this.loading = true;
       let params = {};
+      this.pagination.course_id = this.$route.query.id;
       Object.assign(params, this.pagination);
       this.$api.Course.Live.Course.Video.List(params).then((res) => {
         this.loading = false;

@@ -5,17 +5,10 @@
       <div class="float-left d-flex mb-10">
         <div>
           <p-button
-            text="审核通过"
-            p="addons.meedu_books.book.comments.checked"
-            @click="approve"
-          >
-          </p-button>
-        </div>
-        <div class="ml-10">
-          <p-button
-            text="审核拒绝"
-            p="addons.meedu_books.book.comments.checked"
-            @click="refuse"
+            text="删除"
+            p="addons.meedu_books.book.comments.delete.multi"
+            @click="destorymulti()"
+            type="danger"
           >
           </p-button>
         </div>
@@ -96,15 +89,11 @@
               <span v-html="scope.row.content"></span>
             </template>
           </el-table-column>
-          <el-table-column label="状态" width="100">
-            <template slot-scope="scope">
-              <el-tag type="danger" v-if="scope.row.is_check !== 1"
-                >拒绝</el-tag
-              >
-              <el-tag type="success" v-else>通过</el-tag>
-            </template>
+          <el-table-column label="时间">
+            <template slot-scope="scope">{{
+              scope.row.updated_at | dateFormat
+            }}</template>
           </el-table-column>
-          <el-table-column prop="updated_at" label="时间"> </el-table-column>
           <el-table-column fixed="right" label="操作" width="100">
             <template slot-scope="scope">
               <p-link
@@ -154,6 +143,7 @@ export default {
   },
   data() {
     return {
+      pageName: "bookComment-list",
       pagination: {
         page: 1,
         size: 10,
@@ -180,9 +170,14 @@ export default {
       },
     };
   },
-  mounted() {
+  activated() {
     this.params();
     this.getComments();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     dataFilter(val) {
@@ -255,6 +250,36 @@ export default {
         .then(() => {
           this.loading = true;
           this.$api.Meedubook.Book.Destorycomment(item)
+            .then(() => {
+              this.loading = false;
+              this.$message.success(this.$t("common.success"));
+              this.getComments();
+            })
+            .catch((e) => {
+              this.loading = false;
+              this.$message.error(e.message);
+            });
+        })
+        .catch(() => {
+          //点击删除按钮的操作
+        });
+    },
+    destorymulti() {
+      if (this.loading) {
+        return;
+      }
+      if (this.spids.ids == "") {
+        this.$message.warning("请选择需要操作的数据");
+        return;
+      }
+      this.$confirm("确认操作？", "警告", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          this.loading = true;
+          this.$api.Meedubook.Book.CommentDestoryMulti(this.spids)
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));

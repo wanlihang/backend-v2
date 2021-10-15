@@ -130,6 +130,7 @@ export default {
   props: ["id"],
   data() {
     return {
+      pageName: "videoComment-list",
       pagination: {
         page: 1,
         size: 10,
@@ -154,9 +155,14 @@ export default {
       selectedRows: null,
     };
   },
-  mounted() {
+  activated() {
     this.params();
     this.getData();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     dataFilter(val) {

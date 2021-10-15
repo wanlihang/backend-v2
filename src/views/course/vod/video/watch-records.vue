@@ -107,6 +107,7 @@ export default {
   },
   data() {
     return {
+      pageName: "videoRecords-list",
       video_id: this.$route.query.id,
       pagination: {
         course_id: this.$route.query.course_id,
@@ -137,9 +138,21 @@ export default {
         this.filter.watched_end_at = null;
       }
     },
+    "$route.query.id"() {
+      this.pagination.page = 1;
+      this.filter.user_id = null;
+      this.watched_at = null;
+      this.filter.watched_start_at = null;
+      this.filter.watched_end_at = null;
+    },
   },
-  mounted() {
+  activated() {
     this.getWatchRecords();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     paginationReset() {
@@ -164,6 +177,8 @@ export default {
       }
       this.loading = true;
       let params = {};
+      this.video_id = this.$route.query.id;
+      this.pagination.course_id = this.$route.query.course_id;
       Object.assign(params, this.filter);
       Object.assign(params, this.pagination);
       this.$api.Course.Vod.Videos.WatchRecords(this.video_id, params).then(

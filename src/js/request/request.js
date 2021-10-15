@@ -710,6 +710,9 @@ const Api = {
             Destorycomment(id) {
                 return destroy(`/backend/addons/meedu_books/book_comment/${id}`);
             },
+            CommentDestoryMulti(params) {
+                return post(`/backend/addons/meedu_books/book_comment/destroy/multi`, params);
+            },
             CommentMulti(params) {
                 return post(`/backend/addons/meedu_books/book_comment/checked`, params);
             },
@@ -788,6 +791,9 @@ const Api = {
                 },
                 Destorycomment(id) {
                     return destroy(`/backend/addons/meedu_books/article_comment/${id}`);
+                },
+                CommentDestoryMulti(params) {
+                    return post(`/backend/addons/meedu_books/article_comment/destroy/multi`, params);
                 },
                 CommentMulti(params) {
                     return post(`/backend/addons/meedu_books/article_comment/checked`, params);
@@ -1023,7 +1029,7 @@ const Api = {
     Multishare: {
         Poster: {
             List() {
-                return get(`/backend/addons/multi_level_share/poster/index`, );
+                return get(`/backend/addons/multi_level_share/poster/index`,);
             },
             Store(params) {
                 return post(`/backend/addons/multi_level_share/poster/create`, params);

@@ -45,7 +45,7 @@
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
-        <el-table :data="results"  class="float-left">
+        <el-table :data="results" class="float-left">
           <el-table-column prop="id" label="ID" width="100"> </el-table-column>
 
           <el-table-column label="商品ID">
@@ -107,7 +107,11 @@
             </template>
           </el-table-column>
 
-          <el-table-column label="时间" prop="created_at" width="200"></el-table-column>
+          <el-table-column label="时间" width="200">
+            <template slot-scope="scope">{{
+              scope.row.created_at | dateFormat
+            }}</template>
+          </el-table-column>
         </el-table>
       </div>
 
@@ -131,6 +135,7 @@
 export default {
   data() {
     return {
+      pageName: "msOrders-list",
       pagination: {
         page: 1,
         size: 10,
@@ -165,8 +170,13 @@ export default {
       },
     };
   },
-  mounted() {
+  activated() {
     this.getData();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     firstPageLoad() {

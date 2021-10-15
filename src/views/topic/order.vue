@@ -38,7 +38,6 @@
           <el-table
             :data="list"
             @selection-change="handleSelectionChange"
-            
             class="float-left"
           >
             <el-table-column type="selection" width="55"></el-table-column>
@@ -64,7 +63,11 @@
                 <span>{{ scope.row.charge }}元</span>
               </template>
             </el-table-column>
-            <el-table-column prop="updated_at" label="时间"> </el-table-column>
+            <el-table-column label="时间">
+              <template slot-scope="scope">{{
+                scope.row.updated_at | dateFormat
+              }}</template>
+            </el-table-column>
           </el-table>
         </div>
 
@@ -100,6 +103,7 @@ export default {
   },
   data() {
     return {
+      pageName: "topicOrder-list",
       showUserAddWin: false,
       pagination: {
         page: 1,
@@ -115,8 +119,19 @@ export default {
       selectedRows: null,
     };
   },
-  mounted() {
+  watch: {
+    "$route.query.id"() {
+      this.pagination.page = 1;
+      this.filter.user_id = "";
+    },
+  },
+  activated() {
     this.getData();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     firstPageLoad() {
@@ -145,6 +160,7 @@ export default {
       }
       this.loading = true;
       let params = {};
+      this.filter.topic_id = this.$route.query.id;
       Object.assign(params, this.filter, this.pagination);
       this.$api.Course.Topic.Topic.Order(params).then((res) => {
         this.loading = false;

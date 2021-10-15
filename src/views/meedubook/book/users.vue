@@ -38,7 +38,6 @@
       <el-table
         :data="list"
         @selection-change="handleSelectionChange"
-        
         class="float-left mt-30"
       >
         <el-table-column type="selection" width="55"></el-table-column>
@@ -60,7 +59,10 @@
             <span>￥{{ scope.row.charge }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="created_at" label="订阅时间" width="200">
+        <el-table-column label="订阅时间" width="200">
+          <template slot-scope="scope">{{
+            scope.row.created_at | dateFormat
+          }}</template>
         </el-table-column>
       </el-table>
 
@@ -95,6 +97,7 @@ export default {
   },
   data() {
     return {
+      pageName: "bookUsers-list",
       showUserAddWin: false,
       pagination: {
         id: this.$route.query.bid,
@@ -110,9 +113,19 @@ export default {
       selectedRows: null,
     };
   },
-
-  mounted() {
+  watch: {
+    "$route.query.bid"() {
+      this.pagination.page = 1;
+      this.filter.user_id = null;
+    },
+  },
+  activated() {
     this.getData();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     firstPageLoad() {
@@ -121,7 +134,7 @@ export default {
     },
     paginationReset() {
       this.pagination.page = 1;
-      this.user_id = null;
+      this.filter.user_id = null;
       this.getData();
     },
     paginationSizeChange(size) {
@@ -141,7 +154,8 @@ export default {
       }
       this.loading = true;
       let params = {};
-      Object.assign(params, this.pagination);
+      this.pagination.id = this.$route.query.bid;
+      Object.assign(params, this.filter, this.pagination);
       this.$api.Meedubook.Book.Users.List(this.pagination.id, params).then(
         (res) => {
           this.loading = false;

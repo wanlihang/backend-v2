@@ -10,7 +10,7 @@
       </p-button>
     </div>
     <div class="float-left" v-loading="loading">
-      <el-table :data="list"  class="float-left">
+      <el-table :data="list" class="float-left">
         <el-table-column prop="id" label="ID" width="120"> </el-table-column>
         <el-table-column prop="name" label="VIP"> </el-table-column>
         <el-table-column prop="expire_days" label="天数"> </el-table-column>
@@ -53,12 +53,18 @@
 export default {
   data() {
     return {
+      pageName: "role-list",
       loading: false,
       list: [],
     };
   },
-  created() {
+  activated() {
     this.getData();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     getData() {

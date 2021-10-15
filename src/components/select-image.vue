@@ -20,7 +20,7 @@
           <div class="optinos">
             <el-upload
               :headers="uploadHeaders"
-              :multiple="false"
+              :multiple="true"
               :action="uploadAction"
               :data="uploadData"
               name="file"
@@ -46,13 +46,18 @@
               :key="item.id"
               @click="imageUrl = item.url"
             >
+              <div class="sel" v-if="imageUrl === item.url">
+                <img src="../assets/home/selected.png" />
+              </div>
               <div class="image-render">
                 <div
                   class="image-view"
                   :style="{ 'background-image': 'url(' + item.url + ')' }"
                 ></div>
               </div>
-              <div class="image-name">{{ item.name }}</div>
+              <div class="image-name">
+                <div class="name">{{ item.name }}</div>
+              </div>
             </div>
           </div>
 
@@ -60,7 +65,7 @@
             <el-empty :description="$t('common.none')"></el-empty>
           </div>
 
-          <div class="pagination text-center">
+          <div class="pagination text-center" v-if="pagination.size < total">
             <el-pagination
               @size-change="paginationSizeChange"
               @current-change="paginationPageChange"
@@ -84,6 +89,8 @@
 </template>
 
 <script>
+import config from "@/js/config";
+
 export default {
   props: ["show", "from"],
   data() {
@@ -109,7 +116,7 @@ export default {
       ],
       pagination: {
         page: 1,
-        size: 10,
+        size: 15,
         from: 0,
       },
       upfrom: 0,
@@ -121,7 +128,7 @@ export default {
   },
   computed: {
     uploadAction() {
-      return "/backend/api/v1/media/image";
+      return config.url + "/backend/api/v1/media/image";
     },
     uploadData() {
       return {
@@ -214,22 +221,20 @@ export default {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 1200px;
-  height: 700px;
-  margin-top: -350px;
-  margin-left: -600px;
-  width: 1200px;
-  height: auto;
-  background-color: white;
+  width: 881px;
+  height: 674px;
+  background: #ffffff;
+  margin-top: -337px;
+  margin-left: -440.5px;
   box-sizing: border-box;
 }
 
 .select-images-title {
   width: 100%;
-  height: auto;
+  height: 70px;
   float: left;
   box-sizing: border-box;
-  padding: 30px 15px 40px 30px;
+  padding: 26px 30px;
   font-size: 18px;
   font-weight: 400;
   color: #333333;
@@ -238,13 +243,13 @@ export default {
 
 .select-images-box {
   width: 100%;
-  height: 540px;
+  height: 534px;
   float: left;
   display: flex;
   box-sizing: border-box;
   padding-left: 0px;
   padding-right: 30px;
-  padding-bottom: 40px;
+  padding-bottom: 0px;
   .category-box {
     width: 150px;
     height: auto;
@@ -298,15 +303,15 @@ export default {
 
     .optinos {
       width: 100%;
-      height: auto;
+      height: 40px;
       float: left;
       margin-bottom: 15px;
       text-align: right;
       .upbtn {
         width: 116px;
         position: absolute;
-        top: 30px;
-        right: 15px;
+        top: 15px;
+        right: 30px;
       }
     }
 
@@ -320,35 +325,39 @@ export default {
       width: 100%;
       margin-top: -55px;
       height: auto;
-      min-height: 417px;
       box-sizing: border-box;
-      padding: 0 0px 15px 0px;
+      padding: 0;
       float: left;
       display: grid;
-      gap: 15px;
+      row-gap: 27px;
+      column-gap: 30px;
       grid-template-columns: repeat(5, minmax(0, 1fr));
 
       .image-item {
-        height: 200px;
+        width: 110px;
+        height: 142px;
+        background: #f4fafe;
         box-sizing: border-box;
-        padding: 10px;
         cursor: pointer;
-
-        &.active,
-        &:hover {
-          background-color: rgba(0, 0, 0, 0.05);
+        position: relative;
+        .sel {
+          position: absolute;
+          width: 30px;
+          height: 30px;
+          top: 58px;
+          left: 40px;
+          img {
+            width: 30px;
+            height: 30px;
+          }
         }
-
         .image-render,
         .image-name {
           width: 100%;
-          height: auto;
-          float: left;
-          text-align: center;
 
           .image-view {
-            width: 100px;
-            height: 100px;
+            width: 100%;
+            height: 110px;
             background-repeat: no-repeat;
             background-size: contain;
             background-position: center center;
@@ -356,18 +365,46 @@ export default {
         }
 
         .image-render {
-          height: 100px;
+          height: 110px;
           display: flex;
           justify-content: center;
           align-items: center;
         }
 
         .image-name {
-          margin-top: 10px;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          color: rgba(0, 0, 0, 0.7);
+          height: 32px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .name {
+            width: 80px;
+            height: 16px;
+            font-size: 12px;
+            font-weight: 400;
+            color: #333333;
+            line-height: 16px;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+        }
+        &.active,
+        &:hover {
+          background-color: rgba(60, 167, 250, 0.2);
+          border: 2px solid #3ca7fa;
+          .image-render {
+            width: 106px;
+            height: 108px;
+            .image-view {
+              width: 106px;
+              height: 108px;
+            }
+          }
+          .image-name {
+            width: 106px;
+            height: 30px;
+          }
         }
       }
     }
@@ -376,7 +413,7 @@ export default {
       width: 100%;
       height: auto;
       float: left;
-      margin-top: 15px;
+      margin-top: 12px;
     }
   }
 }

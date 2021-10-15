@@ -50,12 +50,15 @@
 
         <el-table-column label="时间" width="200">
           <template slot-scope="scope">
-            <div>开始:{{ scope.row.started_at }}</div>
-            <div>结束:{{ scope.row.end_at }}</div>
+            <div>开始:{{ scope.row.started_at | dateFormat }}</div>
+            <div>结束:{{ scope.row.end_at | dateFormat }}</div>
           </template>
         </el-table-column>
 
-        <el-table-column label="添加" prop="created_at" width="200">
+        <el-table-column label="添加" width="200">
+          <template slot-scope="scope">{{
+            scope.row.created_at | dateFormat
+          }}</template>
         </el-table-column>
 
         <el-table-column fixed="right" label="操作" width="100">
@@ -102,6 +105,7 @@
 export default {
   data() {
     return {
+      pageName: "ms-list",
       pagination: {
         page: 1,
         size: 10,
@@ -118,9 +122,13 @@ export default {
       },
     };
   },
-
-  mounted() {
+  activated() {
     this.getData();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     paginationReset() {

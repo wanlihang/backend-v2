@@ -83,6 +83,7 @@
 export default {
   data() {
     return {
+      pageName: "liveVideoChat-list",
       pagination: {
         video_id: this.$route.query.id,
         course_id: this.$route.query.course_id,
@@ -100,9 +101,20 @@ export default {
       results: [],
     };
   },
-
-  mounted() {
+  watch: {
+    "$route.query.id"() {
+      this.pagination.page = 1;
+      this.filter.user_id = null;
+      this.spids.ids = [];
+    },
+  },
+  activated() {
     this.getResults();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     firstPageLoad() {
@@ -136,6 +148,8 @@ export default {
       }
       this.loading = true;
       let params = {};
+      this.pagination.video_id = this.$route.query.id;
+      this.pagination.course_id = this.$route.query.course_id;
       Object.assign(params, this.filter, this.pagination);
       this.$api.Course.Live.Course.Video.Chat(
         this.pagination.course_id,

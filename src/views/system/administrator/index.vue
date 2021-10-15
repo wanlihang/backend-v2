@@ -24,7 +24,7 @@
           <el-table-column sortable="" label="登录日志"
             ><template slot-scope="scope">
               <span
-                >{{ scope.row.last_login_date }} /
+                >{{ scope.row.last_login_date | dateFormat }} /
                 {{ scope.row.last_login_ip }}</span
               >
             </template>
@@ -81,6 +81,7 @@
 export default {
   data() {
     return {
+      pageName: "administrator-list",
       pagination: {
         page: 1,
         size: 10,
@@ -97,8 +98,13 @@ export default {
       },
     };
   },
-  mounted() {
+  activated() {
     this.getAdministrator();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     paginationReset() {

@@ -80,7 +80,6 @@
       <div class="float-left">
         <el-table
           :data="questions"
-          
           @selection-change="handleSelectionChange"
           class="float-left"
           @sort-change="sortChange"
@@ -151,7 +150,10 @@
               <el-tag type="info" v-else>{{ scope.row.status_text }}</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="created_at" sortable width="200" label="时间">
+          <el-table-column sortable width="200" label="时间">
+            <template slot-scope="scope">{{
+              scope.row.created_at | dateFormat
+            }}</template>
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="80">
             <template slot-scope="scope">
@@ -191,6 +193,7 @@
 export default {
   data() {
     return {
+      pageName: "wenda-list",
       pagination: {
         page: 1,
         size: 10,
@@ -229,8 +232,13 @@ export default {
       },
     };
   },
-  mounted() {
+  activated() {
     this.getQuestion();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     firstPageLoad() {

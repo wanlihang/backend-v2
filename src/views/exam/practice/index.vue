@@ -62,7 +62,10 @@
               <span>{{ scope.row.question_count }}个</span>
             </template>
           </el-table-column>
-          <el-table-column prop="created_at" label="添加" width="200">
+          <el-table-column label="时间" width="200">
+            <template slot-scope="scope">{{
+              scope.row.created_at | dateFormat
+            }}</template>
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="200">
             <template slot-scope="scope">
@@ -134,6 +137,7 @@
 export default {
   data() {
     return {
+      pageName: "practice-list",
       pagination: {
         page: 1,
         size: 10,
@@ -152,9 +156,13 @@ export default {
       },
     };
   },
-
-  mounted() {
+  activated() {
     this.getResults();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     firstPageLoad() {

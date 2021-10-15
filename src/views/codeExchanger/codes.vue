@@ -60,7 +60,6 @@
         <el-table
           :data="results"
           @selection-change="handleSelectionChange"
-          
           class="float-left"
         >
           <el-table-column type="selection" width="55"></el-table-column>
@@ -92,7 +91,11 @@
               </div>
             </template>
           </el-table-column>
-          <el-table-column prop="used_at" label="使用时间"> </el-table-column>
+          <el-table-column label="使用时间">
+            <template slot-scope="scope">{{
+              scope.row.used_at | dateFormat
+            }}</template>
+          </el-table-column>
         </el-table>
       </div>
 
@@ -116,6 +119,7 @@
 export default {
   data() {
     return {
+      pageName: "codes-list",
       pagination: {
         gid: this.$route.query.id,
         page: 1,
@@ -137,9 +141,21 @@ export default {
       results: [],
     };
   },
-
-  mounted() {
+  activated() {
     this.getData();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
+  },
+  watch: {
+    "$route.query.id"() {
+      this.pagination.page = 1;
+      this.filter.code = "";
+      this.filter.user_id = "";
+      this.spids.ids = [];
+    },
   },
   methods: {
     paginationReset() {
@@ -169,6 +185,8 @@ export default {
       }
       this.loading = true;
       let params = {};
+      this.pagination.gid = this.$route.query.id;
+      this.popbox.gid = this.$route.query.id;
       Object.assign(params, this.filter);
       Object.assign(params, this.pagination);
       this.$api.CodeExchanger.Codes.List(params).then((res) => {

@@ -80,7 +80,6 @@
       <div class="float-left">
         <el-table
           :data="users"
-          
           class="float-left"
           @sort-change="sortChange"
           :default-sort="{ prop: 'id', order: 'descending' }"
@@ -97,12 +96,10 @@
               </div>
             </template>
           </el-table-column>
-          <el-table-column
-            prop="created_at"
-            sortable=""
-            label="注册时间"
-            width="250"
-          >
+          <el-table-column sortable="" label="注册时间" width="250">
+            <template slot-scope="scope">{{
+              scope.row.created_at | dateFormat
+            }}</template>
           </el-table-column>
           <el-table-column prop="mobile" label="手机号" width="180">
           </el-table-column>
@@ -126,7 +123,7 @@
             </template>
           </el-table-column>
 
-          <el-table-column label="备注" >
+          <el-table-column label="备注">
             <template slot-scope="scope">
               <div
                 v-if="userRemark[scope.row.id]"
@@ -168,6 +165,7 @@
 export default {
   data() {
     return {
+      pageName: "member-list",
       pagination: {
         page: 1,
         size: 10,
@@ -190,8 +188,13 @@ export default {
       },
     };
   },
-  mounted() {
+  activated() {
     this.getUser();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     paginationReset() {

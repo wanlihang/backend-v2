@@ -77,7 +77,6 @@
         <el-table
           :data="results"
           @selection-change="handleSelectionChange"
-          
           class="float-left"
         >
           <el-table-column type="selection" width="55"></el-table-column>
@@ -120,6 +119,7 @@ export default {
   },
   data() {
     return {
+      pageName: "practiceChapterQuestion-list",
       pagination: {
         page: 1,
         size: 10,
@@ -144,9 +144,22 @@ export default {
       },
     };
   },
-
-  mounted() {
+  watch: {
+    "$route.query.id"() {
+      this.pagination.page = 1;
+      this.filter.level = null;
+      this.filter.category_id = null;
+      this.filter.type = null;
+      this.spids.qids = [];
+    },
+  },
+  activated() {
     this.getResults();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     firstPageLoad() {
@@ -181,6 +194,8 @@ export default {
       }
       this.loading = true;
       let params = {};
+      this.pagination.id = this.$route.query.id;
+      this.spids.id = this.$route.query.id;
       Object.assign(params, this.filter, this.pagination);
       this.$api.Exam.Practice.Chapter.Question.List(
         this.pagination.id,

@@ -81,6 +81,7 @@
 export default {
   data() {
     return {
+      pageName: "videoSubscribe-list",
       cid: this.$route.query.course_id,
       pagination: {
         video_id: this.$route.query.video_id,
@@ -109,9 +110,21 @@ export default {
         this.filter.subscribe_end_at = null;
       }
     },
+    "$route.query.video_id"() {
+      this.pagination.page = 1;
+      this.filter.user_id = null;
+      this.subscribed_at = null;
+      this.filter.subscribe_start_at = null;
+      this.filter.subscribe_end_at = null;
+    },
   },
-  mounted() {
+  activated() {
     this.getSubscribes();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     paginationReset() {
@@ -136,6 +149,8 @@ export default {
       }
       this.loading = true;
       let params = {};
+      this.cid = this.$route.query.course_id;
+      this.pagination.video_id = this.$route.query.video_id;
       Object.assign(params, this.filter);
       Object.assign(params, this.pagination);
       this.$api.Course.Vod.Videos.Subscribe(

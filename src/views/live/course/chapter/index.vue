@@ -17,7 +17,7 @@
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
-        <el-table :data="results"  class="float-left">
+        <el-table :data="results" class="float-left">
           <el-table-column prop="id" label="ID" width="120"> </el-table-column>
           <el-table-column prop="sort" label="排序" width="120">
           </el-table-column>
@@ -54,14 +54,19 @@
 export default {
   data() {
     return {
+      pageName: "liveChapter-list",
       id: this.$route.query.id,
       loading: false,
       results: [],
     };
   },
-
-  mounted() {
+  activated() {
     this.getResults();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     getResults() {
@@ -69,6 +74,7 @@ export default {
         return;
       }
       this.loading = true;
+      this.id = this.$route.query.id;
       let params = {
         id: this.id,
       };

@@ -5,14 +5,6 @@
       <div class="float-left">
         <div class="float-left d-flex mb-10">
           <div>
-            <el-button @click="approve"> 审核通过 </el-button>
-          </div>
-          <div class="ml-10">
-            <el-button @click="refuse"> 审核拒绝 </el-button>
-          </div>
-        </div>
-        <div class="float-left d-flex">
-          <div>
             <el-input
               v-model="filter.user_id"
               class="w-200px"
@@ -88,15 +80,11 @@
                 <span v-html="scope.row.content"></span>
               </template>
             </el-table-column>
-            <el-table-column label="状态" width="100">
-              <template slot-scope="scope">
-                <el-tag type="success" v-if="scope.row.is_check == 1"
-                  >通过</el-tag
-                >
-                <el-tag v-else type="danger">拒绝</el-tag>
-              </template>
+            <el-table-column label="时间">
+              <template slot-scope="scope">{{
+                scope.row.updated_at | dateFormat
+              }}</template>
             </el-table-column>
-            <el-table-column prop="updated_at" label="时间"> </el-table-column>
             <el-table-column fixed="right" label="操作" width="80">
               <template slot-scope="scope">
                 <el-link type="danger" @click="destroy(scope.row.id)"
@@ -144,6 +132,7 @@ export default {
   },
   data() {
     return {
+      pageName: "topicComment-list",
       pagination: {
         page: 1,
         size: 10,
@@ -170,9 +159,14 @@ export default {
       },
     };
   },
-  mounted() {
+  activated() {
     this.params();
     this.getComments();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     dataFilter(val) {

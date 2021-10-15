@@ -36,7 +36,6 @@
           :data="list"
           @sort-change="sortChange"
           :default-sort="{ prop: 'id', order: 'descending' }"
-          
           class="float-left"
         >
           <el-table-column prop="id" sortable label="ID" width="120">
@@ -71,7 +70,10 @@
               <duration-text :duration="scope.row.use_seconds"></duration-text>
             </template>
           </el-table-column>
-          <el-table-column prop="created_at" sortable label="时间" width="200">
+          <el-table-column sortable label="时间" width="200">
+            <template slot-scope="scope">{{
+              scope.row.created_at | dateFormat
+            }}</template>
           </el-table-column>
           <el-table-column prop="status_text" label="状态" width="100">
           </el-table-column>
@@ -103,6 +105,7 @@ export default {
   },
   data() {
     return {
+      pageName: "mockpaperRecord-list",
       pagination: {
         id: this.$route.query.id,
         page: 1,
@@ -135,9 +138,20 @@ export default {
       },
     };
   },
-
-  mounted() {
+  watch: {
+    "$route.query.id"() {
+      this.pagination.page = 1;
+      this.filter.user_id = null;
+      this.filter.status = -1;
+    },
+  },
+  activated() {
     this.getResults();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     firstPageLoad() {
@@ -170,6 +184,7 @@ export default {
       this.loading = true;
       this.list = [];
       let params = {};
+      this.pagination.id = this.$route.query.id;
       Object.assign(params, this.filter, this.pagination);
       this.$api.Exam.Mockpaper.Userpaper(this.pagination.id, params).then(
         (res) => {

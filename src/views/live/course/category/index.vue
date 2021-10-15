@@ -13,7 +13,7 @@
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
-        <el-table :data="list"  class="float-left">
+        <el-table :data="list" class="float-left">
           <el-table-column prop="id" label="ID" width="100"> </el-table-column>
           <el-table-column prop="sort" label="升序" width="100">
           </el-table-column>
@@ -55,13 +55,18 @@
 export default {
   data() {
     return {
+      pageName: "liveCategory-list",
       loading: false,
       list: [],
     };
   },
-
-  mounted() {
+  activated() {
     this.getData();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     getData() {

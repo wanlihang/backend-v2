@@ -20,7 +20,8 @@
         <div class="float-left" v-show="tab.active === 'base'">
           <el-form-item label="视频">
             <el-button type="primary" @click="showUploadVideoWin = true">
-              重新上传视频
+              <span>重新上传视频</span>
+              <span class="ml-10" v-if="tit">{{ tit }}</span>
             </el-button>
           </el-form-item>
 
@@ -204,18 +205,6 @@
             </div>
           </el-form-item>
 
-          <el-form-item label="评论开关" prop="comment_status">
-            <el-select v-model="video.comment_status">
-              <el-option
-                v-for="(item, index) in comments"
-                :key="index"
-                :label="item.name"
-                :value="item.id"
-              >
-              </el-option>
-            </el-select>
-          </el-form-item>
-
           <el-form-item label="SEO描述">
             <el-input
               class="w-300px"
@@ -297,6 +286,7 @@ export default {
       video_id: this.$route.query.id,
       course: null,
       video: null,
+      tit: null,
       chapters: [],
       rules: {
         title: [
@@ -411,6 +401,7 @@ export default {
     uploadVideoChange(video) {
       this.video.duration = video.duration;
       // this.video.title = video.title;
+      this.tit = video.title;
 
       if (video.storage_driver === "aliyun") {
         this.video.aliyun_video_id = video.storage_file_id;

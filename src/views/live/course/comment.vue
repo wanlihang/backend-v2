@@ -11,7 +11,7 @@
             type="danger"
           >
           </p-button>
-          <p-button
+          <!-- <p-button
             text="审核通过"
             p="addons.Zhibo.course_comment.check"
             @click="approve()"
@@ -22,7 +22,7 @@
             p="addons.Zhibo.course_comment.check"
             @click="refuse()"
           >
-          </p-button>
+          </p-button> -->
         </div>
       </div>
       <div class="float-left d-flex">
@@ -94,14 +94,6 @@
             </template>
           </el-table-column>
           <el-table-column prop="course.title" label="课程"> </el-table-column>
-          <el-table-column label="状态" width="100">
-            <template slot-scope="scope">
-              <el-tag v-if="scope.row.is_check != 1" type="danger">
-                拒绝
-              </el-tag>
-              <el-tag type="success" v-else>通过</el-tag>
-            </template>
-          </el-table-column>
           <el-table-column label="内容">
             <template slot-scope="scope">
               <div v-html="scope.row.content"></div>
@@ -151,6 +143,7 @@ export default {
   },
   data() {
     return {
+      pageName: "liveComment-list",
       pagination: {
         page: 1,
         size: 10,
@@ -178,10 +171,14 @@ export default {
       },
     };
   },
-
-  mounted() {
+  activated() {
     this.params();
     this.getResults();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     dataFilter(val) {

@@ -56,6 +56,7 @@
 export default {
   data() {
     return {
+      pageName: "vodChapter-list",
       box: {
         course_id: this.$route.query.course_id,
       },
@@ -63,8 +64,13 @@ export default {
       chapters: [],
     };
   },
-  mounted() {
+  activated() {
     this.getChapters();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     getChapters() {
@@ -72,6 +78,7 @@ export default {
         return;
       }
       this.loading = true;
+      this.box.course_id = this.$route.query.course_id;
       this.$api.Course.Vod.Chapters.List(this.box.course_id, this.box).then(
         (res) => {
           this.loading = false;

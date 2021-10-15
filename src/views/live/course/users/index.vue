@@ -89,6 +89,7 @@ export default {
   },
   data() {
     return {
+      pageName: "liveUsers-list",
       showUserAddWin: false,
       pagination: {
         id: this.$route.query.id,
@@ -104,9 +105,19 @@ export default {
       selectedRows: null,
     };
   },
-
-  mounted() {
+  watch: {
+    "$route.query.id"() {
+      this.pagination.page = 1;
+      this.filter.user_id = null;
+    },
+  },
+  activated() {
     this.getData();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     firstPageLoad() {
@@ -115,7 +126,7 @@ export default {
     },
     paginationReset() {
       this.pagination.page = 1;
-      this.user_id = null;
+      this.filter.user_id = null;
       this.getData();
     },
     paginationSizeChange(size) {
@@ -135,6 +146,7 @@ export default {
       }
       this.loading = true;
       let params = {};
+      this.pagination.id = this.$route.query.id;
       Object.assign(params, this.pagination);
       this.$api.Course.Live.Course.Users.List(this.pagination.id, params).then(
         (res) => {

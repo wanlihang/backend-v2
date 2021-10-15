@@ -165,12 +165,22 @@
           </el-form-item>
 
           <el-form-item label="简短介绍" prop="short_desc">
-            <el-input
-              type="textarea"
-              v-model="course.short_desc"
-              class="w-500px"
-              rows="3"
-            ></el-input>
+            <div class="d-flex">
+              <div>
+                <el-input
+                  type="textarea"
+                  maxlength="150"
+                  v-model="course.short_desc"
+                  class="w-500px"
+                  rows="3"
+                ></el-input>
+              </div>
+              <div class="ml-10">
+                <helper-text
+                  text="该值会在课程列表显示，建议不要超过150个字。"
+                ></helper-text>
+              </div>
+            </div>
           </el-form-item>
 
           <el-form-item label="详细介绍">

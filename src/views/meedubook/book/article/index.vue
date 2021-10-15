@@ -70,7 +70,10 @@
                 <span>{{ scope.row.view_times }}次</span>
               </template>
             </el-table-column>
-            <el-table-column prop="published_at" sortable label="上架时间">
+            <el-table-column sortable label="上架时间">
+              <template slot-scope="scope">{{
+                scope.row.published_at | dateFormat
+              }}</template>
             </el-table-column>
             <el-table-column fixed="right" label="操作" width="120">
               <template slot-scope="scope">
@@ -118,6 +121,7 @@
 export default {
   data() {
     return {
+      pageName: "bookArticle-list",
       pagination: {
         page: 1,
         size: 100,
@@ -136,8 +140,19 @@ export default {
       },
     };
   },
-  mounted() {
+  watch: {
+    "$route.query.bid"() {
+      this.pagination.page = 1;
+      this.filter.chapter_id = null;
+    },
+  },
+  activated() {
     this.getBook();
+    this.$utils.scrollTopSet(this.pageName);
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$utils.scrollTopRecord(this.pageName);
+    next();
   },
   methods: {
     paginationReset() {
@@ -164,6 +179,7 @@ export default {
       }
       this.loading = true;
       let params = {};
+      this.filter.book_id = this.$route.query.bid;
       Object.assign(params, this.filter);
       Object.assign(params, this.pagination);
       this.$api.Meedubook.Book.Article.List(params).then((res) => {
