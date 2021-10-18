@@ -335,7 +335,7 @@ export default {
 
       .image-item {
         width: 110px;
-        height: 142px;
+        min-height: 142px;
         background: #f4fafe;
         box-sizing: border-box;
         cursor: pointer;
@@ -372,17 +372,17 @@ export default {
         }
 
         .image-name {
-          height: 32px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
+          width: 110px;
+          height: auto;
+          padding: 10px 5px;
+          box-sizing: border-box;
           .name {
-            width: 80px;
-            height: 16px;
-            font-size: 12px;
+            width: 100px;
+            height: 15px;
+            font-size: 10px;
             font-weight: 400;
             color: #333333;
-            line-height: 16px;
+            line-height: 15px;
             text-align: center;
             white-space: nowrap;
             overflow: hidden;
@@ -403,7 +403,14 @@ export default {
           }
           .image-name {
             width: 106px;
-            height: 30px;
+            height: auto;
+            padding: 10px 5px;
+            position: absolute;
+            bottom: 0;
+            .name {
+              width: 96px;
+              height: auto;
+            }
           }
         }
       }
