@@ -239,7 +239,7 @@ export default {
       return (
         parseInt(
           (this.list.today_register_user_count / this.list.user_count).toFixed(
-            4
+            3
           ) * 10000
         ) / 100
       );
@@ -514,30 +514,33 @@ export default {
         display: flex;
         flex-direction: row;
         align-items: center;
+        justify-content: space-between;
         margin-bottom: 20px;
         span {
-          width: 110px;
+          width: 70px;
           display: block;
           font-size: 16px;
           font-family: PingFangSC-Regular, PingFang SC;
           font-weight: 400;
           color: #666666;
-          line-height: 16px;
+          line-height: 22px;
           strong {
             color: #3ca7fa;
           }
         }
         .el_item_num {
+          margin-left: 15px;
           width: auto;
+          height: 36px;
           font-size: 36px;
+          font-family: PingFangSC-Semibold, PingFang SC;
           font-weight: 600;
           color: #333333;
           line-height: 36px;
           text-align: left;
         }
         .el_item_increase {
-          width: 42%;
-          margin-left: auto;
+          width: auto;
         }
       }
       .el_item:last-of-type {
