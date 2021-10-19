@@ -23,7 +23,7 @@
           <template slot-scope="scope">
             <p-link
               text="删除"
-              p="role.destro"
+              p="role.destroy"
               type="danger"
               @click="del_Meberitem(scope.row.id)"
             >
