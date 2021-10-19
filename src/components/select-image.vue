@@ -391,25 +391,39 @@ export default {
         }
         &.active,
         &:hover {
-          background-color: rgba(60, 167, 250, 0.2);
+          background: #fff;
           border: 2px solid #3ca7fa;
+          border-bottom: none;
           .image-render {
+            background-color: rgba(60, 167, 250, 0.2);
             width: 106px;
-            height: 108px;
+            height: 110px;
             .image-view {
               width: 106px;
               height: 108px;
             }
           }
           .image-name {
-            width: 106px;
+            width: 110px;
             height: auto;
+            padding: 0;
+            display: flex;
             padding: 10px 5px;
+            top: 110px;
+            left: -2px;
             position: absolute;
-            bottom: 0;
+            z-index: 10;
+            background-color: rgb(216,237,254);
+            border: 2px solid #3ca7fa;
+            border-top: none;
             .name {
               width: 96px;
               height: auto;
+              word-wrap: break-word;
+              white-space: unset;
+              text-overflow: unset;
+              overflow: unset;
+              
             }
           }
         }
