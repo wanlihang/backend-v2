@@ -177,6 +177,13 @@
               </div>
             </div>
           </el-form-item>
+          <el-form-item label="订阅人数" prop="user_count">
+            <el-input
+              v-model="course.user_count"
+              class="w-400px"
+              placeholder="订阅人数"
+            ></el-input>
+          </el-form-item>
 
           <!-- <el-form-item label="评论控制" prop="comment_status">
             <el-select class="w-200px" v-model="course.comment_status">
@@ -205,14 +212,6 @@
               type="textarea"
               v-model="course.seo_keywords"
               placeholder="SEO关键字"
-            ></el-input>
-          </el-form-item>
-
-          <el-form-item label="Slug" prop="slug">
-            <el-input
-              v-model="course.slug"
-              class="w-400px"
-              placeholder="Slug"
             ></el-input>
           </el-form-item>
         </div>
@@ -269,7 +268,7 @@ export default {
         short_description: null,
         original_desc: null,
         render_desc: null,
-        slug: null,
+        user_count: null,
         seo_description: null,
         seo_keywords: null,
         is_free: 1,

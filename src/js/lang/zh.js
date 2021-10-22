@@ -310,8 +310,8 @@ const zh = {
                 },
             },
             question: {
-                name: '试题',
-                index: '试题',
+                name: '题库',
+                index: '题库',
                 create: '添加试题',
                 update: '编辑试题',
                 userpaper: '考试记录',

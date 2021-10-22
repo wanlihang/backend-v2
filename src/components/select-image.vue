@@ -413,7 +413,7 @@ export default {
             left: -2px;
             position: absolute;
             z-index: 10;
-            background-color: rgb(216,237,254);
+            background-color: rgb(216, 237, 254);
             border: 2px solid #3ca7fa;
             border-top: none;
             .name {
@@ -423,7 +423,6 @@ export default {
               white-space: unset;
               text-overflow: unset;
               overflow: unset;
-              
             }
           }
         }
