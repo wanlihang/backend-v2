@@ -29,7 +29,7 @@
         <div class="el_item">
           <span>总用户</span>
           <span class="el_item_num flex-1">
-            {{ numberForHuman(list.user_count) }}
+            {{ list.user_count }}
           </span>
           <span class="el_item_increase">
             今日新增：
@@ -41,7 +41,7 @@
         <div class="el_item">
           <span>本月收益</span>
           <span class="el_item_num flex-1">
-            {{ numberForHuman(list.this_month_paid_sum || 0) }}
+            {{ list.this_month_paid_sum || 0 }}
           </span>
           <span class="el_item_increase">
             较上月：
