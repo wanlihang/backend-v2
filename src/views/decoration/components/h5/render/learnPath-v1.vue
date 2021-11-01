@@ -91,7 +91,7 @@ export default {
 
       .path-body {
         flex: 1;
-
+        width: 60%;
         .path-title {
           width: 100%;
           height: 20px;
