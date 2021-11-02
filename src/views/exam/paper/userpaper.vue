@@ -84,7 +84,7 @@
           <el-table-column label="用时" width="150">
             <template slot-scope="scope">
               <duration-text
-                v-if="scope.row.status === 2"
+                v-if="!loading && scope.row.status === 2"
                 :duration="scope.row.used_seconds"
               ></duration-text>
             </template>

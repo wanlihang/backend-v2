@@ -22,7 +22,10 @@
           </el-table-column>
           <el-table-column label="观看时长" width="200">
             <template slot-scope="scope">
-              <duration-text :duration="scope.row.duration"></duration-text>
+              <duration-text
+                v-if="!loading"
+                :duration="scope.row.duration"
+              ></duration-text>
             </template>
           </el-table-column>
         </el-table>

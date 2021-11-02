@@ -57,7 +57,7 @@
           <el-table-column label="视频时长" width="140">
             <template slot-scope="scope">
               <duration-text
-                v-if="videos[scope.row.video_id]"
+                v-if="!loading && videos[scope.row.video_id]"
                 :duration="videos[scope.row.video_id].duration"
               ></duration-text>
               <span class="c-red" v-else>已删除</span>
@@ -66,6 +66,7 @@
           <el-table-column label="已观看" width="140">
             <template slot-scope="scope">
               <duration-text
+                v-if="!loading"
                 :duration="scope.row.watch_seconds"
               ></duration-text>
             </template>
