@@ -116,7 +116,7 @@ export default {
 
       .book-body {
         flex: 1;
-
+        width: calc(100% - 105px);
         .book-name {
           width: 100%;
           float: left;
