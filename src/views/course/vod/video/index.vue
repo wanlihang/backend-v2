@@ -22,7 +22,7 @@
       </p-button>
     </div>
     <div class="float-left" v-loading="loading">
-      <div class="float-left">
+      <div class="float-left" v-if="!loading">
         <el-table
           :data="videos"
           class="float-left"
