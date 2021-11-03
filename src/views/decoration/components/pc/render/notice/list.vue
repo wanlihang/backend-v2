@@ -17,7 +17,10 @@
         >
           <el-table-column prop="id" label="ID" width="120"> </el-table-column>
           <el-table-column prop="title" label="公告"> </el-table-column>
-          <el-table-column prop="created_at" label="添加时间" width="200">
+          <el-table-column label="添加时间" width="200">
+            <template slot-scope="scope">{{
+              scope.row.created_at | dateFormat
+            }}</template>
           </el-table-column>
           <el-table-column label="操作" width="120">
             <template slot-scope="scope">
