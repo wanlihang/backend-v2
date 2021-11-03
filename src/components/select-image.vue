@@ -335,7 +335,7 @@ export default {
 
       .image-item {
         width: 110px;
-        height: 142px;
+        min-height: 142px;
         background: #f4fafe;
         box-sizing: border-box;
         cursor: pointer;
@@ -372,17 +372,17 @@ export default {
         }
 
         .image-name {
-          height: 32px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
+          width: 110px;
+          height: auto;
+          padding: 10px 5px;
+          box-sizing: border-box;
           .name {
-            width: 80px;
-            height: 16px;
-            font-size: 12px;
+            width: 100px;
+            height: 15px;
+            font-size: 10px;
             font-weight: 400;
             color: #333333;
-            line-height: 16px;
+            line-height: 15px;
             text-align: center;
             white-space: nowrap;
             overflow: hidden;
@@ -391,19 +391,39 @@ export default {
         }
         &.active,
         &:hover {
-          background-color: rgba(60, 167, 250, 0.2);
+          background: #fff;
           border: 2px solid #3ca7fa;
+          border-bottom: none;
           .image-render {
+            background-color: rgba(60, 167, 250, 0.2);
             width: 106px;
-            height: 108px;
+            height: 110px;
             .image-view {
               width: 106px;
               height: 108px;
             }
           }
           .image-name {
-            width: 106px;
-            height: 30px;
+            width: 110px;
+            height: auto;
+            padding: 0;
+            display: flex;
+            padding: 10px 5px;
+            top: 110px;
+            left: -2px;
+            position: absolute;
+            z-index: 10;
+            background-color: rgb(216, 237, 254);
+            border: 2px solid #3ca7fa;
+            border-top: none;
+            .name {
+              width: 96px;
+              height: auto;
+              word-wrap: break-word;
+              white-space: unset;
+              text-overflow: unset;
+              overflow: unset;
+            }
           }
         }
       }

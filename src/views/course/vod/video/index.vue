@@ -51,7 +51,10 @@
           </el-table-column>
           <el-table-column property="duration" label="时长" sortable width="120"
             ><template slot-scope="scope">
-              <duration-text :duration="scope.row.duration"></duration-text>
+              <duration-text
+                v-if="!loading"
+                :duration="scope.row.duration"
+              ></duration-text>
             </template>
           </el-table-column>
           <el-table-column sortable label="上架时间">

@@ -29,7 +29,7 @@
         <div class="el_item">
           <span>总用户</span>
           <span class="el_item_num flex-1">
-            {{ numberForHuman(list.user_count) }}
+            {{ list.user_count }}
           </span>
           <span class="el_item_increase">
             今日新增：
@@ -41,7 +41,7 @@
         <div class="el_item">
           <span>本月收益</span>
           <span class="el_item_num flex-1">
-            {{ numberForHuman(list.this_month_paid_sum || 0) }}
+            {{ list.this_month_paid_sum || 0 }}
           </span>
           <span class="el_item_increase">
             较上月：
@@ -172,7 +172,7 @@
       <p class="info">
         <span>PHP{{ systemInfo.php_version }} </span>
         <span class="mx-10">主程序{{ systemInfo.meedu_version }}</span>
-        <span>后管v4.4.14</span>
+        <span>后管v4.4.16</span>
       </p>
     </div>
   </div>
@@ -239,7 +239,7 @@ export default {
       return (
         parseInt(
           (this.list.today_register_user_count / this.list.user_count).toFixed(
-            4
+            3
           ) * 10000
         ) / 100
       );
@@ -514,30 +514,33 @@ export default {
         display: flex;
         flex-direction: row;
         align-items: center;
+        justify-content: space-between;
         margin-bottom: 20px;
         span {
-          width: 110px;
+          width: 70px;
           display: block;
           font-size: 16px;
           font-family: PingFangSC-Regular, PingFang SC;
           font-weight: 400;
           color: #666666;
-          line-height: 16px;
+          line-height: 22px;
           strong {
             color: #3ca7fa;
           }
         }
         .el_item_num {
+          margin-left: 15px;
           width: auto;
+          height: 36px;
           font-size: 36px;
+          font-family: PingFangSC-Semibold, PingFang SC;
           font-weight: 600;
           color: #333333;
           line-height: 36px;
           text-align: left;
         }
         .el_item_increase {
-          width: 42%;
-          margin-left: auto;
+          width: auto;
         }
       }
       .el_item:last-of-type {

@@ -67,7 +67,10 @@
             property="use_seconds"
           >
             <template slot-scope="scope">
-              <duration-text :duration="scope.row.use_seconds"></duration-text>
+              <duration-text
+                v-if="!loading"
+                :duration="scope.row.use_seconds"
+              ></duration-text>
             </template>
           </el-table-column>
           <el-table-column sortable label="时间" width="200">

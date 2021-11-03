@@ -59,7 +59,6 @@
         <el-table
           :data="results"
           @selection-change="handleSelectionChange"
-          
           class="float-left"
         >
           <el-table-column type="selection" width="55"></el-table-column>
@@ -72,8 +71,17 @@
           </el-table-column>
           <el-table-column label="内容">
             <template slot-scope="scope">
-              <div v-html="scope.row.content"></div>
+              <question-render :question="scope.row"></question-render>
             </template>
+            <!-- <template slot-scope="scope">
+              <div
+                v-html="
+                  scope.row.content.length > 130
+                    ? scope.row.content.slice(0, 130) + '...'
+                    : scope.row.content
+                "
+              ></div>
+            </template> -->
           </el-table-column>
         </el-table>
       </div>
@@ -94,7 +102,11 @@
 </template>
 
 <script>
+import QuestionRender from "@/components/question-render";
 export default {
+  components: {
+    QuestionRender,
+  },
   data() {
     return {
       pagination: {

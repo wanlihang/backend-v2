@@ -93,18 +93,16 @@ export default {
 
       .topic-body {
         flex: 1;
-        margin-right: 10px;
-
+        width: calc(100% - 130px);
         .topic-title {
           width: 100%;
           height: 20px;
+          float: left;
+          line-height: 20px;
           font-size: 15px;
           font-weight: 600;
-          line-height: 20px;
           color: #171923;
-          line-height: 20px;
-          float: left;
-          word-break: break-all;
+          white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
           margin-bottom: 40px;
