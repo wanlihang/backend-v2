@@ -6,7 +6,9 @@
     ></select-resource> -->
     <!-- <user-add></user-add> -->
 
-    <upload-video :show="true"></upload-video>
+    <!-- <upload-video :show="true"></upload-video> -->
+
+    <quill-editor v-model="content" :height="400"></quill-editor>
   </div>
 </template>
 
@@ -18,11 +20,12 @@
 // import SelectVod from '@/components/select-vod';
 // import SelectResource from "@/components/select-resources/index";
 // import UserAdd from '@/components/user-add';
-import UploadVideo from "@/components/upload-video";
+// import UploadVideo from "@/components/upload-video";
+import QuillEditor from '@/components/quill-editor';
 
 export default {
   components: {
-    UploadVideo,
+    QuillEditor,
   },
   data() {
     return {
