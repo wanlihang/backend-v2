@@ -177,24 +177,12 @@
               </div>
             </div>
           </el-form-item>
-          <el-form-item label="订阅人数" prop="user_count">
+          <!-- <el-form-item label="订阅人数" prop="user_count">
             <el-input
               v-model="course.user_count"
               class="w-400px"
               placeholder="订阅人数"
             ></el-input>
-          </el-form-item>
-
-          <!-- <el-form-item label="评论控制" prop="comment_status">
-            <el-select class="w-200px" v-model="course.comment_status">
-              <el-option
-                v-for="(item, index) in comments"
-                :key="index"
-                :label="item.name"
-                :value="item.id"
-              >
-              </el-option>
-            </el-select>
           </el-form-item> -->
 
           <el-form-item label="SEO描述">

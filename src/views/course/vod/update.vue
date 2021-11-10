@@ -177,13 +177,13 @@
               </div>
             </div>
           </el-form-item>
-          <el-form-item label="订阅人数" prop="user_count">
+          <!-- <el-form-item label="订阅人数" prop="user_count">
             <el-input
               v-model="course.user_count"
               class="w-400px"
               placeholder="订阅人数"
             ></el-input>
-          </el-form-item>
+          </el-form-item> -->
           <el-form-item label="SEO描述">
             <el-input
               class="w-400px"
