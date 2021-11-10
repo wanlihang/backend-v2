@@ -25,8 +25,6 @@ import HelperText from '@/components/helper-text';
 import PLink from '@/components/permission/link';
 import PButton from '@/components/permission/btn';
 
-
-
 Vue.use(ElementUI);
 
 // 组件注册
