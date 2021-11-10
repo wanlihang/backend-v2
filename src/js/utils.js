@@ -1,13 +1,12 @@
-
 export default {
     getToken() {
-        return window.localStorage.getItem('astoken');
+        return window.localStorage.getItem('meedu-admin-token');
     },
     saveToken(token) {
-        window.localStorage.setItem('astoken', token);
+        window.localStorage.setItem('meedu-admin-token', token);
     },
     clearToken() {
-        window.localStorage.removeItem('astoken');
+        window.localStorage.removeItem('meedu-admin-token');
     },
     exportExcel(data, filename, sheetName) {
         const XLSX = require('xlsx');
@@ -22,17 +21,17 @@ export default {
     },
     getHMS(time) {
         const hour =
-            parseInt(time / 3600) < 10
-                ? "0" + parseInt(time / 3600)
-                : parseInt(time / 3600);
+            parseInt(time / 3600) < 10 ?
+            "0" + parseInt(time / 3600) :
+            parseInt(time / 3600);
         const min =
-            parseInt((time % 3600) / 60) < 10
-                ? "0" + parseInt((time % 3600) / 60)
-                : parseInt((time % 3600) / 60);
+            parseInt((time % 3600) / 60) < 10 ?
+            "0" + parseInt((time % 3600) / 60) :
+            parseInt((time % 3600) / 60);
         const sec =
-            parseInt((time % 3600) % 60) < 10
-                ? "0" + parseInt((time % 3600) % 60)
-                : parseInt((time % 3600) % 60);
+            parseInt((time % 3600) % 60) < 10 ?
+            "0" + parseInt((time % 3600) % 60) :
+            parseInt((time % 3600) % 60);
         return hour + ":" + min + ":" + sec;
     },
     scrollTopRecord(page) {
@@ -50,7 +49,13 @@ export default {
         }
     },
     copyright() {
-        var outs = [], fi = function () { return { msg: "", style: "" } };
+        var outs = [],
+            fi = function () {
+                return {
+                    msg: "",
+                    style: ""
+                }
+            };
 
         var oi = fi();
         oi.msg = "  MeEdu - 在线教育培训解决方案";
@@ -64,5 +69,8 @@ export default {
         outs.map(function (x) {
             console.log("%c" + x.msg, x.style);
         });
+    },
+    getUrl() {
+        return window.location.protocol + '//' + window.location.host + window.location.pathname;
     }
 }

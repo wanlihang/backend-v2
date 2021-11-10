@@ -22,6 +22,7 @@
           </el-form-item>
           <el-form-item prop="password">
             <el-input
+              @keyup.enter.native="formValidate"
               type="password"
               v-model="form.password"
               auto-complete="off"
@@ -30,13 +31,13 @@
           </el-form-item>
           <el-form-item style="width: 100%">
             <el-button
-              @keyup.enter="formValidate"
               type="primary"
               style="width: 100%"
               @click="formValidate"
               :loading="logining"
-              >{{ $t("login.login") }}</el-button
             >
+              {{ $t("login.login") }}
+            </el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -74,19 +75,10 @@ export default {
       },
     };
   },
-  created() {
-    var t = this;
-    document.onkeydown = function (e) {
-      var key;
-      if (window.event == undefined) {
-        key = e.keyCode;
-      } else {
-        key = window.event.keyCode;
-      }
-      if (key == 13) {
-        t.formValidate();
-      }
-    };
+  mounted() {
+    if (this.$utils.getToken()) {
+      this.goDashboard();
+    }
   },
   methods: {
     ...mapMutations(["loginHandle"]),
@@ -110,13 +102,16 @@ export default {
 
           this.$api.Administrator.Detail().then((res) => {
             this.loginHandle(res.data);
-            this.$router.push({ name: "Dashboard" });
+            this.goDashboard();
           });
         })
         .catch((e) => {
           this.loading = false;
           this.$message.error(e.message);
         });
+    },
+    goDashboard() {
+      this.$router.push({ name: "Dashboard" });
     },
   },
 };
