@@ -1157,6 +1157,9 @@ const Api = {
             QuestionDestroy(id, ids) {
                 return destroy(`/backend/addons/Paper/paper/${id}/questions/${ids}`);
             },
+            QuestionDestoryMulti(id, params) {
+                return post(`/backend/addons/Paper/paper/${id}/questions/deleteBatch`, params);
+            },
             QuestionList(id, params) {
                 return get(`/backend/addons/Paper/paper/${id}/questions`, params);
             },
