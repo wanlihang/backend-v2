@@ -147,10 +147,10 @@
           </el-form-item>
 
           <el-form-item prop="original_desc" label="详细介绍">
-            <wang-editor
-              class="w-100"
+            <quill-editor
+              :height="400"
               v-model="course.original_desc"
-            ></wang-editor>
+            ></quill-editor>
           </el-form-item>
         </div>
 
@@ -225,12 +225,12 @@
   </div>
 </template>
 <script>
-import WangEditor from "@/components/wangeditor";
+import QuillEditor from "@/components/quill-editor";
 import UploadImage from "@/components/upload-image";
 
 export default {
   components: {
-    WangEditor,
+    QuillEditor,
     UploadImage,
   },
   data() {

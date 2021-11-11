@@ -95,18 +95,14 @@
     <div class="float-left mb-30">
       <div class="float-left helper-text mb-10">解析</div>
       <div class="float-left">
-        <wang-editor
-          v-model="form.remark"
-          class="w-600px"
-          :height="100"
-        ></wang-editor>
+        <quill-editor :height="100" v-model="form.remark"></quill-editor>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import wangEditor from "@/components/wangeditor";
+import QuillEditor from "@/components/quill-editor";
 import CloseIcon from "@/components/close-icon";
 
 import QChoice from "./choice.vue";
@@ -117,7 +113,7 @@ import QQa from "./qa.vue";
 
 export default {
   components: {
-    wangEditor,
+    QuillEditor,
     CloseIcon,
     QChoice,
     QSelect,

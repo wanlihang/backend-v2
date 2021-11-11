@@ -5,7 +5,7 @@
     <div class="form-box broder-top-left-radius">
       <el-form ref="form" label-width="200px">
         <el-form-item label="备注">
-          <wang-editor class="w-600px" v-model="remark"></wang-editor>
+          <quill-editor :height="400" v-model="remark"></quill-editor>
         </el-form-item>
       </el-form>
     </div>
@@ -25,11 +25,11 @@
   </div>
 </template>
 <script>
-import WangEditor from "@/components/wangeditor";
+import QuillEditor from "@/components/quill-editor";
 
 export default {
   components: {
-    WangEditor,
+    QuillEditor,
   },
   data() {
     return {
