@@ -350,30 +350,30 @@ export default {
         return;
       }
       if (
-        parseInt(this.addform.rule.num.choice) === 0 &&
-        parseInt(this.addform.rule.num.select) === 0 &&
-        parseInt(this.addform.rule.num.input) === 0 &&
-        parseInt(this.addform.rule.num.qa) === 0 &&
-        parseInt(this.addform.rule.num.judge) === 0 &&
-        parseInt(this.addform.rule.num.cap) === 0
+        parseInt(this.addform.rule.num.choice) > 0 ||
+        parseInt(this.addform.rule.num.select) > 0 ||
+        parseInt(this.addform.rule.num.input) > 0 ||
+        parseInt(this.addform.rule.num.qa) > 0 ||
+        parseInt(this.addform.rule.num.judge) > 0 ||
+        parseInt(this.addform.rule.num.cap) > 0
       ) {
-        this.$message.error("请至少填入一种抽出题型的数量");
-        return;
-      }
-      this.loading = true;
-      let data = {};
-      Object.assign(data, this.addform);
-      data.rule = JSON.stringify(data.rule);
+        this.loading = true;
+        let data = {};
+        Object.assign(data, this.addform);
+        data.rule = JSON.stringify(data.rule);
 
-      this.$api.Exam.Mockpaper.Update(this.id, data)
-        .then(() => {
-          this.$message.success(this.$t("common.success"));
-          this.$router.back();
-        })
-        .catch((e) => {
-          this.loading = false;
-          this.$message.error(e.message);
-        });
+        this.$api.Exam.Mockpaper.Update(this.id, data)
+          .then(() => {
+            this.$message.success(this.$t("common.success"));
+            this.$router.back();
+          })
+          .catch((e) => {
+            this.loading = false;
+            this.$message.error(e.message);
+          });
+      } else {
+        this.$message.error("请至少填入一种抽出题型的数量");
+      }
     },
   },
 };
