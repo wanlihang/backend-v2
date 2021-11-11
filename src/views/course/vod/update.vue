@@ -152,10 +152,10 @@
           </el-form-item>
 
           <el-form-item prop="original_desc" label="详细介绍">
-            <wang-editor
-              class="w-100"
+            <quill-editor
+              :height="400"
               v-model="course.original_desc"
-            ></wang-editor>
+            ></quill-editor>
           </el-form-item>
         </div>
 
@@ -177,13 +177,13 @@
               </div>
             </div>
           </el-form-item>
-          <el-form-item label="订阅人数" prop="user_count">
+          <!-- <el-form-item label="订阅人数" prop="user_count">
             <el-input
               v-model="course.user_count"
               class="w-400px"
               placeholder="订阅人数"
             ></el-input>
-          </el-form-item>
+          </el-form-item> -->
           <el-form-item label="SEO描述">
             <el-input
               class="w-400px"
@@ -220,12 +220,12 @@
   </div>
 </template>
 <script>
-import WangEditor from "@/components/wangeditor";
+import QuillEditor from "@/components/quill-editor";
 import UploadImage from "@/components/upload-image";
 
 export default {
   components: {
-    WangEditor,
+    QuillEditor,
     UploadImage,
   },
   data() {

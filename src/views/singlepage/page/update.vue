@@ -50,7 +50,7 @@
 
         <el-form-item label="页面内容" v-if="richText" prop="content">
           <div class="changeContent" @click="changeContent">纯文本</div>
-          <wang-editor class="w-100" v-model="form.content"></wang-editor>
+          <quill-editor :height="400" v-model="form.content"></quill-editor>
         </el-form-item>
         <el-form-item label="页面内容" v-else prop="content">
           <div class="changeContent" @click="changeContent">富文本</div>
@@ -96,11 +96,11 @@
   </div>
 </template>
 <script>
-import WangEditor from "@/components/wangeditor";
+import QuillEditor from "@/components/quill-editor";
 
 export default {
   components: {
-    WangEditor,
+    QuillEditor,
   },
   data() {
     return {

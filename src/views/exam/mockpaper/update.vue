@@ -160,6 +160,9 @@
               ></el-input>
             </div>
             <div class="ml-10">
+              <div>（共{{ countMap[1] }}题）</div>
+            </div>
+            <div class="ml-10">
               <helper-text text="每次考试抽出的单选题数量"></helper-text>
             </div>
           </div>
@@ -172,6 +175,9 @@
                 v-model="addform.rule.num.select"
                 class="w-200px"
               ></el-input>
+            </div>
+            <div class="ml-10">
+              <div>（共{{ countMap[2] }}题）</div>
             </div>
             <div class="ml-10">
               <helper-text text="每次考试抽出的多选题数量"></helper-text>
@@ -188,6 +194,9 @@
               ></el-input>
             </div>
             <div class="ml-10">
+              <div>（共{{ countMap[3] }}题）</div>
+            </div>
+            <div class="ml-10">
               <helper-text text="每次考试抽出填空题数量"></helper-text>
             </div>
           </div>
@@ -200,6 +209,9 @@
                 v-model="addform.rule.num.qa"
                 class="w-200px"
               ></el-input>
+            </div>
+            <div class="ml-10">
+              <div>（共{{ countMap[4] }}题）</div>
             </div>
             <div class="ml-10">
               <helper-text text="每次考试抽出的问答题数量"></helper-text>
@@ -216,6 +228,9 @@
               ></el-input>
             </div>
             <div class="ml-10">
+              <div>（共{{ countMap[5] }}题）</div>
+            </div>
+            <div class="ml-10">
               <helper-text text="每次考试抽出的判断题数量"></helper-text>
             </div>
           </div>
@@ -228,6 +243,9 @@
                 v-model="addform.rule.num.cap"
                 class="w-200px"
               ></el-input>
+            </div>
+            <div class="ml-10">
+              <div>（共{{ countMap[6] }}题）</div>
             </div>
             <div class="ml-10">
               <helper-text text="每次考试抽出的题帽题数量"></helper-text>
@@ -294,6 +312,7 @@ export default {
           },
         ],
       },
+      countMap: [],
       categories: [],
       courses: [],
       loading: false,
@@ -308,6 +327,7 @@ export default {
       this.$api.Exam.Mockpaper.Create().then((res) => {
         this.categories = res.data.categories;
         this.courses = res.data.question_categories;
+        this.countMap = res.data.count_map;
       });
     },
     detail() {
@@ -329,20 +349,31 @@ export default {
       if (this.loading) {
         return;
       }
-      this.loading = true;
-      let data = {};
-      Object.assign(data, this.addform);
-      data.rule = JSON.stringify(data.rule);
+      if (
+        parseInt(this.addform.rule.num.choice) > 0 ||
+        parseInt(this.addform.rule.num.select) > 0 ||
+        parseInt(this.addform.rule.num.input) > 0 ||
+        parseInt(this.addform.rule.num.qa) > 0 ||
+        parseInt(this.addform.rule.num.judge) > 0 ||
+        parseInt(this.addform.rule.num.cap) > 0
+      ) {
+        this.loading = true;
+        let data = {};
+        Object.assign(data, this.addform);
+        data.rule = JSON.stringify(data.rule);
 
-      this.$api.Exam.Mockpaper.Update(this.id, data)
-        .then(() => {
-          this.$message.success(this.$t("common.success"));
-          this.$router.back();
-        })
-        .catch((e) => {
-          this.loading = false;
-          this.$message.error(e.message);
-        });
+        this.$api.Exam.Mockpaper.Update(this.id, data)
+          .then(() => {
+            this.$message.success(this.$t("common.success"));
+            this.$router.back();
+          })
+          .catch((e) => {
+            this.loading = false;
+            this.$message.error(e.message);
+          });
+      } else {
+        this.$message.error("请至少填入一种抽出题型的数量");
+      }
     },
   },
 };

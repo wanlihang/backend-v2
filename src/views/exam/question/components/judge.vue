@@ -41,7 +41,7 @@
         <span class="ml-5">试题内容</span>
       </div>
       <div class="float-left">
-        <wang-editor v-model="form.content" class="w-600px" :height="100"></wang-editor>
+        <quill-editor :height="100" v-model="form.content"></quill-editor>
       </div>
     </div>
 
@@ -59,18 +59,18 @@
     <div class="float-left">
       <div class="float-left helper-text mb-10">解析</div>
       <div class="float-left">
-        <wang-editor v-model="form.remark" class="w-600px" :height="100"></wang-editor>
+        <quill-editor :height="100" v-model="form.remark"></quill-editor>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import wangEditor from "@/components/wangeditor";
+import QuillEditor from "@/components/quill-editor";
 
 export default {
   components: {
-    wangEditor,
+    QuillEditor,
   },
   props: ["question", "index"],
   data() {

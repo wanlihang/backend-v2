@@ -2,13 +2,6 @@
   <div class="meedu-main-body">
     <div class="float-left mb-30">
       <p-button
-        text="批量删除"
-        p="addons.Paper.question.delete"
-        @click="destorymulti()"
-        type="danger"
-      >
-      </p-button>
-      <p-button
         text="添加试题"
         p="addons.Paper.question.store"
         @click="
@@ -28,6 +21,13 @@
           })
         "
         type="primary"
+      >
+      </p-button>
+      <p-button
+        text="批量删除"
+        p="addons.Paper.question.delete"
+        @click="destorymulti()"
+        type="danger"
       >
       </p-button>
     </div>

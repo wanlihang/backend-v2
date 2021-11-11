@@ -333,6 +333,16 @@ export default {
       if (this.loading) {
         return;
       }
+      if (
+        this.addform.enabled_invite === 0 &&
+        this.addform.is_free === 0 &&
+        parseInt(this.addform.charge) === 0 &&
+        (this.addform.required_courses.length === 0 ||
+          this.addform.required_courses === "")
+      ) {
+        this.$message.error("设置价格大于0或者设置有购买录播课程");
+        return;
+      }
       this.loading = true;
       var ids = this.addform.required_courses.join(",");
       this.addform.required_courses = ids;

@@ -9,7 +9,7 @@ axios.defaults.baseURL = config.url;
 // 请求拦截器(附带上token)
 axios.interceptors.request.use(
     config => {
-        const token = localStorage.getItem('astoken');
+        const token = Utils.getToken();
         token && (config.headers.Authorization = 'Bearer ' + token);
         return config;
     },
@@ -39,6 +39,8 @@ axios.interceptors.response.use(
         let httpCode = error.response.status;
         if (httpCode === 401) {
             // 未登录
+            Utils.clearToken();
+            window.location = Utils.getUrl();
         } else if (httpCode === 403) {
             // 无权限
         } else {

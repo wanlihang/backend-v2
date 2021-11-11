@@ -204,9 +204,9 @@ export default {
             this.pagination.id,
             this.spids
           )
-            .then(() => {
+            .then((res) => {
               this.loading = false;
-              this.$message.success(this.$t("common.success"));
+              this.$message.success(res.message);
               this.getResults();
             })
             .catch((e) => {

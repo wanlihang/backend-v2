@@ -54,10 +54,6 @@
             </div>
           </el-form-item>
 
-          <el-form-item label="Active" prop="active_routes">
-            <el-input v-model="form.active_routes" class="w-200px"></el-input>
-          </el-form-item>
-
           <el-form-item label="新窗口打开" prop="blank" v-if="linkStatus">
             <el-switch
               v-model="form.blank"
@@ -101,7 +97,6 @@ export default {
         parent_id: null,
         sort: null,
         name: null,
-        active_routes: null,
         blank: 0,
       },
       parentNavs: [],
@@ -187,7 +182,6 @@ export default {
     },
     linkChange(link) {
       this.form.url = link.url;
-      this.form.active_routes = link.active;
       this.showLinkWin = false;
     },
   },
