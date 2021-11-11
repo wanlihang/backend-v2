@@ -41,11 +41,10 @@
         <span class="ml-5">试题内容</span>
       </div>
       <div class="float-left">
-        <wang-editor
-          v-model="form.content"
-          class="w-600px"
+        <quill-editor
           :height="100"
-        ></wang-editor>
+          v-model="form.contentform.remark"
+        ></quill-editor>
       </div>
     </div>
 
