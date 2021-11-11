@@ -41,11 +41,7 @@
         <span class="ml-5">试题内容</span>
       </div>
       <div class="float-left">
-        <wang-editor
-          v-model="form.content"
-          class="w-600px"
-          :height="100"
-        ></wang-editor>
+        <quill-editor :height="100" v-model="form.content"></quill-editor>
       </div>
     </div>
 
@@ -55,11 +51,7 @@
         <span class="ml-5">选项{{ i }}</span>
       </div>
       <div class="float-left">
-        <wang-editor
-          :height="100"
-          class="w-600px"
-          v-model="form['option' + i]"
-        ></wang-editor>
+        <quill-editor :height="100" v-model="form['option' + i]"></quill-editor>
       </div>
     </div>
 

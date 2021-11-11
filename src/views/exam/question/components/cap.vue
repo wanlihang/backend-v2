@@ -6,11 +6,7 @@
         <span class="ml-5">题帽</span>
       </div>
       <div class="float-left">
-        <wang-editor
-          v-model="header"
-          class="w-600px"
-          :height="100"
-        ></wang-editor>
+        <quill-editor :height="100" v-model="header"></quill-editor>
       </div>
     </div>
 
