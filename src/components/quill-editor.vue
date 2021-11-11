@@ -71,8 +71,15 @@ export default {
     init() {
       this.quill = new _Quill(this.$refs["myQuillEditor"], this.editorOption);
 
+      //禁用编辑器，防止页面自动滚动到编辑器位置
+      this.quill.enable(false);
       // 初始值
       this.quill.pasteHTML(this.value || "");
+      this.$nextTick(function () {
+        //丢掉编辑器焦点并重新启用编辑器
+        this.quill.blur();
+        this.quill.enable(true);
+      });
 
       // 自定义imageHandler
       this.quill.getModule("toolbar").addHandler("image", () => {
@@ -93,7 +100,7 @@ export default {
       this.quill.on(
         "text-change",
         debounce(() => {
-           let html = this.$refs.myQuillEditor.children[0].innerHTML
+          let html = this.$refs.myQuillEditor.children[0].innerHTML;
           if (html === "<p><br></p>") {
             html = "";
           }
