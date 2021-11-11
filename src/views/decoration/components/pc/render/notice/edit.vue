@@ -9,7 +9,10 @@
           </el-form-item>
 
           <el-form-item label="内容" prop="announcement">
-            <wang-editor v-model="form.announcement"></wang-editor>
+            <quill-editor
+              :height="400"
+              v-model="form.announcement"
+            ></quill-editor>
           </el-form-item>
         </el-form>
       </div>
@@ -24,12 +27,12 @@
 </template>
 
 <script>
-import WangEditor from "@/components/wangeditor";
+import QuillEditor from "@/components/quill-editor";
 
 export default {
   props: ["id"],
   components: {
-    WangEditor,
+    QuillEditor,
   },
   data() {
     return {

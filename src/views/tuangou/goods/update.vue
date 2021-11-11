@@ -34,7 +34,7 @@
         </el-form-item>
 
         <el-form-item prop="desc" label="详细介绍">
-          <wang-editor class="w-700px" v-model="course.desc"></wang-editor>
+          <quill-editor :height="400" v-model="course.desc"></quill-editor>
         </el-form-item>
 
         <el-form-item label="团购价" prop="charge">
@@ -156,12 +156,12 @@
   </div>
 </template>
 <script>
-import WangEditor from "@/components/wangeditor";
+import QuillEditor from "@/components/quill-editor";
 import UploadImage from "@/components/upload-image";
 
 export default {
   components: {
-    WangEditor,
+    QuillEditor,
     UploadImage,
   },
   data() {

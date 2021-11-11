@@ -45,10 +45,11 @@
             >
             </el-input>
             <!-- 富文本输入框 -->
-            <wang-editor
+            <quill-editor
+              :height="400"
               v-model="c.value"
               v-else-if="c.field_type === 'longtext'"
-            ></wang-editor>
+            ></quill-editor>
             <!-- 图片上传 -->
             <upload-image
               v-model="c.value"
@@ -90,12 +91,12 @@
 </template>
 
 <script>
-import WangEditor from "@/components/wangeditor";
+import QuillEditor from "@/components/quill-editor";
 import UploadImage from "@/components/upload-image";
 
 export default {
   components: {
-    WangEditor,
+    QuillEditor,
     UploadImage,
   },
   data() {

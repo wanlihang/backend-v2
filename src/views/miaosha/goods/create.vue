@@ -39,7 +39,7 @@
         </el-form-item>
 
         <el-form-item prop="desc" label="详细介绍">
-          <wang-editor class="w-600px" v-model="course.desc"></wang-editor>
+          <quill-editor :height="400" v-model="course.desc"></quill-editor>
         </el-form-item>
 
         <el-form-item label="秒杀价" prop="charge">
@@ -100,7 +100,11 @@
         <el-form-item prop="page_title" label="PC秒杀页面标题">
           <div class="d-flex">
             <div>
-              <el-input class="w-500px" v-model="course.page_title" placeholder="PC秒杀页面标题"></el-input>
+              <el-input
+                class="w-500px"
+                v-model="course.page_title"
+                placeholder="PC秒杀页面标题"
+              ></el-input>
             </div>
             <div class="ml-10">
               <helper-text text="PC秒杀页面标题"></helper-text>
@@ -132,13 +136,13 @@
   </div>
 </template>
 <script>
-import WangEditor from "@/components/wangeditor";
+import QuillEditor from "@/components/quill-editor";
 import UploadImage from "@/components/upload-image";
 import SelectResource from "@/components/select-resources/index";
 
 export default {
   components: {
-    WangEditor,
+    QuillEditor,
     UploadImage,
     SelectResource,
   },
