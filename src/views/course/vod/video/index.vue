@@ -14,7 +14,7 @@
         @click="
           $router.push({
             name: 'VideosCreate',
-            query: { course_id: pagination.cid },
+            query: { course_id: $route.query.course_id },
           })
         "
         type="primary"
@@ -71,7 +71,7 @@
                 @click="
                   $router.push({
                     name: 'VideosUpdate',
-                    query: { course_id: pagination.cid, id: scope.row.id },
+                    query: { course_id: scope.row.course_id, id: scope.row.id },
                   })
                 "
               ></p-link>
@@ -84,7 +84,7 @@
                   $router.push({
                     name: 'VideoSubscribe',
                     query: {
-                      course_id: pagination.cid,
+                      course_id: scope.row.course_id,
                       video_id: scope.row.id,
                     },
                   })

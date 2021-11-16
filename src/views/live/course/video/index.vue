@@ -54,7 +54,7 @@
                     name: 'LiveCourseVideoPlay',
                     query: {
                       video_id: scope.row.id,
-                      course_id: pagination.course_id,
+                      course_id: scope.row.course_id,
                     },
                   })
                 "
@@ -69,7 +69,7 @@
                     name: 'LiveCourseVideoWatchusers',
                     query: {
                       id: scope.row.id,
-                      course_id: pagination.course_id,
+                      course_id: scope.row.course_id,
                     },
                   })
                 "
@@ -100,7 +100,7 @@
                     name: 'LiveCourseVideoUpdate',
                     query: {
                       id: scope.row.id,
-                      course_id: pagination.course_id,
+                      course_id: scope.row.course_id,
                     },
                   })
                 "
