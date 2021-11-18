@@ -114,7 +114,7 @@ const Api = {
                 return get(`/backend/addons/MiaoSha/goods/index`, params);
             },
             Destory(id) {
-                return destroy(`/backend/addons/MiaoSha/goods//${id}`);
+                return destroy(`/backend/addons/MiaoSha/goods/${id}`);
             },
             Store(params) {
                 return post(`/backend/addons/MiaoSha/goods/create`, params);
