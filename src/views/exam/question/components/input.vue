@@ -43,7 +43,7 @@
       <div class="float-left">
         <quill-editor
           :height="100"
-          v-model="form.contentform.remark"
+          v-model="form.content"
         ></quill-editor>
       </div>
     </div>
