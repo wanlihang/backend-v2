@@ -4,6 +4,7 @@ const pathroot = require('path');
 module.exports = {
     publicPath: '',
     productionSourceMap: false,
+    assetsDir: 'static',
     devServer: {
         proxy: {
             '/backend':{

@@ -177,7 +177,7 @@
       <p class="info">
         <span>PHP{{ systemInfo.php_version }} </span>
         <span class="mx-10">主程序{{ systemInfo.meedu_version }}</span>
-        <span>后管v4.4.17</span>
+        <span>后管v4.5.0</span>
       </p>
     </div>
   </div>
