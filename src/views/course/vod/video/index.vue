@@ -190,6 +190,7 @@ export default {
       }
       this.loading = true;
       let params = {};
+      this.pagination.cid=this.$route.query.course_id;
       Object.assign(params, this.pagination, {
         cid: this.$route.query.course_id,
       });

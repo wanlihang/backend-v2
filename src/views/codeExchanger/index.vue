@@ -132,7 +132,6 @@ export default {
       this.loading = true;
       let params = {};
       Object.assign(params, this.filter, this.pagination);
-
       this.$api.CodeExchanger.List(params).then((res) => {
         this.loading = false;
         this.list = res.data.data.data;
