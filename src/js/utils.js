@@ -58,7 +58,7 @@ export default {
             };
 
         var oi = fi();
-        oi.msg = "  MeEdu - 在线教育培训解决方案";
+        oi.msg = "MeEdu - 在线教育培训解决方案";
         oi.style = "padding-top: 15px;padding-bottom:15px;line-height:30px;font-size:1.8rem;color:#3ca7fa";
         outs.push(oi);
 
