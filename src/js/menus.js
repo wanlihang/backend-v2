@@ -189,7 +189,7 @@ export default [{
     },
     {
         name: 'title.system-config',
-        key: 'SystemConfig',
+        key: 'SystemIndex',
         permission: 'setting'
     },
     {
