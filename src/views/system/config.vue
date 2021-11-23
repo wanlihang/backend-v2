@@ -2,17 +2,17 @@
   <div class="meedu-main-body" v-loading="loading">
     <back-bar class="mb-30" :title="key"></back-bar>
     <div class="float-left" v-if="config">
-      <el-form ref="form" label-width="155px">
+      <el-form ref="form" label-width="220px">
         <template v-for="c in config[key]">
           <el-form-item :key="c.id" :label="c.name" >
             <div class="d-flex" style="margin-left:3px;">
               <div>
                 <!-- 单行文本输入框 -->
-                <el-input v-if="c.field_type === 'text'" v-model="c.value"></el-input>
+                <el-input class="w-400px" v-if="c.field_type === 'text'" v-model="c.value"></el-input>
                 <!-- 数字输入框 -->
-                <el-input v-else-if="c.field_type === 'number'" v-model="c.value"></el-input>
+                <el-input class="w-400px" v-else-if="c.field_type === 'number'" v-model="c.value"></el-input>
                 <!-- 多行文本输入框 -->
-                <el-input v-else-if="c.field_type === 'textarea'" type="textarea" :rows="3" v-model="c.value">
+                <el-input class="w-400px" v-else-if="c.field_type === 'textarea'" type="textarea" :rows="3" v-model="c.value">
                 </el-input>
                 <!-- 富文本输入框 -->
                 <quill-editor :height="400" v-model="c.value" v-else-if="c.field_type === 'longtext'"></quill-editor>
@@ -24,7 +24,7 @@
                 </el-switch>
 
                 <!-- 选择 -->
-                <el-select class="w-300px" v-model="c.value" v-else-if="c.field_type === 'select'">
+                <el-select class="w-400px" v-model="c.value" v-else-if="c.field_type === 'select'">
                   <el-option v-for="(item, index) in c.option_value" :key="index" :label="item.title" :value="item.key">
                   </el-option>
                 </el-select>
