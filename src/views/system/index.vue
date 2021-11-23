@@ -56,7 +56,7 @@ export default {
                     images: require("../../assets/images/config/role.png"),
                 },
                 {
-                    name: "登录方式",
+                    name: "登录控制",
                     value: "登录",
                     images: require("../../assets/images/config/login.png"),
                 },
@@ -96,11 +96,6 @@ export default {
                     images: require("../../assets/images/config/weixin.png"),
                 },
                 {
-                    name: "单点登录",
-                    value: "单点登录",
-                    images: require("../../assets/images/config/clicklogin.png"),
-                },
-                {
                     name: "课程有效期",
                     value: "课程有效期",
                     images: require("../../assets/images/config/coursetime.png"),
@@ -115,7 +110,7 @@ export default {
                     value: "高德地图",
                     images: require("../../assets/images/config/gaode.png"),
                 },
-                 {
+                {
                     name: "K12配置",
                     value: "K12",
                     images: require("../../assets/images/config/k12.png"),
@@ -211,8 +206,6 @@ export default {
     width: 100%;
     height: auto;
     float: left;
-    border: 1px solid rgb(227, 227, 227);
-    border-radius: 3px;
     .options {
         width: 100%;
         height: auto;
@@ -221,7 +214,7 @@ export default {
         float: left;
         border-radius: 8px;
         box-sizing: border-box;
-        padding: 20px;
+        padding: 20px 0px 0px 20px;
         margin-bottom: 20px;
         .title {
             width: 100%;
@@ -236,11 +229,11 @@ export default {
             width: 100%;
             height: auto;
             box-sizing: border-box;
-            display: grid;
-            gap: 20px;
-            grid-template-columns: repeat(6, minmax(0, 1fr));
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
             .item {
-                width: 100%;
+                width: 257px;
                 height: 88px;
                 background: #F3F4F5;
                 box-shadow: 0px 2px 4px 0px rgba(102, 102, 102, 0.05);
@@ -250,6 +243,8 @@ export default {
                 align-items: center;
                 box-sizing: border-box;
                 padding-left: 30px;
+                margin-right: 20px;
+                margin-bottom: 20px;
                 cursor: pointer;
                 &:hover {
                     opacity: 0.8;
