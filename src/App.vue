@@ -287,7 +287,7 @@ export default {
       flex: 1;
       height: 100%;
       box-sizing: border-box;
-      padding: 20px 10px 20px 20px;
+      padding: 20px 5px 20px 20px;
       overflow-y: auto;
       background-color: #f1f2f9;
     }
