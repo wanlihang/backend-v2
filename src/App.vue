@@ -276,6 +276,7 @@ export default {
       width: 200px;
       height: 100%;
       float: left;
+      overflow-x: hidden;
       overflow-y: auto;
       box-sizing: border-box;
       padding-top: 24px;
