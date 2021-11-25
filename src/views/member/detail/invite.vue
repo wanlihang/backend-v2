@@ -18,7 +18,7 @@
         label="手机号"
         width="200"
       ></el-table-column>
-      <el-table-column prop="created_at" width="200">
+      <el-table-column prop="created_at" label="注册时间" width="200">
         <template slot-scope="scope">{{
           scope.row.created_at | dateFormat
         }}</template></el-table-column

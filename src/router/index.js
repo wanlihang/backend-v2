@@ -107,6 +107,14 @@ const routes = [{
   }
 },
 {
+  path: '/system/index',
+  component: () => import('@/views/system/index'),
+  name: 'SystemIndex',
+  meta: {
+    title: 'title.system-config'
+  }
+},
+{
   path: '/system/config',
   component: () => import('@/views/system/config'),
   name: 'SystemConfig',

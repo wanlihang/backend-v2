@@ -276,6 +276,7 @@ export default {
       width: 200px;
       height: 100%;
       float: left;
+      overflow-x: hidden;
       overflow-y: auto;
       box-sizing: border-box;
       padding-top: 24px;
@@ -286,7 +287,7 @@ export default {
       flex: 1;
       height: 100%;
       box-sizing: border-box;
-      padding: 20px;
+      padding: 20px 5px 20px 20px;
       overflow-y: auto;
       background-color: #f1f2f9;
     }
