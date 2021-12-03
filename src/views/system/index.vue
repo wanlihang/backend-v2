@@ -285,11 +285,11 @@ export default {
       width: 100%;
       height: auto;
       box-sizing: border-box;
-      display: flex;
-      flex-wrap: wrap;
-      flex-direction: row;
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
       .item {
-        width: 257px;
+        width: auto;
         height: 88px;
         background: #f3f4f5;
         box-shadow: 0px 2px 4px 0px rgba(102, 102, 102, 0.05);
