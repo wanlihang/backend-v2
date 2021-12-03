@@ -299,8 +299,6 @@ export default {
         align-items: center;
         box-sizing: border-box;
         padding-left: 30px;
-        margin-right: 20px;
-        margin-bottom: 20px;
         cursor: pointer;
         &:hover {
           opacity: 0.8;
