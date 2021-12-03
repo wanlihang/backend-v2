@@ -270,7 +270,7 @@ export default {
     float: left;
     border-radius: 8px;
     box-sizing: border-box;
-    padding: 20px 0px 0px 20px;
+    padding: 20px;
     margin-bottom: 20px;
     .title {
       width: 100%;
