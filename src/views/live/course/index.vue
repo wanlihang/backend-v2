@@ -15,6 +15,17 @@
         p="addons.Zhibo.course_comment"
       >
       </p-button>
+      <div class="options-link">
+        <div
+          class="link"
+          @click="
+            $router.push({ name: 'SystemConfig', query: { key: '直播' } })
+          "
+        >
+          <img src="../../../assets/images/config/icon-option.png" />
+          直播服务配置
+        </div>
+      </div>
     </div>
     <div class="float-left">
       <div class="float-left d-flex">

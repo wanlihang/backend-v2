@@ -8,6 +8,17 @@
         type="primary"
       >
       </p-button>
+      <div class="options-link">
+        <div
+          class="link"
+          @click="
+            $router.push({ name: 'SystemConfig', query: { key: '三级分销' } })
+          "
+        >
+          <img src="../../../assets/images/config/icon-option.png" />
+          分销配置
+        </div>
+      </div>
     </div>
     <div class="float-left">
       <div class="float-left d-flex">
@@ -177,4 +188,3 @@ export default {
   },
 };
 </script>
-

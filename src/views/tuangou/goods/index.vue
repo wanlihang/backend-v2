@@ -15,6 +15,17 @@
         type="primary"
       >
       </p-button>
+      <div class="options-link">
+        <div
+          class="link"
+          @click="
+            $router.push({ name: 'SystemConfig', query: { key: '团购' } })
+          "
+        >
+          <img src="../../../assets/images/config/icon-option.png" />
+          团购配置
+        </div>
+      </div>
     </div>
     <div class="float-left">
       <div class="float-left d-flex">

@@ -30,6 +30,17 @@
         type="danger"
       >
       </p-button>
+      <div class="options-link">
+        <div
+          class="link"
+          @click="
+            $router.push({ name: 'SystemConfig', query: { key: '考试练习' } })
+          "
+        >
+          <img src="../../../assets/images/config/icon-option.png" />
+          试题库配置
+        </div>
+      </div>
     </div>
     <div class="float-left">
       <div class="float-left d-flex">
