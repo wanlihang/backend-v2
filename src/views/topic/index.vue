@@ -15,6 +15,17 @@
         p="addons.meedu_topics.comments"
       >
       </p-button>
+      <div class="options-link">
+        <div
+          class="link"
+          @click="
+            $router.push({ name: 'SystemConfig', query: { key: '图文' } })
+          "
+        >
+          <img src="../../assets/images/config/icon-option.png" />
+          图文推荐
+        </div>
+      </div>
     </div>
     <div class="float-left">
       <div class="float-left d-flex">
