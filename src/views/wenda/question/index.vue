@@ -8,17 +8,7 @@
         type="primary"
       >
       </p-button>
-      <div class="options-link">
-        <div
-          class="link"
-          @click="
-            $router.push({ name: 'SystemConfig', query: { key: '问答' } })
-          "
-        >
-          <img src="../../../assets/images/config/icon-option.png" />
-          问答配置
-        </div>
-      </div>
+      <option-bar text="问答配置" value="问答"></option-bar>
     </div>
     <div class="float-left">
       <div class="float-left d-flex">

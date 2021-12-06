@@ -7,17 +7,7 @@
         @click="$router.push({ name: 'ReplyCreate' })"
         type="primary"
       ></p-button>
-      <div class="options-link">
-        <div
-          class="link"
-          @click="
-            $router.push({ name: 'SystemConfig', query: { key: '微信公众号' } })
-          "
-        >
-          <img src="../../../assets/images/config/icon-option.png" />
-          公众号配置
-        </div>
-      </div>
+      <option-bar text="公众号配置" value="微信公众号"></option-bar>
     </div>
     <div class="float-left" v-loading="loading">
       <el-table :data="messages" class="float-left">

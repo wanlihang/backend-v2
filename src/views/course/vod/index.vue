@@ -46,17 +46,7 @@
         type="primary"
       >
       </p-button>
-      <div class="options-link">
-        <div
-          class="link"
-          @click="
-            $router.push({ name: 'SystemConfig', query: { key: '播放器配置' } })
-          "
-        >
-          <img src="../../../assets/images/config/icon-option.png" />
-          播放器配置
-        </div>
-      </div>
+      <option-bar text="播放器配置" value="播放器配置"></option-bar>
     </div>
     <div class="float-left">
       <div class="float-left d-flex">

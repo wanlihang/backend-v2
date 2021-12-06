@@ -23,17 +23,7 @@
           type="primary"
         >
         </p-button>
-        <div class="options-link">
-          <div
-            class="link"
-            @click="
-              $router.push({ name: 'SystemConfig', query: { key: '电子书' } })
-            "
-          >
-            <img src="../../../assets/images/config/icon-option.png" />
-            电子书推荐
-          </div>
-        </div>
+        <option-bar text="电子书推荐" value="电子书"></option-bar>
       </div>
       <div class="float-left">
         <div class="float-left d-flex">

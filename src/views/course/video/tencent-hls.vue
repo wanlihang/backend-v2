@@ -23,20 +23,7 @@
           <el-button @click="getData" type="primary" plain>筛选</el-button>
           <el-button @click="paginationReset">清空</el-button>
         </div>
-        <div class="options-link">
-          <div
-            class="link"
-            @click="
-              $router.push({
-                name: 'SystemConfig',
-                query: { key: '腾讯云HLS加密' },
-              })
-            "
-          >
-            <img src="../../../assets/images/config/icon-option.png" />
-            腾讯云HLS加密
-          </div>
-        </div>
+        <option-bar text="腾讯云HLS加密" value="腾讯云HLS加密"></option-bar>
       </div>
     </div>
 
