@@ -36,20 +36,21 @@
     </div>
     <div class="panel-box mt-30">
       <div class="panel-body">
-        <div class="user-extra-info-box" v-if="user.profile">
+        <div class="user-extra-info-box">
           <div class="float-left mb-15 d-flex">
             <div class="info-item">
               <div class="info-label">毕业证照片：</div>
               <div class="info-value">
                 <template v-if="user.profile && user.profile.diploma">
                   <el-image
-                    style="width: 200px; height: 150px"
+                    style="width: 200px; height: 150px;border-radius: 8px;"
                     :src="user.profile.diploma"
                     lazy
                     :preview-src-list="[user.profile.diploma]"
                   >
                   </el-image>
                 </template>
+                <div v-else class="image"></div>
               </div>
             </div>
             <div class="info-item">
@@ -57,13 +58,14 @@
               <div class="info-value">
                 <template v-if="user.profile && user.profile.id_frontend_thumb">
                   <el-image
-                    style="width: 200px; height: 150px"
+                    style="width: 200px; height: 150px;border-radius: 8px;"
                     :src="user.profile.id_frontend_thumb"
                     lazy
                     :preview-src-list="[user.profile.id_frontend_thumb]"
                   >
                   </el-image>
                 </template>
+                <div v-else class="image"></div>
               </div>
             </div>
             <div class="info-item">
@@ -71,13 +73,14 @@
               <div class="info-value">
                 <template v-if="user.profile && user.profile.id_backend_thumb">
                   <el-image
-                    style="width: 200px; height: 150px"
+                    style="width: 200px; height: 150px;border-radius: 8px;"
                     :src="user.profile.id_backend_thumb"
                     lazy
                     :preview-src-list="[user.profile.id_backend_thumb]"
                   >
                   </el-image>
                 </template>
+                <div v-else class="image"></div>
               </div>
             </div>
             <div class="info-item">
@@ -85,19 +88,18 @@
               <div class="info-value">
                 <template v-if="user.profile && user.profile.id_hand_thumb">
                   <el-image
-                    style="width: 200px; height: 150px"
+                    style="width: 200px; height: 150px;border-radius: 8px;"
                     :src="user.profile.id_hand_thumb"
                     lazy
                     :preview-src-list="[user.profile.id_hand_thumb]"
                   >
                   </el-image>
                 </template>
+                <div v-else class="image"></div>
               </div>
             </div>
           </div>
         </div>
-
-        <el-empty :image-size="50" v-else></el-empty>
       </div>
     </div>
   </div>
@@ -176,6 +178,12 @@ export default {
     width: 100%;
     height: auto;
     float: left;
+    .image {
+      width: 200px;
+      height: 150px;
+      background: #f0f0f8;
+      border-radius: 8px;
+    }
   }
 }
 </style>
