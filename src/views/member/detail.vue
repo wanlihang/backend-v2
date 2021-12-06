@@ -26,7 +26,8 @@
             >
               修改资料
             </el-link>
-            <el-link
+            <p-link
+              text="修改积分"
               type="primary"
               class="edit-profile"
               @click="
@@ -35,27 +36,29 @@
                   params: { userId: id },
                 })
               "
+              p="member.credit1.change"
             >
-              修改积分
-            </el-link>
-            <el-link
+            </p-link>
+            <p-link
+              text="修改标签"
               type="primary"
               class="edit-profile"
               @click="
                 $router.push({ name: 'MemberTag', params: { userId: id } })
               "
+              p="member.tags"
             >
-              修改标签
-            </el-link>
-            <el-link
+            </p-link>
+            <p-link
+              text="修改备注"
               type="primary"
               class="edit-profile"
               @click="
                 $router.push({ name: 'MemberRemark', params: { userId: id } })
               "
+              p="member.remark.update"
             >
-              修改备注
-            </el-link>
+            </p-link>
           </div>
         </div>
         <div class="panel-info-box">
