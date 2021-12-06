@@ -47,6 +47,15 @@
             >
               修改标签
             </el-link>
+            <el-link
+              type="primary"
+              class="edit-profile"
+              @click="
+                $router.push({ name: 'MemberRemark', params: { userId: id } })
+              "
+            >
+              修改备注
+            </el-link>
           </div>
         </div>
         <div class="panel-info-box">
@@ -84,27 +93,12 @@
               </el-tag>
             </template>
           </div>
+          <div class="panel-info-item">
+            备注：<template v-if="user.remark">
+              <span v-html="user.remark.remark"></span>
+            </template>
+          </div>
         </div>
-      </div>
-    </div>
-
-    <div class="panel-box mt-30">
-      <div class="panel-header">
-        <span>用户备注</span>
-        <el-link
-          type="primary"
-          @click="
-            $router.push({ name: 'MemberRemark', params: { userId: id } })
-          "
-          class="ml-15"
-        >
-          <i class="el-icon-edit"></i>
-        </el-link>
-      </div>
-      <div class="panel-body">
-        <template v-if="user.remark">
-          <div v-html="user.remark.remark"></div>
-        </template>
       </div>
     </div>
 
@@ -353,6 +347,9 @@ export default {
       font-weight: 400;
       color: #333333;
       line-height: 14px;
+      span {
+        display: inline-block;
+      }
     }
   }
 }
