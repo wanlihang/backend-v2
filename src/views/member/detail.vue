@@ -5,9 +5,72 @@
       <div class="user-info-box">
         <div class="user-base-info-box">
           <div class="user-avatar">
-            <img :src="user.avatar" width="100" height="100" />
+            <img :src="user.avatar" width="80" height="80" />
           </div>
           <div class="user-nickname">{{ user.nick_name }}</div>
+          <div class="buttons">
+            <el-button type="primary" class="real-profile">实名信息</el-button>
+            <el-link
+              type="primary"
+              class="edit-profile"
+              @click="
+                $router.push({ name: 'MemberEdit', params: { userId: id } })
+              "
+            >
+              修改资料
+            </el-link>
+          </div>
+        </div>
+        <div class="panel-info-box">
+          <div class="panel-info-item">ID：{{ user.id }}</div>
+          <div class="panel-info-item">手机号：{{ user.mobile }}</div>
+          <div class="panel-info-item">积分：{{ user.credit1 }}</div>
+          <div class="panel-info-item">
+            VIP： {{ user.role ? user.role.name : "" }}
+          </div>
+          <div class="panel-info-item">
+            VIP过期时间：{{ user.role_expired_at | dateFormat }}
+          </div>
+          <div class="panel-info-item">
+            一级邀请人：{{ user.invitor ? user.invitor.nick_name : ""
+            }}<template v-if="user.invitor"
+              >(有效期剩
+              {{ user.invite_user_expired_at | dateFormat }}天)</template
+            >
+          </div>
+          <div class="panel-info-item">
+            二级邀请人：{{ user.invitor ? user.invitor.nick_name : ""
+            }}<template v-if="user.invitor"
+              >(有效期剩
+              {{ user.invite_user_expired_at | dateFormat }}天)</template
+            >
+          </div>
+          <div class="panel-info-item">
+            三级邀请人：{{ user.invitor ? user.invitor.nick_name : ""
+            }}<template v-if="user.invitor"
+              >(有效期剩
+              {{ user.invite_user_expired_at | dateFormat }}天)</template
+            >
+          </div>
+          <div class="panel-info-item">
+            用户邀请码：{{
+              user.is_used_promo_code === 1 ? "已使用" : "未使用"
+            }}
+          </div>
+          <div class="panel-info-item">推广余额：{{ user.invite_balance }}</div>
+          <div class="panel-info-item">
+            锁定登录：{{ user.is_lock === 1 ? "是" : "否" }}
+          </div>
+          <div class="panel-info-item">IP地址： {{ user.register_ip }}</div>
+          <div class="panel-info-item">注册区域： {{ user.register_area }}</div>
+          <div class="panel-info-item">
+            标签：<template v-if="user.tags">
+              <el-tag class="mr-5" v-for="item in user.tags" :key="item.id">
+                {{ item.name }}
+              </el-tag>
+            </template>
+          </div>
+          <div class="panel-info-item">备注：{{ user.remark }}</div>
         </div>
       </div>
     </div>
@@ -474,33 +537,70 @@ export default {
   box-sizing: border-box;
   display: flex;
   justify-content: center;
+  margin-top: 10px;
+  flex-direction: column;
 
   .user-base-info-box {
-    width: 300px;
+    width: 100%;
     height: auto;
     float: left;
     box-sizing: border-box;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f3f6f9;
+    display: flex;
+    flex-direction: row;
 
     .user-avatar {
-      width: 100%;
-      height: auto;
+      width: 80px;
+      height: 80px;
       float: left;
-      text-align: center;
-      margin-bottom: 30px;
-
+      margin-right: 20px;
       img {
+        width: 80px;
+        height: 80px;
         border-radius: 50%;
       }
     }
 
     .user-nickname {
-      width: 100%;
-      height: auto;
+      width: auto;
+      height: 80px;
       float: left;
-      text-align: center;
-      font-size: 16px;
-      font-weight: bold;
-      color: #333;
+      font-size: 20px;
+      font-weight: 600;
+      color: #333333;
+      line-height: 80px;
+    }
+    .buttons {
+      width: auto;
+      height: 80px;
+      float: left;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      .real-profile {
+        margin-right: 20px;
+        margin-left: 30px;
+      }
+    }
+  }
+  .panel-info-box {
+    width: 100%;
+    height: auto;
+    float: left;
+    box-sizing: border-box;
+    padding-bottom: 20px;
+    padding-top: 30px;
+    display: grid;
+    row-gap: 30px;
+    column-gap: 0px;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    .panel-info-item {
+      height: 14px;
+      font-size: 14px;
+      font-weight: 400;
+      color: #333333;
+      line-height: 14px;
     }
   }
 }
