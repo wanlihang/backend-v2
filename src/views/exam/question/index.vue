@@ -30,17 +30,7 @@
         type="danger"
       >
       </p-button>
-      <div class="options-link">
-        <div
-          class="link"
-          @click="
-            $router.push({ name: 'SystemConfig', query: { key: '考试练习' } })
-          "
-        >
-          <img src="../../../assets/images/config/icon-option.png" />
-          试题库配置
-        </div>
-      </div>
+      <option-bar text="试题库配置" value="考试练习"></option-bar>
     </div>
     <div class="float-left">
       <div class="float-left d-flex">
