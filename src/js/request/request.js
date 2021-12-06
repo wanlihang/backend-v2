@@ -1455,67 +1455,6 @@ const Api = {
       },
     },
   },
-  Organization: {
-    Organization: {
-      List(params) {
-        return get(`/backend/api/v1/organization/organization/index`, params);
-      },
-      Create() {
-        return get(`/backend/api/v1/organization/organization/create`);
-      },
-      Store(params) {
-        return post(`/backend/api/v1/organization/organization/create`, params);
-      },
-      Edit(id) {
-        return get(`/backend/api/v1/organization/organization/${id}`);
-      },
-      Update(id, params) {
-        return put(`/backend/api/v1/organization/organization/${id}`, params);
-      },
-      Destroy(id) {
-        return destroy(`/backend/api/v1/organization/organization/${id}`);
-      },
-    },
-    Admin: {
-      List(params) {
-        return get(`/backend/api/v1/organization/admin/index`, params);
-      },
-      Create() {
-        return get(`/backend/api/v1/organization/admin/create`);
-      },
-      Store(params) {
-        return post(`/backend/api/v1/organization/admin/create`, params);
-      },
-      Edit(id) {
-        return get(`/backend/api/v1/organization/admin/${id}`);
-      },
-      Update(id, params) {
-        return put(`/backend/api/v1/organization/admin/${id}`, params);
-      },
-      Destroy(id) {
-        return destroy(`/backend/api/v1/organization/admin/${id}`);
-      },
-    },
-    User: {
-      List(params) {
-        return get(`/backend/api/v1/organization/user/index`, params);
-      },
-    },
-    Course: {
-      List(params) {
-        return get(`/backend/api/v1/organization/course/index`, params);
-      },
-      Create() {
-        return get(`/backend/api/v1/organization/course/create`);
-      },
-      Store(params) {
-        return post(`/backend/api/v1/organization/course/create`, params);
-      },
-      DestoryMulti(params) {
-        return post(`/backend/api/v1/organization/course/create`, params);
-      },
-    },
-  },
   SinglePage: {
     List(params) {
       return get(`/backend/addons/single_page/page/index`, params);
