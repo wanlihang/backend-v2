@@ -1,10 +1,6 @@
 <template>
   <div class="quill-editor-box">
-    <div
-      ref="myQuillEditor"
-      class="quill-editor"
-      :style="{ height: (height || 'auto') + 'px' }"
-    >
+    <div ref="myQuillEditor" class="quill-editor">
       <slot name="toolbar"></slot>
       <div ref="editor"></div>
     </div>
@@ -75,7 +71,7 @@ export default {
       this.quill.enable(false);
       // 初始值
       this.quill.pasteHTML(this.value || "");
-      this.$nextTick(function () {
+      this.$nextTick(function() {
         //丢掉编辑器焦点并重新启用编辑器
         this.quill.blur();
         this.quill.enable(true);
@@ -122,7 +118,6 @@ export default {
 <style lang="less" scoped>
 .quill-editor-box {
   width: 100%;
-  height: auto;
   float: left;
 }
 </style>
@@ -136,6 +131,12 @@ export default {
     svg {
       display: block;
     }
+  }
+  .ql-toolbar.ql-snow {
+    padding: 0;
+  }
+  .ql-editor {
+    min-height: 80px;
   }
 }
 </style>
