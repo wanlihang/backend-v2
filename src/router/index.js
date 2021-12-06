@@ -534,6 +534,14 @@ const routes = [{
   }
 },
 {
+  path: '/member/profile',
+  component: () => import('@/views/member/profile'),
+  name: 'MemberProfile',
+  meta: {
+    title: 'title.member.profile'
+  }
+},
+{
   path: '/member/:userId',
   component: () => import('@/views/member/detail'),
   name: 'MemberDetail',
