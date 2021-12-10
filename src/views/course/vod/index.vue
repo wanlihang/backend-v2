@@ -32,6 +32,7 @@
       </p-button>
 
       <p-button
+        v-if="enabledAddons['AliyunHls']"
         text="阿里云视频加密"
         p="video.aliyun_hls.list"
         @click="$router.push({ name: 'CourseVodVideoAliyunHls' })"
@@ -40,6 +41,7 @@
       </p-button>
 
       <p-button
+        v-if="enabledAddons['TencentCloudHls']"
         text="腾讯云视频加密"
         p="addons.TencentCloudHls.videos"
         @click="$router.push({ name: 'CourseVodVideoTencentHls' })"
@@ -213,6 +215,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   data() {
     return {
@@ -236,6 +239,9 @@ export default {
         categories: [],
       },
     };
+  },
+  computed: {
+    ...mapState(["enabledAddons"]),
   },
   activated() {
     this.getCourse();
