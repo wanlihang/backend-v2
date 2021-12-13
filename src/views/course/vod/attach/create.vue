@@ -12,7 +12,12 @@
                 <span class="ml-10" v-if="file.name">{{ file.name }}</span>
               </el-button>
               <div style="display: none">
-                <input type="file" ref="file" @change="fileChange" />
+                <input
+                  type="file"
+                  ref="file"
+                  accept="image/gif,image/jpeg,image/jpg,image/png,.csv,.doc,.txt,.pdf,.md,.zip,"
+                  @change="fileChange"
+                />
               </div>
             </div>
             <div class="ml-10">
