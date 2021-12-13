@@ -8,6 +8,7 @@
         type="primary"
       >
       </p-button>
+      <option-bar text="分销配置" value="三级分销"></option-bar>
     </div>
     <div class="float-left">
       <div class="float-left d-flex">
@@ -177,4 +178,3 @@ export default {
   },
 };
 </script>
-

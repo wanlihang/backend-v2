@@ -24,19 +24,6 @@
         <el-form-item label="密码" prop="password">
           <el-input v-model="user.password" class="w-200px"></el-input>
         </el-form-item>
-
-        <el-form-item prop="is_lock">
-          <span slot="label">
-            <form-label text="登录锁定" helper="锁定用户无法登录"></form-label>
-          </span>
-          <el-switch
-            v-model="user.is_lock"
-            :active-value="1"
-            :inactive-value="0"
-          >
-          </el-switch>
-        </el-form-item>
-
         <el-form-item label="VIP">
           <el-select v-model="user.role_id">
             <el-option
@@ -48,7 +35,6 @@
             </el-option>
           </el-select>
         </el-form-item>
-
         <el-form-item label="VIP到期时间" v-if="user.role_id">
           <el-date-picker
             v-model="user.role_expired_at"
@@ -57,6 +43,17 @@
             value-format="yyyy-MM-dd"
           >
           </el-date-picker>
+        </el-form-item>
+        <el-form-item prop="is_lock">
+          <span slot="label">
+            <form-label text="登录锁定" helper="锁定用户无法登录"></form-label>
+          </span>
+          <el-switch
+            v-model="user.is_lock"
+            :active-value="1"
+            :inactive-value="0"
+          >
+          </el-switch>
         </el-form-item>
       </el-form>
     </div>

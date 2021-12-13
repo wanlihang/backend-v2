@@ -15,6 +15,7 @@
         type="primary"
       >
       </p-button>
+      <option-bar text="团购配置" value="团购"></option-bar>
     </div>
     <div class="float-left">
       <div class="float-left d-flex">

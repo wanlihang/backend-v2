@@ -30,6 +30,7 @@
         type="danger"
       >
       </p-button>
+      <option-bar text="试题库配置" value="考试练习"></option-bar>
     </div>
     <div class="float-left">
       <div class="float-left d-flex">

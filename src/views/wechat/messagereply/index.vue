@@ -7,6 +7,7 @@
         @click="$router.push({ name: 'ReplyCreate' })"
         type="primary"
       ></p-button>
+      <option-bar text="公众号配置" value="微信公众号"></option-bar>
     </div>
     <div class="float-left" v-loading="loading">
       <el-table :data="messages" class="float-left">
@@ -141,4 +142,3 @@ export default {
   },
 };
 </script>
-

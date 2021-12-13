@@ -28,7 +28,7 @@ export default {
   watch: {
     content() {
       this.emitUpdate();
-    }
+    },
   },
   mounted() {
     // 自定义菜单

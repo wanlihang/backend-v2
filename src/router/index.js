@@ -107,6 +107,14 @@ const routes = [{
   }
 },
 {
+  path: '/system/index',
+  component: () => import('@/views/system/index'),
+  name: 'SystemIndex',
+  meta: {
+    title: 'title.system-config'
+  }
+},
+{
   path: '/system/config',
   component: () => import('@/views/system/config'),
   name: 'SystemConfig',
@@ -523,6 +531,14 @@ const routes = [{
   name: 'MemberImport',
   meta: {
     title: 'title.member.import'
+  }
+},
+{
+  path: '/member/profile',
+  component: () => import('@/views/member/profile'),
+  name: 'MemberProfile',
+  meta: {
+    title: 'title.member.profile'
   }
 },
 {
