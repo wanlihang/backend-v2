@@ -3,7 +3,7 @@ import Utils from '@/js/utils';
 import config from '@/js/config';
 
 // 请求超时
-axios.defaults.timeout = 10000;
+axios.defaults.timeout = 20000;
 axios.defaults.baseURL = config.url;
 
 // 请求拦截器(附带上token)
