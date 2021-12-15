@@ -192,6 +192,14 @@ export default {
       Object.assign(this.form, question);
     },
     save() {
+      if (this.form.type === 1 && this.form.option2 === "") {
+        this.$message.error("至少得有两个选项");
+        return;
+      }
+      if (this.form.type === 2 && this.form.option2 === "") {
+        this.$message.error("至少得有两个选项");
+        return;
+      }
       if (!this.form.score) {
         this.$message.warning("试题分数不能为空");
         return;
