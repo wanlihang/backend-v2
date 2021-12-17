@@ -1,5 +1,5 @@
 <template>
-  <div class="quill-editor-box">
+  <div class="quill-editor-box" :class="{ 'h-min-40': height === 40 }">
     <div ref="myQuillEditor" class="quill-editor">
       <slot name="toolbar"></slot>
       <div ref="editor"></div>
@@ -144,6 +144,12 @@ export default {
   }
   .ql-editor {
     min-height: 80px;
+  }
+
+  &.h-min-40 {
+    .ql-editor {
+      min-height: 40px;
+    }
   }
 }
 </style>
