@@ -243,7 +243,7 @@ export default {
 }
 
 .pl-200 {
-  padding-left: 200px;
+  padding: 0 200px;
   box-sizing: border-box;
 }
 </style>
