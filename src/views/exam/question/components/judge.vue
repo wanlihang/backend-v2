@@ -1,6 +1,6 @@
 <template>
   <div class="float-left" v-if="init">
-    <div class="float-left mb-30">
+    <div class="float-left mb-15">
       <div class="float-left helper-text mb-10">
         <span class="c-red">*</span>
         <span class="ml-5">分数</span>
@@ -35,7 +35,7 @@
       </div>
     </div>
 
-    <div class="float-left mb-30">
+    <div class="float-left mb-15">
       <div class="float-left helper-text mb-10">
         <span class="c-red">*</span>
         <span class="ml-5">试题内容</span>
@@ -49,7 +49,7 @@
       </div>
     </div>
 
-    <div class="float-left mb-30">
+    <div class="float-left mb-15">
       <div class="float-left helper-text mb-10">
         <span class="c-red">*</span>
         <span class="ml-5">答案</span>
