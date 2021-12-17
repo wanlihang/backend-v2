@@ -1,6 +1,6 @@
 <template>
   <div class="float-left" v-if="init">
-    <div class="float-left mb-30">
+    <div class="float-left mb-15">
       <div class="float-left helper-text mb-10">
         <span class="c-red">*</span>
         <span class="ml-5">分数</span>
@@ -35,7 +35,7 @@
       </div>
     </div>
 
-    <div class="float-left mb-30">
+    <div class="float-left mb-15">
       <div class="float-left helper-text mb-10">
         <span class="c-red">*</span>
         <span class="ml-5">试题内容</span>
@@ -49,7 +49,7 @@
       </div>
     </div>
 
-    <div class="float-left mb-30" v-for="(i, index) in length" :key="i">
+    <div class="float-left mb-15" v-for="(i, index) in length" :key="i">
       <div class="d-flex">
         <div class="helper-text">
           <span class="c-red">*</span>
@@ -65,7 +65,7 @@
       </div>
     </div>
 
-    <div class="float-left mb-30">
+    <div class="float-left mb-15">
       <el-link type="primary" @click="inc">增加一个空</el-link>
       <el-link class="ml-10" type="danger" v-if="length > 1" @click="dec">
         删除一个空
