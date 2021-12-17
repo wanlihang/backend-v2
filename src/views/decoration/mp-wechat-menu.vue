@@ -39,7 +39,7 @@
               <template v-if="item.sub_button">
                 <div
                   class="children-menu-item"
-                  @click="editMenuItem(childrenItem, childrenIndex, index)"
+                  @click="editMenuItem(childrenItem, index, childrenIndex)"
                   v-for="(childrenItem, childrenIndex) in item.sub_button"
                   :key="childrenIndex"
                 >
@@ -241,10 +241,12 @@ export default {
       if (!this.editItem.item) {
         return;
       }
-      if (this.editItem.pIndex) {
-        // 删除子菜单
-        this.menus[this.editItem.pIndex].sub_button.splice(
-          this.editItem.index,
+      console.log(this.editItem.index + "," + this.editItem.pIndex);
+      if (this.editItem.pIndex === 0) {
+        this.menus[this.editItem.index].sub_button = null;
+      } else if (this.editItem.pIndex !== 0) {
+        this.menus[this.editItem.index].sub_button.splice(
+          this.editItem.pIndex,
           1
         );
       } else {
@@ -290,14 +292,10 @@ export default {
       if (this.loading) {
         return;
       }
-
       // 必填检测
       for (let i = 0; i < this.menus.length; i++) {
         let line = i + 1;
-        if (
-          !this.menus[i].sub_button ||
-          this.menus[i].sub_button.length === 0
-        ) {
+        if (!this.menus[i].sub_button) {
           // 无子菜单
           if (!this.menus[i].name) {
             this.$message.error("第" + line + "个菜单的「菜单名」为空");
