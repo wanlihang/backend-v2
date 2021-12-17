@@ -199,6 +199,10 @@ export default {
         this.$message.error("至少得有两个选项");
         return;
       }
+      if (this.form.type === 6 && !this.form.score) {
+        this.$message.warning("请至少添加一个子题");
+        return;
+      }
       if (!this.form.score) {
         this.$message.warning("试题分数不能为空");
         return;
