@@ -41,7 +41,11 @@
         <span class="ml-5">试题内容</span>
       </div>
       <div class="float-left">
-        <quill-editor :height="100" v-model="form.content"></quill-editor>
+        <quill-editor
+          :height="100"
+          v-model="form.content"
+          mode="question"
+        ></quill-editor>
       </div>
     </div>
 
@@ -51,7 +55,11 @@
         <span class="ml-5">选项{{ i }}</span>
       </div>
       <div class="float-left">
-        <quill-editor :height="100" v-model="form['option' + i]"></quill-editor>
+        <quill-editor
+          :height="100"
+          v-model="form['option' + i]"
+          mode="question"
+        ></quill-editor>
       </div>
     </div>
 
@@ -81,7 +89,11 @@
     <div class="float-left">
       <div class="float-left helper-text mb-10">解析</div>
       <div class="float-left">
-        <quill-editor :height="100" v-model="form.remark"></quill-editor>
+        <quill-editor
+          :height="100"
+          v-model="form.remark"
+          mode="question"
+        ></quill-editor>
       </div>
     </div>
   </div>

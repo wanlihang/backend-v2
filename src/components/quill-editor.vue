@@ -29,7 +29,7 @@ export default {
   components: {
     SelectImage,
   },
-  props: ["value", "height"],
+  props: ["value", "height", "mode"],
   data() {
     return {
       quill: null,
@@ -38,18 +38,7 @@ export default {
       editorOption: {
         theme: "snow",
         modules: {
-          toolbar: [
-            ["bold", "italic", "underline", "strike"],
-            ["blockquote", "code-block"],
-            [{ header: 1 }, { header: 2 }],
-            [{ list: "ordered" }, { list: "bullet" }],
-            [{ size: ["small", false, "large", "huge"] }],
-            [{ header: [1, 2, 3, 4, 5, 6, false] }],
-            [{ color: [] }, { background: [] }],
-            [{ align: [] }],
-            ["clean"],
-            ["link", "image"],
-          ],
+          toolbar: this.toolbar(),
         },
         placeholder: "请输入内容...",
         readOnly: false,
@@ -64,6 +53,22 @@ export default {
     delete this.quill;
   },
   methods: {
+    toolbar() {
+      if (this.mode && this.mode === "question") {
+        return ["bold", "italic", "underline", "strike", "image"];
+      }
+      return [
+        ["bold", "italic", "underline", "strike"],
+        ["blockquote", "code-block"],
+        [{ list: "ordered" }, { list: "bullet" }],
+        [{ size: ["small", false, "large", "huge"] }],
+        [{ header: [1, 2, 3, 4, 5, 6, false] }],
+        [{ color: [] }, { background: [] }],
+        [{ align: [] }],
+        ["clean"],
+        ["link", "image"],
+      ];
+    },
     init() {
       this.quill = new _Quill(this.$refs["myQuillEditor"], this.editorOption);
 
