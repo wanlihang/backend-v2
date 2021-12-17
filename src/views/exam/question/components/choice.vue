@@ -64,8 +64,8 @@
     </div>
 
     <div class="float-left mb-15">
-      <el-link @click="add" type="primary">增加选项</el-link>
-      <el-link class="ml-10" @click="del" type="danger">删除选项</el-link>
+      <el-button @click="add" size="mini" type="primary">新增选项</el-button>
+      <el-button @click="del" size="mini" type="danger">删除选项</el-button>
     </div>
 
     <div class="float-left mb-15">
