@@ -3,7 +3,7 @@
     <back-bar class="mb-30" title="添加试题"></back-bar>
 
     <div class="float-left step-box mb-30">
-      <el-steps :active="step" finish-status="finish">
+      <el-steps :active="step + 1" finish-status="finish">
         <el-step title="确认试题类型"></el-step>
         <el-step title="完善试题信息"></el-step>
       </el-steps>
