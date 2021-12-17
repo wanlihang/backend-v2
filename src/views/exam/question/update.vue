@@ -190,11 +190,10 @@ export default {
       Object.assign(this.form, question);
     },
     save() {
-      if (this.form.type === 1 && this.form.option2 === "") {
-        this.$message.error("至少得有两个选项");
-        return;
-      }
-      if (this.form.type === 2 && this.form.option2 === "") {
+      if (
+        (this.form.type === 1 || this.form.type === 2) &&
+        !this.form.option2
+      ) {
         this.$message.error("至少得有两个选项");
         return;
       }
