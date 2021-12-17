@@ -51,8 +51,7 @@
 
     <div class="float-left mb-30">
       <div class="float-left helper-text mb-10">
-        <span class="c-red">*</span>
-        <span class="ml-5">答案</span>
+        <span>答案</span>
       </div>
       <div class="float-left">
         <span class="helper-text">问答题无标准答案，需要人工介入阅卷。</span>
