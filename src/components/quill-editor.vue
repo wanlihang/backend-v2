@@ -131,6 +131,18 @@ export default {
 .quill-editor-box {
   background-color: white;
 
+  .ql-toolbar.ql-snow {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-color: #dcdfe6;
+  }
+
+  .ql-container.ql-snow {
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-color: #dcdfe6;
+  }
+
   .ql-picker-label::before {
     position: absolute;
   }
