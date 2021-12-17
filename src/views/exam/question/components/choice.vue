@@ -1,6 +1,6 @@
 <template>
   <div class="float-left" v-if="init">
-    <div class="float-left mb-30">
+    <div class="float-left mb-15">
       <div class="float-left helper-text mb-10">
         <span class="c-red">*</span>
         <span class="ml-5">分数</span>
@@ -35,7 +35,7 @@
       </div>
     </div>
 
-    <div class="float-left mb-30">
+    <div class="float-left mb-15">
       <div class="float-left helper-text mb-10">
         <span class="c-red">*</span>
         <span class="ml-5">试题内容</span>
@@ -49,7 +49,7 @@
       </div>
     </div>
 
-    <div class="float-left mb-30" v-for="(i, index) in length" :key="index">
+    <div class="float-left mb-15" v-for="(i, index) in length" :key="index">
       <div class="float-left helper-text mb-10">
         <span class="c-red">*</span>
         <span class="ml-5">选项{{ i }}</span>
@@ -63,12 +63,12 @@
       </div>
     </div>
 
-    <div class="float-left mb-30">
+    <div class="float-left mb-15">
       <el-link @click="add" type="primary">增加选项</el-link>
       <el-link class="ml-10" @click="del" type="danger">删除选项</el-link>
     </div>
 
-    <div class="float-left mb-30">
+    <div class="float-left mb-15">
       <div class="float-left helper-text mb-10">
         <span class="c-red">*</span>
         <span class="ml-5">答案</span>
