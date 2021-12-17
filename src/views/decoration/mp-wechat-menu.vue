@@ -294,7 +294,10 @@ export default {
       // 必填检测
       for (let i = 0; i < this.menus.length; i++) {
         let line = i + 1;
-        if (this.menus[i].sub_button.length === 0) {
+        if (
+          !this.menus[i].sub_button ||
+          this.menus[i].sub_button.length === 0
+        ) {
           // 无子菜单
           if (!this.menus[i].name) {
             this.$message.error("第" + line + "个菜单的「菜单名」为空");
