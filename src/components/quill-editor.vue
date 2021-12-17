@@ -129,6 +129,8 @@ export default {
 
 <style lang="less">
 .quill-editor-box {
+  background-color: white;
+
   .ql-picker-label::before {
     position: absolute;
   }
