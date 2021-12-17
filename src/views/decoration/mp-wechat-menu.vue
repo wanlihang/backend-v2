@@ -17,7 +17,7 @@
     </div>
 
     <div class="float-left mt-15 mb-15">
-      <el-button type="primary" @click="getMenu">拉取微信公众号菜单</el-button>
+      <!--<el-button type="primary" @click="getMenu">拉取微信公众号菜单</el-button>-->
       <!-- <el-button type="danger" @click="empty">删除当前微信公众号菜单</el-button> -->
       <el-button type="primary" @click="sync">将菜单更新到微信公众号</el-button>
     </div>
