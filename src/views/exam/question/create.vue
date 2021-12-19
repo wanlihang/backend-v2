@@ -3,7 +3,7 @@
     <back-bar class="mb-30" title="添加试题"></back-bar>
 
     <div class="float-left step-box mb-30">
-      <el-steps :active="step" finish-status="finish">
+      <el-steps :active="step + 1" finish-status="finish">
         <el-step title="确认试题类型"></el-step>
         <el-step title="完善试题信息"></el-step>
       </el-steps>
@@ -192,6 +192,17 @@ export default {
       Object.assign(this.form, question);
     },
     save() {
+      if (
+        (this.form.type === 1 || this.form.type === 2) &&
+        !this.form.option2
+      ) {
+        this.$message.error("至少得有两个选项");
+        return;
+      }
+      if (this.form.type === 6 && !this.form.score) {
+        this.$message.warning("请至少添加一个子题");
+        return;
+      }
       if (!this.form.score) {
         this.$message.warning("试题分数不能为空");
         return;
@@ -236,7 +247,7 @@ export default {
 }
 
 .pl-200 {
-  padding-left: 200px;
+  padding: 0 200px;
   box-sizing: border-box;
 }
 </style>

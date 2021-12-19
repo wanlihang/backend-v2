@@ -44,9 +44,25 @@
               </el-tag>
             </template>
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="200">
+          <el-table-column fixed="right" label="操作" width="220">
             <template slot-scope="scope">
               <p-link
+                v-if="scope.row.status == 1"
+                text="继续直播"
+                type="primary"
+                @click="
+                  $router.push({
+                    name: 'LiveCourseVideoPlay',
+                    query: {
+                      video_id: scope.row.id,
+                      course_id: scope.row.course_id,
+                    },
+                  })
+                "
+                p="addons.Zhibo.zhibo.open"
+              ></p-link>
+              <p-link
+                v-else
                 text="开播"
                 type="primary"
                 @click="

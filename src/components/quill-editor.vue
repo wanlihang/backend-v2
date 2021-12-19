@@ -1,5 +1,5 @@
 <template>
-  <div class="quill-editor-box">
+  <div class="quill-editor-box" :class="{ 'h-min-40': height === 40 }">
     <div ref="myQuillEditor" class="quill-editor">
       <slot name="toolbar"></slot>
       <div ref="editor"></div>
@@ -29,7 +29,7 @@ export default {
   components: {
     SelectImage,
   },
-  props: ["value", "height"],
+  props: ["value", "height", "mode"],
   data() {
     return {
       quill: null,
@@ -38,18 +38,7 @@ export default {
       editorOption: {
         theme: "snow",
         modules: {
-          toolbar: [
-            ["bold", "italic", "underline", "strike"],
-            ["blockquote", "code-block"],
-            [{ header: 1 }, { header: 2 }],
-            [{ list: "ordered" }, { list: "bullet" }],
-            [{ size: ["small", false, "large", "huge"] }],
-            [{ header: [1, 2, 3, 4, 5, 6, false] }],
-            [{ color: [] }, { background: [] }],
-            [{ align: [] }],
-            ["clean"],
-            ["link", "image"],
-          ],
+          toolbar: this.toolbar(),
         },
         placeholder: "请输入内容...",
         readOnly: false,
@@ -64,6 +53,22 @@ export default {
     delete this.quill;
   },
   methods: {
+    toolbar() {
+      if (this.mode && this.mode === "question") {
+        return ["bold", "italic", "underline", "strike", "image"];
+      }
+      return [
+        ["bold", "italic", "underline", "strike"],
+        ["blockquote", "code-block"],
+        [{ list: "ordered" }, { list: "bullet" }],
+        [{ size: ["small", false, "large", "huge"] }],
+        [{ header: [1, 2, 3, 4, 5, 6, false] }],
+        [{ color: [] }, { background: [] }],
+        [{ align: [] }],
+        ["clean"],
+        ["link", "image"],
+      ];
+    },
     init() {
       this.quill = new _Quill(this.$refs["myQuillEditor"], this.editorOption);
 
@@ -124,6 +129,20 @@ export default {
 
 <style lang="less">
 .quill-editor-box {
+  background-color: white;
+
+  .ql-toolbar.ql-snow {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-color: #dcdfe6;
+  }
+
+  .ql-container.ql-snow {
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-color: #dcdfe6;
+  }
+
   .ql-picker-label::before {
     position: absolute;
   }
@@ -137,6 +156,12 @@ export default {
   }
   .ql-editor {
     min-height: 80px;
+  }
+
+  &.h-min-40 {
+    .ql-editor {
+      min-height: 40px;
+    }
   }
 }
 </style>

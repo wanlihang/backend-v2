@@ -1,12 +1,16 @@
 <template>
   <div class="float-left" v-if="init">
-    <div class="float-left mb-30">
+    <div class="float-left mb-15">
       <div class="float-left helper-text mb-10">
         <span class="c-red">*</span>
         <span class="ml-5">题帽</span>
       </div>
       <div class="float-left">
-        <quill-editor :height="100" v-model="header"></quill-editor>
+        <quill-editor
+          :height="40"
+          v-model="header"
+          mode="question"
+        ></quill-editor>
       </div>
     </div>
 
@@ -56,7 +60,7 @@
       </div>
     </div>
 
-    <div class="float-left mb-30">
+    <div class="float-left mt-15 mb-15">
       <div class="d-flex">
         <div>
           <el-select
@@ -72,26 +76,28 @@
           </el-select>
         </div>
         <div class="ml-10">
-          <el-button type="primary" @click="add">增加一题</el-button>
+          <el-button type="primary" @click="add">新增子题</el-button>
         </div>
       </div>
     </div>
 
-    <div class="float-left mb-30">
+    <div class="float-left mb-15">
       <div class="float-left helper-text mb-10">
-        <span class="c-red">*</span>
-        <span class="ml-5">总分</span>
+        <span>总分</span>
       </div>
       <div class="float-left">
-        <span>{{ form.score }}分</span
-        ><span class="helper-text ml-10">自动计算</span>
+        <span>{{ form.score || 0 }}分</span>
       </div>
     </div>
 
-    <div class="float-left mb-30">
+    <div class="float-left mb-15">
       <div class="float-left helper-text mb-10">解析</div>
       <div class="float-left">
-        <quill-editor :height="100" v-model="form.remark"></quill-editor>
+        <quill-editor
+          :height="40"
+          v-model="form.remark"
+          mode="question"
+        ></quill-editor>
       </div>
     </div>
   </div>
@@ -254,9 +260,13 @@ export default {
   height: auto;
   float: left;
   box-sizing: border-box;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   padding: 20px;
   background-color: rgba(0, 0, 0, 0.05);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 
   .btn-close {
     position: absolute;

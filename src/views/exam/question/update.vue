@@ -9,7 +9,7 @@
       </el-steps>
     </div>
 
-    <div class="float-left" v-show="step === 0">
+    <div class="float-left" v-show="step === 1">
       <template v-if="form">
         <el-form ref="form" :model="form" :rules="rules" label-width="200px">
           <el-form-item label="所属分类" prop="category_id">
@@ -52,7 +52,7 @@
       </template>
     </div>
 
-    <div class="float-left pl-200" v-show="step === 1">
+    <div class="float-left pl-200" v-show="step === 2">
       <template v-if="form">
         <q-choice
           @change="change"
@@ -92,19 +92,19 @@
         <div>
           <el-button
             @click="save"
-            v-if="step === 1"
+            v-if="step === 2"
             :loading="loading"
             type="primary"
           >
             保存
           </el-button>
 
-          <el-button @click="formValidate" v-if="step === 0" :loading="loading">
+          <el-button @click="formValidate" v-if="step === 1" :loading="loading">
             下一步
           </el-button>
         </div>
         <div class="ml-24">
-          <el-button @click="step = 0" v-if="step === 1" :loading="loading">
+          <el-button @click="step = 1" v-if="step === 2" :loading="loading">
             上一步
           </el-button>
         </div>
@@ -137,7 +137,7 @@ export default {
     return {
       id: this.$route.query.id,
       loading: false,
-      step: 1,
+      step: 2,
       form: null,
       rules: {
         category_id: [
@@ -182,7 +182,7 @@ export default {
     formValidate() {
       this.$refs["form"].validate((valid) => {
         if (valid) {
-          this.step = 1;
+          this.step = 2;
         }
       });
     },
@@ -190,6 +190,17 @@ export default {
       Object.assign(this.form, question);
     },
     save() {
+      if (
+        (this.form.type === 1 || this.form.type === 2) &&
+        !this.form.option2
+      ) {
+        this.$message.error("至少得有两个选项");
+        return;
+      }
+      if (this.form.type === 6 && !this.form.score) {
+        this.$message.warning("请至少添加一个子题");
+        return;
+      }
       if (!this.form.score) {
         this.$message.warning("试题分数不能为空");
         return;
@@ -234,7 +245,7 @@ export default {
 }
 
 .pl-200 {
-  padding-left: 200px;
+  padding: 0 200px;
   box-sizing: border-box;
 }
 </style>
