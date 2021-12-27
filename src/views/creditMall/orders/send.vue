@@ -4,6 +4,30 @@
 
     <div class="float-left" v-if="form">
       <el-form ref="form" :model="form" :rules="rules" label-width="200px">
+        <el-form-item label="联系名称">
+          <el-input
+            class="w-200px"
+            v-model="user_contact_name"
+            type="text"
+            disabled
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="联系手机">
+          <el-input
+            class="w-200px"
+            v-model="user_contact_mobile"
+            type="number"
+            disabled
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="联系地址">
+          <el-input
+            class="w-400px"
+            v-model="user_contact_address"
+            type="text"
+            disabled
+          ></el-input>
+        </el-form-item>
         <el-form-item
           v-if="goods_is_v === 0"
           label="运单号"
@@ -47,6 +71,9 @@ export default {
     return {
       id: this.$route.query.id,
       goods_is_v: this.$route.query.goods_is_v,
+      user_contact_name: null,
+      user_contact_mobile: null,
+      user_contact_address: null,
       form: {
         remark: null,
         express_number: null,
@@ -70,13 +97,23 @@ export default {
       loading: false,
     };
   },
-  mounted() {},
+  mounted() {
+    this.getDetail();
+  },
   methods: {
     formValidate() {
       this.$refs["form"].validate((valid) => {
         if (valid) {
           this.confirm();
         }
+      });
+    },
+    getDetail() {
+      this.$api.CreditMall.Order.Detail(this.id).then((res) => {
+        this.user_contact_address = res.data.user_contact_address;
+        this.user_contact_mobile = res.data.user_contact_mobile;
+        this.user_contact_name = res.data.user_contact_name;
+        this.form.express_number = res.data.express_number;
       });
     },
     confirm() {

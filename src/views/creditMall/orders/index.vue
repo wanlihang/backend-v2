@@ -73,13 +73,13 @@
               {{ scope.row.total_charge }}积分
             </template>
           </el-table-column>
-          <el-table-column prop="express_number" label="运单号" width="200">
-          </el-table-column>
           <el-table-column label="状态">
             <template slot-scope="scope">
               <span v-if="scope.row.is_send === 1">已发放成功</span>
               <span v-else-if="scope.row.is_send === 0">发货中</span>
             </template>
+          </el-table-column>
+          <el-table-column prop="express_number" label="运单号" width="200">
           </el-table-column>
           <el-table-column label="时间" width="200">
             <template slot-scope="scope">{{
