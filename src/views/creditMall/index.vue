@@ -58,7 +58,7 @@
             </template>
           </el-table-column>
           <el-table-column property="charge" label="价格" width="200">
-            <template slot-scope="scope"> {{ scope.row.charge }}元 </template>
+            <template slot-scope="scope"> {{ scope.row.charge }}积分 </template>
           </el-table-column>
           <el-table-column label="库存" width="250">
             <template slot-scope="scope">

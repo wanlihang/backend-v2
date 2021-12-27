@@ -64,14 +64,14 @@
               <div>
                 <el-input
                   type="number"
-                  placeholder="单位：元"
+                  placeholder="单位：积分"
                   v-model="course.charge"
                   class="w-200px"
                 ></el-input>
               </div>
               <div class="ml-15">
                 <helper-text
-                  text="价格最小单位为：元，不支持小数。"
+                  text="价格最小单位为：积分，不支持小数。"
                 ></helper-text>
               </div>
             </div>
@@ -231,7 +231,6 @@ export default {
     change(data) {
       this.course.v_id = data.id;
       this.course.title = data.title;
-      this.course.charge = data.original_charge;
       this.course.thumb = data.thumb;
       this.showSelectResWin = false;
     },
