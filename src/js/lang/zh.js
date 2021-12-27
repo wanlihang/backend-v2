@@ -64,6 +64,11 @@ const zh = {
       index: "商品列表",
       create: "添加商品",
       update: "编辑商品",
+      orders: {
+        index: "积分订单",
+        update: "编辑积分订单",
+        send: "积分订单发货",
+      },
     },
     tuangou: {
       name: "团购",

@@ -735,7 +735,7 @@ const Api = {
       Update(id, params) {
         return put(`/backend/addons/Credit1Mall/orders/${id}`, params);
       },
-      Store(id, params) {
+      Send(id, params) {
         return post(`/backend/addons/Credit1Mall/orders/${id}/send`, params);
       },
     },

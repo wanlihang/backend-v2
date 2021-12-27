@@ -1,21 +1,6 @@
 <template>
   <div class="meedu-main-body">
-    <div class="float-left mb-30">
-      <p-button
-        text="添加"
-        p="addons.credit1Mall.goods.store"
-        @click="$router.push({ name: 'CreditMallCreate' })"
-        type="primary"
-      >
-      </p-button>
-      <p-button
-        text="订单"
-        p="addons.credit1Mall.orders.list"
-        @click="$router.push({ name: 'CreditMallOrders' })"
-        type="primary"
-      >
-      </p-button>
-    </div>
+    <back-bar class="mb-30" title="积分订单"></back-bar>
     <div class="float-left">
       <div class="float-left d-flex">
         <div>
@@ -52,25 +37,48 @@
       <div class="float-left">
         <el-table :data="results" class="float-left">
           <el-table-column prop="id" label="ID" width="120"> </el-table-column>
+          <el-table-column label="类型" width="100">
+            <template slot-scope="scope">
+              <span v-if="scope.row.goods_is_v === 1">虚拟</span>
+              <span v-else-if="scope.row.goods_is_v === 0">实物</span>
+            </template>
+          </el-table-column>
           <el-table-column label="商品">
             <template slot-scope="scope">
               <div class="d-flex">
                 <div>
-                  <img :src="scope.row.thumb" width="120" height="90" />
+                  <img :src="scope.row.goods_thumb" width="120" height="90" />
                 </div>
                 <div class="ml-10">
-                  {{ scope.row.title }}
+                  {{ scope.row.goods_title }}
                 </div>
               </div>
             </template>
           </el-table-column>
-          <el-table-column property="charge" label="价格" width="200">
-            <template slot-scope="scope"> {{ scope.row.charge }}积分 </template>
-          </el-table-column>
-          <el-table-column label="库存" width="250">
+
+          <el-table-column label="用户">
             <template slot-scope="scope">
-              已卖出：{{ scope.row.sales_count }}<br />
-              剩余：{{ scope.row.stock_count }}
+              <div class="d-flex" v-if="scope.row.user">
+                <div>
+                  <img :src="scope.row.user.avatar" width="40" height="40" />
+                </div>
+                <div class="ml-10">
+                  {{ scope.row.user.nick_name }}
+                </div>
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column label="价格" width="200">
+            <template slot-scope="scope">
+              {{ scope.row.total_charge }}积分
+            </template>
+          </el-table-column>
+          <el-table-column prop="express_number" label="运单号" width="200">
+          </el-table-column>
+          <el-table-column label="状态">
+            <template slot-scope="scope">
+              <span v-if="scope.row.is_send === 1">已发放成功</span>
+              <span v-else-if="scope.row.is_send === 0">发货中</span>
             </template>
           </el-table-column>
           <el-table-column label="时间" width="200">
@@ -82,21 +90,30 @@
             <template slot-scope="scope">
               <p-link
                 text="编辑"
-                p="addons.credit1Mall.goods.update"
+                p="addons.credit1Mall.orders.update"
                 type="primary"
                 @click="
                   $router.push({
-                    name: 'CreditMallUpdate',
+                    name: 'CreditMallOrdersUpdate',
                     query: { id: scope.row.id },
                   })
                 "
               ></p-link>
               <p-link
-                text="删除"
+                v-if="scope.row.is_send !== 1"
+                text="发货"
                 class="ml-5"
-                p="addons.credit1Mall.goods.delete"
-                type="danger"
-                @click="destory(scope.row.id)"
+                p="addons.credit1Mall.orders.send"
+                type="primary"
+                @click="
+                  $router.push({
+                    name: 'CreditMallOrdersSend',
+                    query: {
+                      id: scope.row.id,
+                      goods_is_v: scope.row.goods_is_v,
+                    },
+                  })
+                "
               ></p-link>
             </template>
           </el-table-column>
@@ -171,39 +188,12 @@ export default {
       let params = {};
       Object.assign(params, this.filter);
       Object.assign(params, this.pagination);
-      this.$api.CreditMall.Goods.List(params).then((res) => {
+      this.$api.CreditMall.Order.List(params).then((res) => {
         this.loading = false;
         this.results = res.data.data.data;
-        this.filterData.goodsTypes = res.data.goods_type;
+        this.filterData.goodsTypes = res.data.types;
         this.total = res.data.data.total;
       });
-    },
-    destory(item) {
-      this.$confirm("确认操作？", "警告", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning",
-      })
-        .then(() => {
-          //点击确定按钮的操作
-          if (this.loading) {
-            return;
-          }
-          this.loading = true;
-          this.$api.CreditMall.Goods.Destory(item)
-            .then(() => {
-              this.loading = false;
-              this.$message.success(this.$t("common.success"));
-              this.getData();
-            })
-            .catch((e) => {
-              this.loading = false;
-              this.$message.error(e.message);
-            });
-        })
-        .catch(() => {
-          //点击删除按钮的操作
-        });
     },
   },
 };

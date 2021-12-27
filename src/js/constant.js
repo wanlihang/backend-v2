@@ -196,5 +196,8 @@ export default {
     CreditMall: "CreditMall",
     CreditMallCreate: "CreditMall",
     CreditMallUpdate: "CreditMall",
+    CreditMallOrders: "CreditMall",
+    CreditMallOrdersUpdate: "CreditMall",
+    CreditMallOrdersSend: "CreditMall",
   },
 };

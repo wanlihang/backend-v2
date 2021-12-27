@@ -1635,6 +1635,31 @@ const routes = [
       title: "title.creditMall.update",
     },
   },
+  {
+    path: "/creditMall/orders/index",
+    component: () => import("@/views/creditMall/orders/index"),
+    name: "CreditMallOrders",
+    meta: {
+      title: "title.creditMall.orders.index",
+      keepAlive: true,
+    },
+  },
+  {
+    path: "/creditMall/orders/update",
+    component: () => import("@/views/creditMall/orders/update"),
+    name: "CreditMallOrdersUpdate",
+    meta: {
+      title: "title.creditMall.orders.update",
+    },
+  },
+  {
+    path: "/creditMall/orders/send",
+    component: () => import("@/views/creditMall/orders/send"),
+    name: "CreditMallOrdersSend",
+    meta: {
+      title: "title.creditMall.orders.send",
+    },
+  },
 ];
 
 const router = new VueRouter({
