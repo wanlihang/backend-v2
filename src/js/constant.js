@@ -193,5 +193,8 @@ export default {
     ExamQuestionCategories: "ExamQuestion",
     ExamQuestionCategoriesCreate: "ExamQuestion",
     ExamQuestionCategoriesUpdate: "ExamQuestion",
+    CreditMall: "CreditMall",
+    CreditMallCreate: "CreditMall",
+    CreditMallUpdate: "CreditMall",
   },
 };

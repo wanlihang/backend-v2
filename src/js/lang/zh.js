@@ -59,6 +59,12 @@ const zh = {
         update: "编辑秒杀课程",
       },
     },
+    creditMall: {
+      name: "积分商城",
+      index: "商品列表",
+      create: "添加商品",
+      update: "编辑商品",
+    },
     tuangou: {
       name: "团购",
       orders: "团购订单",
