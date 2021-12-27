@@ -93,13 +93,23 @@ export default {
       loading: false,
     };
   },
-  mounted() {},
+  mounted() {
+    this.getDetail();
+  },
   methods: {
     formValidate() {
       this.$refs["form"].validate((valid) => {
         if (valid) {
           this.confirm();
         }
+      });
+    },
+    getDetail() {
+      this.$api.CreditMall.Order.Detail(this.id).then((res) => {
+        this.form.user_contact_address = res.data.user_contact_address;
+        this.form.user_contact_mobile = res.data.user_contact_mobile;
+        this.form.user_contact_name = res.data.user_contact_name;
+        this.form.express_number = res.data.express_number;
       });
     },
     confirm() {
