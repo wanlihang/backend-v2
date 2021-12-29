@@ -36,26 +36,15 @@
     <div class="float-left mt-30" v-loading="loading">
       <div class="float-left">
         <el-table :data="results" class="float-left">
-          <el-table-column prop="id" label="ID" width="120"> </el-table-column>
-          <el-table-column label="类型" width="100">
+          <el-table-column prop="id" label="ID" width="60"> </el-table-column>
+          <el-table-column label="类型" width="60">
             <template slot-scope="scope">
               <span v-if="scope.row.goods_is_v === 1">虚拟</span>
               <span v-else-if="scope.row.goods_is_v === 0">实物</span>
             </template>
           </el-table-column>
-          <el-table-column label="商品">
-            <template slot-scope="scope">
-              <div class="d-flex">
-                <div>
-                  <img :src="scope.row.goods_thumb" width="120" height="90" />
-                </div>
-                <div class="ml-10">
-                  {{ scope.row.goods_title }}
-                </div>
-              </div>
-            </template>
+          <el-table-column prop="goods_title" width="300" label="商品">
           </el-table-column>
-
           <el-table-column label="用户">
             <template slot-scope="scope">
               <div class="d-flex" v-if="scope.row.user">
@@ -73,7 +62,7 @@
               {{ scope.row.total_charge }}积分
             </template>
           </el-table-column>
-          <el-table-column label="状态">
+          <el-table-column label="状态" width="120">
             <template slot-scope="scope">
               <span v-if="scope.row.is_send === 1">已发放成功</span>
               <span v-else-if="scope.row.is_send === 0">发货中</span>
