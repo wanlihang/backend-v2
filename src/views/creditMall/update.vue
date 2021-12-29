@@ -15,7 +15,7 @@
       </div>
     </div>
 
-    <div class="float-left" v-if="course.desc">
+    <div class="float-left" v-if="course">
       <el-form ref="form" :model="course" :rules="rules" label-width="200px">
         <div class="float-left" v-show="tab.active === 'base'">
           <el-form-item label="商品名" prop="title">
@@ -131,17 +131,7 @@ export default {
           },
         ],
       },
-      course: {
-        is_show: 1,
-        is_v: 0,
-        charge: null,
-        title: null,
-        v_id: null,
-        v_type: null,
-        thumb: null,
-        desc: null,
-        stock_count: null,
-      },
+      course: null,
       rules: {
         charge: [
           {
