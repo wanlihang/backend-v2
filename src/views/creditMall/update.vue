@@ -15,7 +15,7 @@
       </div>
     </div>
 
-    <div class="float-left">
+    <div class="float-left" v-if="course.desc">
       <el-form ref="form" :model="course" :rules="rules" label-width="200px">
         <div class="float-left" v-show="tab.active === 'base'">
           <el-form-item label="是否虚拟商品">
@@ -76,7 +76,7 @@
               </div>
             </div>
           </el-form-item>
-          <el-form-item prop="desc" v-if="course.desc" label="介绍">
+          <el-form-item prop="desc" label="介绍">
             <quill-editor :height="400" v-model="course.desc"></quill-editor>
           </el-form-item>
           <el-form-item label="库存" prop="charge">
