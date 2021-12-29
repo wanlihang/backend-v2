@@ -69,8 +69,8 @@
           </el-table-column>
           <el-table-column label="库存" width="250">
             <template slot-scope="scope">
-              已卖出：{{ scope.row.sales_count }}<br />
-              剩余：{{ scope.row.stock_count }}
+              兑换：{{ scope.row.sales_count }}<br />
+              库存：{{ scope.row.stock_count }}
             </template>
           </el-table-column>
           <el-table-column label="时间" width="200">
