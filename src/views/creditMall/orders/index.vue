@@ -37,7 +37,7 @@
       <div class="float-left">
         <el-table :data="results" class="float-left">
           <el-table-column prop="id" label="ID" width="60"> </el-table-column>
-          <el-table-column label="类型" width="60">
+          <el-table-column label="类型">
             <template slot-scope="scope">
               <span v-if="scope.row.goods_is_v === 1">虚拟</span>
               <span v-else-if="scope.row.goods_is_v === 0">实物</span>
@@ -45,7 +45,7 @@
           </el-table-column>
           <el-table-column prop="goods_title" width="300" label="商品">
           </el-table-column>
-          <el-table-column label="用户">
+          <el-table-column label="用户" width="300">
             <template slot-scope="scope">
               <div class="d-flex" v-if="scope.row.user">
                 <div>
