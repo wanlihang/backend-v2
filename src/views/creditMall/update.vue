@@ -18,34 +18,6 @@
     <div class="float-left" v-if="course.desc">
       <el-form ref="form" :model="course" :rules="rules" label-width="200px">
         <div class="float-left" v-show="tab.active === 'base'">
-          <el-form-item label="是否虚拟商品">
-            <el-switch
-              v-model="course.is_v"
-              :active-value="1"
-              :inactive-value="0"
-            >
-            </el-switch>
-          </el-form-item>
-          <el-form-item label="虚拟商品类型" v-if="course.is_v === 1">
-            <el-select v-model="course.v_type">
-              <el-option
-                v-for="(item, index) in types"
-                :key="index"
-                :label="item.name"
-                :value="item.value"
-              >
-              </el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item
-            label="虚拟商品"
-            v-if="course.is_v === 1 && course.v_type"
-          >
-            <el-button type="primary" @click="showSelectResWin = true">
-              <span>选择商品</span>
-              <span v-if="course.v_id">已选择「{{ course.title }}」</span>
-            </el-button>
-          </el-form-item>
           <el-form-item label="商品名" prop="title">
             <el-input v-model="course.title" class="w-500px"></el-input>
           </el-form-item>
