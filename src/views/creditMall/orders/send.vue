@@ -4,29 +4,16 @@
 
     <div class="float-left" v-if="form">
       <el-form ref="form" :model="form" :rules="rules" label-width="200px">
-        <el-form-item label="联系名称">
-          <el-input
-            class="w-200px"
-            v-model="user_contact_name"
-            type="text"
-            disabled
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="联系手机">
-          <el-input
-            class="w-200px"
-            v-model="user_contact_mobile"
-            type="number"
-            disabled
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="联系地址">
-          <el-input
-            class="w-400px"
-            v-model="user_contact_address"
-            type="text"
-            disabled
-          ></el-input>
+        <el-form-item label="收货人地址">
+          <div class="d-flex">
+            <div class="value">
+              {{ user_contact_address }} {{ user_contact_name }}
+              {{ user_contact_mobile }}
+            </div>
+            <div class="ml-30">
+              <el-link type="primary" @click="copy()">复制</el-link>
+            </div>
+          </div>
         </el-form-item>
         <el-form-item
           v-if="goods_is_v === 0"
@@ -115,6 +102,20 @@ export default {
         this.user_contact_name = res.data.user_contact_name;
         this.form.express_number = res.data.express_number;
       });
+    },
+    copy() {
+      var input = document.createElement("input");
+      input.value =
+        this.user_contact_address +
+        " " +
+        this.user_contact_name +
+        " " +
+        this.user_contact_mobile;
+      document.body.appendChild(input);
+      input.select();
+      document.execCommand("Copy");
+      document.body.removeChild(input);
+      this.$message.success("复制成功");
     },
     confirm() {
       if (this.loading) {
