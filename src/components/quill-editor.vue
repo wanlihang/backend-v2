@@ -16,13 +16,14 @@
 
 <script>
 import _Quill from "quill";
+import katex from "katex";
 
 import "quill/dist/quill.core.css";
 import "quill/dist/quill.snow.css";
 import "quill/dist/quill.bubble.css";
+import "katex/dist/katex.css";
 
 import debounce from "lodash/debounce";
-
 import SelectImage from "@/components/select-image";
 
 export default {
@@ -39,6 +40,7 @@ export default {
         theme: "snow",
         modules: {
           toolbar: this.toolbar(),
+          formula: true,
         },
         placeholder: "请输入内容...",
         readOnly: false,
@@ -46,6 +48,7 @@ export default {
     };
   },
   mounted() {
+    window.katex = katex;
     this.init();
   },
   beforeDestroy() {
