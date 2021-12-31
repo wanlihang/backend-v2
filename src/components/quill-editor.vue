@@ -66,7 +66,7 @@ export default {
         [{ color: [] }, { background: [] }],
         [{ align: [] }],
         ["clean"],
-        ["link", "image"],
+        ["link", "video", "image", "formula"],
       ];
     },
     init() {
