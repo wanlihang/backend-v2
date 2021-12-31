@@ -60,7 +60,7 @@
                   :style="{
                     'background-image': 'url(' + scope.row.thumb + ')',
                     width: '120px',
-                    height: '90px',
+                    height: '120px',
                     'background-repeat': 'no-repeat',
                     'background-size': 'contain',
                     'background-position': 'center center',
