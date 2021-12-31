@@ -42,7 +42,7 @@
       </div>
       <div class="float-left">
         <quill-editor
-          :isFormula="true"
+          :is-formula="true"
           :height="40"
           v-model="form.content"
           mode="question"
@@ -77,7 +77,7 @@
       <div class="float-left helper-text mb-10">解析</div>
       <div class="float-left">
         <quill-editor
-          :isFormula="true"
+          :is-formula="true"
           :height="40"
           v-model="form.remark"
           mode="question"
