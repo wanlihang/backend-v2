@@ -66,7 +66,7 @@
                     'background-position': 'center center',
                   }"
                 ></div>
-                <div class="ml-10">
+                <div class="ml-10" style="width: 250px">
                   {{ scope.row.title }}
                 </div>
               </div>
