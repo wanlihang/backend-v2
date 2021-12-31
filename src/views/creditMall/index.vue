@@ -53,7 +53,7 @@
       <div class="float-left">
         <el-table :data="results" class="float-left">
           <el-table-column prop="id" label="ID" width="120"> </el-table-column>
-          <el-table-column label="商品">
+          <el-table-column label="商品" width="400">
             <template slot-scope="scope">
               <div class="d-flex">
                 <div
@@ -72,7 +72,7 @@
               </div>
             </template>
           </el-table-column>
-          <el-table-column property="charge" label="价格" width="200">
+          <el-table-column property="charge" label="价格">
             <template slot-scope="scope"> {{ scope.row.charge }}积分 </template>
           </el-table-column>
           <el-table-column label="库存" width="250">
