@@ -139,13 +139,6 @@ export default {
           active: null,
         });
       }
-      if (this.enabledAddons["Credit1Mall"]) {
-        links.push({
-          name: "积分商城",
-          url: "/member/credit1_records",
-          active: null,
-        });
-      }
 
       return links;
     },
