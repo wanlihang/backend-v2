@@ -15,6 +15,7 @@
         type="primary"
       >
       </p-button>
+      <option-bar text="积分配置" value="积分"></option-bar>
     </div>
     <div class="float-left">
       <div class="float-left d-flex">
@@ -55,9 +56,16 @@
           <el-table-column label="商品">
             <template slot-scope="scope">
               <div class="d-flex">
-                <div>
-                  <img :src="scope.row.thumb" width="120" height="90" />
-                </div>
+                <div
+                  :style="{
+                    'background-image': 'url(' + scope.row.thumb + ')',
+                    width: '120px',
+                    height: '90px',
+                    'background-repeat': 'no-repeat',
+                    'background-size': 'contain',
+                    'background-position': 'center center',
+                  }"
+                ></div>
                 <div class="ml-10">
                   {{ scope.row.title }}
                 </div>

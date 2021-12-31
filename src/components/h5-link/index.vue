@@ -103,7 +103,7 @@ export default {
       let links = [
         {
           name: "录播课程列表",
-          url: "/packageA/vod/index"
+          url: "/packageA/vod/index",
         },
       ];
 
@@ -172,6 +172,13 @@ export default {
         links.push({
           name: "错题本",
           url: "/packageA/exam/wrongbook/index",
+        });
+      }
+      if (this.enabledAddons["Credit1Mall"]) {
+        links.push({
+          name: "积分商城",
+          url: "/packageA/member/credit1",
+          active: null,
         });
       }
 
