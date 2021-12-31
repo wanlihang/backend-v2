@@ -30,7 +30,7 @@ export default {
   components: {
     SelectImage,
   },
-  props: ["value", "height", "mode"],
+  props: ["value", "height", "mode", "isFormula"],
   data() {
     return {
       quill: null,
@@ -40,7 +40,7 @@ export default {
         theme: "snow",
         modules: {
           toolbar: this.toolbar(),
-          formula: true,
+          formula: this.formula(),
         },
         placeholder: "请输入内容...",
         readOnly: false,
@@ -56,10 +56,21 @@ export default {
     delete this.quill;
   },
   methods: {
+    formula() {
+      if (this.isFormula) {
+        return true;
+      } else {
+        return false;
+      }
+    },
     toolbar() {
       if (this.mode && this.mode === "question") {
+        if (this.isFormula) {
+          return ["bold", "italic", "underline", "strike", "image", "formula"];
+        }
         return ["bold", "italic", "underline", "strike", "image"];
       }
+
       return [
         ["bold", "italic", "underline", "strike"],
         ["blockquote", "code-block"],
@@ -69,7 +80,7 @@ export default {
         [{ color: [] }, { background: [] }],
         [{ align: [] }],
         ["clean"],
-        ["link", "video", "image", "formula"],
+        ["link", "video", "image"],
       ];
     },
     init() {
