@@ -24,10 +24,10 @@
           <el-form-item prop="thumb" label="商品封面">
             <upload-image
               v-model="course.thumb"
-              helper="长宽比4:3，建议尺寸：400x300像素"
               width="400"
-              height="300"
+              height="400"
               name="上传封面"
+              :status="true"
             ></upload-image>
           </el-form-item>
 
@@ -95,24 +95,16 @@
         </div>
       </div>
     </div>
-    <select-resource
-      v-bind:show="showSelectResWin"
-      @change="change"
-      @close="showSelectResWin = false"
-      :enabled-resource="course.v_type"
-    ></select-resource>
   </div>
 </template>
 <script>
 import QuillEditor from "@/components/quill-editor";
 import UploadImage from "@/components/upload-image";
-import SelectResource from "@/components/select-resources/newIndex";
 
 export default {
   components: {
     QuillEditor,
     UploadImage,
-    SelectResource,
   },
   data() {
     return {

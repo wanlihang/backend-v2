@@ -52,9 +52,9 @@
           <el-form-item prop="thumb" label="商品封面">
             <upload-image
               v-model="course.thumb"
-              helper="长宽比4:3，建议尺寸：400x300像素"
               width="400"
-              height="300"
+              height="400"
+              :status="true"
               name="上传封面"
             ></upload-image>
           </el-form-item>
