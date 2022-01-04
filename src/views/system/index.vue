@@ -242,16 +242,10 @@ export default {
           sign: "TuanGou",
         },
         {
-          name: "积分奖励",
+          name: "积分签到",
           value: "积分",
           images: require("../../assets/images/config/credict.png"),
           sign: "",
-        },
-        {
-          name: "签到配置",
-          value: "每日签到",
-          images: require("../../assets/images/config/icon-sign in.png"),
-          sign: "DaySignIn",
         },
       ],
     };
