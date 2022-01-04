@@ -4,7 +4,28 @@
       <slot name="toolbar"></slot>
       <div ref="editor"></div>
     </div>
-
+    <!--弹窗数据-->
+    <el-dialog
+      title="插入视频地址"
+      :visible="dialogFormVisible"
+      :show-close="false"
+      :close-on-click-modal="false"
+      :close-on-press-escape="false"
+    >
+      <el-form :model="form">
+        <el-form-item>
+          <el-input
+            v-model="form.videoIframe"
+            placeholder="如：<iframe src=... ></iframe>"
+            auto-complete="off"
+          ></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="confirm()">确 定</el-button>
+      </div>
+    </el-dialog>
     <select-image
       :show="showUploadImage"
       :from="1"
@@ -34,7 +55,11 @@ export default {
   data() {
     return {
       quill: null,
+      dialogFormVisible: false,
       showUploadImage: false,
+      form: {
+        videoIframe: "",
+      },
       editorIndex: 0,
       editorOption: {
         theme: "snow",
@@ -90,7 +115,7 @@ export default {
       this.quill.enable(false);
       // 初始值
       this.quill.pasteHTML(this.value || "");
-      this.$nextTick(function() {
+      this.$nextTick(function () {
         //丢掉编辑器焦点并重新启用编辑器
         this.quill.blur();
         this.quill.enable(true);
@@ -99,6 +124,10 @@ export default {
       // 自定义imageHandler
       this.quill.getModule("toolbar").addHandler("image", () => {
         this.showUploadImage = true;
+      });
+      //  自定义插入视频
+      this.quill.getModule("toolbar").addHandler("video", () => {
+        this.dialogFormVisible = true;
       });
 
       // 监听记录Index
@@ -125,6 +154,27 @@ export default {
     },
     onEditorChange(val) {
       this.$emit("input", val);
+    },
+    confirm() {
+      this.quill.focus();
+      if (!/^<iframe.+<\/iframe>$/.test(this.form.videoIframe)) {
+        this.form.videoIframe = "";
+        return;
+      }
+      var range = this.quill.getSelection();
+      if (range) {
+        //  在当前光标位置插入图片
+        this.quill
+          .getModule("toolbar")
+          .quill.clipboard.dangerouslyPasteHTML(
+            range.index,
+            this.form.videoIframe
+          );
+        //  将光标移动到图片后面
+        this.quill.getModule("toolbar").quill.setSelection(range.index + 1);
+      }
+      this.form.videoIframe = "";
+      this.dialogFormVisible = false;
     },
     uploadImage(imgUrl) {
       this.quill.insertEmbed(this.editorIndex, "image", imgUrl);
