@@ -11,8 +11,18 @@
       </div>
     </div>
 
-    <div class="preview-box float-left mt-15" v-if="value">
+    <div class="preview-box float-left mt-15" v-if="!status && value">
       <img :src="value" :width="width" :height="height" />
+    </div>
+    <div class="preview-box float-left mt-15" v-if="status && value">
+      <div
+        class="contain-box"
+        :style="{
+          'background-image': 'url(' + value + ')',
+          width: width + 'px',
+          height: height + 'px',
+        }"
+      ></div>
     </div>
 
     <select-image
@@ -30,7 +40,7 @@ export default {
   components: {
     SelectImage,
   },
-  props: ["value", "helper", "width", "height"],
+  props: ["value", "helper", "width", "height", "status"],
   data() {
     return {
       show: false,
@@ -67,6 +77,12 @@ export default {
 .preview-box {
   img {
     max-width: 100%;
+  }
+  .contain-box {
+    max-width: 100%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
   }
 }
 </style>

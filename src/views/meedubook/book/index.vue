@@ -23,6 +23,7 @@
           type="primary"
         >
         </p-button>
+        <option-bar text="电子书推荐" value="电子书"></option-bar>
       </div>
       <div class="float-left">
         <div class="float-left d-flex">

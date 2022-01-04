@@ -13,9 +13,7 @@
           >
           </p-button>
         </div>
-      </div>
-      <div class="float-left d-flex">
-        <div>
+        <div class="ml-10">
           <el-input
             v-model="filter.user_id"
             class="w-200px"
@@ -96,16 +94,6 @@
               scope.row.updated_at | dateFormat
             }}</template>
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="150">
-            <template slot-scope="scope">
-              <p-link
-                text="删除"
-                p="addons.meedu_books.book_article.comments.delete"
-                type="danger"
-                @click="destory(scope.row.id)"
-              ></p-link>
-            </template>
-          </el-table-column>
         </el-table>
       </div>
 
@@ -133,7 +121,7 @@ export default {
         const SELECTWRAP_DOM = el.querySelector(
           ".el-select-dropdown .el-select-dropdown__wrap"
         );
-        SELECTWRAP_DOM.addEventListener("scroll", function () {
+        SELECTWRAP_DOM.addEventListener("scroll", function() {
           const condition =
             this.scrollHeight - this.scrollTop <= this.clientHeight;
           if (condition) {
@@ -282,9 +270,7 @@ export default {
       })
         .then(() => {
           this.loading = true;
-          this.$api.Meedubook.Book.Article.CommentDestoryMulti(
-            this.spids
-          )
+          this.$api.Meedubook.Book.Article.CommentDestoryMulti(this.spids)
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));

@@ -23,6 +23,7 @@
           <el-button @click="getData" type="primary" plain>筛选</el-button>
           <el-button @click="paginationReset">清空</el-button>
         </div>
+        <option-bar text="腾讯云HLS加密" value="腾讯云HLS加密"></option-bar>
       </div>
     </div>
 
@@ -152,5 +153,4 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
-</style>
+<style lang="less" scoped></style>

@@ -15,6 +15,7 @@
         p="addons.meedu_topics.comments"
       >
       </p-button>
+      <option-bar text="图文推荐" value="图文"></option-bar>
     </div>
     <div class="float-left">
       <div class="float-left d-flex">

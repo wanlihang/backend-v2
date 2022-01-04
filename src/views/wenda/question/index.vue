@@ -8,6 +8,7 @@
         type="primary"
       >
       </p-button>
+      <option-bar text="问答配置" value="问答"></option-bar>
     </div>
     <div class="float-left">
       <div class="float-left d-flex">
@@ -334,4 +335,3 @@ export default {
   },
 };
 </script>
-

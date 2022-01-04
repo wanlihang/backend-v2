@@ -58,7 +58,7 @@ export default {
       if (this.enabledAddons["MeeduBooks"]) {
         links.push({
           name: "电子书列表",
-          url: "/books",
+          url: "/book",
           active: "books,book.show,book.read",
         });
       }
@@ -66,7 +66,7 @@ export default {
       if (this.enabledAddons["LearningPaths"]) {
         links.push({
           name: "学习路径列表",
-          url: "/learn/path",
+          url: "/learnPath",
           active: "learning_path.index,learning_path.show",
         });
       }
@@ -74,7 +74,7 @@ export default {
       if (this.enabledAddons["MeeduTopics"]) {
         links.push({
           name: "图文列表",
-          url: "/topics",
+          url: "/topic",
           active: "topic,topic.show",
         });
       }
@@ -107,7 +107,7 @@ export default {
       if (this.enabledAddons["CodeExchanger"]) {
         links.push({
           name: "兑换码",
-          url: "/exchanger",
+          url: "/member/codeexchanger",
           active: "exchanger",
         });
       }
@@ -115,17 +115,22 @@ export default {
       if (this.enabledAddons["Paper"]) {
         links.push({
           name: "考试首页",
-          url: "/papers",
+          url: "/exam",
+          active: "papers,paper.show",
+        });
+        links.push({
+          name: "在线考试首页",
+          url: "/exam/paperss",
           active: "papers,paper.show",
         });
         links.push({
           name: "模拟考试首页",
-          url: "/exam/mock_papers",
+          url: "/exam/mockpapers",
           active: "exam.mock_paper,exam.mock_paper.show",
         });
         links.push({
           name: "在线练习首页",
-          url: "/practices",
+          url: "/exam/practice",
           active: "practices,practice.show",
         });
         links.push({

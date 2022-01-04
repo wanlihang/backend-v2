@@ -15,6 +15,7 @@
         p="addons.Zhibo.course_comment"
       >
       </p-button>
+      <option-bar text="直播服务配置" value="直播"></option-bar>
     </div>
     <div class="float-left">
       <div class="float-left d-flex">
