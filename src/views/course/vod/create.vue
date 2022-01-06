@@ -281,8 +281,8 @@ export default {
           name: "购买后可评论",
         },
       ],
-      categories: [],
       loading: false,
+      categories: [],
     };
   },
   mounted() {
