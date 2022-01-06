@@ -42,7 +42,7 @@
             </el-date-picker>
           </div>
           <div class="ml-15">
-            <el-button @click="getComments" type="primary" plain
+            <el-button @click="firstPageLoad" type="primary" plain
               >筛选</el-button
             >
             <el-button @click="paginationReset">清空</el-button>
@@ -197,6 +197,10 @@ export default {
       this.pagination.page = page;
       this.getComments();
     },
+    firstPageLoad() {
+      this.pagination.page = 1;
+      this.getComments();
+    },
     //保存选中结果
     handleSelectionChange(val) {
       var newbox = [];
@@ -323,5 +327,4 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
-</style>
+<style lang="less" scoped></style>

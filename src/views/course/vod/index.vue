@@ -78,7 +78,7 @@
           </el-select>
         </div>
         <div class="ml-10">
-          <el-button @click="getCourse" type="primary" plain>筛选</el-button>
+          <el-button @click="filterAct" type="primary" plain>筛选</el-button>
           <el-button @click="paginationReset">清空</el-button>
         </div>
       </div>
@@ -265,6 +265,10 @@ export default {
     },
     paginationPageChange(page) {
       this.pagination.page = page;
+      this.getCourse();
+    },
+    filterAct() {
+      this.pagination.page = 1;
       this.getCourse();
     },
     sortChange(column) {

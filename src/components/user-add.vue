@@ -41,7 +41,9 @@
               </el-date-picker>
             </div>
             <div class="ml-10">
-              <el-button @click="getUser" type="primary" plain>筛选</el-button>
+              <el-button @click="firstPageLoad" type="primary" plain
+                >筛选</el-button
+              >
               <el-button @click="paginationReset">清空</el-button>
             </div>
           </div>
@@ -148,6 +150,10 @@ export default {
       this.pagination.page = page;
       this.getUser();
     },
+    firstPageLoad() {
+      this.pagination.page = 1;
+      this.getUser();
+    },
     sortChange(column) {
       this.pagination.sort = column.prop;
       this.pagination.order = column.order === "ascending" ? "asc" : "desc";
@@ -187,5 +193,4 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
-</style>
+<style lang="less" scoped></style>

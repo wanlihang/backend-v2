@@ -20,7 +20,9 @@
           ></el-input>
         </div>
         <div class="ml-10">
-          <el-button @click="getData" type="primary" plain>筛选</el-button>
+          <el-button @click="firstPageLoad" type="primary" plain
+            >筛选</el-button
+          >
           <el-button @click="paginationReset">清空</el-button>
         </div>
         <option-bar text="腾讯云HLS加密" value="腾讯云HLS加密"></option-bar>
@@ -100,6 +102,10 @@ export default {
     },
     paginationPageChange(page) {
       this.pagination.page = page;
+      this.getData();
+    },
+    firstPageLoad() {
+      this.pagination.page = 1;
       this.getData();
     },
     getData() {

@@ -34,7 +34,9 @@
         </div>
 
         <div class="ml-10">
-          <el-button @click="getRecords" type="primary" plain>筛选</el-button>
+          <el-button @click="firstPageLoad" type="primary" plain
+            >筛选</el-button
+          >
           <el-button @click="paginationReset">清空</el-button>
           <el-button @click="importexcel">导出表格</el-button>
         </div>
@@ -182,6 +184,10 @@ export default {
     },
     paginationPageChange(page) {
       this.pagination.page = page;
+      this.getRecords();
+    },
+    firstPageLoad() {
+      this.pagination.page = 1;
       this.getRecords();
     },
     sortChange(column) {

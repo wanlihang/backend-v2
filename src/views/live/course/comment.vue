@@ -64,7 +64,9 @@
           </el-date-picker>
         </div>
         <div class="ml-10">
-          <el-button @click="getResults" type="primary" plain>筛选</el-button>
+          <el-button @click="firstPageLoad" type="primary" plain
+            >筛选</el-button
+          >
           <el-button @click="paginationReset">清空</el-button>
         </div>
       </div>
@@ -207,6 +209,10 @@ export default {
       this.pagination.page = page;
       this.getResults();
     },
+    firstPageLoad() {
+      this.pagination.page = 1;
+      this.getResults();
+    },
     //保存选中结果
     handleSelectionChange(val) {
       var newbox = [];
@@ -340,4 +346,3 @@ export default {
   },
 };
 </script>
-
