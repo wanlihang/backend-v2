@@ -184,23 +184,6 @@
               placeholder="订阅人数"
             ></el-input>
           </el-form-item> -->
-          <el-form-item label="SEO描述">
-            <el-input
-              class="w-400px"
-              type="textarea"
-              v-model="course.seo_description"
-              placeholder="SEO描述"
-            ></el-input>
-          </el-form-item>
-
-          <el-form-item label="SEO关键字">
-            <el-input
-              class="w-400px"
-              type="textarea"
-              v-model="course.seo_keywords"
-              placeholder="SEO关键字"
-            ></el-input>
-          </el-form-item>
         </div>
       </el-form>
 
