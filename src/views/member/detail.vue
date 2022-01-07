@@ -345,11 +345,15 @@ export default {
     column-gap: 0px;
     grid-template-columns: repeat(5, minmax(0, 1fr));
     .panel-info-item {
+      width: auto;
       height: 14px;
       font-size: 14px;
       font-weight: 400;
       color: #333333;
       line-height: 14px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
       span {
         display: inline-block;
       }
