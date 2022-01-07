@@ -82,6 +82,8 @@
               helper="长宽比3:4，建议尺寸：300x400像素"
               width="90"
               height="120"
+              :isBook="true"
+              name="上传封面"
             ></upload-image>
           </el-form-item>
 
