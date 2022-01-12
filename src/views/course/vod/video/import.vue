@@ -179,6 +179,17 @@ export default {
         ],
       ];
       var sheet = XLSX.utils.aoa_to_sheet(array);
+      // for (const key in sheet) {
+      //   if (key.replace(/[^0-9]/gi, "") === "2") {
+      //     sheet[key].s = {
+      //       ...sheet[key].s,
+      //       font: {
+      //         //覆盖字体
+      //         color: "ff5858",
+      //       },
+      //     };
+      //   }
+      // }
       var blob = this.sheet2blob(sheet, "视频批量导入模板");
       this.openDownloadXLSXDialog(blob, "视频批量导入模板.xlsx");
     },
