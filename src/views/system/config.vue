@@ -6,20 +6,23 @@
         <template v-if="key === '积分'">
           <template v-for="d in config['每日签到']">
             <el-form-item :key="d.id" :label="d.name">
-              <div class="d-flex" style="margin-left: 3px">
+              <div class="j-flex flex-column" style="margin-left: 3px">
                 <div>
                   <!-- 单行文本输入框 -->
                   <el-input
+                    class="w-200px"
                     v-if="d.field_type === 'text'"
                     v-model="d.value"
                   ></el-input>
                   <!-- 数字输入框 -->
                   <el-input
+                    class="w-200px"
                     v-else-if="d.field_type === 'number'"
                     v-model="d.value"
                   ></el-input>
                   <!-- 多行文本输入框 -->
                   <el-input
+                    class="w-200px"
                     v-else-if="d.field_type === 'textarea'"
                     type="textarea"
                     :rows="3"
@@ -63,7 +66,7 @@
                     </el-option>
                   </el-select>
                 </div>
-                <div class="ml-10" v-if="d.help">
+                <div class="mt-10" v-if="d.help">
                   <helper-text :text="d.help"></helper-text>
                 </div>
               </div>
@@ -72,20 +75,23 @@
         </template>
         <template v-for="c in config[key]">
           <el-form-item :key="c.id" :label="c.name">
-            <div class="d-flex" style="margin-left: 3px">
+            <div class="j-flex flex-column" style="margin-left: 3px">
               <div>
                 <!-- 单行文本输入框 -->
                 <el-input
+                  class="w-200px"
                   v-if="c.field_type === 'text'"
                   v-model="c.value"
                 ></el-input>
                 <!-- 数字输入框 -->
                 <el-input
+                  class="w-200px"
                   v-else-if="c.field_type === 'number'"
                   v-model="c.value"
                 ></el-input>
                 <!-- 多行文本输入框 -->
                 <el-input
+                  class="w-200px"
                   v-else-if="c.field_type === 'textarea'"
                   type="textarea"
                   :rows="3"
@@ -129,7 +135,7 @@
                   </el-option>
                 </el-select>
               </div>
-              <div class="ml-10" v-if="c.help">
+              <div class="mt-10" v-if="c.help">
                 <helper-text :text="c.help"></helper-text>
               </div>
             </div>
