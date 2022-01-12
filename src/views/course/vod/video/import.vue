@@ -11,7 +11,7 @@
         </div>
         <div class="ml-30">
           <el-link type="primary" @click="model()">
-            > 点击链接下载「视频批量导入模板」
+            点击链接下载「视频批量导入模板」
           </el-link>
         </div>
       </div>
