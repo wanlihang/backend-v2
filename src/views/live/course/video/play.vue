@@ -148,9 +148,14 @@ export default {
           console.log(this.push_url);
 
           // OBS推流地址解析
-          let obs = this.push_url.split("meedu/");
-          this.obs.server = obs[0] + "meedu/";
-          this.obs.token = obs[1];
+          if (this.push_url.substring(0, 6) === "srt://") {
+            this.obs.server = this.push_url;
+            this.obs.token = null;
+          } else {
+            let obs = this.push_url.split("meedu/");
+            this.obs.server = obs[0] + "meedu/";
+            this.obs.token = obs[1];
+          }
 
           this.video.service = this.form.service;
 
