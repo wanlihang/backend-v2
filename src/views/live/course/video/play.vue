@@ -40,7 +40,7 @@
 
           <el-form-item label="OBS串流秘钥">
             <el-input
-              placeholder="推流地址"
+              placeholder="OBS串流秘钥"
               class="w-600px"
               v-model="obs.token"
             ></el-input>
