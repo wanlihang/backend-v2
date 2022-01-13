@@ -189,24 +189,6 @@
               </div>
             </div>
           </el-form-item>
-
-          <el-form-item label="SEO描述">
-            <el-input
-              class="w-400px"
-              rows="4"
-              type="textarea"
-              v-model="course.seo_description"
-            ></el-input>
-          </el-form-item>
-
-          <el-form-item label="SEO关键字">
-            <el-input
-              class="w-400px"
-              rows="4"
-              type="textarea"
-              v-model="course.seo_keywords"
-            ></el-input>
-          </el-form-item>
         </div>
       </el-form>
 
