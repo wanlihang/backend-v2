@@ -25,7 +25,7 @@
           <el-form-item label="推流地址">
             <el-input
               placeholder="推流地址"
-              class="w-600px"
+              class="w-300px"
               v-model="push_url"
             ></el-input>
           </el-form-item>
@@ -33,7 +33,7 @@
           <el-form-item label="OBS服务器">
             <el-input
               placeholder="OBS服务器"
-              class="w-600px"
+              class="w-300px"
               v-model="obs.server"
             ></el-input>
           </el-form-item>
@@ -41,7 +41,7 @@
           <el-form-item label="OBS串流秘钥">
             <el-input
               placeholder="OBS串流秘钥"
-              class="w-600px"
+              class="w-300px"
               v-model="obs.token"
             ></el-input>
           </el-form-item>
