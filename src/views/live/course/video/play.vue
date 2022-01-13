@@ -167,19 +167,32 @@ export default {
         });
     },
     stop() {
-      this.loading = true;
-      this.$api.Course.Live.Course.Video.Stop({
-        video_id: this.video_id,
-        service: this.form.service,
+      this.$confirm("确认操作？", "警告", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
       })
         .then(() => {
-          this.loading = false;
-          this.$message.success("已停止直播");
-          this.$router.back();
+          if (this.loading) {
+            return;
+          }
+          this.loading = true;
+          this.$api.Course.Live.Course.Video.Stop({
+            video_id: this.video_id,
+            service: this.form.service,
+          })
+            .then(() => {
+              this.loading = false;
+              this.$message.success("已停止直播");
+              this.$router.back();
+            })
+            .catch((e) => {
+              this.loading = false;
+              this.$message.error(e.message);
+            });
         })
-        .catch((e) => {
-          this.loading = false;
-          this.$message.error(e.message);
+        .catch(() => {
+          //点击删除按钮的操作
         });
     },
   },
