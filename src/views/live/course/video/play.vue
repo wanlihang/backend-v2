@@ -28,6 +28,9 @@
               class="w-300px"
               v-model="push_url"
             ></el-input>
+            <el-button type="primary" class="ml-10" @click="copy(push_url)"
+              >复制</el-button
+            >
           </el-form-item>
 
           <el-form-item label="OBS服务器">
@@ -36,6 +39,9 @@
               class="w-300px"
               v-model="obs.server"
             ></el-input>
+            <el-button type="primary" class="ml-10" @click="copy(obs.server)"
+              >复制</el-button
+            >
           </el-form-item>
 
           <el-form-item label="OBS串流秘钥">
@@ -44,6 +50,9 @@
               class="w-300px"
               v-model="obs.token"
             ></el-input>
+            <el-button type="primary" class="ml-10" @click="copy(obs.token)"
+              >复制</el-button
+            >
           </el-form-item>
         </template>
       </el-form>
@@ -165,6 +174,15 @@ export default {
           this.loading = false;
           this.$message.error(e.message);
         });
+    },
+    copy(url) {
+      var input = document.createElement("input");
+      input.value = url;
+      document.body.appendChild(input);
+      input.select();
+      document.execCommand("Copy");
+      document.body.removeChild(input);
+      this.$message.success("复制成功");
     },
     stop() {
       this.$confirm("确认操作？", "警告", {
