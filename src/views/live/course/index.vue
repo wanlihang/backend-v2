@@ -9,6 +9,20 @@
       >
       </p-button>
       <p-button
+        text="分类管理"
+        @click="$router.push({ name: 'LiveCourseCategory' })"
+        type="primary"
+        p="addons.Zhibo.course_category.list"
+      >
+      </p-button>
+      <p-button
+        text="讲师管理"
+        @click="$router.push({ name: 'LiveTeacher' })"
+        type="primary"
+        p="addons.Zhibo.teacher.list"
+      >
+      </p-button>
+      <p-button
         text="评论"
         @click="$router.push({ name: 'LiveCourseComment' })"
         type="primary"

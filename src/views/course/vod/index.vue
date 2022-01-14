@@ -9,6 +9,13 @@
       >
       </p-button>
       <p-button
+        text="分类管理"
+        p="courseCategory"
+        @click="$router.push({ name: 'CourseCategories' })"
+        type="primary"
+      >
+      </p-button>
+      <p-button
         text="课程评论"
         p="course_comment"
         @click="$router.push({ name: 'CourseComments' })"
