@@ -13,27 +13,33 @@
         <div class="helper ml-30" v-if="helper">{{ helper }}</div>
       </div>
     </div>
-
-    <div class="preview-box float-left mt-15" v-if="!status && value">
-      <div
-        class="newbox"
-        :style="{
-          'background-image': 'url(' + value + ')',
-          width: width + 'px',
-          height: height + 'px',
-        }"
-      ></div>
-    </div>
-    <div class="preview-box float-left mt-15" v-if="status && value">
-      <div
-        class="contain-box"
-        :style="{
-          'background-image': 'url(' + value + ')',
-          width: width + 'px',
-          height: height + 'px',
-        }"
-      ></div>
-    </div>
+    <template v-if="config">
+      <div class="preview-box float-left mt-15" v-if="value">
+        <img :src="value" />
+      </div>
+    </template>
+    <template v-else>
+      <div class="preview-box float-left mt-15" v-if="!status && value">
+        <div
+          class="newbox"
+          :style="{
+            'background-image': 'url(' + value + ')',
+            width: width + 'px',
+            height: height + 'px',
+          }"
+        ></div>
+      </div>
+      <div class="preview-box float-left mt-15" v-if="status && value">
+        <div
+          class="contain-box"
+          :style="{
+            'background-image': 'url(' + value + ')',
+            width: width + 'px',
+            height: height + 'px',
+          }"
+        ></div>
+      </div>
+    </template>
 
     <select-image
       :show="show"
@@ -50,7 +56,15 @@ export default {
   components: {
     SelectImage,
   },
-  props: ["value", "helper", "width", "height", "status", "configPoster"],
+  props: [
+    "value",
+    "helper",
+    "width",
+    "height",
+    "status",
+    "configPoster",
+    "config",
+  ],
   data() {
     return {
       show: false,
@@ -88,6 +102,10 @@ export default {
 }
 
 .preview-box {
+  img {
+    width: 100%;
+    height: auto;
+  }
   .newbox {
     overflow: hidden;
     background-position: center center;

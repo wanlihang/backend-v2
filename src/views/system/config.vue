@@ -39,6 +39,7 @@
                   <upload-image
                     v-model="d.value"
                     :name="d.name"
+                    :config="true"
                     v-else-if="d.field_type === 'image'"
                   ></upload-image>
 
@@ -110,6 +111,7 @@
                 <upload-image
                   v-model="c.value"
                   :name="c.name"
+                  :config="true"
                   v-else-if="c.field_type === 'image'"
                 ></upload-image>
 
