@@ -66,8 +66,10 @@
                     </el-option>
                   </el-select>
                 </div>
-                <div class="mt-10" v-if="d.help">
-                  <helper-text :text="d.help"></helper-text>
+                <div class="mt-5" v-if="d.help">
+                  <div class="form-helper-text">
+                    <span>{{ d.help }}</span>
+                  </div>
                 </div>
               </div>
             </el-form-item>
@@ -135,8 +137,10 @@
                   </el-option>
                 </el-select>
               </div>
-              <div class="mt-10" v-if="c.help">
-                <helper-text :text="c.help"></helper-text>
+              <div class="mt-5" v-if="c.help">
+                <div class="form-helper-text">
+                  <span>{{ c.help }}</span>
+                </div>
               </div>
             </div>
           </el-form-item>
@@ -231,6 +235,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.el-form-item {
+  margin-bottom: 30px !important;
+}
 .meedu-main-body {
   width: 100%;
 }
