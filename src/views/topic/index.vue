@@ -65,10 +65,19 @@
           <el-table-column label="标题" width="400">
             <template slot-scope="scope">
               <div class="d-flex">
-                <div>
-                  <img :src="scope.row.thumb" width="120" height="90" />
+                <div
+                  :style="{
+                    'background-image': 'url(' + scope.row.thumb + ')',
+                    width: '120px',
+                    height: '90px',
+                    'background-position': 'center center',
+                    'background-size': 'cover',
+                    'background-repeat': 'no-repeat',
+                  }"
+                ></div>
+                <div class="ml-10" style="max-width: 250px">
+                  {{ scope.row.title }}
                 </div>
-                <div class="ml-10">{{ scope.row.title }}</div>
               </div>
             </template>
           </el-table-column>

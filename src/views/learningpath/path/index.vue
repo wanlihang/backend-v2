@@ -13,7 +13,24 @@
       <div class="float-left">
         <el-table :data="results" class="float-left">
           <el-table-column prop="id" label="ID" width="120"> </el-table-column>
-          <el-table-column prop="name" label="路径名" width="400">
+          <el-table-column label="路径" width="400">
+            <template slot-scope="scope">
+              <div class="d-flex">
+                <div
+                  :style="{
+                    'background-image': 'url(' + scope.row.thumb + ')',
+                    width: '120px',
+                    height: '90px',
+                    'background-position': 'center center',
+                    'background-size': 'cover',
+                    'background-repeat': 'no-repeat',
+                  }"
+                ></div>
+                <div class="ml-10" style="max-width: 250px">
+                  {{ scope.row.name }}
+                </div>
+              </div>
+            </template>
           </el-table-column>
           <el-table-column label="价格">
             <template slot-scope="scope">
@@ -168,7 +185,6 @@ export default {
   },
 };
 </script>
-
 
 <style lang="less" scoped>
 .original-charge {

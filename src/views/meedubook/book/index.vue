@@ -68,10 +68,17 @@
             <el-table-column label="电子书" width="400">
               <template slot-scope="scope">
                 <div class="d-flex">
-                  <div>
-                    <img :src="scope.row.thumb" width="84" height="112" />
-                  </div>
-                  <div class="ml-10">
+                  <div
+                    :style="{
+                      'background-image': 'url(' + scope.row.thumb + ')',
+                      width: '90px',
+                      height: '120px',
+                      'background-position': 'center center',
+                      'background-size': 'cover',
+                      'background-repeat': 'no-repeat',
+                    }"
+                  ></div>
+                  <div class="ml-10" style="max-width: 280px">
                     {{ scope.row.name }}
                   </div>
                 </div>

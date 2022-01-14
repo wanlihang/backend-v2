@@ -101,13 +101,20 @@
               <span v-else class="c-red">数据不完整</span>
             </template>
           </el-table-column>
-          <el-table-column label="课程" width="450">
+          <el-table-column label="课程" width="400">
             <template slot-scope="scope">
               <div class="d-flex">
-                <div>
-                  <img :src="scope.row.thumb" width="120" height="90" />
-                </div>
-                <div class="ml-10">
+                <div
+                  :style="{
+                    'background-image': 'url(' + scope.row.thumb + ')',
+                    width: '120px',
+                    height: '90px',
+                    'background-position': 'center center',
+                    'background-size': 'cover',
+                    'background-repeat': 'no-repeat',
+                  }"
+                ></div>
+                <div class="ml-10" style="max-width: 250px">
                   {{ scope.row.title }}
                 </div>
               </div>
