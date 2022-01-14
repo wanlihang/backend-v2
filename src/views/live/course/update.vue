@@ -178,10 +178,12 @@
               <div>
                 <upload-image
                   v-model="course.poster"
-                  width="1200"
-                  height="500"
+                  :config-poster="true"
+                  width="600"
+                  height="250"
                   name="上传播放封面"
                   helper="播放封面是在进入直播时播放器显示的图片。推荐尺寸：1200x500"
+                  @clear="clearPoster"
                 ></upload-image>
               </div>
             </div>
@@ -335,6 +337,9 @@ export default {
           this.confirm();
         }
       });
+    },
+    clearPoster() {
+      this.course.poster = null;
     },
     confirm() {
       if (this.loading) {

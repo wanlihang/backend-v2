@@ -7,6 +7,9 @@
             {{ $t("common.image.upload") }}
           </el-button>
         </div>
+        <div class="ml-10" v-if="configPoster && value">
+          <el-button @click="clearPoster()">清空</el-button>
+        </div>
         <div class="helper ml-30" v-if="helper">{{ helper }}</div>
       </div>
     </div>
@@ -47,7 +50,7 @@ export default {
   components: {
     SelectImage,
   },
-  props: ["value", "helper", "width", "height", "status"],
+  props: ["value", "helper", "width", "height", "status", "configPoster"],
   data() {
     return {
       show: false,
@@ -57,6 +60,9 @@ export default {
     uploadImage(imgUrl) {
       this.$emit("input", imgUrl);
       this.show = false;
+    },
+    clearPoster() {
+      this.$emit("clear");
     },
   },
 };
