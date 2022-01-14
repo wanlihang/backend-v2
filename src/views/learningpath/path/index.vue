@@ -15,21 +15,12 @@
           <el-table-column prop="id" label="ID" width="120"> </el-table-column>
           <el-table-column label="路径" width="400">
             <template slot-scope="scope">
-              <div class="d-flex">
-                <div
-                  :style="{
-                    'background-image': 'url(' + scope.row.thumb + ')',
-                    width: '120px',
-                    height: '90px',
-                    'background-position': 'center center',
-                    'background-size': 'cover',
-                    'background-repeat': 'no-repeat',
-                  }"
-                ></div>
-                <div class="ml-10" style="max-width: 250px">
-                  {{ scope.row.name }}
-                </div>
-              </div>
+              <thumb-bar
+                :value="scope.row.thumb"
+                :width="120"
+                :height="90"
+                :title="scope.row.name"
+              ></thumb-bar>
             </template>
           </el-table-column>
           <el-table-column label="价格">

@@ -67,21 +67,12 @@
             </el-table-column>
             <el-table-column label="电子书" width="400">
               <template slot-scope="scope">
-                <div class="d-flex">
-                  <div
-                    :style="{
-                      'background-image': 'url(' + scope.row.thumb + ')',
-                      width: '90px',
-                      height: '120px',
-                      'background-position': 'center center',
-                      'background-size': 'cover',
-                      'background-repeat': 'no-repeat',
-                    }"
-                  ></div>
-                  <div class="ml-10" style="max-width: 280px">
-                    {{ scope.row.name }}
-                  </div>
-                </div>
+                <thumb-bar
+                  :value="scope.row.thumb"
+                  :width="90"
+                  :height="120"
+                  :title="scope.row.name"
+                ></thumb-bar>
               </template>
             </el-table-column>
             <el-table-column
