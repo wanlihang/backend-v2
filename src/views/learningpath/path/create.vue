@@ -9,6 +9,30 @@
         :rules="rules"
         label-width="200px"
       >
+        <el-form-item label="分类" prop="category_id">
+          <div class="d-flex">
+            <div>
+              <el-select class="w-300px" v-model="course.category_id">
+                <el-option
+                  v-for="(item, index) in categories"
+                  :key="index"
+                  :label="item.name"
+                  :value="item.id"
+                >
+                </el-option>
+              </el-select>
+            </div>
+            <div class="ml-15">
+              <p-link
+                type="primary"
+                text="分类管理"
+                p="addons.learnPaths.category.list"
+                @click="$router.push({ name: 'LearningPathCategories' })"
+              >
+              </p-link>
+            </div>
+          </div>
+        </el-form-item>
         <el-form-item label="路径名" prop="name">
           <el-input v-model="course.name" class="w-500px"></el-input>
         </el-form-item>
@@ -87,8 +111,16 @@ export default {
         charge: null,
         is_show: 1,
         thumb: null,
+        category_id: null,
       },
       rules: {
+        category_id: [
+          {
+            required: true,
+            message: "请选择分类",
+            trigger: "blur",
+          },
+        ],
         name: [
           {
             required: true,
@@ -126,11 +158,33 @@ export default {
           },
         ],
       },
+      categories: [],
       loading: false,
     };
   },
-  mounted() {},
+  mounted() {
+    this.params();
+  },
   methods: {
+    params() {
+      this.$api.Course.LearnPath.Path.Category.Create().then((res) => {
+        let categories = res.data;
+        let box = [];
+        for (let i = 0; i < categories.length; i++) {
+          if (categories[i].children.length > 0) {
+            box.push(categories[i]);
+            let children = categories[i].children;
+            for (let j = 0; j < children.length; j++) {
+              children[j].name = "|----" + children[j].name;
+              box.push(children[j]);
+            }
+          } else {
+            box.push(categories[i]);
+          }
+        }
+        this.categories = box;
+      });
+    },
     formValidate() {
       this.$refs["form"].validate((valid) => {
         if (valid) {

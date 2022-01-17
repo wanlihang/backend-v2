@@ -816,6 +816,31 @@ const routes = [
     },
   },
   {
+    path: "/learningpath/path/category/index",
+    component: () => import("@/views/learningpath/path/category/index"),
+    name: "LearningPathCategories",
+    meta: {
+      title: "title.learningpath.path.category.index",
+      keepAlive: true,
+    },
+  },
+  {
+    path: "/learningpath/path/category/create",
+    component: () => import("@/views/learningpath/path/category/create"),
+    name: "LearningPathCategoriesCreate",
+    meta: {
+      title: "title.learningpath.path.category.create",
+    },
+  },
+  {
+    path: "/learningpath/path/category/update",
+    component: () => import("@/views/learningpath/path/category/update"),
+    name: "LearningPathCategoriesUpdate",
+    meta: {
+      title: "title.learningpath.path.category.update",
+    },
+  },
+  {
     path: "/learningpath/step/index",
     component: () => import("@/views/learningpath/step/index"),
     name: "LearningStep",

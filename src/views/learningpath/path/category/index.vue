@@ -1,85 +1,49 @@
 <template>
   <div class="meedu-main-body">
+    <back-bar class="mb-30" title="学习路径分类"></back-bar>
     <div class="float-left mb-30">
       <p-button
         text="添加"
-        p="addons.learnPaths.path.store"
-        @click="$router.push({ name: 'LearningPathCreate' })"
-        type="primary"
-      >
-      </p-button>
-      <p-button
-        text="分类管理"
-        p="addons.learnPaths.category.list"
-        @click="$router.push({ name: 'LearningPathCategories' })"
+        p="addons.learnPaths.category.store"
+        @click="$router.push({ name: 'LearningPathCategoriesCreate' })"
         type="primary"
       >
       </p-button>
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
-        <el-table :data="results" class="float-left">
-          <el-table-column prop="id" label="ID" width="120"> </el-table-column>
-          <el-table-column label="路径" width="400">
-            <template slot-scope="scope">
-              <thumb-bar
-                :value="scope.row.thumb"
-                :width="120"
-                :height="90"
-                :title="scope.row.name"
-              ></thumb-bar>
-            </template>
-          </el-table-column>
-          <el-table-column label="价格">
-            <template slot-scope="scope">
-              <div>现价：{{ scope.row.charge }}元</div>
-              <div style="color: #666" class="original-charge">
-                原价：{{ scope.row.original_charge }}元
-              </div>
-            </template>
+        <el-table
+          :data="categories"
+          row-key="id"
+          :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
+          class="float-left"
+        >
+          <el-table-column prop="id" label="ID" width="150"> </el-table-column>
+          <el-table-column prop="sort" label="升序" width="150">
           </el-table-column>
 
-          <el-table-column label="步骤" width="200">
-            <template slot-scope="scope">
-              <span>{{ scope.row.steps_count }}个步骤</span>
+          <el-table-column label="分类名"
+            ><template slot-scope="scope">
+              <span>{{ scope.row.name }} </span>
             </template>
           </el-table-column>
-          <el-table-column label="课程" width="200">
+          <el-table-column fixed="right" label="操作" width="150">
             <template slot-scope="scope">
-              <span>{{ scope.row.courses_count }}个课程</span>
-            </template>
-          </el-table-column>
-
-          <el-table-column fixed="right" label="操作" width="120">
-            <template slot-scope="scope">
-              <p-link
-                text="步骤"
-                p="addons.learnPaths.step.list"
-                type="primary"
-                @click="
-                  $router.push({
-                    name: 'LearningStep',
-                    query: { id: scope.row.id },
-                  })
-                "
-              ></p-link>
-
               <p-link
                 text="编辑"
-                p="addons.learnPaths.path.update"
+                p="addons.learnPaths.category.update"
                 type="primary"
-                class="ml-5"
                 @click="
                   $router.push({
-                    name: 'LearningPathUpdate',
+                    name: 'LearningPathCategoriesUpdate',
                     query: { id: scope.row.id },
                   })
                 "
               ></p-link>
               <p-link
                 text="删除"
+                p="addons.learnPaths.category.delete"
                 class="ml-5"
-                p="addons.learnPaths.path.delete"
                 type="danger"
                 @click="destory(scope.row.id)"
               ></p-link>
@@ -103,23 +67,23 @@
     </div>
   </div>
 </template>
-
 <script>
 export default {
   data() {
     return {
-      pageName: "learnpath-list",
+      pageName: "learnPathCategory-list",
       pagination: {
         page: 1,
         size: 10,
       },
       total: 0,
       loading: false,
-      results: [],
+      categories: [],
+      userRemark: [],
     };
   },
   activated() {
-    this.getResults();
+    this.getCategories();
     this.$utils.scrollTopSet(this.pageName);
   },
   beforeRouteLeave(to, from, next) {
@@ -129,31 +93,37 @@ export default {
   methods: {
     paginationReset() {
       this.pagination.page = 1;
-      this.getResults();
+      this.getCategories();
     },
     paginationSizeChange(size) {
       this.pagination.size = size;
-      this.getResults();
+      this.getCategories();
     },
     paginationPageChange(page) {
       this.pagination.page = page;
-      this.getResults();
+      this.getCategories();
     },
-    getResults() {
+    sortChange(column) {
+      this.pagination.sort = column.prop;
+      this.pagination.order = column.order === "ascending" ? "asc" : "desc";
+      this.getCategories();
+    },
+    getCategories() {
       if (this.loading) {
         return;
       }
       this.loading = true;
       let params = {};
-
       Object.assign(params, this.pagination);
-      this.$api.Course.LearnPath.Path.List(params).then((res) => {
+      this.$api.Course.LearnPath.Path.Category.List(params).then((res) => {
         this.loading = false;
-        this.results = res.data.data;
+        this.categories = res.data.data;
         this.total = res.data.total;
       });
     },
-    destory(item) {
+    importUser() {},
+    //删除管理员
+    destory(id) {
       this.$confirm("确认操作？", "警告", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -165,11 +135,11 @@ export default {
             return;
           }
           this.loading = true;
-          this.$api.Course.LearnPath.Path.Destory(item)
+          this.$api.Course.LearnPath.Path.Category.Destory(id)
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));
-              this.getResults();
+              this.paginationReset();
             })
             .catch((e) => {
               this.loading = false;
@@ -183,9 +153,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less" scoped>
-.original-charge {
-  text-decoration: line-through;
-}
-</style>

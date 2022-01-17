@@ -89,6 +89,11 @@ const zh = {
         index: "学习路径",
         create: "添加学习路径",
         update: "编辑学习路径",
+        category: {
+          index: "学习路径分类",
+          create: "添加学习路径分类",
+          update: "编辑学习路径分类",
+        },
       },
       step: {
         name: "步骤",
