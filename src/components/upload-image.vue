@@ -13,34 +13,31 @@
         <div class="helper ml-30" v-if="helper">{{ helper }}</div>
       </div>
     </div>
-    <template v-if="width && height">
-      <div class="preview-box float-left mt-15" v-if="!containBox && value">
-        <div
-          class="normal-box"
-          :style="{
-            'background-image': 'url(' + value + ')',
-            width: width + 'px',
-            height: height + 'px',
-          }"
-        ></div>
-      </div>
-      <div class="preview-box float-left mt-15" v-if="containBox && value">
+    <div class="preview-box float-left mt-15" v-if="value">
+      <template v-if="width && height">
         <div
           class="contain-box"
+          v-if="containBox"
           :style="{
             'background-image': 'url(' + value + ')',
             width: width + 'px',
             height: height + 'px',
           }"
         ></div>
-      </div>
-    </template>
-    <template v-else>
-      <div class="preview-box float-left mt-15" v-if="value">
+        <div
+          class="normal-box"
+          v-else
+          :style="{
+            'background-image': 'url(' + value + ')',
+            width: width + 'px',
+            height: height + 'px',
+          }"
+        ></div>
+      </template>
+      <template v-else>
         <img :src="value" />
-      </div>
-    </template>
-
+      </template>
+    </div>
     <select-image
       :show="show"
       :from="2"
