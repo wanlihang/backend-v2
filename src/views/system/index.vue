@@ -250,7 +250,13 @@ export default {
   mounted() {},
   methods: {
     goConfig(value) {
-      this.$router.push({ name: "SystemConfig", query: { key: value } });
+      if (value === "播放器配置") {
+        this.$router.push({
+          name: "SystemPlayerConfig",
+        });
+      } else {
+        this.$router.push({ name: "SystemConfig", query: { key: value } });
+      }
     },
   },
 };

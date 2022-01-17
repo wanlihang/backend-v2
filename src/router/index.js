@@ -124,6 +124,14 @@ const routes = [
     },
   },
   {
+    path: "/system/playerConfig",
+    component: () => import("@/views/system/playerConfig"),
+    name: "SystemPlayerConfig",
+    meta: {
+      title: "title.system-config",
+    },
+  },
+  {
     path: "/system/application",
     component: () => import("@/views/system/application"),
     name: "SystemApplication",
