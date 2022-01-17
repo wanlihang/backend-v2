@@ -84,7 +84,7 @@ export default {
 
 <style lang="less" scoped>
 .upload-image-box {
-  display: inline-block;
+  display: flex;
 
   .buttons {
     width: 100%;
