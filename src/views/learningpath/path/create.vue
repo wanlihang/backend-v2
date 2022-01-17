@@ -40,25 +40,6 @@
             class="w-200px"
           ></el-input>
         </el-form-item>
-        <el-form-item prop="desc" label="描述">
-          <div class="d-flex">
-            <div>
-              <el-input
-                type="textarea"
-                v-model="course.desc"
-                class="w-600px"
-                maxlength="150"
-                rows="4"
-                placeholder="描述"
-              ></el-input>
-            </div>
-            <div class="ml-10">
-              <helper-text
-                text="该值会在学习路径列表显示，建议不要超过150个字。"
-              ></helper-text>
-            </div>
-          </div>
-        </el-form-item>
         <el-form-item label="显示" prop="is_show">
           <div class="d-flex">
             <div>
@@ -106,7 +87,6 @@ export default {
         charge: null,
         is_show: 1,
         thumb: null,
-        desc: null,
       },
       rules: {
         name: [
@@ -142,13 +122,6 @@ export default {
           {
             required: true,
             message: "请选择是否显示",
-            trigger: "blur",
-          },
-        ],
-        desc: [
-          {
-            required: true,
-            message: "描述不能为空",
             trigger: "blur",
           },
         ],
