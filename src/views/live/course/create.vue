@@ -181,8 +181,8 @@
                 <upload-image
                   v-model="course.poster"
                   :config-poster="true"
-                  width="600"
-                  height="250"
+                  width="400"
+                  height="166.7"
                   name="上传播放封面"
                   helper="播放封面是在进入直播时播放器显示的图片。推荐尺寸：1200x500"
                   @clear="clearPoster"
