@@ -7,21 +7,16 @@
             {{ $t("common.image.upload") }}
           </el-button>
         </div>
-        <div class="ml-10" v-if="configPoster && value">
+        <div class="ml-10" v-if="canClear && value">
           <el-button @click="clearPoster()">清空</el-button>
         </div>
         <div class="helper ml-30" v-if="helper">{{ helper }}</div>
       </div>
     </div>
-    <template v-if="config">
-      <div class="preview-box float-left mt-15" v-if="value">
-        <img :src="value" />
-      </div>
-    </template>
-    <template v-else>
-      <div class="preview-box float-left mt-15" v-if="!status && value">
+    <template v-if="width && height">
+      <div class="preview-box float-left mt-15" v-if="!containBox && value">
         <div
-          class="newbox"
+          class="normal-box"
           :style="{
             'background-image': 'url(' + value + ')',
             width: width + 'px',
@@ -29,7 +24,7 @@
           }"
         ></div>
       </div>
-      <div class="preview-box float-left mt-15" v-if="status && value">
+      <div class="preview-box float-left mt-15" v-if="containBox && value">
         <div
           class="contain-box"
           :style="{
@@ -38,6 +33,11 @@
             height: height + 'px',
           }"
         ></div>
+      </div>
+    </template>
+    <template v-else>
+      <div class="preview-box float-left mt-15" v-if="value">
+        <img :src="value" />
       </div>
     </template>
 
@@ -56,15 +56,7 @@ export default {
   components: {
     SelectImage,
   },
-  props: [
-    "value",
-    "helper",
-    "width",
-    "height",
-    "status",
-    "configPoster",
-    "config",
-  ],
+  props: ["value", "helper", "width", "height", "containBox", "canClear"],
   data() {
     return {
       show: false,
@@ -76,7 +68,7 @@ export default {
       this.show = false;
     },
     clearPoster() {
-      this.$emit('input', null);
+      this.$emit("input", null);
     },
   },
 };
@@ -85,6 +77,7 @@ export default {
 <style lang="less" scoped>
 .upload-image-box {
   display: flex;
+  flex-direction: column;
 
   .buttons {
     width: 100%;
@@ -106,7 +99,7 @@ export default {
     width: 100%;
     height: auto;
   }
-  .newbox {
+  .normal-box {
     overflow: hidden;
     background-position: center center;
     background-size: cover;
@@ -114,6 +107,7 @@ export default {
   }
 
   .contain-box {
+    overflow: hidden;
     max-width: 100%;
     background-repeat: no-repeat;
     background-size: contain;

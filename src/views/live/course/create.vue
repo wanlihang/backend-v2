@@ -180,7 +180,7 @@
               <div>
                 <upload-image
                   v-model="course.poster"
-                  :config-poster="true"
+                  :can-clear="true"
                   width="400"
                   height="166.7"
                   name="上传播放封面"

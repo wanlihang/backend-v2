@@ -178,7 +178,7 @@
               <div>
                 <upload-image
                   v-model="course.poster"
-                  :config-poster="true"
+                  :can-clear="true"
                   width="600"
                   height="250"
                   name="上传播放封面"

@@ -54,7 +54,7 @@
               v-model="course.thumb"
               width="400"
               height="400"
-              :status="true"
+              :contain-box="true"
               name="上传封面"
             ></upload-image>
           </el-form-item>
