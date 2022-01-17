@@ -76,7 +76,7 @@ export default {
       this.show = false;
     },
     clearPoster() {
-      this.value = null;
+      this.$emit('input', null);
     },
   },
 };
