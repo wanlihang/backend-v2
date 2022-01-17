@@ -116,7 +116,7 @@
                     v-else-if="f.field_type === 'image'"
                     :width="400"
                     :height="300"
-                    helper="播放封面是在进入直播时播放器显示的图片。推荐尺寸：1200x900"
+                    helper="播放封面是在录播课播放未开始时显示的。推荐尺寸：1200x900"
                   ></upload-image>
 
                   <!-- 开关 -->
