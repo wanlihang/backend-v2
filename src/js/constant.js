@@ -13,6 +13,8 @@ export default {
     WithdrawOrders: "WithdrawOrders",
     SystemIndex: "SystemIndex",
     SystemConfig: "SystemIndex",
+    SystemPlayerConfig: "SystemIndex",
+    SystemCreditSignConfig: "SystemIndex",
     SystemApplication: "SystemApplication",
     AdministratorChangePassword: "Dashboard",
     SystemAdministrator: "SystemAdministrator",

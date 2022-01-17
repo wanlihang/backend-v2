@@ -3,151 +3,76 @@
     <back-bar class="mb-30" :title="key"></back-bar>
     <div class="float-left" v-if="config">
       <el-form ref="form" label-width="205px">
-        <template v-if="key === '积分'">
-          <template v-for="d in config['每日签到']">
-            <el-form-item :key="d.id" :label="d.name">
-              <div class="j-flex flex-column" style="margin-left: 3px">
-                <div>
-                  <!-- 单行文本输入框 -->
-                  <el-input
-                    class="w-200px"
-                    v-if="d.field_type === 'text'"
-                    v-model="d.value"
-                  ></el-input>
-                  <!-- 数字输入框 -->
-                  <el-input
-                    class="w-200px"
-                    v-else-if="d.field_type === 'number'"
-                    v-model="d.value"
-                  ></el-input>
-                  <!-- 多行文本输入框 -->
-                  <el-input
-                    class="w-200px"
-                    v-else-if="d.field_type === 'textarea'"
-                    type="textarea"
-                    :rows="3"
-                    v-model="d.value"
-                  >
-                  </el-input>
-                  <!-- 富文本输入框 -->
-                  <quill-editor
-                    :height="400"
-                    v-model="d.value"
-                    v-else-if="d.field_type === 'longtext'"
-                  ></quill-editor>
-                  <!-- 图片上传 -->
-                  <upload-image
-                    v-model="d.value"
-                    :name="d.name"
-                    :config="true"
-                    v-else-if="d.field_type === 'image'"
-                  ></upload-image>
+        <template v-for="c in config[key]">
+          <el-form-item :key="c.id" :label="c.name">
+            <div class="j-flex flex-column" style="margin-left: 3px">
+              <div>
+                <!-- 单行文本输入框 -->
+                <el-input
+                  class="w-200px"
+                  v-if="c.field_type === 'text'"
+                  v-model="c.value"
+                ></el-input>
+                <!-- 数字输入框 -->
+                <el-input
+                  class="w-200px"
+                  v-else-if="c.field_type === 'number'"
+                  v-model="c.value"
+                ></el-input>
+                <!-- 多行文本输入框 -->
+                <el-input
+                  class="w-200px"
+                  v-else-if="c.field_type === 'textarea'"
+                  type="textarea"
+                  :rows="3"
+                  v-model="c.value"
+                >
+                </el-input>
+                <!-- 富文本输入框 -->
+                <quill-editor
+                  :height="400"
+                  v-model="c.value"
+                  v-else-if="c.field_type === 'longtext'"
+                ></quill-editor>
+                <!-- 图片上传 -->
+                <upload-image
+                  v-model="c.value"
+                  :name="c.name"
+                  :config="true"
+                  v-else-if="c.field_type === 'image'"
+                ></upload-image>
 
-                  <!-- 开关 -->
-                  <el-switch
-                    v-else-if="d.field_type === 'switch'"
-                    v-model="d.value"
-                    active-value="1"
-                    inactive-value="0"
-                  >
-                  </el-switch>
+                <!-- 开关 -->
+                <el-switch
+                  v-else-if="c.field_type === 'switch'"
+                  v-model="c.value"
+                  active-value="1"
+                  inactive-value="0"
+                >
+                </el-switch>
 
-                  <!-- 选择 -->
-                  <el-select
-                    class="w-300px"
-                    v-model="d.value"
-                    v-else-if="d.field_type === 'select'"
+                <!-- 选择 -->
+                <el-select
+                  class="w-300px"
+                  v-model="c.value"
+                  v-else-if="c.field_type === 'select'"
+                >
+                  <el-option
+                    v-for="(item, index) in c.option_value"
+                    :key="index"
+                    :label="item.title"
+                    :value="item.key"
                   >
-                    <el-option
-                      v-for="(item, index) in d.option_value"
-                      :key="index"
-                      :label="item.title"
-                      :value="item.key"
-                    >
-                    </el-option>
-                  </el-select>
-                </div>
-                <div class="mt-5" v-if="d.help">
-                  <div class="form-helper-text">
-                    <span>{{ d.help }}</span>
-                  </div>
+                  </el-option>
+                </el-select>
+              </div>
+              <div class="mt-5" v-if="c.help">
+                <div class="form-helper-text">
+                  <span>{{ c.help }}</span>
                 </div>
               </div>
-            </el-form-item>
-          </template>
-        </template>
-        <template v-else>
-          <template v-for="c in config[key]">
-            <el-form-item :key="c.id" :label="c.name">
-              <div class="j-flex flex-column" style="margin-left: 3px">
-                <div>
-                  <!-- 单行文本输入框 -->
-                  <el-input
-                    class="w-200px"
-                    v-if="c.field_type === 'text'"
-                    v-model="c.value"
-                  ></el-input>
-                  <!-- 数字输入框 -->
-                  <el-input
-                    class="w-200px"
-                    v-else-if="c.field_type === 'number'"
-                    v-model="c.value"
-                  ></el-input>
-                  <!-- 多行文本输入框 -->
-                  <el-input
-                    class="w-200px"
-                    v-else-if="c.field_type === 'textarea'"
-                    type="textarea"
-                    :rows="3"
-                    v-model="c.value"
-                  >
-                  </el-input>
-                  <!-- 富文本输入框 -->
-                  <quill-editor
-                    :height="400"
-                    v-model="c.value"
-                    v-else-if="c.field_type === 'longtext'"
-                  ></quill-editor>
-                  <!-- 图片上传 -->
-                  <upload-image
-                    v-model="c.value"
-                    :name="c.name"
-                    :config="true"
-                    v-else-if="c.field_type === 'image'"
-                  ></upload-image>
-
-                  <!-- 开关 -->
-                  <el-switch
-                    v-else-if="c.field_type === 'switch'"
-                    v-model="c.value"
-                    active-value="1"
-                    inactive-value="0"
-                  >
-                  </el-switch>
-
-                  <!-- 选择 -->
-                  <el-select
-                    class="w-300px"
-                    v-model="c.value"
-                    v-else-if="c.field_type === 'select'"
-                  >
-                    <el-option
-                      v-for="(item, index) in c.option_value"
-                      :key="index"
-                      :label="item.title"
-                      :value="item.key"
-                    >
-                    </el-option>
-                  </el-select>
-                </div>
-                <div class="mt-5" v-if="c.help">
-                  <div class="form-helper-text">
-                    <span>{{ c.help }}</span>
-                  </div>
-                </div>
-              </div>
-            </el-form-item>
-          </template>
+            </div>
+          </el-form-item>
         </template>
       </el-form>
       <div class="bottom-menus">

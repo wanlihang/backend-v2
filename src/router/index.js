@@ -132,6 +132,14 @@ const routes = [
     },
   },
   {
+    path: "/system/creditSignConfig",
+    component: () => import("@/views/system/creditSignConfig"),
+    name: "SystemCreditSignConfig",
+    meta: {
+      title: "title.system-config",
+    },
+  },
+  {
     path: "/system/application",
     component: () => import("@/views/system/application"),
     name: "SystemApplication",

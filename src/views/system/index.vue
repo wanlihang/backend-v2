@@ -254,6 +254,10 @@ export default {
         this.$router.push({
           name: "SystemPlayerConfig",
         });
+      } else if (value === "积分") {
+        this.$router.push({
+          name: "SystemCreditSignConfig",
+        });
       } else {
         this.$router.push({ name: "SystemConfig", query: { key: value } });
       }
