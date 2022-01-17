@@ -8,9 +8,7 @@
             class="item"
             v-if="enabledAddons[item.sign] === 1 || item.sign === ''"
             :key="index"
-            @click="
-              $router.push({ name: 'SystemConfig', query: { key: item.value } })
-            "
+            @click="goConfig(item.value)"
           >
             <img :src="item.images" />
             <span>{{ item.name }}</span>
@@ -26,9 +24,7 @@
             class="item"
             v-if="enabledAddons[item.sign] === 1 || item.sign === ''"
             :key="index"
-            @click="
-              $router.push({ name: 'SystemConfig', query: { key: item.value } })
-            "
+            @click="goConfig(item.value)"
           >
             <img :src="item.images" />
             <span>{{ item.name }}</span>
@@ -44,9 +40,7 @@
             class="item"
             v-if="enabledAddons[item.sign] === 1 || item.sign === ''"
             :key="index"
-            @click="
-              $router.push({ name: 'SystemConfig', query: { key: item.value } })
-            "
+            @click="goConfig(item.value)"
           >
             <img :src="item.images" />
             <span>{{ item.name }}</span>
@@ -254,7 +248,11 @@ export default {
     ...mapState(["enabledAddons"]),
   },
   mounted() {},
-  methods: {},
+  methods: {
+    goConfig(value) {
+      this.$router.push({ name: "SystemConfig", query: { key: value } });
+    },
+  },
 };
 </script>
 <style lang="less" scoped>
