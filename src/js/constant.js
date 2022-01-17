@@ -14,6 +14,7 @@ export default {
     SystemIndex: "SystemIndex",
     SystemConfig: "SystemIndex",
     SystemPlayerConfig: "SystemIndex",
+    SystemLiveConfig: "SystemIndex",
     SystemCreditSignConfig: "SystemIndex",
     SystemApplication: "SystemApplication",
     AdministratorChangePassword: "Dashboard",

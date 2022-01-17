@@ -140,6 +140,14 @@ const routes = [
     },
   },
   {
+    path: "/system/liveConfig",
+    component: () => import("@/views/system/liveConfig"),
+    name: "SystemLiveConfig",
+    meta: {
+      title: "title.system-config",
+    },
+  },
+  {
     path: "/system/application",
     component: () => import("@/views/system/application"),
     name: "SystemApplication",

@@ -258,6 +258,10 @@ export default {
         this.$router.push({
           name: "SystemCreditSignConfig",
         });
+      } else if (value === "直播") {
+        this.$router.push({
+          name: "SystemLiveConfig",
+        });
       } else {
         this.$router.push({ name: "SystemConfig", query: { key: value } });
       }
