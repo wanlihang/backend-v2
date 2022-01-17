@@ -3,7 +3,7 @@
     <back-bar class="mb-30" title="积分签到"></back-bar>
     <div class="float-left">
       <el-form ref="form" label-width="205px">
-        <el-form-item :key="98" label="积分奖励规则">
+        <el-form-item :key="1909" label="积分奖励规则">
           <div class="j-flex flex-column" style="margin-left: 3px">
             <div>
               <el-input
