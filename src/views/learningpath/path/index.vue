@@ -38,7 +38,7 @@
           <el-input
             class="w-200px"
             v-model="filter.keywords"
-            placeholder="课程名称关键字"
+            placeholder="关键字"
           ></el-input>
         </div>
         <div class="ml-10">
