@@ -80,6 +80,27 @@
             </div>
           </div>
         </el-form-item>
+        <el-form-item label="上架时间" prop="published_at">
+          <div class="d-flex">
+            <div>
+              <el-date-picker
+                v-model="course.published_at"
+                type="datetime"
+                format="yyyy-MM-dd HH:mm"
+                value-format="yyyy-MM-dd HH:mm"
+                placeholder="请选择日期"
+              >
+              </el-date-picker>
+            </div>
+            <div class="ml-15">
+              <div class="helper-text">
+                <helper-text
+                  text="该字段控制路径的排序，时间越大越靠前。"
+                ></helper-text>
+              </div>
+            </div>
+          </div>
+        </el-form-item>
       </el-form>
 
       <div class="bottom-menus">
@@ -114,6 +135,7 @@ export default {
         is_show: 1,
         thumb: null,
         category_id: null,
+        published_at: null,
       },
       rules: {
         category_id: [
@@ -159,6 +181,13 @@ export default {
             trigger: "blur",
           },
         ],
+        published_at: [
+          {
+            required: true,
+            message: "请选择上架时间",
+            trigger: "blur",
+          },
+        ],
       },
       categories: [],
       loading: false,
@@ -197,6 +226,7 @@ export default {
         this.course.is_show = data.is_show;
         this.course.thumb = data.thumb;
         this.course.category_id = data.category_id;
+        this.course.published_at = data.published_at;
       });
     },
     formValidate() {
