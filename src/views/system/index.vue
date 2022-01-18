@@ -130,12 +130,6 @@ export default {
           sign: "",
         },
         {
-          name: "课程有效期",
-          value: "课程有效期",
-          images: require("../../assets/images/config/coursetime.png"),
-          sign: "",
-        },
-        {
           name: "随机拍照",
           value: "随机拍照",
           images: require("../../assets/images/config/camera.png"),
