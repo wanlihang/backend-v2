@@ -148,6 +148,14 @@ const routes = [
     },
   },
   {
+    path: "/system/saveImagesConfig",
+    component: () => import("@/views/system/saveImagesConfig"),
+    name: "SystemSaveImagesConfig",
+    meta: {
+      title: "title.system-config",
+    },
+  },
+  {
     path: "/system/application",
     component: () => import("@/views/system/application"),
     name: "SystemApplication",

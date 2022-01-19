@@ -256,6 +256,10 @@ export default {
         this.$router.push({
           name: "SystemLiveConfig",
         });
+      } else if (value === "图片存储") {
+        this.$router.push({
+          name: "SystemSaveImagesConfig",
+        });
       } else {
         this.$router.push({ name: "SystemConfig", query: { key: value } });
       }
