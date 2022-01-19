@@ -22,7 +22,6 @@
             </div>
           </div>
         </el-form-item>
-        <div class="title">直播间聊天室服务商配置</div>
         <template
           v-if="form.config['meedu.addons.zhibo.default_service'] === 'aliyun'"
         >
@@ -261,6 +260,7 @@
             </div>
           </el-form-item>
         </template>
+        <div class="title">直播间聊天室服务商配置</div>
         <el-form-item :key="1506" label="奥点云DMS pub_key">
           <div class="j-flex flex-column" style="margin-left: 3px">
             <div>
