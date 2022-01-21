@@ -60,9 +60,10 @@
     <div style="display: none">
       <img src="https://addons.meedu.vip/api/v1/stat?v=v4.5" />
     </div>
-    <div class="el_top_row2">
+    <div class="el_top_row2" v-if="user">
       <div class="tit">{{ $t("index.quick_acsess") }}</div>
       <a
+        v-if="checkPermission('course')"
         @click="
           $router.push({
             name: 'Vod',
@@ -74,7 +75,9 @@
         <span>{{ $t("index.demand_course") }}</span>
       </a>
       <a
-        v-if="enabledAddons['Zhibo']"
+        v-if="
+          enabledAddons['Zhibo'] && checkPermission('addons.Zhibo.course.list')
+        "
         @click="
           $router.push({
             name: 'LiveCourse',
@@ -86,7 +89,10 @@
         <span>{{ $t("index.live_course") }}</span>
       </a>
       <a
-        v-if="enabledAddons['MeeduTopics']"
+        v-if="
+          enabledAddons['MeeduTopics'] &&
+          checkPermission('addons.meedu_topics.topic.list')
+        "
         @click="
           $router.push({
             name: 'Topic',
@@ -98,7 +104,10 @@
         <span>{{ $t("index.graphic_course") }}</span>
       </a>
       <a
-        v-if="enabledAddons['MeeduBooks']"
+        v-if="
+          enabledAddons['MeeduBooks'] &&
+          checkPermission('addons.meedu_books.book.list')
+        "
         @click="
           $router.push({
             name: 'Meedubook',
@@ -110,7 +119,10 @@
         <span>{{ $t("index.ebook") }}</span>
       </a>
       <a
-        v-if="enabledAddons['LearningPaths']"
+        v-if="
+          enabledAddons['LearningPaths'] &&
+          checkPermission('addons.learnPaths.path.list')
+        "
         @click="
           $router.push({
             name: 'LearningPath',
@@ -122,7 +134,9 @@
         <span>学习路径</span>
       </a>
       <a
-        v-if="enabledAddons['Paper']"
+        v-if="
+          enabledAddons['Paper'] && checkPermission('addons.Paper.paper.list')
+        "
         @click="
           $router.push({
             name: 'ExamPaper',
@@ -219,7 +233,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["enabledAddons"]),
+    ...mapState(["enabledAddons", "user"]),
     todayPaidRate() {
       return this.sumrate(
         this.list.today_paid_sum,
@@ -266,6 +280,14 @@ export default {
   },
   methods: {
     ...mapMutations(["setEnabledAddons"]),
+    checkPermission(val) {
+      if (typeof this.user.permissions[val] !== "undefined") {
+        // 存在权限
+        return true;
+      } else {
+        return false;
+      }
+    },
     formatNumber(num, fixed) {
       return accounting.formatNumber(num, fixed);
     },
