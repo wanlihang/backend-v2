@@ -281,12 +281,7 @@ export default {
   methods: {
     ...mapMutations(["setEnabledAddons"]),
     checkPermission(val) {
-      if (typeof this.user.permissions[val] !== "undefined") {
-        // 存在权限
-        return true;
-      } else {
-        return false;
-      }
+      return typeof this.user.permissions[val] !== "undefined";
     },
     formatNumber(num, fixed) {
       return accounting.formatNumber(num, fixed);
