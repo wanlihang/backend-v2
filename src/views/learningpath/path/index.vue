@@ -8,12 +8,60 @@
         type="primary"
       >
       </p-button>
+      <p-button
+        text="分类管理"
+        p="addons.learnPaths.category.list"
+        @click="$router.push({ name: 'LearningPathCategories' })"
+        type="primary"
+      >
+      </p-button>
     </div>
-    <div class="float-left" v-loading="loading">
+    <div class="float-left">
+      <div class="float-left d-flex">
+        <div>
+          <el-select
+            class="w-200px"
+            placeholder="分类"
+            v-model="filter.category_id"
+          >
+            <el-option
+              v-for="(item, index) in filterData.categories"
+              :key="index"
+              :label="item.name"
+              :value="item.id"
+            >
+            </el-option>
+          </el-select>
+        </div>
+
+        <div class="ml-10">
+          <el-input
+            class="w-200px"
+            v-model="filter.keywords"
+            placeholder="关键字"
+          ></el-input>
+        </div>
+        <div class="ml-10">
+          <el-button @click="firstPageLoad()" type="primary" plain>
+            筛选
+          </el-button>
+          <el-button @click="paginationReset()">清空</el-button>
+        </div>
+      </div>
+    </div>
+    <div class="float-left mt-30" v-loading="loading">
       <div class="float-left">
         <el-table :data="results" class="float-left">
           <el-table-column prop="id" label="ID" width="120"> </el-table-column>
-          <el-table-column prop="name" label="路径名" width="400">
+          <el-table-column label="路径" width="400">
+            <template slot-scope="scope">
+              <thumb-bar
+                :value="scope.row.thumb"
+                :width="120"
+                :height="90"
+                :title="scope.row.name"
+              ></thumb-bar>
+            </template>
           </el-table-column>
           <el-table-column label="价格">
             <template slot-scope="scope">
@@ -100,10 +148,18 @@ export default {
       },
       total: 0,
       loading: false,
+      filter: {
+        category_id: null,
+        keywords: null,
+      },
       results: [],
+      filterData: {
+        categories: [],
+      },
     };
   },
   activated() {
+    this.params();
     this.getResults();
     this.$utils.scrollTopSet(this.pageName);
   },
@@ -112,8 +168,14 @@ export default {
     next();
   },
   methods: {
+    firstPageLoad() {
+      this.pagination.page = 1;
+      this.getResults();
+    },
     paginationReset() {
       this.pagination.page = 1;
+      this.filter.category_id = null;
+      this.filter.keywords = null;
       this.getResults();
     },
     paginationSizeChange(size) {
@@ -124,14 +186,32 @@ export default {
       this.pagination.page = page;
       this.getResults();
     },
+    params() {
+      this.$api.Course.LearnPath.Path.Category.Create().then((res) => {
+        let categories = res.data;
+        let box = [];
+        for (let i = 0; i < categories.length; i++) {
+          if (categories[i].children.length > 0) {
+            box.push(categories[i]);
+            let children = categories[i].children;
+            for (let j = 0; j < children.length; j++) {
+              children[j].name = "|----" + children[j].name;
+              box.push(children[j]);
+            }
+          } else {
+            box.push(categories[i]);
+          }
+        }
+        this.filterData.categories = box;
+      });
+    },
     getResults() {
       if (this.loading) {
         return;
       }
       this.loading = true;
       let params = {};
-
-      Object.assign(params, this.pagination);
+      Object.assign(params, this.filter, this.pagination);
       this.$api.Course.LearnPath.Path.List(params).then((res) => {
         this.loading = false;
         this.results = res.data.data;
@@ -168,7 +248,6 @@ export default {
   },
 };
 </script>
-
 
 <style lang="less" scoped>
 .original-charge {

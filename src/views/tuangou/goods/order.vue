@@ -62,18 +62,12 @@
           <el-table-column label="商品" width="400">
             <template slot-scope="scope">
               <template v-if="scope.row.goods">
-                <div class="d-flex">
-                  <div>
-                    <img
-                      :src="scope.row.goods.goods_thumb"
-                      width="120"
-                      height="90"
-                    />
-                  </div>
-                  <div class="ml-10">
-                    {{ scope.row.goods.goods_title }}
-                  </div>
-                </div>
+                <thumb-bar
+                  :value="scope.row.goods.goods_thumb"
+                  :width="120"
+                  :height="90"
+                  :title="scope.row.goods.goods_title"
+                ></thumb-bar>
               </template>
               <span class="c-red" v-else>商品已删除</span>
             </template>
@@ -216,4 +210,3 @@ export default {
   },
 };
 </script>
-

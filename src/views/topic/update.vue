@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="编辑话题文章"></back-bar>
+    <back-bar class="mb-30" title="编辑图文"></back-bar>
 
     <div class="center-tabs mb-30">
       <div>
@@ -117,7 +117,19 @@
             ></mavon-editor>
           </el-form-item>
 
-          <el-form-item prop="original_content" label="文章内容">
+          <el-form-item
+            prop="original_content"
+            v-if="topic.charge > 0"
+            label="付费内容"
+          >
+            <mavon-editor
+              :content="topic.original_content"
+              class="w-100"
+              :height="500"
+              @change="getcontent"
+            ></mavon-editor>
+          </el-form-item>
+          <el-form-item prop="original_content" v-else label="文章内容">
             <mavon-editor
               :content="topic.original_content"
               class="w-100"

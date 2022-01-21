@@ -12,7 +12,7 @@
         </div>
 
         <div class="ml-15">
-          <el-button @click="getCourse" type="primary">筛选</el-button>
+          <el-button @click="firstPageLoad" type="primary">筛选</el-button>
           <el-button class="ml-15" @click="paginationReset">清空</el-button>
         </div>
       </div>
@@ -26,7 +26,7 @@
       <el-table-column prop="id" label="ID" width="120"> </el-table-column>
       <el-table-column label="单页">
         <template slot-scope="scope">
-         {{ scope.row.title }}
+          {{ scope.row.title }}
         </template>
       </el-table-column>
     </el-table>
@@ -86,6 +86,10 @@ export default {
     },
     paginationPageChange(page) {
       this.pagination.page = page;
+      this.getCourse();
+    },
+    firstPageLoad() {
+      this.pagination.page = 1;
       this.getCourse();
     },
     tableItemChoice(row) {

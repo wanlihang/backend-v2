@@ -9,6 +9,20 @@
       >
       </p-button>
       <p-button
+        text="分类管理"
+        @click="$router.push({ name: 'LiveCourseCategory' })"
+        type="primary"
+        p="addons.Zhibo.course_category.list"
+      >
+      </p-button>
+      <p-button
+        text="讲师管理"
+        @click="$router.push({ name: 'LiveTeacher' })"
+        type="primary"
+        p="addons.Zhibo.teacher.list"
+      >
+      </p-button>
+      <p-button
         text="评论"
         @click="$router.push({ name: 'LiveCourseComment' })"
         type="primary"
@@ -94,14 +108,12 @@
           </el-table-column>
           <el-table-column label="课程" width="400">
             <template slot-scope="scope">
-              <div class="d-flex">
-                <div>
-                  <img :src="scope.row.thumb" width="120" height="90" />
-                </div>
-                <div class="ml-10">
-                  {{ scope.row.title }}
-                </div>
-              </div>
+              <thumb-bar
+                :value="scope.row.thumb"
+                :width="120"
+                :height="90"
+                :title="scope.row.title"
+              ></thumb-bar>
             </template>
           </el-table-column>
           <el-table-column label="价格" property="charge" sortable width="100">

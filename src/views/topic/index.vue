@@ -44,7 +44,9 @@
         </div>
 
         <div class="ml-15">
-          <el-button @click="getData" type="primary" plain>筛选</el-button>
+          <el-button @click="firstPageLoad" type="primary" plain
+            >筛选</el-button
+          >
           <el-button @click="paginationReset">清空</el-button>
         </div>
       </div>
@@ -62,12 +64,12 @@
           <el-table-column prop="category.name" label="分类"> </el-table-column>
           <el-table-column label="标题" width="400">
             <template slot-scope="scope">
-              <div class="d-flex">
-                <div>
-                  <img :src="scope.row.thumb" width="120" height="90" />
-                </div>
-                <div class="ml-10">{{ scope.row.title }}</div>
-              </div>
+              <thumb-bar
+                :value="scope.row.thumb"
+                :width="120"
+                :height="90"
+                :title="scope.row.title"
+              ></thumb-bar>
             </template>
           </el-table-column>
           <el-table-column label="价格" sortable property="charge" width="100">

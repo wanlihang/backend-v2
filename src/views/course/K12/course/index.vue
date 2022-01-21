@@ -74,16 +74,14 @@
           </el-table-column>
           <el-table-column property="category.name" label="分类">
           </el-table-column>
-          <el-table-column label="课程名" width="500">
+          <el-table-column label="课程" width="400">
             <template slot-scope="scope">
-              <div class="d-flex">
-                <div>
-                  <img :src="scope.row.thumb" width="120" height="90" />
-                </div>
-                <div class="ml-10">
-                  {{ scope.row.title }}
-                </div>
-              </div>
+              <thumb-bar
+                :value="scope.row.thumb"
+                :width="120"
+                :height="90"
+                :title="scope.row.title"
+              ></thumb-bar>
             </template>
           </el-table-column>
           <el-table-column property="status_text" label="状态" width="120">

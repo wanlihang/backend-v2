@@ -158,51 +158,6 @@
             ></quill-editor>
           </el-form-item>
         </div>
-
-        <div class="float-left" v-show="tab.active === 'dev'">
-          <el-form-item label="推荐" prop="is_rec">
-            <div class="d-flex">
-              <div>
-                <el-switch
-                  v-model="course.is_rec"
-                  :active-value="1"
-                  :inactive-value="0"
-                >
-                </el-switch>
-              </div>
-              <div class="ml-15">
-                <div class="helper-text">
-                  <helper-text text="课程列表过滤使用。"></helper-text>
-                </div>
-              </div>
-            </div>
-          </el-form-item>
-          <!-- <el-form-item label="订阅人数" prop="user_count">
-            <el-input
-              v-model="course.user_count"
-              class="w-400px"
-              placeholder="订阅人数"
-            ></el-input>
-          </el-form-item> -->
-
-          <el-form-item label="SEO描述">
-            <el-input
-              class="w-400px"
-              type="textarea"
-              v-model="course.seo_description"
-              placeholder="SEO描述"
-            ></el-input>
-          </el-form-item>
-
-          <el-form-item label="SEO关键字">
-            <el-input
-              class="w-400px"
-              type="textarea"
-              v-model="course.seo_keywords"
-              placeholder="SEO关键字"
-            ></el-input>
-          </el-form-item>
-        </div>
       </el-form>
 
       <div class="bottom-menus">
@@ -238,16 +193,11 @@ export default {
             name: "基础信息",
             key: "base",
           },
-          {
-            name: "可选信息",
-            key: "dev",
-          },
         ],
       },
       course: {
         published_at: null,
         is_show: 1,
-        is_rec: 0,
         charge: null,
         title: null,
         category_id: null,
@@ -257,8 +207,6 @@ export default {
         original_desc: null,
         render_desc: null,
         user_count: null,
-        seo_description: null,
-        seo_keywords: null,
         is_free: 1,
       },
       rules: {
@@ -333,8 +281,8 @@ export default {
           name: "购买后可评论",
         },
       ],
-      categories: [],
       loading: false,
+      categories: [],
     };
   },
   mounted() {

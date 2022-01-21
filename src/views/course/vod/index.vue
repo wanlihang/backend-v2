@@ -9,6 +9,13 @@
       >
       </p-button>
       <p-button
+        text="分类管理"
+        p="courseCategory"
+        @click="$router.push({ name: 'CourseCategories' })"
+        type="primary"
+      >
+      </p-button>
+      <p-button
         text="课程评论"
         p="course_comment"
         @click="$router.push({ name: 'CourseComments' })"
@@ -78,7 +85,7 @@
           </el-select>
         </div>
         <div class="ml-10">
-          <el-button @click="getCourse" type="primary" plain>筛选</el-button>
+          <el-button @click="filterAct" type="primary" plain>筛选</el-button>
           <el-button @click="paginationReset">清空</el-button>
         </div>
       </div>
@@ -101,16 +108,14 @@
               <span v-else class="c-red">数据不完整</span>
             </template>
           </el-table-column>
-          <el-table-column label="课程" width="450">
+          <el-table-column label="课程" width="400">
             <template slot-scope="scope">
-              <div class="d-flex">
-                <div>
-                  <img :src="scope.row.thumb" width="120" height="90" />
-                </div>
-                <div class="ml-10">
-                  {{ scope.row.title }}
-                </div>
-              </div>
+              <thumb-bar
+                :value="scope.row.thumb"
+                :width="120"
+                :height="90"
+                :title="scope.row.title"
+              ></thumb-bar>
             </template>
           </el-table-column>
           <el-table-column property="charge" label="价格" sortable width="100">
@@ -265,6 +270,10 @@ export default {
     },
     paginationPageChange(page) {
       this.pagination.page = page;
+      this.getCourse();
+    },
+    filterAct() {
+      this.pagination.page = 1;
       this.getCourse();
     },
     sortChange(column) {

@@ -25,25 +25,34 @@
           <el-form-item label="推流地址">
             <el-input
               placeholder="推流地址"
-              class="w-600px"
+              class="w-300px"
               v-model="push_url"
             ></el-input>
+            <el-button type="primary" class="ml-10" @click="copy(push_url)"
+              >复制</el-button
+            >
           </el-form-item>
 
           <el-form-item label="OBS服务器">
             <el-input
               placeholder="OBS服务器"
-              class="w-600px"
+              class="w-300px"
               v-model="obs.server"
             ></el-input>
+            <el-button type="primary" class="ml-10" @click="copy(obs.server)"
+              >复制</el-button
+            >
           </el-form-item>
 
           <el-form-item label="OBS串流秘钥">
             <el-input
-              placeholder="推流地址"
-              class="w-600px"
+              placeholder="OBS串流秘钥"
+              class="w-300px"
               v-model="obs.token"
             ></el-input>
+            <el-button type="primary" class="ml-10" @click="copy(obs.token)"
+              >复制</el-button
+            >
           </el-form-item>
         </template>
       </el-form>
@@ -148,9 +157,14 @@ export default {
           console.log(this.push_url);
 
           // OBS推流地址解析
-          let obs = this.push_url.split("meedu/");
-          this.obs.server = obs[0] + "meedu/";
-          this.obs.token = obs[1];
+          if (this.push_url.substring(0, 6) === "srt://") {
+            this.obs.server = this.push_url;
+            this.obs.token = null;
+          } else {
+            let obs = this.push_url.split("meedu/");
+            this.obs.server = obs[0] + "meedu/";
+            this.obs.token = obs[1];
+          }
 
           this.video.service = this.form.service;
 
@@ -161,20 +175,42 @@ export default {
           this.$message.error(e.message);
         });
     },
+    copy(url) {
+      var input = document.createElement("input");
+      input.value = url;
+      document.body.appendChild(input);
+      input.select();
+      document.execCommand("Copy");
+      document.body.removeChild(input);
+      this.$message.success("复制成功");
+    },
     stop() {
-      this.loading = true;
-      this.$api.Course.Live.Course.Video.Stop({
-        video_id: this.video_id,
-        service: this.form.service,
+      this.$confirm("确认操作？", "警告", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
       })
         .then(() => {
-          this.loading = false;
-          this.$message.success("已停止直播");
-          this.$router.back();
+          if (this.loading) {
+            return;
+          }
+          this.loading = true;
+          this.$api.Course.Live.Course.Video.Stop({
+            video_id: this.video_id,
+            service: this.form.service,
+          })
+            .then(() => {
+              this.loading = false;
+              this.$message.success("已停止直播");
+              this.$router.back();
+            })
+            .catch((e) => {
+              this.loading = false;
+              this.$message.error(e.message);
+            });
         })
-        .catch((e) => {
-          this.loading = false;
-          this.$message.error(e.message);
+        .catch(() => {
+          //点击删除按钮的操作
         });
     },
   },

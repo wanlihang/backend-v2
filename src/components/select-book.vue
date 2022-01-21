@@ -15,7 +15,7 @@
               </div>
 
               <div class="ml-15">
-                <el-button @click="getCourse" type="primary" plain>
+                <el-button @click="firstPageLoad" type="primary" plain>
                   筛选
                 </el-button>
                 <el-button class="ml-15" @click="paginationReset">
@@ -105,6 +105,10 @@ export default {
       this.pagination.page = page;
       this.getCourse();
     },
+    firstPageLoad() {
+      this.pagination.page = 1;
+      this.getCourse();
+    },
     handleCurrentChange(row) {
       this.result = row;
     },
@@ -132,7 +136,7 @@ export default {
         view_times: this.result.view_times,
         is_vip_free: this.result.is_vip_free,
         user_count: this.result.user_count,
-        short_desc: this.result.short_desc
+        short_desc: this.result.short_desc,
       });
     },
     close() {

@@ -20,6 +20,7 @@ import "mavon-editor/dist/css/index.css";
 // 全局组件
 import FormLabelComp from "@/components/form-label";
 import BackBar from "@/components/back-bar";
+import ThumbBar from "@/components/thumb-bar";
 import HelperText from "@/components/helper-text";
 import OptionBar from "@/components/option-bar";
 import PLink from "@/components/permission/link";
@@ -30,7 +31,7 @@ Vue.use(ElementUI);
 // 组件注册
 Vue.use(mavonEditor);
 Vue.prototype.moment = moment;
-Vue.filter("dateFormat", function(dateStr, pattern = "YYYY-MM-DD HH:mm") {
+Vue.filter("dateFormat", function (dateStr, pattern = "YYYY-MM-DD HH:mm") {
   if (!dateStr) {
     return dateStr;
   }
@@ -38,6 +39,7 @@ Vue.filter("dateFormat", function(dateStr, pattern = "YYYY-MM-DD HH:mm") {
 });
 Vue.component("FormLabel", FormLabelComp);
 Vue.component("BackBar", BackBar);
+Vue.component("ThumbBar", ThumbBar);
 Vue.component("HelperText", HelperText);
 Vue.component("OptionBar", OptionBar);
 Vue.component("PLink", PLink);

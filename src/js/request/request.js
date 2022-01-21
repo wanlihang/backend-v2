@@ -630,6 +630,29 @@ const Api = {
         Users(id, params) {
           return get(`/backend/addons/LearningPaths/path/${id}/users`, params);
         },
+        Category: {
+          List() {
+            return get(`/backend/addons/LearningPaths/category/index`);
+          },
+          Create(params) {
+            return get(`/backend/addons/LearningPaths/category/create`, params);
+          },
+          Store(params) {
+            return post(
+              `/backend/addons/LearningPaths/category/create`,
+              params
+            );
+          },
+          Destory(id) {
+            return destroy(`/backend/addons/LearningPaths/category/${id}`);
+          },
+          Detail(id) {
+            return get(`/backend/addons/LearningPaths/category/${id}`);
+          },
+          Update(id, params) {
+            return put(`/backend/addons/LearningPaths/category/${id}`, params);
+          },
+        },
       },
       Step: {
         List(params) {

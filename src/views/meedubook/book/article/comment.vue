@@ -51,7 +51,7 @@
           </el-date-picker>
         </div>
         <div class="ml-10">
-          <el-button @click="getComments" type="primary" plain>
+          <el-button @click="firstPageLoad" type="primary" plain>
             筛选
           </el-button>
           <el-button @click="paginationReset">清空</el-button>
@@ -121,7 +121,7 @@ export default {
         const SELECTWRAP_DOM = el.querySelector(
           ".el-select-dropdown .el-select-dropdown__wrap"
         );
-        SELECTWRAP_DOM.addEventListener("scroll", function() {
+        SELECTWRAP_DOM.addEventListener("scroll", function () {
           const condition =
             this.scrollHeight - this.scrollTop <= this.clientHeight;
           if (condition) {
@@ -204,6 +204,10 @@ export default {
     },
     paginationPageChange(page) {
       this.pagination.page = page;
+      this.getComments();
+    },
+    firstPageLoad() {
+      this.pagination.page = 1;
       this.getComments();
     },
     handleSelectionChange(val) {

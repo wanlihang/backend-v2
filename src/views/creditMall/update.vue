@@ -27,7 +27,7 @@
               width="400"
               height="400"
               name="上传封面"
-              :status="true"
+              :contain-box="true"
             ></upload-image>
           </el-form-item>
 

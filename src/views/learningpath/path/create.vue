@@ -9,6 +9,30 @@
         :rules="rules"
         label-width="200px"
       >
+        <el-form-item label="分类" prop="category_id">
+          <div class="d-flex">
+            <div>
+              <el-select class="w-300px" v-model="course.category_id">
+                <el-option
+                  v-for="(item, index) in categories"
+                  :key="index"
+                  :label="item.name"
+                  :value="item.id"
+                >
+                </el-option>
+              </el-select>
+            </div>
+            <div class="ml-15">
+              <p-link
+                type="primary"
+                text="分类管理"
+                p="addons.learnPaths.category.list"
+                @click="$router.push({ name: 'LearningPathCategories' })"
+              >
+              </p-link>
+            </div>
+          </div>
+        </el-form-item>
         <el-form-item label="路径名" prop="name">
           <el-input v-model="course.name" class="w-500px"></el-input>
         </el-form-item>
@@ -74,6 +98,27 @@
             </div>
           </div>
         </el-form-item>
+        <el-form-item label="上架时间" prop="published_at">
+          <div class="d-flex">
+            <div>
+              <el-date-picker
+                v-model="course.published_at"
+                type="datetime"
+                format="yyyy-MM-dd HH:mm"
+                value-format="yyyy-MM-dd HH:mm"
+                placeholder="请选择日期"
+              >
+              </el-date-picker>
+            </div>
+            <div class="ml-15">
+              <div class="helper-text">
+                <helper-text
+                  text="该字段控制路径的排序，时间越大越靠前。"
+                ></helper-text>
+              </div>
+            </div>
+          </div>
+        </el-form-item>
       </el-form>
 
       <div class="bottom-menus">
@@ -106,9 +151,18 @@ export default {
         charge: null,
         is_show: 1,
         thumb: null,
+        category_id: null,
+        published_at: null,
         desc: null,
       },
       rules: {
+        category_id: [
+          {
+            required: true,
+            message: "请选择分类",
+            trigger: "blur",
+          },
+        ],
         name: [
           {
             required: true,
@@ -130,7 +184,6 @@ export default {
             trigger: "blur",
           },
         ],
-
         thumb: [
           {
             required: true,
@@ -152,12 +205,41 @@ export default {
             trigger: "blur",
           },
         ],
+        published_at: [
+          {
+            required: true,
+            message: "请选择上架时间",
+            trigger: "blur",
+          },
+        ],
       },
+      categories: [],
       loading: false,
     };
   },
-  mounted() {},
+  mounted() {
+    this.params();
+  },
   methods: {
+    params() {
+      this.$api.Course.LearnPath.Path.Category.Create().then((res) => {
+        let categories = res.data;
+        let box = [];
+        for (let i = 0; i < categories.length; i++) {
+          if (categories[i].children.length > 0) {
+            box.push(categories[i]);
+            let children = categories[i].children;
+            for (let j = 0; j < children.length; j++) {
+              children[j].name = "|----" + children[j].name;
+              box.push(children[j]);
+            }
+          } else {
+            box.push(categories[i]);
+          }
+        }
+        this.categories = box;
+      });
+    },
     formValidate() {
       this.$refs["form"].validate((valid) => {
         if (valid) {

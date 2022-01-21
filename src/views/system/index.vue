@@ -8,9 +8,7 @@
             class="item"
             v-if="enabledAddons[item.sign] === 1 || item.sign === ''"
             :key="index"
-            @click="
-              $router.push({ name: 'SystemConfig', query: { key: item.value } })
-            "
+            @click="goConfig(item.value)"
           >
             <img :src="item.images" />
             <span>{{ item.name }}</span>
@@ -26,9 +24,7 @@
             class="item"
             v-if="enabledAddons[item.sign] === 1 || item.sign === ''"
             :key="index"
-            @click="
-              $router.push({ name: 'SystemConfig', query: { key: item.value } })
-            "
+            @click="goConfig(item.value)"
           >
             <img :src="item.images" />
             <span>{{ item.name }}</span>
@@ -44,9 +40,7 @@
             class="item"
             v-if="enabledAddons[item.sign] === 1 || item.sign === ''"
             :key="index"
-            @click="
-              $router.push({ name: 'SystemConfig', query: { key: item.value } })
-            "
+            @click="goConfig(item.value)"
           >
             <img :src="item.images" />
             <span>{{ item.name }}</span>
@@ -133,12 +127,6 @@ export default {
           name: "微信小程序",
           value: "微信小程序",
           images: require("../../assets/images/config/weixin.png"),
-          sign: "",
-        },
-        {
-          name: "课程有效期",
-          value: "课程有效期",
-          images: require("../../assets/images/config/coursetime.png"),
           sign: "",
         },
         {
@@ -254,7 +242,29 @@ export default {
     ...mapState(["enabledAddons"]),
   },
   mounted() {},
-  methods: {},
+  methods: {
+    goConfig(value) {
+      if (value === "播放器配置") {
+        this.$router.push({
+          name: "SystemPlayerConfig",
+        });
+      } else if (value === "积分") {
+        this.$router.push({
+          name: "SystemCreditSignConfig",
+        });
+      } else if (value === "直播") {
+        this.$router.push({
+          name: "SystemLiveConfig",
+        });
+      } else if (value === "图片存储") {
+        this.$router.push({
+          name: "SystemSaveImagesConfig",
+        });
+      } else {
+        this.$router.push({ name: "SystemConfig", query: { key: value } });
+      }
+    },
+  },
 };
 </script>
 <style lang="less" scoped>

@@ -46,7 +46,9 @@
             </el-select>
           </div>
           <div class="ml-15">
-            <el-button @click="getBook" type="primary" plain>筛选</el-button>
+            <el-button @click="firstPageLoad" type="primary" plain
+              >筛选</el-button
+            >
             <el-button @click="paginationReset">清空</el-button>
           </div>
         </div>
@@ -65,14 +67,12 @@
             </el-table-column>
             <el-table-column label="电子书" width="400">
               <template slot-scope="scope">
-                <div class="d-flex">
-                  <div>
-                    <img :src="scope.row.thumb" width="84" height="112" />
-                  </div>
-                  <div class="ml-10">
-                    {{ scope.row.name }}
-                  </div>
-                </div>
+                <thumb-bar
+                  :value="scope.row.thumb"
+                  :width="90"
+                  :height="120"
+                  :title="scope.row.name"
+                ></thumb-bar>
               </template>
             </el-table-column>
             <el-table-column
@@ -221,6 +221,10 @@ export default {
     },
     paginationPageChange(page) {
       this.pagination.page = page;
+      this.getBook();
+    },
+    firstPageLoad() {
+      this.pagination.page = 1;
       this.getBook();
     },
     sortChange(column) {

@@ -124,6 +124,38 @@ const routes = [
     },
   },
   {
+    path: "/system/playerConfig",
+    component: () => import("@/views/system/playerConfig"),
+    name: "SystemPlayerConfig",
+    meta: {
+      title: "title.system-config",
+    },
+  },
+  {
+    path: "/system/creditSignConfig",
+    component: () => import("@/views/system/creditSignConfig"),
+    name: "SystemCreditSignConfig",
+    meta: {
+      title: "title.system-config",
+    },
+  },
+  {
+    path: "/system/liveConfig",
+    component: () => import("@/views/system/liveConfig"),
+    name: "SystemLiveConfig",
+    meta: {
+      title: "title.system-config",
+    },
+  },
+  {
+    path: "/system/saveImagesConfig",
+    component: () => import("@/views/system/saveImagesConfig"),
+    name: "SystemSaveImagesConfig",
+    meta: {
+      title: "title.system-config",
+    },
+  },
+  {
     path: "/system/application",
     component: () => import("@/views/system/application"),
     name: "SystemApplication",
@@ -789,6 +821,31 @@ const routes = [
     name: "LearningPathUpdate",
     meta: {
       title: "title.learningpath.path.update",
+    },
+  },
+  {
+    path: "/learningpath/path/category/index",
+    component: () => import("@/views/learningpath/path/category/index"),
+    name: "LearningPathCategories",
+    meta: {
+      title: "title.learningpath.path.category.index",
+      keepAlive: true,
+    },
+  },
+  {
+    path: "/learningpath/path/category/create",
+    component: () => import("@/views/learningpath/path/category/create"),
+    name: "LearningPathCategoriesCreate",
+    meta: {
+      title: "title.learningpath.path.category.create",
+    },
+  },
+  {
+    path: "/learningpath/path/category/update",
+    component: () => import("@/views/learningpath/path/category/update"),
+    name: "LearningPathCategoriesUpdate",
+    meta: {
+      title: "title.learningpath.path.category.update",
     },
   },
   {
