@@ -143,7 +143,6 @@ export default {
       let shareContent = document.querySelector("#pdfDom");
       let imgList = shareContent.querySelectorAll("img");
       if (imgList) {
-        console.log(imgList);
         var i;
         for (i = 1; i < imgList.length; i++) {
           imgList[i].src += "&timeSign=" + Date.now().toString();
