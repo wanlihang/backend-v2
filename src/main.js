@@ -7,6 +7,7 @@ import store from "./store";
 import api from "./js/request/request";
 import i18n from "./js/i18n";
 import utils from "./js/utils";
+import htmlToPdf from "./js/htmlToPdf";
 import moment from "moment";
 
 // 全局样式
@@ -30,6 +31,7 @@ Vue.use(ElementUI);
 
 // 组件注册
 Vue.use(mavonEditor);
+Vue.use(htmlToPdf);
 Vue.prototype.moment = moment;
 Vue.filter("dateFormat", function (dateStr, pattern = "YYYY-MM-DD HH:mm") {
   if (!dateStr) {

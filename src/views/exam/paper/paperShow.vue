@@ -1,7 +1,8 @@
 <template>
   <div class="meedu-main-body">
     <back-bar class="mb-30" :title="paper.title"></back-bar>
-    <div class="float-left">
+    <el-button @click="download()" type="primary">下载pdf格式试卷 </el-button>
+    <div class="float-left" id="pdfDom">
       <div class="top float-left d-flex">
         <div class="score" v-if="userPaper && userPaper.status === 2">
           最终得分：{{ userPaper.score }}
@@ -11,87 +12,87 @@
           及格分：{{ paper.pass_score }}分/{{ paper.score }}分
         </div>
       </div>
-    </div>
-    <div class="paper-box">
-      <div class="questions-box" v-if="questions && userPaper">
-        <template v-for="(question, index) in questions">
-          <div class="item" :key="index">
-            <!-- 单选 -->
-            <question-choice
-              :num="index + 1"
-              v-if="question.question.type === 1"
-              :question="question.question"
-              :reply="question.answer_content"
-              :score="question.score"
-              :is-correct="question.is_correct"
-              @update="questionUpdate"
-              :is-over="true"
-            ></question-choice>
+      <div class="paper-box">
+        <div class="questions-box" v-if="questions && userPaper">
+          <template v-for="(question, index) in questions">
+            <div class="item" :key="index">
+              <!-- 单选 -->
+              <question-choice
+                :num="index + 1"
+                v-if="question.question.type === 1"
+                :question="question.question"
+                :reply="question.answer_content"
+                :score="question.score"
+                :is-correct="question.is_correct"
+                @update="questionUpdate"
+                :is-over="true"
+              ></question-choice>
 
-            <!-- 多选 -->
-            <question-select
-              :num="index + 1"
-              v-else-if="question.question.type === 2"
-              :question="question.question"
-              :reply="question.answer_content"
-              :score="question.score"
-              :is-correct="question.is_correct"
-              @update="questionUpdate"
-              :is-over="true"
-            ></question-select>
+              <!-- 多选 -->
+              <question-select
+                :num="index + 1"
+                v-else-if="question.question.type === 2"
+                :question="question.question"
+                :reply="question.answer_content"
+                :score="question.score"
+                :is-correct="question.is_correct"
+                @update="questionUpdate"
+                :is-over="true"
+              ></question-select>
 
-            <!-- 填空 -->
-            <question-input
-              :num="index + 1"
-              v-else-if="question.question.type === 3"
-              :question="question.question"
-              :reply="question.answer_content"
-              :score="question.score"
-              :is-correct="question.is_correct"
-              @update="questionUpdate"
-              :is-over="true"
-            ></question-input>
+              <!-- 填空 -->
+              <question-input
+                :num="index + 1"
+                v-else-if="question.question.type === 3"
+                :question="question.question"
+                :reply="question.answer_content"
+                :score="question.score"
+                :is-correct="question.is_correct"
+                @update="questionUpdate"
+                :is-over="true"
+              ></question-input>
 
-            <!-- 问答 -->
-            <question-qa
-              :num="index + 1"
-              v-else-if="question.question.type === 4"
-              :question="question.question"
-              :reply="question.answer_content"
-              :thumbs="question.thumbs_rows"
-              :score="question.score"
-              :is-correct="question.is_correct"
-              @update="questionUpdate"
-              :show-image="true"
-              :is-over="true"
-            ></question-qa>
+              <!-- 问答 -->
+              <question-qa
+                :num="index + 1"
+                v-else-if="question.question.type === 4"
+                :question="question.question"
+                :reply="question.answer_content"
+                :thumbs="question.thumbs_rows"
+                :score="question.score"
+                :is-correct="question.is_correct"
+                @update="questionUpdate"
+                :show-image="true"
+                :is-over="true"
+              ></question-qa>
 
-            <!-- 判断 -->
-            <question-judge
-              :num="index + 1"
-              v-else-if="question.question.type === 5"
-              :question="question.question"
-              :score="question.score"
-              :is-correct="question.is_correct"
-              :reply="parseInt(question.answer_content)"
-              @update="questionUpdate"
-              :is-over="true"
-            ></question-judge>
+              <!-- 判断 -->
+              <question-judge
+                :num="index + 1"
+                v-else-if="question.question.type === 5"
+                :question="question.question"
+                :score="question.score"
+                :is-correct="question.is_correct"
+                :reply="parseInt(question.answer_content)"
+                @update="questionUpdate"
+                :is-over="true"
+              ></question-judge>
 
-            <!-- 题帽题 -->
-            <question-cap
-              :num="index + 1"
-              v-else-if="question.question.type === 6"
-              :question="question.question"
-              :score="question.score"
-              :show-image="true"
-              :is-correct="false"
-              :reply="question.answer_content"
-              @update="questionUpdate"
-              :is-over="true"
-            ></question-cap>
-          </div>
-        </template>
+              <!-- 题帽题 -->
+              <question-cap
+                :num="index + 1"
+                v-else-if="question.question.type === 6"
+                :question="question.question"
+                :score="question.score"
+                :show-image="true"
+                :is-correct="false"
+                :reply="question.answer_content"
+                @update="questionUpdate"
+                :is-over="true"
+              ></question-cap>
+            </div>
+          </template>
+        </div>
       </div>
     </div>
   </div>
@@ -132,6 +133,9 @@ export default {
     },
     questionUpdate(qid, answer, thumbs) {
       console.log(qid + ":" + thumbs + ":" + answer);
+    },
+    download() {
+      this.getPdf("pdfDom", this.paper.title);
     },
     getData() {
       this.$api.Exam.PaperJoinRecord(this.id, this.pid)
