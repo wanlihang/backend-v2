@@ -1209,7 +1209,6 @@ const routes = [
       keepAlive: true,
     },
   },
-
   {
     path: "/exam/paper/paperShow",
     component: () => import("@/views/exam/paper/paperShow"),
@@ -1413,6 +1412,14 @@ const routes = [
     meta: {
       title: "title.exam.mockpaper.index",
       keepAlive: true,
+    },
+  },
+  {
+    path: "/exam/mockpaper/paperShow",
+    component: () => import("@/views/exam/mockpaper/paperShow"),
+    name: "ExamMockpaperShow",
+    meta: {
+      title: "查看模拟考试",
     },
   },
   {

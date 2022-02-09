@@ -170,6 +170,7 @@ export default {
     PracticeUser: "ExamPractice",
     PracticeProgress: "ExamPractice",
     ExamMockpaper: "ExamMockpaper",
+    ExamMockpaperShow: "ExamMockpaper",
     ExamMockpaperCreate: "ExamMockpaper",
     ExamMockpaperUpdate: "ExamMockpaper",
     MockpaperCategories: "ExamMockpaper",
