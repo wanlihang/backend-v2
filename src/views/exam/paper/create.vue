@@ -89,7 +89,18 @@
             </div>
           </div>
         </el-form-item>
-
+        <el-form-item label="跳过阅卷" prop="is_skip_mark">
+          <div class="d-flex">
+            <div>
+              <el-switch
+                v-model="addform.is_skip_mark"
+                :active-value="1"
+                :inactive-value="0"
+              >
+              </el-switch>
+            </div>
+          </div>
+        </el-form-item>
         <el-form-item label="仅邀请" prop="enabled_invite">
           <div class="d-flex">
             <div>
@@ -228,6 +239,7 @@ export default {
         enabled_invite: 0,
         charge: 0,
         category_id: null,
+        is_skip_mark: 0,
       },
       rules: {
         title: [
@@ -248,6 +260,13 @@ export default {
           {
             required: true,
             message: "分数不能为空",
+            trigger: "blur",
+          },
+        ],
+        is_skip_mark: [
+          {
+            required: true,
+            message: "请选择是否跳过阅卷",
             trigger: "blur",
           },
         ],

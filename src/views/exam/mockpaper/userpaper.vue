@@ -80,9 +80,27 @@
           </el-table-column>
           <el-table-column prop="status_text" label="状态" width="100">
           </el-table-column>
+          <el-table-column fixed="right" label="操作" width="100">
+            <template slot-scope="scope">
+              <p-link
+                text="查看"
+                p="addons.Paper.mock_paper.userPaper"
+                type="primary"
+                @click="
+                  $router.push({
+                    name: 'ExamMockpaperShow',
+                    query: {
+                      id: scope.row.paper_id,
+                      pid: scope.row.id,
+                    },
+                  })
+                "
+                class="ml-5"
+              ></p-link>
+            </template>
+          </el-table-column>
         </el-table>
       </div>
-
       <div class="float-left mt-30 text-center">
         <el-pagination
           @size-change="paginationSizeChange"

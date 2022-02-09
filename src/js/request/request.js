@@ -1222,6 +1222,16 @@ const Api = {
     },
   },
   Exam: {
+    PaperJoinRecord(paperId, recordId) {
+      return get(
+        `/backend/addons/Paper/paper/${paperId}/userPaper/${recordId}/render`
+      );
+    },
+    MockPaperJoinRecord(paperId, recordId) {
+      return get(
+        `/backend/addons/Paper/mock_paper/${paperId}/userPaper/${recordId}`
+      );
+    },
     Paper: {
       List(params) {
         return get(`/backend/addons/Paper/paper/index`, params);
