@@ -145,6 +145,7 @@ export default {
     TopicComment: "Topic",
     TopicOrder: "Topic",
     ExamPaper: "ExamPaper",
+    ExamPaperShow: "ExamPaper",
     ExamPaperCreate: "ExamPaper",
     ExamPaperUpdate: "ExamPaper",
     PaperCategories: "ExamPaper",

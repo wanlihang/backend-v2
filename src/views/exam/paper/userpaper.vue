@@ -133,10 +133,17 @@
               ></p-link>
               <p-link
                 text="查看"
-                p="addons.Paper.paper.userPaper.detail"
+                p="addons.Paper.paper.userPaper.render"
                 type="primary"
-                target="blank"
-                :href="`/backend/addons/Paper/paper/${scope.row.paper_id}/userPaper/${scope.row.id}/render?token=${config.token}`"
+                @click="
+                  $router.push({
+                    name: 'ExamPaperShow',
+                    query: {
+                      id: scope.row.paper_id,
+                      pid: scope.row.id,
+                    },
+                  })
+                "
                 class="ml-5"
               ></p-link>
             </template>

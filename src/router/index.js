@@ -1209,6 +1209,15 @@ const routes = [
       keepAlive: true,
     },
   },
+
+  {
+    path: "/exam/paper/paperShow",
+    component: () => import("@/views/exam/paper/paperShow"),
+    name: "ExamPaperShow",
+    meta: {
+      title: "查看考试",
+    },
+  },
   {
     path: "/exam/paper/index",
     component: () => import("@/views/exam/paper/index"),
