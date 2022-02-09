@@ -4,6 +4,10 @@
     <el-button @click="download()" type="primary">下载pdf格式试卷 </el-button>
     <div class="float-left" id="pdfDom">
       <div class="top float-left d-flex">
+        <div class="user-info">账户名：{{ user.nick_name }}</div>
+        <div class="user-info">账号：{{ user.mobile }}</div>
+      </div>
+      <div class="top float-left d-flex">
         <div class="score" v-if="userPaper && userPaper.status === 2">
           最终得分：{{ userPaper.score }}
         </div>
@@ -120,6 +124,7 @@ export default {
       id: this.$route.query.id || 0,
       pid: this.$route.query.pid || 0,
       paper: [],
+      user: [],
       questions: [],
       userPaper: null,
     };
@@ -143,6 +148,7 @@ export default {
           this.paper = res.data.paper;
           document.title = res.data.paper.title;
           this.userPaper = res.data.user_paper;
+          this.user = res.data.user;
           let normaldata = res.data.questions;
           if (normaldata.length === 0) {
             this.$message.error("未获取到试题");
@@ -213,7 +219,7 @@ export default {
 <style lang="less" scoped>
 .top {
   width: 100%;
-  height: 70px;
+  height: 60px;
   margin: 0 auto;
   font-size: 16px;
   font-weight: 500;
@@ -231,6 +237,14 @@ export default {
     color: #333333;
     line-height: 24px;
     margin-right: 50px;
+  }
+  .user-info {
+    height: 16px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333333;
+    line-height: 16px;
+    margin-right: 30px;
   }
   .score-info {
     height: 16px;
