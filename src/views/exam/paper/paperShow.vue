@@ -1,11 +1,12 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar :title="paper.title"></back-bar>
+    <back-bar class="mb-30" :title="paper.title"></back-bar>
     <div class="float-left">
       <div class="top float-left d-flex">
         <div class="score" v-if="userPaper && userPaper.status === 2">
           最终得分：{{ userPaper.score }}
         </div>
+        <div class="score" v-else>阅卷中</div>
         <div class="score-info">
           及格分：{{ paper.pass_score }}分/{{ paper.score }}分
         </div>
@@ -24,7 +25,7 @@
               :score="question.score"
               :is-correct="question.is_correct"
               @update="questionUpdate"
-              :is-over="userPaper.status === 2"
+              :is-over="true"
             ></question-choice>
 
             <!-- 多选 -->
@@ -36,7 +37,7 @@
               :score="question.score"
               :is-correct="question.is_correct"
               @update="questionUpdate"
-              :is-over="userPaper.status === 2"
+              :is-over="true"
             ></question-select>
 
             <!-- 填空 -->
@@ -48,7 +49,7 @@
               :score="question.score"
               :is-correct="question.is_correct"
               @update="questionUpdate"
-              :is-over="userPaper.status === 2"
+              :is-over="true"
             ></question-input>
 
             <!-- 问答 -->
@@ -62,7 +63,7 @@
               :is-correct="question.is_correct"
               @update="questionUpdate"
               :show-image="true"
-              :is-over="userPaper.status === 2"
+              :is-over="true"
             ></question-qa>
 
             <!-- 判断 -->
@@ -74,7 +75,7 @@
               :is-correct="question.is_correct"
               :reply="parseInt(question.answer_content)"
               @update="questionUpdate"
-              :is-over="userPaper.status === 2"
+              :is-over="true"
             ></question-judge>
 
             <!-- 题帽题 -->
@@ -87,7 +88,7 @@
               :is-correct="false"
               :reply="question.answer_content"
               @update="questionUpdate"
-              :is-over="userPaper.status === 2"
+              :is-over="true"
             ></question-cap>
           </div>
         </template>
