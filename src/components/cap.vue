@@ -292,9 +292,7 @@ export default {
     padding: 30px 30px 0px 30px;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
-    /* Firefox */
     -webkit-box-sizing: border-box;
-    /* Safari */
     word-wrap: break-word;
   }
   .choice-box {
