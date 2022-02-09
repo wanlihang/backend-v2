@@ -38,18 +38,8 @@
     <!-- 插入视频链接的dialog提示框，表单对话框 -->
     <el-dialog title="插入视频资源" :visible.sync="dialogFormVisible">
       <el-form :model="form">
-        <el-form-item
-          style="margin-bottom: 22px"
-          label="视频链接"
-          :label-width="formLabelWidth"
-        >
+        <el-form-item label="iframe链接" :label-width="formLabelWidth">
           <el-input v-model="form.link" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="链接类型" :label-width="formLabelWidth">
-          <el-select v-model="form.region" placeholder="请选择链接类型">
-            <el-option label="iframe标签" value="iframe"></el-option>
-            <el-option label="url链接" value="url"></el-option>
-          </el-select>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -128,7 +118,7 @@ export default {
       form: {
         // 表单对话框内表单的数据
         link: "",
-        region: "",
+        region: "iframe",
       },
     };
   },
