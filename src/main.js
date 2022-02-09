@@ -31,7 +31,6 @@ Vue.use(ElementUI);
 
 // 组件注册
 Vue.use(mavonEditor);
-Vue.use(htmlToPdf);
 Vue.prototype.moment = moment;
 Vue.filter("dateFormat", function (dateStr, pattern = "YYYY-MM-DD HH:mm") {
   if (!dateStr) {
@@ -52,6 +51,7 @@ Vue.config.productionTip = false;
 // api挂载
 Vue.prototype.$api = api;
 Vue.prototype.$utils = utils;
+Vue.prototype.$htmlToPdf = htmlToPdf;
 
 utils.copyright();
 

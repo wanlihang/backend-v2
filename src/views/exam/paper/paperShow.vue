@@ -140,7 +140,22 @@ export default {
       console.log(qid + ":" + thumbs + ":" + answer);
     },
     download() {
-      this.getPdf("pdfDom", this.paper.title);
+      let shareContent = document.querySelector("#pdfDom");
+      let imgList = shareContent.querySelectorAll("img");
+      if (imgList) {
+        console.log(imgList);
+        var i;
+        for (i = 1; i < imgList.length; i++) {
+          imgList[i].src += "&timeSign=" + Date.now().toString();
+          console.log(imgList[i].src);
+
+          window.URL = window.URL || window.webkitURL;
+          var xhr = new XMLHttpRequest();
+          xhr.open("get", imgList[i].src, true);
+          xhr.send();
+        }
+      }
+      this.$htmlToPdf.downloadPdf(this.paper.title);
     },
     getData() {
       this.$api.Exam.PaperJoinRecord(this.id, this.pid)
