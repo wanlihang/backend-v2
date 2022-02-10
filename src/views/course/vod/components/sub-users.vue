@@ -1,13 +1,13 @@
 <template>
   <div class="float-left">
-    <div class="float-left">
-      <div class="float-left d-flex mb-30">
+    <div class="float-left j-b-flex mb-30">
+      <div class="d-flex">
+        <el-button type="primary" @click="showUserAddWin = true">
+          添加用户
+        </el-button>
+      </div>
+      <div class="d-flex">
         <div>
-          <el-button type="primary" @click="showUserAddWin = true">
-            添加用户
-          </el-button>
-        </div>
-        <div class="ml-10">
           <el-input
             class="w-150px"
             v-model="filter.user_id"
@@ -27,16 +27,18 @@
           >
           </el-date-picker>
         </div>
-        <div class="ml-15">
-          <el-button @click="firstPageLoad()" type="primary" plain>
-            筛选
-          </el-button>
+        <div class="ml-10">
           <el-button @click="paginationReset()">清空</el-button>
+          <el-button @click="firstPageLoad()" type="primary"> 筛选 </el-button>
         </div>
       </div>
     </div>
 
-    <el-table :data="list" class="float-left">
+    <el-table
+      :header-cell-style="{ background: '#f1f2f9' }"
+      :data="list"
+      class="float-left"
+    >
       <el-table-column label="用户ID" prop="user_id" width="120">
       </el-table-column>
       <el-table-column label="用户">

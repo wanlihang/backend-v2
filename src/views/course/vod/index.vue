@@ -50,17 +50,6 @@
           ></el-input>
         </div>
         <div class="ml-10">
-          <el-select class="w-150px" v-model="filter.cid" placeholder="分类">
-            <el-option
-              v-for="(item, index) in filterData.categories"
-              :key="index"
-              :label="item.name"
-              :value="item.id"
-            >
-            </el-option>
-          </el-select>
-        </div>
-        <div class="ml-10">
           <el-button @click="paginationReset">清空</el-button>
           <el-button @click="filterAct" type="primary">筛选</el-button>
         </div>

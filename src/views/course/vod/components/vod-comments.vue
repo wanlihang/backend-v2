@@ -1,16 +1,18 @@
 <template>
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="课程评论"></back-bar>
-    <div class="float-left">
-      <div class="float-left d-flex">
+    <div class="float-left j-b-flex mb-30">
+      <div class="d-flex">
+        <p-button
+          type="danger"
+          text="删除"
+          p="course_comment.destroy"
+          @click="delRecords()"
+        ></p-button>
+      </div>
+
+      <div class="d-flex">
         <div>
-          <p-button
-            text="删除"
-            p="course_comment.destroy"
-            @click="delRecords()"
-          ></p-button>
-        </div>
-        <div class="ml-10">
           <el-input
             class="w-150px"
             v-model="filter.user_id"
@@ -22,7 +24,7 @@
             filterable
             :filter-method="dataFilter"
             placeholder="课程"
-            class="w-200px"
+            class="w-150px"
             v-model="filter.course_id"
             v-el-select-loadmore="loadmore"
           >
@@ -48,18 +50,16 @@
           >
           </el-date-picker>
         </div>
-
         <div class="ml-10">
-          <el-button @click="firstPageLoad()" type="primary" plain>
-            筛选
-          </el-button>
           <el-button @click="paginationReset()">清空</el-button>
+          <el-button @click="firstPageLoad()" type="primary"> 筛选 </el-button>
         </div>
       </div>
     </div>
-    <div class="float-left mt-30" v-loading="loading">
+    <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
           :data="list"
           class="float-left"
           @selection-change="handleSelectionChange"

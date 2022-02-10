@@ -41,6 +41,7 @@
     <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
           :data="videos"
           class="float-left"
           @sort-change="sortChange"
