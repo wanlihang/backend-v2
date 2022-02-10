@@ -67,7 +67,7 @@
     <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table
-          :header-cell-style="{ row, background: '#f1f2f9' }"
+          :header-cell-style="{ background: '#f1f2f9' }"
           :data="list"
           @sort-change="sortChange"
           :default-sort="{ prop: 'id', order: 'descending' }"
