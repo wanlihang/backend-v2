@@ -31,6 +31,7 @@
           </div>
           <div class="ml-10">
             <el-date-picker
+              :picker-options="pickerOptions"
               v-model="filter.created_at"
               type="daterange"
               align="right"
@@ -156,6 +157,11 @@ export default {
         keywords: null,
         page: 1,
         size: 10,
+      },
+      pickerOptions: {
+        disabledDate(time) {
+          return time.getTime() > Date.now();
+        },
       },
     };
   },
