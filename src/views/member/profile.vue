@@ -3,35 +3,36 @@
     <div class="float-left bg-white br-15 p-30">
       <back-bar class="mb-30" title="实名信息"></back-bar>
       <div class="panel-info-box">
-        <div class="panel-info-item">
-          真实姓名： {{ user.profile ? user.profile.real_name : "" }}
-        </div>
-        <div class="panel-info-item">
-          性别：
-          <template v-if="user.profile">
-            <span v-if="user.profile.gender == 0">未知</span>
-            <span v-else-if="user.profile.gender == 1">男</span>
-            <span v-else-if="user.profile.gender == 2">女</span>
-          </template>
-        </div>
-        <div class="panel-info-item">
-          年龄：{{ user.profile ? user.profile.age : "" }}
-        </div>
-        <div class="panel-info-item">
-          生日： {{ user.profile ? user.profile.birthday : "" }}
-        </div>
-        <div class="panel-info-item">
-          职业： {{ user.profile ? user.profile.profession : "" }}
-        </div>
-        <div class="panel-info-item">
-          住址： {{ user.profile ? user.profile.address : "" }}
-        </div>
-        <div class="panel-info-item">
-          毕业院校： {{ user.profile ? user.profile.graduated_school : "" }}
-        </div>
-        <div class="panel-info-item">
-          身份证号码： {{ user.profile ? user.profile.id_number : "" }}
-        </div>
+        <el-descriptions direction="vertical" :column="5" border>
+          <el-descriptions-item label="真实姓名">{{
+            user.profile ? user.profile.real_name : ""
+          }}</el-descriptions-item>
+          <el-descriptions-item label="性别">
+            <template v-if="user.profile">
+              <span v-if="user.profile.gender == 0">未知</span>
+              <span v-else-if="user.profile.gender == 1">男</span>
+              <span v-else-if="user.profile.gender == 2">女</span>
+            </template>
+          </el-descriptions-item>
+          <el-descriptions-item label="年龄">{{
+            user.profile ? user.profile.age : ""
+          }}</el-descriptions-item>
+          <el-descriptions-item label="生日">{{
+            user.profile ? user.profile.birthday : ""
+          }}</el-descriptions-item>
+          <el-descriptions-item label="职业">{{
+            user.profile ? user.profile.profession : ""
+          }}</el-descriptions-item>
+          <el-descriptions-item label="住址">{{
+            user.profile ? user.profile.address : ""
+          }}</el-descriptions-item>
+          <el-descriptions-item label="毕业院校">{{
+            user.profile ? user.profile.graduated_school : ""
+          }}</el-descriptions-item>
+          <el-descriptions-item label="身份证号码">{{
+            user.profile ? user.profile.id_number : ""
+          }}</el-descriptions-item>
+        </el-descriptions>
       </div>
     </div>
     <div class="panel-box mt-30">
@@ -43,7 +44,7 @@
               <div class="info-value">
                 <template v-if="user.profile && user.profile.diploma">
                   <el-image
-                    style="width: 200px; height: 150px;border-radius: 8px;"
+                    style="width: 200px; height: 150px; border-radius: 8px"
                     :src="user.profile.diploma"
                     lazy
                     :preview-src-list="[user.profile.diploma]"
@@ -58,7 +59,7 @@
               <div class="info-value">
                 <template v-if="user.profile && user.profile.id_frontend_thumb">
                   <el-image
-                    style="width: 200px; height: 150px;border-radius: 8px;"
+                    style="width: 200px; height: 150px; border-radius: 8px"
                     :src="user.profile.id_frontend_thumb"
                     lazy
                     :preview-src-list="[user.profile.id_frontend_thumb]"
@@ -73,7 +74,7 @@
               <div class="info-value">
                 <template v-if="user.profile && user.profile.id_backend_thumb">
                   <el-image
-                    style="width: 200px; height: 150px;border-radius: 8px;"
+                    style="width: 200px; height: 150px; border-radius: 8px"
                     :src="user.profile.id_backend_thumb"
                     lazy
                     :preview-src-list="[user.profile.id_backend_thumb]"
@@ -88,7 +89,7 @@
               <div class="info-value">
                 <template v-if="user.profile && user.profile.id_hand_thumb">
                   <el-image
-                    style="width: 200px; height: 150px;border-radius: 8px;"
+                    style="width: 200px; height: 150px; border-radius: 8px"
                     :src="user.profile.id_hand_thumb"
                     lazy
                     :preview-src-list="[user.profile.id_hand_thumb]"
@@ -143,19 +144,6 @@ export default {
     height: auto;
     float: left;
     box-sizing: border-box;
-    padding-bottom: 20px;
-    padding-top: 10px;
-    display: grid;
-    row-gap: 30px;
-    column-gap: 0px;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    .panel-info-item {
-      height: 14px;
-      font-size: 14px;
-      font-weight: 400;
-      color: #333333;
-      line-height: 14px;
-    }
   }
 }
 .info-item {

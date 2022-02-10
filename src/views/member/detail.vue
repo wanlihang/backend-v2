@@ -355,7 +355,7 @@ export default {
     height: auto;
     float: left;
     box-sizing: border-box;
-    padding-bottom: 20px;
+    padding-bottom: 0px;
     padding-top: 30px;
   }
 }
