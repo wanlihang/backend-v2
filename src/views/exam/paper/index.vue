@@ -1,26 +1,26 @@
 <template>
   <div class="meedu-main-body">
-    <div class="float-left mb-30">
-      <p-button
-        text="添加"
-        p="addons.Paper.paper.store"
-        @click="$router.push({ name: 'ExamPaperCreate' })"
-        type="primary"
-      >
-      </p-button>
-    </div>
-    <div class="float-left">
-      <div class="float-left d-flex">
+    <div class="float-left j-b-flex mb-30">
+      <div class="d-flex">
+        <p-button
+          text="添加"
+          p="addons.Paper.paper.store"
+          @click="$router.push({ name: 'ExamPaperCreate' })"
+          type="primary"
+        >
+        </p-button>
+      </div>
+      <div class="d-flex">
         <div>
           <el-input
             v-model="filter.keywords"
             placeholder="试卷关键字"
-            class="w-200px"
+            class="w-150px"
           ></el-input>
         </div>
         <div class="ml-10">
           <el-select
-            class="w-200px"
+            class="w-150px"
             placeholder="分类"
             v-model="filter.category_id"
           >
@@ -33,18 +33,16 @@
             </el-option>
           </el-select>
         </div>
-
         <div class="ml-10">
-          <el-button @click="firstPageLoad()" type="primary" plain>
-            筛选
-          </el-button>
           <el-button @click="paginationReset()">清空</el-button>
+          <el-button @click="firstPageLoad()" type="primary"> 筛选 </el-button>
         </div>
       </div>
     </div>
-    <div class="float-left mt-30" v-loading="loading">
+    <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
           :data="list"
           @sort-change="sortChange"
           :default-sort="{ prop: 'id', order: 'descending' }"
@@ -67,7 +65,7 @@
               <span>{{ scope.row.expired_minutes }}m</span>
             </template>
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="270">
+          <el-table-column fixed="right" label="操作" width="140">
             <template slot-scope="scope">
               <p-link
                 text="试题"
@@ -81,19 +79,7 @@
                 "
               ></p-link>
               <p-link
-                text="编辑"
-                p="addons.Paper.paper.update"
-                type="primary"
-                class="ml-5"
-                @click="
-                  $router.push({
-                    name: 'ExamPaperUpdate',
-                    query: { id: scope.row.id },
-                  })
-                "
-              ></p-link>
-              <p-link
-                text="用户"
+                text="学员"
                 p="addons.Paper.paper.users"
                 type="primary"
                 class="ml-5"
@@ -104,38 +90,56 @@
                   })
                 "
               ></p-link>
-              <p-link
-                text="统计"
-                p="addons.Paper.paper.statistics"
-                type="primary"
-                class="ml-5"
-                @click="
-                  $router.push({
-                    name: 'ExamPaperStat',
-                    query: { id: scope.row.id },
-                  })
-                "
-              ></p-link>
-              <p-link
-                text="考试记录"
-                p="addons.Paper.paper.userPaper"
-                type="primary"
-                class="ml-5"
-                @click="
-                  $router.push({
-                    name: 'ExamPaperUserpaper',
-                    query: { id: scope.row.id },
-                  })
-                "
-              ></p-link>
-
-              <p-link
-                text="删除"
-                class="ml-5"
-                p="addons.Paper.paper.delete"
-                type="danger"
-                @click="destroy(scope.row.id)"
-              ></p-link>
+              <el-dropdown>
+                <el-link type="primary" class="el-dropdown-link ml-5">
+                  更多<i class="el-icon-arrow-down el-icon--right"></i>
+                </el-link>
+                <el-dropdown-menu slot="dropdown">
+                  <p-dropdown-item
+                    text="编辑"
+                    p="addons.Paper.paper.update"
+                    type="primary"
+                    @click="
+                      $router.push({
+                        name: 'ExamPaperUpdate',
+                        query: { id: scope.row.id },
+                      })
+                    "
+                  >
+                  </p-dropdown-item>
+                  <p-dropdown-item
+                    text="统计"
+                    p="addons.Paper.paper.statistics"
+                    type="primary"
+                    @click="
+                      $router.push({
+                        name: 'ExamPaperStat',
+                        query: { id: scope.row.id },
+                      })
+                    "
+                  >
+                  </p-dropdown-item>
+                  <p-dropdown-item
+                    text="考试记录"
+                    p="addons.Paper.paper.userPaper"
+                    type="primary"
+                    @click="
+                      $router.push({
+                        name: 'ExamPaperUserpaper',
+                        query: { id: scope.row.id },
+                      })
+                    "
+                  >
+                  </p-dropdown-item>
+                  <p-dropdown-item
+                    text="删除"
+                    p="addons.Paper.paper.delete"
+                    type="danger"
+                    @click="destroy(scope.row.id)"
+                  >
+                  </p-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
             </template>
           </el-table-column>
         </el-table>
