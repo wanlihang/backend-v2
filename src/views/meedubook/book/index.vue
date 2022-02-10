@@ -1,7 +1,7 @@
 <template>
   <div class="meedu-main-body">
-    <div class="float-left">
-      <div class="float-left mb-30">
+    <div class="float-left j-b-flex mb-30">
+      <div class="d-flex">
         <p-button
           text="添加"
           p="addons.meedu_books.book.store"
@@ -25,153 +25,150 @@
         </p-button>
         <option-bar text="电子书推荐" value="电子书"></option-bar>
       </div>
-      <div class="float-left">
-        <div class="float-left d-flex">
-          <div>
-            <el-input
-              class="w-200px"
-              v-model="filter.key"
-              placeholder="电子书关键字"
-            ></el-input>
-          </div>
-          <div class="ml-10">
-            <el-select v-model="filter.cid" class="w-200px" placeholder="分类">
-              <el-option
-                v-for="(item, index) in filterData.categories"
-                :key="index"
-                :label="item.name"
-                :value="item.id"
-              >
-              </el-option>
-            </el-select>
-          </div>
-          <div class="ml-15">
-            <el-button @click="firstPageLoad" type="primary" plain
-              >筛选</el-button
+      <div class="d-flex">
+        <div>
+          <el-input
+            class="w-150px"
+            v-model="filter.key"
+            placeholder="电子书关键字"
+          ></el-input>
+        </div>
+        <div class="ml-10">
+          <el-select v-model="filter.cid" class="w-150px" placeholder="分类">
+            <el-option
+              v-for="(item, index) in filterData.categories"
+              :key="index"
+              :label="item.name"
+              :value="item.id"
             >
-            <el-button @click="paginationReset">清空</el-button>
-          </div>
+            </el-option>
+          </el-select>
+        </div>
+        <div class="ml-10">
+          <el-button @click="paginationReset">清空</el-button>
+          <el-button @click="firstPageLoad" type="primary">筛选</el-button>
         </div>
       </div>
-      <div class="float-left mt-30" v-loading="loading">
-        <div class="float-left">
-          <el-table
-            :data="mbooks"
-            @sort-change="sortChange"
-            :default-sort="{ prop: 'id', order: 'descending' }"
-            class="float-left"
+    </div>
+    <div class="float-left" v-loading="loading">
+      <div class="float-left">
+        <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
+          :data="mbooks"
+          @sort-change="sortChange"
+          :default-sort="{ prop: 'id', order: 'descending' }"
+          class="float-left"
+        >
+          <el-table-column prop="id" sortable label="ID" width="100">
+          </el-table-column>
+          <el-table-column prop="category.name" label="分类"> </el-table-column>
+          <el-table-column label="电子书" width="400">
+            <template slot-scope="scope">
+              <thumb-bar
+                :value="scope.row.thumb"
+                :width="90"
+                :height="120"
+                :title="scope.row.name"
+              ></thumb-bar>
+            </template>
+          </el-table-column>
+          <el-table-column label="价格" property="charge" sortable width="100">
+            <template slot-scope="scope">
+              <span>{{ scope.row.charge }}元</span>
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="浏览"
+            property="view_times"
+            sortable
+            width="100"
           >
-            <el-table-column prop="id" sortable label="ID" width="100">
-            </el-table-column>
-            <el-table-column prop="category.name" label="分类">
-            </el-table-column>
-            <el-table-column label="电子书" width="400">
-              <template slot-scope="scope">
-                <thumb-bar
-                  :value="scope.row.thumb"
-                  :width="90"
-                  :height="120"
-                  :title="scope.row.name"
-                ></thumb-bar>
-              </template>
-            </el-table-column>
-            <el-table-column
-              label="价格"
-              property="charge"
-              sortable
-              width="100"
-            >
-              <template slot-scope="scope">
-                <span>{{ scope.row.charge }}元</span>
-              </template>
-            </el-table-column>
-            <el-table-column
-              label="浏览"
-              property="view_times"
-              sortable
-              width="100"
-            >
-              <template slot-scope="scope">
-                <span>{{ scope.row.view_times }}次</span>
-              </template>
-            </el-table-column>
-            <el-table-column
-              label="订阅人数"
-              property="user_count"
-              sortable
-              width="150"
-            >
-              <template slot-scope="scope">
-                <span>{{ scope.row.user_count }}人</span>
-              </template>
-            </el-table-column>
-            <el-table-column label="上架时间" sortable width="200">
-              <template slot-scope="scope">{{
-                scope.row.published_at | dateFormat
-              }}</template>
-            </el-table-column>
-            <el-table-column fixed="right" label="操作" width="150">
-              <template slot-scope="scope">
-                <p-link
-                  text="文章"
-                  p="addons.meedu_books.book_article.list"
-                  type="primary"
-                  @click="
-                    $router.push({
-                      name: 'MeedubookArticle',
-                      query: { bid: scope.row.id },
-                    })
-                  "
-                ></p-link>
-                <p-link
-                  text="编辑"
-                  class="ml-5"
-                  p="addons.meedu_books.book.update"
-                  type="primary"
-                  @click="
-                    $router.push({
-                      name: 'MeedubookUpdate',
-                      query: { id: scope.row.id },
-                    })
-                  "
-                ></p-link>
-                <p-link
-                  text="用户"
-                  p="addons.meedu_books.book.users"
-                  type="primary"
-                  class="ml-5"
-                  @click="
-                    $router.push({
-                      name: 'MeedubookUsers',
-                      query: { bid: scope.row.id },
-                    })
-                  "
-                ></p-link>
-
-                <p-link
-                  text="删除"
-                  class="ml-5"
-                  type="danger"
-                  @click="destory(scope.row.id)"
-                  p="addons.meedu_books.book.delete"
-                ></p-link>
-              </template>
-            </el-table-column>
-          </el-table>
-        </div>
-
-        <div class="float-left mt-30 text-center">
-          <el-pagination
-            @size-change="paginationSizeChange"
-            @current-change="paginationPageChange"
-            :current-page="pagination.page"
-            :page-sizes="[10, 20, 50, 100]"
-            :page-size="pagination.size"
-            layout="total, sizes, prev, pager, next, jumper"
-            :total="total"
+            <template slot-scope="scope">
+              <span>{{ scope.row.view_times }}次</span>
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="订阅人数"
+            property="user_count"
+            sortable
+            width="150"
           >
-          </el-pagination>
-        </div>
+            <template slot-scope="scope">
+              <span>{{ scope.row.user_count }}人</span>
+            </template>
+          </el-table-column>
+          <el-table-column label="上架时间" sortable width="200">
+            <template slot-scope="scope">{{
+              scope.row.published_at | dateFormat
+            }}</template>
+          </el-table-column>
+          <el-table-column fixed="right" label="操作" width="140">
+            <template slot-scope="scope">
+              <p-link
+                text="文章"
+                p="addons.meedu_books.book_article.list"
+                type="primary"
+                @click="
+                  $router.push({
+                    name: 'MeedubookArticle',
+                    query: { bid: scope.row.id },
+                  })
+                "
+              ></p-link>
+              <p-link
+                text="学员"
+                p="addons.meedu_books.book.users"
+                type="primary"
+                class="ml-5"
+                @click="
+                  $router.push({
+                    name: 'MeedubookUsers',
+                    query: { bid: scope.row.id },
+                  })
+                "
+              ></p-link>
+              <el-dropdown>
+                <el-link type="primary" class="el-dropdown-link ml-5">
+                  更多<i class="el-icon-arrow-down el-icon--right"></i>
+                </el-link>
+                <el-dropdown-menu slot="dropdown">
+                  <p-dropdown-item
+                    text="编辑"
+                    p="addons.meedu_books.book.update"
+                    type="primary"
+                    @click="
+                      $router.push({
+                        name: 'MeedubookUpdate',
+                        query: { id: scope.row.id },
+                      })
+                    "
+                  >
+                  </p-dropdown-item>
+                  <p-dropdown-item
+                    text="删除"
+                    type="danger"
+                    @click="destory(scope.row.id)"
+                    p="addons.meedu_books.book.delete"
+                  >
+                  </p-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+
+      <div class="float-left mt-30 text-center">
+        <el-pagination
+          @size-change="paginationSizeChange"
+          @current-change="paginationPageChange"
+          :current-page="pagination.page"
+          :page-sizes="[10, 20, 50, 100]"
+          :page-size="pagination.size"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="total"
+        >
+        </el-pagination>
       </div>
     </div>
   </div>
