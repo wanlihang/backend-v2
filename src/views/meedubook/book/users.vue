@@ -5,10 +5,12 @@
       <div class="d-flex">
         <p-button
           text="删除用户"
+          type="danger"
           p="addons.meedu_books.book.user.del"
           @click="delUser"
         ></p-button>
         <p-button
+          type="primary"
           text="添加用户"
           p="addons.meedu_books.book.user.add"
           @click="showUserAddWin = true"
