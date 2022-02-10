@@ -3,20 +3,19 @@
     <back-bar class="mb-30" :title="paper.title"></back-bar>
     <el-button @click="download()" type="primary">下载pdf格式试卷 </el-button>
     <div class="float-left" id="pdfDom">
-      <div class="top float-left d-flex">
-        <div class="user-info">账户名：{{ user.nick_name }}</div>
-        <div class="user-info">账号：{{ user.mobile }}</div>
-      </div>
-      <div class="top float-left d-flex">
-        <div class="score" v-if="userPaper && userPaper.status === 1">
-          最终得分：{{ userPaper.get_score }}
-        </div>
-        <div class="score" v-else>阅卷中</div>
-        <div class="score-info">
-          及格分：{{ paper.pass_score }}分/{{ paper.score }}分
-        </div>
-      </div>
       <div class="paper-box">
+        <div class="top float-left d-flex">
+          <div class="user-info">考生：{{ user.nick_name }}</div>
+          <div class="user-info">考卷：{{ paper.title }}</div>
+          <div class="score-info">
+            及格分/总分：{{ paper.pass_score }}/{{ paper.score }}
+          </div>
+          <div class="score" v-if="userPaper && userPaper.status === 1">
+            考试得分：<strong>{{ userPaper.get_score }}分</strong>
+          </div>
+          <div class="score" v-else>阅卷中</div>
+        </div>
+        <div class="line float-left d-flex"></div>
         <div class="questions-box" v-if="questions && userPaper">
           <template v-for="(question, index) in questions">
             <div class="item" :key="index">
@@ -231,74 +230,85 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-.top {
-  width: 100%;
-  height: 60px;
-  margin: 0 auto;
-  font-size: 16px;
-  font-weight: 500;
-  color: #333333;
-  line-height: 16px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 0px 30px;
-  box-sizing: border-box;
-  .score {
-    height: 24px;
-    font-size: 24px;
-    font-weight: 600;
-    color: #333333;
-    line-height: 24px;
-    margin-right: 50px;
-  }
-  .user-info {
-    height: 16px;
-    font-size: 16px;
-    font-weight: 500;
-    color: #333333;
-    line-height: 16px;
-    margin-right: 30px;
-  }
-  .score-info {
-    height: 16px;
-    font-size: 16px;
-    font-weight: 400;
-    color: #666666;
-    line-height: 16px;
-    margin-right: 30px;
-  }
-  .remaining-time {
-    height: 16px;
-    font-size: 16px;
-    font-weight: 400;
-    color: #666666;
-    line-height: 16px;
-    margin-right: 50px;
-  }
-  .button {
-    width: 104px;
-    height: 40px;
-    background: #3ca7fa;
-    border-radius: 4px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    font-weight: 400;
-    color: #ffffff;
-  }
-}
-
 .paper-box {
   display: flex;
+  flex-direction: column;
   width: 100%;
   margin: 0 auto;
   min-height: 600px;
   background: #ffffff;
-  border-radius: 8px;
-  margin-top: 0px;
+  border-radius: 4px;
+  border: 1px solid #dcdfe6;
+  margin-top: 30px;
+  .line {
+    width: auto;
+    height: 1px;
+    background: #dcdfe6;
+    margin: 0px 30px;
+    box-sizing: border-box;
+  }
+  .top {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333333;
+    line-height: 16px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 50px 30px;
+    box-sizing: border-box;
+    .score {
+      height: 20px;
+      font-size: 20px;
+      font-weight: 600;
+      color: #333333;
+      line-height: 20px;
+      margin-right: 30px;
+      strong {
+        color: #ff4d4f;
+      }
+    }
+    .user-info {
+      height: 14px;
+      font-size: 14px;
+      font-weight: 400;
+      color: #333333;
+      line-height: 14px;
+      margin-right: 30px;
+    }
+    .score-info {
+      height: 14px;
+      font-size: 14px;
+      font-weight: 400;
+      color: #333333;
+      line-height: 14px;
+      margin-right: 30px;
+    }
+    .remaining-time {
+      height: 16px;
+      font-size: 16px;
+      font-weight: 400;
+      color: #666666;
+      line-height: 16px;
+      margin-right: 50px;
+    }
+    .button {
+      width: 104px;
+      height: 40px;
+      background: #3ca7fa;
+      border-radius: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 400;
+      color: #ffffff;
+    }
+  }
   .questions-box {
     width: 100%;
   }
