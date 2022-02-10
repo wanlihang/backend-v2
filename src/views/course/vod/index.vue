@@ -1,80 +1,56 @@
 <template>
   <div class="meedu-main-body">
-    <div class="float-left mb-30">
-      <p-button
-        text="添加"
-        p="course.store"
-        @click="$router.push({ name: 'VodCreate' })"
-        type="primary"
-      >
-      </p-button>
-      <p-button
-        text="分类管理"
-        p="courseCategory"
-        @click="$router.push({ name: 'CourseCategories' })"
-        type="primary"
-      >
-      </p-button>
-      <p-button
-        text="课程评论"
-        p="course_comment"
-        @click="$router.push({ name: 'CourseComments' })"
-        type="primary"
-      >
-      </p-button>
-      <p-button
-        text="视频评论"
-        p="video_comment"
-        @click="$router.push({ name: 'VideoComments' })"
-        type="primary"
-      >
-      </p-button>
+    <div class="float-left j-b-flex mb-30">
+      <div class="d-flex">
+        <p-button
+          text="添加"
+          p="course.store"
+          @click="$router.push({ name: 'VodCreate' })"
+          type="primary"
+        >
+        </p-button>
+        <p-button
+          text="分类管理"
+          p="courseCategory"
+          @click="$router.push({ name: 'CourseCategories' })"
+          type="primary"
+        >
+        </p-button>
+        <p-button
+          text="课程评论"
+          p="course_comment"
+          @click="$router.push({ name: 'CourseComments' })"
+          type="primary"
+        >
+        </p-button>
+        <p-button
+          text="视频评论"
+          p="video_comment"
+          @click="$router.push({ name: 'VideoComments' })"
+          type="primary"
+        >
+        </p-button>
 
-      <p-button
-        text="视频批量导入"
-        p="video.import"
-        @click="$router.push({ name: 'VodImport' })"
-        type="primary"
-      >
-      </p-button>
+        <p-button
+          text="视频批量导入"
+          p="video.import"
+          @click="$router.push({ name: 'VodImport' })"
+          type="primary"
+        >
+        </p-button>
 
-      <p-button
-        v-if="enabledAddons['AliyunHls']"
-        text="阿里云视频加密"
-        p="video.aliyun_hls.list"
-        @click="$router.push({ name: 'CourseVodVideoAliyunHls' })"
-        type="primary"
-      >
-      </p-button>
-
-      <p-button
-        v-if="enabledAddons['TencentCloudHls']"
-        text="腾讯云视频加密"
-        p="addons.TencentCloudHls.videos"
-        @click="$router.push({ name: 'CourseVodVideoTencentHls' })"
-        type="primary"
-      >
-      </p-button>
-      <option-bar text="播放器配置" value="播放器配置"></option-bar>
-    </div>
-    <div class="float-left">
-      <div class="float-left d-flex">
+        <option-bar text="播放器配置" value="播放器配置"></option-bar>
+      </div>
+      <div class="d-flex">
         <div>
           <el-input
             class="w-150px"
-            v-model="filter.id"
-            placeholder="课程ID"
-          ></el-input>
-        </div>
-        <div class="ml-10">
-          <el-input
-            class="w-200px"
             v-model="filter.keywords"
             placeholder="课程名称关键字"
           ></el-input>
         </div>
         <div class="ml-10">
-          <el-select v-model="filter.cid" placeholder="分类">
+          <el-select class="w-150px" v-model="filter.cid" placeholder="分类">
             <el-option
               v-for="(item, index) in filterData.categories"
               :key="index"
@@ -85,14 +61,18 @@
           </el-select>
         </div>
         <div class="ml-10">
-          <el-button @click="filterAct" type="primary" plain>筛选</el-button>
           <el-button @click="paginationReset">清空</el-button>
+          <el-button @click="filterAct" type="primary">筛选</el-button>
+        </div>
+        <div class="drawerMore d-flex ml-10" @click="drawer = true">
+          <img src="../../../assets/img/icon-filter.png" />更多
         </div>
       </div>
     </div>
-    <div class="float-left mt-30" v-loading="loading">
+    <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
           :data="courses"
           class="float-left"
           @sort-change="sortChange"
@@ -137,7 +117,7 @@
               scope.row.published_at | dateFormat
             }}</template>
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="200">
+          <el-table-column fixed="right" label="操作" width="140">
             <template slot-scope="scope">
               <p-link
                 text="视频"
@@ -152,20 +132,7 @@
               >
               </p-link>
               <p-link
-                text="编辑"
-                p="course.update"
-                type="primary"
-                class="ml-5"
-                @click="
-                  $router.push({
-                    name: 'VodUpdate',
-                    query: { id: scope.row.id },
-                  })
-                "
-              >
-              </p-link>
-              <p-link
-                text="用户"
+                text="学员"
                 p="course.subscribes"
                 class="ml-5"
                 type="primary"
@@ -177,27 +144,44 @@
                 "
               >
               </p-link>
-              <p-link
-                text="附件"
-                p="course_attach"
-                type="primary"
-                class="ml-5"
-                @click="
-                  $router.push({
-                    name: 'CourseAttach',
-                    query: { course_id: scope.row.id },
-                  })
-                "
-              >
-              </p-link>
-              <p-link
-                text="删除"
-                p="course.destroy"
-                class="ml-5"
-                type="danger"
-                @click="destory(scope.row.id)"
-              >
-              </p-link>
+              <el-dropdown>
+                <el-link type="primary" class="el-dropdown-link ml-5">
+                  更多<i class="el-icon-arrow-down el-icon--right"></i>
+                </el-link>
+                <el-dropdown-menu slot="dropdown">
+                  <p-dropdown-item
+                    text="编辑"
+                    p="course.update"
+                    type="primary"
+                    @click="
+                      $router.push({
+                        name: 'VodUpdate',
+                        query: { id: scope.row.id },
+                      })
+                    "
+                  >
+                  </p-dropdown-item>
+                  <p-dropdown-item
+                    text="附件"
+                    p="course_attach"
+                    type="primary"
+                    @click="
+                      $router.push({
+                        name: 'CourseAttach',
+                        query: { course_id: scope.row.id },
+                      })
+                    "
+                  >
+                  </p-dropdown-item>
+                  <p-dropdown-item
+                    text="删除"
+                    p="course.destroy"
+                    type="danger"
+                    @click="destory(scope.row.id)"
+                  >
+                  </p-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
             </template>
           </el-table-column>
         </el-table>
@@ -216,11 +200,43 @@
         </el-pagination>
       </div>
     </div>
+    <el-drawer :size="260" :visible.sync="drawer" :with-header="false">
+      <div class="n-padding-box">
+        <div class="j-flex">
+          <el-input
+            class="w-200px"
+            v-model="filter.keywords"
+            placeholder="课程名称关键字"
+          ></el-input>
+        </div>
+        <div class="j-flex mt-30">
+          <el-select class="w-200px" v-model="filter.cid" placeholder="分类">
+            <el-option
+              v-for="(item, index) in filterData.categories"
+              :key="index"
+              :label="item.name"
+              :value="item.id"
+            >
+            </el-option>
+          </el-select>
+        </div>
+        <div class="j-flex mt-30">
+          <el-input
+            class="w-200px"
+            v-model="filter.id"
+            placeholder="课程ID"
+          ></el-input>
+        </div>
+        <div class="j-flex mt-30">
+          <el-button @click="paginationReset">清空</el-button>
+          <el-button @click="filterAct" type="primary">筛选</el-button>
+        </div>
+      </div>
+    </el-drawer>
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
 export default {
   data() {
     return {
@@ -243,10 +259,8 @@ export default {
       filterData: {
         categories: [],
       },
+      drawer: false,
     };
-  },
-  computed: {
-    ...mapState(["enabledAddons"]),
   },
   activated() {
     this.getCourse();
@@ -263,6 +277,7 @@ export default {
       this.filter.id = null;
       this.filter.cid = null;
       this.getCourse();
+      this.drawer = false;
     },
     paginationSizeChange(size) {
       this.pagination.size = size;
@@ -275,6 +290,7 @@ export default {
     filterAct() {
       this.pagination.page = 1;
       this.getCourse();
+      this.drawer = false;
     },
     sortChange(column) {
       this.pagination.sort = column.prop;
