@@ -1,26 +1,33 @@
 <template>
   <div class="meedu-main-body">
-    <div class="float-left mb-30">
-      <p-button
-        text="添加"
-        p="addons.learnPaths.path.store"
-        @click="$router.push({ name: 'LearningPathCreate' })"
-        type="primary"
-      >
-      </p-button>
-      <p-button
-        text="分类管理"
-        p="addons.learnPaths.category.list"
-        @click="$router.push({ name: 'LearningPathCategories' })"
-        type="primary"
-      >
-      </p-button>
-    </div>
-    <div class="float-left">
-      <div class="float-left d-flex">
+    <div class="float-left j-b-flex mb-30">
+      <div class="d-flex">
+        <p-button
+          text="添加"
+          p="addons.learnPaths.path.store"
+          @click="$router.push({ name: 'LearningPathCreate' })"
+          type="primary"
+        >
+        </p-button>
+        <p-button
+          text="分类管理"
+          p="addons.learnPaths.category.list"
+          @click="$router.push({ name: 'LearningPathCategories' })"
+          type="primary"
+        >
+        </p-button>
+      </div>
+      <div class="d-flex">
         <div>
+          <el-input
+            class="w-150px"
+            v-model="filter.keywords"
+            placeholder="课程关键字"
+          ></el-input>
+        </div>
+        <div class="ml-10">
           <el-select
-            class="w-200px"
+            class="w-150px"
             placeholder="分类"
             v-model="filter.category_id"
           >
@@ -33,25 +40,19 @@
             </el-option>
           </el-select>
         </div>
-
         <div class="ml-10">
-          <el-input
-            class="w-200px"
-            v-model="filter.keywords"
-            placeholder="关键字"
-          ></el-input>
-        </div>
-        <div class="ml-10">
-          <el-button @click="firstPageLoad()" type="primary" plain>
-            筛选
-          </el-button>
           <el-button @click="paginationReset()">清空</el-button>
+          <el-button @click="firstPageLoad()" type="primary"> 筛选 </el-button>
         </div>
       </div>
     </div>
-    <div class="float-left mt-30" v-loading="loading">
+    <div class="float-left" v-loading="loading">
       <div class="float-left">
-        <el-table :data="results" class="float-left">
+        <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
+          :data="results"
+          class="float-left"
+        >
           <el-table-column prop="id" label="ID" width="120"> </el-table-column>
           <el-table-column label="路径" width="400">
             <template slot-scope="scope">
@@ -83,7 +84,7 @@
             </template>
           </el-table-column>
 
-          <el-table-column fixed="right" label="操作" width="120">
+          <el-table-column fixed="right" label="操作" width="140">
             <template slot-scope="scope">
               <p-link
                 text="步骤"
