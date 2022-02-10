@@ -60,7 +60,7 @@
           <el-button @click="firstPageLoad()" type="primary"> 筛选 </el-button>
         </div>
         <div class="drawerMore d-flex ml-10" @click="drawer = true">
-          <img src="../../../assets/img/icon-filter@2x.png" />更多
+          <img src="../../../assets/img/icon-filter.png" />更多
         </div>
       </div>
     </div>
