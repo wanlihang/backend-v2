@@ -1,7 +1,6 @@
 <template>
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="讲师管理"></back-bar>
-
     <div class="float-left mb-30">
       <p-button
         text="添加"
@@ -13,7 +12,11 @@
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
-        <el-table :data="results" class="float-left">
+        <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
+          :data="results"
+          class="float-left"
+        >
           <el-table-column prop="id" label="讲师ID" width="120">
           </el-table-column>
           <el-table-column label="讲师" width="300">
@@ -39,7 +42,7 @@
               <div>密码：{{ scope.row.password }}</div>
             </template>
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="150">
+          <el-table-column fixed="right" label="操作" width="100">
             <template slot-scope="scope">
               <p-link
                 text="删除"

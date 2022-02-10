@@ -13,7 +13,11 @@
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
-        <el-table :data="list" class="float-left">
+        <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
+          :data="list"
+          class="float-left"
+        >
           <el-table-column prop="id" label="ID" width="100"> </el-table-column>
           <el-table-column prop="sort" label="升序" width="100">
           </el-table-column>
@@ -23,7 +27,7 @@
               <span>{{ scope.row.courses_count }}个</span>
             </template>
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="150">
+          <el-table-column fixed="right" label="操作" width="100">
             <template slot-scope="scope">
               <p-link
                 text="删除"

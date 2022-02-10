@@ -17,7 +17,11 @@
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
-        <el-table :data="results" class="float-left">
+        <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
+          :data="results"
+          class="float-left"
+        >
           <el-table-column prop="id" label="ID" width="120"> </el-table-column>
           <el-table-column prop="name" label="标题">
             <template slot-scope="scope">
@@ -44,7 +48,7 @@
               </el-tag>
             </template>
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="220">
+          <el-table-column fixed="right" label="操作" width="180">
             <template slot-scope="scope">
               <p-link
                 v-if="scope.row.status == 1"
@@ -90,47 +94,52 @@
                   })
                 "
                 p="addons.Zhibo.course_video.watch.users"
-              ></p-link>
-              <p-link
-                text="讨论"
-                type="primary"
-                class="ml-5"
-                @click="
-                  $router.push({
-                    name: 'LiveCourseVideoChat',
-                    query: {
-                      id: scope.row.id,
-                      course_id: scope.row.course_id,
-                    },
-                  })
-                "
-                p="addons.Zhibo.chat.list"
-              ></p-link>
-
-              <p-link
-                text="编辑"
-                type="primary"
-                class="ml-5"
-                @click="
-                  $router.push({
-                    name: 'LiveCourseVideoUpdate',
-                    query: {
-                      id: scope.row.id,
-                      course_id: scope.row.course_id,
-                    },
-                  })
-                "
-                p="addons.Zhibo.course_video.update"
               >
               </p-link>
-              <p-link
-                text="删除"
-                class="ml-5"
-                type="danger"
-                @click="destory(scope.row.id)"
-                p="addons.Zhibo.course_video.delete"
-              >
-              </p-link>
+              <el-dropdown>
+                <el-link type="primary" class="el-dropdown-link ml-5">
+                  更多<i class="el-icon-arrow-down el-icon--right"></i>
+                </el-link>
+                <el-dropdown-menu slot="dropdown">
+                  <p-dropdown-item
+                    text="讨论"
+                    type="primary"
+                    @click="
+                      $router.push({
+                        name: 'LiveCourseVideoChat',
+                        query: {
+                          id: scope.row.id,
+                          course_id: scope.row.course_id,
+                        },
+                      })
+                    "
+                    p="addons.Zhibo.chat.list"
+                  >
+                  </p-dropdown-item>
+                  <p-dropdown-item
+                    text="编辑"
+                    type="primary"
+                    @click="
+                      $router.push({
+                        name: 'LiveCourseVideoUpdate',
+                        query: {
+                          id: scope.row.id,
+                          course_id: scope.row.course_id,
+                        },
+                      })
+                    "
+                    p="addons.Zhibo.course_video.update"
+                  >
+                  </p-dropdown-item>
+                  <p-dropdown-item
+                    text="删除"
+                    type="danger"
+                    @click="destory(scope.row.id)"
+                    p="addons.Zhibo.course_video.delete"
+                  >
+                  </p-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
             </template>
           </el-table-column>
         </el-table>
