@@ -78,13 +78,13 @@
             <el-descriptions-item label="VIP过期时间">{{
               user.role_expired_at | dateFormat
             }}</el-descriptions-item>
-            <el-descriptions-item label="一级邀请人"
-              >{{ user.invitor ? user.invitor.nick_name : ""
-              }}<template v-if="user.invitor"
+            <el-descriptions-item label="一级邀请人">
+              {{ user.invitor ? user.invitor.nick_name : "" }}
+              <template v-if="user.invitor"
                 >(有效期剩
                 {{ user.invite_user_expired_at | dateFormat }}天)</template
-              ></el-descriptions-item
-            >
+              >
+            </el-descriptions-item>
             <el-descriptions-item label="用户邀请码">{{
               user.is_used_promo_code === 1 ? "已使用" : "未使用"
             }}</el-descriptions-item>
