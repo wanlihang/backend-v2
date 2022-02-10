@@ -25,10 +25,8 @@
           ></el-input>
         </div>
         <div class="ml-10">
-          <el-button @click="firstPageLoad()" type="primary" plain>
-            筛选
-          </el-button>
           <el-button @click="paginationReset">清空</el-button>
+          <el-button @click="firstPageLoad()" type="primary"> 筛选 </el-button>
         </div>
       </div>
     </div>
