@@ -41,17 +41,15 @@
               </el-date-picker>
             </div>
             <div class="ml-10">
-              <el-button @click="firstPageLoad" type="primary" plain
-                >筛选</el-button
-              >
               <el-button @click="paginationReset">清空</el-button>
+              <el-button @click="firstPageLoad" type="primary">筛选</el-button>
             </div>
           </div>
         </div>
-
         <div class="float-left mt-30" v-loading="loading">
           <div class="float-left">
             <el-table
+              :header-cell-style="{ background: '#f1f2f9' }"
               :data="users"
               class="float-left"
               @sort-change="sortChange"
