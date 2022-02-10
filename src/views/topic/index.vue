@@ -1,27 +1,38 @@
 <template>
   <div class="meedu-main-body">
-    <div class="float-left mb-30">
-      <p-button
-        text="添加"
-        @click="$router.push({ name: 'TopicCreate' })"
-        type="primary"
-        p="addons.meedu_topics.topic.store"
-      >
-      </p-button>
-      <p-button
-        text="评论"
-        @click="$router.push({ name: 'TopicComment' })"
-        type="primary"
-        p="addons.meedu_topics.comments"
-      >
-      </p-button>
-      <option-bar text="图文推荐" value="图文"></option-bar>
-    </div>
-    <div class="float-left">
-      <div class="float-left d-flex">
+    <div class="float-left j-b-flex mb-30">
+      <div class="d-flex">
+        <p-button
+          text="添加"
+          @click="$router.push({ name: 'TopicCreate' })"
+          type="primary"
+          p="addons.meedu_topics.topic.store"
+        >
+        </p-button>
+        <p-button
+          text="图文分类"
+          @click="
+            $router.push({
+              name: 'TopicCategory',
+            })
+          "
+          type="primary"
+          p="addons.meedu_topics.category.list"
+        >
+        </p-button>
+        <p-button
+          text="图文评论"
+          @click="$router.push({ name: 'TopicComment' })"
+          type="primary"
+          p="addons.meedu_topics.comments"
+        >
+        </p-button>
+        <option-bar text="图文推荐" value="图文"></option-bar>
+      </div>
+      <div class="d-flex">
         <div>
           <el-input
-            class="w-200px"
+            class="w-150px"
             v-model="filter.keywords"
             placeholder="图文关键字"
           ></el-input>
@@ -29,8 +40,8 @@
 
         <div class="ml-10">
           <el-select
-            placeholder="文章分类"
-            class="w-200px"
+            placeholder="分类"
+            class="w-150px"
             v-model="filter.category_id"
           >
             <el-option
@@ -42,18 +53,16 @@
             </el-option>
           </el-select>
         </div>
-
-        <div class="ml-15">
-          <el-button @click="firstPageLoad" type="primary" plain
-            >筛选</el-button
-          >
+        <div class="ml-10">
           <el-button @click="paginationReset">清空</el-button>
+          <el-button @click="firstPageLoad" type="primary">筛选</el-button>
         </div>
       </div>
     </div>
-    <div class="float-left mt-30" v-loading="loading">
+    <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
           :data="list"
           @sort-change="sortChange"
           :default-sort="{ prop: 'id', order: 'descending' }"
@@ -136,7 +145,6 @@
                 "
                 p="addons.meedu_topics.orders"
               ></p-link>
-
               <p-link
                 text="删除"
                 class="ml-5"
@@ -148,7 +156,6 @@
           </el-table-column>
         </el-table>
       </div>
-
       <div class="float-left mt-30 text-center">
         <el-pagination
           @size-change="paginationSizeChange"

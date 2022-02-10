@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="话题分类管理"></back-bar>
+    <back-bar class="mb-30" title="图文分类管理"></back-bar>
     <div class="float-left mb-30">
       <p-button
         text="添加"
