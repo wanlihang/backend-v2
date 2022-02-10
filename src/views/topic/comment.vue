@@ -3,7 +3,7 @@
     <back-bar class="mb-30" title="图文文章评论"></back-bar>
     <div class="float-left">
       <div class="float-left">
-        <div class="float-left d-flex mb-10">
+        <div class="float-left d-flex">
           <div>
             <el-input
               v-model="filter.user_id"
@@ -42,17 +42,16 @@
             >
             </el-date-picker>
           </div>
-          <div class="ml-15">
-            <el-button @click="firstPageLoad" type="primary" plain
-              >筛选</el-button
-            >
+          <div class="ml-10">
             <el-button @click="paginationReset">清空</el-button>
+            <el-button @click="firstPageLoad" type="primary">筛选</el-button>
           </div>
         </div>
       </div>
       <div class="float-left mt-30" v-loading="loading">
         <div class="float-left">
           <el-table
+            :header-cell-style="{ background: '#f1f2f9' }"
             :data="list"
             @selection-change="handleSelectionChange"
             class="float-left"
