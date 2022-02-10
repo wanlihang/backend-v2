@@ -26,6 +26,7 @@ import HelperText from "@/components/helper-text";
 import OptionBar from "@/components/option-bar";
 import PLink from "@/components/permission/link";
 import PButton from "@/components/permission/btn";
+import PDropdownItem from "@/components/permission/dropdown-item";
 
 Vue.use(ElementUI);
 
@@ -45,6 +46,7 @@ Vue.component("HelperText", HelperText);
 Vue.component("OptionBar", OptionBar);
 Vue.component("PLink", PLink);
 Vue.component("PButton", PButton);
+Vue.component("PDropdownItem", PDropdownItem);
 
 Vue.config.productionTip = false;
 

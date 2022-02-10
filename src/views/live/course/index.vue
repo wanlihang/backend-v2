@@ -1,41 +1,48 @@
 <template>
   <div class="meedu-main-body">
-    <div class="float-left mb-30">
-      <p-button
-        text="添加"
-        @click="$router.push({ name: 'LiveCourseCreate' })"
-        type="primary"
-        p="addons.Zhibo.course.store"
-      >
-      </p-button>
-      <p-button
-        text="分类管理"
-        @click="$router.push({ name: 'LiveCourseCategory' })"
-        type="primary"
-        p="addons.Zhibo.course_category.list"
-      >
-      </p-button>
-      <p-button
-        text="讲师管理"
-        @click="$router.push({ name: 'LiveTeacher' })"
-        type="primary"
-        p="addons.Zhibo.teacher.list"
-      >
-      </p-button>
-      <p-button
-        text="评论"
-        @click="$router.push({ name: 'LiveCourseComment' })"
-        type="primary"
-        p="addons.Zhibo.course_comment"
-      >
-      </p-button>
-      <option-bar text="直播服务配置" value="直播"></option-bar>
-    </div>
-    <div class="float-left">
-      <div class="float-left d-flex">
+    <div class="float-left j-b-flex mb-30">
+      <div class="d-flex">
+        <p-button
+          text="添加"
+          @click="$router.push({ name: 'LiveCourseCreate' })"
+          type="primary"
+          p="addons.Zhibo.course.store"
+        >
+        </p-button>
+        <p-button
+          text="分类管理"
+          @click="$router.push({ name: 'LiveCourseCategory' })"
+          type="primary"
+          p="addons.Zhibo.course_category.list"
+        >
+        </p-button>
+        <p-button
+          text="讲师管理"
+          @click="$router.push({ name: 'LiveTeacher' })"
+          type="primary"
+          p="addons.Zhibo.teacher.list"
+        >
+        </p-button>
+        <p-button
+          text="课程评论"
+          @click="$router.push({ name: 'LiveCourseComment' })"
+          type="primary"
+          p="addons.Zhibo.course_comment"
+        >
+        </p-button>
+        <option-bar text="直播服务配置" value="直播"></option-bar>
+      </div>
+      <div class="d-flex">
         <div>
+          <el-input
+            class="w-150px"
+            v-model="filter.keywords"
+            placeholder="课程名称关键字"
+          ></el-input>
+        </div>
+        <div class="ml-10">
           <el-select
-            class="w-200px"
+            class="w-150px"
             placeholder="分类"
             v-model="filter.category_id"
           >
@@ -48,54 +55,19 @@
             </el-option>
           </el-select>
         </div>
-
         <div class="ml-10">
-          <el-select
-            class="w-200px"
-            placeholder="讲师"
-            v-model="filter.teacher_id"
-          >
-            <el-option
-              v-for="(item, index) in filterData.teachers"
-              :key="index"
-              :label="item.name"
-              :value="item.id"
-            >
-            </el-option>
-          </el-select>
-        </div>
-
-        <div class="ml-10">
-          <el-input
-            class="w-200px"
-            v-model="filter.keywords"
-            placeholder="课程名称关键字"
-          ></el-input>
-        </div>
-
-        <div class="ml-10">
-          <el-select class="w-200px" placeholder="状态" v-model="filter.status">
-            <el-option
-              v-for="(item, index) in filterData.statusList"
-              :key="index"
-              :label="item.name"
-              :value="item.key"
-            >
-            </el-option>
-          </el-select>
-        </div>
-
-        <div class="ml-10">
-          <el-button @click="firstPageLoad()" type="primary" plain>
-            筛选
-          </el-button>
           <el-button @click="paginationReset()">清空</el-button>
+          <el-button @click="firstPageLoad()" type="primary"> 筛选 </el-button>
+        </div>
+        <div class="drawerMore d-flex ml-10" @click="drawer = true">
+          <img src="../../../assets/img/icon-filter@2x.png" />更多
         </div>
       </div>
     </div>
-    <div class="float-left mt-30" v-loading="loading">
+    <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table
+          :header-cell-style="{ row, background: '#f1f2f9' }"
           :data="list"
           @sort-change="sortChange"
           :default-sort="{ prop: 'id', order: 'descending' }"
@@ -141,7 +113,7 @@
               scope.row.published_at | dateFormat
             }}</template>
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="150">
+          <el-table-column fixed="right" label="操作" width="140">
             <template slot-scope="scope">
               <p-link
                 text="排课"
@@ -155,19 +127,7 @@
                 p="addons.Zhibo.course_video.list"
               ></p-link>
               <p-link
-                text="编辑"
-                type="primary"
-                class="ml-5"
-                @click="
-                  $router.push({
-                    name: 'LiveCourseUpdate',
-                    query: { id: scope.row.id },
-                  })
-                "
-                p="addons.Zhibo.course.update"
-              ></p-link>
-              <p-link
-                text="用户"
+                text="学员"
                 type="primary"
                 class="ml-5"
                 @click="
@@ -178,14 +138,33 @@
                 "
                 p="addons.Zhibo.course.users"
               ></p-link>
-
-              <p-link
-                text="删除"
-                class="ml-5"
-                type="danger"
-                @click="destory(scope.row.id)"
-                p="addons.Zhibo.course.delete"
-              ></p-link>
+              <el-dropdown>
+                <el-link type="primary" class="el-dropdown-link ml-5">
+                  更多<i class="el-icon-arrow-down el-icon--right"></i>
+                </el-link>
+                <el-dropdown-menu slot="dropdown">
+                  <p-dropdown-item
+                    text="编辑"
+                    type="primary"
+                    @click="
+                      $router.push({
+                        name: 'LiveCourseUpdate',
+                        query: { id: scope.row.id },
+                      })
+                    "
+                    p="addons.Zhibo.course.update"
+                  >
+                  </p-dropdown-item>
+                  <p-dropdown-item
+                    text="删除"
+                    :underline="false"
+                    type="danger"
+                    @click="destory(scope.row.id)"
+                    p="addons.Zhibo.course.delete"
+                  >
+                  </p-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
             </template>
           </el-table-column>
         </el-table>
@@ -204,6 +183,64 @@
         </el-pagination>
       </div>
     </div>
+    <el-drawer :size="260" :visible.sync="drawer" :with-header="false">
+      <div class="n-padding-box">
+        <div class="j-flex">
+          <el-input
+            class="w-200px"
+            v-model="filter.keywords"
+            placeholder="课程名称关键字"
+          ></el-input>
+        </div>
+        <div class="j-flex mt-30">
+          <el-select
+            class="w-200px"
+            placeholder="分类"
+            v-model="filter.category_id"
+          >
+            <el-option
+              v-for="(item, index) in filterData.categories"
+              :key="index"
+              :label="item.name"
+              :value="item.id"
+            >
+            </el-option>
+          </el-select>
+        </div>
+
+        <div class="j-flex mt-30">
+          <el-select
+            class="w-200px"
+            placeholder="讲师"
+            v-model="filter.teacher_id"
+          >
+            <el-option
+              v-for="(item, index) in filterData.teachers"
+              :key="index"
+              :label="item.name"
+              :value="item.id"
+            >
+            </el-option>
+          </el-select>
+        </div>
+
+        <div class="j-flex mt-30">
+          <el-select class="w-200px" placeholder="状态" v-model="filter.status">
+            <el-option
+              v-for="(item, index) in filterData.statusList"
+              :key="index"
+              :label="item.name"
+              :value="item.key"
+            >
+            </el-option>
+          </el-select>
+        </div>
+        <div class="j-flex mt-30">
+          <el-button @click="paginationReset()">清空</el-button>
+          <el-button @click="firstPageLoad()" type="primary"> 筛选 </el-button>
+        </div>
+      </div>
+    </el-drawer>
   </div>
 </template>
 
@@ -232,6 +269,7 @@ export default {
         teachers: [],
         statusList: [],
       },
+      drawer: false,
     };
   },
   activated() {
@@ -246,6 +284,7 @@ export default {
     firstPageLoad() {
       this.pagination.page = 1;
       this.getData();
+      this.drawer = false;
     },
     paginationReset() {
       this.pagination.page = 1;
@@ -254,6 +293,7 @@ export default {
       this.filter.keywords = null;
       this.filter.status = -1;
       this.getData();
+      this.drawer = false;
     },
     paginationSizeChange(size) {
       this.pagination.size = size;
