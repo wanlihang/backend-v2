@@ -22,6 +22,7 @@
         </div>
         <div class="ml-10">
           <el-date-picker
+            :picker-options="pickerOptions"
             v-model="watched_at"
             type="daterange"
             align="right"
@@ -151,6 +152,11 @@ export default {
           key: 1,
         },
       ],
+      pickerOptions: {
+        disabledDate(time) {
+          return time.getTime() > Date.now();
+        },
+      },
     };
   },
   watch: {

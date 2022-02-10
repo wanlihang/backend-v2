@@ -13,6 +13,7 @@
         </div>
         <div class="ml-10">
           <el-date-picker
+            :picker-options="pickerOptions"
             v-model="watched_at"
             type="daterange"
             align="right"
@@ -127,6 +128,11 @@ export default {
       users: [],
       videos: [],
       courses: [],
+      pickerOptions: {
+        disabledDate(time) {
+          return time.getTime() > Date.now();
+        },
+      },
     };
   },
   watch: {
