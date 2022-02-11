@@ -41,21 +41,6 @@
           ></el-input>
         </div>
         <div class="ml-10">
-          <el-select
-            class="w-150px"
-            placeholder="分类"
-            v-model="filter.category_id"
-          >
-            <el-option
-              v-for="(item, index) in filterData.categories"
-              :key="index"
-              :label="item.name"
-              :value="item.id"
-            >
-            </el-option>
-          </el-select>
-        </div>
-        <div class="ml-10">
           <el-button @click="paginationReset()">清空</el-button>
           <el-button @click="firstPageLoad()" type="primary"> 筛选 </el-button>
         </div>
