@@ -123,21 +123,6 @@
             </div>
           </div>
         </el-form-item>
-
-        <el-form-item prop="page_title" label="PC团购页面标题">
-          <div class="d-flex">
-            <div>
-              <el-input
-                class="w-500px"
-                placeholder="PC团购页面标题"
-                v-model="course.page_title"
-              ></el-input>
-            </div>
-            <div class="ml-10">
-              <helper-text text="PC打开团购界面浏览器显示的标题"></helper-text>
-            </div>
-          </div>
-        </el-form-item>
       </el-form>
 
       <div class="bottom-menus">

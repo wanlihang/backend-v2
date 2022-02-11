@@ -131,21 +131,6 @@
             </div>
           </div>
         </el-form-item>
-
-        <el-form-item prop="page_title" label="PC团购页面标题">
-          <div class="d-flex">
-            <div>
-              <el-input
-                class="w-500px"
-                placeholder="PC团购页面标题"
-                v-model="course.page_title"
-              ></el-input>
-            </div>
-            <div class="ml-10">
-              <helper-text text="PC打开团购界面浏览器显示的标题"></helper-text>
-            </div>
-          </div>
-        </el-form-item>
       </el-form>
 
       <div class="bottom-menus">
@@ -197,7 +182,6 @@ export default {
         goods_id: null,
         people_num: null,
         goods_type: null,
-        page_title: null,
         desc: null,
       },
       rules: {
@@ -291,7 +275,7 @@ export default {
     change(data) {
       this.course.goods_id = data.id;
       this.course.other_id = data.id;
-      this.course.goods_title = this.course.page_title = data.title;
+      this.course.goods_title = data.title;
       this.course.goods_charge = data.original_charge;
       this.course.original_charge = data.original_charge;
       this.course.goods_thumb = data.thumb;
