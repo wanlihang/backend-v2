@@ -281,7 +281,7 @@ export default {
       },
       expireTimeOption: {
         disabledDate(date) {
-          return date.getTime() < Date.now();
+          return date.getTime() < Date.now() - 24 * 60 * 60 * 1000;
         },
       },
       loading: false,
