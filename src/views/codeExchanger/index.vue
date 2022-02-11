@@ -13,7 +13,7 @@
       <div class="d-flex">
         <div>
           <el-input
-            class="w-200px"
+            class="w-150px"
             v-model="filter.keywords"
             placeholder="关键字"
           ></el-input>

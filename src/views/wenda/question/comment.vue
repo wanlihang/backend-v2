@@ -3,7 +3,11 @@
     <back-bar class="mb-30" title="问题评论"></back-bar>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
-        <el-table :data="comments" class="float-left">
+        <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
+          :data="comments"
+          class="float-left"
+        >
           <el-table-column prop="id" label="ID" width="120"> </el-table-column>
           <el-table-column prop="user_id" label="用户ID" width="120">
           </el-table-column>
@@ -30,7 +34,7 @@
               scope.row.created_at | dateFormat
             }}</template>
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="150">
+          <el-table-column fixed="right" label="操作" width="100">
             <template slot-scope="scope">
               <p-link
                 text="删除"

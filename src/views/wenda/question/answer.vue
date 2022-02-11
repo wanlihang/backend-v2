@@ -3,7 +3,11 @@
     <back-bar class="mb-30" title="问题回答"></back-bar>
 
     <div class="float-left" v-loading="loading">
-      <el-table :data="answers" class="float-left">
+      <el-table
+        :header-cell-style="{ background: '#f1f2f9' }"
+        :data="answers"
+        class="float-left"
+      >
         <el-table-column prop="id" label="ID" width="120"> </el-table-column>
         <el-table-column prop="user_id" label="用户ID" width="120">
         </el-table-column>
@@ -153,4 +157,3 @@ export default {
   },
 };
 </script>
-
