@@ -1,12 +1,12 @@
 <template>
   <div class="meedu-main-body">
-    <div class="float-left mb-30">
-      <div class="float-left d-flex">
+    <div class="float-left j-b-flex mb-30">
+      <div class="d-flex">
         <div>
           <el-input
             v-model="filter.goods_name"
-            placeholder="商品名称关键字"
-            class="w-200px"
+            placeholder="商品关键字"
+            class="w-150px"
           ></el-input>
         </div>
         <!-- <div class="ml-10">
@@ -19,7 +19,7 @@
         <div class="ml-10">
           <el-input
             v-model="filter.order_id"
-            class="w-200px"
+            class="w-150px"
             placeholder="订单编号"
           ></el-input>
         </div>
@@ -38,10 +38,10 @@
           </el-date-picker>
         </div>
         <div class="ml-10">
-          <el-button type="primary" class="search" @click="filterAct()" plain>
+          <el-button class="reset" @click="paginationReset()">清空</el-button>
+          <el-button type="primary" class="search" @click="filterAct()">
             筛选
           </el-button>
-          <el-button class="reset" @click="paginationReset()">清空</el-button>
         </div>
       </div>
     </div>
@@ -64,6 +64,7 @@
 
     <div class="float-left" v-loading="loading">
       <el-table
+        :header-cell-style="{ background: '#f1f2f9' }"
         :data="dataList"
         class="float-left"
         @sort-change="sortChange"
