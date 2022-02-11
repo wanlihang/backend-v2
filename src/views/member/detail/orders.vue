@@ -1,6 +1,11 @@
 <template>
   <div class="float-left">
-    <el-table v-loading="loading" :data="list" class="float-left">
+    <el-table
+      :header-cell-style="{ background: '#f1f2f9' }"
+      v-loading="loading"
+      :data="list"
+      class="float-left"
+    >
       <el-table-column prop="order_id" label="订单编号" width="300">
       </el-table-column>
       <el-table-column label="商品">

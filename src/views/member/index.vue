@@ -1,62 +1,30 @@
 <template>
   <div class="meedu-main-body">
-    <div class="float-left mb-30">
-      <p-button
-        text="添加用户"
-        p="member.store"
-        @click="$router.push({ name: 'MemberCreate' })"
-        type="primary"
-      >
-      </p-button>
-      <p-button
-        text="批量导入"
-        p="member.import"
-        @click="$router.push({ name: 'MemberImport' })"
-        type="primary"
-        class="ml-15"
-      >
-      </p-button>
-    </div>
-    <div class="float-left">
-      <div class="float-left d-flex">
+    <div class="float-left j-b-flex mb-30">
+      <div class="d-flex">
+        <p-button
+          text="添加用户"
+          p="member.store"
+          @click="$router.push({ name: 'MemberCreate' })"
+          type="primary"
+        >
+        </p-button>
+        <p-button
+          text="批量导入"
+          p="member.import"
+          @click="$router.push({ name: 'MemberImport' })"
+          type="primary"
+          class="ml-15"
+        >
+        </p-button>
+      </div>
+      <div class="d-flex">
         <div>
           <el-input
             class="w-150px"
             v-model="filter.keywords"
-            placeholder="用户列表关键字"
+            placeholder="用户关键字"
           ></el-input>
-        </div>
-        <div class="ml-10">
-          <el-select
-            v-model="filter.role_id"
-            class="w-150px"
-            placeholder="VIP会员"
-            filterable
-          >
-            <el-option
-              v-for="(item, index) in filterData.roles"
-              :key="index"
-              :label="item.name"
-              :value="item.id"
-            >
-            </el-option>
-          </el-select>
-        </div>
-        <div class="ml-10">
-          <el-select
-            v-model="filter.tag_id"
-            class="w-150px"
-            placeholder="用户标签"
-            filterable
-          >
-            <el-option
-              v-for="(item, index) in filterData.tags"
-              :key="index"
-              :label="item.name"
-              :value="item.id"
-            >
-            </el-option>
-          </el-select>
         </div>
         <div class="ml-10">
           <el-date-picker
@@ -72,16 +40,18 @@
           </el-date-picker>
         </div>
         <div class="ml-10">
-          <el-button @click="firstPageLoad" type="primary" plain
-            >筛选</el-button
-          >
           <el-button @click="paginationReset">清空</el-button>
+          <el-button @click="firstPageLoad" type="primary">筛选</el-button>
+        </div>
+        <div class="drawerMore d-flex ml-10" @click="drawer = true">
+          <img src="../../assets/img/icon-filter.png" />更多
         </div>
       </div>
     </div>
-    <div class="float-left mt-30" v-loading="loading">
+    <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
           :data="users"
           class="float-left"
           @sort-change="sortChange"
@@ -161,6 +131,67 @@
         </el-pagination>
       </div>
     </div>
+    <el-drawer :size="360" :visible.sync="drawer" :with-header="false">
+      <div class="n-padding-box">
+        <div class="j-flex">
+          <el-input
+            class="w-300px"
+            v-model="filter.keywords"
+            placeholder="用户列表关键字"
+          ></el-input>
+        </div>
+        <div class="j-flex mt-30">
+          <el-select
+            v-model="filter.role_id"
+            class="w-300px"
+            placeholder="VIP会员"
+            filterable
+          >
+            <el-option
+              v-for="(item, index) in filterData.roles"
+              :key="index"
+              :label="item.name"
+              :value="item.id"
+            >
+            </el-option>
+          </el-select>
+        </div>
+
+        <div class="j-flex mt-30">
+          <el-select
+            v-model="filter.tag_id"
+            class="w-300px"
+            placeholder="用户标签"
+            filterable
+          >
+            <el-option
+              v-for="(item, index) in filterData.tags"
+              :key="index"
+              :label="item.name"
+              :value="item.id"
+            >
+            </el-option>
+          </el-select>
+        </div>
+        <div class="j-flex mt-30">
+          <el-date-picker
+            :picker-options="pickerOptions"
+            v-model="filter.created_at"
+            type="daterange"
+            align="right"
+            unlink-panels
+            range-separator="至"
+            start-placeholder="注册开始日期"
+            end-placeholder="注册结束日期"
+          >
+          </el-date-picker>
+        </div>
+        <div class="j-flex mt-30">
+          <el-button @click="paginationReset">清空</el-button>
+          <el-button @click="firstPageLoad" type="primary">筛选</el-button>
+        </div>
+      </div>
+    </el-drawer>
   </div>
 </template>
 
@@ -189,6 +220,7 @@ export default {
         tags: [],
         roles: [],
       },
+      drawer: false,
       pickerOptions: {
         disabledDate(time) {
           return time.getTime() > Date.now();
@@ -212,6 +244,7 @@ export default {
       this.filter.tag_id = null;
       this.filter.created_at = null;
       this.getUser();
+      this.drawer = false;
     },
     paginationSizeChange(size) {
       this.pagination.size = size;
@@ -224,6 +257,7 @@ export default {
     firstPageLoad() {
       this.pagination.page = 1;
       this.getUser();
+      this.drawer = false;
     },
     sortChange(column) {
       this.pagination.sort = column.prop;

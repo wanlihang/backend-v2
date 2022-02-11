@@ -1,6 +1,11 @@
 <template>
   <div class="float-left">
-    <el-table v-loading="loading" :data="list" class="float-left">
+    <el-table
+      :header-cell-style="{ background: '#f1f2f9' }"
+      v-loading="loading"
+      :data="list"
+      class="float-left"
+    >
       <el-table-column prop="id" label="记录ID" width="120"></el-table-column>
       <el-table-column prop="sum" label="变动" width="200"></el-table-column>
       <el-table-column prop="remark" label="备注"></el-table-column>

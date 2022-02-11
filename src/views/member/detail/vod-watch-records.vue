@@ -1,6 +1,11 @@
 <template>
   <div class="float-left">
-    <el-table v-loading="loading" :data="list" class="float-left">
+    <el-table
+      :header-cell-style="{ background: '#f1f2f9' }"
+      v-loading="loading"
+      :data="list"
+      class="float-left"
+    >
       <el-table-column label="课程">
         <template slot-scope="scope">
           <div class="d-flex" v-if="courses[scope.row.course_id]">
