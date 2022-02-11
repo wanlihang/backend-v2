@@ -1,36 +1,38 @@
 <template>
   <div class="meedu-main-body">
-    <div class="float-left mb-30">
-      <p-button
-        text="添加"
-        p="addons.MultiLevelShare.goods.store"
-        @click="$router.push({ name: 'ShareGoodsCreate' })"
-        type="primary"
-      >
-      </p-button>
-      <option-bar text="分销配置" value="三级分销"></option-bar>
-    </div>
-    <div class="float-left">
-      <div class="float-left d-flex">
+    <div class="float-left j-b-flex mb-30">
+      <div class="d-flex">
+        <p-button
+          text="添加"
+          p="addons.MultiLevelShare.goods.store"
+          @click="$router.push({ name: 'ShareGoodsCreate' })"
+          type="primary"
+        >
+        </p-button>
+        <option-bar text="分销配置" value="三级分销"></option-bar>
+      </div>
+      <div class="d-flex">
         <div>
           <el-input
-            class="w-200px"
+            class="w-150px"
             v-model="filter.keywords"
             placeholder="关键字搜索"
           ></el-input>
         </div>
 
-        <div class="ml-15">
-          <el-button @click="firstPageLoad" type="primary" plain
-            >筛选</el-button
-          >
+        <div class="ml-10">
           <el-button @click="paginationReset">清空</el-button>
+          <el-button @click="firstPageLoad" type="primary">筛选</el-button>
         </div>
       </div>
     </div>
-    <div class="float-left mt-30" v-loading="loading">
+    <div class="float-left" v-loading="loading">
       <div class="float-left">
-        <el-table :data="list" class="float-left">
+        <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
+          :data="list"
+          class="float-left"
+        >
           <el-table-column prop="id" label="ID" width="100"> </el-table-column>
           <el-table-column prop="goods_id" label="商品ID" width="100">
           </el-table-column>
@@ -55,7 +57,7 @@
               scope.row.created_at | dateFormat
             }}</template>
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="120">
+          <el-table-column fixed="right" label="操作" width="100">
             <template slot-scope="scope">
               <p-link
                 text="编辑"
