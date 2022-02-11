@@ -1,6 +1,7 @@
 <template>
   <div class="float-left">
     <el-table
+      :header-cell-style="{ background: '#f1f2f9' }"
       :data="courses"
       highlight-current-row
       @current-change="handleCurrentChange"
