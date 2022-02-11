@@ -1,11 +1,11 @@
 <template>
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="积分订单"></back-bar>
-    <div class="float-left">
-      <div class="float-left d-flex">
+    <div class="float-left j-b-flex mb-30">
+      <div class="d-flex">
         <div>
           <el-input
-            class="w-200px"
+            class="w-150px"
             v-model="filter.key"
             placeholder="关键字"
           ></el-input>
@@ -14,7 +14,7 @@
         <div class="ml-10">
           <el-select
             placeholder="商品分类"
-            class="w-200px"
+            class="w-150px"
             v-model="filter.goods_type"
           >
             <el-option
@@ -27,17 +27,19 @@
           </el-select>
         </div>
 
-        <div class="ml-15">
-          <el-button @click="firstPageLoad" type="primary" plain
-            >筛选</el-button
-          >
+        <div class="ml-10">
           <el-button @click="paginationReset">清空</el-button>
+          <el-button @click="firstPageLoad" type="primary">筛选</el-button>
         </div>
       </div>
     </div>
-    <div class="float-left mt-30" v-loading="loading">
+    <div class="float-left" v-loading="loading">
       <div class="float-left">
-        <el-table :data="results" class="float-left">
+        <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
+          :data="results"
+          class="float-left"
+        >
           <el-table-column prop="id" label="ID" width="60"> </el-table-column>
           <el-table-column label="类型">
             <template slot-scope="scope">

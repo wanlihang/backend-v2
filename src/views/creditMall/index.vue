@@ -1,27 +1,28 @@
 <template>
   <div class="meedu-main-body">
-    <div class="float-left mb-30">
-      <p-button
-        text="添加"
-        p="addons.credit1Mall.goods.store"
-        @click="$router.push({ name: 'CreditMallCreate' })"
-        type="primary"
-      >
-      </p-button>
-      <p-button
-        text="订单"
-        p="addons.credit1Mall.orders.list"
-        @click="$router.push({ name: 'CreditMallOrders' })"
-        type="primary"
-      >
-      </p-button>
-      <option-bar text="积分配置" value="积分"></option-bar>
-    </div>
-    <div class="float-left">
-      <div class="float-left d-flex">
+    <div class="float-left j-b-flex mb-30">
+      <div class="d-flex">
+        <p-button
+          text="添加"
+          p="addons.credit1Mall.goods.store"
+          @click="$router.push({ name: 'CreditMallCreate' })"
+          type="primary"
+        >
+        </p-button>
+        <p-button
+          text="订单"
+          p="addons.credit1Mall.orders.list"
+          @click="$router.push({ name: 'CreditMallOrders' })"
+          type="primary"
+        >
+        </p-button>
+        <option-bar text="积分配置" value="积分"></option-bar>
+      </div>
+
+      <div class="d-flex">
         <div>
           <el-input
-            class="w-200px"
+            class="w-150px"
             v-model="filter.key"
             placeholder="关键字"
           ></el-input>
@@ -30,7 +31,7 @@
         <div class="ml-10">
           <el-select
             placeholder="商品分类"
-            class="w-200px"
+            class="w-150px"
             v-model="filter.goods_type"
           >
             <el-option
@@ -43,17 +44,19 @@
           </el-select>
         </div>
 
-        <div class="ml-15">
-          <el-button @click="firstPageLoad" type="primary" plain
-            >筛选</el-button
-          >
+        <div class="ml-10">
           <el-button @click="paginationReset">清空</el-button>
+          <el-button @click="firstPageLoad" type="primary">筛选</el-button>
         </div>
       </div>
     </div>
-    <div class="float-left mt-30" v-loading="loading">
+    <div class="float-left" v-loading="loading">
       <div class="float-left">
-        <el-table :data="results" class="float-left">
+        <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
+          :data="results"
+          class="float-left"
+        >
           <el-table-column prop="id" label="ID" width="120"> </el-table-column>
           <el-table-column label="商品" width="400">
             <template slot-scope="scope">
@@ -88,7 +91,7 @@
               scope.row.created_at | dateFormat
             }}</template>
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="120">
+          <el-table-column fixed="right" label="操作" width="100">
             <template slot-scope="scope">
               <p-link
                 text="编辑"
