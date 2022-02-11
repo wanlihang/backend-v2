@@ -1,11 +1,11 @@
 <template>
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="分数统计"></back-bar>
-    <div class="float-left mb-30">
-      <el-button @click="exportXlsx()" type="primary"> 导出成绩 </el-button>
-    </div>
-    <div class="float-left mb-30">
-      <div class="float-left d-flex">
+    <div class="float-left j-b-flex mb-30">
+      <div class="d-flex">
+        <el-button @click="exportXlsx()" type="primary"> 导出成绩 </el-button>
+      </div>
+      <div class="d-flex">
         <div>
           <el-date-picker
             :picker-options="pickerOptions"
@@ -33,10 +33,8 @@
           </el-date-picker>
         </div>
         <div class="ml-10">
-          <el-button @click="firstPageLoad()" type="primary" plain>
-            筛选
-          </el-button>
           <el-button @click="paginationReset()">清空</el-button>
+          <el-button @click="firstPageLoad()" type="primary"> 筛选 </el-button>
         </div>
       </div>
     </div>
@@ -78,7 +76,11 @@
     </div>
     <div class="float-left mt-30" v-loading="loading">
       <div class="float-left">
-        <el-table :data="list" class="float-left">
+        <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
+          :data="list"
+          class="float-left"
+        >
           <el-table-column prop="user_id" label="用户ID" width="120">
           </el-table-column>
           <el-table-column label="用户" width="300">

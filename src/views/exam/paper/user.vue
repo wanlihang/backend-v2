@@ -6,11 +6,16 @@
         text="添加用户"
         p="addons.Paper.paper.users.add"
         @click="showUserAddWin = true"
+        type="primary"
       ></p-button>
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
-        <el-table :data="results" class="float-left">
+        <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
+          :data="results"
+          class="float-left"
+        >
           <el-table-column prop="user_id" label="用户ID" width="80">
           </el-table-column>
           <el-table-column label="手机号" width="150">

@@ -4,13 +4,9 @@
     :disabled="disabled"
     :icon="icon"
     v-if="through"
+    @click.native="$emit('click')"
   >
-    <el-link
-      :type="type"
-      :disabled="disabled"
-      @click="$emit('click')"
-      :underline="false"
-    >
+    <el-link :type="type" :disabled="disabled" :underline="false">
       {{ text }}
     </el-link>
   </el-dropdown-item>

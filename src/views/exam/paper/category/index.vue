@@ -13,6 +13,7 @@
     <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
           :data="categories"
           row-key="id"
           :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
@@ -27,7 +28,7 @@
               <span>{{ scope.row.name }} </span>
             </template>
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="150">
+          <el-table-column fixed="right" label="操作" width="100">
             <template slot-scope="scope">
               <p-link
                 text="删除"

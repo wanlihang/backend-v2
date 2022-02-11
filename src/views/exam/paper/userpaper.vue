@@ -5,13 +5,13 @@
       <div class="float-left d-flex">
         <div>
           <el-input
-            class="w-200px"
+            class="w-150px"
             v-model="filter.user_id"
             placeholder="用户ID"
           ></el-input>
         </div>
         <div class="ml-10">
-          <el-select class="w-200px" placeholder="状态" v-model="filter.status">
+          <el-select class="w-150px" placeholder="状态" v-model="filter.status">
             <el-option
               v-for="(item, index) in filterData.statusMap"
               :key="index"
@@ -47,17 +47,16 @@
           >
           </el-date-picker>
         </div>
-      </div>
-      <div class="float-left mt-15">
-        <el-button @click="firstPageLoad()" type="primary" plain>
-          筛选
-        </el-button>
-        <el-button @click="paginationReset()">清空</el-button>
+        <div class="ml-10">
+          <el-button @click="paginationReset()">清空</el-button>
+          <el-button @click="firstPageLoad()" type="primary"> 筛选 </el-button>
+        </div>
       </div>
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
           :data="list"
           @sort-change="sortChange"
           :default-sort="{ prop: 'id', order: 'descending' }"

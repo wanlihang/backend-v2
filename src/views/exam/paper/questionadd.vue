@@ -1,14 +1,14 @@
 <template>
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="添加习题"></back-bar>
-    <div class="float-left mb-30">
-      <el-button @click="addmulti()" type="danger"> 批量添加 </el-button>
-    </div>
-    <div class="float-left">
-      <div class="float-left d-flex">
+    <div class="float-left j-b-flex mb-30">
+      <div class="d-flex">
+        <el-button @click="addmulti()" type="danger"> 批量添加 </el-button>
+      </div>
+      <div class="d-flex">
         <div>
           <el-select
-            class="w-200px"
+            class="w-150px"
             placeholder="分类"
             v-model="filter.category_id"
           >
@@ -23,7 +23,7 @@
         </div>
 
         <div class="ml-10">
-          <el-select class="w-200px" placeholder="类型" v-model="filter.type">
+          <el-select class="w-150px" placeholder="类型" v-model="filter.type">
             <el-option
               v-for="(item, index) in filterData.types"
               :key="index"
@@ -35,7 +35,7 @@
         </div>
 
         <div class="ml-10">
-          <el-select class="w-200px" placeholder="难度" v-model="filter.level">
+          <el-select class="w-150px" placeholder="难度" v-model="filter.level">
             <el-option
               v-for="(item, index) in filterData.levels"
               :key="index"
@@ -47,16 +47,15 @@
         </div>
 
         <div class="ml-10">
-          <el-button @click="firstPageLoad()" type="primary" plain>
-            筛选
-          </el-button>
           <el-button @click="paginationReset()">清空</el-button>
+          <el-button @click="firstPageLoad()" type="primary"> 筛选 </el-button>
         </div>
       </div>
     </div>
-    <div class="float-left mt-30" v-loading="loading">
+    <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
           :data="results"
           @selection-change="handleSelectionChange"
           class="float-left"
