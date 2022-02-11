@@ -1,27 +1,27 @@
 <template>
   <div class="meedu-main-body">
-    <div class="float-left mb-30">
-      <p-button
-        text="添加"
-        p="addons.Paper.mock_paper.store"
-        @click="$router.push({ name: 'ExamMockpaperCreate' })"
-        type="primary"
-      >
-      </p-button>
-    </div>
-    <div class="float-left">
-      <div class="float-left d-flex">
+    <div class="float-left j-b-flex mb-30">
+      <div class="d-flex">
+        <p-button
+          text="添加"
+          p="addons.Paper.mock_paper.store"
+          @click="$router.push({ name: 'ExamMockpaperCreate' })"
+          type="primary"
+        >
+        </p-button>
+      </div>
+      <div class="d-flex">
         <div>
           <el-input
             v-model="filter.keywords"
-            class="w-200px"
+            class="w-150px"
             placeholder="模拟试卷关键字"
           ></el-input>
         </div>
 
         <div class="ml-10">
           <el-select
-            class="w-200px"
+            class="w-150px"
             placeholder="分类"
             v-model="filter.category_id"
           >
@@ -36,16 +36,15 @@
         </div>
 
         <div class="ml-10">
-          <el-button @click="firstPageLoad()" type="primary" plain>
-            筛选
-          </el-button>
           <el-button @click="paginationReset()">清空</el-button>
+          <el-button @click="firstPageLoad()" type="primary"> 筛选 </el-button>
         </div>
       </div>
     </div>
-    <div class="float-left mt-30" v-loading="loading">
+    <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
           :data="list"
           @sort-change="sortChange"
           :default-sort="{ prop: 'id', order: 'descending' }"
@@ -67,7 +66,7 @@
               <span>{{ scope.row.expired_minutes }}分钟</span>
             </template>
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="220">
+          <el-table-column fixed="right" label="操作" width="140">
             <template slot-scope="scope">
               <p-link
                 text="编辑"
@@ -81,7 +80,7 @@
                 "
               ></p-link>
               <p-link
-                text="用户"
+                text="学员"
                 class="ml-5"
                 p="addons.Paper.mock_paper.users"
                 type="primary"
@@ -92,38 +91,44 @@
                   })
                 "
               ></p-link>
-              <p-link
-                text="统计"
-                p="addons.Paper.mock_paper.statistics"
-                type="primary"
-                class="ml-5"
-                @click="
-                  $router.push({
-                    name: 'ExamMockpaperStat',
-                    query: { id: scope.row.id },
-                  })
-                "
-              ></p-link>
-              <p-link
-                text="考试记录"
-                p="addons.Paper.mock_paper.records"
-                type="primary"
-                class="ml-5"
-                @click="
-                  $router.push({
-                    name: 'ExamMockpaperUserpaper',
-                    query: { id: scope.row.id },
-                  })
-                "
-              ></p-link>
-
-              <p-link
-                text="删除"
-                class="ml-5"
-                p="addons.Paper.mock_paper.delete"
-                type="danger"
-                @click="destory(scope.row.id)"
-              ></p-link>
+              <el-dropdown>
+                <el-link type="primary" class="el-dropdown-link ml-5">
+                  更多<i class="el-icon-arrow-down el-icon--right"></i>
+                </el-link>
+                <el-dropdown-menu slot="dropdown">
+                  <p-dropdown-item
+                    text="统计"
+                    p="addons.Paper.mock_paper.statistics"
+                    type="primary"
+                    @click="
+                      $router.push({
+                        name: 'ExamMockpaperStat',
+                        query: { id: scope.row.id },
+                      })
+                    "
+                  >
+                  </p-dropdown-item>
+                  <p-dropdown-item
+                    text="考试记录"
+                    p="addons.Paper.mock_paper.records"
+                    type="primary"
+                    @click="
+                      $router.push({
+                        name: 'ExamMockpaperUserpaper',
+                        query: { id: scope.row.id },
+                      })
+                    "
+                  >
+                  </p-dropdown-item>
+                  <p-dropdown-item
+                    text="删除"
+                    p="addons.Paper.mock_paper.delete"
+                    type="danger"
+                    @click="destory(scope.row.id)"
+                  >
+                  </p-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
             </template>
           </el-table-column>
         </el-table>

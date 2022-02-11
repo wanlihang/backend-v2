@@ -1,8 +1,8 @@
 <template>
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="考试记录"></back-bar>
-    <div class="float-left mb-30">
-      <div class="float-left d-flex">
+    <div class="float-left j-b-flex mb-30">
+      <div class="d-flex">
         <div>
           <el-input
             class="w-150px"
