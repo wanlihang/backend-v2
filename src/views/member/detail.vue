@@ -62,62 +62,45 @@
           </div>
         </div>
         <div class="panel-info-box">
-          <el-descriptions direction="vertical" :column="4" border>
-            <el-descriptions-item label="ID">{{
-              user.id
-            }}</el-descriptions-item>
-            <el-descriptions-item label="手机号">{{
-              user.mobile
-            }}</el-descriptions-item>
-            <el-descriptions-item label="积分">{{
-              user.credit1
-            }}</el-descriptions-item>
-            <el-descriptions-item label="VIP">{{
-              user.role ? user.role.name : ""
-            }}</el-descriptions-item>
-            <el-descriptions-item label="VIP过期时间">{{
-              user.role_expired_at | dateFormat
-            }}</el-descriptions-item>
-            <el-descriptions-item label="一级邀请人">
-              {{ user.invitor ? user.invitor.nick_name : "" }}
-              <template v-if="user.invitor"
-                >(有效期剩
-                {{ user.invite_user_expired_at | dateFormat }}天)</template
-              >
-            </el-descriptions-item>
-            <el-descriptions-item label="用户邀请码">{{
+          <div class="panel-info-item">ID：{{ user.id }}</div>
+          <div class="panel-info-item">手机号：{{ user.mobile }}</div>
+          <div class="panel-info-item">积分：{{ user.credit1 }}</div>
+          <div class="panel-info-item">
+            VIP： {{ user.role ? user.role.name : "" }}
+          </div>
+          <div class="panel-info-item">
+            VIP过期时间：{{ user.role_expired_at | dateFormat }}
+          </div>
+          <div class="panel-info-item">
+            一级邀请人：{{ user.invitor ? user.invitor.nick_name : ""
+            }}<template v-if="user.invitor"
+              >(有效期剩
+              {{ user.invite_user_expired_at | dateFormat }}天)</template
+            >
+          </div>
+          <div class="panel-info-item">
+            用户邀请码：{{
               user.is_used_promo_code === 1 ? "已使用" : "未使用"
-            }}</el-descriptions-item>
-            <el-descriptions-item label="推广余额">{{
-              user.invite_balance
-            }}</el-descriptions-item>
-            <el-descriptions-item label="锁定登录">{{
-              user.is_lock === 1 ? "是" : "否"
-            }}</el-descriptions-item>
-            <el-descriptions-item label="IP地址">{{
-              user.register_ip
-            }}</el-descriptions-item>
-            <el-descriptions-item label="注册区域">{{
-              user.register_area
-            }}</el-descriptions-item>
-            <el-descriptions-item label="标签">
-              <template v-if="user.tags">
-                <el-tag
-                  size="small"
-                  class="mr-5"
-                  v-for="item in user.tags"
-                  :key="item.id"
-                >
-                  {{ item.name }}
-                </el-tag>
-              </template>
-            </el-descriptions-item>
-            <el-descriptions-item label="备注">
-              <template v-if="user.remark">
-                <div v-html="user.remark.remark"></div>
-              </template>
-            </el-descriptions-item>
-          </el-descriptions>
+            }}
+          </div>
+          <div class="panel-info-item">推广余额：{{ user.invite_balance }}</div>
+          <div class="panel-info-item">
+            锁定登录：{{ user.is_lock === 1 ? "是" : "否" }}
+          </div>
+          <div class="panel-info-item">IP地址： {{ user.register_ip }}</div>
+          <div class="panel-info-item">注册区域： {{ user.register_area }}</div>
+          <div class="panel-info-item">
+            标签：<template v-if="user.tags">
+              <el-tag class="mr-5" v-for="item in user.tags" :key="item.id">
+                {{ item.name }}
+              </el-tag>
+            </template>
+          </div>
+          <div class="panel-info-item">
+            备注：<template v-if="user.remark">
+              <span v-html="user.remark.remark"></span>
+            </template>
+          </div>
         </div>
       </div>
     </div>
@@ -355,8 +338,26 @@ export default {
     height: auto;
     float: left;
     box-sizing: border-box;
-    padding-bottom: 0px;
+    padding-bottom: 20px;
     padding-top: 30px;
+    display: grid;
+    row-gap: 30px;
+    column-gap: 0px;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    .panel-info-item {
+      width: auto;
+      height: 14px;
+      font-size: 14px;
+      font-weight: 400;
+      color: #333333;
+      line-height: 14px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      span {
+        display: inline-block;
+      }
+    }
   }
 }
 
