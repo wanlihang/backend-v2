@@ -6,12 +6,17 @@
         text="添加用户"
         p="addons.Paper.practice.user.insert"
         @click="showUserAddWin = true"
+        type="primary"
       ></p-button>
       <el-button @click="exportXlsx" type="primary">导出记录</el-button>
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
-        <el-table :data="results" class="float-left">
+        <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
+          :data="results"
+          class="float-left"
+        >
           <el-table-column prop="user_id" label="用户ID" width="120">
           </el-table-column>
           <el-table-column label="用户" width="300">
@@ -50,22 +55,22 @@
           <el-table-column fixed="right" label="操作" width="100">
             <template slot-scope="scope">
               <p-link
-                text="删除"
-                p="addons.Paper.practice.user.delete"
-                type="danger"
-                @click="destroy(scope.row.user_id)"
-              ></p-link>
-              <p-link
                 text="详细"
                 p="addons.Paper.practice.user.progress"
                 type="primary"
-                class="ml-5"
                 @click="
                   $router.push({
                     name: 'PracticeProgress',
                     query: { pid: scope.row.user_id, id: pagination.id },
                   })
                 "
+              ></p-link>
+              <p-link
+                text="删除"
+                class="ml-5"
+                p="addons.Paper.practice.user.delete"
+                type="danger"
+                @click="destroy(scope.row.user_id)"
               ></p-link>
             </template>
           </el-table-column>
