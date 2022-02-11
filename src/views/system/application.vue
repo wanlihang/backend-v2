@@ -18,7 +18,11 @@
     <div class="float-left">
       <template v-if="tab === 'repository'">
         <div class="float-left table-content">
-          <el-table :data="repositories" class="float-left">
+          <el-table
+            :header-cell-style="{ background: '#f1f2f9' }"
+            :data="repositories"
+            class="float-left"
+          >
             <el-table-column prop="name" label="插件"> </el-table-column>
             <el-table-column prop="version" label="版本" width="200">
             </el-table-column>
@@ -62,7 +66,11 @@
       </template>
 
       <div class="float-left table-content" v-else-if="tab === 'local'">
-        <el-table :data="localList" class="float-left">
+        <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
+          :data="localList"
+          class="float-left"
+        >
           <el-table-column prop="name" label="插件"> </el-table-column>
           <el-table-column prop="version" label="本地版本" width="200">
           </el-table-column>
@@ -83,7 +91,14 @@
                   停用
                 </el-link>
 
-                <el-link class="ml-10" v-if="scope.row.index_url" type="primary"  target="_blank" :href="scope.row.index_url">配置</el-link>
+                <el-link
+                  class="ml-10"
+                  v-if="scope.row.index_url"
+                  type="primary"
+                  target="_blank"
+                  :href="scope.row.index_url"
+                  >配置</el-link
+                >
               </template>
 
               <el-link

@@ -11,6 +11,7 @@
     <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
           :data="users"
           class="float-left"
           @sort-change="sortChange"
@@ -37,7 +38,7 @@
             </template>
           </el-table-column>
 
-          <el-table-column fixed="right" label="操作" width="120">
+          <el-table-column fixed="right" label="操作" width="100">
             <template slot-scope="scope">
               <p-link
                 text="编辑"
