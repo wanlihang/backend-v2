@@ -1,42 +1,45 @@
 <template>
   <div class="meedu-main-body">
-    <div class="float-left mb-30">
-      <p-button
-        text="添加"
-        p="addons.TuanGou.goods.store"
-        @click="$router.push({ name: 'TuangouGoodsCreate' })"
-        type="primary"
-      >
-      </p-button>
-      <p-button
-        text="退款订单"
-        p="addons.TuanGou.refund"
-        @click="$router.push({ name: 'TuangouGoodsRefund' })"
-        type="primary"
-      >
-      </p-button>
-      <option-bar text="团购配置" value="团购"></option-bar>
-    </div>
-    <div class="float-left">
-      <div class="float-left d-flex">
+    <div class="float-left j-b-flex mb-30">
+      <div class="d-flex">
+        <p-button
+          text="添加"
+          p="addons.TuanGou.goods.store"
+          @click="$router.push({ name: 'TuangouGoodsCreate' })"
+          type="primary"
+        >
+        </p-button>
+        <p-button
+          text="退款订单"
+          p="addons.TuanGou.refund"
+          @click="$router.push({ name: 'TuangouGoodsRefund' })"
+          type="primary"
+        >
+        </p-button>
+        <option-bar text="团购配置" value="团购"></option-bar>
+      </div>
+
+      <div class="d-flex">
         <div>
           <el-input
-            class="w-200px"
+            class="w-150px"
             v-model="filter.keywords"
             placeholder="关键字搜索"
           ></el-input>
         </div>
 
         <div class="ml-10">
-          <el-button @click="firstPageLoad" type="primary" plain
-            >筛选</el-button
-          >
           <el-button @click="paginationReset">清空</el-button>
+          <el-button @click="firstPageLoad" type="primary">筛选</el-button>
         </div>
       </div>
     </div>
-    <div class="float-left mt-30" v-loading="loading">
-      <el-table :data="list" class="float-left">
+    <div class="float-left" v-loading="loading">
+      <el-table
+        :header-cell-style="{ background: '#f1f2f9' }"
+        :data="list"
+        class="float-left"
+      >
         <el-table-column prop="id" label="ID" width="100"> </el-table-column>
         <el-table-column prop="other_id" label="商品ID" width="100">
         </el-table-column>

@@ -3,7 +3,11 @@
     <back-bar class="mb-30" title="团列表"></back-bar>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
-        <el-table :data="results" class="float-left">
+        <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
+          :data="results"
+          class="float-left"
+        >
           <el-table-column prop="id" label="ID" width="80"> </el-table-column>
           <el-table-column label="团长">
             <template slot-scope="scope">
@@ -138,4 +142,3 @@ export default {
   },
 };
 </script>
-
