@@ -159,6 +159,7 @@
     </div>
     <el-drawer :size="360" :visible.sync="drawer" :with-header="false">
       <div class="n-padding-box">
+        <div class="tit flex">更多筛选</div>
         <div class="j-flex">
           <el-input
             class="w-300px"
@@ -166,7 +167,7 @@
             placeholder="关键字"
           ></el-input>
         </div>
-        <div class="j-flex mt-30">
+        <div class="j-flex mt-20">
           <el-select
             placeholder="分类"
             class="w-300px"
@@ -181,14 +182,14 @@
             </el-option>
           </el-select>
         </div>
-        <div class="j-flex mt-30">
+        <div class="j-flex mt-20">
           <el-input
             class="w-300px"
             v-model="filter.user_id"
             placeholder="用户ID"
           ></el-input>
         </div>
-        <div class="j-flex mt-30">
+        <div class="j-flex mt-20">
           <el-select placeholder="状态" class="w-300px" v-model="filter.status">
             <el-option
               v-for="(item, index) in filterData.status"
@@ -199,7 +200,7 @@
             </el-option>
           </el-select>
         </div>
-        <div class="j-flex mt-30">
+        <div class="j-flex mt-20">
           <el-date-picker
             :picker-options="pickerOptions"
             v-model="filter.created_at"
@@ -212,7 +213,7 @@
           >
           </el-date-picker>
         </div>
-        <div class="j-flex mt-30">
+        <div class="j-b-flex mt-30">
           <el-button @click="paginationReset()">清空</el-button>
           <el-button @click="firstPageLoad()" type="primary">筛选</el-button>
         </div>

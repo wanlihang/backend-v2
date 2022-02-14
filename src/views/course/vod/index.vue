@@ -191,6 +191,7 @@
     </div>
     <el-drawer :size="260" :visible.sync="drawer" :with-header="false">
       <div class="n-padding-box">
+        <div class="tit flex">更多筛选</div>
         <div class="j-flex">
           <el-input
             class="w-200px"
@@ -198,7 +199,7 @@
             placeholder="课程名称关键字"
           ></el-input>
         </div>
-        <div class="j-flex mt-30">
+        <div class="j-flex mt-20">
           <el-select class="w-200px" v-model="filter.cid" placeholder="分类">
             <el-option
               v-for="(item, index) in filterData.categories"
@@ -209,14 +210,14 @@
             </el-option>
           </el-select>
         </div>
-        <div class="j-flex mt-30">
+        <div class="j-flex mt-20">
           <el-input
             class="w-200px"
             v-model="filter.id"
             placeholder="课程ID"
           ></el-input>
         </div>
-        <div class="j-flex mt-30">
+        <div class="j-b-flex mt-30">
           <el-button @click="paginationReset">清空</el-button>
           <el-button @click="filterAct" type="primary">筛选</el-button>
         </div>

@@ -123,6 +123,7 @@
     </div>
     <el-drawer :size="260" :visible.sync="drawer" :with-header="false">
       <div class="n-padding-box">
+        <div class="tit flex">更多筛选</div>
         <div class="j-flex">
           <el-select
             class="w-200px"
@@ -138,7 +139,7 @@
             </el-option>
           </el-select>
         </div>
-        <div class="j-flex mt-30">
+        <div class="j-flex mt-20">
           <el-select class="w-200px" placeholder="类型" v-model="filter.type">
             <el-option
               v-for="(item, index) in filterData.types"
@@ -150,7 +151,7 @@
           </el-select>
         </div>
 
-        <div class="j-flex mt-30">
+        <div class="j-flex mt-20">
           <el-select class="w-200px" placeholder="难度" v-model="filter.level">
             <el-option
               v-for="(item, index) in filterData.levels"
@@ -162,7 +163,7 @@
           </el-select>
         </div>
 
-        <div class="j-flex mt-30">
+        <div class="j-b-flex mt-30">
           <el-button @click="paginationReset()">清空</el-button>
           <el-button @click="firstPageLoad()" type="primary"> 筛选 </el-button>
         </div>
