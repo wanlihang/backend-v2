@@ -65,7 +65,14 @@
           <el-button @click="firstPageLoad()" type="primary"> 筛选 </el-button>
         </div>
         <div class="drawerMore d-flex ml-10" @click="drawer = true">
-          <img src="../../../assets/img/icon-filter.png" />更多
+          <template v-if="showStatus">
+            <img src="../../../assets/img/icon-filter-h.png" />
+            <span class="act">已选</span>
+          </template>
+          <template v-else>
+            <img src="../../../assets/img/icon-filter.png" />
+            <span>更多</span>
+          </template>
         </div>
       </div>
     </div>
@@ -203,6 +210,7 @@ export default {
         types: [],
       },
       drawer: false,
+      showStatus: false,
     };
   },
   activated() {
@@ -212,6 +220,29 @@ export default {
   beforeRouteLeave(to, from, next) {
     this.$utils.scrollTopRecord(this.pageName);
     next();
+  },
+  watch: {
+    "filter.level"(val) {
+      if (val) {
+        this.showStatus = true;
+      } else {
+        this.showStatus = false;
+      }
+    },
+    "filter.category_id"(val) {
+      if (val) {
+        this.showStatus = true;
+      } else {
+        this.showStatus = false;
+      }
+    },
+    "filter.type"(val) {
+      if (val) {
+        this.showStatus = true;
+      } else {
+        this.showStatus = false;
+      }
+    },
   },
   methods: {
     firstPageLoad() {
