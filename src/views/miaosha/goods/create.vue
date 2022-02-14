@@ -96,21 +96,6 @@
             </div>
           </div>
         </el-form-item>
-
-        <el-form-item prop="page_title" label="PC秒杀页面标题">
-          <div class="d-flex">
-            <div>
-              <el-input
-                class="w-500px"
-                v-model="course.page_title"
-                placeholder="PC秒杀页面标题"
-              ></el-input>
-            </div>
-            <div class="ml-10">
-              <helper-text text="PC秒杀页面标题"></helper-text>
-            </div>
-          </div>
-        </el-form-item>
       </el-form>
 
       <div class="bottom-menus">
@@ -158,7 +143,6 @@ export default {
         original_charge: null,
         goods_id: null,
         goods_type: null,
-        page_title: null,
         desc: null,
         num: null,
       },
@@ -245,7 +229,7 @@ export default {
   methods: {
     change(data) {
       this.course.goods_id = data.id;
-      this.course.goods_title = this.course.page_title = data.title;
+      this.course.goods_title = data.title;
       this.course.original_charge = data.original_charge;
       this.course.goods_thumb = data.thumb;
 
