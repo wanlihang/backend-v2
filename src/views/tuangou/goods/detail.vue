@@ -3,10 +3,10 @@
     <back-bar class="mb-30" title="团列表详情"></back-bar>
     <div class="float-left" v-loading="loading">
       <div class="float-left flex-column mb-30">
-        <div class="title mb-30">未支付团员：</div>
+        <div class="title mb-30">已支付团员：</div>
         <el-table
           :header-cell-style="{ background: '#f1f2f9' }"
-          :data="users[0]"
+          :data="users[1]"
           class="float-left"
         >
           <el-table-column prop="id" label="ID" width="120"> </el-table-column>
@@ -29,10 +29,10 @@
         </el-table>
       </div>
       <div class="float-left flex-column">
-        <div class="title mb-30">已支付团员：</div>
+        <div class="title mb-30">未支付团员：</div>
         <el-table
           :header-cell-style="{ background: '#f1f2f9' }"
-          :data="users[1]"
+          :data="users[0]"
           class="float-left"
         >
           <el-table-column prop="id" label="ID" width="120"> </el-table-column>
