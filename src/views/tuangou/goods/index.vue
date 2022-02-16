@@ -82,7 +82,7 @@
               type="primary"
               @click="
                 $router.push({
-                  name: 'TuangouMoodsUpdate',
+                  name: 'TuangouGoodsUpdate',
                   query: { id: scope.row.id },
                 })
               "

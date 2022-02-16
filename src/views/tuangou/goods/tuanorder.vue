@@ -45,7 +45,7 @@
               }}</el-tag>
             </template>
           </el-table-column>
-          <el-table-column label="人数" width="200">
+          <el-table-column label="人数" width="120">
             <template slot-scope="scope">
               <span
                 >{{ scope.row.people_num - scope.row.over_people_num }}/{{
@@ -59,9 +59,21 @@
               <span>{{ scope.row.expired_at | dateFormat }}</span>
             </template>
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="100">
+          <el-table-column fixed="right" label="操作" width="140">
             <template slot-scope="scope">
               <p-link
+                text="详情"
+                p="addons.TuanGou.goods.item.detail"
+                @click="
+                  $router.push({
+                    name: 'TuangouGoodsDetail',
+                    query: { id: scope.row.goods_id, tid: scope.row.id },
+                  })
+                "
+                type="primary"
+              ></p-link>
+              <p-link
+                class="ml-5"
                 text="改为已完成"
                 p="addons.TuanGou.goods.complete"
                 v-if="scope.row.status != 1"

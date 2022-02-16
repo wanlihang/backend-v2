@@ -768,9 +768,17 @@ const routes = [
   {
     path: "/tuangou/goods/update",
     component: () => import("@/views/tuangou/goods/update"),
-    name: "TuangouMoodsUpdate",
+    name: "TuangouGoodsUpdate",
     meta: {
       title: "title.tuangou.goods.update",
+    },
+  },
+  {
+    path: "/tuangou/goods/detail",
+    component: () => import("@/views/tuangou/goods/detail"),
+    name: "TuangouGoodsDetail",
+    meta: {
+      title: "title.tuangou.goods.detail",
     },
   },
   {

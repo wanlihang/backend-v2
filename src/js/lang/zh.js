@@ -80,6 +80,7 @@ const zh = {
         order: "团购订单",
         refund: "团购退款订单",
         tuanorder: "团列表",
+        detail: "团列表详情",
       },
     },
     learningpath: {
