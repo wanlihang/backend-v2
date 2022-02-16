@@ -29,11 +29,6 @@
               <span>{{ scope.row.create_user_name }}</span>
             </template>
           </el-table-column>
-          <el-table-column label="成员" width="100">
-            <template slot-scope="scope">
-              <span>{{ scope.row.over_people_num }}人</span>
-            </template>
-          </el-table-column>
           <el-table-column label="状态" width="120">
             <template slot-scope="scope">
               <el-tag type="info" v-if="scope.row.status === 0">{{
