@@ -144,7 +144,7 @@ export default {
   },
   methods: {
     paginationReset() {
-      this.filter.status = -1;
+      this.filter.status = "-1";
       this.pagination.page = 1;
       this.getResults();
     },
