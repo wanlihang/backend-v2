@@ -45,6 +45,11 @@
               }}</el-tag>
             </template>
           </el-table-column>
+          <el-table-column label="模拟" width="120">
+            <template slot-scope="scope">
+              <el-tag v-if="scope.row.create_user_id === 0">是</el-tag>
+            </template>
+          </el-table-column>
           <el-table-column label="人数" width="120">
             <template slot-scope="scope">
               <span
