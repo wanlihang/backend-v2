@@ -151,7 +151,7 @@
       v-bind:show="showSelectResWin"
       @change="change"
       @close="showSelectResWin = false"
-      enabled-resource="vod,video,live,book,paper,learnPath,practice"
+      enabled-resource="vod,live,book,learnPath"
     ></select-resource>
   </div>
 </template>
