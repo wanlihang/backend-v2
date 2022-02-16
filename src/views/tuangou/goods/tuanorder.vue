@@ -34,7 +34,21 @@
               <span>{{ scope.row.over_people_num }}人</span>
             </template>
           </el-table-column>
-          <el-table-column prop="status_text" label="状态" width="120">
+          <el-table-column label="状态" width="120">
+            <template slot-scope="scope">
+              <el-tag type="info" v-if="scope.row.status === 0">{{
+                scope.row.status_text
+              }}</el-tag>
+              <el-tag type="success" v-else-if="scope.row.status === 1">{{
+                scope.row.status_text
+              }}</el-tag>
+              <el-tag type="danger" v-else-if="scope.row.status === 2">{{
+                scope.row.status_text
+              }}</el-tag>
+              <el-tag v-else-if="scope.row.status === 3">{{
+                scope.row.status_text
+              }}</el-tag>
+            </template>
           </el-table-column>
           <el-table-column label="人数" width="120">
             <template slot-scope="scope">
