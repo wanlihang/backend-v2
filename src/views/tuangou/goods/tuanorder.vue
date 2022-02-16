@@ -29,7 +29,7 @@
               <span>{{ scope.row.create_user_name }}</span>
             </template>
           </el-table-column>
-          <el-table-column label="状态" width="120">
+          <el-table-column label="状态" width="200">
             <template slot-scope="scope">
               <el-tag type="info" v-if="scope.row.status === 0">{{
                 scope.row.status_text
@@ -45,7 +45,7 @@
               }}</el-tag>
             </template>
           </el-table-column>
-          <el-table-column label="人数" width="120">
+          <el-table-column label="人数" width="200">
             <template slot-scope="scope">
               <span
                 >{{ scope.row.people_num - scope.row.over_people_num }}/{{
@@ -54,7 +54,7 @@
               >
             </template>
           </el-table-column>
-          <el-table-column label="过期" width="180">
+          <el-table-column label="过期" width="200">
             <template slot-scope="scope">
               <span>{{ scope.row.expired_at | dateFormat }}</span>
             </template>
