@@ -33,7 +33,7 @@ Vue.use(ElementUI);
 // 组件注册
 Vue.use(mavonEditor);
 Vue.prototype.moment = moment;
-Vue.filter("dateFormat", function (dateStr, pattern = "YYYY-MM-DD HH:mm") {
+Vue.filter("dateFormat", function (dateStr, pattern = "yyyy-MM-dd HH:mm") {
   if (!dateStr) {
     return dateStr;
   }
