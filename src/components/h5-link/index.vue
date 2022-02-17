@@ -135,12 +135,12 @@ export default {
         });
       }
 
-      if (this.enabledAddons["TuanGou"]) {
-        links.push({
-          name: "团购列表",
-          url: "/packageA/tg/index",
-        });
-      }
+      // if (this.enabledAddons["TuanGou"]) {
+      //   links.push({
+      //     name: "团购列表",
+      //     url: "/packageA/tg/index",
+      //   });
+      // }
 
       if (this.enabledAddons["MiaoSha"]) {
         links.push({
