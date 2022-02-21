@@ -4,7 +4,6 @@
       <div class="text">
         {{ config.title }}
       </div>
-      <div class="more">更多</div>
     </div>
     <div class="body">
       <div class="tg-box">
