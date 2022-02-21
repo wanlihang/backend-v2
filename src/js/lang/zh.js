@@ -301,7 +301,7 @@ const zh = {
         create: "添加试卷",
         update: "编辑试卷",
         userpaper: "考试记录",
-        user: "订阅用户",
+        user: "订阅学员",
         stat: "分数统计",
         question: "设置习题",
         questionadd: "添加习题",
@@ -318,7 +318,7 @@ const zh = {
         create: "添加模拟试卷",
         update: "编辑模拟试卷",
         userpaper: "考试记录",
-        user: "订阅用户",
+        user: "订阅学员",
         stat: "分数统计",
         category: {
           index: "模拟试卷分类",
@@ -344,7 +344,7 @@ const zh = {
         index: "练习",
         create: "添加练习",
         update: "编辑练习",
-        user: "参与用户",
+        user: "参与学员",
         progress: "练习进度",
         category: {
           index: "练习分类",
