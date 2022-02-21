@@ -38,9 +38,14 @@
                 <upload-image
                   v-model="c.value"
                   :name="c.name"
-                  v-else-if="c.field_type === 'image'"
+                  class="w-200px"
+                  v-else-if="c.name === '网站Logo' && c.field_type === 'image'"
                 ></upload-image>
-
+                <upload-image
+                  v-model="c.value"
+                  :name="c.name"
+                  v-else-if="c.name !== '网站Logo' && c.field_type === 'image'"
+                ></upload-image>
                 <!-- 开关 -->
                 <el-switch
                   v-else-if="c.field_type === 'switch'"
