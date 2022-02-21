@@ -1,6 +1,7 @@
 <template>
   <div class="meedu-main-body">
     <div class="float-left j-b-flex mb-30">
+      <div class="d-flex"></div>
       <div class="d-flex">
         <div>
           <el-input
