@@ -214,22 +214,32 @@ export default {
         });
     },
     upgradeAddons(item) {
-      if (this.loading) {
-        return;
-      }
-      this.loading = true;
-      this.$api.System.Addons.Upgrade({
-        addons_id: item.id,
-        addons_sign: item.sign,
+      this.$confirm("确认操作？", "警告", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
       })
         .then(() => {
-          this.loading = false;
-          this.$message.success(this.$t("common.success"));
-          this.getRepository();
+          if (this.loading) {
+            return;
+          }
+          this.loading = true;
+          this.$api.System.Addons.Upgrade({
+            addons_id: item.id,
+            addons_sign: item.sign,
+          })
+            .then(() => {
+              this.loading = false;
+              this.$message.success(this.$t("common.success"));
+              this.getRepository();
+            })
+            .catch((e) => {
+              this.loading = false;
+              this.$message.error(e.message);
+            });
         })
-        .catch((e) => {
-          this.loading = false;
-          this.$message.error(e.message);
+        .catch(() => {
+          //点击删除按钮的操作
         });
     },
     addonsSwitch(item, status) {
