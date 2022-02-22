@@ -15,6 +15,7 @@ export default {
     SystemConfig: "SystemIndex",
     SystemPlayerConfig: "SystemIndex",
     SystemLiveConfig: "SystemIndex",
+    SystemMessageConfig: "SystemIndex",
     SystemCreditSignConfig: "SystemIndex",
     SystemSaveImagesConfig: "SystemIndex",
     SystemApplication: "SystemApplication",

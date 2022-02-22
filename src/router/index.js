@@ -148,6 +148,14 @@ const routes = [
     },
   },
   {
+    path: "/system/messageConfig",
+    component: () => import("@/views/system/messageConfig"),
+    name: "SystemMessageConfig",
+    meta: {
+      title: "title.system-config",
+    },
+  },
+  {
     path: "/system/saveImagesConfig",
     component: () => import("@/views/system/saveImagesConfig"),
     name: "SystemSaveImagesConfig",

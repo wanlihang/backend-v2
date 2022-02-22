@@ -256,7 +256,11 @@ export default {
         this.$router.push({
           name: "SystemLiveConfig",
         });
-      } else if (value === "图片存储") {
+      }  else if (value === "短信") {
+        this.$router.push({
+          name: "SystemMessageConfig",
+        });
+      }else if (value === "图片存储") {
         this.$router.push({
           name: "SystemSaveImagesConfig",
         });
