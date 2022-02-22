@@ -72,11 +72,12 @@
             VIP过期时间：{{ user.role_expired_at | dateFormat }}
           </div>
           <div class="panel-info-item">
-            一级邀请人：{{ user.invitor ? user.invitor.nick_name : ""
-            }}<template v-if="user.invitor"
-              >(有效期剩
-              {{ user.invite_user_expired_at | dateFormat }}天)</template
-            >
+            一级邀请人：{{ user.invitor ? user.invitor.nick_name : "" }}
+            <template v-if="user.invitor">
+              <div class="item">
+                (有效期剩 {{ user.invite_user_expired_at | dateFormat }}天)
+              </div>
+            </template>
           </div>
           <div class="panel-info-item">
             用户邀请码：{{
@@ -345,15 +346,19 @@ export default {
     column-gap: 0px;
     grid-template-columns: repeat(5, minmax(0, 1fr));
     .panel-info-item {
+      display: flex;
       width: auto;
-      height: 14px;
+      height: auto;
       font-size: 14px;
       font-weight: 400;
       color: #333333;
       line-height: 14px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      align-items: center;
+      .item {
+        flex: 1;
+        line-height: 20px;
+        margin-left: 5px;
+      }
       span {
         display: inline-block;
       }
