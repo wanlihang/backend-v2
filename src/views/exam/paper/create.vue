@@ -99,6 +99,11 @@
               >
               </el-switch>
             </div>
+            <div class="ml-10">
+              <helper-text
+                text="若试卷中包含问答题，将自动跳过问答题阅卷生成总成绩。"
+              ></helper-text>
+            </div>
           </div>
         </el-form-item>
         <el-form-item label="仅邀请" prop="enabled_invite">
