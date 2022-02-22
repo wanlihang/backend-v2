@@ -298,7 +298,7 @@ const zh = {
       paper: {
         name: "试卷",
         index: "试卷",
-        create: "添加试卷",
+        create: "新建试卷",
         update: "编辑试卷",
         userpaper: "考试记录",
         user: "订阅学员",
@@ -315,7 +315,7 @@ const zh = {
       mockpaper: {
         name: "模拟",
         index: "模拟试卷",
-        create: "添加模拟试卷",
+        create: "新建模拟试卷",
         update: "编辑模拟试卷",
         userpaper: "考试记录",
         user: "订阅学员",
@@ -342,7 +342,7 @@ const zh = {
       practice: {
         name: "练习",
         index: "练习",
-        create: "添加练习",
+        create: "新建练习",
         update: "编辑练习",
         user: "参与学员",
         progress: "练习进度",
