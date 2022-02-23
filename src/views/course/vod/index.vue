@@ -39,7 +39,7 @@
         >
         </p-button>
 
-        <option-bar text="播放器配置" value="播放器配置"></option-bar>
+        <option-bar text="录播课设置" value="播放器配置"></option-bar>
       </div>
       <div class="d-flex">
         <div>
