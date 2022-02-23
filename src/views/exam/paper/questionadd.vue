@@ -112,7 +112,7 @@ export default {
       filter: {
         in: 0,
         category_id: null,
-        tyoe: null,
+        type: null,
         level: null,
       },
       loading: false,
