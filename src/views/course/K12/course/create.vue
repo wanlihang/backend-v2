@@ -157,7 +157,7 @@
                 </el-date-picker>
               </div>
               <div class="ml-10">
-                <helper-text text="用于提醒用户什么时候开课"></helper-text>
+                <helper-text text="用于提醒学员什么时候开课"></helper-text>
               </div>
             </div>
           </el-form-item>
@@ -174,7 +174,7 @@
                 </el-date-picker>
               </div>
               <div class="ml-10">
-                <helper-text text="用于提醒用户什么时候结课"></helper-text>
+                <helper-text text="用于提醒学员什么时候结课"></helper-text>
               </div>
             </div>
           </el-form-item>
@@ -219,7 +219,7 @@
               </div>
               <div class="ml-10">
                 <helper-text
-                  text="该字段控制用户是否可以看到课程。"
+                  text="该字段控制学员是否可以看到课程。"
                 ></helper-text>
               </div>
             </div>
