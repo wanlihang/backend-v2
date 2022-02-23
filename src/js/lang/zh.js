@@ -274,7 +274,7 @@ const zh = {
         create: "添加电子书",
         update: "编辑电子书",
         comment: "电子书评论",
-        users: "订阅用户",
+        users: "学员",
         category: {
           index: "电子书分类管理",
           create: "添加电子书分类",

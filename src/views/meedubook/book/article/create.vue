@@ -60,7 +60,7 @@
             </div>
             <div class="ml-10">
               <helper-text
-                text="上架时间决定了电子书下文章的排序，时间越早越靠后。如果是未来时间，则需要等到时间到达用户才可以看到该篇文章。"
+                text="上架时间决定了电子书下文章的排序，时间越早越靠后。如果是未来时间，则需要等到时间到达学员才可以看到该篇文章。"
               ></helper-text>
             </div>
           </div>
@@ -78,7 +78,7 @@
             </div>
             <div class="ml-10">
               <helper-text
-                text="开启试看的话未购买电子书用户可直接浏览该篇文章。"
+                text="开启试看的话未购买电子书学员可直接浏览该篇文章。"
               ></helper-text>
             </div>
           </div>
@@ -95,7 +95,7 @@
               </el-switch>
             </div>
             <div class="ml-10">
-              <helper-text text="控制用户是否可以看到该篇文章。"></helper-text>
+              <helper-text text="控制学员是否可以看到该篇文章。"></helper-text>
             </div>
           </div>
         </el-form-item>
