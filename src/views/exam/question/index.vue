@@ -3,13 +3,6 @@
     <div class="float-left j-b-flex mb-30">
       <div class="d-flex">
         <p-button
-          text="批量删除"
-          p="addons.Paper.question.delete"
-          @click="destorymulti()"
-          type="danger"
-        >
-        </p-button>
-        <p-button
           text="添加试题"
           p="addons.Paper.question.store"
           @click="
@@ -31,7 +24,21 @@
           type="primary"
         >
         </p-button>
-        <option-bar text="试题库配置" value="考试练习"></option-bar>
+        <p-button
+          text="分类管理"
+          p="addons.Paper.question_category.list"
+          @click="$router.push({ name: 'ExamQuestionCategories' })"
+          type="primary"
+        >
+        </p-button>
+        <p-button
+          text="批量删除"
+          p="addons.Paper.question.delete"
+          @click="destorymulti()"
+          type="danger"
+        >
+        </p-button>
+        <!--<option-bar text="试题库配置" value="考试练习"></option-bar>-->
       </div>
       <div class="d-flex">
         <div>

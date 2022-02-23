@@ -69,19 +69,7 @@
           <el-table-column fixed="right" label="操作" width="140">
             <template slot-scope="scope">
               <p-link
-                text="编辑"
-                p="addons.Paper.mock_paper.update"
-                type="primary"
-                @click="
-                  $router.push({
-                    name: 'ExamMockpaperUpdate',
-                    query: { id: scope.row.id },
-                  })
-                "
-              ></p-link>
-              <p-link
                 text="学员"
-                class="ml-5"
                 p="addons.Paper.mock_paper.users"
                 type="primary"
                 @click="
@@ -91,23 +79,36 @@
                   })
                 "
               ></p-link>
+              <p-link
+                text="统计"
+                class="ml-5"
+                p="addons.Paper.mock_paper.statistics"
+                type="primary"
+                @click="
+                  $router.push({
+                    name: 'ExamMockpaperStat',
+                    query: { id: scope.row.id },
+                  })
+                "
+              >
+              </p-link>
               <el-dropdown>
                 <el-link type="primary" class="el-dropdown-link ml-5">
                   更多<i class="el-icon-arrow-down el-icon--right"></i>
                 </el-link>
                 <el-dropdown-menu slot="dropdown">
                   <p-dropdown-item
-                    text="统计"
-                    p="addons.Paper.mock_paper.statistics"
+                    text="编辑"
+                    p="addons.Paper.mock_paper.update"
                     type="primary"
                     @click="
                       $router.push({
-                        name: 'ExamMockpaperStat',
+                        name: 'ExamMockpaperUpdate',
                         query: { id: scope.row.id },
                       })
                     "
-                  >
-                  </p-dropdown-item>
+                  ></p-dropdown-item>
+
                   <p-dropdown-item
                     text="考试记录"
                     p="addons.Paper.mock_paper.records"

@@ -1,15 +1,8 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="章节试题"></back-bar>
+    <back-bar class="mb-30" title="章节组卷"></back-bar>
     <div class="float-left j-b-flex mb-30">
       <div class="d-flex">
-        <p-button
-          text="批量删除"
-          p="addons.Paper.practice_chapter.questions.delete"
-          @click="destorymulti()"
-          type="danger"
-        >
-        </p-button>
         <p-button
           text="添加"
           p="addons.Paper.practice_chapter.questions.store"
@@ -20,6 +13,13 @@
             })
           "
           type="primary"
+        >
+        </p-button>
+        <p-button
+          text="批量删除"
+          p="addons.Paper.practice_chapter.questions.delete"
+          @click="destorymulti()"
+          type="danger"
         >
         </p-button>
       </div>

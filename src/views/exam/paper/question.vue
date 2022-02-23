@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="设置习题"></back-bar>
+    <back-bar class="mb-30" title="组卷"></back-bar>
     <div class="float-left mb-30">
       <p-button
         text="添加试题"

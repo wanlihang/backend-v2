@@ -303,7 +303,7 @@ const zh = {
         userpaper: "考试记录",
         user: "订阅学员",
         stat: "分数统计",
-        question: "设置习题",
+        question: "组卷",
         questionadd: "添加习题",
         marking: "阅卷",
         category: {
@@ -356,8 +356,8 @@ const zh = {
           create: "添加练习章节",
           update: "编辑练习章节",
           question: {
-            index: "章节试题",
-            create: "添加章节试题",
+            index: "章节组卷",
+            create: "添加章节组卷",
           },
         },
       },

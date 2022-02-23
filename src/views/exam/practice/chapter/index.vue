@@ -3,13 +3,6 @@
     <back-bar class="mb-30" title="练习章节"></back-bar>
     <div class="float-left mb-30">
       <p-button
-        text="批量删除"
-        p="addons.Paper.practice_chapter.delete"
-        @click="destorymulti()"
-        type="danger"
-      >
-      </p-button>
-      <p-button
         text="添加"
         p="addons.Paper.practice_chapter.store"
         @click="
@@ -19,6 +12,13 @@
           })
         "
         type="primary"
+      >
+      </p-button>
+      <p-button
+        text="批量删除"
+        p="addons.Paper.practice_chapter.delete"
+        @click="destorymulti()"
+        type="danger"
       >
       </p-button>
     </div>
@@ -43,25 +43,25 @@
           <el-table-column fixed="right" label="操作" width="100">
             <template slot-scope="scope">
               <p-link
+                text="组卷"
+                p="addons.Paper.practice_chapter.questions"
+                type="primary"
+                @click="
+                  $router.push({
+                    name: 'PracticeChapterQuestion',
+                    query: { id: scope.row.id },
+                  })
+                "
+              ></p-link>
+              <p-link
                 text="编辑"
+                class="ml-5"
                 p="addons.Paper.practice_chapter.update"
                 type="primary"
                 @click="
                   $router.push({
                     name: 'PracticeChapterUpdate',
                     query: { id: scope.row.id, pid: id },
-                  })
-                "
-              ></p-link>
-              <p-link
-                text="试题"
-                p="addons.Paper.practice_chapter.questions"
-                type="primary"
-                class="ml-5"
-                @click="
-                  $router.push({
-                    name: 'PracticeChapterQuestion',
-                    query: { id: scope.row.id },
                   })
                 "
               ></p-link>
