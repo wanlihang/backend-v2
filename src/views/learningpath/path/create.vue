@@ -94,7 +94,7 @@
               </el-switch>
             </div>
             <div class="ml-10">
-              <helper-text text="该字段控制用户能否看到该路径"></helper-text>
+              <helper-text text="该字段控制学员能否看到该路径"></helper-text>
             </div>
           </div>
         </el-form-item>
