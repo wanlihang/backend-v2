@@ -8,7 +8,7 @@
             <el-input
               v-model="filter.user_id"
               class="w-200px"
-              placeholder="用户ID"
+              placeholder="学员ID"
             ></el-input>
           </div>
           <div class="ml-10">
@@ -59,9 +59,9 @@
             <el-table-column type="selection" width="55"></el-table-column>
             <el-table-column prop="id" label="ID" width="120">
             </el-table-column>
-            <el-table-column prop="user_id" label="用户ID" width="120">
+            <el-table-column prop="user_id" label="学员ID" width="120">
             </el-table-column>
-            <el-table-column label="用户" width="300">
+            <el-table-column label="学员" width="300">
               <template slot-scope="scope">
                 <div class="d-flex" v-if="scope.row.user">
                   <div>
@@ -71,7 +71,7 @@
                     {{ scope.row.user.nick_name }}
                   </div>
                 </div>
-                <span v-else class="c-red">用户不存在</span>
+                <span v-else class="c-red">学员不存在</span>
               </template>
             </el-table-column>
             <el-table-column prop="topic.title" label="图文"> </el-table-column>

@@ -182,7 +182,7 @@ const zh = {
       index: "图文列表",
       create: "添加图文",
       update: "编辑图文",
-      order: "图文订阅用户",
+      order: "图文学员",
       comment: "图文文章评论",
       category: {
         index: "图文分类管理",

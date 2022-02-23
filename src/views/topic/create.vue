@@ -98,7 +98,7 @@
               </div>
               <div class="ml-10">
                 <helper-text
-                  text="开启VIP免费的话，购买VIP会员的用户可无需购买直接观看文章。"
+                  text="开启VIP免费的话，购买VIP会员的学员可无需购买直接观看文章。"
                 ></helper-text>
               </div>
             </div>
@@ -151,7 +151,7 @@
                 </el-switch>
               </div>
               <div class="ml-10">
-                <helper-text text="控制文章是否可以被用户看到。"></helper-text>
+                <helper-text text="控制文章是否可以被学员看到。"></helper-text>
               </div>
             </div>
           </el-form-item>
@@ -170,7 +170,7 @@
               </div>
               <div class="ml-10">
                 <helper-text
-                  text="控制文章在用户端的显示顺序，时间越早越靠后"
+                  text="控制文章在学员端的显示顺序，时间越早越靠后"
                 ></helper-text>
               </div>
             </div>

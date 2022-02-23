@@ -123,19 +123,7 @@
           <el-table-column fixed="right" label="操作" width="120">
             <template slot-scope="scope">
               <p-link
-                text="编辑"
-                type="primary"
-                @click="
-                  $router.push({
-                    name: 'TopicUpdate',
-                    query: { id: scope.row.id },
-                  })
-                "
-                p="addons.meedu_topics.topic.update"
-              ></p-link>
-              <p-link
-                text="用户"
-                class="ml-5"
+                text="学员"
                 type="primary"
                 @click="
                   $router.push({
@@ -144,6 +132,18 @@
                   })
                 "
                 p="addons.meedu_topics.orders"
+              ></p-link>
+              <p-link
+                text="编辑"
+                type="primary"
+                class="ml-5"
+                @click="
+                  $router.push({
+                    name: 'TopicUpdate',
+                    query: { id: scope.row.id },
+                  })
+                "
+                p="addons.meedu_topics.topic.update"
               ></p-link>
               <p-link
                 text="删除"
