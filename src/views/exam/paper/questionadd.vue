@@ -3,7 +3,7 @@
     <back-bar class="mb-30" title="添加试题"></back-bar>
     <div class="float-left j-b-flex mb-30">
       <div class="d-flex">
-        <el-button @click="addmulti()" type="danger"> 批量添加 </el-button>
+        <el-button @click="addmulti()" type="primary"> 批量添加 </el-button>
       </div>
       <div class="d-flex">
         <div>

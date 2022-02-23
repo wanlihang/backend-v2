@@ -2,7 +2,7 @@
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="添加章节组卷"></back-bar>
     <div class="float-left mb-30">
-      <el-button @click="addmulti()" type="danger"> 批量添加 </el-button>
+      <el-button @click="addmulti()" type="primary"> 批量添加 </el-button>
     </div>
     <div class="float-left">
       <div class="float-left d-flex">
