@@ -1,42 +1,42 @@
 <template>
   <div class="meedu-main-body">
-    <div class="float-left mb-30">
-      <p-button
-        text="添加试题"
-        p="addons.Paper.question.store"
-        @click="
-          $router.push({
-            name: 'ExamQuestionCreate',
-          })
-        "
-        type="primary"
-      >
-      </p-button>
-      <p-button
-        text="批量导入"
-        p="addons.Paper.question.import.csv"
-        @click="
-          $router.push({
-            name: 'ExamQuestionImport',
-          })
-        "
-        type="primary"
-      >
-      </p-button>
-      <p-button
-        text="批量删除"
-        p="addons.Paper.question.delete"
-        @click="destorymulti()"
-        type="danger"
-      >
-      </p-button>
-      <option-bar text="试题库配置" value="考试练习"></option-bar>
-    </div>
-    <div class="float-left">
-      <div class="float-left d-flex">
+    <div class="float-left j-b-flex mb-30">
+      <div class="d-flex">
+        <p-button
+          text="批量删除"
+          p="addons.Paper.question.delete"
+          @click="destorymulti()"
+          type="danger"
+        >
+        </p-button>
+        <p-button
+          text="添加试题"
+          p="addons.Paper.question.store"
+          @click="
+            $router.push({
+              name: 'ExamQuestionCreate',
+            })
+          "
+          type="primary"
+        >
+        </p-button>
+        <p-button
+          text="批量导入"
+          p="addons.Paper.question.import.csv"
+          @click="
+            $router.push({
+              name: 'ExamQuestionImport',
+            })
+          "
+          type="primary"
+        >
+        </p-button>
+        <option-bar text="试题库配置" value="考试练习"></option-bar>
+      </div>
+      <div class="d-flex">
         <div>
           <el-select
-            class="w-200px"
+            class="w-150px"
             placeholder="分类"
             v-model="filter.category_id"
           >
@@ -49,9 +49,8 @@
             </el-option>
           </el-select>
         </div>
-
         <div class="ml-10">
-          <el-select class="w-200px" placeholder="类型" v-model="filter.type">
+          <el-select class="w-150px" placeholder="类型" v-model="filter.type">
             <el-option
               v-for="(item, index) in filterData.types"
               :key="index"
@@ -61,30 +60,26 @@
             </el-option>
           </el-select>
         </div>
-
         <div class="ml-10">
-          <el-select class="w-200px" placeholder="难度" v-model="filter.level">
-            <el-option
-              v-for="(item, index) in filterData.levels"
-              :key="index"
-              :label="item.name"
-              :value="item.id"
-            >
-            </el-option>
-          </el-select>
-        </div>
-
-        <div class="ml-10">
-          <el-button @click="firstPageLoad()" type="primary" plain>
-            筛选
-          </el-button>
           <el-button @click="paginationReset()">清空</el-button>
+          <el-button @click="firstPageLoad()" type="primary"> 筛选 </el-button>
+        </div>
+        <div class="drawerMore d-flex ml-10" @click="drawer = true">
+          <template v-if="showStatus">
+            <img src="../../../assets/img/icon-filter-h.png" />
+            <span class="act">已选</span>
+          </template>
+          <template v-else>
+            <img src="../../../assets/img/icon-filter.png" />
+            <span>更多</span>
+          </template>
         </div>
       </div>
     </div>
-    <div class="float-left mt-30" v-loading="loading">
+    <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
           :data="results"
           @selection-change="handleSelectionChange"
           class="float-left"
@@ -133,6 +128,54 @@
         </el-pagination>
       </div>
     </div>
+    <el-drawer :size="260" :visible.sync="drawer" :with-header="false">
+      <div class="n-padding-box">
+        <div class="tit flex">更多筛选</div>
+        <div class="j-flex">
+          <el-select
+            class="w-200px"
+            placeholder="分类"
+            v-model="filter.category_id"
+          >
+            <el-option
+              v-for="(item, index) in filterData.categories"
+              :key="index"
+              :label="item.name"
+              :value="item.id"
+            >
+            </el-option>
+          </el-select>
+        </div>
+        <div class="j-flex mt-20">
+          <el-select class="w-200px" placeholder="类型" v-model="filter.type">
+            <el-option
+              v-for="(item, index) in filterData.types"
+              :key="index"
+              :label="item.name"
+              :value="item.id"
+            >
+            </el-option>
+          </el-select>
+        </div>
+
+        <div class="j-flex mt-20">
+          <el-select class="w-200px" placeholder="难度" v-model="filter.level">
+            <el-option
+              v-for="(item, index) in filterData.levels"
+              :key="index"
+              :label="item.name"
+              :value="item.id"
+            >
+            </el-option>
+          </el-select>
+        </div>
+
+        <div class="j-b-flex mt-30">
+          <el-button @click="paginationReset()">清空</el-button>
+          <el-button @click="firstPageLoad()" type="primary"> 筛选 </el-button>
+        </div>
+      </div>
+    </el-drawer>
   </div>
 </template>
 
@@ -166,6 +209,8 @@ export default {
         levels: [],
         types: [],
       },
+      drawer: false,
+      showStatus: false,
     };
   },
   activated() {
@@ -176,10 +221,34 @@ export default {
     this.$utils.scrollTopRecord(this.pageName);
     next();
   },
+  watch: {
+    "filter.level"(val) {
+      if (val) {
+        this.showStatus = true;
+      } else {
+        this.showStatus = false;
+      }
+    },
+    "filter.category_id"(val) {
+      if (val) {
+        this.showStatus = true;
+      } else {
+        this.showStatus = false;
+      }
+    },
+    "filter.type"(val) {
+      if (val) {
+        this.showStatus = true;
+      } else {
+        this.showStatus = false;
+      }
+    },
+  },
   methods: {
     firstPageLoad() {
       this.pagination.page = 1;
       this.getResults();
+      this.drawer = false;
     },
     paginationReset() {
       this.pagination.page = 1;
@@ -187,6 +256,7 @@ export default {
       this.filter.category_id = null;
       this.filter.type = null;
       this.getResults();
+      this.drawer = false;
     },
     paginationSizeChange(size) {
       this.pagination.size = size;

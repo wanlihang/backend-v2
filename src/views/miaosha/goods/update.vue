@@ -87,21 +87,6 @@
             </div>
           </div>
         </el-form-item>
-
-        <el-form-item prop="page_title" label="PC秒杀页面标题">
-          <div class="d-flex">
-            <div>
-              <el-input
-                class="w-500px"
-                v-model="course.page_title"
-                placeholder="PC秒杀页面标题"
-              ></el-input>
-            </div>
-            <div class="ml-10">
-              <helper-text text="PC秒杀页面标题"></helper-text>
-            </div>
-          </div>
-        </el-form-item>
       </el-form>
 
       <div class="bottom-menus">
@@ -206,7 +191,7 @@ export default {
       },
       expireTimeOption: {
         disabledDate(date) {
-          return date.getTime() < Date.now();
+          return date.getTime() < Date.now() - 24 * 60 * 60 * 1000;
         },
       },
       loading: false,

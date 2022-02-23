@@ -10,7 +10,11 @@
       <option-bar text="公众号配置" value="微信公众号"></option-bar>
     </div>
     <div class="float-left" v-loading="loading">
-      <el-table :data="messages" class="float-left">
+      <el-table
+        :header-cell-style="{ background: '#f1f2f9' }"
+        :data="messages"
+        class="float-left"
+      >
         <el-table-column prop="id" label="ID" width="120"> </el-table-column>
         <el-table-column label="匹配规则" width="500"
           ><template slot-scope="scope">

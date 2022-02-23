@@ -1,90 +1,84 @@
 <template>
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="图文订阅用户"></back-bar>
-
-    <div class="float-left">
-      <div class="float-left">
-        <div class="float-left d-flex">
-          <div>
-            <p-button
-              text="删除用户"
-              @click="delUser"
-              p="addons.meedu_topics.orders.user.del"
-            ></p-button>
-          </div>
-          <div class="ml-10">
-            <p-button
-              text="添加用户"
-              p="addons.meedu_topics.orders.user.add"
-              @click="showUserAddWin = true"
-            ></p-button>
-          </div>
-          <div class="ml-10">
-            <el-input
-              v-model="filter.user_id"
-              class="w-200px"
-              placeholder="用户ID"
-            ></el-input>
-          </div>
-          <div class="ml-10">
-            <el-button @click="firstPageLoad" type="primary" plain
-              >筛选</el-button
-            >
-            <el-button @click="paginationReset">清空</el-button>
-          </div>
+    <div class="float-left j-b-flex mb-30">
+      <div class="d-flex">
+        <p-button
+          type="danger"
+          text="删除用户"
+          @click="delUser"
+          p="addons.meedu_topics.orders.user.del"
+        ></p-button>
+        <p-button
+          text="添加用户"
+          type="primary"
+          p="addons.meedu_topics.orders.user.add"
+          @click="showUserAddWin = true"
+        ></p-button>
+      </div>
+      <div class="d-flex">
+        <div>
+          <el-input
+            v-model="filter.user_id"
+            class="w-150px"
+            placeholder="用户ID"
+          ></el-input>
+        </div>
+        <div class="ml-10">
+          <el-button @click="paginationReset">清空</el-button>
+          <el-button @click="firstPageLoad" type="primary">筛选</el-button>
         </div>
       </div>
-
-      <div class="float-left mt-30" v-loading="loading">
-        <div class="float-left">
-          <el-table
-            :data="list"
-            @selection-change="handleSelectionChange"
-            class="float-left"
-          >
-            <el-table-column type="selection" width="55"></el-table-column>
-            <el-table-column prop="id" label="ID" width="120">
-            </el-table-column>
-            <el-table-column prop="user_id" label="用户ID" width="120">
-            </el-table-column>
-            <el-table-column label="用户" width="300">
-              <template slot-scope="scope">
-                <div class="d-flex" v-if="scope.row.user">
-                  <div>
-                    <img :src="scope.row.user.avatar" width="40" height="40" />
-                  </div>
-                  <div class="ml-10">
-                    {{ scope.row.user.nick_name }}
-                  </div>
+    </div>
+    <div class="float-left" v-loading="loading">
+      <div class="float-left">
+        <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
+          :data="list"
+          @selection-change="handleSelectionChange"
+          class="float-left"
+        >
+          <el-table-column type="selection" width="55"></el-table-column>
+          <el-table-column prop="id" label="ID" width="120"> </el-table-column>
+          <el-table-column prop="user_id" label="用户ID" width="120">
+          </el-table-column>
+          <el-table-column label="用户" width="300">
+            <template slot-scope="scope">
+              <div class="d-flex" v-if="scope.row.user">
+                <div>
+                  <img :src="scope.row.user.avatar" width="40" height="40" />
                 </div>
-                <span v-else class="c-red">用户不存在</span>
-              </template>
-            </el-table-column>
-            <el-table-column label="价格" width="150">
-              <template slot-scope="scope">
-                <span>{{ scope.row.charge }}元</span>
-              </template>
-            </el-table-column>
-            <el-table-column label="时间">
-              <template slot-scope="scope">{{
-                scope.row.updated_at | dateFormat
-              }}</template>
-            </el-table-column>
-          </el-table>
-        </div>
+                <div class="ml-10">
+                  {{ scope.row.user.nick_name }}
+                </div>
+              </div>
+              <span v-else class="c-red">用户不存在</span>
+            </template>
+          </el-table-column>
+          <el-table-column label="价格" width="150">
+            <template slot-scope="scope">
+              <span>{{ scope.row.charge }}元</span>
+            </template>
+          </el-table-column>
+          <el-table-column label="时间">
+            <template slot-scope="scope">{{
+              scope.row.updated_at | dateFormat
+            }}</template>
+          </el-table-column>
+        </el-table>
+      </div>
 
-        <div class="float-left mt-30 text-center">
-          <el-pagination
-            @size-change="paginationSizeChange"
-            @current-change="paginationPageChange"
-            :current-page="pagination.page"
-            :page-sizes="[10, 20, 50, 100]"
-            :page-size="pagination.size"
-            layout="total, sizes, prev, pager, next, jumper"
-            :total="total"
-          >
-          </el-pagination>
-        </div>
+      <div class="float-left mt-30 text-center">
+        <el-pagination
+          @size-change="paginationSizeChange"
+          @current-change="paginationPageChange"
+          :current-page="pagination.page"
+          :page-sizes="[10, 20, 50, 100]"
+          :page-size="pagination.size"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="total"
+        >
+        </el-pagination>
       </div>
     </div>
 

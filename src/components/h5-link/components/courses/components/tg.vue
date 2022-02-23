@@ -101,7 +101,15 @@ export default {
     },
     tableItemChoice(row) {
       if (row) {
-        this.link = "/pages/tg/show?id=" + row.id;
+        if (row.goods_type === "course") {
+          this.link = "/pages/course/show?id=" + row.id;
+        } else if (row.goods_type === "live") {
+          this.link = "/packageA/live/show?id=" + row.id;
+        } else if (row.goods_type === "book") {
+          this.link = "/packageA/book/show?id=" + row.id;
+        } else if (row.goods_type === "learnPath") {
+          this.link = "/packageA/learnPath/show?id=" + row.id;
+        }
       }
     },
     getCourse() {

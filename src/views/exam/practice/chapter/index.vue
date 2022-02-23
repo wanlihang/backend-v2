@@ -3,6 +3,13 @@
     <back-bar class="mb-30" title="练习章节"></back-bar>
     <div class="float-left mb-30">
       <p-button
+        text="批量删除"
+        p="addons.Paper.practice_chapter.delete"
+        @click="destorymulti()"
+        type="danger"
+      >
+      </p-button>
+      <p-button
         text="添加"
         p="addons.Paper.practice_chapter.store"
         @click="
@@ -14,17 +21,11 @@
         type="primary"
       >
       </p-button>
-      <p-button
-        text="批量删除"
-        p="addons.Paper.practice_chapter.delete"
-        @click="destorymulti()"
-        type="danger"
-      >
-      </p-button>
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
           :data="results"
           @selection-change="handleSelectionChange"
           class="float-left"
@@ -39,7 +40,7 @@
               <span>{{ scope.row.question_count }}个</span>
             </template>
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="150">
+          <el-table-column fixed="right" label="操作" width="100">
             <template slot-scope="scope">
               <p-link
                 text="编辑"

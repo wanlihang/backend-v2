@@ -1,24 +1,29 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="订阅用户"></back-bar>
+    <back-bar class="mb-30" title="订阅学员"></back-bar>
     <div class="float-left mb-30">
       <p-button
-        text="添加用户"
+        text="添加学员"
         p="addons.Paper.mock_paper.addUser"
         @click="showUserAddWin = true"
+        type="primary"
       ></p-button>
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
-        <el-table :data="results" class="float-left">
-          <el-table-column prop="user_id" label="用户ID" width="80">
+        <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
+          :data="results"
+          class="float-left"
+        >
+          <el-table-column prop="user_id" label="学员ID" width="80">
           </el-table-column>
           <el-table-column label="手机号" width="150">
             <template slot-scope="scope">
               <span>{{ scope.row.user.mobile }}</span>
             </template>
           </el-table-column>
-          <el-table-column label="用户">
+          <el-table-column label="学员">
             <template slot-scope="scope">
               <div class="d-flex" v-if="scope.row.user">
                 <div>
@@ -26,7 +31,7 @@
                 </div>
                 <div class="ml-10">{{ scope.row.user.nick_name }}</div>
               </div>
-              <span class="c-red" v-else>用户不存在</span>
+              <span class="c-red" v-else>学员不存在</span>
             </template>
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="200">

@@ -1,41 +1,41 @@
 <template>
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="兑换码"></back-bar>
-    <div class="float-left mb-30">
-      <p-button
-        text="批量删除"
-        @click="destorymulti()"
-        type="danger"
-        p="addons.CodeExchanger.codes.delete.multi"
-      >
-      </p-button>
-      <p-button
-        text="生成10个"
-        @click="getnum(10)"
-        type="primary"
-        p="addons.CodeExchanger.codes.generate"
-      >
-      </p-button>
-      <p-button
-        text="生成50个"
-        @click="getnum(50)"
-        type="primary"
-        p="addons.CodeExchanger.codes.generate"
-      >
-      </p-button>
-      <p-button
-        text="导出未使用兑换码"
-        @click="importcode()"
-        type="primary"
-        p="addons.CodeExchanger.codes.export"
-      >
-      </p-button>
-    </div>
-    <div class="float-left">
-      <div class="float-left d-flex">
+    <div class="float-left j-b-flex mb-30">
+      <div class="d-flex">
+        <p-button
+          text="批量删除"
+          @click="destorymulti()"
+          type="danger"
+          p="addons.CodeExchanger.codes.delete.multi"
+        >
+        </p-button>
+        <p-button
+          text="生成10个"
+          @click="getnum(10)"
+          type="primary"
+          p="addons.CodeExchanger.codes.generate"
+        >
+        </p-button>
+        <p-button
+          text="生成50个"
+          @click="getnum(50)"
+          type="primary"
+          p="addons.CodeExchanger.codes.generate"
+        >
+        </p-button>
+        <p-button
+          text="导出未使用兑换码"
+          @click="importcode()"
+          type="primary"
+          p="addons.CodeExchanger.codes.export"
+        >
+        </p-button>
+      </div>
+      <div class="d-flex">
         <div>
           <el-input
-            class="w-200px"
+            class="w-150px"
             v-model="filter.code"
             placeholder="兑换码"
           ></el-input>
@@ -43,23 +43,22 @@
 
         <div class="ml-10">
           <el-input
-            class="w-200px"
+            class="w-150px"
             v-model="filter.user_id"
             placeholder="用户ID"
           ></el-input>
         </div>
 
         <div class="ml-10">
-          <el-button @click="firstPageLoad" type="primary" plain
-            >筛选</el-button
-          >
           <el-button @click="paginationReset">清空</el-button>
+          <el-button @click="firstPageLoad" type="primary">筛选</el-button>
         </div>
       </div>
     </div>
-    <div class="float-left mt-30" v-loading="loading">
+    <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
           :data="results"
           @selection-change="handleSelectionChange"
           class="float-left"

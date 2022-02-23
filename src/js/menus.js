@@ -75,6 +75,11 @@ export default [
     icon: "icon-icon-exam-n",
     children: [
       {
+        name: "title.exam.question.name",
+        key: "ExamQuestion",
+        permission: "addons.Paper.question.list",
+      },
+      {
         name: "title.exam.paper.index",
         key: "ExamPaper",
         permission: "addons.Paper.paper.list",
@@ -88,11 +93,6 @@ export default [
         name: "title.exam.practice.index",
         key: "ExamPractice",
         permission: "addons.Paper.practice.list",
-      },
-      {
-        name: "title.exam.question.name",
-        key: "ExamQuestion",
-        permission: "addons.Paper.question.list",
       },
     ],
   },

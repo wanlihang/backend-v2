@@ -80,6 +80,7 @@ const zh = {
         order: "团购订单",
         refund: "团购退款订单",
         tuanorder: "团列表",
+        detail: "团列表详情",
       },
     },
     learningpath: {
@@ -297,10 +298,10 @@ const zh = {
       paper: {
         name: "试卷",
         index: "试卷",
-        create: "添加试卷",
+        create: "新建试卷",
         update: "编辑试卷",
         userpaper: "考试记录",
-        user: "订阅用户",
+        user: "订阅学员",
         stat: "分数统计",
         question: "设置习题",
         questionadd: "添加习题",
@@ -314,10 +315,10 @@ const zh = {
       mockpaper: {
         name: "模拟",
         index: "模拟试卷",
-        create: "添加模拟试卷",
+        create: "新建模拟试卷",
         update: "编辑模拟试卷",
         userpaper: "考试记录",
-        user: "订阅用户",
+        user: "订阅学员",
         stat: "分数统计",
         category: {
           index: "模拟试卷分类",
@@ -341,9 +342,9 @@ const zh = {
       practice: {
         name: "练习",
         index: "练习",
-        create: "添加练习",
+        create: "新建练习",
         update: "编辑练习",
-        user: "参与用户",
+        user: "参与学员",
         progress: "练习进度",
         category: {
           index: "练习分类",

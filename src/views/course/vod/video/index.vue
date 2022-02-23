@@ -20,10 +20,28 @@
         type="primary"
       >
       </p-button>
+      <p-button
+        v-if="enabledAddons['AliyunHls']"
+        text="阿里云视频加密"
+        p="video.aliyun_hls.list"
+        @click="$router.push({ name: 'CourseVodVideoAliyunHls' })"
+        type="primary"
+      >
+      </p-button>
+
+      <p-button
+        v-if="enabledAddons['TencentCloudHls']"
+        text="腾讯云视频加密"
+        p="addons.TencentCloudHls.videos"
+        @click="$router.push({ name: 'CourseVodVideoTencentHls' })"
+        type="primary"
+      >
+      </p-button>
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
           :data="videos"
           class="float-left"
           @sort-change="sortChange"
@@ -122,6 +140,7 @@
   </div>
 </template>
 <script>
+import { mapState } from "vuex";
 import DurationText from "@/components/duration-text";
 
 export default {
@@ -145,6 +164,9 @@ export default {
         ids: [],
       },
     };
+  },
+  computed: {
+    ...mapState(["enabledAddons"]),
   },
   watch: {
     "$route.query.course_id"() {
@@ -190,7 +212,7 @@ export default {
       }
       this.loading = true;
       let params = {};
-      this.pagination.cid=this.$route.query.course_id;
+      this.pagination.cid = this.$route.query.course_id;
       Object.assign(params, this.pagination, {
         cid: this.$route.query.course_id,
       });

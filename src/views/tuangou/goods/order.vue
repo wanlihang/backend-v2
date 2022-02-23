@@ -1,54 +1,58 @@
 <template>
   <div class="meedu-main-body">
-    <div class="float-left mb-30 d-flex">
-      <div>
-        <el-input
-          placeholder="关键字"
-          class="w-200px"
-          v-model="filter.keywords"
-        ></el-input>
-      </div>
-      <div class="ml-10">
-        <el-input
-          placeholder="用户ID"
-          class="w-200px"
-          v-model="filter.user_id"
-        ></el-input>
-      </div>
-      <div class="ml-10">
-        <el-select class="w-200px" v-model="filter.status">
-          <el-option
-            v-for="(item, index) in filterData.status"
-            :key="index"
-            :label="item.name"
-            :value="item.id"
+    <div class="float-left j-b-flex mb-30">
+      <div class="d-flex">
+        <div>
+          <el-input
+            placeholder="关键字"
+            class="w-150px"
+            v-model="filter.keywords"
+          ></el-input>
+        </div>
+        <div class="ml-10">
+          <el-input
+            placeholder="用户ID"
+            class="w-150px"
+            v-model="filter.user_id"
+          ></el-input>
+        </div>
+        <div class="ml-10">
+          <el-select class="w-150px" v-model="filter.status">
+            <el-option
+              v-for="(item, index) in filterData.status"
+              :key="index"
+              :label="item.name"
+              :value="item.id"
+            >
+            </el-option>
+          </el-select>
+        </div>
+        <div class="ml-10">
+          <el-date-picker
+            :picker-options="pickerOptions"
+            v-model="filter.created_at"
+            type="daterange"
+            align="right"
+            unlink-panels
+            range-separator="至"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
           >
-          </el-option>
-        </el-select>
-      </div>
-      <div class="ml-10">
-        <el-date-picker
-          v-model="filter.created_at"
-          type="daterange"
-          align="right"
-          unlink-panels
-          range-separator="至"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
-        >
-        </el-date-picker>
-      </div>
-      <div class="ml-10">
-        <el-button @click="firstPageLoad()" type="primary" plain
-          >筛选</el-button
-        >
-        <el-button @click="paginationReset()">清空</el-button>
+          </el-date-picker>
+        </div>
+        <div class="ml-10">
+          <el-button @click="paginationReset()">清空</el-button>
+          <el-button @click="firstPageLoad()" type="primary">筛选</el-button>
+        </div>
       </div>
     </div>
-
     <div class="float-left" v-loading="loading">
       <div class="float-left">
-        <el-table :data="results" class="float-left">
+        <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
+          :data="results"
+          class="float-left"
+        >
           <el-table-column prop="id" label="ID" width="100"> </el-table-column>
           <el-table-column label="商品ID">
             <template slot-scope="scope">
@@ -161,6 +165,11 @@ export default {
             name: "已支付",
           },
         ],
+      },
+      pickerOptions: {
+        disabledDate(time) {
+          return time.getTime() > Date.now();
+        },
       },
     };
   },

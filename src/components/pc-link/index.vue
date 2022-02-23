@@ -120,12 +120,12 @@ export default {
         });
         links.push({
           name: "在线考试首页",
-          url: "/exam/paperss",
+          url: "/exam/papers",
           active: "papers,paper.show",
         });
         links.push({
           name: "模拟考试首页",
-          url: "/exam/mockpapers",
+          url: "/exam/mockpaper",
           active: "exam.mock_paper,exam.mock_paper.show",
         });
         links.push({

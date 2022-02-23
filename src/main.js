@@ -26,12 +26,12 @@ import HelperText from "@/components/helper-text";
 import OptionBar from "@/components/option-bar";
 import PLink from "@/components/permission/link";
 import PButton from "@/components/permission/btn";
+import PDropdownItem from "@/components/permission/dropdown-item";
 
 Vue.use(ElementUI);
 
 // 组件注册
 Vue.use(mavonEditor);
-Vue.use(htmlToPdf);
 Vue.prototype.moment = moment;
 Vue.filter("dateFormat", function (dateStr, pattern = "YYYY-MM-DD HH:mm") {
   if (!dateStr) {
@@ -46,12 +46,14 @@ Vue.component("HelperText", HelperText);
 Vue.component("OptionBar", OptionBar);
 Vue.component("PLink", PLink);
 Vue.component("PButton", PButton);
+Vue.component("PDropdownItem", PDropdownItem);
 
 Vue.config.productionTip = false;
 
 // api挂载
 Vue.prototype.$api = api;
 Vue.prototype.$utils = utils;
+Vue.prototype.$htmlToPdf = htmlToPdf;
 
 utils.copyright();
 

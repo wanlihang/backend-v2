@@ -1,17 +1,17 @@
 <template>
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="考试记录"></back-bar>
-    <div class="float-left mb-30">
-      <div class="float-left d-flex">
+    <div class="float-left j-b-flex mb-30">
+      <div class="d-flex">
         <div>
           <el-input
-            class="w-200px"
+            class="w-150px"
             v-model="filter.user_id"
-            placeholder="用户ID"
+            placeholder="学员ID"
           ></el-input>
         </div>
         <div class="ml-10">
-          <el-select class="w-200px" placeholder="状态" v-model="filter.status">
+          <el-select class="w-150px" placeholder="状态" v-model="filter.status">
             <el-option
               v-for="(item, index) in filterData.statusMap"
               :key="index"
@@ -23,6 +23,7 @@
         </div>
         <div class="ml-10">
           <el-date-picker
+            :picker-options="pickerOptions"
             v-model="filter.created_at"
             type="daterange"
             align="right"
@@ -35,6 +36,7 @@
         </div>
         <div class="ml-10">
           <el-date-picker
+            :picker-options="pickerOptions"
             v-model="filter.submit_at"
             type="daterange"
             align="right"
@@ -45,17 +47,16 @@
           >
           </el-date-picker>
         </div>
-      </div>
-      <div class="float-left mt-15">
-        <el-button @click="firstPageLoad()" type="primary" plain>
-          筛选
-        </el-button>
-        <el-button @click="paginationReset()">清空</el-button>
+        <div class="ml-10">
+          <el-button @click="paginationReset()">清空</el-button>
+          <el-button @click="firstPageLoad()" type="primary"> 筛选 </el-button>
+        </div>
       </div>
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
           :data="list"
           @sort-change="sortChange"
           :default-sort="{ prop: 'id', order: 'descending' }"
@@ -63,9 +64,9 @@
         >
           <el-table-column prop="id" sortable label="ID" width="120">
           </el-table-column>
-          <el-table-column prop="user_id" sortable label="用户ID" width="120">
+          <el-table-column prop="user_id" sortable label="学员ID" width="120">
           </el-table-column>
-          <el-table-column label="用户" width="300">
+          <el-table-column label="学员" width="300">
             <template slot-scope="scope">
               <div class="d-flex" v-if="scope.row.user">
                 <div>
@@ -73,7 +74,7 @@
                 </div>
                 <div class="ml-10">{{ scope.row.user.nick_name }}</div>
               </div>
-              <span class="c-red" v-else>用户不存在</span>
+              <span class="c-red" v-else>学员不存在</span>
             </template>
           </el-table-column>
           <el-table-column label="得分" property="score" sortable width="150">
@@ -198,6 +199,11 @@ export default {
       },
       config: {
         token: this.$utils.getToken(),
+      },
+      pickerOptions: {
+        disabledDate(time) {
+          return time.getTime() > Date.now();
+        },
       },
     };
   },

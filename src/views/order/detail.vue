@@ -39,7 +39,10 @@
       <div class="panel-box p-0 mt-30 mb-30">
         <div class="panel-header">订单商品</div>
         <div class="panel-body">
-          <el-table :data="order.goods">
+          <el-table
+            :header-cell-style="{ background: '#f1f2f9' }"
+            :data="order.goods"
+          >
             <el-table-column prop="id" label="ID" width="120"></el-table-column>
             <el-table-column
               prop="goods_id"
@@ -59,7 +62,10 @@
       <div class="panel-box p-0 mt-30">
         <div class="panel-header">支付记录</div>
         <div class="panel-body">
-          <el-table :data="order.paid_records">
+          <el-table
+            :header-cell-style="{ background: '#f1f2f9' }"
+            :data="order.paid_records"
+          >
             <el-table-column prop="id" label="ID" width="120"></el-table-column>
             <el-table-column
               prop="paid_type_text"

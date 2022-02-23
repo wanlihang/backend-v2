@@ -1,36 +1,33 @@
 <template>
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="直播课程订阅用户"></back-bar>
-
-    <div class="float-left" v-loading="loading">
-      <div class="float-left">
-        <div class="float-left d-flex">
-          <div>
-            <el-button @click="delUser">删除用户</el-button>
-          </div>
-          <div class="ml-10">
-            <el-button @click="showUserAddWin = true">添加用户</el-button>
-          </div>
-          <div class="ml-10">
-            <el-input
-              v-model="filter.user_id"
-              class="w-200px"
-              placeholder="用户ID"
-            ></el-input>
-          </div>
-          <div class="ml-10">
-            <el-button @click="firstPageLoad()" type="primary" plain
-              >筛选</el-button
-            >
-            <el-button @click="paginationReset">清空</el-button>
-          </div>
+    <div class="float-left j-b-flex mb-30">
+      <div class="d-flex">
+        <el-button type="danger" @click="delUser">删除用户</el-button>
+        <el-button @click="showUserAddWin = true" type="primary"
+          >添加用户</el-button
+        >
+      </div>
+      <div class="d-flex">
+        <div>
+          <el-input
+            v-model="filter.user_id"
+            class="w-200px"
+            placeholder="用户ID"
+          ></el-input>
+        </div>
+        <div class="ml-10">
+          <el-button @click="paginationReset">清空</el-button>
+          <el-button @click="firstPageLoad()" type="primary">筛选</el-button>
         </div>
       </div>
-
+    </div>
+    <div class="float-left" v-loading="loading">
       <el-table
+        :header-cell-style="{ background: '#f1f2f9' }"
         :data="list"
         @selection-change="handleSelectionChange"
-        class="float-left mt-30"
+        class="float-left"
       >
         <el-table-column type="selection" width="55"></el-table-column>
         <el-table-column prop="user_id" label="用户ID" width="150">
@@ -206,4 +203,3 @@ export default {
   },
 };
 </script>
-

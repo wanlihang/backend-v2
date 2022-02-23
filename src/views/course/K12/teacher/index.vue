@@ -12,7 +12,11 @@
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
-        <el-table :data="list" class="float-left">
+        <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
+          :data="list"
+          class="float-left"
+        >
           <el-table-column prop="id" label="ID" width="100"> </el-table-column>
           <el-table-column label="讲师">
             <template slot-scope="scope">
@@ -149,4 +153,3 @@ export default {
   },
 };
 </script>
-

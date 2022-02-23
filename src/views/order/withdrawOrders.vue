@@ -1,19 +1,19 @@
 <template>
   <div class="meedu-main-body">
-    <div class="float-left mb-30">
-      <el-button @click="handleMulti()"> 批量操作 </el-button>
-    </div>
-    <div class="float-left">
-      <div class="float-left d-flex">
+    <div class="float-left j-b-flex mb-30">
+      <div class="d-flex">
+        <el-button type="primary" @click="handleMulti()"> 批量操作 </el-button>
+      </div>
+      <div class="d-flex">
         <div>
           <el-input
-            class="w-200px"
+            class="w-150px"
             v-model="filter.user_id"
             placeholder="用户ID"
           ></el-input>
         </div>
         <div class="ml-10">
-          <el-select class="w-200px" placeholder="状态" v-model="filter.status">
+          <el-select class="w-150px" placeholder="状态" v-model="filter.status">
             <el-option
               v-for="(item, index) in filterData.groups"
               :key="index"
@@ -24,16 +24,15 @@
           </el-select>
         </div>
         <div class="ml-10">
-          <el-button @click="firstPageLoad()" type="primary" plain>
-            筛选
-          </el-button>
           <el-button @click="paginationReset()">清空</el-button>
+          <el-button @click="firstPageLoad()" type="primary"> 筛选 </el-button>
         </div>
       </div>
     </div>
-    <div class="float-left mt-30" v-loading="loading">
+    <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
           :data="results"
           @selection-change="handleSelectionChange"
           class="float-left"
@@ -47,7 +46,7 @@
             "
             width="55"
           ></el-table-column>
-          <el-table-column prop="id" label="ID" width="120"> </el-table-column>
+          <el-table-column prop="id" label="ID" width="100"> </el-table-column>
           <el-table-column prop="user_id" label="用户ID" width="120">
           </el-table-column>
           <el-table-column label="用户" width="300">
@@ -67,7 +66,7 @@
               <span v-else class="c-red">用户已删除</span>
             </template>
           </el-table-column>
-          <el-table-column label="提现金额" width="150">
+          <el-table-column label="提现金额">
             <template slot-scope="scope">
               <span>{{ scope.row.before_balance }}元</span>
             </template>
@@ -94,7 +93,7 @@
           </el-table-column>
           <el-table-column prop="remark" label="备注" width="300">
           </el-table-column>
-          <el-table-column label="添加时间">
+          <el-table-column label="添加时间" width="200">
             <template slot-scope="scope">{{
               scope.row.created_at | dateFormat
             }}</template>

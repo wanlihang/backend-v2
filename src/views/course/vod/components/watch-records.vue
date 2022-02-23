@@ -1,11 +1,12 @@
 <template>
   <div class="float-left">
-    <div class="float-left">
-      <div class="float-left d-flex mb-30">
+    <div class="float-left j-b-flex mb-30">
+      <div class="d-flex">
+        <el-button type="danger" @click="delRecords()">删除</el-button>
+        <el-button @click="importexcel" type="primary">导出表格</el-button>
+      </div>
+      <div class="d-flex">
         <div>
-          <el-button @click="delRecords()">删除</el-button>
-        </div>
-        <div class="ml-10">
           <el-select
             v-model="filter.is_watched"
             class="w-150px"
@@ -22,6 +23,7 @@
         </div>
         <div class="ml-10">
           <el-date-picker
+            :picker-options="pickerOptions"
             v-model="watched_at"
             type="daterange"
             align="right"
@@ -34,17 +36,15 @@
         </div>
 
         <div class="ml-10">
-          <el-button @click="firstPageLoad" type="primary" plain
-            >筛选</el-button
-          >
           <el-button @click="paginationReset">清空</el-button>
-          <el-button @click="importexcel">导出表格</el-button>
+          <el-button @click="firstPageLoad" type="primary">筛选</el-button>
         </div>
       </div>
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
           :data="records"
           class="float-left"
           @sort-change="sortChange"
@@ -151,6 +151,11 @@ export default {
           key: 1,
         },
       ],
+      pickerOptions: {
+        disabledDate(time) {
+          return time.getTime() > Date.now();
+        },
+      },
     };
   },
   watch: {

@@ -95,8 +95,8 @@
               <el-date-picker
                 v-model="course.started_at"
                 type="datetime"
-                format="yyyy-MM-dd hh:mm"
-                value-format="yyyy-MM-dd hh:mm"
+                format="yyyy-MM-dd HH:mm"
+                value-format="yyyy-MM-dd HH:mm"
                 placeholder="请选择日期"
                 :picker-options="expireTimeOption"
               >
@@ -109,8 +109,8 @@
               <el-date-picker
                 v-model="course.ended_at"
                 type="datetime"
-                format="yyyy-MM-dd hh:mm"
-                value-format="yyyy-MM-dd hh:mm"
+                format="yyyy-MM-dd HH:mm"
+                value-format="yyyy-MM-dd HH:mm"
                 placeholder="请选择日期"
                 :picker-options="expireTimeOption"
               >
@@ -120,21 +120,6 @@
               <helper-text
                 text="团购开始时间，时间达到之后，用户才能参与团购"
               ></helper-text>
-            </div>
-          </div>
-        </el-form-item>
-
-        <el-form-item prop="page_title" label="PC团购页面标题">
-          <div class="d-flex">
-            <div>
-              <el-input
-                class="w-500px"
-                placeholder="PC团购页面标题"
-                v-model="course.page_title"
-              ></el-input>
-            </div>
-            <div class="ml-10">
-              <helper-text text="PC打开团购界面浏览器显示的标题"></helper-text>
             </div>
           </div>
         </el-form-item>
@@ -249,7 +234,7 @@ export default {
       },
       expireTimeOption: {
         disabledDate(date) {
-          return date.getTime() < Date.now();
+          return date.getTime() < Date.now() - 24 * 60 * 60 * 1000;
         },
       },
       loading: false,

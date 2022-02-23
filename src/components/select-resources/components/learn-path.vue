@@ -4,21 +4,20 @@
       <div class="float-left d-flex">
         <div class="d-flex">
           <el-input
-            class="w-200px"
+            class="w-150px"
             v-model="pagination.keywords"
             placeholder="关键字"
           ></el-input>
         </div>
 
-        <div class="ml-15">
-          <el-button @click="firstPageLoad" type="primary" plain
-            >筛选</el-button
-          >
-          <el-button class="ml-15" @click="paginationReset">清空</el-button>
+        <div class="ml-10">
+          <el-button @click="paginationReset">清空</el-button>
+          <el-button @click="firstPageLoad" type="primary">筛选</el-button>
         </div>
       </div>
     </div>
     <el-table
+      :header-cell-style="{ background: '#f1f2f9' }"
       :data="courses"
       highlight-current-row
       @current-change="tableItemChoice"

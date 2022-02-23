@@ -25,7 +25,7 @@
           <el-input v-model="user.password" class="w-200px"></el-input>
         </el-form-item>
         <el-form-item label="VIP">
-          <el-select v-model="user.role_id">
+          <el-select :clearable="true" v-model="user.role_id">
             <el-option
               v-for="(item, index) in roles"
               :key="index"

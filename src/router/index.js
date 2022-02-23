@@ -148,6 +148,14 @@ const routes = [
     },
   },
   {
+    path: "/system/messageConfig",
+    component: () => import("@/views/system/messageConfig"),
+    name: "SystemMessageConfig",
+    meta: {
+      title: "title.system-config",
+    },
+  },
+  {
     path: "/system/saveImagesConfig",
     component: () => import("@/views/system/saveImagesConfig"),
     name: "SystemSaveImagesConfig",
@@ -768,9 +776,17 @@ const routes = [
   {
     path: "/tuangou/goods/update",
     component: () => import("@/views/tuangou/goods/update"),
-    name: "TuangouMoodsUpdate",
+    name: "TuangouGoodsUpdate",
     meta: {
       title: "title.tuangou.goods.update",
+    },
+  },
+  {
+    path: "/tuangou/goods/detail",
+    component: () => import("@/views/tuangou/goods/detail"),
+    name: "TuangouGoodsDetail",
+    meta: {
+      title: "title.tuangou.goods.detail",
     },
   },
   {

@@ -10,7 +10,11 @@
       </p-button>
     </div>
     <div class="float-left" v-loading="loading">
-      <el-table :data="list" class="float-left">
+      <el-table
+        :header-cell-style="{ background: '#f1f2f9' }"
+        :data="list"
+        class="float-left"
+      >
         <el-table-column prop="id" label="ID" width="120"> </el-table-column>
         <el-table-column prop="name" label="VIP"> </el-table-column>
         <el-table-column prop="expire_days" label="天数"> </el-table-column>

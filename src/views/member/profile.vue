@@ -43,7 +43,7 @@
               <div class="info-value">
                 <template v-if="user.profile && user.profile.diploma">
                   <el-image
-                    style="width: 200px; height: 150px;border-radius: 8px;"
+                    style="width: 200px; height: 150px; border-radius: 8px"
                     :src="user.profile.diploma"
                     lazy
                     :preview-src-list="[user.profile.diploma]"
@@ -58,7 +58,7 @@
               <div class="info-value">
                 <template v-if="user.profile && user.profile.id_frontend_thumb">
                   <el-image
-                    style="width: 200px; height: 150px;border-radius: 8px;"
+                    style="width: 200px; height: 150px; border-radius: 8px"
                     :src="user.profile.id_frontend_thumb"
                     lazy
                     :preview-src-list="[user.profile.id_frontend_thumb]"
@@ -73,7 +73,7 @@
               <div class="info-value">
                 <template v-if="user.profile && user.profile.id_backend_thumb">
                   <el-image
-                    style="width: 200px; height: 150px;border-radius: 8px;"
+                    style="width: 200px; height: 150px; border-radius: 8px"
                     :src="user.profile.id_backend_thumb"
                     lazy
                     :preview-src-list="[user.profile.id_backend_thumb]"
@@ -88,7 +88,7 @@
               <div class="info-value">
                 <template v-if="user.profile && user.profile.id_hand_thumb">
                   <el-image
-                    style="width: 200px; height: 150px;border-radius: 8px;"
+                    style="width: 200px; height: 150px; border-radius: 8px"
                     :src="user.profile.id_hand_thumb"
                     lazy
                     :preview-src-list="[user.profile.id_hand_thumb]"

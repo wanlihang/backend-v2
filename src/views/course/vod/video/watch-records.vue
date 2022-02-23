@@ -13,6 +13,7 @@
         </div>
         <div class="ml-10">
           <el-date-picker
+            :picker-options="pickerOptions"
             v-model="watched_at"
             type="daterange"
             align="right"
@@ -34,7 +35,11 @@
 
     <div class="float-left mt-30" v-loading="loading">
       <div class="float-left">
-        <el-table :data="list" class="float-left">
+        <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
+          :data="list"
+          class="float-left"
+        >
           <el-table-column prop="user_id" label="用户ID" width="120">
           </el-table-column>
           <el-table-column label="用户">
@@ -127,6 +132,11 @@ export default {
       users: [],
       videos: [],
       courses: [],
+      pickerOptions: {
+        disabledDate(time) {
+          return time.getTime() > Date.now();
+        },
+      },
     };
   },
   watch: {

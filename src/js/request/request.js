@@ -1206,6 +1206,9 @@ const Api = {
       List(id, params) {
         return get(`/backend/addons/TuanGou/goods/${id}/items`, params);
       },
+      Detail(id, itemId) {
+        return get(`/backend/addons/TuanGou/goods/${id}/item/${itemId}`);
+      },
       Complete(params) {
         return get(`/backend/addons/TuanGou/goods/item/complete`, params);
       },

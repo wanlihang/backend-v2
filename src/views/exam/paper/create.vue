@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="添加试卷"></back-bar>
+    <back-bar class="mb-30" title="新建试卷"></back-bar>
 
     <div class="float-left">
       <el-form ref="form" :model="addform" :rules="rules" label-width="200px">
@@ -98,6 +98,11 @@
                 :inactive-value="0"
               >
               </el-switch>
+            </div>
+            <div class="ml-10">
+              <helper-text
+                text="若试卷中包含问答题，将自动跳过问答题阅卷生成总成绩。"
+              ></helper-text>
             </div>
           </div>
         </el-form-item>

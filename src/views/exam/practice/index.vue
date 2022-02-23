@@ -1,26 +1,26 @@
 <template>
   <div class="meedu-main-body">
-    <div class="float-left mb-30">
-      <p-button
-        text="添加"
-        p="addons.Paper.practice.store"
-        @click="$router.push({ name: 'ExamPracticeCreate' })"
-        type="primary"
-      >
-      </p-button>
-    </div>
-    <div class="float-left">
-      <div class="float-left d-flex">
+    <div class="float-left j-b-flex mb-30">
+      <div class="d-flex">
+        <p-button
+          text="新建"
+          p="addons.Paper.practice.store"
+          @click="$router.push({ name: 'ExamPracticeCreate' })"
+          type="primary"
+        >
+        </p-button>
+      </div>
+      <div class="d-flex">
         <div>
           <el-input
-            class="w-200px"
+            class="w-150px"
             v-model="filter.key"
             placeholder="练习试卷关键字"
           ></el-input>
         </div>
         <div class="d-flex ml-10">
           <el-select
-            class="w-200px"
+            class="w-150px"
             placeholder="分类"
             v-model="filter.category_id"
           >
@@ -35,17 +35,16 @@
         </div>
 
         <div class="ml-10">
-          <el-button @click="firstPageLoad()" type="primary" plain>
-            筛选
-          </el-button>
           <el-button @click="paginationReset()">清空</el-button>
+          <el-button @click="firstPageLoad()" type="primary"> 筛选 </el-button>
         </div>
       </div>
     </div>
 
-    <div class="float-left mt-30" v-loading="loading">
+    <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
           :data="list"
           @sort-change="sortChange"
           :default-sort="{ prop: 'id', order: 'descending' }"
@@ -67,7 +66,7 @@
               scope.row.created_at | dateFormat
             }}</template>
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="200">
+          <el-table-column fixed="right" label="操作" width="140">
             <template slot-scope="scope">
               <p-link
                 text="章节"
@@ -81,22 +80,10 @@
                 "
               ></p-link>
               <p-link
-                text="编辑"
-                p="addons.Paper.practice.update"
-                type="primary"
                 class="ml-5"
-                @click="
-                  $router.push({
-                    name: 'ExamPracticeUpdate',
-                    query: { id: scope.row.id },
-                  })
-                "
-              ></p-link>
-              <p-link
-                text="用户"
+                text="学员"
                 p="addons.Paper.practice.users"
                 type="primary"
-                class="ml-5"
                 @click="
                   $router.push({
                     name: 'PracticeUser',
@@ -104,14 +91,32 @@
                   })
                 "
               ></p-link>
-
-              <p-link
-                text="删除"
-                class="ml-5"
-                p="addons.Paper.practice.delete"
-                type="danger"
-                @click="destory(scope.row.id)"
-              ></p-link>
+              <el-dropdown>
+                <el-link type="primary" class="el-dropdown-link ml-5">
+                  更多<i class="el-icon-arrow-down el-icon--right"></i>
+                </el-link>
+                <el-dropdown-menu slot="dropdown">
+                  <p-dropdown-item
+                    type="primary"
+                    text="编辑"
+                    p="addons.Paper.practice.update"
+                    @click="
+                      $router.push({
+                        name: 'ExamPracticeUpdate',
+                        query: { id: scope.row.id },
+                      })
+                    "
+                  >
+                  </p-dropdown-item>
+                  <p-dropdown-item
+                    text="删除"
+                    p="addons.Paper.practice.delete"
+                    type="danger"
+                    @click="destory(scope.row.id)"
+                  >
+                  </p-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
             </template>
           </el-table-column>
         </el-table>

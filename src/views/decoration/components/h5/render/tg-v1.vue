@@ -4,28 +4,38 @@
       <div class="text">
         {{ config.title }}
       </div>
-      <div class="more">更多</div>
     </div>
     <div class="body">
       <div class="tg-box">
         <div class="tg-item" v-for="(item, index) in config.items" :key="index">
           <div class="tg-thumb">
-            <img v-if="item.goods_thumb" :src="item.goods_thumb" width="150" height="113" />
+            <div class="tg-icon">拼团中</div>
+            <img
+              v-if="item.goods_thumb"
+              :src="item.goods_thumb"
+              width="120"
+              height="90"
+            />
             <img
               v-else
               src="@/assets/images/decoration/h5/default-tg.png"
-              width="150"
-              height="113"
+              width="120"
+              height="90"
             />
           </div>
-          <div class="tg-info">
-            <div class="label">拼团价</div>
-            <div class="price">
-              <span class="unit">￥</span>{{ item.charge || "XX" }}
+          <div class="tg-body">
+            <div class="tg-goods-title">
+              {{ item.goods_title }}
             </div>
-          </div>
-          <div class="tg-title">
-            {{ item.goods_title }}
+            <div class="tg-info">
+              <div class="tg-sub">{{ item.goods_type_text }}</div>
+              <div class="tg-original_charge">
+                原价:￥{{ item.original_charge }}
+              </div>
+              <div class="tg-charge">
+                <span class="unit">￥</span>{{ item.charge || "XX" }}
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -83,77 +93,104 @@ export default {
       width: 100%;
       height: auto;
       float: left;
-      box-sizing: border-box;
-      overflow-x: auto;
-      white-space: nowrap;
 
       .tg-item {
-        display: inline-block;
-        width: 150px;
+        width: 100%;
         height: auto;
-        margin-right: 15px;
+        float: left;
+        display: flex;
+        margin-bottom: 20px;
 
         &:last-child {
-          margin-right: 0;
+          margin-bottom: 0;
         }
 
         .tg-thumb {
-          width: 150px;
-          height: 113px;
-          float: left;
-
-          img {
-            border-radius: 8px 8px 0px 0px;
-          }
-        }
-
-        .tg-info {
-          width: 100%;
-          height: 30px;
-          float: left;
-          box-sizing: border-box;
-          background: linear-gradient(90deg, #ff6033 0%, #fba55b 100%);
-          border-radius: 0px 0px 8px 8px;
-          display: flex;
-          align-items: center;
-          padding-left: 10px;
-          padding-right: 10px;
-
-          .label {
+          position: relative;
+          width: 120px;
+          height: 90px;
+          border-radius: 4px;
+          margin-right: 10px;
+          overflow: hidden;
+          .tg-icon {
+            position: absolute;
+            width: 52px;
+            height: 22px;
+            background: #ff4d4f;
+            border-radius: 4px 0px 4px 0px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 14px;
             font-weight: 400;
             color: #ffffff;
-            line-height: 30px;
+            right: 0;
+            bottom: 0;
+            z-index: 100;
           }
 
-          .price {
-            flex: 1;
-            text-align: right;
-            font-size: 28rpx;
-            font-family: PingFangSC-Medium, PingFang SC;
-            font-weight: 500;
-            color: #ffffff;
-            line-height: 30px;
-
-            .unit {
-              font-size: 24rpx;
-            }
+          img {
+            border-radius: 4px;
           }
         }
+        .tg-body {
+          flex: 1;
+          padding-top: 5px;
+          .tg-goods-title {
+            width: 100%;
+            height: 40px;
+            font-size: 15px;
+            font-weight: 500;
+            color: #171923;
+            line-height: 20px;
+            float: left;
+            word-break: break-all;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 15px;
+          }
+          .tg-info {
+            width: 100%;
+            height: auto;
+            float: left;
+            display: flex;
+            align-items: center;
+            .tg-sub {
+              width: auto;
+              height: 20px;
+              background: rgba(#3ca7fa, 0.1);
+              border-radius: 2px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 12px;
+              font-weight: 400;
+              padding: 0 5px;
+              color: #3ca7fa;
+            }
+            .tg-original_charge {
+              width: auto;
+              height: 12px;
+              font-size: 12px;
+              font-weight: 400;
+              color: #999999;
+              line-height: 12px;
+              margin-left: 10px;
+            }
 
-        .tg-title {
-          width: 100%;
-          height: auto;
-          float: left;
-          box-sizing: border-box;
-          padding-top: 10px;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          font-size: 13px;
-          font-weight: 500;
-          color: #171923;
-          line-height: 18px;
+            .tg-charge {
+              flex: 1;
+              text-align: right;
+              color: #ff4d4f;
+              font-size: 18px;
+              font-weight: 500;
+              line-height: 20px;
+              .unit {
+                font-size: 14px;
+                line-height: 20px;
+              }
+            }
+          }
         }
       }
     }

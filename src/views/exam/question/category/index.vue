@@ -1,7 +1,6 @@
 <template>
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="试题分类"></back-bar>
-
     <div class="float-left mb-30">
       <p-button
         text="添加"
@@ -11,10 +10,10 @@
       >
       </p-button>
     </div>
-
     <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
           :data="categories"
           row-key="id"
           :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"

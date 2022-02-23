@@ -1,37 +1,38 @@
 <template>
   <div class="meedu-main-body">
-    <div class="float-left mb-30">
-      <p-button
-        text="批量删除"
-        p="promoCode.destroy.multi"
-        @click="destorymulti()"
-        type="danger"
-      >
-      </p-button>
-      <p-button
-        text="添加"
-        p="promoCode.store"
-        @click="$router.push({ name: 'Createcode' })"
-        type="primary"
-      >
-      </p-button>
-      <p-button
-        text="批量导入"
-        p="promoCode.import"
-        @click="$router.push({ name: 'CodeImport' })"
-        type="primary"
-      >
-      </p-button>
-      <p-button
-        text="批量生成"
-        p="promoCode.generator"
-        @click="$router.push({ name: 'CreateMulticode' })"
-        type="primary"
-      >
-      </p-button>
-    </div>
-    <div class="float-left">
-      <div class="float-left d-flex">
+    <div class="float-left j-b-flex mb-30">
+      <div class="d-flex">
+        <p-button
+          text="批量删除"
+          p="promoCode.destroy.multi"
+          @click="destorymulti()"
+          type="danger"
+        >
+        </p-button>
+        <p-button
+          text="添加"
+          p="promoCode.store"
+          @click="$router.push({ name: 'Createcode' })"
+          type="primary"
+        >
+        </p-button>
+        <p-button
+          text="批量导入"
+          p="promoCode.import"
+          @click="$router.push({ name: 'CodeImport' })"
+          type="primary"
+        >
+        </p-button>
+        <p-button
+          text="批量生成"
+          p="promoCode.generator"
+          @click="$router.push({ name: 'CreateMulticode' })"
+          type="primary"
+        >
+        </p-button>
+      </div>
+
+      <div class="d-flex">
         <div>
           <el-input
             class="w-150px"
@@ -47,41 +48,25 @@
           ></el-input>
         </div>
         <div class="ml-10">
-          <el-date-picker
-            v-model="filter.expired_at"
-            type="daterange"
-            align="right"
-            unlink-panels
-            range-separator="至"
-            start-placeholder="过期时间-开始"
-            end-placeholder="过期时间-结束"
-          >
-          </el-date-picker>
-        </div>
-        <div class="ml-10">
-          <el-date-picker
-            v-model="filter.created_at"
-            type="daterange"
-            align="right"
-            unlink-panels
-            range-separator="至"
-            start-placeholder="添加时间-开始"
-            end-placeholder="添加时间-结束"
-          >
-          </el-date-picker>
-        </div>
-
-        <div class="ml-10">
-          <el-button @click="firstPageLoad()" type="primary" plain>
-            筛选
-          </el-button>
           <el-button @click="paginationReset()">清空</el-button>
+          <el-button @click="firstPageLoad()" type="primary"> 筛选 </el-button>
+        </div>
+        <div class="drawerMore d-flex ml-10" @click="drawer = true">
+          <template v-if="showStatus">
+            <img src="../../assets/img/icon-filter-h.png" />
+            <span class="act">已选</span>
+          </template>
+          <template v-else>
+            <img src="../../assets/img/icon-filter.png" />
+            <span>更多</span>
+          </template>
         </div>
       </div>
     </div>
-    <div class="float-left mt-30" v-loading="loading">
+    <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
           :data="list"
           @selection-change="handleSelectionChange"
           class="float-left"
@@ -144,6 +129,55 @@
         </el-pagination>
       </div>
     </div>
+    <el-drawer :size="360" :visible.sync="drawer" :with-header="false">
+      <div class="n-padding-box">
+        <div class="tit flex">更多筛选</div>
+        <div class="j-flex">
+          <el-input
+            class="w-300px"
+            v-model="filter.key"
+            placeholder="优惠码"
+          ></el-input>
+        </div>
+        <div class="j-flex mt-20">
+          <el-input
+            class="w-300px"
+            v-model="filter.user_id"
+            placeholder="用户ID"
+          ></el-input>
+        </div>
+
+        <div class="j-flex mt-20">
+          <el-date-picker
+            v-model="filter.expired_at"
+            type="daterange"
+            align="right"
+            unlink-panels
+            range-separator="至"
+            start-placeholder="过期时间-开始"
+            end-placeholder="过期时间-结束"
+          >
+          </el-date-picker>
+        </div>
+
+        <div class="j-flex mt-20">
+          <el-date-picker
+            v-model="filter.created_at"
+            type="daterange"
+            align="right"
+            unlink-panels
+            range-separator="至"
+            start-placeholder="添加时间-开始"
+            end-placeholder="添加时间-结束"
+          >
+          </el-date-picker>
+        </div>
+        <div class="j-b-flex mt-30">
+          <el-button @click="paginationReset()">清空</el-button>
+          <el-button @click="firstPageLoad()" type="primary"> 筛选 </el-button>
+        </div>
+      </div>
+    </el-drawer>
   </div>
 </template>
 
@@ -170,6 +204,8 @@ export default {
       total: 0,
       loading: false,
       list: [],
+      drawer: false,
+      showStatus: false,
     };
   },
   watch: {
@@ -180,6 +216,34 @@ export default {
       this.filter.created_at = null;
       this.filter.expired_at = null;
       this.spids.ids = [];
+    },
+    "filter.user_id"(val) {
+      if (val) {
+        this.showStatus = true;
+      } else {
+        this.showStatus = false;
+      }
+    },
+    "filter.key"(val) {
+      if (val) {
+        this.showStatus = true;
+      } else {
+        this.showStatus = false;
+      }
+    },
+    "filter.created_at"(val) {
+      if (val) {
+        this.showStatus = true;
+      } else {
+        this.showStatus = false;
+      }
+    },
+    "filter.expired_at"(val) {
+      if (val) {
+        this.showStatus = true;
+      } else {
+        this.showStatus = false;
+      }
     },
   },
   activated() {
@@ -194,6 +258,7 @@ export default {
     firstPageLoad() {
       this.pagination.page = 1;
       this.getData();
+      this.drawer = false;
     },
     paginationReset() {
       this.pagination.page = 1;
@@ -202,6 +267,7 @@ export default {
       this.filter.created_at = null;
       this.filter.expired_at = null;
       this.getData();
+      this.drawer = false;
     },
     paginationSizeChange(size) {
       this.pagination.size = size;

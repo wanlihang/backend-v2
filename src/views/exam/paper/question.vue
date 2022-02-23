@@ -36,6 +36,7 @@
           {{ typeText }}&nbsp;(共{{ list.length }}题)
         </div>
         <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
           :data="list"
           @selection-change="handleSelectionChange($event, typeText)"
           class="float-left"

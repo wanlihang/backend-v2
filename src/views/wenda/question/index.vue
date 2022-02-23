@@ -1,36 +1,29 @@
 <template>
   <div class="meedu-main-body">
-    <div class="float-left mb-30">
-      <p-button
-        text="分类管理"
-        p="addons.Wenda.category.list"
-        @click="$router.push({ name: 'QuestionCategory' })"
-        type="primary"
-      >
-      </p-button>
-      <option-bar text="问答配置" value="问答"></option-bar>
-    </div>
-    <div class="float-left">
-      <div class="float-left d-flex">
+    <div class="float-left j-b-flex mb-30">
+      <div class="d-flex">
+        <el-button @click="destoryMulti()" type="danger"> 批量删除 </el-button>
+        <p-button
+          text="分类管理"
+          p="addons.Wenda.category.list"
+          @click="$router.push({ name: 'QuestionCategory' })"
+          type="primary"
+        >
+        </p-button>
+        <option-bar text="问答配置" value="问答"></option-bar>
+      </div>
+      <div class="d-flex">
         <div>
           <el-input
-            class="w-200px"
+            class="w-150px"
             v-model="filter.keywords"
             placeholder="关键字"
-          ></el-input>
-        </div>
-
-        <div class="ml-10">
-          <el-input
-            class="w-200px"
-            v-model="filter.user_id"
-            placeholder="用户ID"
           ></el-input>
         </div>
         <div class="ml-10">
           <el-select
             placeholder="分类"
-            class="w-200px"
+            class="w-150px"
             v-model="filter.category_id"
           >
             <el-option
@@ -44,42 +37,26 @@
         </div>
 
         <div class="ml-10">
-          <el-select placeholder="状态" class="w-200px" v-model="filter.status">
-            <el-option
-              v-for="(item, index) in filterData.status"
-              :key="index"
-              :label="item.name"
-              :value="item.id"
-            >
-            </el-option>
-          </el-select>
+          <el-button @click="paginationReset()">清空</el-button>
+          <el-button @click="firstPageLoad()" type="primary">筛选</el-button>
         </div>
-
-        <div class="ml-10">
-          <el-date-picker
-            v-model="filter.created_at"
-            type="daterange"
-            align="right"
-            unlink-panels
-            range-separator="至"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期"
-          >
-          </el-date-picker>
+        <div class="drawerMore d-flex ml-10" @click="drawer = true">
+          <template v-if="showStatus">
+            <img src="../../../assets/img/icon-filter-h.png" />
+            <span class="act">已选</span>
+          </template>
+          <template v-else>
+            <img src="../../../assets/img/icon-filter.png" />
+            <span>更多</span>
+          </template>
         </div>
-      </div>
-      <div class="float-left mt-30">
-        <el-button @click="destoryMulti()" type="danger"> 批量删除 </el-button>
-        <el-button @click="firstPageLoad()" type="primary" plain
-          >筛选</el-button
-        >
-        <el-button @click="paginationReset()">清空</el-button>
       </div>
     </div>
 
-    <div class="float-left mt-30" v-loading="loading">
+    <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table
+          :header-cell-style="{ background: '#f1f2f9' }"
           :data="questions"
           @selection-change="handleSelectionChange"
           class="float-left"
@@ -187,6 +164,68 @@
         </el-pagination>
       </div>
     </div>
+    <el-drawer :size="360" :visible.sync="drawer" :with-header="false">
+      <div class="n-padding-box">
+        <div class="tit flex">更多筛选</div>
+        <div class="j-flex">
+          <el-input
+            class="w-300px"
+            v-model="filter.keywords"
+            placeholder="关键字"
+          ></el-input>
+        </div>
+        <div class="j-flex mt-20">
+          <el-select
+            placeholder="分类"
+            class="w-300px"
+            v-model="filter.category_id"
+          >
+            <el-option
+              v-for="(item, index) in filterData.categories"
+              :key="index"
+              :label="item.name"
+              :value="item.id"
+            >
+            </el-option>
+          </el-select>
+        </div>
+        <div class="j-flex mt-20">
+          <el-input
+            class="w-300px"
+            v-model="filter.user_id"
+            placeholder="用户ID"
+          ></el-input>
+        </div>
+        <div class="j-flex mt-20">
+          <el-select placeholder="状态" class="w-300px" v-model="filter.status">
+            <el-option
+              v-for="(item, index) in filterData.status"
+              :key="index"
+              :label="item.name"
+              :value="item.id"
+            >
+            </el-option>
+          </el-select>
+        </div>
+        <div class="j-flex mt-20">
+          <el-date-picker
+            :picker-options="pickerOptions"
+            v-model="filter.created_at"
+            type="daterange"
+            align="right"
+            unlink-panels
+            range-separator="至"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
+          >
+          </el-date-picker>
+        </div>
+        <div class="j-b-flex mt-30">
+          <el-button @click="paginationReset()">清空</el-button>
+          <el-button @click="firstPageLoad()" type="primary">筛选</el-button>
+        </div>
+      </div>
+    </el-drawer>
   </div>
 </template>
 
@@ -231,6 +270,13 @@ export default {
           },
         ],
       },
+      drawer: false,
+      showStatus: false,
+      pickerOptions: {
+        disabledDate(time) {
+          return time.getTime() > Date.now();
+        },
+      },
     };
   },
   activated() {
@@ -241,10 +287,48 @@ export default {
     this.$utils.scrollTopRecord(this.pageName);
     next();
   },
+  watch: {
+    "filter.category_id"(val) {
+      if (val) {
+        this.showStatus = true;
+      } else {
+        this.showStatus = false;
+      }
+    },
+    "filter.user_id"(val) {
+      if (val) {
+        this.showStatus = true;
+      } else {
+        this.showStatus = false;
+      }
+    },
+    "filter.keywords"(val) {
+      if (val) {
+        this.showStatus = true;
+      } else {
+        this.showStatus = false;
+      }
+    },
+    "filter.status"(val) {
+      if (val !== -1) {
+        this.showStatus = true;
+      } else {
+        this.showStatus = false;
+      }
+    },
+    "filter.created_at"(val) {
+      if (val) {
+        this.showStatus = true;
+      } else {
+        this.showStatus = false;
+      }
+    },
+  },
   methods: {
     firstPageLoad() {
       this.pagination.page = 1;
       this.getQuestion();
+      this.drawer = false;
     },
     paginationReset() {
       this.pagination.page = 1;
@@ -254,6 +338,7 @@ export default {
       this.filter.keywords = null;
       this.filter.created_at = null;
       this.getQuestion();
+      this.drawer = false;
     },
     paginationSizeChange(size) {
       this.pagination.size = size;
