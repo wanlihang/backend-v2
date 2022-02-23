@@ -140,7 +140,6 @@ export default {
                 answer: childrenAnswer ? childrenAnswer["answer"] : "",
                 thumbs: childrenAnswer ? childrenAnswer["thumbs"] : [],
               });
-              break;
             }
           }
 
