@@ -140,7 +140,7 @@ const zh = {
           update: "编辑直播课程章节",
         },
         users: {
-          index: "直播课程订阅用户",
+          index: "直播课程学员",
         },
         video: {
           index: "直播排课",
