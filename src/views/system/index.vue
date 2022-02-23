@@ -191,12 +191,6 @@ export default {
           images: require("../../assets/images/config/wenda.png"),
           sign: "Wenda",
         },
-        {
-          name: "考试练习",
-          value: "考试练习",
-          images: require("../../assets/images/config/exam.png"),
-          sign: "Paper",
-        },
       ],
       market: [
         {
@@ -256,11 +250,11 @@ export default {
         this.$router.push({
           name: "SystemLiveConfig",
         });
-      }  else if (value === "短信") {
+      } else if (value === "短信") {
         this.$router.push({
           name: "SystemMessageConfig",
         });
-      }else if (value === "图片存储") {
+      } else if (value === "图片存储") {
         this.$router.push({
           name: "SystemSaveImagesConfig",
         });
