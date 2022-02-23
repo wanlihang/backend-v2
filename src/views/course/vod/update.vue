@@ -68,7 +68,7 @@
                 </el-switch>
               </div>
               <div class="ml-10">
-                <helper-text text="用户无需购买即可观看"></helper-text>
+                <helper-text text="学员无需购买即可观看"></helper-text>
               </div>
             </div>
           </el-form-item>
@@ -106,7 +106,7 @@
               <div class="ml-15">
                 <div class="helper-text">
                   <helper-text
-                    text="上架时间决定课程的排名，时间越早排名越靠后。另外，如果上架时间是未来时间，那么只有时间到了用户才能看到该课程。"
+                    text="上架时间决定课程的排名，时间越早排名越靠后。另外，如果上架时间是未来时间，那么只有时间到了学员才能看到该课程。"
                   ></helper-text>
                 </div>
               </div>
@@ -125,7 +125,7 @@
               </div>
               <div class="ml-15">
                 <div class="helper-text">
-                  <helper-text text="控制用户是否能看到该课程。"></helper-text>
+                  <helper-text text="控制学员是否能看到该课程。"></helper-text>
                 </div>
               </div>
             </div>

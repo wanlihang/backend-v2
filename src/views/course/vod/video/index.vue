@@ -83,20 +83,8 @@
           <el-table-column fixed="right" label="操作" width="150">
             <template slot-scope="scope">
               <p-link
-                text="编辑"
-                p="video.update"
-                type="primary"
-                @click="
-                  $router.push({
-                    name: 'VideosUpdate',
-                    query: { course_id: scope.row.course_id, id: scope.row.id },
-                  })
-                "
-              ></p-link>
-              <p-link
                 p="video.subscribes"
-                text="用户"
-                class="ml-5"
+                text="学员"
                 type="primary"
                 @click="
                   $router.push({
@@ -116,6 +104,18 @@
                 @click="
                   $router.push({
                     name: 'VideoWatchRecords',
+                    query: { course_id: scope.row.course_id, id: scope.row.id },
+                  })
+                "
+              ></p-link>
+              <p-link
+                text="编辑"
+                p="video.update"
+                type="primary"
+                class="ml-5"
+                @click="
+                  $router.push({
+                    name: 'VideosUpdate',
                     query: { course_id: scope.row.course_id, id: scope.row.id },
                   })
                 "

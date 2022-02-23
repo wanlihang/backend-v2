@@ -98,7 +98,7 @@
             <template slot-scope="scope"> {{ scope.row.charge }}元 </template>
           </el-table-column>
           <el-table-column
-            label="订阅人数"
+            label="付费人数"
             property="user_count"
             sortable
             width="150"
