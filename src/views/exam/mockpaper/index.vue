@@ -9,6 +9,12 @@
           type="primary"
         >
         </p-button>
+        <el-button
+          type="primary"
+          @click="$router.push({ name: 'PaperCategories' })"
+        >
+          分类管理
+        </el-button>
       </div>
       <div class="d-flex">
         <div>
