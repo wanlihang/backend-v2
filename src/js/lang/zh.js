@@ -304,7 +304,7 @@ const zh = {
         user: "订阅学员",
         stat: "分数统计",
         question: "组卷",
-        questionadd: "添加习题",
+        questionadd: "添加试题",
         marking: "阅卷",
         category: {
           index: "试卷分类",
