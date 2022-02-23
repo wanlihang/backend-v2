@@ -89,7 +89,7 @@
             label="付费人数"
             property="join_user_times"
             sortable
-            width="120"
+            width="100"
           >
             <template slot-scope="scope">
               <span>{{ scope.row.join_user_times }}人</span>
