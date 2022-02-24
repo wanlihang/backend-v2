@@ -83,6 +83,9 @@
         </div>
       </div>
     </div>
+    <div class="float-left mb-30 check-num" v-if="spids.ids.length > 0">
+      已选择{{ spids.ids.length }}项
+    </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table
