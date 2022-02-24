@@ -223,6 +223,9 @@ export default {
   mounted() {
     this.initMenu();
     this.autoLogin();
+
+    // 关闭加载框
+    document.getElementById("meedu-loading-box").remove();
   },
 };
 </script>
