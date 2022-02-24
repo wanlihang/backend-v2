@@ -150,108 +150,110 @@
             </div>
           </div>
         </el-form-item>
-        <el-form-item label="单选题数量">
-          <div class="d-flex">
-            <div>
-              <el-input
-                type="number"
-                v-model="addform.rule.num.choice"
-                class="w-200px"
-              ></el-input>
+        <template v-if="addform.rule.category_ids.length > 0">
+          <el-form-item label="单选题数量">
+            <div class="d-flex">
+              <div>
+                <el-input
+                  type="number"
+                  v-model="addform.rule.num.choice"
+                  class="w-200px"
+                ></el-input>
+              </div>
+              <div class="ml-10">
+                <div>（共{{ countMap[1] }}题）</div>
+              </div>
+              <div class="ml-10">
+                <helper-text text="每次考试抽出的单选题数量"></helper-text>
+              </div>
             </div>
-            <div class="ml-10">
-              <div>（共{{ countMap[1] }}题）</div>
+          </el-form-item>
+          <el-form-item label="多选题数量">
+            <div class="d-flex">
+              <div>
+                <el-input
+                  type="number"
+                  v-model="addform.rule.num.select"
+                  class="w-200px"
+                ></el-input>
+              </div>
+              <div class="ml-10">
+                <div>（共{{ countMap[2] }}题）</div>
+              </div>
+              <div class="ml-10">
+                <helper-text text="每次考试抽出的多选题数量"></helper-text>
+              </div>
             </div>
-            <div class="ml-10">
-              <helper-text text="每次考试抽出的单选题数量"></helper-text>
+          </el-form-item>
+          <el-form-item label="填空题数量">
+            <div class="d-flex">
+              <div>
+                <el-input
+                  type="number"
+                  v-model="addform.rule.num.input"
+                  class="w-200px"
+                ></el-input>
+              </div>
+              <div class="ml-10">
+                <div>（共{{ countMap[3] }}题）</div>
+              </div>
+              <div class="ml-10">
+                <helper-text text="每次考试抽出填空题数量"></helper-text>
+              </div>
             </div>
-          </div>
-        </el-form-item>
-        <el-form-item label="多选题数量">
-          <div class="d-flex">
-            <div>
-              <el-input
-                type="number"
-                v-model="addform.rule.num.select"
-                class="w-200px"
-              ></el-input>
+          </el-form-item>
+          <el-form-item label="问答题数量">
+            <div class="d-flex">
+              <div>
+                <el-input
+                  type="number"
+                  v-model="addform.rule.num.qa"
+                  class="w-200px"
+                ></el-input>
+              </div>
+              <div class="ml-10">
+                <div>（共{{ countMap[4] }}题）</div>
+              </div>
+              <div class="ml-10">
+                <helper-text text="每次考试抽出的问答题数量"></helper-text>
+              </div>
             </div>
-            <div class="ml-10">
-              <div>（共{{ countMap[2] }}题）</div>
+          </el-form-item>
+          <el-form-item label="判断题数量">
+            <div class="d-flex">
+              <div>
+                <el-input
+                  type="number"
+                  v-model="addform.rule.num.judge"
+                  class="w-200px"
+                ></el-input>
+              </div>
+              <div class="ml-10">
+                <div>（共{{ countMap[5] }}题）</div>
+              </div>
+              <div class="ml-10">
+                <helper-text text="每次考试抽出的判断题数量"></helper-text>
+              </div>
             </div>
-            <div class="ml-10">
-              <helper-text text="每次考试抽出的多选题数量"></helper-text>
+          </el-form-item>
+          <el-form-item label="题帽题数量">
+            <div class="d-flex">
+              <div>
+                <el-input
+                  type="number"
+                  v-model="addform.rule.num.cap"
+                  class="w-200px"
+                ></el-input>
+              </div>
+              <div class="ml-10">
+                <div>（共{{ countMap[6] }}题）</div>
+              </div>
+              <div class="ml-10">
+                <helper-text text="每次考试抽出的题帽题数量"></helper-text>
+              </div>
             </div>
-          </div>
-        </el-form-item>
-        <el-form-item label="填空题数量">
-          <div class="d-flex">
-            <div>
-              <el-input
-                type="number"
-                v-model="addform.rule.num.input"
-                class="w-200px"
-              ></el-input>
-            </div>
-            <div class="ml-10">
-              <div>（共{{ countMap[3] }}题）</div>
-            </div>
-            <div class="ml-10">
-              <helper-text text="每次考试抽出填空题数量"></helper-text>
-            </div>
-          </div>
-        </el-form-item>
-        <el-form-item label="问答题数量">
-          <div class="d-flex">
-            <div>
-              <el-input
-                type="number"
-                v-model="addform.rule.num.qa"
-                class="w-200px"
-              ></el-input>
-            </div>
-            <div class="ml-10">
-              <div>（共{{ countMap[4] }}题）</div>
-            </div>
-            <div class="ml-10">
-              <helper-text text="每次考试抽出的问答题数量"></helper-text>
-            </div>
-          </div>
-        </el-form-item>
-        <el-form-item label="判断题数量">
-          <div class="d-flex">
-            <div>
-              <el-input
-                type="number"
-                v-model="addform.rule.num.judge"
-                class="w-200px"
-              ></el-input>
-            </div>
-            <div class="ml-10">
-              <div>（共{{ countMap[5] }}题）</div>
-            </div>
-            <div class="ml-10">
-              <helper-text text="每次考试抽出的判断题数量"></helper-text>
-            </div>
-          </div>
-        </el-form-item>
-        <el-form-item label="题帽题数量">
-          <div class="d-flex">
-            <div>
-              <el-input
-                type="number"
-                v-model="addform.rule.num.cap"
-                class="w-200px"
-              ></el-input>
-            </div>
-            <div class="ml-10">
-              <div>（共{{ countMap[6] }}题）</div>
-            </div>
-            <div class="ml-10">
-              <helper-text text="每次考试抽出的题帽题数量"></helper-text>
-            </div>
-          </div>
-        </el-form-item>
+          </el-form-item>
+        </template>
       </el-form>
     </div>
 
@@ -274,7 +276,11 @@ export default {
   data() {
     return {
       id: this.$route.query.id,
-      addform: null,
+      addform: {
+        rule: {
+          category_ids: [],
+        },
+      },
       rules: {
         title: [
           {
@@ -318,13 +324,20 @@ export default {
       loading: false,
     };
   },
+  watch: {
+    "addform.rule.category_ids"() {
+      this.params();
+    },
+  },
   mounted() {
     this.params();
     this.detail();
   },
   methods: {
     params() {
-      this.$api.Exam.Mockpaper.Create().then((res) => {
+      this.$api.Exam.Mockpaper.Create({
+        category_ids: this.addform.rule.category_ids,
+      }).then((res) => {
         this.categories = res.data.categories;
         this.courses = res.data.question_categories;
         this.countMap = res.data.count_map;
