@@ -1324,8 +1324,8 @@ const Api = {
       List(params) {
         return get(`/backend/addons/Paper/mock_paper/index`, params);
       },
-      Create() {
-        return get(`/backend/addons/Paper/mock_paper/create`);
+      Create(params) {
+        return get(`/backend/addons/Paper/mock_paper/create`, params);
       },
       Store(params) {
         return post(`/backend/addons/Paper/mock_paper/create`, params);
