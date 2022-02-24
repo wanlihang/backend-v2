@@ -377,6 +377,30 @@ export default {
         parseInt(this.addform.rule.num.judge) > 0 ||
         parseInt(this.addform.rule.num.cap) > 0
       ) {
+        if (parseInt(this.addform.rule.num.choice) > this.countMap[1]) {
+          this.$message.error("单选题数量超出可抽取单选题总量");
+          return;
+        }
+        if (parseInt(this.addform.rule.num.select) > this.countMap[2]) {
+          this.$message.error("多选题数量超出可抽取多选题总量");
+          return;
+        }
+        if (parseInt(this.addform.rule.num.input) > this.countMap[3]) {
+          this.$message.error("填空题数量超出可抽取填空题总量");
+          return;
+        }
+        if (parseInt(this.addform.rule.num.qa) > this.countMap[4]) {
+          this.$message.error("问答题数量超出可抽取问答题总量");
+          return;
+        }
+        if (parseInt(this.addform.rule.num.judge) > this.countMap[5]) {
+          this.$message.error("判断题数量超出可抽取判断题总量");
+          return;
+        }
+        if (parseInt(this.addform.rule.num.cap) > this.countMap[6]) {
+          this.$message.error("题帽题数量超出可抽取题帽题总量");
+          return;
+        }
         this.loading = true;
         let data = {};
         Object.assign(data, this.addform);
