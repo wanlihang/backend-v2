@@ -91,44 +91,62 @@
         </el-form-item>
 
         <template v-if="addform.is_invite === 0">
-          <el-form-item label="价格" prop="charge">
-            <div class="d-flex">
-              <div>
-                <el-input
-                  type="number"
-                  v-model="addform.charge"
-                  class="w-200px"
-                ></el-input>
-              </div>
-              <div class="ml-10">
-                <helper-text
-                  text="请输入整数。不支持小数。价格大于0则意味着用户可以购买试卷参与。价格为0意味着禁止购买。"
-                ></helper-text>
-              </div>
-            </div>
-          </el-form-item>
-
-          <el-form-item
-            label="VIP免费"
-            prop="is_vip_free"
-            v-if="addform.charge > 0"
-          >
+          <el-form-item label="免费参与" prop="is_free">
             <div class="d-flex">
               <div>
                 <el-switch
-                  v-model="addform.is_vip_free"
+                  v-model="is_free"
                   :active-value="1"
                   :inactive-value="0"
                 >
                 </el-switch>
               </div>
               <div class="ml-10">
-                <helper-text
-                  text="设置VIP免费的话，则VIP会员用户可以无需购买直接参与考试。"
-                ></helper-text>
+                <helper-text text="开启所有用户均可直接考试。"></helper-text>
               </div>
             </div>
           </el-form-item>
+
+          <template v-if="is_free === 0">
+            <el-form-item label="价格" prop="charge">
+              <div class="d-flex">
+                <div>
+                  <el-input
+                    type="number"
+                    v-model="addform.charge"
+                    class="w-200px"
+                  ></el-input>
+                </div>
+                <div class="ml-10">
+                  <helper-text
+                    text="请输入整数。不支持小数。价格大于0则意味着用户可以购买试卷参与。价格为0意味着禁止购买。"
+                  ></helper-text>
+                </div>
+              </div>
+            </el-form-item>
+
+            <el-form-item
+              label="VIP免费"
+              prop="is_vip_free"
+              v-if="addform.charge > 0"
+            >
+              <div class="d-flex">
+                <div>
+                  <el-switch
+                    v-model="addform.is_vip_free"
+                    :active-value="1"
+                    :inactive-value="0"
+                  >
+                  </el-switch>
+                </div>
+                <div class="ml-10">
+                  <helper-text
+                    text="设置VIP免费的话，则VIP会员用户可以无需购买直接参与考试。"
+                  ></helper-text>
+                </div>
+              </div>
+            </el-form-item>
+          </template>
         </template>
 
         <el-form-item label="试题随机范围">
@@ -281,6 +299,7 @@ export default {
           category_ids: [],
         },
       },
+      is_free: 0,
       rules: {
         title: [
           {
@@ -349,6 +368,9 @@ export default {
         data.rule = JSON.parse(data.rule);
 
         this.addform = data;
+        if (this.addform.charge === 0) {
+          this.is_free = 1;
+        }
       });
     },
     formValidate() {
@@ -361,6 +383,9 @@ export default {
     confirm() {
       if (this.loading) {
         return;
+      }
+      if (this.addform.is_invite === 0 && this.is_free === 1) {
+        this.addform.charge = 0;
       }
       if (
         parseInt(this.addform.rule.num.choice) > 0 ||
