@@ -2,6 +2,15 @@
   <div class="meedu-main-body">
     <div class="float-left j-b-flex mb-30">
       <div class="d-flex">
+        <p-button
+          text="退款订单"
+          p="addons.TuanGou.refund"
+          @click="$router.push({ name: 'TuangouGoodsRefund' })"
+          type="primary"
+        >
+        </p-button>
+      </div>
+      <div class="d-flex">
         <div>
           <el-input
             placeholder="关键字"

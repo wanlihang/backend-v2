@@ -10,6 +10,13 @@
         >
         </p-button>
         <p-button
+          text="团购订单"
+          p="addons.TuanGou.orders"
+          @click="$router.push({ name: 'TuangouGoodsOrder' })"
+          type="primary"
+        >
+        </p-button>
+        <p-button
           text="退款订单"
           p="addons.TuanGou.refund"
           @click="$router.push({ name: 'TuangouGoodsRefund' })"
