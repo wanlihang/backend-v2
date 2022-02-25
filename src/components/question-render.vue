@@ -1,6 +1,6 @@
 <template>
   <div
-    class="question-render"
+    class="question-list-render"
     v-html="title.length > 130 ? title.slice(0, 130) + '...' : title"
   ></div>
 </template>
