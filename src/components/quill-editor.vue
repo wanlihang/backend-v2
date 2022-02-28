@@ -187,7 +187,8 @@ export default {
     uploadImage(imgUrl) {
       let index = this.editorIndex;
       let nextIndex = this.editorIndex + 1;
-      if (index === 1) {
+      let html = this.$refs.myQuillEditor.children[0].innerHTML;
+      if (html === "<p><br></p>") {
         index = 0;
         nextIndex = 1;
       }
