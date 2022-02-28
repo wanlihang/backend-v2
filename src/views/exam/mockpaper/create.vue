@@ -45,24 +45,6 @@
           ></el-input>
         </el-form-item>
 
-        <el-form-item label="总分" prop="score">
-          <div class="d-flex">
-            <div>
-              <el-input
-                placeholder="总分"
-                type="number"
-                v-model="addform.score"
-                class="w-200px"
-              ></el-input>
-            </div>
-            <div class="ml-10">
-              <helper-text
-                text="模拟卷抽题的总分将会等于这里配置的总分"
-              ></helper-text>
-            </div>
-          </div>
-        </el-form-item>
-
         <el-form-item label="及格分" prop="pass_score">
           <el-input
             placeholder="及格分"
@@ -302,7 +284,6 @@ export default {
         is_invite: null,
         charge: 0,
         category_id: null,
-        score: null,
         rule: {
           category_ids: [],
           num: {
@@ -328,13 +309,6 @@ export default {
           {
             required: true,
             message: "请选择分类",
-            trigger: "blur",
-          },
-        ],
-        score: [
-          {
-            required: true,
-            message: "总分不能为空",
             trigger: "blur",
           },
         ],

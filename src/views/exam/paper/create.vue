@@ -36,24 +36,6 @@
           </div>
         </el-form-item>
 
-        <el-form-item label="总分" prop="score">
-          <div class="d-flex">
-            <div>
-              <el-input
-                placeholder="总分"
-                type="number"
-                v-model="addform.score"
-                class="w-200px"
-              ></el-input>
-            </div>
-            <div class="ml-10">
-              <helper-text
-                text="这里的总分仅作参考意义，试卷的实际总分将会根据该试卷下的题目总分计算的。"
-              ></helper-text>
-            </div>
-          </div>
-        </el-form-item>
-
         <el-form-item label="及格分" prop="pass_score">
           <el-input
             placeholder="及格分"
@@ -234,7 +216,6 @@ export default {
         thumb: null,
         title: null,
         try_times: null,
-        score: null,
         required_courses: null,
         pass_score: null,
         is_vip_free: 0,
@@ -258,13 +239,6 @@ export default {
           {
             required: true,
             message: "请选择分类",
-            trigger: "blur",
-          },
-        ],
-        score: [
-          {
-            required: true,
-            message: "分数不能为空",
             trigger: "blur",
           },
         ],
