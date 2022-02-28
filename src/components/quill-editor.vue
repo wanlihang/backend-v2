@@ -197,9 +197,6 @@ export default {
   width: 100%;
   float: left;
 }
-</style>
-
-<style lang="less">
 .quill-editor-box {
   background-color: white;
 
