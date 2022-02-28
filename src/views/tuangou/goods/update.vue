@@ -260,6 +260,18 @@ export default {
       if (this.loading) {
         return;
       }
+      if (this.course.charge < 0) {
+        this.$message.error("请输入正确的团购价");
+        return;
+      }
+      if (this.course.people_num < 2) {
+        this.$message.error("组团成功人数最少为2个");
+        return;
+      }
+      if (this.course.time_limit < 0) {
+        this.$message.error("请输入正确的有效期");
+        return;
+      }
       this.loading = true;
       this.$api.TuanGou.Update(this.id, this.course)
         .then(() => {
