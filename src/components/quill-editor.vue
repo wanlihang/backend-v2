@@ -185,7 +185,14 @@ export default {
       this.dialogFormVisible = false;
     },
     uploadImage(imgUrl) {
-      this.quill.insertEmbed(this.editorIndex, "image", imgUrl);
+      let index = this.editorIndex;
+      let nextIndex = this.editorIndex + 1;
+      if (index === 1) {
+        index = 0;
+        nextIndex = 1;
+      }
+      this.quill.insertEmbed(index, "image", imgUrl);
+      this.quill.getModule("toolbar").quill.setSelection(nextIndex);
       this.showUploadImage = false;
     },
   },
@@ -197,6 +204,9 @@ export default {
   width: 100%;
   float: left;
 }
+</style>
+
+<style lang="less">
 .quill-editor-box {
   background-color: white;
 
