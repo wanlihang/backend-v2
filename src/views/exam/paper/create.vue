@@ -1,7 +1,6 @@
 <template>
   <div class="meedu-main-body">
     <back-bar class="mb-30" title="新建试卷"></back-bar>
-
     <div class="float-left">
       <el-form ref="form" :model="addform" :rules="rules" label-width="200px">
         <el-form-item label="试卷名" prop="title">
