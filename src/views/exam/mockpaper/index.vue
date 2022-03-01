@@ -63,7 +63,6 @@
           </el-table-column>
           <el-table-column label="分数" width="150">
             <template slot-scope="scope">
-              <div>总分：{{ scope.row.score }}分</div>
               <div class="c-red">及格：{{ scope.row.pass_score }}分</div>
             </template>
           </el-table-column>
