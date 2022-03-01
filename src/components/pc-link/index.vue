@@ -79,22 +79,6 @@ export default {
         });
       }
 
-      if (this.enabledAddons["TuanGou"]) {
-        links.push({
-          name: "团购列表",
-          url: "/tg",
-          active: "tuangou,tuangou.show",
-        });
-      }
-
-      if (this.enabledAddons["MiaoSha"]) {
-        links.push({
-          name: "秒杀列表",
-          url: "/ms",
-          active: "miaosha,miaosha.show",
-        });
-      }
-
       if (this.enabledAddons["Wenda"]) {
         links.push({
           name: "问答列表",

@@ -38,8 +38,8 @@
             width="120"
             height="90"
             name="上传封面"
-          ></upload-image> </el-form-item
-        >>
+          ></upload-image>
+        </el-form-item>
 
         <el-form-item label="团购价" prop="charge">
           <div class="d-flex">
