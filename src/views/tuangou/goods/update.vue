@@ -33,10 +33,6 @@
           ></upload-image>
         </el-form-item>
 
-        <el-form-item prop="desc" label="详细介绍">
-          <quill-editor :height="400" v-model="course.desc"></quill-editor>
-        </el-form-item>
-
         <el-form-item label="团购价" prop="charge">
           <div class="d-flex">
             <div>
@@ -141,12 +137,10 @@
   </div>
 </template>
 <script>
-import QuillEditor from "@/components/quill-editor";
 import UploadImage from "@/components/upload-image";
 
 export default {
   components: {
-    QuillEditor,
     UploadImage,
   },
   data() {
@@ -221,13 +215,6 @@ export default {
           {
             required: true,
             message: "请选择开始时间",
-            trigger: "blur",
-          },
-        ],
-        desc: [
-          {
-            required: true,
-            message: "详细介绍不能为空",
             trigger: "blur",
           },
         ],
