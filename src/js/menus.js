@@ -124,16 +124,6 @@ export default [
         permission: "order",
       },
       {
-        name: "title.miaosha.orders.index",
-        key: "MiaoshaOrders",
-        permission: "addons.MiaoSha.orders",
-      },
-      {
-        name: "title.tuangou.orders",
-        key: "TuangouGoodsOrder",
-        permission: "addons.TuanGou.orders",
-      },
-      {
         name: "title.withdrawOrders",
         key: "WithdrawOrders",
         permission: "member.inviteBalance.withdrawOrders",

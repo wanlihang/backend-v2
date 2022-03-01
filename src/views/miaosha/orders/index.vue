@@ -1,5 +1,6 @@
 <template>
   <div class="meedu-main-body">
+    <back-bar class="mb-30" title="秒杀订单"></back-bar>
     <div class="float-left j-b-flex mb-30">
       <div class="d-flex">
         <div>

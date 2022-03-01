@@ -9,6 +9,13 @@
           type="primary"
         >
         </p-button>
+        <p-button
+          text="秒杀订单"
+          p="addons.MiaoSha.orders"
+          @click="$router.push({ name: 'MiaoshaOrders' })"
+          type="primary"
+        >
+        </p-button>
       </div>
       <div class="d-flex">
         <div>
