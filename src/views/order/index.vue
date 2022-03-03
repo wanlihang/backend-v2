@@ -101,6 +101,17 @@
         <el-table-column prop="charge" sortable label="支付金额" :width="150">
         </el-table-column>
         <el-table-column prop="status_text" label="支付状态" :width="150">
+          <template slot-scope="scope">
+            <span
+              :class="{
+                'c-green': scope.row.status_text === '已支付',
+                'c-red': scope.row.status_text === '未支付',
+                'c-yellow': scope.row.status_text === '支付中',
+              }"
+            >
+              {{ scope.row.status_text }}
+            </span>
+          </template>
         </el-table-column>
 
         <el-table-column sortable label="订单创建时间" :width="220">
