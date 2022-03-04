@@ -215,6 +215,9 @@ export default {
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
     border-color: #dcdfe6;
+    .ql-picker-label {
+      color: #ccc;
+    }
     .ql-stroke {
       stroke: #ccc;
     }
