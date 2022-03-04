@@ -245,6 +245,11 @@ export default {
   .ql-editor {
     min-height: 80px;
   }
+  .ql-editor[data-placeholder]::before {
+    font-style: normal;
+    font-size: 14px;
+    color: #c0c4cc;
+  }
 
   &.h-min-40 {
     .ql-editor {
