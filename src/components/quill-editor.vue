@@ -218,6 +218,9 @@ export default {
     .ql-picker-label {
       color: #ccc;
     }
+    .ql-picker-label {
+      color: #ccc;
+    }
     .ql-active {
       color: #000;
     }
@@ -226,6 +229,9 @@ export default {
     }
     .ql-fill {
       fill: #ccc;
+    }
+    .ql-picker.ql-expanded .ql-picker-options {
+      z-index: 2001;
     }
   }
 
