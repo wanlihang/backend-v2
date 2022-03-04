@@ -109,7 +109,7 @@
                 'c-yellow': scope.row.status_text === '支付中',
               }"
             >
-              {{ scope.row.status_text }}
+              · {{ scope.row.status_text }}
             </span>
           </template>
         </el-table-column>

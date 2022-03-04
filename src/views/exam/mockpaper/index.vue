@@ -61,9 +61,9 @@
           </el-table-column>
           <el-table-column prop="title" label="标题" width="500">
           </el-table-column>
-          <el-table-column label="分数" width="150">
+          <el-table-column label="及格" width="150">
             <template slot-scope="scope">
-              <div class="c-red">及格：{{ scope.row.pass_score }}分</div>
+              <div class="c-red">{{ scope.row.pass_score }}分</div>
             </template>
           </el-table-column>
           <el-table-column label="时长">
