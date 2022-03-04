@@ -215,12 +215,20 @@ export default {
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
     border-color: #dcdfe6;
+    .ql-stroke {
+      stroke: #ccc;
+    }
+    .ql-fill {
+      fill: #ccc;
+    }
   }
 
   .ql-container.ql-snow {
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
     border-color: #dcdfe6;
+    font-size: 14px;
+    color: #606266;
   }
 
   .ql-picker-label::before {
