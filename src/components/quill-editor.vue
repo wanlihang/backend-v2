@@ -218,6 +218,9 @@ export default {
     .ql-picker-label {
       color: #ccc;
     }
+    .ql-active {
+      color: #000;
+    }
     .ql-stroke {
       stroke: #ccc;
     }
