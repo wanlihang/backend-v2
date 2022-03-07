@@ -346,6 +346,12 @@ export default {
     },
   },
   mounted() {
+    let screenWidth = document.body.clientWidth;
+    if (screenWidth > 1500) {
+      this.previewWidth = 1200;
+    } else {
+      this.previewWidth = 1000;
+    }
     window.addEventListener("resize", this.getScreenWidth, false);
     this.getData();
   },
