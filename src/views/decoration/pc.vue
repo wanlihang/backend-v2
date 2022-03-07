@@ -345,27 +345,21 @@ export default {
       return sort;
     },
   },
-  watch: {
-    screenWidth(val) {
-      console.log(val);
-      if (val > 1500) {
+  mounted() {
+    window.addEventListener("resize", this.getScreenWidth, false);
+    this.getData();
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.getScreenWidth, false);
+  },
+  methods: {
+    getScreenWidth() {
+      let screenWidth = document.body.clientWidth;
+      if (screenWidth > 1500) {
         this.previewWidth = 1200;
       } else {
         this.previewWidth = 1000;
       }
-    },
-  },
-  mounted() {
-    window.addEventListener("resize", this.getScreenWidth());
-    this.getData();
-  },
-  beforeDestroy() {
-    window.removeEventListener("resize", this.getScreenWidth());
-  },
-  methods: {
-    getScreenWidth() {
-      window.screenWidth = document.body.clientWidth;
-      this.screenWidth = window.screenWidth;
     },
     close() {
       this.showListWin = false;
