@@ -2,9 +2,13 @@
   <div class="sliders-box">
     <div class="float-left" @click="showListWin = true">
       <template v-if="list.length > 0">
-        <el-carousel height="400px">
+        <el-carousel :height="parseInt(width / 3) + 'px'">
           <el-carousel-item v-for="(item, index) in list" :key="index">
-            <img :src="item.thumb" width="1200" height="400" />
+            <img
+              :src="item.thumb"
+              :width="width"
+              :height="parseInt(width / 3)"
+            />
           </el-carousel-item>
         </el-carousel>
       </template>
@@ -19,7 +23,7 @@
 import ListComp from "./list.vue";
 
 export default {
-  props: ["reload"],
+  props: ["reload", "width"],
   components: { ListComp },
   data() {
     return {
@@ -55,7 +59,7 @@ export default {
 <style lang="less" scoped>
 .sliders-box {
   width: 100%;
-  height: 400px;
+  height: auto;
   float: left;
   cursor: pointer;
 }

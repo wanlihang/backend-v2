@@ -176,12 +176,15 @@
       group="blocks"
       @add="dragChange"
     >
-      <div class="pc-box">
+      <div class="pc-box" :style="{ width: previewWidth + 'px' }">
         <!-- 导航栏 -->
         <render-navs :reload="showNavWin"></render-navs>
 
         <!-- 幻灯片 -->
-        <render-sliders :reload="showListWin"></render-sliders>
+        <render-sliders
+          :reload="showListWin"
+          :width="previewWidth"
+        ></render-sliders>
 
         <!-- 公告 -->
         <render-notice :reload="showNoticeWin"></render-notice>
@@ -328,6 +331,8 @@ export default {
       showListWin: false,
       showNoticeWin: false,
       showLinkWin: false,
+      screenWidth: null,
+      previewWidth: null,
     };
   },
   computed: {
@@ -340,10 +345,28 @@ export default {
       return sort;
     },
   },
+  watch: {
+    screenWidth(val) {
+      console.log(val);
+      if (val > 1500) {
+        this.previewWidth = 1200;
+      } else {
+        this.previewWidth = 1000;
+      }
+    },
+  },
   mounted() {
+    window.addEventListener("resize", this.getScreenWidth());
     this.getData();
   },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.getScreenWidth());
+  },
   methods: {
+    getScreenWidth() {
+      window.screenWidth = document.body.clientWidth;
+      this.screenWidth = window.screenWidth;
+    },
     close() {
       this.showListWin = false;
       this.showNavWin = false;
@@ -912,7 +935,6 @@ export default {
   overflow-x: auto;
 
   .pc-box {
-    width: 1200px;
     height: auto;
     float: left;
 

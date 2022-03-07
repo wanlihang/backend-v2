@@ -63,8 +63,9 @@ export default {
 
     .course-thumb {
       width: 100%;
-      height: auto;
       float: left;
+      height: 198px;
+      overflow: hidden;
 
       img {
         border-top-left-radius: 8px;
