@@ -332,7 +332,7 @@ export default {
       showNoticeWin: false,
       showLinkWin: false,
       screenWidth: null,
-      previewWidth: null,
+      previewWidth: 1200,
     };
   },
   computed: {
