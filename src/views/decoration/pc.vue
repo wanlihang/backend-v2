@@ -135,7 +135,7 @@
       </draggable>
     </div>
     <div class="navs-box">
-      <div class="nav-item" @click="showNavWin = true">
+      <div class="nav-item ml-10" @click="showNavWin = true">
         <img
           src="@/assets/images/decoration/h5/icon-nav.png"
           width="30"
