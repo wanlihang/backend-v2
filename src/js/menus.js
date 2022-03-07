@@ -161,6 +161,11 @@ export default [
         permission: "addons.MultiLevelShare.goods.list",
       },
       {
+        name: "title.wenda.question.index",
+        key: "Question",
+        permission: "addons.Wenda.question.list",
+      },
+      {
         name: "title.codeExchanger.index",
         key: "CodeExchanger",
         permission: "addons.CodeExchanger.goods.list",
@@ -169,11 +174,6 @@ export default [
         name: "title.promocode",
         key: "Promocode",
         permission: "promoCode",
-      },
-      {
-        name: "title.wenda.question.index",
-        key: "Question",
-        permission: "addons.Wenda.question.list",
       },
       {
         name: "title.wechat.messagereply.index",
