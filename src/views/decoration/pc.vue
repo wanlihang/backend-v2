@@ -11,6 +11,7 @@
 
     <div class="blocks-box">
       <div class="title">拖动添加板块</div>
+      <div class="tip">拖动下列图标到右侧预览区</div>
       <draggable
         class="blocks"
         :sort="false"
@@ -745,12 +746,11 @@ export default {
   top: 56px;
   left: 0;
   bottom: 0;
-  width: 230px;
+  width: 210px;
   background-color: white;
   box-sizing: border-box;
   padding: 30px;
   overflow-y: auto;
-  border-right: 1px solid #f2f2f2;
 
   .title {
     width: 100%;
@@ -760,7 +760,17 @@ export default {
     font-weight: 600;
     color: #333333;
     line-height: 16px;
-    margin-bottom: 40px;
+    margin-bottom: 15px;
+  }
+  .tip {
+    width: 100%;
+    height: auto;
+    float: left;
+    font-size: 12px;
+    font-weight: 400;
+    color: #999999;
+    line-height: 12px;
+    margin-bottom: 30px;
   }
 
   .blocks {
@@ -768,7 +778,7 @@ export default {
     height: auto;
     float: left;
     display: grid;
-    gap: 40px;
+    gap: 30px;
     grid-template-columns: repeat(2, minmax(0, 1fr));
 
     .block-item {
