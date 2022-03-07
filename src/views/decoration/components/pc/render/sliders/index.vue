@@ -19,6 +19,7 @@
 import ListComp from "./list.vue";
 
 export default {
+  props: ["reload"],
   components: { ListComp },
   data() {
     return {
@@ -26,6 +27,11 @@ export default {
       platform: "PC",
       list: [],
     };
+  },
+  watch: {
+    reload() {
+      this.getData();
+    },
   },
   mounted() {
     this.getData();
