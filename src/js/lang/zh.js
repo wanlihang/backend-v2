@@ -192,7 +192,7 @@ const zh = {
     },
     wenda: {
       question: {
-        index: "用户问答",
+        index: "站内问答",
         answer: "问题回答",
         comment: "问题评论",
         category: {
