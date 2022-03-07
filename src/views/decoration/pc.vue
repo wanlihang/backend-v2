@@ -230,7 +230,7 @@
       </div>
       <config-setting
         :block="blocks[curBlockIndex]"
-        @update="getData()"
+        @update="reloadData()"
       ></config-setting>
     </div>
   </div>
@@ -304,6 +304,27 @@ export default {
       }).then((res) => {
         this.blocks = res.data;
         this.loading = false;
+        if (toBottom) {
+          // 滚动到底部
+          this.$nextTick(() => {
+            this.$refs["preview-box"].$el.scrollTop =
+              this.$refs["preview-box"].$el.scrollHeight;
+          });
+        }
+      });
+    },
+    reloadData(toBottom = false) {
+      if (this.loading) {
+        return;
+      }
+      this.loading = true;
+      this.$api.ViewBlock.List({
+        platform: this.platform,
+        page: this.page,
+      }).then((res) => {
+        this.blocks = res.data;
+        this.loading = false;
+        this.curBlockIndex = null;
         if (toBottom) {
           // 滚动到底部
           this.$nextTick(() => {
