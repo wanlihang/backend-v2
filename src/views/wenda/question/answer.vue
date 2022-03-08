@@ -143,7 +143,7 @@ export default {
             .then(() => {
               this.loading = false;
               this.$message.success(this.$t("common.success"));
-              this.create();
+              this.getData();
             })
             .catch((e) => {
               this.loading = false;

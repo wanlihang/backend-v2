@@ -1004,7 +1004,7 @@ const Api = {
           return post(`/backend/addons/Wenda/category/create`, params);
         },
         Detail(id) {
-          return get(`/backend/addons/Wenda/category//${id}`);
+          return get(`/backend/addons/Wenda/category/${id}`);
         },
         Update(id, params) {
           return put(`/backend/addons/Wenda/category/${id}`, params);

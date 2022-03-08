@@ -2,7 +2,6 @@
   <div class="meedu-main-body">
     <div class="float-left j-b-flex mb-30">
       <div class="d-flex">
-        <el-button @click="destoryMulti()" type="danger"> 批量删除 </el-button>
         <p-button
           text="分类管理"
           p="addons.Wenda.category.list"
@@ -10,6 +9,7 @@
           type="primary"
         >
         </p-button>
+        <el-button @click="destoryMulti()" type="danger"> 批量删除 </el-button>
         <option-bar text="问答配置" value="问答"></option-bar>
       </div>
       <div class="d-flex">
