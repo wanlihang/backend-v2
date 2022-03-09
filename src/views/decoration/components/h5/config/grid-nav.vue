@@ -47,7 +47,12 @@
                   <el-input class="w-100px" v-model="item.href"></el-input>
                 </div>
                 <div class="ml-10">
-                  <el-link type="primary" @click="selectLink(index)">选择链接</el-link>
+                  <el-link
+                    type="primary"
+                    style="font-size: 12px"
+                    @click="selectLink(index)"
+                    >选择链接</el-link
+                  >
                 </div>
               </div>
             </div>
@@ -144,7 +149,7 @@ export default {
         .then(() => {
           this.loading = false;
           this.$message.success(this.$t("common.success"));
-          this.$emit('update');
+          this.$emit("update");
         })
         .catch((e) => {
           this.loading = false;
