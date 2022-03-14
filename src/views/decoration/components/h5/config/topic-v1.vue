@@ -26,12 +26,13 @@
             @click="changeCourse(index)"
           >
             <img v-if="item.thumb" :src="item.thumb" width="80" height="60" />
-            <img
+            <div v-else class="default-box">选择课程</div>
+            <!--<img
               v-else
               src="@/assets/images/decoration/h5/default-topic.png"
               width="80"
               height="60"
-            />
+            />-->
 
             <div class="btn-del" @click.stop="delCourse(index)">
               <close-icon></close-icon>
@@ -202,6 +203,18 @@ export default {
 
           img {
             border-radius: 4px;
+          }
+
+          .default-box {
+            border-radius: 4px;
+            width: 78px;
+            height: 58px;
+            border: 1px dashed #dcdfe6;
+            font-size: 12px;
+            color: #3ca7fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
           }
 
           .btn-del {
