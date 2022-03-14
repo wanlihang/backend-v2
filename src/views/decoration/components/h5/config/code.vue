@@ -16,7 +16,7 @@
       </div>
     </div>
 
-    <div class="float-left mt-15">
+    <div class="float-left footer-button">
       <el-button type="primary" class="w-100" :loading="loading" @click="save">
         保存
       </el-button>
@@ -66,6 +66,20 @@ export default {
   height: auto;
   float: left;
   box-sizing: border-box;
+  position: relative;
+  padding-bottom: 40px;
+
+  .footer-button {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 400px;
+    height: 70px;
+    background: #ffffff;
+    border-top: 1px solid #e5e5e5;
+    box-sizing: border-box;
+    padding: 15px 30px;
+  }
 
   .title {
     width: 100%;

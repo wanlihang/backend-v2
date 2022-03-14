@@ -1,5 +1,5 @@
 <template>
-  <div class="float-left">
+  <div class="vod-v1-box float-left">
     <div class="title">
       <div class="text">幻灯片</div>
       <div class="desc">图片宽高比3:1 推荐尺寸1200x400</div>
@@ -34,19 +34,15 @@
     </div>
 
     <div class="float-left mt-15">
-      <div class="float-left mb-15">
+      <div class="float-left">
         <el-button class="w-100" @click="addSlider"> 添加幻灯片 </el-button>
       </div>
-      <div class="float-left">
-        <el-button
-          type="primary"
-          class="w-100"
-          :loading="loading"
-          @click="save"
-        >
-          保存
-        </el-button>
-      </div>
+    </div>
+
+    <div class="float-left footer-button">
+      <el-button type="primary" class="w-100" :loading="loading" @click="save">
+        保存
+      </el-button>
     </div>
 
     <select-image
@@ -150,6 +146,26 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.vod-v1-box {
+  width: 100%;
+  height: auto;
+  float: left;
+  box-sizing: border-box;
+  position: relative;
+  padding-bottom: 40px;
+
+  .footer-button {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 400px;
+    height: 70px;
+    background: #ffffff;
+    border-top: 1px solid #e5e5e5;
+    box-sizing: border-box;
+    padding: 15px 30px;
+  }
+}
 .title {
   width: 100%;
   height: auto;
