@@ -67,6 +67,11 @@
       :block="block"
       @update="update"
     ></image-group-set>
+    <gzh-v1-set
+      v-else-if="block.sign === 'h5-gzh-v1'"
+      :block="block"
+      @update="update"
+    ></gzh-v1-set>
   </div>
 </template>
 <script>
@@ -83,6 +88,7 @@ import CodeSet from "./code.vue";
 import BlankSet from "./blank.vue";
 import MpWechatSet from "./mp-wechat.vue";
 import ImageGroupSet from "./image-group.vue";
+import GzhV1Set from "./gzh-v1.vue";
 
 export default {
   components: {
@@ -99,6 +105,7 @@ export default {
     BlankSet,
     MpWechatSet,
     ImageGroupSet,
+    GzhV1Set,
   },
   props: ["block"],
   methods: {
