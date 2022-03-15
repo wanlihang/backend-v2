@@ -116,7 +116,7 @@
       :show="showSelectResWin"
       @change="change"
       @close="showSelectResWin = false"
-      enabled-resource="vod,video,live,book,paper,learnPath,practice"
+      enabled-resource="vod,vlive,book,learnPath"
     ></select-resource>
   </div>
 </template>
