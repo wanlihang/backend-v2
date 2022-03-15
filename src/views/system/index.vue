@@ -224,7 +224,7 @@ export default {
           sign: "TuanGou",
         },
         {
-          name: "积分签到",
+          name: "积分配置",
           value: "积分",
           images: require("../../assets/images/config/credict.png"),
           sign: "",
