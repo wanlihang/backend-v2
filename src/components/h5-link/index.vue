@@ -142,12 +142,12 @@ export default {
       //   });
       // }
 
-      if (this.enabledAddons["MiaoSha"]) {
-        links.push({
-          name: "秒杀",
-          url: "/packageA/ms/index",
-        });
-      }
+      // if (this.enabledAddons["MiaoSha"]) {
+      //   links.push({
+      //     name: "秒杀",
+      //     url: "/packageA/ms/index",
+      //   });
+      // }
 
       if (this.enabledAddons["Wenda"]) {
         links.push({
