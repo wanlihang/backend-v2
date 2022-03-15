@@ -17,7 +17,7 @@
           />
           <img
             v-else
-            src="@/assets/images/decoration/h5/default-ms.png"
+            src="@/assets/images/decoration/h5/course-back.png"
             width="120"
             height="90"
           />

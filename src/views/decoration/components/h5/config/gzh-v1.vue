@@ -46,7 +46,7 @@
               />
               <img
                 v-else
-                src="@/assets/images/decoration/h5/none-img.png"
+                src="@/assets/images/decoration/h5/h5-edit.png"
                 width="100"
                 height="100"
               />
@@ -69,7 +69,7 @@
               />
               <img
                 v-else
-                src="@/assets/images/decoration/h5/none-img.png"
+                src="@/assets/images/decoration/h5/h5-edit.png"
                 width="100"
                 height="100"
               />

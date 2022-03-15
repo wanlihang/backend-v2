@@ -22,7 +22,7 @@
             />
             <img
               v-else
-              src="@/assets/images/decoration/h5/default-live.png"
+              src="@/assets/images/decoration/h5/course-back.png"
               width="100%"
               height="124"
             />

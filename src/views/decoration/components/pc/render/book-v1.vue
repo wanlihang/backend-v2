@@ -7,7 +7,7 @@
           <img v-if="item.thumb" :src="item.thumb" width="120" height="160" />
           <img
             v-else
-            src="@/assets/images/decoration/h5/default-book.png"
+            src="@/assets/images/decoration/h5/book-back.png"
             width="120"
             height="160"
           />

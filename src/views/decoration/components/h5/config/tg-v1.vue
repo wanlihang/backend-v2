@@ -31,13 +31,13 @@
               width="80"
               height="60"
             />
-            <div v-else class="default-box">选择课程</div>
-            <!--<img
+            <!--<div v-else class="default-box">选择课程</div>-->
+            <img
               v-else
-              src="@/assets/images/decoration/h5/default-tg.png"
+              src="@/assets/images/decoration/h5/pc-edit.png"
               width="80"
               height="60"
-            />-->
+            />
 
             <div class="btn-del" @click.stop="delCourse(index)">
               <close-icon></close-icon>

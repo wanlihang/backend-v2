@@ -21,7 +21,7 @@
             <div class="btn">
               <div class="icon">
                 <img
-                  src="@/assets/images/decoration/h5/h5-vod-v1.png"
+                  src="@/assets/images/decoration/h5/slider.png"
                   width="44"
                   height="44"
                 />
@@ -34,7 +34,7 @@
             <div class="btn">
               <div class="icon">
                 <img
-                  src="@/assets/images/decoration/h5/h5-vod-v1.png"
+                  src="@/assets/images/decoration/h5/grid-nav.png"
                   width="44"
                   height="44"
                 />

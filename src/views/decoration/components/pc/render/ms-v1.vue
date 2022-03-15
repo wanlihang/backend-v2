@@ -7,7 +7,7 @@
           <img v-if="item.goods_thumb" :src="item.goods_thumb" width="100%" />
           <img
             v-else
-            src="@/assets/images/decoration/h5/default-ms.png"
+            src="@/assets/images/decoration/h5/course-back.png"
             width="100%"
           />
         </div>

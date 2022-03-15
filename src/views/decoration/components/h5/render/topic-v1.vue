@@ -20,12 +20,12 @@
           </div>
         </div>
         <div class="topic-thumb">
-          <img v-if="item.thumb" :src="item.thumb" width="120" height="80" />
+          <img v-if="item.thumb" :src="item.thumb" width="120" height="90" />
           <img
             v-else
-            src="@/assets/images/decoration/h5/default-topic.png"
+            src="@/assets/images/decoration/h5/course-back.png"
             width="120"
-            height="80"
+            height="90"
           />
         </div>
       </div>

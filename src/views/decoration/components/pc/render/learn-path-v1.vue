@@ -7,7 +7,7 @@
           <img v-if="item.thumb" :src="item.thumb" width="173" height="130" />
           <img
             v-else
-            src="@/assets/images/decoration/h5/default-learnPath.png"
+            src="@/assets/images/decoration/h5/course-back.png"
             width="173"
             height="130"
           />
