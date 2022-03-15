@@ -95,6 +95,9 @@ export default {
       grid-template-columns: repeat(2, minmax(0, 1fr));
 
       .course-thumb {
+        width: 100%;
+        height: 124px;
+        overflow: hidden;
         img {
           border-top-left-radius: 4px;
           border-top-right-radius: 4px;
