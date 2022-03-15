@@ -28,9 +28,11 @@
               {{ item.goods_title }}
             </div>
             <div class="tg-info">
-              <div class="tg-sub">{{ item.goods_type_text }}</div>
+              <div class="tg-sub" v-if="item.goods_type_text">
+                {{ item.goods_type_text }}
+              </div>
               <div class="tg-original_charge">
-                原价:￥{{ item.original_charge }}
+                原价:￥{{ item.original_charge || 0 }}
               </div>
               <div class="tg-charge">
                 <span class="unit">￥</span>{{ item.charge || "XX" }}
@@ -167,6 +169,7 @@ export default {
               font-weight: 400;
               padding: 0 5px;
               color: #3ca7fa;
+              margin-right: 10px;
             }
             .tg-original_charge {
               width: auto;
@@ -175,7 +178,6 @@ export default {
               font-weight: 400;
               color: #999999;
               line-height: 12px;
-              margin-left: 10px;
             }
 
             .tg-charge {

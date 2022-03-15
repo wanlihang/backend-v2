@@ -29,11 +29,11 @@
             </div>
             <div class="book-info">
               <div class="sub">
-                <span>{{ item.user_count }}人已订阅</span>
+                <span>{{ item.user_count || 0 }}人已订阅</span>
               </div>
               <div class="price">
                 <small class="unit">￥</small>
-                <span>{{ item.charge }}</span>
+                <span>{{ item.charge || "XX" }}</span>
               </div>
             </div>
           </div>

@@ -15,8 +15,8 @@
         <div class="topic-body">
           <div class="topic-title">{{ item.title }}</div>
           <div class="topic-info">
-            <span>{{ item.view_times }}阅读</span>
-            <span class="ml-15">{{ item.comment_times }}评论</span>
+            <span>{{ item.view_times || 0 }}阅读</span>
+            <span class="ml-15">{{ item.comment_times || 0 }}评论</span>
           </div>
         </div>
         <div class="topic-thumb">

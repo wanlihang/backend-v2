@@ -12,9 +12,9 @@
           <div class="path-title">{{ item.name }}</div>
           <div class="path-desc">{{ item.desc }}</div>
           <div class="path-info">
-            <span>{{ item.steps_count }}个步骤</span>
+            <span>{{ item.steps_count || 0 }}个步骤</span>
             <span>&dot;</span>
-            <span>{{ item.courses_count }}个课程</span>
+            <span>{{ item.courses_count || 0 }}个课程</span>
           </div>
         </div>
         <div class="path-thumb">

@@ -26,9 +26,11 @@
         <div class="ms-body">
           <div class="ms-title">{{ item.goods_title }}</div>
           <div class="ms-info">
-            <div class="ms-sub">{{ item.goods_type_text }}</div>
+            <div class="ms-sub" v-if="item.goods_type_text">
+              {{ item.goods_type_text }}
+            </div>
             <div class="ms-original_charge">
-              原价:￥{{ item.original_charge }}
+              原价:￥{{ item.original_charge || "XX" }}
             </div>
             <div class="ms-charge">
               <span class="unit">￥</span>{{ item.charge }}

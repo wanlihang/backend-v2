@@ -25,9 +25,9 @@
           <div class="course-title">{{ item.title }}</div>
           <div class="course-info">
             <div class="sub">
-              <span>{{ item.user_count }}人已订阅</span>
+              <span>{{ item.user_count || 0 }}人已订阅</span>
             </div>
-            <div class="price"><small>￥</small>{{ item.charge }}</div>
+            <div class="price"><small>￥</small>{{ item.charge || "XX" }}</div>
           </div>
         </div>
       </div>
