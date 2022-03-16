@@ -213,6 +213,7 @@ export default {
 
 <style lang="less" scoped>
 .ori-charge {
+  color: #999;
   text-decoration: line-through;
 }
 </style>
