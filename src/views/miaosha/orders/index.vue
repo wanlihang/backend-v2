@@ -5,28 +5,10 @@
       <div class="d-flex">
         <div>
           <el-input
-            placeholder="关键字"
-            class="w-150px"
-            v-model="filter.keywords"
-          ></el-input>
-        </div>
-        <div class="ml-10">
-          <el-input
             placeholder="用户ID"
             class="w-150px"
             v-model="filter.user_id"
           ></el-input>
-        </div>
-        <div class="ml-10">
-          <el-select class="w-150px" v-model="filter.status">
-            <el-option
-              v-for="(item, index) in filterData.status"
-              :key="index"
-              :label="item.name"
-              :value="item.id"
-            >
-            </el-option>
-          </el-select>
         </div>
         <div class="ml-10">
           <el-date-picker
@@ -46,6 +28,16 @@
           <el-button @click="firstPageLoad" type="primary">筛选</el-button>
         </div>
       </div>
+    </div>
+    <div class="float-left">
+      <el-tabs v-model="filter.status">
+        <el-tab-pane
+          :label="item.name"
+          :name="item.key"
+          v-for="item in filterData.status"
+          :key="item.id"
+        ></el-tab-pane>
+      </el-tabs>
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
@@ -144,8 +136,8 @@ export default {
       },
       filter: {
         type: null,
-        gid: null,
-        status: -1,
+        gid: this.$route.query.id,
+        status: "1",
         created_at: null,
         user_id: null,
       },
@@ -157,16 +149,12 @@ export default {
         goods: [],
         status: [
           {
-            id: -1,
-            name: "全部",
-          },
-          {
-            id: 0,
-            name: "未支付",
-          },
-          {
-            id: 1,
+            key: "1",
             name: "已支付",
+          },
+          {
+            key: "0",
+            name: "未支付",
           },
         ],
       },
@@ -176,6 +164,11 @@ export default {
         },
       },
     };
+  },
+  watch: {
+    "filter.status"() {
+      this.getData();
+    },
   },
   activated() {
     this.getData();
@@ -193,9 +186,8 @@ export default {
     paginationReset() {
       this.pagination.page = 1;
       this.filter.type = null;
-      this.filter.gid = null;
-      this.filter.status = -1;
-      this.filter.keywords = null;
+      this.filter.gid = this.$route.query.id;
+      this.filter.status = "1";
       this.filter.created_at = null;
       this.filter.user_id = null;
       this.getData();
@@ -214,6 +206,7 @@ export default {
       }
       this.loading = true;
       let params = {};
+      this.filter.gid = this.$route.query.id;
       Object.assign(params, this.filter);
       Object.assign(params, this.pagination);
       this.$api.Miaosha.Orders.List(params).then((res) => {

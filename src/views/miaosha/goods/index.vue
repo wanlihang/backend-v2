@@ -9,13 +9,6 @@
           type="primary"
         >
         </p-button>
-        <p-button
-          text="秒杀订单"
-          p="addons.MiaoSha.orders"
-          @click="$router.push({ name: 'MiaoshaOrders' })"
-          type="primary"
-        >
-        </p-button>
       </div>
       <div class="d-flex">
         <div>
@@ -72,9 +65,21 @@
           }}</template>
         </el-table-column>
 
-        <el-table-column fixed="right" label="操作" width="100">
+        <el-table-column fixed="right" label="操作" width="120">
           <template slot-scope="scope">
             <p-link
+              text="订单"
+              p="addons.MiaoSha.orders"
+              type="primary"
+              @click="
+                $router.push({
+                  name: 'MiaoshaOrders',
+                  query: { id: scope.row.id },
+                })
+              "
+            ></p-link>
+            <p-link
+              class="ml-5"
               text="编辑"
               p="addons.MiaoSha.goods.update"
               type="primary"
