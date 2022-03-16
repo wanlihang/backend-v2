@@ -16,13 +16,13 @@
           type="primary"
         >
         </p-button>
-        <p-button
+        <!--<p-button
           text="退款订单"
           p="addons.TuanGou.refund"
           @click="$router.push({ name: 'TuangouGoodsRefund' })"
           type="primary"
         >
-        </p-button>
+        </p-button>-->
         <option-bar text="团购配置" value="团购"></option-bar>
       </div>
 
@@ -229,6 +229,7 @@ export default {
 
 <style lang="less" scoped>
 .ori-charge {
+  color: #999;
   text-decoration: line-through;
 }
 </style>
