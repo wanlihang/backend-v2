@@ -164,6 +164,14 @@ const routes = [
     },
   },
   {
+    path: "/system/videoHlsConfig",
+    component: () => import("@/views/system/videoHlsConfig"),
+    name: "SystemVideoHlsConfig",
+    meta: {
+      title: "title.system-config",
+    },
+  },
+  {
     path: "/system/application",
     component: () => import("@/views/system/application"),
     name: "SystemApplication",

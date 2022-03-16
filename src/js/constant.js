@@ -18,6 +18,7 @@ export default {
     SystemMessageConfig: "SystemIndex",
     SystemCreditSignConfig: "SystemIndex",
     SystemSaveImagesConfig: "SystemIndex",
+    SystemVideoHlsConfig: "SystemIndex",
     SystemApplication: "SystemApplication",
     AdministratorChangePassword: "Dashboard",
     SystemAdministrator: "SystemAdministrator",
