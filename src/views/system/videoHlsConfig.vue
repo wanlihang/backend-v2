@@ -8,11 +8,18 @@
           <el-form-item :key="1595" label="region">
             <div class="j-flex flex-column" style="margin-left: 3px">
               <div>
-                <el-input
-                  class="w-200px"
+                <el-select
+                  class="w-300px"
                   v-model="form.config['meedu.addons.AliyunHls.region']"
                 >
-                </el-input>
+                  <el-option
+                    v-for="(item, index) in aliRegions"
+                    :key="index"
+                    :label="item.title"
+                    :value="item.key"
+                  >
+                  </el-option>
+                </el-select>
               </div>
               <div class="mt-5">
                 <div class="form-helper-text">
@@ -161,6 +168,20 @@ export default {
           "meedu.addons.TencentCloudHls.transcode_definition": null,
         },
       },
+      aliRegions: [
+        {
+          title: "华东2",
+          key: "cn-shanghai",
+        },
+        {
+          title: "华北2",
+          key: "cn-beijing",
+        },
+        {
+          title: "华南1",
+          key: "cn-shenzhen",
+        },
+      ],
       regions: [
         {
           title: "亚太东南(曼谷)",
