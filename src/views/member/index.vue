@@ -210,9 +210,12 @@
     <el-dialog title="发消息" :visible.sync="visible" width="400px">
       <div class="d-flex">
         <el-input
-          class="w-100"
+          type="textarea"
+          maxlength="150"
           v-model="message"
           placeholder="请输入消息文本"
+          class="w-100"
+          rows="4"
         ></el-input>
       </div>
       <div class="j-r-flex mt-20">
@@ -356,6 +359,8 @@ export default {
         message: this.message,
       }).then((res) => {
         this.$message.success(this.$t("common.success"));
+        this.message = null;
+        this.mid = null;
         this.visible = false;
         this.getUser();
       });
