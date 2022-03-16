@@ -211,7 +211,9 @@
       <div class="d-flex">
         <el-input
           type="textarea"
-          maxlength="150"
+          maxlength="500"
+          resize="none"
+          show-word-limit
           v-model="message"
           placeholder="请输入消息文本"
           class="w-100"
