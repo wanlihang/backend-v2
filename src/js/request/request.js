@@ -1034,6 +1034,9 @@ const Api = {
     Detail(id) {
       return get(`/backend/api/v1/member/${id}/detail`);
     },
+    SendMessage(id, params) {
+      return post(`/backend/api/v1/member/${id}/message `, params);
+    },
     UserCourses(id, params) {
       return get(`/backend/api/v1/member/${id}/detail/userCourses`, params);
     },

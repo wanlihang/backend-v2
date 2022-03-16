@@ -112,13 +112,20 @@
             </template>
           </el-table-column>
 
-          <el-table-column fixed="right" label="操作" width="80">
+          <el-table-column fixed="right" label="操作" width="100">
             <template slot-scope="scope">
               <p-link
                 text="查看"
                 p="member.detail"
                 type="primary"
                 @click="detail(scope.row)"
+              ></p-link>
+              <p-link
+                class="ml-5"
+                text="发消息"
+                p="member.message.send"
+                type="primary"
+                @click="sendMessage(scope.row)"
               ></p-link>
             </template>
           </el-table-column>
@@ -200,6 +207,18 @@
         </div>
       </div>
     </el-drawer>
+    <el-dialog title="发消息" :visible.sync="visible" width="400px">
+      <div class="d-flex">
+        <el-input
+          class="w-100"
+          v-model="message"
+          placeholder="请输入消息文本"
+        ></el-input>
+      </div>
+      <div class="j-r-flex mt-20">
+        <el-button @click="confirm" type="primary">确认</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -235,6 +254,9 @@ export default {
           return time.getTime() > Date.now();
         },
       },
+      visible: false,
+      message: null,
+      mid: null,
     };
   },
   activated() {
@@ -324,6 +346,19 @@ export default {
     },
     detail(item) {
       this.$router.push({ name: "MemberDetail", params: { userId: item.id } });
+    },
+    sendMessage(item) {
+      this.visible = true;
+      this.mid = item.id;
+    },
+    confirm() {
+      this.$api.Member.SendMessage(this.mid, {
+        message: this.message,
+      }).then((res) => {
+        this.$message.success(this.$t("common.success"));
+        this.visible = false;
+        this.getUser();
+      });
     },
   },
 };
