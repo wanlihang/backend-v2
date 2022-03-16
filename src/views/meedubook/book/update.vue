@@ -127,23 +127,15 @@
           </el-form-item>
 
           <el-form-item prop="short_desc" label="简短介绍">
-            <div class="d-flex">
-              <div>
-                <el-input
-                  class="w-400px"
-                  rows="4"
-                  maxlength="150"
-                  type="textarea"
-                  v-model="course.short_desc"
-                  placeholder="简短介绍"
-                ></el-input>
-              </div>
-              <div class="ml-10">
-                <helper-text
-                  text="该值会在电子书列表显示，建议不要超过150个字。"
-                ></helper-text>
-              </div>
-            </div>
+            <el-input
+              class="w-400px"
+              rows="4"
+              maxlength="150"
+              type="textarea"
+              show-word-limit
+              v-model="course.short_desc"
+              placeholder="简短介绍"
+            ></el-input>
           </el-form-item>
 
           <el-form-item prop="original_desc" label="详细介绍">
