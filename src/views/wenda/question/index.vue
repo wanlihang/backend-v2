@@ -66,21 +66,21 @@
           <el-table-column type="selection" width="55"></el-table-column>
           <el-table-column prop="id" sortable label="ID" width="120">
           </el-table-column>
-          <el-table-column prop="user_id" sortable label="用户ID" width="120">
+          <el-table-column prop="user_id" sortable label="学员ID" width="120">
           </el-table-column>
           <el-table-column prop="category.name" label="分类" width="200">
           </el-table-column>
-          <el-table-column label="用户" width="300">
+          <el-table-column label="学员" width="300">
             <template slot-scope="scope">
-              <div class="d-flex" v-if="scope.row.user">
-                <div>
+              <div class="user-item d-flex" v-if="scope.row.user">
+                <div class="avatar">
                   <img :src="scope.row.user.avatar" width="40" height="40" />
                 </div>
                 <div class="ml-10">
                   {{ scope.row.user.nick_name }}
                 </div>
               </div>
-              <span v-else class="c-red">用户不存在</span>
+              <span v-else class="c-red">学员不存在</span>
             </template>
           </el-table-column>
           <el-table-column prop="title" label="标题" width="500">
@@ -193,7 +193,7 @@
           <el-input
             class="w-300px"
             v-model="filter.user_id"
-            placeholder="用户ID"
+            placeholder="学员ID"
           ></el-input>
         </div>
         <div class="j-flex mt-20">

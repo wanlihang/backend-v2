@@ -70,8 +70,8 @@
           </el-table-column>
           <el-table-column label="学员" width="300">
             <template slot-scope="scope">
-              <div class="d-flex" v-if="users[scope.row.user_id]">
-                <div>
+              <div class="user-item d-flex" v-if="users[scope.row.user_id]">
+                <div class="avatar">
                   <img
                     :src="users[scope.row.user_id].avatar"
                     width="40"

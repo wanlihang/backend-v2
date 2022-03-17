@@ -1,7 +1,7 @@
 <template>
   <div class="meedu-dialog-mask" v-if="show">
     <div class="meedu-dialog-box">
-      <div class="meedu-dialog-header">添加用户</div>
+      <div class="meedu-dialog-header">添加学员</div>
       <div class="meedu-dialog-body">
         <div class="float-left">
           <div class="float-left d-flex">
@@ -16,7 +16,7 @@
               <el-select
                 v-model="filter.tag_id"
                 class="w-150px"
-                placeholder="用户标签"
+                placeholder="学员标签"
                 filterable
               >
                 <el-option
@@ -57,12 +57,12 @@
               @selection-change="handleSelectionChange"
             >
               <el-table-column type="selection" width="55"> </el-table-column>
-              <el-table-column prop="id" sortable label="用户ID" width="120">
+              <el-table-column prop="id" sortable label="学员ID" width="120">
               </el-table-column>
-              <el-table-column label="用户">
+              <el-table-column label="学员">
                 <template slot-scope="scope">
-                  <div class="d-flex">
-                    <div>
+                  <div class="user-item d-flex">
+                    <div class="avatar">
                       <img :src="scope.row.avatar" width="40" height="40" />
                     </div>
                     <div class="ml-10">{{ scope.row.nick_name }}</div>
@@ -182,7 +182,7 @@ export default {
     },
     confirm() {
       if (this.selectedRows.length === 0) {
-        this.$message.warning("请选择需要操作的用户");
+        this.$message.warning("请选择需要操作的学员");
         return;
       }
       this.$emit("confirm", this.selectedRows);

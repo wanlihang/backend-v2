@@ -20,8 +20,8 @@
           <el-table-column prop="id" label="ID" width="100"> </el-table-column>
           <el-table-column label="讲师">
             <template slot-scope="scope">
-              <div class="d-flex">
-                <div>
+              <div class="user-item d-flex">
+                <div class="avatar">
                   <img :src="scope.row.avatar" width="40" height="40" />
                 </div>
                 <div class="ml-10">

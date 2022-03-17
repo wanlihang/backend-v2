@@ -18,7 +18,7 @@
           <div class="float-left">
             <div class="float-left d-flex mb-30">
               <div class="flex-1">UID：{{ user.id }}</div>
-              <div class="flex-1">用户：{{ user.nick_name }}</div>
+              <div class="flex-1">学员：{{ user.nick_name }}</div>
               <div class="flex-1">订单ID：{{ order.id }}</div>
               <div class="flex-1">订单编号：{{ order.order_id }}</div>
               <div class="flex-1">总额：￥{{ order.charge }}</div>

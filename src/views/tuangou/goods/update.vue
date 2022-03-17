@@ -114,7 +114,7 @@
             </div>
             <div class="ml-10">
               <helper-text
-                text="团购开始时间，时间达到之后，用户才能参与团购"
+                text="团购开始时间，时间达到之后，学员才能参与团购"
               ></helper-text>
             </div>
           </div>
