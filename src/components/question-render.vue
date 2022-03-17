@@ -28,10 +28,5 @@ export default {
       return content.header;
     },
   },
-  watch: {
-    title() {
-      this.$formula(document.getElementById("content"));
-    },
-  },
 };
 </script>

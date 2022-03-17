@@ -54,17 +54,17 @@ export default {
     },
   },
   mounted() {
-    if (this.editorKey) {
-      this.current = this.editorKey;
+    if (this.$utils.getEditorKey()) {
+      this.current = this.$utils.getEditorKey();
     }
   },
   methods: {
-    ...mapMutations(["saverEditorKey"]),
+    ...mapMutations(["saveEditorKey"]),
     change(pureContent, renderContent) {
       this.$emit("change", pureContent, renderContent);
     },
     saveKey(value) {
-      this.saverEditorKey(value);
+      this.$utils.saveEditorKey(value);
     },
   },
 };
