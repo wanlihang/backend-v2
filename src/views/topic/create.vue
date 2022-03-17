@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="添加图文"></back-bar>
+    <back-bar class="mb-30" title="新建图文"></back-bar>
 
     <div class="center-tabs mb-30">
       <div>

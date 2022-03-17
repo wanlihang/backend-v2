@@ -88,7 +88,7 @@ const zh = {
       path: {
         name: "学习路径",
         index: "学习路径",
-        create: "添加学习路径",
+        create: "新建学习路径",
         update: "编辑学习路径",
         category: {
           index: "学习路径分类",
@@ -126,7 +126,7 @@ const zh = {
       course: {
         name: "直播课",
         index: "直播课程",
-        create: "添加直播课程",
+        create: "新建直播课程",
         update: "编辑直播课程",
         comment: "直播课程评论",
         category: {
@@ -180,7 +180,7 @@ const zh = {
     topic: {
       name: "图文",
       index: "图文列表",
-      create: "添加图文",
+      create: "新建图文",
       update: "编辑图文",
       order: "图文学员",
       comment: "图文文章评论",
@@ -205,7 +205,7 @@ const zh = {
     course: {
       vod: {
         index: "录播",
-        create: "添加录播课程",
+        create: "新建录播课程",
         update: "编辑录播课程",
         detail: "录播学员",
         "video-import": "视频批量导入",
@@ -244,7 +244,7 @@ const zh = {
         name: "大小班",
         course: {
           index: "大小班",
-          create: "添加大小班",
+          create: "新建大小班",
           update: "编辑大小班",
         },
         teacher: {
@@ -271,7 +271,7 @@ const zh = {
     meedubook: {
       book: {
         index: "电子书",
-        create: "添加电子书",
+        create: "新建电子书",
         update: "编辑电子书",
         comment: "电子书评论",
         users: "学员",

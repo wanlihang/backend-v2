@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="添加大小班"></back-bar>
+    <back-bar class="mb-30" title="新建大小班"></back-bar>
 
     <div class="center-tabs mb-30">
       <div>

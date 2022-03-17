@@ -3,7 +3,7 @@
     <div class="float-left j-b-flex mb-30">
       <div class="d-flex">
         <p-button
-          text="添加"
+          text="新建"
           @click="$router.push({ name: 'LiveCourseCreate' })"
           type="primary"
           p="addons.Zhibo.course.store"
