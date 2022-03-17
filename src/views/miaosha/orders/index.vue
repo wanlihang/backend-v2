@@ -156,6 +156,10 @@ export default {
             key: "0",
             name: "未支付",
           },
+          {
+            key: "3",
+            name: "已取消",
+          },
         ],
       },
       pickerOptions: {
