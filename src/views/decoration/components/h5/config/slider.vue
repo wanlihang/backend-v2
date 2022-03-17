@@ -124,6 +124,7 @@ export default {
         .then(() => {
           this.loading = false;
           this.$message.success(this.$t("common.success"));
+          this.$emit("update");
         })
         .catch((e) => {
           this.loading = false;

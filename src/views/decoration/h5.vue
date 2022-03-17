@@ -399,7 +399,7 @@ export default {
       }).then((res) => {
         this.blocks = res.data;
         this.loading = false;
-
+        this.curBlock = null;
         if (toBottom) {
           // 滚动到底部
           this.$nextTick(() => {
