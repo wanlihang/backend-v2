@@ -45,15 +45,6 @@
           </div>
         </el-form-item>
 
-        <el-form-item label="库存" prop="num">
-          <el-input
-            type="number"
-            v-model="course.num"
-            class="w-200px"
-            placeholder="库存"
-          ></el-input>
-        </el-form-item>
-
         <el-form-item label="活动时间" prop="started_at">
           <div class="d-flex">
             <div>
@@ -144,13 +135,6 @@ export default {
           {
             required: true,
             message: "请选择商品",
-            trigger: "blur",
-          },
-        ],
-        num: [
-          {
-            required: true,
-            message: "秒杀数量不能为空",
             trigger: "blur",
           },
         ],
