@@ -3,7 +3,7 @@
     <div class="float-left j-b-flex mb-30">
       <div class="d-flex">
         <p-button
-          text="添加用户"
+          text="添加学员"
           p="member.store"
           @click="$router.push({ name: 'MemberCreate' })"
           type="primary"
@@ -23,7 +23,7 @@
           <el-input
             class="w-150px"
             v-model="filter.keywords"
-            placeholder="用户关键字"
+            placeholder="学员关键字"
           ></el-input>
         </div>
         <div class="ml-10">
@@ -64,9 +64,9 @@
           @sort-change="sortChange"
           :default-sort="{ prop: 'id', order: 'descending' }"
         >
-          <el-table-column prop="id" sortable label="用户ID" width="100">
+          <el-table-column prop="id" sortable label="学员ID" width="100">
           </el-table-column>
-          <el-table-column label="用户" width="210">
+          <el-table-column label="学员" width="210">
             <template slot-scope="scope">
               <div class="user-item">
                 <div class="avatar">
@@ -152,7 +152,7 @@
           <el-input
             class="w-300px"
             v-model="filter.keywords"
-            placeholder="用户列表关键字"
+            placeholder="学员列表关键字"
           ></el-input>
         </div>
         <div class="j-flex mt-20">
@@ -176,7 +176,7 @@
           <el-select
             v-model="filter.tag_id"
             class="w-300px"
-            placeholder="用户标签"
+            placeholder="学员标签"
             filterable
           >
             <el-option
@@ -342,7 +342,7 @@ export default {
         this.loading = false;
         this.users = res.data.data.data;
         this.total = res.data.data.total;
-        // 用户备注
+        // 学员备注
         this.userRemark = res.data.user_remarks;
 
         this.filterData.tags = res.data.tags;

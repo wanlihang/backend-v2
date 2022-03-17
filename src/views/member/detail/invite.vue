@@ -6,9 +6,9 @@
       :data="list"
       class="float-left"
     >
-      <el-table-column prop="id" label="邀请用户ID" width="120">
+      <el-table-column prop="id" label="邀请学员ID" width="120">
       </el-table-column>
-      <el-table-column label="邀请用户">
+      <el-table-column label="邀请学员">
         <template slot-scope="scope">
           <div class="d-flex">
             <div>
