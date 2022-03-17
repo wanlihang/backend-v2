@@ -1,6 +1,6 @@
 <template>
   <div class="quill-editor-box" :class="{ 'h-min-40': height === 40 }">
-    <div ref="myQuillEditor" class="quill-editor">
+    <div ref="myQuillEditor" :style="style" class="quill-editor">
       <slot name="toolbar"></slot>
       <div ref="editor"></div>
     </div>
@@ -71,6 +71,14 @@ export default {
         readOnly: false,
       },
     };
+  },
+  computed: {
+    style() {
+      if (this.height !== 40) {
+        return { height: (this.height || 300) + "px" };
+      }
+      return null;
+    },
   },
   mounted() {
     window.katex = katex;

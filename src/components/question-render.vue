@@ -1,6 +1,7 @@
 <template>
   <div
     class="question-list-render"
+    id="content"
     v-html="title.length > 130 ? title.slice(0, 130) + '...' : title"
   ></div>
 </template>
@@ -25,6 +26,11 @@ export default {
       }
       let content = JSON.parse(this.question.content);
       return content.header;
+    },
+  },
+  watch: {
+    title() {
+      this.$formula(document.getElementById("content"));
     },
   },
 };

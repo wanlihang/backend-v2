@@ -109,12 +109,12 @@
             label="免费内容"
             v-if="topic.charge > 0"
           >
-            <mavon-editor
-              class="w-100"
-              :height="500"
+            <change-editor
               :content="topic.free_content"
+              class="w-100"
+              :height="300"
               @change="getfreecontent"
-            ></mavon-editor>
+            ></change-editor>
           </el-form-item>
 
           <el-form-item
@@ -122,20 +122,20 @@
             v-if="topic.charge > 0"
             label="付费内容"
           >
-            <mavon-editor
+            <change-editor
               :content="topic.original_content"
               class="w-100"
-              :height="500"
+              :height="300"
               @change="getcontent"
-            ></mavon-editor>
+            ></change-editor>
           </el-form-item>
           <el-form-item prop="original_content" v-else label="文章内容">
-            <mavon-editor
+            <change-editor
               :content="topic.original_content"
               class="w-100"
-              :height="500"
+              :height="300"
               @change="getcontent"
-            ></mavon-editor>
+            ></change-editor>
           </el-form-item>
         </div>
 
@@ -214,13 +214,13 @@
   </div>
 </template>
 <script>
-import MavonEditor from "@/components/md-editor";
 import UploadImage from "@/components/upload-image";
+import ChangeEditor from "@/components/change-editor";
 
 export default {
   components: {
-    MavonEditor,
     UploadImage,
+    ChangeEditor,
   },
   data() {
     return {
