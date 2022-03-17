@@ -26,7 +26,6 @@
   </div>
 </template>
 <script>
-import { mapState, mapMutations } from "vuex";
 import MavonEditor from "@/components/md-editor";
 import QuillEditor from "@/components/quill-editor";
 export default {
@@ -45,9 +44,6 @@ export default {
       desc: this.content,
     };
   },
-  computed: {
-    ...mapState(["editorKey"]),
-  },
   watch: {
     desc() {
       this.$emit("change", this.desc, this.desc);
@@ -59,7 +55,6 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(["saveEditorKey"]),
     change(pureContent, renderContent) {
       this.$emit("change", pureContent, renderContent);
     },
