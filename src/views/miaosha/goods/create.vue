@@ -12,32 +12,6 @@
           </el-button>
         </el-form-item>
 
-        <el-form-item label="商品名" prop="goods_title">
-          <el-input
-            v-model="course.goods_title"
-            class="w-600px"
-            placeholder="商品名"
-          ></el-input>
-        </el-form-item>
-
-        <el-form-item label="商品原价" prop="original_charge">
-          <el-input
-            type="number"
-            placeholder="原价"
-            v-model="course.original_charge"
-            class="w-200px"
-          ></el-input>
-        </el-form-item>
-
-        <el-form-item prop="goods_thumb" label="商品封面">
-          <upload-image
-            v-model="course.goods_thumb"
-            helper="长宽比4:3，建议尺寸：400x300像素"
-            width="120"
-            height="90"
-          ></upload-image>
-        </el-form-item>
-
         <el-form-item label="秒杀价" prop="charge">
           <div class="d-flex">
             <div>
@@ -117,12 +91,10 @@
   </div>
 </template>
 <script>
-import UploadImage from "@/components/upload-image";
 import SelectResource from "@/components/select-resources/index";
 
 export default {
   components: {
-    UploadImage,
     SelectResource,
   },
   data() {
