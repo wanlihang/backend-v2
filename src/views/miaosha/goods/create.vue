@@ -238,6 +238,18 @@ export default {
       if (this.loading) {
         return;
       }
+      if (this.course.original_charge < 0) {
+        this.$message.error("请输入正确的商品原价");
+        return;
+      }
+      if (this.course.charge < 0) {
+        this.$message.error("请输入正确的秒杀价");
+        return;
+      }
+      if (this.course.num < 0) {
+        this.$message.error("请输入正确的库存");
+        return;
+      }
       this.loading = true;
       this.$api.Miaosha.Goods.Store(this.course)
         .then(() => {
