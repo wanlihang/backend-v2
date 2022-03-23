@@ -25,11 +25,6 @@ export default [
         key: "SinglePage",
         permission: "addons.SinglePage.page.list",
       },
-      {
-        name: "title.mp-wechat-menu",
-        key: "MpWechatMenu",
-        permission: "mpWechat.menu",
-      },
     ],
   },
   {

@@ -1,5 +1,6 @@
 <template>
   <div class="meedu-main-body" v-loading="loading">
+    <back-bar class="mb-30" title="公众号菜单"></back-bar>
     <div class="float-left">
       <h3>常见问题</h3>
       <div class="helper-text">
@@ -156,7 +157,7 @@
               </div>
               <div>
                 <span class="helper-text">
-                  不支持打开小程序的老板客户端将会打开该地址
+                  不支持打开小程序的老版客户端将会打开该地址
                 </span>
               </div>
             </div>

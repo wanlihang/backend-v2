@@ -37,11 +37,6 @@
               v-model="link"
               v-else-if="tabActive === 'course'"
             ></courses>
-
-            <single-page
-              v-model="link"
-              v-else-if="tabActive === 'single-page'"
-            ></single-page>
           </div>
         </div>
       </div>
@@ -56,14 +51,12 @@
 <script>
 import CourseCategory from "./components/course-category.vue";
 import Courses from "./components/courses/index";
-import SinglePage from "./components/single-page.vue";
 import { mapState } from "vuex";
 
 export default {
   components: {
     CourseCategory,
     Courses,
-    SinglePage,
   },
   props: ["show"],
   data() {
@@ -80,22 +73,11 @@ export default {
           name: "功能",
           key: "func",
         },
-        // {
-        //   name: "课程分类",
-        //   key: "category",
-        // },
         {
           name: "课程",
           key: "course",
         },
       ];
-
-      if (this.enabledAddons["SinglePage"]) {
-        tabs.push({
-          name: "单页",
-          key: "single-page",
-        });
-      }
 
       return tabs;
     },

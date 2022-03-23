@@ -8,7 +8,12 @@
         :key="index"
       >
         <div class="topic-thumb">
-          <img v-if="item.thumb" :src="item.thumb" width="133" height="100" />
+          <thumb-bar
+            v-if="item.thumb"
+            :value="item.thumb"
+            :width="133"
+            :height="100"
+          ></thumb-bar>
           <img
             v-else
             src="@/assets/images/decoration/h5/course-back.png"
@@ -70,9 +75,12 @@ export default {
     background-color: white;
     padding: 15px;
     border-radius: 8px;
+    overflow: hidden;
 
     .topic-thumb {
       margin-right: 20px;
+      border-radius: 8px;
+      overflow: hidden;
 
       img {
         border-radius: 8px;

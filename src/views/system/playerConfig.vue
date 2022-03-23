@@ -10,9 +10,9 @@
                 v-model="form.config['meedu.system.player_thumb']"
                 :name="form.name"
                 :can-clear="true"
-                :width="400"
-                :height="300"
-                helper="播放封面是在录播课播放未开始时显示的。推荐尺寸：1200x900"
+                :width="480"
+                :height="270"
+                helper="播放封面是在录播课播放未开始时显示的。推荐尺寸：1920x1080"
               ></upload-image>
             </div>
           </div>

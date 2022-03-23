@@ -256,6 +256,10 @@ export default {
         this.$router.push({
           name: "SystemVideoHlsConfig",
         });
+      } else if (value === "微信公众号") {
+        this.$router.push({
+          name: "SystemMpwechatConfig",
+        });
       } else {
         this.$router.push({ name: "SystemConfig", query: { key: value } });
       }

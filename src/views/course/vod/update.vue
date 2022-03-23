@@ -51,8 +51,8 @@
             <upload-image
               v-model="course.thumb"
               helper="长宽比4:3，建议尺寸：400x300像素"
-              width="400"
-              height="300"
+              width="200"
+              height="150"
               name="上传封面"
             ></upload-image>
           </el-form-item>
@@ -144,10 +144,12 @@
           </el-form-item>
 
           <el-form-item prop="original_desc" label="详细介绍">
-            <quill-editor
-              :height="400"
-              v-model="course.original_desc"
-            ></quill-editor>
+            <div class="w-800px">
+              <quill-editor
+                :height="400"
+                v-model="course.original_desc"
+              ></quill-editor>
+            </div>
           </el-form-item>
         </div>
       </el-form>

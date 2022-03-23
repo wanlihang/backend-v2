@@ -8,6 +8,11 @@
         type="primary"
       ></p-button>
       <option-bar text="公众号配置" value="微信公众号"></option-bar>
+      <option-bar
+        v-if="through"
+        text="公众号菜单"
+        value="公众号菜单"
+      ></option-bar>
     </div>
     <div class="float-left" v-loading="loading">
       <el-table
@@ -67,6 +72,7 @@
   </div>
 </template>
 <script>
+import { mapState } from "vuex";
 export default {
   data() {
     return {
@@ -87,6 +93,15 @@ export default {
   beforeRouteLeave(to, from, next) {
     this.$utils.scrollTopRecord(this.pageName);
     next();
+  },
+  computed: {
+    ...mapState(["user"]),
+    through() {
+      if (!this.user) {
+        return false;
+      }
+      return typeof this.user.permissions["mpWechat.menu"] !== "undefined";
+    },
   },
   methods: {
     paginationReset() {

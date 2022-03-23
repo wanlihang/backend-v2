@@ -132,6 +132,14 @@ const routes = [
     },
   },
   {
+    path: "/system/mp_wechatConfig",
+    component: () => import("@/views/system/mp_wechatConfig"),
+    name: "SystemMpwechatConfig",
+    meta: {
+      title: "title.system-config",
+    },
+  },
+  {
     path: "/system/creditSignConfig",
     component: () => import("@/views/system/creditSignConfig"),
     name: "SystemCreditSignConfig",

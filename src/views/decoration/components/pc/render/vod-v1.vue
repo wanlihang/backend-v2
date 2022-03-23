@@ -4,7 +4,12 @@
     <div class="vod-courses-box">
       <div class="vod-item" v-for="(item, index) in config.items" :key="index">
         <div class="course-thumb">
-          <img v-if="item.thumb" :src="item.thumb" width="100%" />
+          <thumb-bar
+            v-if="item.thumb"
+            :value="item.thumb"
+            :width="264"
+            :height="198"
+          ></thumb-bar>
           <img
             v-else
             src="@/assets/images/decoration/h5/course-back.png"
@@ -60,6 +65,7 @@ export default {
   .vod-item {
     background-color: white;
     border-radius: 8px;
+    overflow: hidden;
 
     .course-thumb {
       width: 100%;
