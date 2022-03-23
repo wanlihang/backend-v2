@@ -1,9 +1,18 @@
 <template>
   <div class="grid-nav-box">
     <div class="grid-nav">
-      <div class="grid-line" v-for="index in lineCount" :key="index">
+      <div
+        class="grid-line"
+        :class="{ active: config.line_count === 5 }"
+        v-for="index in lineCount"
+        :key="index"
+      >
         <template v-for="i in config.line_count">
-          <div class="grid-item" :key="i" v-if="config.items[(index - 1) * config.line_count + i - 1]">
+          <div
+            class="grid-item"
+            :key="i"
+            v-if="config.items[(index - 1) * config.line_count + i - 1]"
+          >
             <div class="icon">
               <img
                 v-if="config.items[(index - 1) * config.line_count + i - 1].src"
@@ -57,10 +66,16 @@ export default {
     height: auto;
     float: left;
     margin-bottom: 15px;
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 36px;
     justify-content: space-between;
-    text-align: center;
+    justify-items: center;
+    align-items: center;
+    &.active {
+      gap: 20px;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
 
     .name {
       width: 100%;
@@ -71,6 +86,7 @@ export default {
       font-weight: 400;
       color: #333333;
       line-height: 12px;
+      text-align: center;
     }
 
     &:last-child {
