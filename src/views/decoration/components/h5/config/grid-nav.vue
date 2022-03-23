@@ -188,7 +188,7 @@ export default {
   float: left;
   box-sizing: border-box;
   position: relative;
-  padding-bottom: 40px;
+  padding-bottom: 60px;
 
   .footer-button {
     position: fixed;
