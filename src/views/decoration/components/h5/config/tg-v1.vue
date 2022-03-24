@@ -25,12 +25,21 @@
             :key="index"
             @click="changeCourse(index)"
           >
-            <img
-              v-if="item.goods_thumb"
-              :src="item.goods_thumb"
-              width="80"
-              height="60"
-            />
+            <template v-if="item.goods_thumb">
+              <thumb-bar
+                v-if="item.goods_type === 'book'"
+                :value="item.goods_thumb"
+                :border="4"
+                :width="45"
+                :height="60"
+              ></thumb-bar>
+              <thumb-bar
+                v-else
+                :value="item.goods_thumb"
+                :width="80"
+                :height="60"
+              ></thumb-bar>
+            </template>
             <!--<div v-else class="default-box">选择课程</div>-->
             <img
               v-else

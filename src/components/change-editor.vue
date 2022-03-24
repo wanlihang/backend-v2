@@ -1,15 +1,15 @@
 <template>
   <div class="editor-box flex-column">
-    <div class="d-flex w-100" v-show="editorKey === 'markdown'">
+    <div class="d-flex w-800px" v-show="editorKey === 'markdown'">
       <mavon-editor
-        :content="content"
-        class="w-100"
+        :content="mavContent"
+        class="w-800px"
         :height="height"
         :placeholder="placeholder"
         @change="change"
       ></mavon-editor>
     </div>
-    <div class="d-flex w-100" v-show="editorKey === 'quill'">
+    <div class="d-flex w-800px" v-show="editorKey === 'quill'">
       <quill-editor :height="height - 42" v-model="desc"></quill-editor>
     </div>
     <div class="editor-tab d-flex w-100">
@@ -42,7 +42,8 @@ export default {
         { title: "富文本编辑器", key: "quill" },
       ],
       desc: this.content,
-      current: "markdown",
+      current: null,
+      mavContent: this.content,
     };
   },
   computed: {
@@ -57,10 +58,10 @@ export default {
     },
   },
   mounted() {
-    if (this.$utils.getEditorKey()) {
-      this.saveEditorKey(this.$utils.getEditorKey());
-      this.current = this.$utils.getEditorKey();
-    }
+    let localCurrent = this.$utils.getEditorKey();
+    let current = localCurrent ? localCurrent : "markdown";
+    this.saveEditorKey(current);
+    this.current = current;
   },
   methods: {
     ...mapMutations(["saveEditorKey"]),

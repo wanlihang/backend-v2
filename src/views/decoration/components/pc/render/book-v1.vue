@@ -9,6 +9,7 @@
             style="display: inline-block; width: 120px; height: 160px"
           >
             <thumb-bar
+              :border="8"
               :value="item.thumb"
               :width="120"
               :height="160"

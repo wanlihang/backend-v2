@@ -4,12 +4,21 @@
     <div class="ms-box">
       <div class="ms-item" v-for="(item, index) in config.items" :key="index">
         <div class="ms-thumb">
-          <thumb-bar
-            v-if="item.goods_thumb"
-            :value="item.goods_thumb"
-            :width="264"
-            :height="198"
-          ></thumb-bar>
+          <template v-if="item.goods_thumb">
+            <thumb-bar
+              v-if="item.goods_type === 'book'"
+              :value="item.goods_thumb"
+              :border="8"
+              :width="148.5"
+              :height="198"
+            ></thumb-bar>
+            <thumb-bar
+              v-else
+              :value="item.goods_thumb"
+              :width="264"
+              :height="198"
+            ></thumb-bar>
+          </template>
           <img
             v-else
             src="@/assets/images/decoration/h5/course-back.png"

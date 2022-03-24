@@ -20,10 +20,6 @@ export default {
         this.$router.push({
           name: "SystemMpwechatConfig",
         });
-      } else if (this.value === "公众号菜单") {
-        this.$router.push({
-          name: "MpWechatMenu",
-        });
       } else {
         this.$router.push({
           name: "SystemConfig",

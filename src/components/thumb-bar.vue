@@ -4,6 +4,7 @@
       <div class="j-flex" style="width: 120px">
         <div
           :style="{
+            'border-radius': '4px',
             'background-image': 'url(' + value + ')',
             width: width + 'px',
             height: height + 'px',
@@ -18,22 +19,25 @@
       </div>
     </template>
     <template v-else>
-      <div
-        :style="{
-          'background-image': 'url(' + value + ')',
-          width: width + 'px',
-          height: height + 'px',
-          'background-position': 'center center',
-          'background-size': 'cover',
-          'background-repeat': 'no-repeat',
-        }"
-      ></div>
+      <div class="j-flex" style="width: 100%">
+        <div
+          :style="{
+            'border-radius': border + 'px',
+            'background-image': 'url(' + value + ')',
+            width: width + 'px',
+            height: height + 'px',
+            'background-position': 'center center',
+            'background-size': 'cover',
+            'background-repeat': 'no-repeat',
+          }"
+        ></div>
+      </div>
     </template>
   </div>
 </template>
 <script>
 export default {
-  props: ["value", "width", "height", "title"],
+  props: ["value", "width", "height", "title", "border"],
   methods: {},
 };
 </script>

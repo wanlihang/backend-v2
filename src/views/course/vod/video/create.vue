@@ -76,6 +76,7 @@
                   type="datetime"
                   align="right"
                   placeholder="请选择日期"
+                  value-format="yyyy-MM-dd HH:mm:ss"
                 >
                 </el-date-picker>
               </div>
@@ -217,24 +218,6 @@
             </el-select>
           </el-form-item> -->
 
-          <el-form-item label="SEO描述">
-            <el-input
-              class="w-300px"
-              type="textarea"
-              v-model="video.seo_description"
-              placeholder="SEO描述"
-            ></el-input>
-          </el-form-item>
-
-          <el-form-item label="SEO关键字">
-            <el-input
-              class="w-300px"
-              type="textarea"
-              v-model="video.seo_keywords"
-              placeholder="SEO关键字"
-            ></el-input>
-          </el-form-item>
-
           <el-form-item label="阿里云视频文件ID" prop="aliyun_video_id">
             <el-input
               v-model="video.aliyun_video_id"
@@ -312,8 +295,6 @@ export default {
         short_description: null,
         tencent_video_id: null,
         url: null,
-        seo_description: null,
-        seo_keywords: null,
       },
       chapters: [],
       rules: {

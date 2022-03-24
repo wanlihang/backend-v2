@@ -161,8 +161,8 @@ const zh = {
     wechat: {
       messagereply: {
         index: "公众号",
-        create: "公众号添加规则",
-        update: "公众号编辑规则",
+        create: "新建自动回复",
+        update: "编辑自动回复",
       },
     },
     codeExchanger: {

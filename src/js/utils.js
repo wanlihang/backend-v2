@@ -21,6 +21,14 @@ export default {
     XLSX.utils.book_append_sheet(wb, ws, sheetName);
     XLSX.writeFile(wb, filename);
   },
+  wechatUrlRules(url) {
+    if (
+      !url.substring(0, 8).match("https://") &&
+      !url.substring(0, 7).match("http://")
+    ) {
+      return "地址必须携带http://或https://协议";
+    }
+  },
   currentDate() {
     const Manba = require("manba");
     return Manba().format("YYYY/MM/DD h:mm:ss");

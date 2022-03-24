@@ -111,7 +111,7 @@
           >
             <change-editor
               class="w-100"
-              :height="300"
+              :height="400"
               :content="topic.free_content"
               @change="getfreecontent"
             ></change-editor>
@@ -125,7 +125,7 @@
             <change-editor
               :content="topic.original_content"
               class="w-100"
-              :height="300"
+              :height="400"
               @change="getcontent"
             ></change-editor>
           </el-form-item>
@@ -133,7 +133,7 @@
             <change-editor
               :content="topic.original_content"
               class="w-100"
-              :height="300"
+              :height="400"
               @change="getcontent"
             ></change-editor>
           </el-form-item>
@@ -174,26 +174,6 @@
                 ></helper-text>
               </div>
             </div>
-          </el-form-item>
-
-          <el-form-item label="SEO关键字">
-            <el-input
-              class="w-400px"
-              rows="3"
-              type="textarea"
-              v-model="topic.seo_keywords"
-              placeholder="SEO关键字"
-            ></el-input>
-          </el-form-item>
-
-          <el-form-item label="SEO描述">
-            <el-input
-              class="w-400px"
-              rows="3"
-              type="textarea"
-              v-model="topic.seo_description"
-              placeholder="SEO描述"
-            ></el-input>
           </el-form-item>
         </div>
       </el-form>

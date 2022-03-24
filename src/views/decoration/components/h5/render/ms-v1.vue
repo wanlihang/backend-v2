@@ -9,12 +9,21 @@
       <div class="ms-item" v-for="(item, index) in config.items" :key="index">
         <div class="ms-thumb">
           <div class="ms-icon">秒杀中</div>
-          <img
-            v-if="item.goods_thumb"
-            :src="item.goods_thumb"
-            width="120"
-            height="90"
-          />
+          <template v-if="item.goods_thumb">
+            <thumb-bar
+              v-if="item.goods_type === 'book'"
+              :value="item.goods_thumb"
+              :border="4"
+              :width="67.5"
+              :height="90"
+            ></thumb-bar>
+            <thumb-bar
+              v-else
+              :value="item.goods_thumb"
+              :width="120"
+              :height="90"
+            ></thumb-bar>
+          </template>
           <img
             v-else
             src="@/assets/images/decoration/h5/course-back.png"
@@ -24,7 +33,9 @@
         </div>
 
         <div class="ms-body">
-          <div class="ms-title">{{ item.goods_title }}</div>
+          <div class="ms-title">
+            {{ item.goods_title }}
+          </div>
           <div class="ms-info">
             <div class="ms-sub" v-if="item.goods_type_text">
               {{ item.goods_type_text }}
@@ -103,7 +114,7 @@ export default {
       .ms-thumb {
         position: relative;
         width: 120px;
-        height: 90px;
+        height: auto;
         border-radius: 4px;
         margin-right: 10px;
         overflow: hidden;

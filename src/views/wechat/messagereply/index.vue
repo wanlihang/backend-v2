@@ -2,17 +2,18 @@
   <div class="meedu-main-body">
     <div class="float-left mb-30">
       <p-button
-        text="添加规则"
+        text="新建自动回复"
         p="mpWechatMessageReply.store"
         @click="$router.push({ name: 'ReplyCreate' })"
         type="primary"
       ></p-button>
-      <option-bar text="公众号配置" value="微信公众号"></option-bar>
-      <option-bar
-        v-if="through"
+      <p-button
         text="公众号菜单"
-        value="公众号菜单"
-      ></option-bar>
+        p="mpWechat.menu"
+        @click="$router.push({ name: 'MpWechatMenu' })"
+        type="primary"
+      ></p-button>
+      <option-bar text="公众号配置" value="微信公众号"></option-bar>
     </div>
     <div class="float-left" v-loading="loading">
       <el-table
@@ -96,12 +97,6 @@ export default {
   },
   computed: {
     ...mapState(["user"]),
-    through() {
-      if (!this.user) {
-        return false;
-      }
-      return typeof this.user.permissions["mpWechat.menu"] !== "undefined";
-    },
   },
   methods: {
     paginationReset() {
