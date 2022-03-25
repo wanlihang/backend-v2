@@ -228,7 +228,7 @@ export default {
             trigger: "blur",
           },
         ],
-        render_content: [
+        original_content: [
           {
             required: true,
             message: "内容不能为空",

@@ -1,5 +1,5 @@
 <template>
-  <div class="editor-box flex flex-row" v-if="status">
+  <div class="editor-box flex flex-row">
     <div class="d-flex w-800px" v-show="editorKey === 'markdown'">
       <mavon-editor
         :content="mavContent"
@@ -10,7 +10,11 @@
       ></mavon-editor>
     </div>
     <div class="d-flex w-800px" v-show="editorKey === 'quill'">
-      <quill-editor :height="height - 42" v-model="desc"></quill-editor>
+      <quill-editor
+        :height="height - 42"
+        v-model="desc"
+        v-if="renderComponent"
+      ></quill-editor>
     </div>
     <div class="editor-tab">
       <el-select @change="saveKey" class="w-150px" v-model="current">
@@ -44,7 +48,7 @@ export default {
       desc: this.content,
       current: null,
       mavContent: this.content,
-      status: true,
+      renderComponent: true,
     };
   },
   computed: {
@@ -78,6 +82,13 @@ export default {
         .then(() => {
           this.saveEditorKey(value);
           this.$utils.saveEditorKey(value);
+          this.$emit("change", null, null);
+          this.desc = null;
+          this.mavContent = "";
+          this.renderComponent = false;
+          this.$nextTick(() => {
+            this.renderComponent = true;
+          });
         })
         .catch(() => {
           //点击删除按钮的操作
