@@ -2,6 +2,7 @@
   <div class="editor-box flex flex-row">
     <div class="d-flex w-800px" v-show="editorKey === 'markdown'">
       <mavon-editor
+        v-if="renderComponent"
         :content="mavContent"
         class="w-800px"
         :height="height"
@@ -84,7 +85,7 @@ export default {
           this.$utils.saveEditorKey(value);
           this.$emit("change", null, null);
           this.desc = null;
-          this.mavContent = "";
+          this.mavContent = null;
           this.renderComponent = false;
           this.$nextTick(() => {
             this.renderComponent = true;
