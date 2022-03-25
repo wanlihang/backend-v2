@@ -61,13 +61,15 @@ export default {
     },
     editorKey() {
       this.current = this.editorKey;
-      this.$emit("change", null, null);
-      this.desc = null;
-      this.mavContent = null;
-      this.renderComponent = false;
-      this.$nextTick(() => {
-        this.renderComponent = true;
-      });
+      if (this.editorKey === this.$utils.getEditorKey()) {
+        this.$emit("change", null, null);
+        this.desc = null;
+        this.mavContent = null;
+        this.renderComponent = false;
+        this.$nextTick(() => {
+          this.renderComponent = true;
+        });
+      }
     },
   },
   mounted() {
