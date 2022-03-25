@@ -61,6 +61,13 @@ export default {
     },
     editorKey() {
       this.current = this.editorKey;
+      this.$emit("change", null, null);
+      this.desc = null;
+      this.mavContent = null;
+      this.renderComponent = false;
+      this.$nextTick(() => {
+        this.renderComponent = true;
+      });
     },
   },
   mounted() {
@@ -83,13 +90,6 @@ export default {
         .then(() => {
           this.saveEditorKey(value);
           this.$utils.saveEditorKey(value);
-          this.$emit("change", null, null);
-          this.desc = null;
-          this.mavContent = null;
-          this.renderComponent = false;
-          this.$nextTick(() => {
-            this.renderComponent = true;
-          });
         })
         .catch(() => {
           //点击删除按钮的操作
