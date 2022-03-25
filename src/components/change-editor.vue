@@ -1,6 +1,6 @@
 <template>
   <div class="editor-box flex flex-row">
-    <div class="d-flex w-800px" v-show="editorKey === 'markdown'">
+    <div class="d-flex w-800px" v-if="editorKey === 'markdown'">
       <mavon-editor
         v-if="renderComponent"
         :content="mavContent"
@@ -10,7 +10,7 @@
         @change="change"
       ></mavon-editor>
     </div>
-    <div class="d-flex w-800px" v-show="editorKey === 'quill'">
+    <div class="d-flex w-800px" v-if="editorKey === 'quill'">
       <quill-editor
         :height="height - 42"
         v-model="desc"
