@@ -3,7 +3,7 @@
     <div class="float-left j-b-flex mb-30">
       <div class="d-flex">
         <p-button
-          text="添加用户"
+          text="添加学员"
           p="member.store"
           @click="$router.push({ name: 'MemberCreate' })"
           type="primary"
@@ -23,7 +23,7 @@
           <el-input
             class="w-150px"
             v-model="filter.keywords"
-            placeholder="用户关键字"
+            placeholder="学员关键字"
           ></el-input>
         </div>
         <div class="ml-10">
@@ -64,9 +64,9 @@
           @sort-change="sortChange"
           :default-sort="{ prop: 'id', order: 'descending' }"
         >
-          <el-table-column prop="id" sortable label="用户ID" width="100">
+          <el-table-column prop="id" sortable label="学员ID" width="100">
           </el-table-column>
-          <el-table-column label="用户" width="210">
+          <el-table-column label="学员" width="210">
             <template slot-scope="scope">
               <div class="user-item">
                 <div class="avatar">
@@ -112,13 +112,20 @@
             </template>
           </el-table-column>
 
-          <el-table-column fixed="right" label="操作" width="80">
+          <el-table-column fixed="right" label="操作" width="100">
             <template slot-scope="scope">
               <p-link
                 text="查看"
                 p="member.detail"
                 type="primary"
                 @click="detail(scope.row)"
+              ></p-link>
+              <p-link
+                class="ml-5"
+                text="发消息"
+                p="member.message.send"
+                type="primary"
+                @click="sendMessage(scope.row)"
               ></p-link>
             </template>
           </el-table-column>
@@ -145,7 +152,7 @@
           <el-input
             class="w-300px"
             v-model="filter.keywords"
-            placeholder="用户列表关键字"
+            placeholder="学员列表关键字"
           ></el-input>
         </div>
         <div class="j-flex mt-20">
@@ -169,7 +176,7 @@
           <el-select
             v-model="filter.tag_id"
             class="w-300px"
-            placeholder="用户标签"
+            placeholder="学员标签"
             filterable
           >
             <el-option
@@ -200,6 +207,23 @@
         </div>
       </div>
     </el-drawer>
+    <el-dialog title="发消息" :visible.sync="visible" width="400px">
+      <div class="d-flex">
+        <el-input
+          type="textarea"
+          maxlength="500"
+          resize="none"
+          show-word-limit
+          v-model="message"
+          placeholder="请输入消息文本"
+          class="w-100"
+          rows="4"
+        ></el-input>
+      </div>
+      <div class="j-r-flex mt-20">
+        <el-button @click="confirm" type="primary">确认</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -235,6 +259,9 @@ export default {
           return time.getTime() > Date.now();
         },
       },
+      visible: false,
+      message: null,
+      mid: null,
     };
   },
   activated() {
@@ -315,7 +342,7 @@ export default {
         this.loading = false;
         this.users = res.data.data.data;
         this.total = res.data.data.total;
-        // 用户备注
+        // 学员备注
         this.userRemark = res.data.user_remarks;
 
         this.filterData.tags = res.data.tags;
@@ -324,6 +351,21 @@ export default {
     },
     detail(item) {
       this.$router.push({ name: "MemberDetail", params: { userId: item.id } });
+    },
+    sendMessage(item) {
+      this.visible = true;
+      this.mid = item.id;
+    },
+    confirm() {
+      this.$api.Member.SendMessage(this.mid, {
+        message: this.message,
+      }).then((res) => {
+        this.$message.success(this.$t("common.success"));
+        this.message = null;
+        this.mid = null;
+        this.visible = false;
+        this.getUser();
+      });
     },
   },
 };

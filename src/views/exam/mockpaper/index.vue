@@ -9,6 +9,12 @@
           type="primary"
         >
         </p-button>
+        <el-button
+          type="primary"
+          @click="$router.push({ name: 'PaperCategories' })"
+        >
+          分类管理
+        </el-button>
       </div>
       <div class="d-flex">
         <div>
@@ -55,10 +61,9 @@
           </el-table-column>
           <el-table-column prop="title" label="标题" width="500">
           </el-table-column>
-          <el-table-column label="分数" width="150">
+          <el-table-column label="及格" width="150">
             <template slot-scope="scope">
-              <div>总分：{{ scope.row.score }}分</div>
-              <div class="c-red">及格：{{ scope.row.pass_score }}分</div>
+              <div class="c-red">{{ scope.row.pass_score }}分</div>
             </template>
           </el-table-column>
           <el-table-column label="时长">
@@ -69,19 +74,7 @@
           <el-table-column fixed="right" label="操作" width="140">
             <template slot-scope="scope">
               <p-link
-                text="编辑"
-                p="addons.Paper.mock_paper.update"
-                type="primary"
-                @click="
-                  $router.push({
-                    name: 'ExamMockpaperUpdate',
-                    query: { id: scope.row.id },
-                  })
-                "
-              ></p-link>
-              <p-link
                 text="学员"
-                class="ml-5"
                 p="addons.Paper.mock_paper.users"
                 type="primary"
                 @click="
@@ -91,23 +84,36 @@
                   })
                 "
               ></p-link>
+              <p-link
+                text="统计"
+                class="ml-5"
+                p="addons.Paper.mock_paper.statistics"
+                type="primary"
+                @click="
+                  $router.push({
+                    name: 'ExamMockpaperStat',
+                    query: { id: scope.row.id },
+                  })
+                "
+              >
+              </p-link>
               <el-dropdown>
                 <el-link type="primary" class="el-dropdown-link ml-5">
                   更多<i class="el-icon-arrow-down el-icon--right"></i>
                 </el-link>
                 <el-dropdown-menu slot="dropdown">
                   <p-dropdown-item
-                    text="统计"
-                    p="addons.Paper.mock_paper.statistics"
+                    text="编辑"
+                    p="addons.Paper.mock_paper.update"
                     type="primary"
                     @click="
                       $router.push({
-                        name: 'ExamMockpaperStat',
+                        name: 'ExamMockpaperUpdate',
                         query: { id: scope.row.id },
                       })
                     "
-                  >
-                  </p-dropdown-item>
+                  ></p-dropdown-item>
+
                   <p-dropdown-item
                     text="考试记录"
                     p="addons.Paper.mock_paper.records"

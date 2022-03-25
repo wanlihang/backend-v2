@@ -26,9 +26,10 @@
             @click="changeCourse(index)"
           >
             <img v-if="item.thumb" :src="item.thumb" width="80" height="60" />
+            <!--<div v-else class="default-box">选择课程</div>-->
             <img
               v-else
-              src="@/assets/images/decoration/h5/default-learnPath.png"
+              src="@/assets/images/decoration/h5/pc-edit.png"
               width="80"
               height="60"
             />
@@ -42,19 +43,15 @@
     </div>
 
     <div class="float-left mt-15">
-      <div class="float-left mb-15">
+      <div class="float-left">
         <el-button class="w-100" @click="addCourse"> 添加路径 </el-button>
       </div>
-      <div class="float-left">
-        <el-button
-          type="primary"
-          class="w-100"
-          :loading="loading"
-          @click="save"
-        >
-          保存
-        </el-button>
-      </div>
+    </div>
+
+    <div class="float-left footer-button">
+      <el-button type="primary" class="w-100" :loading="loading" @click="save">
+        保存
+      </el-button>
     </div>
 
     <select-learn-path
@@ -138,6 +135,20 @@ export default {
   height: auto;
   float: left;
   box-sizing: border-box;
+  position: relative;
+  padding-bottom: 40px;
+
+  .footer-button {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 400px;
+    height: 70px;
+    background: #ffffff;
+    border-top: 1px solid #e5e5e5;
+    box-sizing: border-box;
+    padding: 15px 30px;
+  }
 
   .title {
     width: 100%;
@@ -202,6 +213,18 @@ export default {
 
           img {
             border-radius: 4px;
+          }
+
+          .default-box {
+            border-radius: 4px;
+            width: 78px;
+            height: 58px;
+            border: 1px dashed #dcdfe6;
+            font-size: 12px;
+            color: #3ca7fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
           }
 
           .btn-del {

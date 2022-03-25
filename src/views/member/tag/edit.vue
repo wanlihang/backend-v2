@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="编辑用户标签"></back-bar>
+    <back-bar class="mb-30" title="编辑学员标签"></back-bar>
 
     <div class="float-left">
       <el-form ref="form" :model="form" :rules="rules" label-width="200px">

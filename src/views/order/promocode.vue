@@ -44,7 +44,7 @@
           <el-input
             class="w-150px"
             v-model="filter.user_id"
-            placeholder="用户ID"
+            placeholder="学员ID"
           ></el-input>
         </div>
         <div class="ml-10">
@@ -143,7 +143,7 @@
           <el-input
             class="w-300px"
             v-model="filter.user_id"
-            placeholder="用户ID"
+            placeholder="学员ID"
           ></el-input>
         </div>
 

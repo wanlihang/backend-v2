@@ -65,23 +65,15 @@
           ></el-input>
         </el-form-item>
         <el-form-item prop="desc" label="描述">
-          <div class="d-flex">
-            <div>
-              <el-input
-                type="textarea"
-                v-model="course.desc"
-                class="w-600px"
-                maxlength="150"
-                rows="4"
-                placeholder="描述"
-              ></el-input>
-            </div>
-            <div class="ml-10">
-              <helper-text
-                text="该值会在学习路径列表显示，建议不要超过150个字。"
-              ></helper-text>
-            </div>
-          </div>
+          <el-input
+            type="textarea"
+            v-model="course.desc"
+            class="w-600px"
+            maxlength="150"
+            rows="4"
+            show-word-limit
+            placeholder="描述"
+          ></el-input>
         </el-form-item>
         <el-form-item label="显示" prop="is_show">
           <div class="d-flex">
@@ -94,7 +86,7 @@
               </el-switch>
             </div>
             <div class="ml-10">
-              <helper-text text="该字段控制用户能否看到该路径"></helper-text>
+              <helper-text text="该字段控制学员能否看到该路径"></helper-text>
             </div>
           </div>
         </el-form-item>

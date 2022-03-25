@@ -1,9 +1,9 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="添加习题"></back-bar>
+    <back-bar class="mb-30" title="添加试题"></back-bar>
     <div class="float-left j-b-flex mb-30">
       <div class="d-flex">
-        <el-button @click="addmulti()" type="danger"> 批量添加 </el-button>
+        <el-button @click="addmulti()" type="primary"> 批量添加 </el-button>
       </div>
       <div class="d-flex">
         <div>
@@ -52,6 +52,7 @@
         </div>
       </div>
     </div>
+    <div class="float-left mb-30 check-num">已选择{{ spids.s.length }}项</div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table
@@ -112,7 +113,7 @@ export default {
       filter: {
         in: 0,
         category_id: null,
-        tyoe: null,
+        type: null,
         level: null,
       },
       loading: false,
@@ -214,9 +215,9 @@ export default {
             this.pagination.id,
             this.spids
           )
-            .then(() => {
+            .then((res) => {
               this.loading = false;
-              this.$message.success(this.$t("common.success"));
+              this.$message.success(res.message);
               this.getResults();
             })
             .catch((e) => {

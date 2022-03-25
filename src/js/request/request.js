@@ -1004,7 +1004,7 @@ const Api = {
           return post(`/backend/addons/Wenda/category/create`, params);
         },
         Detail(id) {
-          return get(`/backend/addons/Wenda/category//${id}`);
+          return get(`/backend/addons/Wenda/category/${id}`);
         },
         Update(id, params) {
           return put(`/backend/addons/Wenda/category/${id}`, params);
@@ -1033,6 +1033,9 @@ const Api = {
     },
     Detail(id) {
       return get(`/backend/api/v1/member/${id}/detail`);
+    },
+    SendMessage(id, params) {
+      return post(`/backend/api/v1/member/${id}/message `, params);
     },
     UserCourses(id, params) {
       return get(`/backend/api/v1/member/${id}/detail/userCourses`, params);
@@ -1324,8 +1327,8 @@ const Api = {
       List(params) {
         return get(`/backend/addons/Paper/mock_paper/index`, params);
       },
-      Create() {
-        return get(`/backend/addons/Paper/mock_paper/create`);
+      Create(params) {
+        return get(`/backend/addons/Paper/mock_paper/create`, params);
       },
       Store(params) {
         return post(`/backend/addons/Paper/mock_paper/create`, params);

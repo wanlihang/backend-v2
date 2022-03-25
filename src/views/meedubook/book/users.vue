@@ -1,17 +1,17 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="电子书订阅用户"></back-bar>
+    <back-bar class="mb-30" title="电子书学员"></back-bar>
     <div class="float-left j-b-flex mb-30">
       <div class="d-flex">
         <p-button
-          text="删除用户"
+          text="删除学员"
           type="danger"
           p="addons.meedu_books.book.user.del"
           @click="delUser"
         ></p-button>
         <p-button
           type="primary"
-          text="添加用户"
+          text="添加学员"
           p="addons.meedu_books.book.user.add"
           @click="showUserAddWin = true"
         ></p-button>
@@ -21,7 +21,7 @@
           <el-input
             v-model="filter.user_id"
             class="w-150px"
-            placeholder="用户ID"
+            placeholder="学员ID"
           ></el-input>
         </div>
         <div class="ml-10">
@@ -38,17 +38,17 @@
         class="float-left"
       >
         <el-table-column type="selection" width="55"></el-table-column>
-        <el-table-column prop="user_id" label="用户ID" width="150">
+        <el-table-column prop="user_id" label="学员ID" width="150">
         </el-table-column>
-        <el-table-column label="用户">
+        <el-table-column label="学员">
           <template slot-scope="scope">
-            <div class="d-flex" v-if="scope.row.user">
-              <div>
+            <div class="user-item d-flex" v-if="scope.row.user">
+              <div class="avatar">
                 <img :src="scope.row.user.avatar" width="40" height="40" />
               </div>
               <div class="ml-10">{{ scope.row.user.nick_name }}</div>
             </div>
-            <span class="c-red" v-else>用户不存在</span>
+            <span class="c-red" v-else>学员不存在</span>
           </template>
         </el-table-column>
         <el-table-column label="价格" width="200">

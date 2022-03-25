@@ -3,7 +3,7 @@
     <div class="float-left j-b-flex mb-30">
       <div class="d-flex">
         <el-button type="primary" @click="showUserAddWin = true">
-          添加用户
+          添加学员
         </el-button>
       </div>
       <div class="d-flex">
@@ -11,7 +11,7 @@
           <el-input
             class="w-150px"
             v-model="filter.user_id"
-            placeholder="用户ID"
+            placeholder="学员ID"
           ></el-input>
         </div>
         <div class="ml-10">
@@ -39,12 +39,12 @@
       :data="list"
       class="float-left"
     >
-      <el-table-column label="用户ID" prop="user_id" width="120">
+      <el-table-column label="学员ID" prop="user_id" width="120">
       </el-table-column>
-      <el-table-column label="用户">
+      <el-table-column label="学员">
         <template slot-scope="scope">
-          <div v-if="users[scope.row.user_id]" class="d-flex">
-            <div>
+          <div v-if="users[scope.row.user_id]" class="user-item d-flex">
+            <div class="avatar">
               <img
                 :src="users[scope.row.user_id].avatar"
                 width="40"
@@ -55,7 +55,7 @@
               {{ users[scope.row.user_id].nick_name }}
             </div>
           </div>
-          <span v-else class="c-red">用户已删除</span>
+          <span v-else class="c-red">学员已删除</span>
         </template>
       </el-table-column>
       <el-table-column label="订阅价格" width="200">

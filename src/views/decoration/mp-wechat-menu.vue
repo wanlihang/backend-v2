@@ -1,5 +1,6 @@
 <template>
   <div class="meedu-main-body" v-loading="loading">
+    <back-bar class="mb-30" title="公众号菜单"></back-bar>
     <div class="float-left">
       <h3>常见问题</h3>
       <div class="helper-text">
@@ -90,11 +91,18 @@
             网址 <span class="c-red" v-if="editItem.pIndex">*</span>
           </div>
           <div class="float-left">
-            <el-input
-              class="w-300px"
-              v-model="editItem.item.url"
-              placeholder="请输入网址"
-            ></el-input>
+            <div class="d-flex">
+              <div>
+                <el-input
+                  class="w-300px"
+                  v-model="editItem.item.url"
+                  placeholder="请输入网址"
+                ></el-input>
+              </div>
+              <div class="ml-10 c-red" v-if="editItem.item.url">
+                {{ this.$utils.wechatUrlRules(editItem.item.url) }}
+              </div>
+            </div>
           </div>
         </div>
 
@@ -156,7 +164,7 @@
               </div>
               <div>
                 <span class="helper-text">
-                  不支持打开小程序的老板客户端将会打开该地址
+                  不支持打开小程序的老版客户端将会打开该地址
                 </span>
               </div>
             </div>
@@ -244,7 +252,7 @@ export default {
       console.log(this.editItem.index + "," + this.editItem.pIndex);
       if (this.editItem.pIndex === 0) {
         this.menus[this.editItem.index].sub_button = null;
-      } else if (this.editItem.pIndex !== 0) {
+      } else if (this.editItem.pIndex > 0) {
         this.menus[this.editItem.index].sub_button.splice(
           this.editItem.pIndex,
           1
@@ -292,10 +300,65 @@ export default {
       if (this.loading) {
         return;
       }
+      if (this.menus.length == 0) {
+        this.$message.error("请编辑菜单");
+        return;
+      }
       // 必填检测
       for (let i = 0; i < this.menus.length; i++) {
         let line = i + 1;
-        if (!this.menus[i].sub_button) {
+        if (!this.menus[i].name) {
+          this.$message.error("第" + line + "个菜单的「菜单名」为空");
+          this.setEditItem(i);
+          return;
+        }
+        if (!this.menus[i].type) {
+          this.$message.error("第" + line + "个菜单的「类型」为空");
+          this.setEditItem(i);
+          return;
+        }
+
+        if (this.menus[i].type === "view") {
+          if (!this.menus[i].url) {
+            this.$message.error("第" + line + "个菜单的「网址」为空");
+            this.setEditItem(i);
+            return;
+          }
+          if (this.$utils.wechatUrlRules(this.menus[i].url)) {
+            this.$message.error(
+              "第" +
+                line +
+                "个菜单的「网址」错误，必须携带http://或https://协议"
+            );
+            this.setEditItem(i);
+            return;
+          }
+        } else if (this.menus[i].type === "click") {
+          if (!this.menus[i].key) {
+            this.$message.error("第" + line + "个菜单的「事件key」为空");
+            this.setEditItem(i);
+            return;
+          }
+        } else if (this.menus[i].type === "miniprogram") {
+          if (!this.menus[i].appid) {
+            this.$message.error("第" + line + "个菜单的「小程序appid」为空");
+            this.setEditItem(i);
+            return;
+          }
+          if (!this.menus[i].pagepath) {
+            this.$message.error(
+              "第" + line + "个菜单的「小程序打开页面路径」为空"
+            );
+            this.setEditItem(i);
+            return;
+          }
+          if (!this.menus[i].url) {
+            this.$message.error("第" + line + "个菜单的「URL地址」为空");
+            this.setEditItem(i);
+            return;
+          }
+        }
+        if (this.menus[i].sub_button === undefined) {
           // 无子菜单
           if (!this.menus[i].name) {
             this.$message.error("第" + line + "个菜单的「菜单名」为空");
@@ -311,6 +374,15 @@ export default {
           if (this.menus[i].type === "view") {
             if (!this.menus[i].url) {
               this.$message.error("第" + line + "个菜单的「网址」为空");
+              this.setEditItem(i);
+              return;
+            }
+            if (this.$utils.wechatUrlRules(this.menus[i].url)) {
+              this.$message.error(
+                "第" +
+                  line +
+                  "个菜单的「网址」错误，必须携带http://或https://协议"
+              );
               this.setEditItem(i);
               return;
             }
@@ -369,6 +441,17 @@ export default {
               this.setEditItem(i, j);
               return;
             }
+            if (this.$utils.wechatUrlRules(this.menus[i].sub_button[j].url)) {
+              this.$message.error(
+                "第" +
+                  line +
+                  "个菜单的第" +
+                  cLine +
+                  "子菜单的「网址」错误，必须携带http://或https://协议"
+              );
+              this.setEditItem(i, j);
+              return;
+            }
           } else if (this.menus[i].sub_button[j].type === "click") {
             if (!this.menus[i].sub_button[j].key) {
               this.$message.error(
@@ -410,7 +493,6 @@ export default {
           }
         }
       }
-
       this.loading = true;
 
       let menuData = [];
@@ -461,7 +543,6 @@ export default {
     },
     setEditItem(index, cIndex) {
       this.reset();
-
       if (typeof cIndex !== "undefined") {
         this.editItem.item = this.menus[index].sub_button[cIndex];
         this.editItem.index = index;

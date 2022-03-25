@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="添加消息回复规则"></back-bar>
+    <back-bar class="mb-30" title="新建自动回复"></back-bar>
 
     <div class="float-left">
       <el-form ref="form" :model="reply" :rules="rules" label-width="200px">
@@ -104,14 +104,6 @@ export default {
         {
           id: "subscribe",
           name: "用户关注",
-        },
-        {
-          id: "unsubscribe",
-          name: "用户取消关注",
-        },
-        {
-          id: "SCAN",
-          name: "二维码扫描事件",
         },
         {
           id: "CLICK",

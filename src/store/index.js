@@ -1,15 +1,16 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import Utils from '@/js/utils';
+import Vue from "vue";
+import Vuex from "vuex";
+import Utils from "@/js/utils";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
     user: null,
     isLogin: false,
     enabledAddons: {},
-    enabledAddonsCount: 0
+    enabledAddonsCount: 0,
+    editorKey: "markdown",
   },
   mutations: {
     loginHandle(state, user) {
@@ -24,10 +25,11 @@ export default new Vuex.Store({
     setEnabledAddons(state, addons, count) {
       state.enabledAddons = addons;
       state.enabledAddonsCount = count;
-    }
+    },
+    saveEditorKey(state, editorKey) {
+      state.editorKey = editorKey;
+    },
   },
-  actions: {
-  },
-  modules: {
-  }
-})
+  actions: {},
+  modules: {},
+});

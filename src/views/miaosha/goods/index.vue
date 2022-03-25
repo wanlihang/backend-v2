@@ -31,10 +31,26 @@
         class="float-left"
       >
         <el-table-column prop="id" label="ID" width="100"> </el-table-column>
-        <el-table-column prop="goods_id" label="课程ID" width="100">
-        </el-table-column>
         <el-table-column prop="goods_type_text" label="类型"> </el-table-column>
-        <el-table-column prop="goods_title" label="商品" width="400">
+        <el-table-column label="商品" width="400">
+          <template slot-scope="scope">
+            <template v-if="scope.row.goods_type === 'book'">
+              <thumb-bar
+                :value="scope.row.goods_thumb"
+                :width="90"
+                :height="120"
+                :title="scope.row.goods_title"
+              ></thumb-bar>
+            </template>
+            <template v-else>
+              <thumb-bar
+                :value="scope.row.goods_thumb"
+                :width="120"
+                :height="90"
+                :title="scope.row.goods_title"
+              ></thumb-bar>
+            </template>
+          </template>
         </el-table-column>
         <el-table-column label="价格" width="150">
           <template slot-scope="scope">
@@ -59,15 +75,21 @@
           </template>
         </el-table-column>
 
-        <el-table-column label="添加" width="200">
-          <template slot-scope="scope">{{
-            scope.row.created_at | dateFormat
-          }}</template>
-        </el-table-column>
-
-        <el-table-column fixed="right" label="操作" width="100">
+        <el-table-column fixed="right" label="操作" width="120">
           <template slot-scope="scope">
             <p-link
+              text="订单"
+              p="addons.MiaoSha.orders"
+              type="primary"
+              @click="
+                $router.push({
+                  name: 'MiaoshaOrders',
+                  query: { id: scope.row.id },
+                })
+              "
+            ></p-link>
+            <p-link
+              class="ml-5"
               text="编辑"
               p="addons.MiaoSha.goods.update"
               type="primary"
@@ -201,6 +223,7 @@ export default {
 
 <style lang="less" scoped>
 .ori-charge {
+  color: #999;
   text-decoration: line-through;
 }
 </style>

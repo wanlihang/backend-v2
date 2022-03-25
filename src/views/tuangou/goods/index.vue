@@ -10,12 +10,19 @@
         >
         </p-button>
         <p-button
+          text="团购订单"
+          p="addons.TuanGou.orders"
+          @click="$router.push({ name: 'TuangouGoodsOrder' })"
+          type="primary"
+        >
+        </p-button>
+        <!--<p-button
           text="退款订单"
           p="addons.TuanGou.refund"
           @click="$router.push({ name: 'TuangouGoodsRefund' })"
           type="primary"
         >
-        </p-button>
+        </p-button>-->
         <option-bar text="团购配置" value="团购"></option-bar>
       </div>
 
@@ -41,10 +48,26 @@
         class="float-left"
       >
         <el-table-column prop="id" label="ID" width="100"> </el-table-column>
-        <el-table-column prop="other_id" label="商品ID" width="100">
-        </el-table-column>
         <el-table-column prop="goods_type_text" label="类型"> </el-table-column>
-        <el-table-column prop="goods_title" label="商品" width="400">
+        <el-table-column label="商品" width="400">
+          <template slot-scope="scope">
+            <template v-if="scope.row.goods_type === 'book'">
+              <thumb-bar
+                :value="scope.row.goods_thumb"
+                :width="90"
+                :height="120"
+                :title="scope.row.goods_title"
+              ></thumb-bar>
+            </template>
+            <template v-else>
+              <thumb-bar
+                :value="scope.row.goods_thumb"
+                :width="120"
+                :height="90"
+                :title="scope.row.goods_title"
+              ></thumb-bar>
+            </template>
+          </template>
         </el-table-column>
         <el-table-column label="价格" width="150">
           <template slot-scope="scope">
@@ -66,12 +89,6 @@
             <div>开始:{{ scope.row.started_at | dateFormat }}</div>
             <div>结束:{{ scope.row.ended_at | dateFormat }}</div>
           </template>
-        </el-table-column>
-
-        <el-table-column label="添加" width="200">
-          <template slot-scope="scope">{{
-            scope.row.created_at | dateFormat
-          }}</template>
         </el-table-column>
 
         <el-table-column fixed="right" label="操作" width="150">
@@ -222,6 +239,7 @@ export default {
 
 <style lang="less" scoped>
 .ori-charge {
+  color: #999;
   text-decoration: line-through;
 }
 </style>

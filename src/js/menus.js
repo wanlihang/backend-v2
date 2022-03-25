@@ -25,11 +25,6 @@ export default [
         key: "SinglePage",
         permission: "addons.SinglePage.page.list",
       },
-      {
-        name: "title.mp-wechat-menu",
-        key: "MpWechatMenu",
-        permission: "mpWechat.menu",
-      },
     ],
   },
   {
@@ -124,16 +119,6 @@ export default [
         permission: "order",
       },
       {
-        name: "title.miaosha.orders.index",
-        key: "MiaoshaOrders",
-        permission: "addons.MiaoSha.orders",
-      },
-      {
-        name: "title.tuangou.orders",
-        key: "TuangouGoodsOrder",
-        permission: "addons.TuanGou.orders",
-      },
-      {
         name: "title.withdrawOrders",
         key: "WithdrawOrders",
         permission: "member.inviteBalance.withdrawOrders",
@@ -171,6 +156,11 @@ export default [
         permission: "addons.MultiLevelShare.goods.list",
       },
       {
+        name: "title.wenda.question.index",
+        key: "Question",
+        permission: "addons.Wenda.question.list",
+      },
+      {
         name: "title.codeExchanger.index",
         key: "CodeExchanger",
         permission: "addons.CodeExchanger.goods.list",
@@ -179,11 +169,6 @@ export default [
         name: "title.promocode",
         key: "Promocode",
         permission: "promoCode",
-      },
-      {
-        name: "title.wenda.question.index",
-        key: "Question",
-        permission: "addons.Wenda.question.list",
       },
       {
         name: "title.wechat.messagereply.index",

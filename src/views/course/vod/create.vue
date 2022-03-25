@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="添加录播课程"></back-bar>
+    <back-bar class="mb-30" title="新建录播课程"></back-bar>
 
     <div class="center-tabs mb-30">
       <div>
@@ -51,8 +51,8 @@
             <upload-image
               v-model="course.thumb"
               helper="长宽比4:3，建议尺寸：400x300像素"
-              width="400"
-              height="300"
+              width="200"
+              height="150"
               name="上传封面"
             ></upload-image>
           </el-form-item>
@@ -68,7 +68,7 @@
                 </el-switch>
               </div>
               <div class="ml-10">
-                <helper-text text="用户无需购买即可观看"></helper-text>
+                <helper-text text="学员无需购买即可观看"></helper-text>
               </div>
             </div>
           </el-form-item>
@@ -106,7 +106,7 @@
               <div class="ml-15">
                 <div class="helper-text">
                   <helper-text
-                    text="上架时间决定课程的排名，时间越早排名越靠后。另外，如果上架时间是未来时间，那么只有时间到了用户才能看到该课程。"
+                    text="上架时间决定课程的排名，时间越早排名越靠后。另外，如果上架时间是未来时间，那么只有时间到了学员才能看到该课程。"
                   ></helper-text>
                 </div>
               </div>
@@ -125,37 +125,31 @@
               </div>
               <div class="ml-15">
                 <div class="helper-text">
-                  <helper-text text="控制用户是否能看到该课程。"></helper-text>
+                  <helper-text text="控制学员是否能看到该课程。"></helper-text>
                 </div>
               </div>
             </div>
           </el-form-item>
 
           <el-form-item prop="short_description" label="简短介绍">
-            <div class="d-flex">
-              <div>
-                <el-input
-                  class="w-500px"
-                  type="textarea"
-                  rows="4"
-                  maxlength="150"
-                  v-model="course.short_description"
-                  placeholder="简短介绍"
-                ></el-input>
-              </div>
-              <div class="ml-10">
-                <helper-text
-                  text="该值会在课程列表显示，建议不要超过150个字。"
-                ></helper-text>
-              </div>
-            </div>
+            <el-input
+              class="w-500px"
+              type="textarea"
+              rows="4"
+              show-word-limit
+              maxlength="150"
+              v-model="course.short_description"
+              placeholder="简短介绍"
+            ></el-input>
           </el-form-item>
 
           <el-form-item prop="original_desc" label="详细介绍">
-            <quill-editor
-              :height="400"
-              v-model="course.original_desc"
-            ></quill-editor>
+            <div class="w-800px">
+              <quill-editor
+                :height="400"
+                v-model="course.original_desc"
+              ></quill-editor>
+            </div>
           </el-form-item>
         </div>
       </el-form>

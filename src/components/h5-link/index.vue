@@ -37,11 +37,6 @@
               v-model="link"
               v-else-if="tabActive === 'course'"
             ></courses>
-
-            <single-page
-              v-model="link"
-              v-else-if="tabActive === 'single-page'"
-            ></single-page>
           </div>
         </div>
       </div>
@@ -56,14 +51,12 @@
 <script>
 import CourseCategory from "./components/course-category.vue";
 import Courses from "./components/courses/index";
-import SinglePage from "./components/single-page.vue";
 import { mapState } from "vuex";
 
 export default {
   components: {
     CourseCategory,
     Courses,
-    SinglePage,
   },
   props: ["show"],
   data() {
@@ -80,57 +73,46 @@ export default {
           name: "功能",
           key: "func",
         },
-        // {
-        //   name: "课程分类",
-        //   key: "category",
-        // },
         {
           name: "课程",
           key: "course",
         },
       ];
 
-      if (this.enabledAddons["SinglePage"]) {
-        tabs.push({
-          name: "单页",
-          key: "single-page",
-        });
-      }
-
       return tabs;
     },
     funcLinks() {
       let links = [
         {
-          name: "录播课程列表",
+          name: "录播课程",
           url: "/packageA/vod/index",
         },
       ];
 
       if (this.enabledAddons["Zhibo"]) {
         links.push({
-          name: "直播课程列表",
+          name: "直播课程",
           url: "/packageA/live/index",
         });
       }
 
       if (this.enabledAddons["MeeduBooks"]) {
         links.push({
-          name: "电子书列表",
+          name: "电子书",
           url: "/packageA/book/index",
         });
       }
 
       if (this.enabledAddons["LearningPaths"]) {
         links.push({
-          name: "学习路径列表",
+          name: "学习路径",
           url: "/packageA/learnPath/index",
         });
       }
 
       if (this.enabledAddons["MeeduTopics"]) {
         links.push({
-          name: "图文列表",
+          name: "图文",
           url: "/packageA/topic/index",
         });
       }
@@ -142,36 +124,32 @@ export default {
       //   });
       // }
 
-      if (this.enabledAddons["MiaoSha"]) {
-        links.push({
-          name: "秒杀列表",
-          url: "/packageA/ms/index",
-        });
-      }
+      // if (this.enabledAddons["MiaoSha"]) {
+      //   links.push({
+      //     name: "秒杀",
+      //     url: "/packageA/ms/index",
+      //   });
+      // }
 
       if (this.enabledAddons["Wenda"]) {
         links.push({
-          name: "问答列表",
+          name: "问答",
           url: "/packageA/qa/index",
         });
       }
 
       if (this.enabledAddons["Paper"]) {
         links.push({
-          name: "考试首页",
+          name: "在线考试",
           url: "/packageA/exam/paper/index",
         });
         links.push({
-          name: "模拟考试首页",
+          name: "模拟考试",
           url: "/packageA/exam/mock/index",
         });
         links.push({
-          name: "在线练习首页",
+          name: "练习",
           url: "/packageA/exam/practice/index",
-        });
-        links.push({
-          name: "错题本",
-          url: "/packageA/exam/wrongbook/index",
         });
       }
       if (this.enabledAddons["Credit1Mall"]) {

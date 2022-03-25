@@ -32,14 +32,22 @@
           >
             <el-table-column prop="id" label="ID" width="120">
             </el-table-column>
-            <el-table-column label="秒杀课程">
+            <el-table-column label="团购课程">
               <template slot-scope="scope">
-                <div class="d-flex">
-                  <div>
-                    <img :src="scope.row.goods_thumb" width="80" height="60" />
-                  </div>
-                  <div class="ml-15">{{ scope.row.goods_title }}</div>
-                </div>
+                <thumb-bar
+                  v-if="scope.row.goods_type === 'book'"
+                  :value="scope.row.goods_thumb"
+                  :width="90"
+                  :height="120"
+                  :title="scope.row.goods_title"
+                ></thumb-bar>
+                <thumb-bar
+                  v-else
+                  :value="scope.row.goods_thumb"
+                  :width="120"
+                  :height="90"
+                  :title="scope.row.goods_title"
+                ></thumb-bar>
               </template>
             </el-table-column>
             <el-table-column label="秒杀价" width="120">
@@ -124,7 +132,7 @@ export default {
     },
     confirm() {
       if (this.result === null) {
-        this.$message.warning("请选择秒杀课程");
+        this.$message.warning("请选择团购课程");
         return;
       }
       this.$emit("change", {

@@ -47,7 +47,12 @@
                   <el-input class="w-100px" v-model="item.href"></el-input>
                 </div>
                 <div class="ml-10">
-                  <el-link type="primary" @click="selectLink(index)">选择链接</el-link>
+                  <el-link
+                    type="primary"
+                    style="font-size: 12px"
+                    @click="selectLink(index)"
+                    >选择链接</el-link
+                  >
                 </div>
               </div>
             </div>
@@ -57,19 +62,15 @@
     </div>
 
     <div class="float-left mt-15">
-      <div class="float-left mb-15">
+      <div class="float-left">
         <el-button class="w-100" @click="addNav"> 添加导航 </el-button>
       </div>
-      <div class="float-left">
-        <el-button
-          type="primary"
-          class="w-100"
-          :loading="loading"
-          @click="save"
-        >
-          保存
-        </el-button>
-      </div>
+    </div>
+
+    <div class="float-left footer-button">
+      <el-button type="primary" class="w-100" :loading="loading" @click="save">
+        保存
+      </el-button>
     </div>
 
     <select-image
@@ -144,7 +145,7 @@ export default {
         .then(() => {
           this.loading = false;
           this.$message.success(this.$t("common.success"));
-          this.$emit('update');
+          this.$emit("update");
         })
         .catch((e) => {
           this.loading = false;
@@ -186,6 +187,20 @@ export default {
   height: auto;
   float: left;
   box-sizing: border-box;
+  position: relative;
+  padding-bottom: 60px;
+
+  .footer-button {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 400px;
+    height: 70px;
+    background: #ffffff;
+    border-top: 1px solid #e5e5e5;
+    box-sizing: border-box;
+    padding: 15px 30px;
+  }
 
   .title {
     width: 100%;

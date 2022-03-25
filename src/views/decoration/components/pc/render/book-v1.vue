@@ -4,10 +4,20 @@
     <div class="vod-courses-box">
       <div class="vod-item" v-for="(item, index) in config.items" :key="index">
         <div class="course-thumb">
-          <img v-if="item.thumb" :src="item.thumb" width="120" height="160" />
+          <div
+            v-if="item.thumb"
+            style="display: inline-block; width: 120px; height: 160px"
+          >
+            <thumb-bar
+              :border="8"
+              :value="item.thumb"
+              :width="120"
+              :height="160"
+            ></thumb-bar>
+          </div>
           <img
             v-else
-            src="@/assets/images/decoration/h5/default-book.png"
+            src="@/assets/images/decoration/h5/book-back.png"
             width="120"
             height="160"
           />
@@ -60,6 +70,7 @@ export default {
     border-radius: 8px;
     padding-top: 37px;
     padding-bottom: 15px;
+    overflow: hidden;
 
     .course-thumb {
       width: 100%;

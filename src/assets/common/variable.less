@@ -27,6 +27,32 @@ textarea {
   font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
     "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
 }
+.question-list-render {
+  p {
+    img {
+      display: inline-block;
+      max-width: 100px !important;
+      vertical-align: middle;
+    }
+  }
+}
+.question-render {
+  p {
+    img {
+      display: inline-block;
+      max-width: 200px !important;
+    }
+  }
+}
+.quill-content {
+  p {
+    img {
+      display: inline-block;
+      max-width: 400px !important;
+    }
+  }
+}
+
 .n-padding-box {
   width: 100%;
   height: auto;
@@ -149,8 +175,21 @@ a {
   float: left;
 }
 
+.check-num {
+  font-size: 14px;
+  color: #409eff;
+}
+.c-blue {
+  color: #409eff;
+}
 .c-red {
   color: red;
+}
+.c-yellow {
+  color: #e1a500;
+}
+.c-green {
+  color: #67c23a;
 }
 
 .w-100 {
@@ -296,6 +335,10 @@ a {
 .j-flex {
   display: flex;
   justify-content: center;
+}
+.j-r-flex {
+  display: flex;
+  justify-content: right;
 }
 .j-b-flex {
   display: flex;
@@ -455,6 +498,14 @@ a {
   border-radius: 15px;
   margin-bottom: 90px;
   box-shadow: 0px 2px 4px 0px rgba(102, 102, 102, 0.05);
+}
+
+.user-item {
+  .avatar {
+    img {
+      border-radius: 50%;
+    }
+  }
 }
 
 .helper-text {

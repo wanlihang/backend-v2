@@ -1,6 +1,16 @@
 <template>
   <div class="meedu-main-body">
+    <back-bar class="mb-30" title="团购订单"></back-bar>
     <div class="float-left j-b-flex mb-30">
+      <div class="d-flex">
+        <p-button
+          text="退款订单"
+          p="addons.TuanGou.refund"
+          @click="$router.push({ name: 'TuangouGoodsRefund' })"
+          type="primary"
+        >
+        </p-button>
+      </div>
       <div class="d-flex">
         <div>
           <el-input
@@ -11,7 +21,7 @@
         </div>
         <div class="ml-10">
           <el-input
-            placeholder="用户ID"
+            placeholder="学员ID"
             class="w-150px"
             v-model="filter.user_id"
           ></el-input>
@@ -60,7 +70,7 @@
               <span class="c-red" v-else>已删除</span>
             </template>
           </el-table-column>
-          <el-table-column prop="user_id" label="用户ID" width="100">
+          <el-table-column prop="user_id" label="学员ID" width="100">
           </el-table-column>
 
           <el-table-column label="商品" width="400">
@@ -77,11 +87,11 @@
             </template>
           </el-table-column>
 
-          <el-table-column label="用户" :width="300">
+          <el-table-column label="学员" :width="300">
             <template slot-scope="scope">
               <template v-if="scope.row.user">
-                <div class="d-flex" v-if="scope.row.user">
-                  <div>
+                <div class="user-item d-flex" v-if="scope.row.user">
+                  <div class="avatar">
                     <img :src="scope.row.user.avatar" width="40" height="40" />
                   </div>
                   <div class="ml-10">
@@ -89,7 +99,7 @@
                   </div>
                 </div>
               </template>
-              <span class="c-red" v-else>用户不存在</span>
+              <span class="c-red" v-else>学员不存在</span>
             </template>
           </el-table-column>
 

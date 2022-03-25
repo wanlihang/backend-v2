@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="编辑用户"></back-bar>
+    <back-bar class="mb-30" title="编辑学员"></back-bar>
 
     <div class="float-left">
       <el-form ref="form" :model="user" :rules="rules" label-width="200px">
@@ -46,7 +46,7 @@
         </el-form-item>
         <el-form-item prop="is_lock">
           <span slot="label">
-            <form-label text="登录锁定" helper="锁定用户无法登录"></form-label>
+            <form-label text="登录锁定" helper="锁定学员无法登录"></form-label>
           </span>
           <el-switch
             v-model="user.is_lock"

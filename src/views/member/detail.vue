@@ -1,7 +1,7 @@
 <template>
   <div class="user-main-body" v-if="user" v-loading="loading">
     <div class="float-left bg-white br-15 p-30">
-      <back-bar class="mb-30" title="用户详情"></back-bar>
+      <back-bar class="mb-30" title="学员详情"></back-bar>
       <div class="user-info-box">
         <div class="user-base-info-box">
           <div class="user-avatar">
@@ -80,7 +80,7 @@
             </template>
           </div>
           <div class="panel-info-item">
-            用户邀请码：{{
+            学员邀请码：{{
               user.is_used_promo_code === 1 ? "已使用" : "未使用"
             }}
           </div>
@@ -106,7 +106,7 @@
       </div>
     </div>
 
-    <!-- 用户课程区域 -->
+    <!-- 学员课程区域 -->
     <div class="float-left bg-white br-15 p-30 mt-30">
       <el-tabs v-model="courseTabActive">
         <el-tab-pane

@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="微信公众号编辑规则"></back-bar>
+    <back-bar class="mb-30" title="编辑自动回复"></back-bar>
 
     <el-form
       ref="form"
@@ -105,14 +105,14 @@ export default {
           id: "subscribe",
           name: "用户关注",
         },
-        {
-          id: "unsubscribe",
-          name: "用户取消关注",
-        },
-        {
-          id: "SCAN",
-          name: "二维码扫描事件",
-        },
+        // {
+        //   id: "unsubscribe",
+        //   name: "用户取消关注",
+        // },
+        // {
+        //   id: "SCAN",
+        //   name: "二维码扫描事件",
+        // },
         {
           id: "CLICK",
           name: "自定义菜单事件",

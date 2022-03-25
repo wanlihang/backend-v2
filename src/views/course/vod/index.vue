@@ -3,7 +3,7 @@
     <div class="float-left j-b-flex mb-30">
       <div class="d-flex">
         <p-button
-          text="添加"
+          text="新建"
           p="course.store"
           @click="$router.push({ name: 'VodCreate' })"
           type="primary"
@@ -39,7 +39,7 @@
         >
         </p-button>
 
-        <option-bar text="播放器配置" value="播放器配置"></option-bar>
+        <option-bar text="录播课设置" value="播放器配置"></option-bar>
       </div>
       <div class="d-flex">
         <div>
@@ -98,7 +98,7 @@
             <template slot-scope="scope"> {{ scope.row.charge }}元 </template>
           </el-table-column>
           <el-table-column
-            label="订阅人数"
+            label="付费人数"
             property="user_count"
             sortable
             width="150"

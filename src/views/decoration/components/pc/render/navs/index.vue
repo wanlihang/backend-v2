@@ -29,6 +29,7 @@
 <script>
 import NavsList from "./list.vue";
 export default {
+  props: ["reload"],
   components: { NavsList },
   data() {
     return {
@@ -36,6 +37,11 @@ export default {
       showListWin: false,
       list: [],
     };
+  },
+  watch: {
+    reload() {
+      this.getData();
+    },
   },
   mounted() {
     this.getData();

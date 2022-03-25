@@ -21,11 +21,11 @@
     </div>
     <div class="info" :class="{ spcolor: spcolor }">
       <span class="tit"
-        >{{num}}.{{ question.type_text }}（{{ question.score }}分）</span
+        >{{ num }}.{{ question.type_text }}（{{ question.score }}分）</span
       >
     </div>
     <div class="question-content" :class="{ spcolor: spcolor }">
-      <div v-html="question.content"></div>
+      <div class="question-render" v-html="question.content"></div>
     </div>
     <div class="choice-box" :class="{ spcolor: spcolor }">
       <div class="input-title">我的作答</div>
@@ -176,7 +176,7 @@ export default {
   },
 };
 </script>
-<style lang='less' scoped>
+<style lang="less" scoped>
 .spcolor {
   background: #f4fafe !important;
 }

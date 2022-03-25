@@ -11,6 +11,7 @@
 
     <div class="blocks-box">
       <div class="title">拖动添加板块</div>
+      <div class="tip">拖动下列图标到右侧预览区</div>
       <draggable
         class="blocks"
         :sort="false"
@@ -133,7 +134,41 @@
         </div>
       </draggable>
     </div>
-
+    <div class="navs-box">
+      <div class="nav-item" @click="showNavWin = true">
+        <img
+          src="@/assets/images/decoration/h5/icon-nav.png"
+          width="30"
+          height="30"
+        />
+        导航管理
+      </div>
+      <div class="nav-item" @click="showNoticeWin = true">
+        <img
+          src="@/assets/images/decoration/h5/icon-announce.png"
+          width="30"
+          height="30"
+        />
+        公告管理
+      </div>
+      <div class="nav-item" @click="showListWin = true">
+        <img
+          src="@/assets/images/decoration/h5/icon-banner.png"
+          width="30"
+          height="30"
+        />
+        轮播图片
+      </div>
+      <div class="nav-item" @click="showLinkWin = true">
+        <img
+          src="@/assets/images/decoration/h5/icon-link.png"
+          width="30"
+          height="30"
+        />
+        友情链接
+      </div>
+      <div class="tip">点击预览区直接编辑板块</div>
+    </div>
     <draggable
       ref="preview-box"
       class="preview-box"
@@ -141,15 +176,18 @@
       group="blocks"
       @add="dragChange"
     >
-      <div class="pc-box">
+      <div class="pc-box" :style="{ width: previewWidth + 'px' }">
         <!-- 导航栏 -->
-        <render-navs></render-navs>
+        <render-navs :reload="showNavWin"></render-navs>
 
         <!-- 幻灯片 -->
-        <render-sliders></render-sliders>
+        <render-sliders
+          :reload="showListWin"
+          :width="previewWidth"
+        ></render-sliders>
 
         <!-- 公告 -->
-        <render-notice></render-notice>
+        <render-notice :reload="showNoticeWin"></render-notice>
 
         <template v-for="(item, index) in blocks">
           <div class="float-left" :key="item.id">
@@ -218,7 +256,7 @@
         </template>
 
         <!-- 友情链接 -->
-        <render-link></render-link>
+        <render-link :reload="showLinkWin"></render-link>
       </div>
     </draggable>
 
@@ -230,9 +268,13 @@
       </div>
       <config-setting
         :block="blocks[curBlockIndex]"
-        @update="getData()"
+        @update="reloadData()"
       ></config-setting>
     </div>
+    <navs-list @close="close" :show="showNavWin"></navs-list>
+    <list-comp :show="showListWin" @close="close"></list-comp>
+    <list-notice :show="showNoticeWin" @close="close"></list-notice>
+    <list-link :show="showLinkWin" @close="close"></list-link>
   </div>
 </template>
 
@@ -252,6 +294,10 @@ import RenderMsV1 from "./components/pc/render/ms-v1.vue";
 import RenderTgV1 from "./components/pc/render/tg-v1.vue";
 import ConfigSetting from "./components/h5/config/index.vue";
 import RenderCode from "./components/pc/render/code";
+import NavsList from "./components/pc/render/navs/list.vue";
+import ListComp from "./components/pc/render/sliders/list.vue";
+import ListNotice from "./components/pc/render/notice/list.vue";
+import ListLink from "./components/pc/render/links/list.vue";
 
 export default {
   components: {
@@ -269,6 +315,10 @@ export default {
     RenderTgV1,
     ConfigSetting,
     RenderCode,
+    NavsList,
+    ListComp,
+    ListNotice,
+    ListLink,
   },
   data() {
     return {
@@ -277,6 +327,12 @@ export default {
       blocks: [],
       loading: false,
       curBlockIndex: null,
+      showNavWin: false,
+      showListWin: false,
+      showNoticeWin: false,
+      showLinkWin: false,
+      screenWidth: null,
+      previewWidth: 1200,
     };
   },
   computed: {
@@ -290,9 +346,33 @@ export default {
     },
   },
   mounted() {
+    let screenWidth = document.body.clientWidth;
+    if (screenWidth > 1500) {
+      this.previewWidth = 1200;
+    } else {
+      this.previewWidth = 1000;
+    }
+    window.addEventListener("resize", this.getScreenWidth, false);
     this.getData();
   },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.getScreenWidth, false);
+  },
   methods: {
+    getScreenWidth() {
+      let screenWidth = document.body.clientWidth;
+      if (screenWidth > 1500) {
+        this.previewWidth = 1200;
+      } else {
+        this.previewWidth = 1000;
+      }
+    },
+    close() {
+      this.showListWin = false;
+      this.showNavWin = false;
+      this.showNoticeWin = false;
+      this.showLinkWin = false;
+    },
     getData(toBottom = false) {
       if (this.loading) {
         return;
@@ -304,6 +384,27 @@ export default {
       }).then((res) => {
         this.blocks = res.data;
         this.loading = false;
+        if (toBottom) {
+          // 滚动到底部
+          this.$nextTick(() => {
+            this.$refs["preview-box"].$el.scrollTop =
+              this.$refs["preview-box"].$el.scrollHeight;
+          });
+        }
+      });
+    },
+    reloadData(toBottom = false) {
+      if (this.loading) {
+        return;
+      }
+      this.loading = true;
+      this.$api.ViewBlock.List({
+        platform: this.platform,
+        page: this.page,
+      }).then((res) => {
+        this.blocks = res.data;
+        this.loading = false;
+        this.curBlockIndex = null;
         if (toBottom) {
           // 滚动到底部
           this.$nextTick(() => {
@@ -724,12 +825,11 @@ export default {
   top: 56px;
   left: 0;
   bottom: 0;
-  width: 230px;
+  width: 210px;
   background-color: white;
   box-sizing: border-box;
   padding: 30px;
   overflow-y: auto;
-  border-right: 1px solid #f2f2f2;
 
   .title {
     width: 100%;
@@ -739,7 +839,17 @@ export default {
     font-weight: 600;
     color: #333333;
     line-height: 16px;
-    margin-bottom: 40px;
+    margin-bottom: 15px;
+  }
+  .tip {
+    width: 100%;
+    height: auto;
+    float: left;
+    font-size: 12px;
+    font-weight: 400;
+    color: #999999;
+    line-height: 12px;
+    margin-bottom: 30px;
   }
 
   .blocks {
@@ -747,7 +857,7 @@ export default {
     height: auto;
     float: left;
     display: grid;
-    gap: 40px;
+    gap: 30px;
     grid-template-columns: repeat(2, minmax(0, 1fr));
 
     .block-item {
@@ -773,10 +883,49 @@ export default {
     }
   }
 }
+.navs-box {
+  position: fixed;
+  top: 56px;
+  left: 210px;
+  width: calc(100% - 210px);
+  height: 56px;
+  background: #ffffff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 8px 30px;
+  .nav-item {
+    width: 96px;
+    height: 40px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 30px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #3ca7fa;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.8;
+    }
+    img {
+      margin-left: 5px;
+    }
+  }
+  .tip {
+    height: 12px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #999999;
+    line-height: 12px;
+  }
+}
 
 .preview-box {
   position: absolute;
-  top: 70px;
+  top: 143px;
   left: 249px;
   bottom: 0;
   background-color: #f6f6f6;
@@ -785,7 +934,6 @@ export default {
   overflow-x: auto;
 
   .pc-box {
-    width: 1200px;
     height: auto;
     float: left;
 
@@ -848,7 +996,7 @@ export default {
 .config-box {
   position: absolute;
   z-index: 10;
-  top: 56px;
+  top: 112px;
   right: 0;
   bottom: 0;
   width: 400px;

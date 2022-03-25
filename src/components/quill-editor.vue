@@ -1,6 +1,6 @@
 <template>
   <div class="quill-editor-box" :class="{ 'h-min-40': height === 40 }">
-    <div ref="myQuillEditor" class="quill-editor">
+    <div ref="myQuillEditor" :style="style" class="quill-editor">
       <slot name="toolbar"></slot>
       <div ref="editor"></div>
     </div>
@@ -71,6 +71,14 @@ export default {
         readOnly: false,
       },
     };
+  },
+  computed: {
+    style() {
+      if (this.height !== 40) {
+        return { height: (this.height || 300) + "px" };
+      }
+      return null;
+    },
   },
   mounted() {
     window.katex = katex;
@@ -185,7 +193,15 @@ export default {
       this.dialogFormVisible = false;
     },
     uploadImage(imgUrl) {
-      this.quill.insertEmbed(this.editorIndex, "image", imgUrl);
+      let index = this.editorIndex;
+      let nextIndex = this.editorIndex + 1;
+      let html = this.$refs.myQuillEditor.children[0].innerHTML;
+      if (html === "<p><br></p>") {
+        index = 0;
+        nextIndex = 1;
+      }
+      this.quill.insertEmbed(index, "image", imgUrl);
+      this.quill.getModule("toolbar").quill.setSelection(nextIndex);
       this.showUploadImage = false;
     },
   },
@@ -207,12 +223,32 @@ export default {
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
     border-color: #dcdfe6;
+    .ql-picker-label {
+      color: #ccc;
+    }
+    .ql-picker-label {
+      color: #ccc;
+    }
+    .ql-active {
+      color: #000;
+    }
+    .ql-stroke {
+      stroke: #ccc;
+    }
+    .ql-fill {
+      fill: #ccc;
+    }
+    .ql-picker.ql-expanded .ql-picker-options {
+      z-index: 2001;
+    }
   }
 
   .ql-container.ql-snow {
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
     border-color: #dcdfe6;
+    font-size: 14px;
+    color: #606266;
   }
 
   .ql-picker-label::before {
@@ -228,6 +264,11 @@ export default {
   }
   .ql-editor {
     min-height: 80px;
+  }
+  .ql-editor[data-placeholder]::before {
+    font-style: normal;
+    font-size: 14px;
+    color: #c0c4cc;
   }
 
   &.h-min-40 {

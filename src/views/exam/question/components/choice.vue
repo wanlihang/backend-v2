@@ -42,6 +42,7 @@
       </div>
       <div class="float-left">
         <quill-editor
+          class="quill-content"
           :is-formula="true"
           :height="40"
           v-model="form.content"
@@ -57,6 +58,7 @@
       </div>
       <div class="float-left">
         <quill-editor
+          class="quill-content"
           :is-formula="true"
           :height="40"
           v-model="form['option' + i]"
@@ -66,8 +68,8 @@
     </div>
 
     <div class="float-left mb-15">
-      <el-button @click="add" size="mini" type="primary">新增选项</el-button>
-      <el-button @click="del" size="mini" type="danger">删除选项</el-button>
+      <el-button @click="add" type="primary">新增选项</el-button>
+      <el-button @click="del" type="danger">删除选项</el-button>
     </div>
 
     <div class="float-left mb-15">
@@ -92,6 +94,7 @@
       <div class="float-left helper-text mb-10">解析</div>
       <div class="float-left">
         <quill-editor
+          class="quill-content"
           :is-formula="true"
           :height="40"
           v-model="form.remark"

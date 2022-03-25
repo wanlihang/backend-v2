@@ -2,9 +2,15 @@
   <div class="meedu-main-body">
     <div class="float-left mb-30">
       <p-button
-        text="添加规则"
+        text="新建自动回复"
         p="mpWechatMessageReply.store"
         @click="$router.push({ name: 'ReplyCreate' })"
+        type="primary"
+      ></p-button>
+      <p-button
+        text="公众号菜单"
+        p="mpWechat.menu"
+        @click="$router.push({ name: 'MpWechatMenu' })"
         type="primary"
       ></p-button>
       <option-bar text="公众号配置" value="微信公众号"></option-bar>
@@ -67,6 +73,7 @@
   </div>
 </template>
 <script>
+import { mapState } from "vuex";
 export default {
   data() {
     return {
@@ -87,6 +94,9 @@ export default {
   beforeRouteLeave(to, from, next) {
     this.$utils.scrollTopRecord(this.pageName);
     next();
+  },
+  computed: {
+    ...mapState(["user"]),
   },
   methods: {
     paginationReset() {

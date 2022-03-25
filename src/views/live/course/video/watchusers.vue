@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="观看用户"></back-bar>
+    <back-bar class="mb-30" title="观看学员"></back-bar>
     <div class="float-left mb-30">
       <el-button @click="getResults()" type="primary"> 刷新数据 </el-button>
     </div>
@@ -11,9 +11,9 @@
           :data="results"
           class="float-left"
         >
-          <el-table-column prop="user_id" label="用户ID" width="150">
+          <el-table-column prop="user_id" label="学员ID" width="150">
           </el-table-column>
-          <el-table-column label="用户">
+          <el-table-column label="学员">
             <template slot-scope="scope">
               <div class="d-flex" v-if="scope.row.user">
                 <div>
@@ -21,7 +21,7 @@
                 </div>
                 <div class="ml-10">{{ scope.row.user.nick_name }}</div>
               </div>
-              <span class="c-red" v-else>用户不存在</span>
+              <span class="c-red" v-else>学员不存在</span>
             </template>
           </el-table-column>
           <el-table-column label="观看时长" width="200">

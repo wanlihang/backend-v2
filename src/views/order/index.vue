@@ -14,7 +14,7 @@
           <el-input
             v-model="filter.user_id"
             class="w-200px"
-            placeholder="用户ID"
+            placeholder="学员ID"
           ></el-input>
         </div> -->
         <div class="ml-10">
@@ -73,12 +73,12 @@
       >
         <el-table-column prop="id" sortable label="ID" :width="100">
         </el-table-column>
-        <!-- <el-table-column prop="user_id" sortable label="用户ID" :width="120">
+        <!-- <el-table-column prop="user_id" sortable label="学员ID" :width="120">
         </el-table-column> -->
-        <el-table-column label="用户" :width="210">
+        <el-table-column label="学员" :width="210">
           <template slot-scope="scope">
-            <div class="d-flex" v-if="users[scope.row.user_id]">
-              <div>
+            <div class="user-item d-flex" v-if="users[scope.row.user_id]">
+              <div class="avatar">
                 <img
                   :src="users[scope.row.user_id].avatar"
                   width="40"
@@ -101,6 +101,17 @@
         <el-table-column prop="charge" sortable label="支付金额" :width="150">
         </el-table-column>
         <el-table-column prop="status_text" label="支付状态" :width="150">
+          <template slot-scope="scope">
+            <span
+              :class="{
+                'c-green': scope.row.status_text === '已支付',
+                'c-red': scope.row.status_text === '未支付',
+                'c-yellow': scope.row.status_text === '支付中',
+              }"
+            >
+              · {{ scope.row.status_text }}
+            </span>
+          </template>
         </el-table-column>
 
         <el-table-column sortable label="订单创建时间" :width="220">

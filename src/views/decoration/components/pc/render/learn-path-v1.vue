@@ -4,10 +4,15 @@
     <div class="learn-path-box">
       <div class="path-item" v-for="(item, index) in config.items" :key="index">
         <div class="path-thumb">
-          <img v-if="item.thumb" :src="item.thumb" width="173" height="130" />
+          <thumb-bar
+            v-if="item.thumb"
+            :value="item.thumb"
+            :width="173"
+            :height="130"
+          ></thumb-bar>
           <img
             v-else
-            src="@/assets/images/decoration/h5/default-learnPath.png"
+            src="@/assets/images/decoration/h5/course-back.png"
             width="173"
             height="130"
           />
@@ -71,6 +76,8 @@ export default {
 
     .path-thumb {
       margin-right: 20px;
+      border-radius: 8px;
+      overflow: hidden;
 
       img {
         border-radius: 8px;

@@ -3,7 +3,6 @@
     <back-bar class="mb-30" title="图片存储"></back-bar>
     <div class="float-left">
       <el-form ref="form" label-width="205px">
-        <div class="title">图片存储驱动配置</div>
         <el-form-item :key="36" label="图片存储驱动">
           <div class="j-flex flex-column" style="margin-left: 3px">
             <div>

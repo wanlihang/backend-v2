@@ -4,10 +4,24 @@
     <div class="ms-box">
       <div class="ms-item" v-for="(item, index) in config.items" :key="index">
         <div class="ms-thumb">
-          <img v-if="item.goods_thumb" :src="item.goods_thumb" width="100%" />
+          <template v-if="item.goods_thumb">
+            <thumb-bar
+              v-if="item.goods_type === 'book'"
+              :value="item.goods_thumb"
+              :border="8"
+              :width="148.5"
+              :height="198"
+            ></thumb-bar>
+            <thumb-bar
+              v-else
+              :value="item.goods_thumb"
+              :width="264"
+              :height="198"
+            ></thumb-bar>
+          </template>
           <img
             v-else
-            src="@/assets/images/decoration/h5/default-tg.png"
+            src="@/assets/images/decoration/h5/course-back.png"
             width="100%"
           />
         </div>
@@ -66,11 +80,13 @@ export default {
     box-sizing: border-box;
     background-color: white;
     border-radius: 8px;
+    overflow: hidden;
 
     .ms-thumb {
       width: 100%;
-      height: auto;
       float: left;
+      height: 198px;
+      overflow: hidden;
 
       img {
         border-top-left-radius: 8px;

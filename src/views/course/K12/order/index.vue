@@ -49,17 +49,17 @@
           :data="list"
           class="float-left"
         >
-          <el-table-column label="用户" width="300">
+          <el-table-column label="学员" width="300">
             <template slot-scope="scope">
-              <div class="d-flex" v-if="scope.row.user">
-                <div>
+              <div class="user-item d-flex" v-if="scope.row.user">
+                <div class="avatar">
                   <img :src="scope.row.user.avatar" width="40" height="40" />
                 </div>
                 <div class="ml-10">
                   {{ scope.row.user.nick_name }}
                 </div>
               </div>
-              <span v-else class="c-red">用户不存在</span>
+              <span v-else class="c-red">学员不存在</span>
             </template>
           </el-table-column>
           <el-table-column label="课程" width="400">

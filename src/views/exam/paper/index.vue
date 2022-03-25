@@ -9,6 +9,11 @@
           type="primary"
         >
         </p-button>
+        <el-button
+          @click="$router.push({ name: 'PaperCategories' })"
+          type="primary"
+          >分类管理
+        </el-button>
       </div>
       <div class="d-flex">
         <div>
@@ -68,7 +73,7 @@
           <el-table-column fixed="right" label="操作" width="140">
             <template slot-scope="scope">
               <p-link
-                text="试题"
+                text="组卷"
                 p="addons.Paper.paper.questions.list"
                 type="primary"
                 @click="

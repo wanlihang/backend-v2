@@ -22,13 +22,13 @@
             />
             <img
               v-else
-              src="@/assets/images/decoration/h5/default-live.png"
+              src="@/assets/images/decoration/h5/course-back.png"
               width="100%"
               height="124"
             />
           </div>
           <div class="course-title">
-            {{ item.title }}
+            <div class="tit">{{ item.title }}</div>
           </div>
         </div>
       </div>
@@ -95,6 +95,9 @@ export default {
       grid-template-columns: repeat(2, minmax(0, 1fr));
 
       .course-thumb {
+        width: 100%;
+        height: 124px;
+        overflow: hidden;
         img {
           border-top-left-radius: 4px;
           border-top-right-radius: 4px;
@@ -103,20 +106,28 @@ export default {
 
       .course-title {
         width: 100%;
-        height: auto;
+        height: 52px;
         box-sizing: border-box;
         padding: 8px;
         background: #f6f6f6;
         border-radius: 0px 0px 8px 8px;
         float: left;
-        font-size: 13px;
-        font-family: PingFangSC-Medium, PingFang SC;
-        font-weight: 500;
-        color: #333333;
-        line-height: 18px;
-        white-space: nowrap;
         overflow: hidden;
-        text-overflow: ellipsis;
+        .tit {
+          width: 100%;
+          height: 36px;
+          font-size: 13px;
+          font-weight: 500;
+          color: #333333;
+          line-height: 18px;
+          word-break: break-all;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          line-clamp: 2;
+          -webkit-box-orient: vertical;
+        }
       }
     }
   }

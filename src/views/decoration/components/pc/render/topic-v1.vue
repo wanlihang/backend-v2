@@ -8,10 +8,15 @@
         :key="index"
       >
         <div class="topic-thumb">
-          <img v-if="item.thumb" :src="item.thumb" width="133" height="100" />
+          <thumb-bar
+            v-if="item.thumb"
+            :value="item.thumb"
+            :width="133"
+            :height="100"
+          ></thumb-bar>
           <img
             v-else
-            src="@/assets/images/decoration/h5/default-topic.png"
+            src="@/assets/images/decoration/h5/course-back.png"
             width="133"
             height="100"
           />
@@ -20,7 +25,9 @@
           <div class="topic-title">{{ item.title }}</div>
           <div class="topic-info">
             <div class="topic-category">
-              <span class="category" v-if="item.category">{{ item.category.name }}</span>
+              <span class="category" v-if="item.category">{{
+                item.category.name
+              }}</span>
             </div>
             <div class="view-times">{{ item.view_times }}次阅读</div>
           </div>
@@ -68,9 +75,12 @@ export default {
     background-color: white;
     padding: 15px;
     border-radius: 8px;
+    overflow: hidden;
 
     .topic-thumb {
       margin-right: 20px;
+      border-radius: 8px;
+      overflow: hidden;
 
       img {
         border-radius: 8px;

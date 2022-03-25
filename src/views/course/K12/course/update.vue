@@ -142,7 +142,7 @@
                 </el-date-picker>
               </div>
               <div class="ml-10">
-                <helper-text text="用于提醒用户什么时候开课"></helper-text>
+                <helper-text text="用于提醒学员什么时候开课"></helper-text>
               </div>
             </div>
           </el-form-item>
@@ -159,35 +159,29 @@
                 </el-date-picker>
               </div>
               <div class="ml-10">
-                <helper-text text="用于提醒用户什么时候结课"></helper-text>
+                <helper-text text="用于提醒学员什么时候结课"></helper-text>
               </div>
             </div>
           </el-form-item>
 
           <el-form-item label="简短介绍" prop="short_desc">
-            <div class="d-flex">
-              <div>
-                <el-input
-                  type="textarea"
-                  maxlength="150"
-                  v-model="course.short_desc"
-                  class="w-500px"
-                  rows="3"
-                ></el-input>
-              </div>
-              <div class="ml-10">
-                <helper-text
-                  text="该值会在课程列表显示，建议不要超过150个字。"
-                ></helper-text>
-              </div>
-            </div>
+            <el-input
+              type="textarea"
+              maxlength="150"
+              v-model="course.short_desc"
+              class="w-500px"
+              show-word-limit
+              rows="3"
+            ></el-input>
           </el-form-item>
 
           <el-form-item label="详细介绍">
-            <quill-editor
-              :height="400"
-              v-model="course.original_desc"
-            ></quill-editor>
+            <div class="w-800px">
+              <quill-editor
+                :height="400"
+                v-model="course.original_desc"
+              ></quill-editor>
+            </div>
           </el-form-item>
         </div>
 
@@ -204,7 +198,7 @@
               </div>
               <div class="ml-10">
                 <helper-text
-                  text="该字段控制用户是否可以看到课程。"
+                  text="该字段控制学员是否可以看到课程。"
                 ></helper-text>
               </div>
             </div>

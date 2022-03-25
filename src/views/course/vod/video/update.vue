@@ -76,12 +76,13 @@
                   type="datetime"
                   align="right"
                   placeholder="请选择日期"
+                  value-format="yyyy-MM-dd HH:mm:ss"
                 >
                 </el-date-picker>
               </div>
               <div class="ml-10">
                 <helper-text
-                  text="上架时间决定了录播课程下视频排名，时间越早越靠后。上架时间如果是未来时间，则需等到时间到达后用户才可查看。"
+                  text="上架时间决定了录播课程下视频排名，时间越早越靠后。上架时间如果是未来时间，则需等到时间到达后学员才可查看。"
                 ></helper-text>
               </div>
             </div>
@@ -98,7 +99,7 @@
               </div>
               <div class="ml-10">
                 <helper-text
-                  text="最小单位：元。不支持小数。价格为0的话意味着该视频可以免费观看。价格大于0则需要用户购买视频/购买课程之后才能观看。"
+                  text="最小单位：元。不支持小数。价格为0的话意味着该视频可以免费观看。价格大于0则需要学员购买视频/购买课程之后才能观看。"
                 ></helper-text>
               </div>
             </div>
@@ -139,7 +140,7 @@
               </div>
               <div class="ml-15">
                 <helper-text
-                  text="如果用户未购买课程将可以观看当前配置的秒数，从视频开头计算。配置为0即为无法试看。"
+                  text="如果学员未购买课程将可以观看当前配置的秒数，从视频开头计算。配置为0即为无法试看。"
                 ></helper-text>
               </div>
             </div>
@@ -163,7 +164,7 @@
               </div>
               <div class="ml-10">
                 <helper-text
-                  text="该字段控制用户是否可以直接购买该视频。如果禁止购买，那么用户观看该视频的话则必须先购买该视频所属录播课程。"
+                  text="该字段控制学员是否可以直接购买该视频。如果禁止购买，那么学员观看该视频的话则必须先购买该视频所属录播课程。"
                 ></helper-text>
               </div>
             </div>
@@ -181,7 +182,7 @@
               </div>
               <div class="ml-10">
                 <helper-text
-                  text="该字段控制用户是否可以看到该视频。"
+                  text="该字段控制学员是否可以看到该视频。"
                 ></helper-text>
               </div>
             </div>
@@ -199,28 +200,10 @@
               </div>
               <div class="ml-10">
                 <helper-text
-                  text="该字段控制用户播放该视频时是否可以快进播放。"
+                  text="该字段控制学员播放该视频时是否可以快进播放。"
                 ></helper-text>
               </div>
             </div>
-          </el-form-item>
-
-          <el-form-item label="SEO描述">
-            <el-input
-              class="w-300px"
-              type="textarea"
-              v-model="video.seo_description"
-              placeholder="SEO描述"
-            ></el-input>
-          </el-form-item>
-
-          <el-form-item label="SEO关键字">
-            <el-input
-              class="w-300px"
-              type="textarea"
-              v-model="video.seo_keywords"
-              placeholder="SEO关键字"
-            ></el-input>
           </el-form-item>
 
           <el-form-item label="阿里云视频文件ID" prop="aliyun_video_id">

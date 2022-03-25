@@ -153,7 +153,7 @@ export default {
           xhr.send();
         }
       }
-      this.$htmlToPdf.downloadPdf(this.paper.title);
+      this.$htmlToPdf.getPdf(this.paper.title);
     },
     getData() {
       this.$api.Exam.PaperJoinRecord(this.id, this.pid)

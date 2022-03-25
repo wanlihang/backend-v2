@@ -1,31 +1,14 @@
 <template>
   <div class="meedu-main-body">
+    <back-bar class="mb-30" title="秒杀订单"></back-bar>
     <div class="float-left j-b-flex mb-30">
       <div class="d-flex">
         <div>
           <el-input
-            placeholder="关键字"
-            class="w-150px"
-            v-model="filter.keywords"
-          ></el-input>
-        </div>
-        <div class="ml-10">
-          <el-input
-            placeholder="用户ID"
+            placeholder="学员ID"
             class="w-150px"
             v-model="filter.user_id"
           ></el-input>
-        </div>
-        <div class="ml-10">
-          <el-select class="w-150px" v-model="filter.status">
-            <el-option
-              v-for="(item, index) in filterData.status"
-              :key="index"
-              :label="item.name"
-              :value="item.id"
-            >
-            </el-option>
-          </el-select>
         </div>
         <div class="ml-10">
           <el-date-picker
@@ -46,6 +29,16 @@
         </div>
       </div>
     </div>
+    <div class="float-left">
+      <el-tabs v-model="filter.status">
+        <el-tab-pane
+          :label="item.name"
+          :name="item.key"
+          v-for="item in filterData.status"
+          :key="item.id"
+        ></el-tab-pane>
+      </el-tabs>
+    </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table
@@ -62,7 +55,7 @@
             </template>
           </el-table-column>
 
-          <el-table-column prop="user_id" label="用户ID" width="120">
+          <el-table-column prop="user_id" label="学员ID" width="120">
           </el-table-column>
 
           <el-table-column label="商品" width="400">
@@ -79,11 +72,11 @@
             </template>
           </el-table-column>
 
-          <el-table-column label="用户" :width="300">
+          <el-table-column label="学员" :width="300">
             <template slot-scope="scope">
               <template v-if="scope.row.user">
-                <div class="d-flex" v-if="scope.row.user">
-                  <div>
+                <div class="user-item d-flex" v-if="scope.row.user">
+                  <div class="avatar">
                     <img :src="scope.row.user.avatar" width="40" height="40" />
                   </div>
                   <div class="ml-10">
@@ -91,7 +84,7 @@
                   </div>
                 </div>
               </template>
-              <span class="c-red" v-else>用户不存在</span>
+              <span class="c-red" v-else>学员不存在</span>
             </template>
           </el-table-column>
 
@@ -143,8 +136,8 @@ export default {
       },
       filter: {
         type: null,
-        gid: null,
-        status: -1,
+        gid: this.$route.query.id,
+        status: "1",
         created_at: null,
         user_id: null,
       },
@@ -156,16 +149,16 @@ export default {
         goods: [],
         status: [
           {
-            id: -1,
-            name: "全部",
+            key: "1",
+            name: "已支付",
           },
           {
-            id: 0,
+            key: "0",
             name: "未支付",
           },
           {
-            id: 1,
-            name: "已支付",
+            key: "3",
+            name: "已取消",
           },
         ],
       },
@@ -175,6 +168,11 @@ export default {
         },
       },
     };
+  },
+  watch: {
+    "filter.status"() {
+      this.getData();
+    },
   },
   activated() {
     this.getData();
@@ -192,9 +190,8 @@ export default {
     paginationReset() {
       this.pagination.page = 1;
       this.filter.type = null;
-      this.filter.gid = null;
-      this.filter.status = -1;
-      this.filter.keywords = null;
+      this.filter.gid = this.$route.query.id;
+      this.filter.status = "1";
       this.filter.created_at = null;
       this.filter.user_id = null;
       this.getData();
@@ -213,6 +210,7 @@ export default {
       }
       this.loading = true;
       let params = {};
+      this.filter.gid = this.$route.query.id;
       Object.assign(params, this.filter);
       Object.assign(params, this.pagination);
       this.$api.Miaosha.Orders.List(params).then((res) => {

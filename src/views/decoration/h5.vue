@@ -21,7 +21,7 @@
             <div class="btn">
               <div class="icon">
                 <img
-                  src="@/assets/images/decoration/h5/h5-vod-v1.png"
+                  src="@/assets/images/decoration/h5/slider.png"
                   width="44"
                   height="44"
                 />
@@ -34,7 +34,7 @@
             <div class="btn">
               <div class="icon">
                 <img
-                  src="@/assets/images/decoration/h5/h5-vod-v1.png"
+                  src="@/assets/images/decoration/h5/grid-nav.png"
                   width="44"
                   height="44"
                 />
@@ -196,6 +196,18 @@
               <div class="name">团购</div>
             </div>
           </div>
+          <div class="block-item" sign="h5-gzh-v1">
+            <div class="btn">
+              <div class="icon">
+                <img
+                  src="@/assets/images/decoration/h5/h5-gognzhoanghao-v1.png"
+                  width="44"
+                  height="44"
+                />
+              </div>
+              <div class="name">公众号</div>
+            </div>
+          </div>
         </draggable>
       </div>
 
@@ -276,6 +288,10 @@
                 v-else-if="item.sign === 'image-group'"
                 :config="item.config_render"
               ></render-image-group>
+              <render-gzh-v1
+                v-else-if="item.sign === 'h5-gzh-v1'"
+                :config="item.config_render"
+              ></render-gzh-v1>
 
               <div class="item-options" v-if="curBlock === index">
                 <div class="btn-item" @click="blockDestroy(index, item)">
@@ -329,6 +345,7 @@ import ConfigSetting from "./components/h5/config/index.vue";
 import RenderBlank from "./components/h5/render/blank.vue";
 import RenderMpWechat from "./components/h5/render/mp-wechat";
 import RenderImageGroup from "./components/h5/render/image-group";
+import RenderGzhV1 from "./components/h5/render/gzh-v1.vue";
 
 export default {
   components: {
@@ -346,6 +363,7 @@ export default {
     RenderBlank,
     RenderMpWechat,
     RenderImageGroup,
+    RenderGzhV1,
   },
   data() {
     return {
@@ -381,7 +399,7 @@ export default {
       }).then((res) => {
         this.blocks = res.data;
         this.loading = false;
-
+        this.curBlock = null;
         if (toBottom) {
           // 滚动到底部
           this.$nextTick(() => {
@@ -543,6 +561,14 @@ export default {
               url: null,
             },
           ],
+        };
+      } else if (blockSign === "h5-gzh-v1") {
+        defaultConfig = {
+          title: "公众号",
+          name: "公众号名称",
+          logo: null,
+          desc: "公众号引导",
+          qrcode: null,
         };
       }
 

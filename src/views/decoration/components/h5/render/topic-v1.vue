@@ -15,17 +15,17 @@
         <div class="topic-body">
           <div class="topic-title">{{ item.title }}</div>
           <div class="topic-info">
-            <span>{{ item.view_times }}阅读</span>
-            <span class="ml-15">{{ item.comment_times }}评论</span>
+            <span>{{ item.view_times || 0 }}阅读</span>
+            <span class="ml-15">{{ item.comment_times || 0 }}评论</span>
           </div>
         </div>
         <div class="topic-thumb">
-          <img v-if="item.thumb" :src="item.thumb" width="120" height="80" />
+          <img v-if="item.thumb" :src="item.thumb" width="120" height="90" />
           <img
             v-else
-            src="@/assets/images/decoration/h5/default-topic.png"
+            src="@/assets/images/decoration/h5/course-back.png"
             width="120"
-            height="80"
+            height="90"
           />
         </div>
       </div>

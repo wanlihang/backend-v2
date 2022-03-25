@@ -3,7 +3,7 @@
     <div class="float-left j-b-flex mb-30">
       <div class="d-flex">
         <p-button
-          text="添加"
+          text="新建"
           @click="$router.push({ name: 'LiveCourseCreate' })"
           type="primary"
           p="addons.Zhibo.course.store"
@@ -86,10 +86,10 @@
             </template>
           </el-table-column>
           <el-table-column
-            label="订阅人数"
+            label="付费人数"
             property="join_user_times"
             sortable
-            width="120"
+            width="100"
           >
             <template slot-scope="scope">
               <span>{{ scope.row.join_user_times }}人</span>

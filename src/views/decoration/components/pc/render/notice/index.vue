@@ -1,6 +1,8 @@
 <template>
   <div class="float-left">
-    <div class="notice-box" @click="showListWin = true">{{ title || '未配置公告' }}</div>
+    <div class="notice-box" @click="showListWin = true">
+      {{ title || "未配置公告" }}
+    </div>
     <list-comp :show="showListWin" @close="close"></list-comp>
   </div>
 </template>
@@ -8,6 +10,7 @@
 <script>
 import ListComp from "./list.vue";
 export default {
+  props: ["reload"],
   components: {
     ListComp,
   },
@@ -16,6 +19,11 @@ export default {
       showListWin: false,
       title: null,
     };
+  },
+  watch: {
+    reload() {
+      this.getData();
+    },
   },
   mounted() {
     this.getData();

@@ -3,7 +3,7 @@
     <div class="float-left j-b-flex mb-30">
       <div class="d-flex">
         <p-button
-          text="添加"
+          text="新建"
           @click="$router.push({ name: 'K12CourseCreate' })"
           type="primary"
           p="addons.XiaoBanKe.course.store"
@@ -113,7 +113,7 @@
               <div>结课：{{ scope.row.over_at | dateFormat }}</div>
             </template>
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="120">
+          <el-table-column fixed="right" label="操作" width="140">
             <template slot-scope="scope">
               <p-link
                 text="订单"

@@ -41,7 +41,7 @@ export default {
           active: "index",
         },
         {
-          name: "录播课程列表",
+          name: "录播课程",
           url: "/courses",
           active: "courses,course.show,video.show",
         },
@@ -49,7 +49,7 @@ export default {
 
       if (this.enabledAddons["Zhibo"]) {
         links.push({
-          name: "直播课程列表",
+          name: "直播课程",
           url: "/live",
           active: "zhibo.course.index,zhibo.course.show,zhibo.course.play",
         });
@@ -57,7 +57,7 @@ export default {
 
       if (this.enabledAddons["MeeduBooks"]) {
         links.push({
-          name: "电子书列表",
+          name: "电子书",
           url: "/book",
           active: "books,book.show,book.read",
         });
@@ -65,7 +65,7 @@ export default {
 
       if (this.enabledAddons["LearningPaths"]) {
         links.push({
-          name: "学习路径列表",
+          name: "学习路径",
           url: "/learnPath",
           active: "learning_path.index,learning_path.show",
         });
@@ -73,31 +73,15 @@ export default {
 
       if (this.enabledAddons["MeeduTopics"]) {
         links.push({
-          name: "图文列表",
+          name: "图文",
           url: "/topic",
           active: "topic,topic.show",
         });
       }
 
-      if (this.enabledAddons["TuanGou"]) {
-        links.push({
-          name: "团购列表",
-          url: "/tg",
-          active: "tuangou,tuangou.show",
-        });
-      }
-
-      if (this.enabledAddons["MiaoSha"]) {
-        links.push({
-          name: "秒杀列表",
-          url: "/ms",
-          active: "miaosha,miaosha.show",
-        });
-      }
-
       if (this.enabledAddons["Wenda"]) {
         links.push({
-          name: "问答列表",
+          name: "问答",
           url: "/wenda",
           active:
             "wenda.question.index,wenda.question.show,wenda.question.create,wenda.question.edit",
@@ -114,29 +98,24 @@ export default {
 
       if (this.enabledAddons["Paper"]) {
         links.push({
-          name: "考试首页",
+          name: "考试练习首页",
           url: "/exam",
           active: "papers,paper.show",
         });
         links.push({
-          name: "在线考试首页",
+          name: "在线考试",
           url: "/exam/papers",
           active: "papers,paper.show",
         });
         links.push({
-          name: "模拟考试首页",
+          name: "模拟考试",
           url: "/exam/mockpaper",
           active: "exam.mock_paper,exam.mock_paper.show",
         });
         links.push({
-          name: "在线练习首页",
+          name: "练习",
           url: "/exam/practice",
           active: "practices,practice.show",
-        });
-        links.push({
-          name: "错题本",
-          url: "/exam/wrongbook",
-          active: null,
         });
       }
 

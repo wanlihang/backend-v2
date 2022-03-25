@@ -18,33 +18,6 @@
           </el-button>
         </el-form-item>
 
-        <el-form-item label="商品名" prop="goods_title">
-          <el-input v-model="course.goods_title" class="w-600px"></el-input>
-        </el-form-item>
-
-        <el-form-item label="商品原价" prop="original_charge">
-          <el-input
-            type="number"
-            placeholder="单位：元"
-            v-model="course.original_charge"
-            class="w-200px"
-          ></el-input>
-        </el-form-item>
-
-        <el-form-item prop="goods_thumb" label="商品封面">
-          <upload-image
-            v-model="course.goods_thumb"
-            helper="长宽比4:3，建议尺寸：400x300像素"
-            width="120"
-            height="90"
-            name="上传封面"
-          ></upload-image>
-        </el-form-item>
-
-        <el-form-item prop="desc" label="详细介绍">
-          <quill-editor :height="400" v-model="course.desc"></quill-editor>
-        </el-form-item>
-
         <el-form-item label="团购价" prop="charge">
           <div class="d-flex">
             <div>
@@ -126,7 +99,7 @@
             </div>
             <div class="ml-10">
               <helper-text
-                text="团购开始时间，时间达到之后，用户才能参与团购"
+                text="团购开始时间，时间达到之后，学员才能参与团购"
               ></helper-text>
             </div>
           </div>
@@ -156,14 +129,10 @@
   </div>
 </template>
 <script>
-import QuillEditor from "@/components/quill-editor";
-import UploadImage from "@/components/upload-image";
 import SelectResource from "@/components/select-resources/index";
 
 export default {
   components: {
-    QuillEditor,
-    UploadImage,
     SelectResource,
   },
   data() {
@@ -182,7 +151,6 @@ export default {
         goods_id: null,
         people_num: null,
         goods_type: null,
-        desc: null,
       },
       rules: {
         goods_type: [
@@ -255,13 +223,6 @@ export default {
             trigger: "blur",
           },
         ],
-        desc: [
-          {
-            required: true,
-            message: "详细介绍不能为空",
-            trigger: "blur",
-          },
-        ],
       },
       expireTimeOption: {
         disabledDate(date) {
@@ -297,6 +258,18 @@ export default {
     },
     confirm() {
       if (this.loading) {
+        return;
+      }
+      if (this.course.charge < 0) {
+        this.$message.error("请输入正确的团购价");
+        return;
+      }
+      if (this.course.people_num < 2) {
+        this.$message.error("组团成功人数最少为2个");
+        return;
+      }
+      if (this.course.time_limit < 0) {
+        this.$message.error("请输入正确的有效期");
         return;
       }
       this.loading = true;

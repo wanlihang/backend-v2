@@ -32,20 +32,20 @@ const zh = {
     },
     "system-application": "功能模块",
     member: {
-      name: "用户",
-      index: "用户列表",
-      create: "添加用户",
+      name: "学员",
+      index: "学员列表",
+      create: "添加学员",
       profile: "实名信息",
-      import: "用户批量导入",
-      detail: "用户详情",
-      edit: "用户编辑",
-      tags: "用户标签",
-      remark: "用户备注",
-      credit1: "用户积分",
+      import: "学员批量导入",
+      detail: "学员详情",
+      edit: "学员编辑",
+      tags: "学员标签",
+      remark: "学员备注",
+      credit1: "学员积分",
       tag: {
-        index: "用户标签列表",
-        create: "添加用户标签",
-        edit: "编辑用户标签",
+        index: "学员标签列表",
+        create: "添加学员标签",
+        edit: "编辑学员标签",
       },
     },
     miaosha: {
@@ -88,7 +88,7 @@ const zh = {
       path: {
         name: "学习路径",
         index: "学习路径",
-        create: "添加学习路径",
+        create: "新建学习路径",
         update: "编辑学习路径",
         category: {
           index: "学习路径分类",
@@ -126,7 +126,7 @@ const zh = {
       course: {
         name: "直播课",
         index: "直播课程",
-        create: "添加直播课程",
+        create: "新建直播课程",
         update: "编辑直播课程",
         comment: "直播课程评论",
         category: {
@@ -140,7 +140,7 @@ const zh = {
           update: "编辑直播课程章节",
         },
         users: {
-          index: "直播课程订阅用户",
+          index: "直播课程学员",
         },
         video: {
           index: "直播排课",
@@ -160,9 +160,9 @@ const zh = {
     },
     wechat: {
       messagereply: {
-        index: "公众号消息",
-        create: "公众号添加规则",
-        update: "公众号编辑规则",
+        index: "公众号",
+        create: "新建自动回复",
+        update: "编辑自动回复",
       },
     },
     codeExchanger: {
@@ -180,9 +180,9 @@ const zh = {
     topic: {
       name: "图文",
       index: "图文列表",
-      create: "添加图文",
+      create: "新建图文",
       update: "编辑图文",
-      order: "图文订阅用户",
+      order: "图文学员",
       comment: "图文文章评论",
       category: {
         index: "图文分类管理",
@@ -192,7 +192,7 @@ const zh = {
     },
     wenda: {
       question: {
-        index: "用户问答",
+        index: "站内问答",
         answer: "问题回答",
         comment: "问题评论",
         category: {
@@ -205,9 +205,9 @@ const zh = {
     course: {
       vod: {
         index: "录播",
-        create: "添加录播课程",
+        create: "新建录播课程",
         update: "编辑录播课程",
-        detail: "录播定阅用户",
+        detail: "录播学员",
         "video-import": "视频批量导入",
         comment: "课程评论",
         category: {
@@ -244,7 +244,7 @@ const zh = {
         name: "大小班",
         course: {
           index: "大小班",
-          create: "添加大小班",
+          create: "新建大小班",
           update: "编辑大小班",
         },
         teacher: {
@@ -271,10 +271,10 @@ const zh = {
     meedubook: {
       book: {
         index: "电子书",
-        create: "添加电子书",
+        create: "新建电子书",
         update: "编辑电子书",
         comment: "电子书评论",
-        users: "订阅用户",
+        users: "学员",
         category: {
           index: "电子书分类管理",
           create: "添加电子书分类",
@@ -303,8 +303,8 @@ const zh = {
         userpaper: "考试记录",
         user: "订阅学员",
         stat: "分数统计",
-        question: "设置习题",
-        questionadd: "添加习题",
+        question: "组卷",
+        questionadd: "添加试题",
         marking: "阅卷",
         category: {
           index: "试卷分类",
@@ -356,8 +356,8 @@ const zh = {
           create: "添加练习章节",
           update: "编辑练习章节",
           question: {
-            index: "章节试题",
-            create: "添加章节试题",
+            index: "章节组卷",
+            create: "添加章节组卷",
           },
         },
       },

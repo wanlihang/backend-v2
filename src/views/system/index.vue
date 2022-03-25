@@ -6,7 +6,7 @@
         <template v-for="(item, index) in groups">
           <div
             class="item"
-            v-if="enabledAddons[item.sign] === 1 || item.sign === ''"
+            v-if="check(item.sign)"
             :key="index"
             @click="goConfig(item.value)"
           >
@@ -112,16 +112,10 @@ export default {
           sign: "",
         },
         {
-          name: "阿里云HLS加密",
-          value: "阿里云HLS加密",
+          name: "视频加密",
+          value: "视频加密",
           images: require("../../assets/images/config/ali.png"),
-          sign: "AliyunHls",
-        },
-        {
-          name: "腾讯云HLS加密",
-          value: "腾讯云HLS加密",
-          images: require("../../assets/images/config/tecent.png"),
-          sign: "TencentCloudHls",
+          sign: "视频加密",
         },
         {
           name: "微信小程序",
@@ -224,7 +218,7 @@ export default {
           sign: "TuanGou",
         },
         {
-          name: "积分签到",
+          name: "积分配置",
           value: "积分",
           images: require("../../assets/images/config/credict.png"),
           sign: "",
@@ -258,8 +252,29 @@ export default {
         this.$router.push({
           name: "SystemSaveImagesConfig",
         });
+      } else if (value === "视频加密") {
+        this.$router.push({
+          name: "SystemVideoHlsConfig",
+        });
+      } else if (value === "微信公众号") {
+        this.$router.push({
+          name: "SystemMpwechatConfig",
+        });
       } else {
         this.$router.push({ name: "SystemConfig", query: { key: value } });
+      }
+    },
+    check(sign) {
+      if (
+        sign === "视频加密" &&
+        (this.enabledAddons["AliyunHls"] === 1 ||
+          this.enabledAddons["TencentCloudHls"] === 1)
+      ) {
+        return true;
+      } else if (this.enabledAddons[sign] === 1 || sign === "") {
+        return true;
+      } else {
+        return false;
       }
     },
   },

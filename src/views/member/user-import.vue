@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="用户批量导入"></back-bar>
+    <back-bar class="mb-30" title="学员批量导入"></back-bar>
 
     <div class="user-import-box">
       <div class="float-left d-flex mb-15">
@@ -15,7 +15,7 @@
             href="https://www.yuque.com/meedu/fvvkbf/qtkixc"
             target="_blank"
           >
-            点击链接下载「用户批量导入模板」
+            点击链接下载「学员批量导入模板」
           </el-link>
         </div>
       </div>

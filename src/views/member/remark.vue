@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body" v-if="user">
-    <back-bar class="mb-30" title="用户备注"></back-bar>
+    <back-bar class="mb-30" title="学员备注"></back-bar>
 
     <div class="form-box broder-top-left-radius">
       <el-form ref="form" label-width="200px">

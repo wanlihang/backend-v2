@@ -10,15 +10,24 @@
         <div class="tg-item" v-for="(item, index) in config.items" :key="index">
           <div class="tg-thumb">
             <div class="tg-icon">拼团中</div>
-            <img
-              v-if="item.goods_thumb"
-              :src="item.goods_thumb"
-              width="120"
-              height="90"
-            />
+            <template v-if="item.goods_thumb">
+              <thumb-bar
+                v-if="item.goods_type === 'book'"
+                :value="item.goods_thumb"
+                :border="4"
+                :width="67.5"
+                :height="90"
+              ></thumb-bar>
+              <thumb-bar
+                v-else
+                :value="item.goods_thumb"
+                :width="120"
+                :height="90"
+              ></thumb-bar>
+            </template>
             <img
               v-else
-              src="@/assets/images/decoration/h5/default-tg.png"
+              src="@/assets/images/decoration/h5/course-back.png"
               width="120"
               height="90"
             />
@@ -28,9 +37,11 @@
               {{ item.goods_title }}
             </div>
             <div class="tg-info">
-              <div class="tg-sub">{{ item.goods_type_text }}</div>
+              <div class="tg-sub" v-if="item.goods_type_text">
+                {{ item.goods_type_text }}
+              </div>
               <div class="tg-original_charge">
-                原价:￥{{ item.original_charge }}
+                原价:￥{{ item.original_charge || 0 }}
               </div>
               <div class="tg-charge">
                 <span class="unit">￥</span>{{ item.charge || "XX" }}
@@ -108,7 +119,7 @@ export default {
         .tg-thumb {
           position: relative;
           width: 120px;
-          height: 90px;
+          height: auto;
           border-radius: 4px;
           margin-right: 10px;
           overflow: hidden;
@@ -136,6 +147,7 @@ export default {
         .tg-body {
           flex: 1;
           padding-top: 5px;
+
           .tg-goods-title {
             width: 100%;
             height: 40px;
@@ -167,6 +179,7 @@ export default {
               font-weight: 400;
               padding: 0 5px;
               color: #3ca7fa;
+              margin-right: 10px;
             }
             .tg-original_charge {
               width: auto;
@@ -175,7 +188,6 @@ export default {
               font-weight: 400;
               color: #999999;
               line-height: 12px;
-              margin-left: 10px;
             }
 
             .tg-charge {

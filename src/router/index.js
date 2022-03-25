@@ -132,6 +132,14 @@ const routes = [
     },
   },
   {
+    path: "/system/mp_wechatConfig",
+    component: () => import("@/views/system/mp_wechatConfig"),
+    name: "SystemMpwechatConfig",
+    meta: {
+      title: "title.system-config",
+    },
+  },
+  {
     path: "/system/creditSignConfig",
     component: () => import("@/views/system/creditSignConfig"),
     name: "SystemCreditSignConfig",
@@ -159,6 +167,14 @@ const routes = [
     path: "/system/saveImagesConfig",
     component: () => import("@/views/system/saveImagesConfig"),
     name: "SystemSaveImagesConfig",
+    meta: {
+      title: "title.system-config",
+    },
+  },
+  {
+    path: "/system/videoHlsConfig",
+    component: () => import("@/views/system/videoHlsConfig"),
+    name: "SystemVideoHlsConfig",
     meta: {
       title: "title.system-config",
     },

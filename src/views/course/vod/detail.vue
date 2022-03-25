@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body" v-if="id">
-    <back-bar class="mb-30" title="录播订阅用户"></back-bar>
+    <back-bar class="mb-30" title="录播学员"></back-bar>
 
     <div class="float-left">
       <div class="float-left">
@@ -42,7 +42,7 @@ export default {
       tabActive: "sub-users",
       tabs: [
         {
-          name: "购买用户",
+          name: "购买学员",
           key: "sub-users",
         },
         {
@@ -55,5 +55,4 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
-</style>
+<style lang="less" scoped></style>

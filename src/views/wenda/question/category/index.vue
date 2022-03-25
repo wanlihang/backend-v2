@@ -31,13 +31,6 @@
           <el-table-column fixed="right" label="操作" width="100">
             <template slot-scope="scope">
               <p-link
-                text="删除"
-                p="addons.Wenda.category.delete"
-                style="margin-right: 10px"
-                type="danger"
-                @click="destory(scope.row.id)"
-              ></p-link>
-              <p-link
                 text="编辑"
                 p="addons.Wenda.category.update"
                 type="primary"
@@ -47,6 +40,13 @@
                     query: { id: scope.row.id },
                   })
                 "
+              ></p-link>
+              <p-link
+                text="删除"
+                p="addons.Wenda.category.delete"
+                class="ml-5"
+                type="danger"
+                @click="destory(scope.row.id)"
               ></p-link>
             </template>
           </el-table-column>

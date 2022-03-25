@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="添加图文"></back-bar>
+    <back-bar class="mb-30" title="新建图文"></back-bar>
 
     <div class="center-tabs mb-30">
       <div>
@@ -98,7 +98,7 @@
               </div>
               <div class="ml-10">
                 <helper-text
-                  text="开启VIP免费的话，购买VIP会员的用户可无需购买直接观看文章。"
+                  text="开启VIP免费的话，购买VIP会员的学员可无需购买直接观看文章。"
                 ></helper-text>
               </div>
             </div>
@@ -109,12 +109,12 @@
             label="免费内容"
             v-if="topic.charge > 0"
           >
-            <mavon-editor
-              class="w-100"
-              :height="500"
+            <change-editor
               :content="topic.free_content"
+              class="w-100"
+              :height="400"
               @change="getfreecontent"
-            ></mavon-editor>
+            ></change-editor>
           </el-form-item>
 
           <el-form-item
@@ -122,20 +122,20 @@
             v-if="topic.charge > 0"
             label="付费内容"
           >
-            <mavon-editor
+            <change-editor
               :content="topic.original_content"
               class="w-100"
-              :height="500"
+              :height="400"
               @change="getcontent"
-            ></mavon-editor>
+            ></change-editor>
           </el-form-item>
           <el-form-item prop="original_content" v-else label="文章内容">
-            <mavon-editor
+            <change-editor
               :content="topic.original_content"
               class="w-100"
-              :height="500"
+              :height="400"
               @change="getcontent"
-            ></mavon-editor>
+            ></change-editor>
           </el-form-item>
         </div>
 
@@ -151,7 +151,7 @@
                 </el-switch>
               </div>
               <div class="ml-10">
-                <helper-text text="控制文章是否可以被用户看到。"></helper-text>
+                <helper-text text="控制文章是否可以被学员看到。"></helper-text>
               </div>
             </div>
           </el-form-item>
@@ -170,30 +170,10 @@
               </div>
               <div class="ml-10">
                 <helper-text
-                  text="控制文章在用户端的显示顺序，时间越早越靠后"
+                  text="控制文章在学员端的显示顺序，时间越早越靠后"
                 ></helper-text>
               </div>
             </div>
-          </el-form-item>
-
-          <el-form-item label="SEO关键字">
-            <el-input
-              class="w-400px"
-              rows="3"
-              type="textarea"
-              v-model="topic.seo_keywords"
-              placeholder="SEO关键字"
-            ></el-input>
-          </el-form-item>
-
-          <el-form-item label="SEO描述">
-            <el-input
-              class="w-400px"
-              rows="3"
-              type="textarea"
-              v-model="topic.seo_description"
-              placeholder="SEO描述"
-            ></el-input>
           </el-form-item>
         </div>
       </el-form>
@@ -214,13 +194,13 @@
   </div>
 </template>
 <script>
-import MavonEditor from "@/components/md-editor";
 import UploadImage from "@/components/upload-image";
+import ChangeEditor from "@/components/change-editor";
 
 export default {
   components: {
-    MavonEditor,
     UploadImage,
+    ChangeEditor,
   },
   data() {
     return {
@@ -234,8 +214,6 @@ export default {
         is_vip_free: 0,
         charge: 0,
         title: null,
-        seo_description: null,
-        seo_keywords: null,
         sorted_at: null,
         original_content: null,
         render_content: null,

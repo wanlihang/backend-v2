@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="添加直播课程"></back-bar>
+    <back-bar class="mb-30" title="新建直播课程"></back-bar>
 
     <div class="center-tabs mb-30">
       <div>
@@ -96,7 +96,7 @@
               </div>
               <div class="ml-10">
                 <helper-text
-                  text="上架时间决定了课程在用户端的排名，时间越早排名越靠后。如果是未来时间，则需要等到时间到达用户才能看到该课程。"
+                  text="上架时间决定了课程在学员端的排名，时间越早排名越靠后。如果是未来时间，则需要等到时间到达学员才能看到该课程。"
                 ></helper-text>
               </div>
             </div>
@@ -123,7 +123,7 @@
               </div>
               <div class="ml-10">
                 <helper-text
-                  text="最小单位：元。不支持小数。价格为0意味着用户可以直接观看直播，价格大于0则需要用户购买后才能观看直播。"
+                  text="最小单位：元。不支持小数。价格为0意味着学员可以直接观看直播，价格大于0则需要学员购买后才能观看直播。"
                 ></helper-text>
               </div>
             </div>
@@ -141,36 +141,30 @@
               </div>
               <div class="ml-10">
                 <helper-text
-                  text="如果启用会员免费那么购买VIP会员的用户将可以无需购买直接观看直播。"
+                  text="如果启用会员免费那么购买VIP会员的学员将可以无需购买直接观看直播。"
                 ></helper-text>
               </div>
             </div>
           </el-form-item>
 
           <el-form-item label="简短介绍" prop="short_description">
-            <div class="d-flex">
-              <div>
-                <el-input
-                  type="textarea"
-                  maxlength="150"
-                  v-model="course.short_description"
-                  class="w-500px"
-                  rows="3"
-                ></el-input>
-              </div>
-              <div class="ml-10">
-                <helper-text
-                  text="该值会在课程列表显示，建议不要超过150个字。"
-                ></helper-text>
-              </div>
-            </div>
+            <el-input
+              type="textarea"
+              show-word-limit
+              maxlength="150"
+              v-model="course.short_description"
+              class="w-500px"
+              rows="3"
+            ></el-input>
           </el-form-item>
 
           <el-form-item label="详细介绍" prop="original_desc">
-            <quill-editor
-              :height="400"
-              v-model="course.original_desc"
-            ></quill-editor>
+            <div class="w-800px">
+              <quill-editor
+                :height="400"
+                v-model="course.original_desc"
+              ></quill-editor>
+            </div>
           </el-form-item>
         </div>
 
@@ -202,7 +196,7 @@
               </div>
               <div class="ml-10">
                 <helper-text
-                  text="该字段控制用户是否可以看到课程。"
+                  text="该字段控制学员是否可以看到课程。"
                 ></helper-text>
               </div>
             </div>

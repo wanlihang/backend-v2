@@ -125,19 +125,19 @@ export default {
         });
       }
 
-      if (this.enabledAddons["MiaoSha"]) {
-        types.push({
-          name: "秒杀",
-          key: "ms",
-        });
-      }
+      // if (this.enabledAddons["MiaoSha"]) {
+      //   types.push({
+      //     name: "秒杀",
+      //     key: "ms",
+      //   });
+      // }
 
-      if (this.enabledAddons["TuanGou"]) {
-        types.push({
-          name: "团购",
-          key: "tg",
-        });
-      }
+      // if (this.enabledAddons["TuanGou"]) {
+      //   types.push({
+      //     name: "团购",
+      //     key: "tg",
+      //   });
+      // }
 
       if (this.enabledAddons["LearningPaths"]) {
         types.push({

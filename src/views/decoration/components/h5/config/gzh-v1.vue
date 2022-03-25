@@ -1,0 +1,266 @@
+<template>
+  <div class="vod-v1-box" v-if="config">
+    <div class="title">
+      <div class="text">公众号配置</div>
+    </div>
+    <div class="line float-left"></div>
+    <div class="config-item">
+      <div class="config-item-body">
+        <div class="float-left d-flex">
+          <div class="form-label">名称</div>
+          <div class="flex-1 ml-15">
+            <el-input
+              class="w-100"
+              placeholder="填写公众号名称"
+              v-model="config.name"
+            ></el-input>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="config-item">
+      <div class="config-item-body">
+        <div class="float-left d-flex">
+          <div class="form-label">引导</div>
+          <div class="flex-1 ml-15">
+            <el-input
+              class="w-100"
+              placeholder="填写引导，如“关注公众号了解更多”"
+              v-model="config.desc"
+            ></el-input>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="config-item">
+      <div class="config-item-body">
+        <div class="float-left d-flex">
+          <div class="form-label">头像</div>
+          <div class="flex-1 ml-15">
+            <div class="thumb" @click="selectIcon(1)">
+              <img
+                v-if="config.logo"
+                :src="config.logo"
+                width="100"
+                height="100"
+              />
+              <img
+                v-else
+                src="@/assets/images/decoration/h5/h5-edit.png"
+                width="100"
+                height="100"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="config-item">
+      <div class="config-item-body">
+        <div class="float-left d-flex">
+          <div class="form-label">二维码</div>
+          <div class="flex-1 ml-15">
+            <div class="thumb" @click="selectIcon(2)">
+              <img
+                v-if="config.qrcode"
+                :src="config.qrcode"
+                width="100"
+                height="100"
+              />
+              <img
+                v-else
+                src="@/assets/images/decoration/h5/h5-edit.png"
+                width="100"
+                height="100"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="float-left footer-button">
+      <el-button type="primary" class="w-100" :loading="loading" @click="save">
+        保存
+      </el-button>
+    </div>
+    <select-image
+      :show="showSelectImageWin"
+      :from="1"
+      @close="showSelectImageWin = false"
+      @selected="uploadImage"
+    ></select-image>
+  </div>
+</template>
+<script>
+import SelectImage from "@/components/select-image";
+export default {
+  components: {
+    SelectImage,
+  },
+  props: ["block"],
+  data() {
+    return {
+      config: null,
+      curImageIndex: null,
+      showSelectImageWin: false,
+      loading: false,
+    };
+  },
+  mounted() {
+    this.config = this.block.config_render;
+  },
+  methods: {
+    save() {
+      if (this.loading) {
+        return;
+      }
+      this.loading = true;
+      this.$api.ViewBlock.Update(this.block.id, {
+        sort: this.block.sort,
+        config: this.config,
+      })
+        .then(() => {
+          this.loading = false;
+          this.$message.success(this.$t("common.success"));
+          this.$emit("update");
+        })
+        .catch((e) => {
+          this.loading = false;
+          this.$message.error(e.message);
+        });
+    },
+    selectIcon(index) {
+      this.curImageIndex = index;
+      this.showSelectImageWin = true;
+    },
+    uploadImage(src) {
+      if (this.curImageIndex === null) {
+        return;
+      }
+      if (this.curImageIndex === 1) {
+        this.config.logo = src;
+      } else {
+        this.config.qrcode = src;
+      }
+
+      this.showSelectImageWin = false;
+    },
+  },
+};
+</script>
+<style lang="less" scoped>
+.vod-v1-box {
+  width: 100%;
+  height: auto;
+  float: left;
+  box-sizing: border-box;
+  position: relative;
+  padding-bottom: 40px;
+
+  .footer-button {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 400px;
+    height: 70px;
+    background: #ffffff;
+    border-top: 1px solid #e5e5e5;
+    box-sizing: border-box;
+    padding: 15px 30px;
+  }
+
+  .title {
+    width: 100%;
+    height: auto;
+    float: left;
+    box-sizing: border-box;
+    border-left: 5px solid #3ca7fa;
+    padding-left: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333333;
+    line-height: 16px;
+    margin-bottom: 30px;
+  }
+
+  .line {
+    width: 100%;
+    height: 1px;
+    float: left;
+    background: #f1f2f9;
+  }
+
+  .config-item {
+    width: 100%;
+    height: auto;
+    float: left;
+    box-sizing: border-box;
+    padding-top: 30px;
+
+    .config-item-title {
+      width: 100%;
+      height: auto;
+      float: left;
+      box-sizing: border-box;
+      font-size: 14px;
+      font-weight: 600;
+      color: #333333;
+      line-height: 14px;
+      padding-bottom: 30px;
+    }
+
+    .config-item-body {
+      width: 100%;
+      height: auto;
+      float: left;
+      box-sizing: border-box;
+
+      .form-label {
+        width: 50px;
+        font-size: 14px;
+        font-weight: 400;
+        color: #666666;
+        line-height: 14px;
+      }
+
+      .courses-list-box {
+        width: 100%;
+        height: auto;
+        float: left;
+        box-sizing: border-box;
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+
+        .course-item {
+          position: relative;
+          cursor: pointer;
+
+          img {
+            border-radius: 4px;
+          }
+
+          .default-box {
+            border-radius: 4px;
+            width: 78px;
+            height: 58px;
+            border: 1px dashed #dcdfe6;
+            font-size: 12px;
+            color: #3ca7fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .btn-del {
+            position: absolute;
+            top: -17px;
+            right: -17px;
+          }
+        }
+      }
+    }
+  }
+}
+</style>
