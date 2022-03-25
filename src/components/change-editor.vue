@@ -59,9 +59,9 @@ export default {
     desc() {
       this.$emit("change", this.desc, this.desc);
     },
-    editorKey() {
+    editorKey(newVal, oldVal) {
       this.current = this.editorKey;
-      if (this.editorKey === this.$utils.getEditorKey()) {
+      if (oldVal !== null) {
         this.$emit("change", null, null);
         this.desc = null;
         this.mavContent = null;
