@@ -10,7 +10,7 @@
         >
         </p-button>
         <p-button
-          text="分类管理"
+          text="大小班分类"
           @click="$router.push({ name: 'K12Categories' })"
           type="primary"
           p="addons.XiaoBanKe.course_category.list"
