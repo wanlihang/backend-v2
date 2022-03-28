@@ -10,7 +10,7 @@
         >
         </p-button>
         <p-button
-          text="分类管理"
+          text="学习路径分类"
           p="addons.learnPaths.category.list"
           @click="$router.push({ name: 'LearningPathCategories' })"
           type="primary"

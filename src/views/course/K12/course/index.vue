@@ -9,6 +9,13 @@
           p="addons.XiaoBanKe.course.store"
         >
         </p-button>
+        <p-button
+          text="大小班分类"
+          @click="$router.push({ name: 'K12Categories' })"
+          type="primary"
+          p="addons.XiaoBanKe.course_category.list"
+        >
+        </p-button>
       </div>
       <div class="d-flex">
         <div>

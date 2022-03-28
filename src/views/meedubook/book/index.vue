@@ -10,6 +10,13 @@
         >
         </p-button>
         <p-button
+          text="电子书分类"
+          p="addons.meedu_books.book_category.list"
+          @click="$router.push({ name: 'MeedubookCategory' })"
+          type="primary"
+        >
+        </p-button>
+        <p-button
           text="电子书评论"
           p="addons.meedu_books.book.comments.list"
           @click="$router.push({ name: 'MeedubookComment' })"
