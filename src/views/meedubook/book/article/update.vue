@@ -100,13 +100,13 @@
           </div>
         </el-form-item>
 
-        <el-form-item prop="render_content" label="文章内容">
-          <mavon-editor
+        <el-form-item prop="original_content" label="文章内容">
+          <change-editor
             :content="article.original_content"
             class="w-100"
             :height="500"
             @change="getcontent"
-          ></mavon-editor>
+          ></change-editor>
         </el-form-item>
       </el-form>
 
@@ -126,11 +126,11 @@
   </div>
 </template>
 <script>
-import MavonEditor from "@/components/md-editor";
+import ChangeEditor from "@/components/change-editor";
 
 export default {
   components: {
-    MavonEditor,
+    ChangeEditor,
   },
   data() {
     return {
@@ -155,7 +155,7 @@ export default {
             trigger: "blur",
           },
         ],
-        render_content: [
+        original_content: [
           {
             required: true,
             message: "内容不能为空",

@@ -10,7 +10,7 @@ export default new Vuex.Store({
     isLogin: false,
     enabledAddons: {},
     enabledAddonsCount: 0,
-    editorKey: "markdown",
+    editorKey: null,
   },
   mutations: {
     loginHandle(state, user) {

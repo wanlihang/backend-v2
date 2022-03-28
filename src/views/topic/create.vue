@@ -112,7 +112,7 @@
             <change-editor
               :content="topic.free_content"
               class="w-100"
-              :height="400"
+              :height="500"
               @change="getfreecontent"
             ></change-editor>
           </el-form-item>
@@ -125,7 +125,7 @@
             <change-editor
               :content="topic.original_content"
               class="w-100"
-              :height="400"
+              :height="500"
               @change="getcontent"
             ></change-editor>
           </el-form-item>
@@ -133,7 +133,7 @@
             <change-editor
               :content="topic.original_content"
               class="w-100"
-              :height="400"
+              :height="500"
               @change="getcontent"
             ></change-editor>
           </el-form-item>
@@ -240,7 +240,7 @@ export default {
             trigger: "blur",
           },
         ],
-        render_content: [
+        original_content: [
           {
             required: true,
             message: "内容不能为空",

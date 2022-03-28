@@ -1,7 +1,8 @@
 <template>
-  <div class="editor-box flex-column">
-    <div class="d-flex w-800px" v-show="editorKey === 'markdown'">
+  <div class="editor-box flex flex-row">
+    <div class="d-flex w-800px" v-if="editorKey === 'markdown'">
       <mavon-editor
+        v-if="renderComponent"
         :content="mavContent"
         class="w-800px"
         :height="height"
@@ -9,10 +10,14 @@
         @change="change"
       ></mavon-editor>
     </div>
-    <div class="d-flex w-800px" v-show="editorKey === 'quill'">
-      <quill-editor :height="height - 42" v-model="desc"></quill-editor>
+    <div class="d-flex w-800px" v-if="editorKey === 'quill'">
+      <quill-editor
+        :height="height - 42"
+        v-model="desc"
+        v-if="renderComponent"
+      ></quill-editor>
     </div>
-    <div class="editor-tab d-flex w-100">
+    <div class="editor-tab">
       <el-select @change="saveKey" class="w-150px" v-model="current">
         <el-option
           v-for="(item, index) in tools"
@@ -44,6 +49,7 @@ export default {
       desc: this.content,
       current: null,
       mavContent: this.content,
+      renderComponent: true,
     };
   },
   computed: {
@@ -53,13 +59,22 @@ export default {
     desc() {
       this.$emit("change", this.desc, this.desc);
     },
-    editorKey() {
+    editorKey(newVal, oldVal) {
       this.current = this.editorKey;
+      if (oldVal !== null) {
+        this.$emit("change", null, null);
+        this.desc = null;
+        this.mavContent = null;
+        this.renderComponent = false;
+        this.$nextTick(() => {
+          this.renderComponent = true;
+        });
+      }
     },
   },
   mounted() {
     let localCurrent = this.$utils.getEditorKey();
-    let current = localCurrent ? localCurrent : "markdown";
+    let current = localCurrent ? localCurrent : "quill";
     this.saveEditorKey(current);
     this.current = current;
   },
@@ -69,8 +84,19 @@ export default {
       this.$emit("change", pureContent, renderContent);
     },
     saveKey(value) {
-      this.saveEditorKey(value);
-      this.$utils.saveEditorKey(value);
+      this.$confirm("切换编辑器将清空已编辑文章内容，是否切换？", "警告", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          this.saveEditorKey(value);
+          this.$utils.saveEditorKey(value);
+        })
+        .catch(() => {
+          //点击删除按钮的操作
+          this.current = this.$utils.getEditorKey();
+        });
     },
   },
 };
@@ -80,7 +106,7 @@ export default {
   width: 100%;
   float: left;
   .editor-tab {
-    margin-top: 5px;
+    margin-left: 30px;
   }
 }
 </style>
