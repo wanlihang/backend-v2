@@ -112,10 +112,18 @@
           <el-form-item :key="1893" label="腾讯云短信 Region">
             <div class="j-flex flex-column" style="margin-left: 3px">
               <div>
-                <el-input
-                  class="w-200px"
+                <el-select
+                  class="w-300px"
                   v-model="form.config['sms.gateways.tencent.region']"
-                ></el-input>
+                >
+                  <el-option
+                    v-for="(item, index) in regions"
+                    :key="index"
+                    :label="item.title"
+                    :value="item.key"
+                  >
+                  </el-option>
+                </el-select>
               </div>
             </div>
           </el-form-item>
@@ -306,6 +314,20 @@ export default {
         {
           key: "yunpian",
           title: "云片",
+        },
+      ],
+      regions: [
+        {
+          key: "ap-beijing",
+          title: "华北地区（北京）",
+        },
+        {
+          key: "ap-guangzhou",
+          title: "华南地区（广州）",
+        },
+        {
+          key: "ap-nanjing",
+          title: "华东地区（南京）",
         },
       ],
       form: {
