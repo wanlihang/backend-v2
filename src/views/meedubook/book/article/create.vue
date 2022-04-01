@@ -144,6 +144,7 @@ export default {
         book_cid: null,
         original_content: null,
         render_content: null,
+        editor: null,
       },
       form: {
         trySee: false,
@@ -212,6 +213,12 @@ export default {
         return;
       }
       this.loading = true;
+      let localCurrent = this.$utils.getEditorKey();
+      if (localCurrent === "markdown") {
+        this.article.editor = "MARKDOWN";
+      } else {
+        this.article.editor = "FULLEDITOR";
+      }
       this.$api.Meedubook.Book.Article.Store(this.article)
         .then(() => {
           this.$message.success(this.$t("common.success"));

@@ -101,12 +101,20 @@
         </el-form-item>
 
         <el-form-item prop="original_content" label="文章内容">
-          <change-editor
-            :content="article.original_content"
-            class="w-100"
-            :height="500"
-            @change="getcontent"
-          ></change-editor>
+          <div class="d-flex w-800px">
+            <mavon-editor
+              v-if="article.editor === 'MARKDOWN'"
+              :content="article.original_content"
+              :height="500"
+              @change="getcontent"
+            ></mavon-editor>
+            <quill-editor
+              v-else
+              v-model="article.original_content"
+              :height="458"
+              @change="getcontent"
+            ></quill-editor>
+          </div>
         </el-form-item>
       </el-form>
 
@@ -126,11 +134,13 @@
   </div>
 </template>
 <script>
-import ChangeEditor from "@/components/change-editor";
+import MavonEditor from "@/components/md-editor";
+import QuillEditor from "@/components/quill-editor";
 
 export default {
   components: {
-    ChangeEditor,
+    MavonEditor,
+    QuillEditor,
   },
   data() {
     return {

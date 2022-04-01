@@ -217,6 +217,7 @@ export default {
         sorted_at: null,
         original_content: null,
         render_content: null,
+        editor: null,
       },
       rules: {
         cid: [
@@ -294,6 +295,12 @@ export default {
         return;
       }
       this.loading = true;
+      let localCurrent = this.$utils.getEditorKey();
+      if (localCurrent === "markdown") {
+        this.topic.editor = "MARKDOWN";
+      } else {
+        this.topic.editor = "FULLEDITOR";
+      }
       this.$api.Course.Topic.Topic.Store(this.topic)
         .then(() => {
           this.$message.success(this.$t("common.success"));

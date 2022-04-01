@@ -20,6 +20,14 @@ export default {
         this.$router.push({
           name: "SystemMpwechatConfig",
         });
+      } else if (this.value === "图文") {
+        this.$router.push({
+          name: "SystemTopicConfig",
+        });
+      } else if (this.value === "电子书") {
+        this.$router.push({
+          name: "SystemBookConfig",
+        });
       } else {
         this.$router.push({
           name: "SystemConfig",
