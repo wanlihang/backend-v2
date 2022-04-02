@@ -5,6 +5,12 @@ const Api = {
     Login(params) {
       return post("/backend/api/v1/login", params);
     },
+    Logout(params) {
+      return post("/backend/api/v1/logout", params);
+    },
+    Captcha() {
+      return get(`/backend/api/v1/captcha/image`);
+    },
   },
   Administrator: {
     Detail() {
