@@ -286,11 +286,19 @@ export default {
   methods: {
     getcontent(pureContent, renderContent) {
       this.topic.original_content = pureContent;
-      this.topic.render_content = renderContent;
+      if (renderContent) {
+        this.topic.render_content = renderContent;
+      } else {
+        this.topic.render_content = this.topic.original_content;
+      }
     },
     getfreecontent(pureContent, renderContent) {
       this.topic.free_content = pureContent;
-      this.topic.free_content_render = renderContent;
+      if (renderContent) {
+        this.topic.free_content_render = renderContent;
+      } else {
+        this.topic.free_content_render = this.topic.free_content;
+      }
     },
     params() {
       this.$api.Course.Topic.Topic.Create().then((res) => {

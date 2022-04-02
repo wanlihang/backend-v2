@@ -191,7 +191,11 @@ export default {
   methods: {
     getcontent(pureContent, renderContent) {
       this.article.original_content = pureContent;
-      this.article.render_content = renderContent;
+      if (renderContent) {
+        this.article.render_content = renderContent;
+      } else {
+        this.article.render_content = this.article.original_content;
+      }
     },
     params() {
       this.$api.Meedubook.Book.Article.Create().then((res) => {
