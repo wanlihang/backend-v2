@@ -120,7 +120,6 @@
                 v-else
                 :height="458"
                 v-model="topic.free_content"
-                @change="getfreecontent"
               ></quill-editor>
             </div>
           </el-form-item>
@@ -141,7 +140,6 @@
                 v-else
                 v-model="topic.original_content"
                 :height="458"
-                @change="getcontent"
               ></quill-editor>
             </div>
           </el-form-item>
@@ -157,7 +155,6 @@
                 v-else
                 v-model="topic.original_content"
                 :height="458"
-                @change="getcontent"
               ></quill-editor>
             </div>
           </el-form-item>
