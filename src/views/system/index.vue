@@ -268,6 +268,10 @@ export default {
         this.$router.push({
           name: "SystemBookConfig",
         });
+      } else if (value === "支付") {
+        this.$router.push({
+          name: "SystemPaymentConfig",
+        });
       } else {
         this.$router.push({ name: "SystemConfig", query: { key: value } });
       }

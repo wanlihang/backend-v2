@@ -196,6 +196,14 @@ const routes = [
     },
   },
   {
+    path: "/system/paymentConfig",
+    component: () => import("@/views/system/paymentConfig"),
+    name: "SystemPaymentConfig",
+    meta: {
+      title: "title.system-config",
+    },
+  },
+  {
     path: "/system/application",
     component: () => import("@/views/system/application"),
     name: "SystemApplication",
