@@ -112,7 +112,6 @@
               v-else
               v-model="article.original_content"
               :height="458"
-              @change="getcontent"
             ></quill-editor>
           </div>
         </el-form-item>
@@ -221,6 +220,9 @@ export default {
         return;
       }
       this.loading = true;
+      if (this.article.editor !== "MARKDOWN") {
+        this.article.render_content = this.article.original_content;
+      }
       this.$api.Meedubook.Book.Article.Update(this.article_id, this.article)
         .then(() => {
           this.$message.success(this.$t("common.success"));
