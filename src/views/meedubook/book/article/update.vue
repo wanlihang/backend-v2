@@ -191,11 +191,7 @@ export default {
   methods: {
     getcontent(pureContent, renderContent) {
       this.article.original_content = pureContent;
-      if (renderContent) {
-        this.article.render_content = renderContent;
-      } else {
-        this.article.render_content = this.article.original_content;
-      }
+      this.article.render_content = renderContent;
     },
     params() {
       this.$api.Meedubook.Book.Article.Create().then((res) => {
@@ -225,6 +221,9 @@ export default {
         return;
       }
       this.loading = true;
+      if (this.article.editor !== "MARKDOWN") {
+        this.article.render_content = this.article.original_content;
+      }
       this.$api.Meedubook.Book.Article.Update(this.article_id, this.article)
         .then(() => {
           this.$message.success(this.$t("common.success"));

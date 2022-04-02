@@ -286,19 +286,11 @@ export default {
   methods: {
     getcontent(pureContent, renderContent) {
       this.topic.original_content = pureContent;
-      if (renderContent) {
-        this.topic.render_content = renderContent;
-      } else {
-        this.topic.render_content = this.topic.original_content;
-      }
+      this.topic.render_content = renderContent;
     },
     getfreecontent(pureContent, renderContent) {
       this.topic.free_content = pureContent;
-      if (renderContent) {
-        this.topic.free_content_render = renderContent;
-      } else {
-        this.topic.free_content_render = this.topic.free_content;
-      }
+      this.topic.free_content_render = renderContent;
     },
     params() {
       this.$api.Course.Topic.Topic.Create().then((res) => {
@@ -322,6 +314,10 @@ export default {
         return;
       }
       this.loading = true;
+      if (this.topic.editor !== "MARKDOWN") {
+        this.topic.render_content = this.topic.original_content;
+        this.topic.free_content_render = this.topic.free_content;
+      }
       this.$api.Course.Topic.Topic.Update(this.id, this.topic)
         .then(() => {
           this.$message.success(this.$t("common.success"));
