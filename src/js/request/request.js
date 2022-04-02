@@ -326,6 +326,9 @@ const Api = {
         List(params) {
           return get(`/backend/api/v1/courseCategory`, params);
         },
+        Create() {
+          return get(`/backend/api/v1/courseCategory/create`);
+        },
         Store(params) {
           return post(`/backend/api/v1/courseCategory`, params);
         },
