@@ -19,7 +19,7 @@
           </div>
         </el-form-item>
         <div class="title">跑马灯</div>
-        <el-form-item :key="99" label="跑马灯（防止录屏）">
+        <el-form-item :key="99" label="开关">
           <div class="j-flex flex-column" style="margin-left: 3px">
             <div>
               <el-switch
@@ -33,17 +33,26 @@
             </div>
           </div>
         </el-form-item>
-        <el-form-item :key="1913" label="跑马灯-内容">
-          <div class="j-flex flex-column" style="margin-left: 3px">
+        <el-form-item :key="1913" label="内容">
+          <div class="float-left d-flex" style="margin-left: 3px">
             <div>
               <el-input
-                class="w-200px"
+                class="w-300px"
                 v-model="form.config['meedu.system.player.bullet_secret.text']"
               ></el-input>
             </div>
+            <div class="ml-10">
+              <span class="helper-text">变量：</span>
+              <el-link class="ml-10" @click="addMobile" type="primary"
+                >学员手机号</el-link
+              >
+              <el-link class="ml-10" @click="addID" type="primary"
+                >学员ID</el-link
+              >
+            </div>
           </div>
         </el-form-item>
-        <el-form-item :key="1914" label="跑马灯-文字大小">
+        <el-form-item :key="1914" label="文字大小">
           <div class="j-flex flex-column" style="margin-left: 3px">
             <div>
               <el-input
@@ -56,7 +65,7 @@
             </div>
           </div>
         </el-form-item>
-        <el-form-item :key="1915" label="跑马灯-文字颜色">
+        <el-form-item :key="1915" label="文字颜色">
           <div class="j-flex flex-column" style="margin-left: 3px">
             <div>
               <el-color-picker
@@ -65,14 +74,13 @@
             </div>
           </div>
         </el-form-item>
-        <el-form-item :key="1916" label="跑马灯-文字透明度">
+        <el-form-item :key="1916" label="文字透明度">
           <div class="j-flex flex-column" style="margin-left: 3px">
             <div class="w-400px">
               <el-slider
                 v-model="
                   form.config['meedu.system.player.bullet_secret.opacity']
                 "
-                :format-tooltip="formatTooltip"
                 :max="1"
                 :step="0.1"
                 show-stops
@@ -124,8 +132,13 @@ export default {
     this.getConfig();
   },
   methods: {
-    formatTooltip(val) {
-      return val / 1;
+    addMobile() {
+      this.form.config["meedu.system.player.bullet_secret.text"] +=
+        "${user.mobile}";
+    },
+    addID() {
+      this.form.config["meedu.system.player.bullet_secret.text"] +=
+        "${user.id}";
     },
     getConfig() {
       if (this.loading) {
