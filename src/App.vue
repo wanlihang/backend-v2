@@ -1,86 +1,89 @@
 <template>
   <div id="app">
-    <router-view v-if="this.$route.meta.pure" />
+    <template v-if="initComplete">
+      <router-view v-if="this.$route.meta.pure" />
 
-    <div id="home" v-if="!this.$route.meta.pure">
-      <div class="meedu-main-box">
-        <!-- 顶部栏 -->
-        <header class="header-box">
-          <div class="logo-box">
-            <a href="javascript:void(0)" @click="goDashboard">
-              <img src="@/assets/home/logo.png" width="112" height="30" />
-            </a>
-          </div>
-          <div class="page-name">{{ $t($route.meta.title) }}</div>
-          <div class="user-info" v-if="user">
-            <el-dropdown @command="dropMenuEvt">
-              <span class="el-dropdown-link">
-                {{ user.name }}<i class="el-icon-arrow-down el-icon--right"></i>
-              </span>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item command="changePassword"
-                  >修改密码</el-dropdown-item
-                >
-                <el-dropdown-item command="logout">安全退出</el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
-          </div>
-        </header>
-
-        <!-- 页面主体 -->
-        <div class="page-body">
-          <!-- 左侧菜单 -->
-          <div class="page-body-left-menus">
-            <div class="app-menus">
-              <el-menu
-                :default-active="defaultActive"
-                unique-opened
-                @select="menuSelect"
-              >
-                <template v-for="(item, index) in activeMenus">
-                  <el-submenu
-                    v-if="item.children.length > 0"
-                    :index="index + ''"
-                    :key="item.key"
-                  >
-                    <template slot="title">
-                      <i class="iconfont" :class="item.icon"></i
-                      >{{ $t(item.name) }}
-                    </template>
-                    <!-- 子菜单 -->
-                    <el-menu-item
-                      v-for="child in item.children"
-                      :index="child.key"
-                      :key="child.key"
-                      >{{ $t(child.name) }}
-                    </el-menu-item>
-                  </el-submenu>
-
-                  <el-menu-item
-                    class="menu-item"
-                    v-else
-                    :index="item.key"
-                    :key="item.key"
-                  >
-                    <template slot="title">
-                      <i class="iconfont" :class="item.icon"></i
-                      >{{ $t(item.name) }}
-                    </template>
-                  </el-menu-item>
-                </template>
-              </el-menu>
+      <div id="home" v-if="!this.$route.meta.pure">
+        <div class="meedu-main-box">
+          <!-- 顶部栏 -->
+          <header class="header-box">
+            <div class="logo-box">
+              <a href="javascript:void(0)" @click="goDashboard">
+                <img src="@/assets/home/logo.png" width="112" height="30" />
+              </a>
             </div>
-          </div>
+            <div class="page-name">{{ $t($route.meta.title) }}</div>
+            <div class="user-info" v-if="user">
+              <el-dropdown @command="dropMenuEvt">
+                <span class="el-dropdown-link">
+                  {{ user.name
+                  }}<i class="el-icon-arrow-down el-icon--right"></i>
+                </span>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item command="changePassword"
+                    >修改密码</el-dropdown-item
+                  >
+                  <el-dropdown-item command="logout">安全退出</el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
+            </div>
+          </header>
 
-          <div class="page-main-body-box">
-            <keep-alive>
-              <router-view v-if="this.$route.meta.keepAlive"></router-view>
-            </keep-alive>
-            <router-view v-if="!this.$route.meta.keepAlive"></router-view>
+          <!-- 页面主体 -->
+          <div class="page-body">
+            <!-- 左侧菜单 -->
+            <div class="page-body-left-menus">
+              <div class="app-menus">
+                <el-menu
+                  :default-active="defaultActive"
+                  unique-opened
+                  @select="menuSelect"
+                >
+                  <template v-for="(item, index) in activeMenus">
+                    <el-submenu
+                      v-if="item.children.length > 0"
+                      :index="index + ''"
+                      :key="item.key"
+                    >
+                      <template slot="title">
+                        <i class="iconfont" :class="item.icon"></i
+                        >{{ $t(item.name) }}
+                      </template>
+                      <!-- 子菜单 -->
+                      <el-menu-item
+                        v-for="child in item.children"
+                        :index="child.key"
+                        :key="child.key"
+                        >{{ $t(child.name) }}
+                      </el-menu-item>
+                    </el-submenu>
+
+                    <el-menu-item
+                      class="menu-item"
+                      v-else
+                      :index="item.key"
+                      :key="item.key"
+                    >
+                      <template slot="title">
+                        <i class="iconfont" :class="item.icon"></i
+                        >{{ $t(item.name) }}
+                      </template>
+                    </el-menu-item>
+                  </template>
+                </el-menu>
+              </div>
+            </div>
+
+            <div class="page-main-body-box">
+              <keep-alive>
+                <router-view v-if="this.$route.meta.keepAlive"></router-view>
+              </keep-alive>
+              <router-view v-if="!this.$route.meta.keepAlive"></router-view>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </template>
   </div>
 </template>
 <script>
@@ -95,6 +98,7 @@ export default {
       defaultActive: "Dashboard",
       menus: Menus,
       loading: false,
+      initComplete: false,
     };
   },
   computed: {
@@ -157,32 +161,28 @@ export default {
   },
   methods: {
     ...mapMutations(["loginHandle", "setEnabledAddons", "logout"]),
-    getEnabledAddons() {
+    async getEnabledAddons() {
       // 获取已开启的插件
-      this.$api.System.Addons.LocalList().then((res) => {
-        let enabledAddons = {};
-        let count = 0;
+      let res = await this.$api.System.Addons.LocalList();
+      let enabledAddons = {};
+      let count = 0;
 
-        for (let i = 0; i < res.data.length; i++) {
-          if (res.data[i].enabled) {
-            count += 1;
-            enabledAddons[res.data[i].sign] = 1;
-          }
+      for (let i = 0; i < res.data.length; i++) {
+        if (res.data[i].enabled) {
+          count += 1;
+          enabledAddons[res.data[i].sign] = 1;
         }
+      }
 
-        this.setEnabledAddons(enabledAddons, count);
-      });
+      this.setEnabledAddons(enabledAddons, count);
     },
-    autoLogin() {
-      // 自动登录
+    async autoLogin() {
       if (this.$route.name !== "Login") {
         let token = Utils.getToken();
         if (token) {
-          this.$api.Administrator.Detail().then((res) => {
-            this.loginHandle(res.data);
-
-            this.getEnabledAddons();
-          });
+          let res = await this.$api.Administrator.Detail();
+          this.loginHandle(res.data);
+          await this.getEnabledAddons();
         }
       }
     },
@@ -236,7 +236,8 @@ export default {
   mounted() {
     this.initMenu();
     this.autoLogin();
-
+    // 系统初始化完成
+    this.initComplete = true;
     // 关闭加载框
     document.getElementById("meedu-loading-box").remove();
   },
