@@ -10,11 +10,7 @@
           </el-button>
         </div>
         <div class="ml-30">
-          <el-link
-            type="primary"
-            href="https://www.yuque.com/meedu/fvvkbf/qtkixc"
-            target="_blank"
-          >
+          <el-link type="primary" @click="model()">
             点击链接下载「学员批量导入模板」
           </el-link>
         </div>
@@ -92,6 +88,78 @@ export default {
           });
       };
       reader.readAsArrayBuffer(f);
+    },
+    sheet2blob(sheet, sheetName) {
+      //将文件转换为二进制文件
+      sheetName = sheetName || "sheet1";
+      var workbook = {
+        SheetNames: [sheetName],
+        Sheets: {},
+      };
+      workbook.Sheets[sheetName] = sheet;
+      // 生成excel的配置项
+      var wopts = {
+        bookType: "xlsx", // 要生成的文件类型
+        bookSST: false, // 是否生成Shared String Table，官方解释是，如果开启生成速度会下降，但在低版本IOS设备上有更好的兼容性
+        type: "binary",
+      };
+      var wbout = XLSX.write(workbook, wopts);
+      var blob = new Blob([s2ab(wbout)], { type: "application/octet-stream" });
+      // 字符串转ArrayBuffer
+      function s2ab(s) {
+        var buf = new ArrayBuffer(s.length);
+        var view = new Uint8Array(buf);
+        for (var i = 0; i != s.length; ++i) view[i] = s.charCodeAt(i) & 0xff;
+        return buf;
+      }
+      return blob;
+    },
+    openDownloadXLSXDialog(url, saveName) {
+      //下载模板文件
+      if (typeof url == "object" && url instanceof Blob) {
+        url = URL.createObjectURL(url); // 创建blob地址
+      }
+
+      var aLink = document.createElement("a");
+      aLink.href = url;
+      aLink.download = saveName || ""; // HTML5新增的属性，指定保存文件名，可以不要后缀，注意，file:///模式下不会生效
+      var event;
+      if (window.MouseEvent) event = new MouseEvent("click");
+      else {
+        event = document.createEvent("MouseEvents");
+        event.initMouseEvent(
+          "click",
+          true,
+          false,
+          window,
+          0,
+          0,
+          0,
+          0,
+          0,
+          false,
+          false,
+          false,
+          false,
+          0,
+          null
+        );
+      }
+      aLink.dispatchEvent(event);
+    },
+    model() {
+      var array = [
+        [
+          "手机号",
+          "密码",
+          "VIP",
+          "VIP过期时间",
+          "是否锁定（1锁定，0不锁定）",
+        ],
+      ];
+      var sheet = XLSX.utils.aoa_to_sheet(array);
+      var blob = this.sheet2blob(sheet, "学员批量导入模板");
+      this.openDownloadXLSXDialog(blob, "学员批量导入模板.xlsx");
     },
     parseData(workbook) {
       let data = [];
