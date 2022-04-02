@@ -38,10 +38,17 @@
         <el-form-item label="密码" prop="password">
           <div class="d-flex">
             <div>
-              <el-input v-model="user.password" class="w-300px"></el-input>
+              <el-input
+                type="password"
+                v-model="user.password"
+                class="w-300px"
+              ></el-input>
             </div>
             <div class="ml-10">
               <helper-text text="不修改密码请勿填写"></helper-text>
+            </div>
+            <div class="ml-10 c-red" v-if="user.password">
+              {{ this.$utils.passwordRules(user.password) }}
             </div>
           </div>
         </el-form-item>
@@ -142,10 +149,17 @@ export default {
       if (this.loading) {
         return;
       }
-      this.loading = true;
       if (this.user.password == null) {
         delete this.user.password;
+      } else {
+        if (this.$utils.passwordRules(this.user.password)) {
+          this.$message.error(
+            "密码至少包含大写字母，小写字母，数字，且不少于12位"
+          );
+          return;
+        }
       }
+      this.loading = true;
       this.$api.System.administrator
         .Update(this.user.id, this.user)
         .then(() => {
