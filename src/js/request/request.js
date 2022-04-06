@@ -406,6 +406,9 @@ const Api = {
         Subscribe(id, params) {
           return get(`/backend/api/v1/video/${id}/subscribes`, params);
         },
+        SubscribeDestory(id, params) {
+          return get(`/backend/api/v1/video/${id}/subscribe/delete`, params);
+        },
         WatchRecords(id, params) {
           return get(`/backend/api/v1/video/${id}/watch/records`, params);
         },

@@ -65,6 +65,17 @@
               scope.row.created_at | dateFormat
             }}</template>
           </el-table-column>
+          <el-table-column fixed="right" label="操作" width="50">
+            <template slot-scope="scope">
+              <p-link
+                slot="reference"
+                text="删除"
+                p="video.subscribe.delete"
+                @click="destory(scope.row.user_id)"
+                type="danger"
+              ></p-link>
+            </template>
+          </el-table-column>
         </el-table>
       </div>
       <div class="float-left mt-30 text-center">
@@ -177,6 +188,34 @@ export default {
 
         this.users = res.data.users;
       });
+    },
+    destory(item) {
+      this.$confirm("确认操作？", "警告", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          //点击确定按钮的操作
+          if (this.loading) {
+            return;
+          }
+          this.loading = true;
+          this.$api.Course.Vod.Videos.SubscribeDestory(
+            this.$route.query.video_id,
+            { user_id: item }
+          )
+            .then(() => {
+              this.loading = false;
+              this.$message.success(this.$t("common.success"));
+              this.getSubscribes();
+            })
+            .catch((e) => {
+              this.loading = false;
+              this.$message.error(e.message);
+            });
+        })
+        .catch(() => {});
     },
   },
 };
