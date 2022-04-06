@@ -61,6 +61,7 @@
     <div class="float-left" v-loading="loading">
       <div class="float-left">
         <el-table
+          ref="multipleTable"
           :header-cell-style="{ background: '#f1f2f9' }"
           :data="users"
           class="float-left"
@@ -514,13 +515,11 @@ export default {
       this.form.is_password_set = null;
       this.form.role_id = null;
       this.form.role_expired_at = null;
+      this.current = null;
+      this.$refs.multipleTable.clearFilter();
     },
     editConfirmMulti() {
       if (this.dialogLoading) {
-        return;
-      }
-      if (!this.form.role_id) {
-        this.$message.error("请选择VIP");
         return;
       }
       if (this.form.role_id && !this.form.role_expired_at) {
@@ -561,6 +560,7 @@ export default {
         this.message = null;
         this.mid = null;
         this.visible = false;
+        this.$refs.multipleTable.clearFilter();
         this.getUser();
       });
     },
