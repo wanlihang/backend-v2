@@ -372,12 +372,16 @@ export default {
       current: null,
       types: [
         {
-          name: "是否登录锁定",
-          key: "is_lock",
-        },
-        {
           name: "修改VIP",
           key: "role_id",
+        },
+        {
+          name: "修改标签",
+          key: "tag",
+        },
+        {
+          name: "是否登录锁定",
+          key: "is_lock",
         },
         {
           name: "是否已设置密码",
@@ -386,10 +390,6 @@ export default {
         {
           name: "是否已设置昵称",
           key: "is_set_nickname",
-        },
-        {
-          name: "修改标签",
-          key: "tag",
         },
       ],
       dialogLoading: false,
@@ -515,8 +515,6 @@ export default {
       this.form.is_password_set = null;
       this.form.role_id = null;
       this.form.role_expired_at = null;
-      this.current = null;
-      this.$refs.multipleTable.clearFilter();
     },
     editConfirmMulti() {
       if (this.dialogLoading) {
@@ -538,6 +536,8 @@ export default {
           this.dialogLoading = false;
           this.$message.success(this.$t("common.success"));
           this.clearEdit();
+          this.current = null;
+          this.$refs.multipleTable.clearFilter();
           this.editVisible = false;
           this.getUser();
         })
