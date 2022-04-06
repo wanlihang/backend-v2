@@ -524,6 +524,10 @@ export default {
         this.$message.error("请选择VIP过期时间");
         return;
       }
+      if (!this.form.role_id && this.form.role_expired_at) {
+        this.$message.error("请选择VIP");
+        return;
+      }
       this.dialogLoading = true;
       this.$api.Member.EditMulti({
         user_ids: this.spids.ids,
