@@ -5,7 +5,12 @@
       <div class="d-flex"></div>
       <div class="d-flex">
         <div>
-          <el-select class="w-150px" multiple v-model="filter.payment">
+          <el-select
+            placeholder="请选择支付渠道"
+            class="w-150px"
+            multiple
+            v-model="filter.payment"
+          >
             <el-option
               v-for="(item, index) in filterData.payments"
               :key="index"
@@ -16,7 +21,11 @@
           </el-select>
         </div>
         <div class="ml-10">
-          <el-select class="w-150px" v-model="filter.status">
+          <el-select
+            placeholder="请选择退款状态"
+            class="w-150px"
+            v-model="filter.status"
+          >
             <el-option
               v-for="(item, index) in filterData.status"
               :key="index"
@@ -77,6 +86,24 @@
             <template slot-scope="scope">
               <span v-if="scope.row.is_local === 1">本地</span>
               <span v-else>远程</span>
+            </template>
+          </el-table-column>
+          <el-table-column label="支付渠道" :width="150">
+            <template slot-scope="scope">
+              <span v-if="scope.row.payment === 'alipay'">支付宝支付</span>
+              <span v-else-if="scope.row.payment === 'wechat'"
+                >微信扫码支付</span
+              >
+              <span v-else-if="scope.row.payment === 'wechat-jsapi'"
+                >微信JSAPI支付</span
+              >
+              <span v-else-if="scope.row.payment === 'wechat_h5'"
+                >微信H5支付</span
+              >
+              <span v-else-if="scope.row.payment === 'wechatApp'"
+                >微信APP支付</span
+              >
+              <span v-else-if="scope.row.payment === 'handPay'">线下打款</span>
             </template>
           </el-table-column>
           <el-table-column label="退款金额">
@@ -161,6 +188,10 @@ export default {
           {
             key: "wechatApp",
             name: "微信APP支付",
+          },
+          {
+            key: "handPay",
+            name: "线下打款",
           },
         ],
         status: [
