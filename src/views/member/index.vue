@@ -558,26 +558,37 @@ export default {
       this.$api.Member.SendMessageMulti({
         user_ids: this.spids.ids,
         message: this.message,
-      }).then((res) => {
-        this.dialogLoading = false;
-        this.$message.success(this.$t("common.success"));
-        this.message = null;
-        this.mid = null;
-        this.visible = false;
-        this.$refs.multipleTable.clearFilter();
-        this.getUser();
-      });
+      })
+        .then((res) => {
+          this.dialogLoading = false;
+          this.$message.success(this.$t("common.success"));
+          this.message = null;
+          this.mid = null;
+          this.visible = false;
+          this.$refs.multipleTable.clearFilter();
+          this.getUser();
+        })
+        .catch((e) => {
+          this.dialogLoading = false;
+          this.visible = false;
+          this.$message.error(e.message);
+        });
     },
     confirm() {
       this.$api.Member.SendMessage(this.mid, {
         message: this.message,
-      }).then((res) => {
-        this.$message.success(this.$t("common.success"));
-        this.message = null;
-        this.mid = null;
-        this.visible = false;
-        this.getUser();
-      });
+      })
+        .then((res) => {
+          this.$message.success(this.$t("common.success"));
+          this.message = null;
+          this.mid = null;
+          this.visible = false;
+          this.getUser();
+        })
+        .catch((e) => {
+          this.visible = false;
+          this.$message.error(e.message);
+        });
     },
   },
 };

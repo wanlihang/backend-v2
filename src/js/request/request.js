@@ -55,6 +55,9 @@ const Api = {
       List(params) {
         return get(`/backend/api/v1/order`, params);
       },
+      Refund(id, params) {
+        return post(`/backend/api/v1/order/${id}/refund`, params);
+      },
     },
     Detail(id) {
       return get(`/backend/api/v1/order/${id}`);

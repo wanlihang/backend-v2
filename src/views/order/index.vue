@@ -24,7 +24,17 @@
             placeholder="订单编号"
           ></el-input>
         </div>
-
+        <div class="ml-10">
+          <el-select class="w-150px" v-model="filter.is_refund">
+            <el-option
+              v-for="(item, index) in filterData.status"
+              :key="index"
+              :label="item.name"
+              :value="item.key"
+            >
+            </el-option>
+          </el-select>
+        </div>
         <div class="ml-10">
           <el-date-picker
             :picker-options="pickerOptions"
@@ -113,13 +123,18 @@
             </span>
           </template>
         </el-table-column>
-
+        <el-table-column label="退款" :width="200">
+          <template slot-scope="scope">
+            <span v-if="scope.row.is_refund === 0">-</span>
+            <span v-else>{{ showRefund(scope.row.refund) }}</span>
+          </template>
+        </el-table-column>
         <el-table-column sortable label="订单创建时间" :width="220">
           <template slot-scope="scope">{{
             scope.row.updated_at | dateFormat
           }}</template>
         </el-table-column>
-        <el-table-column label="操作" fixed="right" :width="80">
+        <el-table-column label="操作" fixed="right" :width="100">
           <template slot-scope="scope">
             <p-link
               text="查看"
@@ -130,6 +145,14 @@
                   query: { id: scope.row.id },
                 })
               "
+              type="primary"
+            ></p-link>
+            <p-link
+              class="ml-5"
+              v-if="scope.row.status === 9"
+              text="退款"
+              p="order.refund"
+              @click="refund(scope.row)"
               type="primary"
             ></p-link>
           </template>
@@ -150,6 +173,50 @@
         </el-pagination>
       </div>
     </div>
+    <el-dialog title="退款" :visible.sync="visible" width="420px">
+      <div class="j-flex flex-column">
+        <div class="d-flex">
+          <label class="mr-20">退款类型</label>
+          <el-select class="el-item" v-model="form.is_local">
+            <el-option
+              v-for="(item, index) in types"
+              :key="index"
+              :label="item.name"
+              :value="item.key"
+            >
+            </el-option>
+          </el-select>
+        </div>
+        <div class="d-flex mt-20">
+          <label class="mr-20">退款金额</label>
+          <el-input
+            class="el-item"
+            placeholder="请输入退款金额"
+            v-model="form.amount"
+            type="number"
+          >
+            <template slot="append">元</template>
+          </el-input>
+        </div>
+        <div class="flex mt-20">
+          <label class="mr-20">退款理由</label>
+          <el-input
+            class="el-item"
+            type="textarea"
+            maxlength="64"
+            resize="none"
+            show-word-limit
+            v-model="form.reason"
+            placeholder="请输入退款理由"
+            rows="4"
+          ></el-input>
+        </div>
+      </div>
+
+      <div class="j-r-flex mt-30">
+        <el-button @click="refundConfirm" type="primary">确认</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -167,6 +234,7 @@ export default {
       total: 0,
       loading: false,
       filter: {
+        is_refund: -1,
         user_id: null,
         goods_id: null,
         goods_name: null,
@@ -197,6 +265,20 @@ export default {
             key: "7",
           },
         ],
+        status: [
+          {
+            name: "全部",
+            key: -1,
+          },
+          {
+            name: "有退款",
+            key: 1,
+          },
+          {
+            name: "无退款",
+            key: 0,
+          },
+        ],
       },
       dataList: [],
       countMap: null,
@@ -205,6 +287,24 @@ export default {
           return time.getTime() > Date.now();
         },
       },
+      dialogLoading: false,
+      visible: false,
+      oid: null,
+      form: {
+        is_local: null,
+        reason: null,
+        amount: null,
+      },
+      types: [
+        {
+          name: "本地退款订单",
+          key: 1,
+        },
+        {
+          name: "远程退款订单",
+          key: 0,
+        },
+      ],
     };
   },
   computed: {
@@ -233,6 +333,11 @@ export default {
     next();
   },
   methods: {
+    showRefund(item) {
+      if (item[0].status === 1 || item[0].status === 5) {
+        return item[0].amount / 100 + "元";
+      }
+    },
     paginationSizeChange(size) {
       this.pagination.size = size;
       this.getList();
@@ -242,6 +347,7 @@ export default {
       this.getList();
     },
     paginationReset() {
+      this.filter.is_refund = -1;
       this.pagination.page = 1;
       this.filter.order_id = null;
       this.filter.user_id = null;
@@ -277,6 +383,57 @@ export default {
         this.loading = false;
       });
     },
+    refund(item) {
+      this.visible = true;
+      this.oid = item.id;
+    },
+    refundConfirm() {
+      if (this.dialogLoading) {
+        return;
+      }
+      if (!this.form.is_local) {
+        this.$message.error("请选择退款类型");
+        return;
+      }
+      if (!this.form.amount) {
+        this.$message.error("请输入退款金额");
+        return;
+      }
+      if (!this.form.reason) {
+        this.$message.error("请输入退款理由");
+        return;
+      }
+      this.dialogLoading = true;
+      this.$api.Order.OrderList.Refund(this.oid, {
+        is_local: this.form.is_local,
+        amount: this.form.amount * 100,
+        reason: this.form.reason,
+      })
+        .then((res) => {
+          this.dialogLoading = false;
+          this.$message.success(this.$t("common.success"));
+          this.form.is_local = null;
+          this.form.amount = null;
+          this.form.reason = null;
+          this.oid = null;
+          this.visible = false;
+          this.getList();
+        })
+        .catch((e) => {
+          this.dialogLoading = false;
+          this.visible = false;
+          this.$message.error(e.message);
+        });
+    },
   },
 };
 </script>
+<style lang="less" scoped>
+label {
+  width: 70px;
+  text-align: right;
+}
+.el-item {
+  flex: 1;
+}
+</style>
