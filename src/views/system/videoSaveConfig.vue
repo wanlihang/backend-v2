@@ -141,7 +141,7 @@ export default {
           "tencent.vod.app_id": null,
           "tencent.vod.secret_id": null,
           "tencent.vod.secret_key": null,
-          "mmeedu.system.player.tencent_play_key": null,
+          "meedu.system.player.tencent_play_key": null,
           "meedu.system.player.video_format_whitelist": null,
         },
       },
