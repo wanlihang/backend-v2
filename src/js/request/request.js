@@ -1049,6 +1049,9 @@ const Api = {
     SendMessageMulti(params) {
       return post(`/backend/api/v1/member/message/multi`, params);
     },
+    EditMulti(params) {
+      return put(`/backend/api/v1/member/field/multi`, params);
+    },
     UserCourses(id, params) {
       return get(`/backend/api/v1/member/${id}/detail/userCourses`, params);
     },

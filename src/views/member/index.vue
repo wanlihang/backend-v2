@@ -25,6 +25,14 @@
           class="ml-15"
         >
         </p-button>
+        <p-button
+          text="批量修改"
+          p="member.update.field.multi"
+          @click="editMulti()"
+          type="primary"
+          class="ml-15"
+        >
+        </p-button>
       </div>
       <div class="d-flex">
         <div>
@@ -33,19 +41,6 @@
             v-model="filter.keywords"
             placeholder="学员关键字"
           ></el-input>
-        </div>
-        <div class="ml-10">
-          <el-date-picker
-            :picker-options="pickerOptions"
-            v-model="filter.created_at"
-            type="daterange"
-            align="right"
-            unlink-panels
-            range-separator="至"
-            start-placeholder="注册开始日期"
-            end-placeholder="注册结束日期"
-          >
-          </el-date-picker>
         </div>
         <div class="ml-10">
           <el-button @click="paginationReset">清空</el-button>
@@ -101,7 +96,7 @@
           </el-table-column>
           <el-table-column prop="credit1" sortable label="积分" width="120">
           </el-table-column>
-          <el-table-column label="标签" width="150">
+          <el-table-column label="标签" width="200">
             <template slot-scope="scope">
               <el-tag
                 class="ml-5"
@@ -235,6 +230,88 @@
         <el-button v-else @click="confirmMulti" type="primary">确认</el-button>
       </div>
     </el-dialog>
+    <el-dialog title="批量修改" :visible.sync="editVisible" width="420px">
+      <div class="j-flex flex-column">
+        <div class="d-flex">
+          <el-select @change="clearEdit" class="w-100" v-model="current">
+            <el-option
+              v-for="(item, index) in types"
+              :key="index"
+              :label="item.name"
+              :value="item.key"
+            >
+            </el-option>
+          </el-select>
+        </div>
+        <div class="d-flex mt-20" v-if="current === 'is_lock'">
+          <label class="w-150px mr-20">登录锁定：</label>
+          <el-switch
+            v-model="form.is_lock"
+            :active-value="1"
+            :inactive-value="0"
+          >
+          </el-switch>
+        </div>
+        <div class="d-flex mt-20" v-if="current === 'role_id'">
+          <label class="w-150px mr-20">VIP会员：</label>
+          <el-select v-model="form.role_id">
+            <el-option
+              v-for="(item, index) in filterData.roles"
+              :key="index"
+              :label="item.name"
+              :value="item.id"
+            >
+            </el-option>
+          </el-select>
+        </div>
+        <div class="d-flex mt-20" v-if="current === 'role_id'">
+          <label class="w-150px mr-20">VIP过期时间：</label>
+          <el-date-picker
+            v-model="form.role_expired_at"
+            type="datetime"
+            placeholder="选择日期"
+            format="yyyy-MM-dd HH:mm:ss"
+            value-format="yyyy-MM-dd HH:mm:ss"
+            :picker-options="newPickerOptions"
+          >
+          </el-date-picker>
+        </div>
+        <div class="d-flex mt-20" v-if="current === 'is_password_set'">
+          <label class="w-150px mr-20">是否已设置密码：</label>
+          <el-switch
+            v-model="form.is_password_set"
+            :active-value="1"
+            :inactive-value="0"
+          >
+          </el-switch>
+        </div>
+        <div class="d-flex mt-20" v-if="current === 'is_set_nickname'">
+          <label class="w-150px mr-20">是否已设置昵称：</label>
+          <el-switch
+            v-model="form.is_set_nick_name"
+            :active-value="1"
+            :inactive-value="0"
+          >
+          </el-switch>
+        </div>
+        <div class="d-flex mt-20" v-if="current === 'tag'">
+          <label class="w-150px mr-20">选择学员标签：</label>
+          <el-select multiple v-model="form.tag_ids">
+            <el-option
+              v-for="(item, index) in filterData.tags"
+              :key="index"
+              :label="item.name"
+              :value="item.id"
+            >
+            </el-option>
+          </el-select>
+        </div>
+      </div>
+
+      <div class="j-r-flex mt-30">
+        <el-button @click="editConfirmMulti" type="primary">确认</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -270,12 +347,49 @@ export default {
           return time.getTime() > Date.now();
         },
       },
+      newPickerOptions: {
+        disabledDate(time) {
+          return time.getTime() < Date.now();
+        },
+      },
       visible: false,
+      editVisible: false,
       message: null,
       mid: null,
       spids: {
         ids: [],
       },
+      form: {
+        tag_ids: [],
+        is_set_nick_name: null,
+        is_password_set: null,
+        role_id: null,
+        role_expired_at: null,
+        is_lock: null,
+      },
+      current: null,
+      types: [
+        {
+          name: "登录锁定",
+          key: "is_lock",
+        },
+        {
+          name: "VIP会员",
+          key: "role_id",
+        },
+        {
+          name: "密码设置",
+          key: "is_password_set",
+        },
+        {
+          name: "昵称设置",
+          key: "is_set_nickname",
+        },
+        {
+          name: "标签",
+          key: "tag",
+        },
+      ],
     };
   },
   activated() {
@@ -377,12 +491,51 @@ export default {
       this.visible = true;
       this.mid = item.id;
     },
+    editMulti() {
+      if (this.spids.ids == "") {
+        this.$message.error("请选择需要操作的数据");
+        return;
+      }
+      this.editVisible = true;
+    },
     sendMessageMulti() {
       if (this.spids.ids == "") {
         this.$message.error("请选择需要操作的数据");
         return;
       }
       this.visible = true;
+    },
+    clearEdit() {
+      this.form.is_lock = null;
+      this.form.tag_ids = [];
+      this.form.is_set_nick_name = null;
+      this.form.is_password_set = null;
+      this.form.role_id = null;
+      this.form.role_expired_at = null;
+    },
+    editConfirmMulti() {
+      if (this.loading) {
+        return;
+      }
+      this.loading = true;
+      this.$api.Member.EditMulti({
+        user_ids: this.spids.ids,
+        field: this.current,
+        value: this.current === "tag_ids" ? null : this.form[this.current],
+        role_expired_at: this.form.role_expired_at,
+        tag_ids: this.form.tag_ids,
+      })
+        .then((res) => {
+          this.loading = false;
+          this.$message.success(this.$t("common.success"));
+          this.clearEdit();
+          this.editVisible = false;
+          this.getUser();
+        })
+        .catch((e) => {
+          this.loading = false;
+          this.$message.error(e.message);
+        });
     },
     confirmMulti() {
       if (this.loading) {
