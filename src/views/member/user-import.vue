@@ -155,6 +155,7 @@ export default {
           "VIP",
           "VIP过期时间",
           "是否锁定（1锁定，0不锁定）",
+          "标签",
         ],
       ];
       var sheet = XLSX.utils.aoa_to_sheet(array);
