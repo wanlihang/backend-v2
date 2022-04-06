@@ -489,3 +489,11 @@ export default {
   justify-content: center;
 }
 </style>
+<style lang="less">
+.el-popconfirm__main {
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+</style>
