@@ -244,7 +244,7 @@
           </el-select>
         </div>
         <div class="d-flex mt-20" v-if="current === 'is_lock'">
-          <label class="w-150px mr-20">登录锁定：</label>
+          <label class="w-100px mr-20">是否登录锁定</label>
           <el-switch
             v-model="form.is_lock"
             :active-value="1"
@@ -253,8 +253,8 @@
           </el-switch>
         </div>
         <div class="d-flex mt-20" v-if="current === 'role_id'">
-          <label class="w-150px mr-20">VIP会员：</label>
-          <el-select v-model="form.role_id">
+          <label class="w-100px mr-20">选择VIP</label>
+          <el-select class="el-item" v-model="form.role_id">
             <el-option
               v-for="(item, index) in filterData.roles"
               :key="index"
@@ -265,8 +265,9 @@
           </el-select>
         </div>
         <div class="d-flex mt-20" v-if="current === 'role_id'">
-          <label class="w-150px mr-20">VIP过期时间：</label>
+          <label class="w-100px mr-20">VIP过期时间</label>
           <el-date-picker
+            class="el-item"
             v-model="form.role_expired_at"
             type="datetime"
             placeholder="选择日期"
@@ -277,7 +278,7 @@
           </el-date-picker>
         </div>
         <div class="d-flex mt-20" v-if="current === 'is_password_set'">
-          <label class="w-150px mr-20">是否已设置密码：</label>
+          <label class="w-100px mr-20">是否已设置密码</label>
           <el-switch
             v-model="form.is_password_set"
             :active-value="1"
@@ -286,7 +287,7 @@
           </el-switch>
         </div>
         <div class="d-flex mt-20" v-if="current === 'is_set_nickname'">
-          <label class="w-150px mr-20">是否已设置昵称：</label>
+          <label class="w-100px mr-20">是否已设置昵称</label>
           <el-switch
             v-model="form.is_set_nick_name"
             :active-value="1"
@@ -295,8 +296,8 @@
           </el-switch>
         </div>
         <div class="d-flex mt-20" v-if="current === 'tag'">
-          <label class="w-150px mr-20">选择学员标签：</label>
-          <el-select multiple v-model="form.tag_ids">
+          <label class="w-100px mr-20">选择标签</label>
+          <el-select class="el-item" multiple v-model="form.tag_ids">
             <el-option
               v-for="(item, index) in filterData.tags"
               :key="index"
@@ -370,26 +371,27 @@ export default {
       current: null,
       types: [
         {
-          name: "登录锁定",
+          name: "是否登录锁定",
           key: "is_lock",
         },
         {
-          name: "VIP会员",
+          name: "修改VIP",
           key: "role_id",
         },
         {
-          name: "密码设置",
+          name: "是否已设置密码",
           key: "is_password_set",
         },
         {
-          name: "昵称设置",
+          name: "是否已设置昵称",
           key: "is_set_nickname",
         },
         {
-          name: "标签",
+          name: "修改标签",
           key: "tag",
         },
       ],
+      dialogLoading: false,
     };
   },
   activated() {
@@ -514,10 +516,18 @@ export default {
       this.form.role_expired_at = null;
     },
     editConfirmMulti() {
-      if (this.loading) {
+      if (this.dialogLoading) {
         return;
       }
-      this.loading = true;
+      if (!this.form.role_id) {
+        this.$message.error("请选择VIP");
+        return;
+      }
+      if (this.form.role_id && !this.form.role_expired_at) {
+        this.$message.error("请选择VIP过期时间");
+        return;
+      }
+      this.dialogLoading = true;
       this.$api.Member.EditMulti({
         user_ids: this.spids.ids,
         field: this.current,
@@ -526,27 +536,27 @@ export default {
         tag_ids: this.form.tag_ids,
       })
         .then((res) => {
-          this.loading = false;
+          this.dialogLoading = false;
           this.$message.success(this.$t("common.success"));
           this.clearEdit();
           this.editVisible = false;
           this.getUser();
         })
         .catch((e) => {
-          this.loading = false;
+          this.dialogLoading = false;
           this.$message.error(e.message);
         });
     },
     confirmMulti() {
-      if (this.loading) {
+      if (this.dialogLoading) {
         return;
       }
-      this.loading = true;
+      this.dialogLoading = true;
       this.$api.Member.SendMessageMulti({
         user_ids: this.spids.ids,
         message: this.message,
       }).then((res) => {
-        this.loading = false;
+        this.dialogLoading = false;
         this.$message.success(this.$t("common.success"));
         this.message = null;
         this.mid = null;
@@ -581,5 +591,11 @@ export default {
     font-size: 15px;
     font-weight: normal;
   }
+}
+label {
+  text-align: right;
+}
+.el-item {
+  flex: 1;
 }
 </style>
