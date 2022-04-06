@@ -99,7 +99,7 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column label="商品名称">
+        <el-table-column label="商品名称" :width="500">
           <template slot-scope="scope">
             <span v-for="item in scope.row.goods" :key="item.id">
               {{ item.goods_name }}
@@ -123,7 +123,7 @@
             </span>
           </template>
         </el-table-column>
-        <el-table-column label="退款" :width="200">
+        <el-table-column label="退款" :width="120">
           <template slot-scope="scope">
             <span v-if="scope.row.is_refund === 0">-</span>
             <span v-else>{{ showRefund(scope.row.refund) }}</span>
@@ -214,7 +214,12 @@
       </div>
 
       <div class="j-r-flex mt-30">
-        <el-button @click="refundConfirm" type="primary">确认</el-button>
+        <el-button
+          :loading="dialogLoading"
+          @click="refundConfirm"
+          type="primary"
+          >确认</el-button
+        >
       </div>
     </el-dialog>
   </div>
@@ -334,9 +339,13 @@ export default {
   },
   methods: {
     showRefund(item) {
-      if (item[0].status === 1 || item[0].status === 5) {
-        return item[0].amount / 100 + "元";
+      let amount = 0;
+      for (let i = 0; i < item.length; i++) {
+        if (item[i].status === 1 || item[i].status === 5) {
+          amount += item[i].amount / 100;
+        }
       }
+      return amount + "元";
     },
     paginationSizeChange(size) {
       this.pagination.size = size;
