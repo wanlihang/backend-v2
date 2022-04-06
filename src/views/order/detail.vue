@@ -93,8 +93,17 @@
             :header-cell-style="{ background: '#f1f2f9' }"
             :data="order.refund"
           >
-            <el-table-column prop="id" label="ID" width="120"></el-table-column>
-            <el-table-column label="退款类型" width="150">
+            <el-table-column
+              prop="id"
+              label="ID"
+              :width="120"
+            ></el-table-column>
+            <el-table-column
+              prop="refund_no"
+              label="退款单号"
+              width="300"
+            ></el-table-column>
+            <el-table-column label="退款类型" :width="100">
               <template slot-scope="scope">
                 <span v-if="scope.row.is_local === 1">本地</span>
                 <span v-else>远程</span>
@@ -105,7 +114,7 @@
                 {{ scope.row.amount / 100 }}元
               </template>
             </el-table-column>
-            <el-table-column label="状态" width="300">
+            <el-table-column label="状态" :width="220">
               <template slot-scope="scope">
                 <span v-if="scope.row.status === 1">待处理</span>
                 <span v-else-if="scope.row.status === 5"
@@ -114,6 +123,11 @@
                 <span v-else-if="scope.row.status === 9">退款异常</span>
                 <span v-else-if="scope.row.status === 13">退款已关闭</span>
               </template>
+            </el-table-column>
+            <el-table-column sortable label="提交时间" :width="220">
+              <template slot-scope="scope">{{
+                scope.row.created_at | dateFormat
+              }}</template>
             </el-table-column>
           </el-table>
         </div>
