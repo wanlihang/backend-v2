@@ -6,6 +6,7 @@ export default {
     Editrole: "Role",
     Orderlist: "Orderlist",
     OrderDetail: "Orderlist",
+    OrderRefund: "Orderlist",
     Promocode: "Promocode",
     Createcode: "Promocode",
     CreateMulticode: "Promocode",

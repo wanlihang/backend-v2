@@ -66,6 +66,15 @@ const routes = [
     },
   },
   {
+    path: "/order/refund",
+    component: () => import("@/views/order/refund"),
+    name: "OrderRefund",
+    meta: {
+      title: "title.order-refund",
+      keepAlive: true,
+    },
+  },
+  {
     path: "/promocode",
     component: () => import("@/views/order/promocode"),
     name: "Promocode",

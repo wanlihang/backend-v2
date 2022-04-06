@@ -59,6 +59,9 @@ const Api = {
         return post(`/backend/api/v1/order/${id}/refund`, params);
       },
     },
+    RefundList(params) {
+      return get(`/backend/api/v1/order/refund/list`, params);
+    },
     Detail(id) {
       return get(`/backend/api/v1/order/${id}`);
     },
