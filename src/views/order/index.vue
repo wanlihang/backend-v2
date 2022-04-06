@@ -400,7 +400,7 @@ export default {
       if (this.dialogLoading) {
         return;
       }
-      if (!this.form.is_local) {
+      if (this.form.is_local === null) {
         this.$message.error("请选择退款类型");
         return;
       }
