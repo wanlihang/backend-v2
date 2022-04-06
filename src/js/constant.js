@@ -23,6 +23,7 @@ export default {
     SystemTopicConfig: "SystemIndex",
     SystemBookConfig: "SystemIndex",
     SystemPaymentConfig: "SystemIndex",
+    SystemVideoSaveConfig: "SystemIndex",
     SystemApplication: "SystemApplication",
     AdministratorChangePassword: "Dashboard",
     SystemAdministrator: "SystemAdministrator",

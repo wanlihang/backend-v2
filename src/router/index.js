@@ -204,6 +204,14 @@ const routes = [
     },
   },
   {
+    path: "/system/videoSaveConfig",
+    component: () => import("@/views/system/videoSaveConfig"),
+    name: "SystemVideoSaveConfig",
+    meta: {
+      title: "title.system-config",
+    },
+  },
+  {
     path: "/system/application",
     component: () => import("@/views/system/application"),
     name: "SystemApplication",

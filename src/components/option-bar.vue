@@ -28,6 +28,14 @@ export default {
         this.$router.push({
           name: "SystemBookConfig",
         });
+      } else if (this.value === "播放器配置") {
+        this.$router.push({
+          name: "SystemPlayerConfig",
+        });
+      } else if (this.value === "直播") {
+        this.$router.push({
+          name: "SystemLiveConfig",
+        });
       } else {
         this.$router.push({
           name: "SystemConfig",

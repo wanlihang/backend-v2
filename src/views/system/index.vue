@@ -272,6 +272,10 @@ export default {
         this.$router.push({
           name: "SystemPaymentConfig",
         });
+      } else if (value === "视频") {
+        this.$router.push({
+          name: "SystemVideoSaveConfig",
+        });
       } else {
         this.$router.push({ name: "SystemConfig", query: { key: value } });
       }
