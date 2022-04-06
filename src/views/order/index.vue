@@ -254,16 +254,16 @@ export default {
             key: null,
           },
           {
-            name: "未支付",
-            key: "1",
+            name: "已支付",
+            key: "9",
           },
           {
             name: "支付中",
             key: "5",
           },
           {
-            name: "已支付",
-            key: "9",
+            name: "未支付",
+            key: "1",
           },
           {
             name: "已取消",
@@ -327,6 +327,14 @@ export default {
   watch: {
     "filter.status"() {
       this.getList();
+    },
+    visible(val) {
+      if (!val) {
+        this.form.is_local = null;
+        this.form.amount = null;
+        this.form.reason = null;
+        this.oid = null;
+      }
     },
   },
   activated() {
@@ -430,7 +438,6 @@ export default {
         })
         .catch((e) => {
           this.dialogLoading = false;
-          this.visible = false;
           this.$message.error(e.message);
         });
     },
