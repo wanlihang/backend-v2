@@ -65,12 +65,17 @@
             </el-table-column>
             <el-table-column fixed="right" label="操作" width="50">
               <template slot-scope="scope">
-                <p-link
-                  text="删除"
-                  p="media.video.delete.multi"
-                  type="danger"
-                  @click="destory(scope.row.id)"
-                ></p-link>
+                <el-popconfirm
+                  title="确认删除吗？"
+                  @confirm="destory(scope.row.id)"
+                >
+                  <p-link
+                    slot="reference"
+                    text="删除"
+                    p="media.video.delete.multi"
+                    type="danger"
+                  ></p-link>
+                </el-popconfirm>
               </template>
             </el-table-column>
           </el-table>
@@ -451,34 +456,24 @@ export default {
         });
     },
     destory(item) {
-      this.$confirm("确认操作？", "警告", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning",
+      //点击确定按钮的操作
+      if (this.loading) {
+        return;
+      }
+      this.loading = true;
+      let ids = [];
+      ids.push(item);
+      this.$api.Media.Video.Destroy({
+        ids: ids,
       })
         .then(() => {
-          //点击确定按钮的操作
-          if (this.loading) {
-            return;
-          }
-          this.loading = true;
-          let ids = [];
-          ids.push(item);
-          this.$api.Media.Video.Destroy({
-            ids: ids,
-          })
-            .then(() => {
-              this.loading = false;
-              this.$message.success(this.$t("common.success"));
-              this.getData();
-            })
-            .catch((e) => {
-              this.loading = false;
-              this.$message.error(e.message);
-            });
+          this.loading = false;
+          this.$message.success(this.$t("common.success"));
+          this.getData();
         })
-        .catch(() => {
-          //点击删除按钮的操作
+        .catch((e) => {
+          this.loading = false;
+          this.$message.error(e.message);
         });
     },
   },
