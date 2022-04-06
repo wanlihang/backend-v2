@@ -149,22 +149,6 @@
         </div>
 
         <div class="float-left" v-show="tab.active === 'dev'">
-          <el-form-item label="订阅人数" prop="count">
-            <div class="d-flex">
-              <div>
-                <el-input
-                  v-model="course.user_count"
-                  class="w-200px"
-                ></el-input>
-              </div>
-              <div class="ml-10">
-                <helper-text
-                  text="订阅人数是学员端可看到的数值，可手动指定该值。该值会随着购买人数的增加而增加。"
-                ></helper-text>
-              </div>
-            </div>
-          </el-form-item>
-
           <el-form-item label="显示" prop="is_show">
             <div class="d-flex">
               <div>
@@ -222,7 +206,6 @@ export default {
         short_desc: null,
         original_desc: null,
         render_desc: null,
-        user_count: null,
       },
       rules: {
         cid: [

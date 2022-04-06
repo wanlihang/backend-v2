@@ -260,6 +260,14 @@ export default {
         this.$router.push({
           name: "SystemMpwechatConfig",
         });
+      } else if (value === "图文") {
+        this.$router.push({
+          name: "SystemTopicConfig",
+        });
+      } else if (value === "电子书") {
+        this.$router.push({
+          name: "SystemBookConfig",
+        });
       } else {
         this.$router.push({ name: "SystemConfig", query: { key: value } });
       }

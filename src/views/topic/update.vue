@@ -109,12 +109,19 @@
             label="免费内容"
             v-if="topic.charge > 0"
           >
-            <change-editor
-              class="w-100"
-              :height="400"
-              :content="topic.free_content"
-              @change="getfreecontent"
-            ></change-editor>
+            <div class="d-flex w-800px">
+              <mavon-editor
+                v-if="topic.editor === 'MARKDOWN'"
+                :height="500"
+                :content="topic.free_content"
+                @change="getfreecontent"
+              ></mavon-editor>
+              <quill-editor
+                v-else
+                :height="458"
+                v-model="topic.free_content"
+              ></quill-editor>
+            </div>
           </el-form-item>
 
           <el-form-item
@@ -122,20 +129,34 @@
             v-if="topic.charge > 0"
             label="付费内容"
           >
-            <change-editor
-              :content="topic.original_content"
-              class="w-100"
-              :height="400"
-              @change="getcontent"
-            ></change-editor>
+            <div class="d-flex w-800px">
+              <mavon-editor
+                v-if="topic.editor === 'MARKDOWN'"
+                :content="topic.original_content"
+                :height="500"
+                @change="getcontent"
+              ></mavon-editor>
+              <quill-editor
+                v-else
+                v-model="topic.original_content"
+                :height="458"
+              ></quill-editor>
+            </div>
           </el-form-item>
           <el-form-item prop="original_content" v-else label="文章内容">
-            <change-editor
-              :content="topic.original_content"
-              class="w-100"
-              :height="400"
-              @change="getcontent"
-            ></change-editor>
+            <div class="d-flex w-800px">
+              <mavon-editor
+                v-if="topic.editor === 'MARKDOWN'"
+                :content="topic.original_content"
+                :height="500"
+                @change="getcontent"
+              ></mavon-editor>
+              <quill-editor
+                v-else
+                v-model="topic.original_content"
+                :height="458"
+              ></quill-editor>
+            </div>
           </el-form-item>
         </div>
 
@@ -194,12 +215,14 @@
   </div>
 </template>
 <script>
-import ChangeEditor from "@/components/change-editor";
+import MavonEditor from "@/components/md-editor";
+import QuillEditor from "@/components/quill-editor";
 import UploadImage from "@/components/upload-image";
 
 export default {
   components: {
-    ChangeEditor,
+    MavonEditor,
+    QuillEditor,
     UploadImage,
   },
   data() {
@@ -228,7 +251,7 @@ export default {
             trigger: "blur",
           },
         ],
-        render_content: [
+        original_content: [
           {
             required: true,
             message: "内容不能为空",
@@ -288,6 +311,10 @@ export default {
         return;
       }
       this.loading = true;
+      if (this.topic.editor !== "MARKDOWN") {
+        this.topic.render_content = this.topic.original_content;
+        this.topic.free_content_render = this.topic.free_content;
+      }
       this.$api.Course.Topic.Topic.Update(this.id, this.topic)
         .then(() => {
           this.$message.success(this.$t("common.success"));

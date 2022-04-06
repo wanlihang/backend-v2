@@ -1,7 +1,7 @@
 <template>
-  <div class="meedu-dialog-mask" v-if="show">
+  <div class="meedu-dialog-mask" v-show="show">
     <div class="meedu-dialog-box">
-      <div class="meedu-dialog-header">选择录播课程</div>
+      <div class="meedu-dialog-header">选择电子书</div>
       <div class="meedu-dialog-body">
         <div class="courses-box">
           <div class="float-left mb-15">
@@ -9,7 +9,7 @@
               <div class="d-flex">
                 <el-input
                   class="w-150px"
-                  v-model="pagination.keywords"
+                  v-model="pagination.key"
                   placeholder="关键字"
                 ></el-input>
               </div>
@@ -23,22 +23,27 @@
             </div>
           </div>
           <el-table
+            ref="table"
             :header-cell-style="{ background: '#f1f2f9' }"
             :data="courses"
-            highlight-current-row
-            @current-change="handleCurrentChange"
+            @selection-change="handleSelectionChange"
             class="float-left mb-15"
             v-loading="loading"
           >
-            <el-table-column prop="id" label="课程ID" width="120">
+            <el-table-column
+              type="selection"
+              width="55"
+              :selectable="checkSelectable"
+            ></el-table-column>
+            <el-table-column prop="id" label="电子书ID" width="120">
             </el-table-column>
-            <el-table-column label="课程">
+            <el-table-column label="电子书">
               <template slot-scope="scope">
                 <div class="d-flex">
                   <div>
-                    <img :src="scope.row.thumb" width="80" height="60" />
+                    <img :src="scope.row.thumb" width="60" height="80" />
                   </div>
-                  <div class="ml-15">{{ scope.row.title }}</div>
+                  <div class="ml-15">{{ scope.row.name }}</div>
                 </div>
               </template>
             </el-table-column>
@@ -46,7 +51,6 @@
               <template slot-scope="scope"> ￥{{ scope.row.charge }} </template>
             </el-table-column>
           </el-table>
-
           <div class="float-left mt-15 text-center">
             <el-pagination
               @size-change="paginationSizeChange"
@@ -71,7 +75,7 @@
 
 <script>
 export default {
-  props: ["show"],
+  props: ["show", "selected"],
   data() {
     return {
       pagination: {
@@ -79,7 +83,7 @@ export default {
         size: 10,
         sort: "created_at",
         order: "desc",
-        keywords: null,
+        key: null,
       },
       loading: false,
       total: 0,
@@ -87,13 +91,21 @@ export default {
       result: null,
     };
   },
+
   mounted() {
     this.getCourse();
   },
   methods: {
+    checkSelectable(row) {
+      let id = row.id;
+      if (!this.selected) {
+        return true;
+      }
+      return this.selected.indexOf(id) <= -1;
+    },
     paginationReset() {
       this.pagination.page = 1;
-      this.pagination.keywords = null;
+      this.pagination.key = null;
       this.getCourse();
     },
     paginationSizeChange(size) {
@@ -108,33 +120,30 @@ export default {
       this.pagination.page = 1;
       this.getCourse();
     },
-    handleCurrentChange(row) {
-      this.result = row;
+    handleSelectionChange(val) {
+      var newbox = [];
+      for (var i = 0; i < val.length; i++) {
+        newbox.push(val[i].id);
+      }
+      this.result = newbox;
     },
     getCourse() {
       if (this.loading) {
         return;
       }
       this.loading = true;
-      this.$api.Course.Vod.List(this.pagination).then((res) => {
+      this.$api.Meedubook.Book.List(this.pagination).then((res) => {
         this.loading = false;
-        this.courses = res.data.courses.data;
-        this.total = res.data.courses.total;
+        this.courses = res.data.data.data;
+        this.total = res.data.data.total;
       });
     },
     confirm() {
-      if (this.result === null) {
-        this.$message.warning("请选择课程");
+      if (this.result === null || this.result === "") {
+        this.$message.warning("请选择电子书");
         return;
       }
-      this.$emit("change", {
-        id: this.result.id,
-        title: this.result.title,
-        thumb: this.result.thumb,
-        charge: this.result.charge,
-        is_free: this.result.is_free,
-        user_count: this.result.user_count,
-      });
+      this.$emit("change", this.result);
     },
     close() {
       this.$emit("close");
@@ -144,10 +153,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-::-webkit-scrollbar-thumb {
-  border-radius: 4px;
-  background-color: #dcdfe6;
-}
 .courses-box {
   width: 100%;
   height: auto;

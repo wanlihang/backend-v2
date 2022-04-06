@@ -100,13 +100,20 @@
           </div>
         </el-form-item>
 
-        <el-form-item prop="render_content" label="文章内容">
-          <mavon-editor
-            :content="article.original_content"
-            class="w-100"
-            :height="500"
-            @change="getcontent"
-          ></mavon-editor>
+        <el-form-item prop="original_content" label="文章内容">
+          <div class="d-flex w-800px">
+            <mavon-editor
+              v-if="article.editor === 'MARKDOWN'"
+              :content="article.original_content"
+              :height="500"
+              @change="getcontent"
+            ></mavon-editor>
+            <quill-editor
+              v-else
+              v-model="article.original_content"
+              :height="458"
+            ></quill-editor>
+          </div>
         </el-form-item>
       </el-form>
 
@@ -127,10 +134,12 @@
 </template>
 <script>
 import MavonEditor from "@/components/md-editor";
+import QuillEditor from "@/components/quill-editor";
 
 export default {
   components: {
     MavonEditor,
+    QuillEditor,
   },
   data() {
     return {
@@ -155,7 +164,7 @@ export default {
             trigger: "blur",
           },
         ],
-        render_content: [
+        original_content: [
           {
             required: true,
             message: "内容不能为空",
@@ -211,6 +220,9 @@ export default {
         return;
       }
       this.loading = true;
+      if (this.article.editor !== "MARKDOWN") {
+        this.article.render_content = this.article.original_content;
+      }
       this.$api.Meedubook.Book.Article.Update(this.article_id, this.article)
         .then(() => {
           this.$message.success(this.$t("common.success"));

@@ -100,12 +100,13 @@
           </div>
         </el-form-item>
 
-        <el-form-item prop="render_content" label="文章内容">
-          <mavon-editor
+        <el-form-item prop="original_content" label="文章内容">
+          <change-editor
+            :content="article.original_content"
             class="w-100"
             :height="500"
             @change="getcontent"
-          ></mavon-editor>
+          ></change-editor>
         </el-form-item>
       </el-form>
 
@@ -125,11 +126,11 @@
   </div>
 </template>
 <script>
-import MavonEditor from "@/components/md-editor";
+import ChangeEditor from "@/components/change-editor";
 
 export default {
   components: {
-    MavonEditor,
+    ChangeEditor,
   },
   data() {
     return {
@@ -143,6 +144,7 @@ export default {
         book_cid: null,
         original_content: null,
         render_content: null,
+        editor: null,
       },
       form: {
         trySee: false,
@@ -162,7 +164,7 @@ export default {
             trigger: "blur",
           },
         ],
-        render_content: [
+        original_content: [
           {
             required: true,
             message: "内容不能为空",
@@ -211,6 +213,12 @@ export default {
         return;
       }
       this.loading = true;
+      let localCurrent = this.$utils.getEditorKey();
+      if (localCurrent === "markdown") {
+        this.article.editor = "MARKDOWN";
+      } else {
+        this.article.editor = "FULLEDITOR";
+      }
       this.$api.Meedubook.Book.Article.Store(this.article)
         .then(() => {
           this.$message.success(this.$t("common.success"));

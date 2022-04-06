@@ -10,7 +10,7 @@
         >
         </p-button>
         <p-button
-          text="分类管理"
+          text="直播课分类"
           @click="$router.push({ name: 'LiveCourseCategory' })"
           type="primary"
           p="addons.Zhibo.course_category.list"

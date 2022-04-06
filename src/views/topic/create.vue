@@ -112,7 +112,7 @@
             <change-editor
               :content="topic.free_content"
               class="w-100"
-              :height="400"
+              :height="500"
               @change="getfreecontent"
             ></change-editor>
           </el-form-item>
@@ -125,7 +125,7 @@
             <change-editor
               :content="topic.original_content"
               class="w-100"
-              :height="400"
+              :height="500"
               @change="getcontent"
             ></change-editor>
           </el-form-item>
@@ -133,7 +133,7 @@
             <change-editor
               :content="topic.original_content"
               class="w-100"
-              :height="400"
+              :height="500"
               @change="getcontent"
             ></change-editor>
           </el-form-item>
@@ -217,6 +217,7 @@ export default {
         sorted_at: null,
         original_content: null,
         render_content: null,
+        editor: null,
       },
       rules: {
         cid: [
@@ -240,7 +241,7 @@ export default {
             trigger: "blur",
           },
         ],
-        render_content: [
+        original_content: [
           {
             required: true,
             message: "内容不能为空",
@@ -294,6 +295,12 @@ export default {
         return;
       }
       this.loading = true;
+      let localCurrent = this.$utils.getEditorKey();
+      if (localCurrent === "markdown") {
+        this.topic.editor = "MARKDOWN";
+      } else {
+        this.topic.editor = "FULLEDITOR";
+      }
       this.$api.Course.Topic.Topic.Store(this.topic)
         .then(() => {
           this.$message.success(this.$t("common.success"));

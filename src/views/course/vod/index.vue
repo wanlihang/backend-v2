@@ -10,7 +10,7 @@
         >
         </p-button>
         <p-button
-          text="分类管理"
+          text="录播课分类"
           p="courseCategory"
           @click="$router.push({ name: 'CourseCategories' })"
           type="primary"

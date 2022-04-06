@@ -346,9 +346,14 @@ export default {
               configTenData[index].key ===
               "meedu.addons.TencentCloudHls.transcode_definition"
             ) {
-              this.form.config[
-                "meedu.addons.TencentCloudHls.transcode_definition"
-              ] = configTenData[index].value.split(",");
+              if (
+                configTenData[index].value &&
+                configTenData[index].value.length > 0
+              ) {
+                this.form.config[
+                  "meedu.addons.TencentCloudHls.transcode_definition"
+                ] = configTenData[index].value.split(",");
+              }
             }
           }
         }

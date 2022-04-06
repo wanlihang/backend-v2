@@ -180,6 +180,22 @@ const routes = [
     },
   },
   {
+    path: "/system/topicConfig",
+    component: () => import("@/views/system/topicConfig"),
+    name: "SystemTopicConfig",
+    meta: {
+      title: "title.system-config",
+    },
+  },
+  {
+    path: "/system/bookConfig",
+    component: () => import("@/views/system/bookConfig"),
+    name: "SystemBookConfig",
+    meta: {
+      title: "title.system-config",
+    },
+  },
+  {
     path: "/system/application",
     component: () => import("@/views/system/application"),
     name: "SystemApplication",
