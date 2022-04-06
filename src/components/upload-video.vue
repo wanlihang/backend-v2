@@ -63,6 +63,16 @@
                 <span>{{ scope.row.created_at | dateFormat }}</span>
               </template>
             </el-table-column>
+            <el-table-column fixed="right" label="操作" width="50">
+              <template slot-scope="scope">
+                <p-link
+                  text="删除"
+                  p="media.video.delete.multi"
+                  type="danger"
+                  @click="destory(scope.row.id)"
+                ></p-link>
+              </template>
+            </el-table-column>
           </el-table>
 
           <div class="float-left mt-15 text-center">
@@ -438,6 +448,37 @@ export default {
         })
         .catch((e) => {
           this.$message.error(e.message);
+        });
+    },
+    destory(item) {
+      this.$confirm("确认操作？", "警告", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          //点击确定按钮的操作
+          if (this.loading) {
+            return;
+          }
+          this.loading = true;
+          let ids = [];
+          ids.push(item);
+          this.$api.Media.Video.Destroy({
+            ids: ids,
+          })
+            .then(() => {
+              this.loading = false;
+              this.$message.success(this.$t("common.success"));
+              this.getData();
+            })
+            .catch((e) => {
+              this.loading = false;
+              this.$message.error(e.message);
+            });
+        })
+        .catch(() => {
+          //点击删除按钮的操作
         });
     },
   },

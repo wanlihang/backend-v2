@@ -107,6 +107,9 @@ const Api = {
       Store(params) {
         return post(`/backend/api/v1/media/videos/create`, params);
       },
+      Destroy(params) {
+        return post(`/backend/api/v1/media/videos/delete/multi`, params);
+      },
     },
   },
   Miaosha: {
