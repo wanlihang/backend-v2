@@ -17,6 +17,14 @@
           class="ml-15"
         >
         </p-button>
+        <p-button
+          text="批量发消息"
+          p="member.message.send.multi"
+          @click="sendMessageMulti()"
+          type="primary"
+          class="ml-15"
+        >
+        </p-button>
       </div>
       <div class="d-flex">
         <div>
@@ -63,7 +71,9 @@
           class="float-left"
           @sort-change="sortChange"
           :default-sort="{ prop: 'id', order: 'descending' }"
+          @selection-change="handleSelectionChange"
         >
+          <el-table-column type="selection" width="55"></el-table-column>
           <el-table-column prop="id" sortable label="学员ID" width="100">
           </el-table-column>
           <el-table-column label="学员" width="210">
@@ -221,7 +231,8 @@
         ></el-input>
       </div>
       <div class="j-r-flex mt-20">
-        <el-button @click="confirm" type="primary">确认</el-button>
+        <el-button v-if="mid" @click="confirm" type="primary">确认</el-button>
+        <el-button v-else @click="confirmMulti" type="primary">确认</el-button>
       </div>
     </el-dialog>
   </div>
@@ -262,6 +273,9 @@ export default {
       visible: false,
       message: null,
       mid: null,
+      spids: {
+        ids: [],
+      },
     };
   },
   activated() {
@@ -303,6 +317,13 @@ export default {
     },
   },
   methods: {
+    handleSelectionChange(val) {
+      var newbox = [];
+      for (var i = 0; i < val.length; i++) {
+        newbox.push(val[i].id);
+      }
+      this.spids.ids = newbox;
+    },
     paginationReset() {
       this.pagination.page = 1;
       this.filter.keywords = null;
@@ -355,6 +376,30 @@ export default {
     sendMessage(item) {
       this.visible = true;
       this.mid = item.id;
+    },
+    sendMessageMulti() {
+      if (this.spids.ids == "") {
+        this.$message.error("请选择需要操作的数据");
+        return;
+      }
+      this.visible = true;
+    },
+    confirmMulti() {
+      if (this.loading) {
+        return;
+      }
+      this.loading = true;
+      this.$api.Member.SendMessageMulti({
+        user_ids: this.spids.ids,
+        message: this.message,
+      }).then((res) => {
+        this.loading = false;
+        this.$message.success(this.$t("common.success"));
+        this.message = null;
+        this.mid = null;
+        this.visible = false;
+        this.getUser();
+      });
     },
     confirm() {
       this.$api.Member.SendMessage(this.mid, {
