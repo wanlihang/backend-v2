@@ -138,7 +138,7 @@
           </el-table-column>
           <el-table-column label="退款金额">
             <template slot-scope="scope">
-              {{ scope.row.amount / 100 }}元
+              ¥{{ scope.row.amount / 100 }}
             </template>
           </el-table-column>
           <el-table-column label="状态" :width="220">
@@ -149,7 +149,9 @@
               <template v-else-if="scope.row.status === 5">
                 <span class="c-green mb-10">· 退款成功</span>
                 <br />
-                <span>{{ scope.row.success_at | dateFormat }}</span>
+                <span class="c-gray">{{
+                  scope.row.success_at | dateFormat
+                }}</span>
               </template>
               <span v-else-if="scope.row.status === 9">· 退款异常</span>
               <span class="c-red" v-else-if="scope.row.status === 13"
@@ -178,13 +180,13 @@
         </el-pagination>
       </div>
     </div>
-    <el-drawer :size="260" :visible.sync="drawer" :with-header="false">
+    <el-drawer :size="360" :visible.sync="drawer" :with-header="false">
       <div class="n-padding-box">
         <div class="tit flex">更多筛选</div>
         <div class="j-flex">
           <el-select
             placeholder="请选择支付渠道"
-            class="w-200px"
+            class="w-300px"
             multiple
             v-model="filter.payment"
           >
@@ -201,7 +203,7 @@
           <el-input
             type="text"
             placeholder="请输入手机号"
-            class="w-200px"
+            class="w-300px"
             v-model="filter.mobile"
           >
           </el-input>
@@ -210,7 +212,7 @@
           <el-input
             type="text"
             placeholder="请输入退款单号"
-            class="w-200px"
+            class="w-300px"
             v-model="filter.refund_no"
           >
           </el-input>
@@ -219,7 +221,7 @@
           <el-input
             type="text"
             placeholder="请输入订单号"
-            class="w-200px"
+            class="w-300px"
             v-model="filter.order_no"
           >
           </el-input>
@@ -227,7 +229,7 @@
         <div class="j-flex mt-20">
           <el-select
             placeholder="请选择退款类型"
-            class="w-200px"
+            class="w-300px"
             v-model="filter.is_local"
           >
             <el-option
@@ -242,7 +244,7 @@
         <div class="j-flex mt-20">
           <el-select
             placeholder="请选择退款状态"
-            class="w-200px"
+            class="w-300px"
             v-model="filter.status"
           >
             <el-option
@@ -395,7 +397,7 @@ export default {
         this.showStatus = false;
       }
     },
-    order_no(val) {
+    "filter.order_no"(val) {
       if (val) {
         this.showStatus = true;
       } else {

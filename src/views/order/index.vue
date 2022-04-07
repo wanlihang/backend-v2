@@ -13,6 +13,7 @@
       <div class="d-flex">
         <div>
           <el-input
+            type="text"
             v-model="filter.goods_name"
             placeholder="商品关键字"
             class="w-150px"
@@ -121,7 +122,8 @@
         </el-table-column>
         <el-table-column prop="order_id" label="订单编号" :width="200">
         </el-table-column>
-        <el-table-column prop="charge" sortable label="支付金额" :width="150">
+        <el-table-column sortable label="支付金额" :width="150">
+          <template slot-scope="scope">¥{{ scope.row.charge }}</template>
         </el-table-column>
         <el-table-column label="支付渠道" :width="150">
           <template slot-scope="scope">
@@ -249,20 +251,21 @@
         >
       </div>
     </el-dialog>
-    <el-drawer :size="260" :visible.sync="drawer" :with-header="false">
+    <el-drawer :size="360" :visible.sync="drawer" :with-header="false">
       <div class="n-padding-box">
         <div class="tit flex">更多筛选</div>
         <div class="j-flex">
           <el-input
+            type="text"
             v-model="filter.goods_name"
             placeholder="商品关键字"
-            class="w-200px"
+            class="w-300px"
           ></el-input>
         </div>
         <div class="j-flex mt-20">
           <el-select
             placeholder="请选择支付渠道"
-            class="w-200px"
+            class="w-300px"
             v-model="filter.payment"
           >
             <el-option
@@ -277,12 +280,12 @@
         <div class="j-flex mt-20">
           <el-input
             v-model="filter.order_id"
-            class="w-200px"
+            class="w-300px"
             placeholder="订单编号"
           ></el-input>
         </div>
         <div class="j-flex mt-20">
-          <el-select class="w-200px" v-model="filter.is_refund">
+          <el-select class="w-300px" v-model="filter.is_refund">
             <el-option
               v-for="(item, index) in filterData.status"
               :key="index"
@@ -493,7 +496,7 @@ export default {
           amount += item[i].amount / 100;
         }
       }
-      return amount + "元";
+      return "¥" + amount;
     },
     paginationSizeChange(size) {
       this.pagination.size = size;

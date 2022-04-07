@@ -111,7 +111,7 @@
             </el-table-column>
             <el-table-column label="退款金额">
               <template slot-scope="scope">
-                {{ scope.row.amount / 100 }}元
+                ¥{{ scope.row.amount / 100 }}
               </template>
             </el-table-column>
             <el-table-column label="状态" :width="220">
@@ -122,7 +122,9 @@
                 <template v-else-if="scope.row.status === 5">
                   <span class="c-green mb-10">· 退款成功</span>
                   <br />
-                  <span>{{ scope.row.success_at | dateFormat }}</span>
+                  <span class="c-gray">{{
+                    scope.row.success_at | dateFormat
+                  }}</span>
                 </template>
                 <span v-else-if="scope.row.status === 9">· 退款异常</span>
                 <span class="c-red" v-else-if="scope.row.status === 13"
