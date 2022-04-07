@@ -133,6 +133,15 @@
             <span v-else-if="scope.row.payment === 'wechat'"
               ><img src="../../assets/img/wepay.png" width="30" height="30"
             /></span>
+            <span v-else-if="scope.row.payment === 'wechat_h5'"
+              ><img src="../../assets/img/wepay.png" width="30" height="30"
+            /></span>
+            <span v-else-if="scope.row.payment === 'wechat-jsapi'"
+              ><img src="../../assets/img/wepay.png" width="30" height="30"
+            /></span>
+            <span v-else-if="scope.row.payment === 'wechatApp'"
+              ><img src="../../assets/img/wepay.png" width="30" height="30"
+            /></span>
             <span v-else-if="scope.row.payment === 'handPay'"
               ><img src="../../assets/img/card.png" width="30" height="30"
             /></span>
