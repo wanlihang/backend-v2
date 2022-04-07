@@ -21,6 +21,39 @@
           </el-select>
         </div>
         <div class="ml-10">
+          <el-input
+            type="text"
+            placeholder="请输入手机号"
+            class="w-150px"
+            v-model="filter.mobile"
+          >
+          </el-input>
+        </div>
+        <div class="ml-10">
+          <el-input
+            type="text"
+            placeholder="请输入退款单号"
+            class="w-150px"
+            v-model="filter.refund_no"
+          >
+          </el-input>
+        </div>
+        <div class="ml-10">
+          <el-select
+            placeholder="请选择退款类型"
+            class="w-150px"
+            v-model="filter.is_local"
+          >
+            <el-option
+              v-for="(item, index) in filterData.types"
+              :key="index"
+              :label="item.name"
+              :value="item.key"
+            >
+            </el-option>
+          </el-select>
+        </div>
+        <div class="ml-10">
           <el-select
             placeholder="请选择退款状态"
             class="w-150px"
@@ -160,9 +193,12 @@ export default {
         size: 10,
       },
       filter: {
+        is_local: -1,
         payment: null,
         status: 0,
         created_at: null,
+        mobile: null,
+        refund_no: null,
       },
       total: 0,
       loading: false,
@@ -192,6 +228,20 @@ export default {
           {
             key: "handPay",
             name: "线下打款",
+          },
+        ],
+        types: [
+          {
+            key: -1,
+            name: "全部",
+          },
+          {
+            key: 0,
+            name: "原渠道退回",
+          },
+          {
+            key: 1,
+            name: "本地(仅记录)",
           },
         ],
         status: [
@@ -240,9 +290,12 @@ export default {
     },
     paginationReset() {
       this.pagination.page = 1;
+      this.filter.is_local = -1;
       this.filter.payment = null;
       this.filter.status = 0;
       this.filter.created_at = null;
+      this.filter.mobile = null;
+      this.filter.refund_no = null;
       this.getData();
     },
     paginationSizeChange(size) {
