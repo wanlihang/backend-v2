@@ -13,7 +13,6 @@
       <div class="d-flex">
         <div>
           <el-input
-            type="text"
             v-model="filter.goods_name"
             placeholder="商品关键字"
             class="w-150px"
@@ -265,7 +264,6 @@
         <div class="tit flex">更多筛选</div>
         <div class="j-flex">
           <el-input
-            type="text"
             v-model="filter.goods_name"
             placeholder="商品关键字"
             class="w-300px"
@@ -426,7 +424,6 @@ export default {
         },
       ],
       drawer: false,
-      showStatus: false,
     };
   },
   computed: {
@@ -440,6 +437,18 @@ export default {
       }
       return total;
     },
+    showStatus() {
+      if (
+        this.filter.is_refund !== -1 ||
+        this.filter.payment ||
+        this.filter.created_at ||
+        this.filter.order_id ||
+        this.filter.goods_name
+      ) {
+        return true;
+      }
+      return false;
+    },
   },
   watch: {
     "filter.status"() {
@@ -451,41 +460,6 @@ export default {
         this.form.amount = null;
         this.form.reason = null;
         this.oid = null;
-      }
-    },
-    "filter.is_refund"(val) {
-      if (val !== -1) {
-        this.showStatus = true;
-      } else {
-        this.showStatus = false;
-      }
-    },
-    "filter.payment"(val) {
-      if (val) {
-        this.showStatus = true;
-      } else {
-        this.showStatus = false;
-      }
-    },
-    "filter.created_at"(val) {
-      if (val) {
-        this.showStatus = true;
-      } else {
-        this.showStatus = false;
-      }
-    },
-    "filter.goods_name"(val) {
-      if (val) {
-        this.showStatus = true;
-      } else {
-        this.showStatus = false;
-      }
-    },
-    "filter.order_id"(val) {
-      if (val) {
-        this.showStatus = true;
-      } else {
-        this.showStatus = false;
       }
     },
   },
@@ -543,7 +517,6 @@ export default {
       let data = {};
       Object.assign(data, this.pagination);
       Object.assign(data, this.filter);
-
       this.$api.Order.OrderList.List(data).then((resp) => {
         this.users = resp.data.users;
         this.total = resp.data.orders.total;

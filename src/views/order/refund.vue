@@ -367,58 +367,22 @@ export default {
         },
       },
       drawer: false,
-      showStatus: false,
     };
   },
-  watch: {
-    "filter.is_local"(val) {
-      if (val !== -1) {
-        this.showStatus = true;
-      } else {
-        this.showStatus = false;
+  computed: {
+    showStatus() {
+      if (
+        this.filter.is_local !== -1 ||
+        this.filter.payment ||
+        this.filter.created_at ||
+        this.filter.refund_no ||
+        this.filter.mobile ||
+        this.filter.order_no ||
+        this.filter.status !== 0
+      ) {
+        return true;
       }
-    },
-    "filter.payment"(val) {
-      if (val) {
-        this.showStatus = true;
-      } else {
-        this.showStatus = false;
-      }
-    },
-    "filter.created_at"(val) {
-      if (val) {
-        this.showStatus = true;
-      } else {
-        this.showStatus = false;
-      }
-    },
-    "filter.mobile"(val) {
-      if (val) {
-        this.showStatus = true;
-      } else {
-        this.showStatus = false;
-      }
-    },
-    "filter.refund_no"(val) {
-      if (val) {
-        this.showStatus = true;
-      } else {
-        this.showStatus = false;
-      }
-    },
-    "filter.order_no"(val) {
-      if (val) {
-        this.showStatus = true;
-      } else {
-        this.showStatus = false;
-      }
-    },
-    "filter.status"(val) {
-      if (val !== 0) {
-        this.showStatus = true;
-      } else {
-        this.showStatus = false;
-      }
+      return false;
     },
   },
   activated() {
