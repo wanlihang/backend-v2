@@ -125,9 +125,7 @@
           <el-table-column label="支付渠道" :width="150">
             <template slot-scope="scope">
               <span v-if="scope.row.payment === 'alipay'">支付宝支付</span>
-              <span v-else-if="scope.row.payment === 'wechat'"
-                >微信扫码支付</span
-              >
+              <span v-else-if="scope.row.payment === 'wechat'">微信支付</span>
               <span v-else-if="scope.row.payment === 'handPay'">线下打款</span>
             </template>
           </el-table-column>
@@ -136,7 +134,6 @@
               {{ scope.row.amount / 100 }}元
             </template>
           </el-table-column>
-
           <el-table-column label="状态" :width="220">
             <template slot-scope="scope">
               <span class="c-yellow" v-if="scope.row.status === 1"
@@ -301,7 +298,7 @@ export default {
           },
           {
             key: "wechat",
-            name: "微信扫码支付",
+            name: "微信支付",
           },
 
           {

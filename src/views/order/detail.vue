@@ -116,12 +116,18 @@
             </el-table-column>
             <el-table-column label="状态" :width="220">
               <template slot-scope="scope">
-                <span v-if="scope.row.status === 1">待处理</span>
-                <span v-else-if="scope.row.status === 5"
-                  >退款成功<br />{{ scope.row.success_at | dateFormat }}</span
+                <span class="c-yellow" v-if="scope.row.status === 1"
+                  >· 待处理</span
                 >
-                <span v-else-if="scope.row.status === 9">退款异常</span>
-                <span v-else-if="scope.row.status === 13">退款已关闭</span>
+                <template v-else-if="scope.row.status === 5">
+                  <span class="c-green mb-10">· 退款成功</span>
+                  <br />
+                  <span>{{ scope.row.success_at | dateFormat }}</span>
+                </template>
+                <span v-else-if="scope.row.status === 9">· 退款异常</span>
+                <span class="c-red" v-else-if="scope.row.status === 13"
+                  >· 退款已关闭</span
+                >
               </template>
             </el-table-column>
             <el-table-column sortable label="提交时间" :width="220">

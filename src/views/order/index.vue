@@ -52,23 +52,20 @@
           </el-select>
         </div>
         <div class="ml-10">
-          <el-date-picker
-            :picker-options="pickerOptions"
-            v-model="filter.created_at"
-            type="daterange"
-            align="right"
-            unlink-panels
-            range-separator="至"
-            start-placeholder="订单添加开始时间"
-            end-placeholder="结束时间"
-          >
-          </el-date-picker>
-        </div>
-        <div class="ml-10">
           <el-button class="reset" @click="paginationReset()">清空</el-button>
           <el-button type="primary" class="search" @click="filterAct()">
             筛选
           </el-button>
+        </div>
+        <div class="drawerMore d-flex ml-10" @click="drawer = true">
+          <template v-if="showStatus">
+            <img src="../../assets/img/icon-filter-h.png" />
+            <span class="act">已选</span>
+          </template>
+          <template v-else>
+            <img src="../../assets/img/icon-filter.png" />
+            <span>更多</span>
+          </template>
         </div>
       </div>
     </div>
@@ -129,7 +126,7 @@
         <el-table-column label="支付渠道" :width="150">
           <template slot-scope="scope">
             <span v-if="scope.row.payment === 'alipay'">支付宝支付</span>
-            <span v-else-if="scope.row.payment === 'wechat'">微信扫码支付</span>
+            <span v-else-if="scope.row.payment === 'wechat'">微信支付</span>
             <span v-else-if="scope.row.payment === 'handPay'">线下打款</span>
           </template>
         </el-table-column>
@@ -245,6 +242,68 @@
         >
       </div>
     </el-dialog>
+    <el-drawer :size="260" :visible.sync="drawer" :with-header="false">
+      <div class="n-padding-box">
+        <div class="tit flex">更多筛选</div>
+        <div class="j-flex">
+          <el-input
+            v-model="filter.goods_name"
+            placeholder="商品关键字"
+            class="w-200px"
+          ></el-input>
+        </div>
+        <div class="j-flex mt-20">
+          <el-select
+            placeholder="请选择支付渠道"
+            class="w-200px"
+            v-model="filter.payment"
+          >
+            <el-option
+              v-for="(item, index) in filterData.payments"
+              :key="index"
+              :label="item.name"
+              :value="item.key"
+            >
+            </el-option>
+          </el-select>
+        </div>
+        <div class="j-flex mt-20">
+          <el-input
+            v-model="filter.order_id"
+            class="w-200px"
+            placeholder="订单编号"
+          ></el-input>
+        </div>
+        <div class="j-flex mt-20">
+          <el-select class="w-200px" v-model="filter.is_refund">
+            <el-option
+              v-for="(item, index) in filterData.status"
+              :key="index"
+              :label="item.name"
+              :value="item.key"
+            >
+            </el-option>
+          </el-select>
+        </div>
+        <div class="j-flex mt-20">
+          <el-date-picker
+            :picker-options="pickerOptions"
+            v-model="filter.created_at"
+            type="daterange"
+            align="right"
+            unlink-panels
+            range-separator="至"
+            start-placeholder="订单添加开始时间"
+            end-placeholder="结束时间"
+          >
+          </el-date-picker>
+        </div>
+        <div class="j-b-flex mt-30">
+          <el-button @click="paginationReset">清空</el-button>
+          <el-button @click="filterAct" type="primary">筛选</el-button>
+        </div>
+      </div>
+    </el-drawer>
   </div>
 </template>
 
@@ -263,9 +322,7 @@ export default {
       loading: false,
       filter: {
         is_refund: -1,
-        user_id: null,
         goods_id: null,
-        goods_name: null,
         status: null,
         order_id: null,
         created_at: null,
@@ -279,7 +336,7 @@ export default {
           },
           {
             key: "wechat",
-            name: "微信扫码支付",
+            name: "微信支付",
           },
 
           {
@@ -349,6 +406,8 @@ export default {
           key: 0,
         },
       ],
+      drawer: false,
+      showStatus: false,
     };
   },
   computed: {
@@ -373,6 +432,41 @@ export default {
         this.form.amount = null;
         this.form.reason = null;
         this.oid = null;
+      }
+    },
+    "filter.is_refund"(val) {
+      if (val !== -1) {
+        this.showStatus = true;
+      } else {
+        this.showStatus = false;
+      }
+    },
+    "filter.payment"(val) {
+      if (val) {
+        this.showStatus = true;
+      } else {
+        this.showStatus = false;
+      }
+    },
+    "filter.created_at"(val) {
+      if (val) {
+        this.showStatus = true;
+      } else {
+        this.showStatus = false;
+      }
+    },
+    "filter.goods_name"(val) {
+      if (val) {
+        this.showStatus = true;
+      } else {
+        this.showStatus = false;
+      }
+    },
+    "filter.order_id"(val) {
+      if (val) {
+        this.showStatus = true;
+      } else {
+        this.showStatus = false;
       }
     },
   },
@@ -407,11 +501,10 @@ export default {
       this.pagination.page = 1;
       this.filter.payment = null;
       this.filter.order_id = null;
-      this.filter.user_id = null;
       this.filter.created_at = null;
-      this.filter.goods_id = null;
       this.filter.goods_name = null;
       this.getList();
+      this.drawer = false;
     },
     sortChange(column) {
       this.pagination.sort = column.prop;
@@ -421,6 +514,7 @@ export default {
     filterAct() {
       this.pagination.page = 1;
       this.getList();
+      this.drawer = false;
     },
     getList() {
       if (this.loading) {
