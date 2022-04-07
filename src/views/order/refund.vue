@@ -39,6 +39,15 @@
           </el-input>
         </div>
         <div class="ml-10">
+          <el-input
+            type="text"
+            placeholder="请输入订单号"
+            class="w-150px"
+            v-model="filter.order_no"
+          >
+          </el-input>
+        </div>
+        <div class="ml-10">
           <el-select
             placeholder="请选择退款类型"
             class="w-150px"
@@ -69,21 +78,18 @@
           </el-select>
         </div>
         <div class="ml-10">
-          <el-date-picker
-            :picker-options="pickerOptions"
-            v-model="filter.created_at"
-            type="daterange"
-            align="right"
-            unlink-panels
-            range-separator="至"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期"
-          >
-          </el-date-picker>
-        </div>
-        <div class="ml-10">
           <el-button @click="paginationReset">清空</el-button>
           <el-button @click="firstPageLoad" type="primary">筛选</el-button>
+        </div>
+        <div class="drawerMore d-flex ml-10" @click="drawer = true">
+          <template v-if="showStatus">
+            <img src="../../assets/img/icon-filter-h.png" />
+            <span class="act">已选</span>
+          </template>
+          <template v-else>
+            <img src="../../assets/img/icon-filter.png" />
+            <span>更多</span>
+          </template>
         </div>
       </div>
     </div>
@@ -110,6 +116,11 @@
               <span class="c-red" v-else>学员不存在</span>
             </template>
           </el-table-column>
+          <el-table-column
+            prop="order.order_id"
+            label="订单号"
+            width="200"
+          ></el-table-column>
           <el-table-column
             prop="refund_no"
             label="退款单号"
@@ -147,15 +158,17 @@
 
           <el-table-column label="状态" :width="220">
             <template slot-scope="scope">
-              <el-tag type="info" v-if="scope.row.status === 1">待处理</el-tag>
+              <span class="c-yellow" v-if="scope.row.status === 1"
+                >· 待处理</span
+              >
               <template v-else-if="scope.row.status === 5">
-                <el-tag type="success" class="mb-10">退款成功</el-tag>
+                <span class="c-green mb-10">· 退款成功</span>
                 <br />
                 <span>{{ scope.row.success_at | dateFormat }}</span>
               </template>
-              <el-tag v-else-if="scope.row.status === 9">退款异常</el-tag>
-              <el-tag type="danger" v-else-if="scope.row.status === 13"
-                >退款已关闭</el-tag
+              <span v-else-if="scope.row.status === 9">· 退款异常</span>
+              <span class="c-red" v-else-if="scope.row.status === 13"
+                >· 退款已关闭</span
               >
             </template>
           </el-table-column>
@@ -180,6 +193,101 @@
         </el-pagination>
       </div>
     </div>
+    <el-drawer :size="260" :visible.sync="drawer" :with-header="false">
+      <div class="n-padding-box">
+        <div class="tit flex">更多筛选</div>
+        <div class="j-flex">
+          <el-select
+            placeholder="请选择支付渠道"
+            class="w-200px"
+            multiple
+            v-model="filter.payment"
+          >
+            <el-option
+              v-for="(item, index) in filterData.payments"
+              :key="index"
+              :label="item.name"
+              :value="item.key"
+            >
+            </el-option>
+          </el-select>
+        </div>
+        <div class="j-flex mt-20">
+          <el-input
+            type="text"
+            placeholder="请输入手机号"
+            class="w-200px"
+            v-model="filter.mobile"
+          >
+          </el-input>
+        </div>
+        <div class="j-flex mt-20">
+          <el-input
+            type="text"
+            placeholder="请输入退款单号"
+            class="w-200px"
+            v-model="filter.refund_no"
+          >
+          </el-input>
+        </div>
+        <div class="j-flex mt-20">
+          <el-input
+            type="text"
+            placeholder="请输入订单号"
+            class="w-200px"
+            v-model="filter.order_no"
+          >
+          </el-input>
+        </div>
+        <div class="j-flex mt-20">
+          <el-select
+            placeholder="请选择退款类型"
+            class="w-200px"
+            v-model="filter.is_local"
+          >
+            <el-option
+              v-for="(item, index) in filterData.types"
+              :key="index"
+              :label="item.name"
+              :value="item.key"
+            >
+            </el-option>
+          </el-select>
+        </div>
+        <div class="j-flex mt-20">
+          <el-select
+            placeholder="请选择退款状态"
+            class="w-200px"
+            v-model="filter.status"
+          >
+            <el-option
+              v-for="(item, index) in filterData.status"
+              :key="index"
+              :label="item.name"
+              :value="item.key"
+            >
+            </el-option>
+          </el-select>
+        </div>
+        <div class="j-flex mt-20">
+          <el-date-picker
+            :picker-options="pickerOptions"
+            v-model="filter.created_at"
+            type="daterange"
+            align="right"
+            unlink-panels
+            range-separator="至"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
+          >
+          </el-date-picker>
+        </div>
+        <div class="j-b-flex mt-30">
+          <el-button @click="paginationReset">清空</el-button>
+          <el-button @click="firstPageLoad" type="primary">筛选</el-button>
+        </div>
+      </div>
+    </el-drawer>
   </div>
 </template>
 
@@ -199,6 +307,7 @@ export default {
         created_at: null,
         mobile: null,
         refund_no: null,
+        order_no: null,
       },
       total: 0,
       loading: false,
@@ -233,7 +342,7 @@ export default {
         types: [
           {
             key: -1,
-            name: "全部",
+            name: "退款类型",
           },
           {
             key: 0,
@@ -247,7 +356,7 @@ export default {
         status: [
           {
             key: 0,
-            name: "全部",
+            name: "退款状态",
           },
           {
             key: 1,
@@ -272,9 +381,61 @@ export default {
           return time.getTime() > Date.now();
         },
       },
+      drawer: false,
+      showStatus: false,
     };
   },
-  watch: {},
+  watch: {
+    "filter.is_local"(val) {
+      if (val !== -1) {
+        this.showStatus = true;
+      } else {
+        this.showStatus = false;
+      }
+    },
+    "filter.payment"(val) {
+      if (val) {
+        this.showStatus = true;
+      } else {
+        this.showStatus = false;
+      }
+    },
+    "filter.created_at"(val) {
+      if (val) {
+        this.showStatus = true;
+      } else {
+        this.showStatus = false;
+      }
+    },
+    "filter.mobile"(val) {
+      if (val) {
+        this.showStatus = true;
+      } else {
+        this.showStatus = false;
+      }
+    },
+    "filter.refund_no"(val) {
+      if (val) {
+        this.showStatus = true;
+      } else {
+        this.showStatus = false;
+      }
+    },
+    order_no(val) {
+      if (val) {
+        this.showStatus = true;
+      } else {
+        this.showStatus = false;
+      }
+    },
+    "filter.status"(val) {
+      if (val !== 0) {
+        this.showStatus = true;
+      } else {
+        this.showStatus = false;
+      }
+    },
+  },
   activated() {
     this.getData();
     this.$utils.scrollTopSet(this.pageName);
@@ -287,6 +448,7 @@ export default {
     firstPageLoad() {
       this.pagination.page = 1;
       this.getData();
+      this.drawer = false;
     },
     paginationReset() {
       this.pagination.page = 1;
@@ -296,7 +458,9 @@ export default {
       this.filter.created_at = null;
       this.filter.mobile = null;
       this.filter.refund_no = null;
+      this.filter.order_no = null;
       this.getData();
+      this.drawer = false;
     },
     paginationSizeChange(size) {
       this.pagination.size = size;
