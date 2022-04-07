@@ -343,7 +343,6 @@ export default {
         roles: [],
       },
       drawer: false,
-      showStatus: false,
       pickerOptions: {
         disabledDate(time) {
           return time.getTime() > Date.now();
@@ -403,34 +402,17 @@ export default {
     this.$utils.scrollTopRecord(this.pageName);
     next();
   },
-  watch: {
-    "filter.role_id"(val) {
-      if (val) {
-        this.showStatus = true;
-      } else {
-        this.showStatus = false;
+  computed: {
+    showStatus() {
+      if (
+        this.filter.role_id ||
+        this.filter.tag_id ||
+        this.filter.created_at ||
+        this.filter.keywords
+      ) {
+        return true;
       }
-    },
-    "filter.tag_id"(val) {
-      if (val) {
-        this.showStatus = true;
-      } else {
-        this.showStatus = false;
-      }
-    },
-    "filter.keywords"(val) {
-      if (val) {
-        this.showStatus = true;
-      } else {
-        this.showStatus = false;
-      }
-    },
-    "filter.created_at"(val) {
-      if (val) {
-        this.showStatus = true;
-      } else {
-        this.showStatus = false;
-      }
+      return false;
     },
   },
   methods: {

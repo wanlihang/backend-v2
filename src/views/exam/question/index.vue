@@ -218,8 +218,15 @@ export default {
         types: [],
       },
       drawer: false,
-      showStatus: false,
     };
+  },
+  computed: {
+    showStatus() {
+      if (this.filter.level || this.filter.category_id || this.filter.type) {
+        return true;
+      }
+      return false;
+    },
   },
   activated() {
     this.getResults();
@@ -228,29 +235,6 @@ export default {
   beforeRouteLeave(to, from, next) {
     this.$utils.scrollTopRecord(this.pageName);
     next();
-  },
-  watch: {
-    "filter.level"(val) {
-      if (val) {
-        this.showStatus = true;
-      } else {
-        this.showStatus = false;
-      }
-    },
-    "filter.category_id"(val) {
-      if (val) {
-        this.showStatus = true;
-      } else {
-        this.showStatus = false;
-      }
-    },
-    "filter.type"(val) {
-      if (val) {
-        this.showStatus = true;
-      } else {
-        this.showStatus = false;
-      }
-    },
   },
   methods: {
     firstPageLoad() {

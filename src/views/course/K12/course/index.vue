@@ -248,8 +248,21 @@ export default {
         statusList: [],
       },
       drawer: false,
-      showStatus: false,
     };
+  },
+  computed: {
+    showStatus() {
+      if (
+        this.filter.status !== -1 ||
+        this.filter.cid ||
+        this.filter.id ||
+        this.filter.keywords ||
+        this.filter.type !== -1
+      ) {
+        return true;
+      }
+      return false;
+    },
   },
   activated() {
     this.getData();
@@ -258,43 +271,6 @@ export default {
   beforeRouteLeave(to, from, next) {
     this.$utils.scrollTopRecord(this.pageName);
     next();
-  },
-  watch: {
-    "filter.cid"(val) {
-      if (val) {
-        this.showStatus = true;
-      } else {
-        this.showStatus = false;
-      }
-    },
-    "filter.id"(val) {
-      if (val) {
-        this.showStatus = true;
-      } else {
-        this.showStatus = false;
-      }
-    },
-    "filter.keywords"(val) {
-      if (val) {
-        this.showStatus = true;
-      } else {
-        this.showStatus = false;
-      }
-    },
-    "filter.status"(val) {
-      if (val !== -1) {
-        this.showStatus = true;
-      } else {
-        this.showStatus = false;
-      }
-    },
-    "filter.type"(val) {
-      if (val !== -1) {
-        this.showStatus = true;
-      } else {
-        this.showStatus = false;
-      }
-    },
   },
   methods: {
     firstPageLoad() {

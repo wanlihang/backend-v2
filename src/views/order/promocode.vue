@@ -205,8 +205,20 @@ export default {
       loading: false,
       list: [],
       drawer: false,
-      showStatus: false,
     };
+  },
+  computed: {
+    showStatus() {
+      if (
+        this.filter.user_id ||
+        this.filter.key ||
+        this.filter.created_at ||
+        this.filter.expired_at
+      ) {
+        return true;
+      }
+      return false;
+    },
   },
   watch: {
     "$route.query.id"() {
@@ -216,34 +228,6 @@ export default {
       this.filter.created_at = null;
       this.filter.expired_at = null;
       this.spids.ids = [];
-    },
-    "filter.user_id"(val) {
-      if (val) {
-        this.showStatus = true;
-      } else {
-        this.showStatus = false;
-      }
-    },
-    "filter.key"(val) {
-      if (val) {
-        this.showStatus = true;
-      } else {
-        this.showStatus = false;
-      }
-    },
-    "filter.created_at"(val) {
-      if (val) {
-        this.showStatus = true;
-      } else {
-        this.showStatus = false;
-      }
-    },
-    "filter.expired_at"(val) {
-      if (val) {
-        this.showStatus = true;
-      } else {
-        this.showStatus = false;
-      }
     },
   },
   activated() {
