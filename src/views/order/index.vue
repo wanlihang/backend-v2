@@ -18,13 +18,22 @@
             class="w-150px"
           ></el-input>
         </div>
-        <!-- <div class="ml-10">
-          <el-input
-            v-model="filter.user_id"
-            class="w-200px"
-            placeholder="学员ID"
-          ></el-input>
-        </div> -->
+        <div class="ml-10">
+          <el-select
+            placeholder="请选择支付渠道"
+            class="w-150px"
+            multiple
+            v-model="filter.payment"
+          >
+            <el-option
+              v-for="(item, index) in filterData.payments"
+              :key="index"
+              :label="item.name"
+              :value="item.key"
+            >
+            </el-option>
+          </el-select>
+        </div>
         <div class="ml-10">
           <el-input
             v-model="filter.order_id"
@@ -117,6 +126,13 @@
         <el-table-column prop="order_id" label="订单编号" :width="200">
         </el-table-column>
         <el-table-column prop="charge" sortable label="支付金额" :width="150">
+        </el-table-column>
+        <el-table-column label="支付渠道" :width="150">
+          <template slot-scope="scope">
+            <span v-if="scope.row.payment === 'alipay'">支付宝支付</span>
+            <span v-else-if="scope.row.payment === 'wechat'">微信扫码支付</span>
+            <span v-else-if="scope.row.payment === 'handPay'">线下打款</span>
+          </template>
         </el-table-column>
         <el-table-column prop="status_text" label="支付状态" :width="150">
           <template slot-scope="scope">
@@ -254,8 +270,24 @@ export default {
         status: null,
         order_id: null,
         created_at: null,
+        payment: null,
       },
       filterData: {
+        payments: [
+          {
+            key: "alipay",
+            name: "支付宝支付",
+          },
+          {
+            key: "wechat",
+            name: "微信扫码支付",
+          },
+
+          {
+            key: "handPay",
+            name: "线下打款",
+          },
+        ],
         statusRows: [
           {
             name: "全部",
@@ -280,7 +312,7 @@ export default {
         ],
         status: [
           {
-            name: "全部",
+            name: "是否有退款",
             key: -1,
           },
           {
@@ -374,6 +406,7 @@ export default {
     paginationReset() {
       this.filter.is_refund = -1;
       this.pagination.page = 1;
+      this.filter.payment = null;
       this.filter.order_id = null;
       this.filter.user_id = null;
       this.filter.created_at = null;

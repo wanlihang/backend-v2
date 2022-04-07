@@ -7,7 +7,7 @@
         <div>
           <el-select
             placeholder="请选择支付渠道"
-            class="w-300px"
+            class="w-150px"
             multiple
             v-model="filter.payment"
           >
@@ -35,15 +35,6 @@
             placeholder="请输入退款单号"
             class="w-150px"
             v-model="filter.refund_no"
-          >
-          </el-input>
-        </div>
-        <div class="ml-10">
-          <el-input
-            type="text"
-            placeholder="请输入订单号"
-            class="w-150px"
-            v-model="filter.order_no"
           >
           </el-input>
         </div>
@@ -137,15 +128,6 @@
               <span v-if="scope.row.payment === 'alipay'">支付宝支付</span>
               <span v-else-if="scope.row.payment === 'wechat'"
                 >微信扫码支付</span
-              >
-              <span v-else-if="scope.row.payment === 'wechat-jsapi'"
-                >微信JSAPI支付</span
-              >
-              <span v-else-if="scope.row.payment === 'wechat_h5'"
-                >微信H5支付</span
-              >
-              <span v-else-if="scope.row.payment === 'wechatApp'"
-                >微信APP支付</span
               >
               <span v-else-if="scope.row.payment === 'handPay'">线下打款</span>
             </template>
@@ -322,18 +304,7 @@ export default {
             key: "wechat",
             name: "微信扫码支付",
           },
-          {
-            key: "wechat-jsapi",
-            name: "微信JSAPI支付",
-          },
-          {
-            key: "wechat_h5",
-            name: "微信H5支付",
-          },
-          {
-            key: "wechatApp",
-            name: "微信APP支付",
-          },
+
           {
             key: "handPay",
             name: "线下打款",
