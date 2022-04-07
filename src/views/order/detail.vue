@@ -101,15 +101,41 @@
             <el-table-column
               prop="refund_no"
               label="退款单号"
-              width="300"
+              :width="300"
             ></el-table-column>
+            <el-table-column label="支付渠道">
+              <template slot-scope="scope">
+                <span v-if="scope.row.payment === 'alipay'">
+                  <img
+                    src="../../assets/img/ali-pay.png"
+                    width="30"
+                    height="30"
+                /></span>
+                <span v-else-if="scope.row.payment === 'wechat'"
+                  ><img src="../../assets/img/wepay.png" width="30" height="30"
+                /></span>
+                <span v-else-if="scope.row.payment === 'wechat_h5'"
+                  ><img src="../../assets/img/wepay.png" width="30" height="30"
+                /></span>
+                <span v-else-if="scope.row.payment === 'wechat-jsapi'"
+                  ><img src="../../assets/img/wepay.png" width="30" height="30"
+                /></span>
+                <span v-else-if="scope.row.payment === 'wechatApp'"
+                  ><img src="../../assets/img/wepay.png" width="30" height="30"
+                /></span>
+                <span v-else-if="scope.row.payment === 'handPay'"
+                  ><img src="../../assets/img/card.png" width="30" height="30"
+                /></span>
+                <span v-else>-</span>
+              </template>
+            </el-table-column>
             <el-table-column label="退款类型" :width="120">
               <template slot-scope="scope">
                 <span v-if="scope.row.is_local === 1">本地(仅记录)</span>
                 <span v-else>原渠道退回</span>
               </template>
             </el-table-column>
-            <el-table-column label="退款金额">
+            <el-table-column label="退款金额" :width="150">
               <template slot-scope="scope">
                 ¥{{ scope.row.amount / 100 }}
               </template>
