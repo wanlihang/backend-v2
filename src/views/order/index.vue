@@ -13,6 +13,13 @@
       <div class="d-flex">
         <div>
           <el-input
+            v-model="filter.order_id"
+            class="w-150px"
+            placeholder="订单编号"
+          ></el-input>
+        </div>
+        <div class="ml-10">
+          <el-input
             v-model="filter.goods_name"
             placeholder="商品关键字"
             class="w-150px"
@@ -32,13 +39,6 @@
             >
             </el-option>
           </el-select>
-        </div>
-        <div class="ml-10">
-          <el-input
-            v-model="filter.order_id"
-            class="w-150px"
-            placeholder="订单编号"
-          ></el-input>
         </div>
         <div class="ml-10">
           <el-select class="w-150px" v-model="filter.is_refund">
@@ -264,6 +264,13 @@
         <div class="tit flex">更多筛选</div>
         <div class="j-flex">
           <el-input
+            v-model="filter.order_id"
+            class="w-300px"
+            placeholder="订单编号"
+          ></el-input>
+        </div>
+        <div class="j-flex mt-20">
+          <el-input
             v-model="filter.goods_name"
             placeholder="商品关键字"
             class="w-300px"
@@ -283,13 +290,6 @@
             >
             </el-option>
           </el-select>
-        </div>
-        <div class="j-flex mt-20">
-          <el-input
-            v-model="filter.order_id"
-            class="w-300px"
-            placeholder="订单编号"
-          ></el-input>
         </div>
         <div class="j-flex mt-20">
           <el-select class="w-300px" v-model="filter.is_refund">
@@ -339,7 +339,7 @@ export default {
       loading: false,
       filter: {
         is_refund: -1,
-        goods_id: null,
+        goods_name: null,
         status: null,
         order_id: null,
         created_at: null,
