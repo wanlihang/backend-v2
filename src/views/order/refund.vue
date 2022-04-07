@@ -8,7 +8,6 @@
           <el-select
             placeholder="请选择支付渠道"
             class="w-150px"
-            multiple
             v-model="filter.payment"
           >
             <el-option
