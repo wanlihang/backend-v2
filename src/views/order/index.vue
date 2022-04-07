@@ -125,9 +125,16 @@
         </el-table-column>
         <el-table-column label="支付渠道" :width="150">
           <template slot-scope="scope">
-            <span v-if="scope.row.payment === 'alipay'">支付宝支付</span>
-            <span v-else-if="scope.row.payment === 'wechat'">微信支付</span>
-            <span v-else-if="scope.row.payment === 'handPay'">线下打款</span>
+            <span v-if="scope.row.payment === 'alipay'">
+              <img src="../../assets/img/ali-pay.png" width="30" height="30"
+            /></span>
+            <span v-else-if="scope.row.payment === 'wechat'"
+              ><img src="../../assets/img/wepay.png" width="30" height="30"
+            /></span>
+            <span v-else-if="scope.row.payment === 'handPay'"
+              ><img src="../../assets/img/card.png" width="30" height="30"
+            /></span>
+            <span v-else>-</span>
           </template>
         </el-table-column>
         <el-table-column prop="status_text" label="支付状态" :width="150">
