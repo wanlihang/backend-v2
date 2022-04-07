@@ -7,7 +7,7 @@
         <div>
           <el-select
             placeholder="请选择支付渠道"
-            class="w-150px"
+            class="w-300px"
             multiple
             v-model="filter.payment"
           >
@@ -82,10 +82,10 @@
             label="退款单号"
             width="300"
           ></el-table-column>
-          <el-table-column label="退款类型" :width="100">
+          <el-table-column label="退款类型" :width="120">
             <template slot-scope="scope">
-              <span v-if="scope.row.is_local === 1">本地</span>
-              <span v-else>远程</span>
+              <span v-if="scope.row.is_local === 1">本地(仅记录)</span>
+              <span v-else>原渠道退回</span>
             </template>
           </el-table-column>
           <el-table-column label="支付渠道" :width="150">

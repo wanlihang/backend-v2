@@ -310,11 +310,11 @@ export default {
       },
       types: [
         {
-          name: "本地退款订单",
+          name: "本地(仅记录)",
           key: 1,
         },
         {
-          name: "远程退款订单",
+          name: "原渠道退回",
           key: 0,
         },
       ],
