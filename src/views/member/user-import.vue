@@ -3,7 +3,7 @@
     <back-bar class="mb-30" title="学员批量导入"></back-bar>
 
     <div class="user-import-box">
-      <div class="float-left d-flex mb-15">
+      <div class="float-left d-flex mb-30">
         <div>
           <el-button type="primary" @click="choiceFile">
             选择Excel表格文件
@@ -13,6 +13,31 @@
           <el-link type="primary" @click="model()">
             点击链接下载「学员批量导入模板」
           </el-link>
+        </div>
+      </div>
+      <div class="float-left">
+        <div class="rules">
+          <div class="title">用户批量导入规则介绍：</div>
+          <p>
+            1.手机号 -
+            支持中国大陆手机号，标准的11位，不需要在手机号前面添加（+86）区号 -
+            必须填写
+          </p>
+          <p>2.密码 - 任意英文+数字的组合字符串 - 必须填写</p>
+          <p>3.VIP - 请填写[后台-运营-VIP会员]列表显示的ID - 可选，可留空</p>
+          <p>
+            4.VIP过期时间 - 时间格式为：YYYY-mm-dd
+            HH:ii:ss，举个例子：2022-04-08 12:00:00 - 可选，可留空
+          </p>
+          <p>
+            5.是否锁定 - 可选值：[1, 0] -
+            1:锁定意味着无法登录,0:不锁定意味着无登录限制 - 可选 - 留空默认为0
+          </p>
+          <p>
+            6.标签 - 任意的字符串，多个标签请用英文逗号分割 -
+            例如我想给用户打上“大客户”+“精神小伙”这两个标签的话，可以这样输入：大客户,精神小伙
+            - 可选，可留空
+          </p>
         </div>
       </div>
       <div class="float-left">
