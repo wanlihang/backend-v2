@@ -175,14 +175,21 @@
               "
               type="primary"
             ></p-link>
-            <p-link
-              class="ml-5"
-              v-if="scope.row.status === 9"
-              text="退款"
-              p="order.refund"
-              @click="refund(scope.row)"
-              type="primary"
-            ></p-link>
+            <el-dropdown>
+              <el-link type="primary" class="el-dropdown-link ml-5">
+                更多<i class="el-icon-arrow-down el-icon--right"></i>
+              </el-link>
+              <el-dropdown-menu slot="dropdown">
+                <p-dropdown-item
+                  text="退款"
+                  v-if="scope.row.status === 9"
+                  p="order.refund"
+                  type="primary"
+                  @click="refund(scope.row)"
+                >
+                </p-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
           </template>
         </el-table-column>
       </el-table>
@@ -204,7 +211,7 @@
     <el-dialog title="退款" :visible.sync="visible" width="420px">
       <div class="j-flex flex-column">
         <div class="d-flex">
-          <label class="mr-20">退款类型</label>
+          <label class="mr-20">退款方式</label>
           <el-select class="el-item" v-model="form.is_local">
             <el-option
               v-for="(item, index) in types"
@@ -526,7 +533,7 @@ export default {
         return;
       }
       if (this.form.is_local === null) {
-        this.$message.error("请选择退款类型");
+        this.$message.error("请选择退款方式");
         return;
       }
       if (!this.form.amount) {

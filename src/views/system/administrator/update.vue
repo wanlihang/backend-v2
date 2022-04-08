@@ -28,11 +28,19 @@
           </div>
         </el-form-item>
         <el-form-item label="姓名" prop="name">
-          <el-input v-model="user.name" class="w-300px"></el-input>
+          <el-input
+            v-model="user.name"
+            class="w-300px"
+            autocomplete="off"
+          ></el-input>
         </el-form-item>
 
         <el-form-item label="邮箱" prop="email">
-          <el-input v-model="user.email" class="w-300px"></el-input>
+          <el-input
+            v-model="user.email"
+            class="w-300px"
+            autocomplete="off"
+          ></el-input>
         </el-form-item>
 
         <el-form-item label="密码" prop="password">
@@ -42,6 +50,7 @@
                 type="password"
                 v-model="user.password"
                 class="w-300px"
+                autocomplete="off"
               ></el-input>
             </div>
             <div class="ml-10">

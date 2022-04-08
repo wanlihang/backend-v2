@@ -26,10 +26,11 @@
             <div class="float-left d-flex">
               <div class="flex-1">状态：{{ order.status_text }}</div>
               <div class="flex-1">支付渠道：{{ order.payment_text }}</div>
-              <div class="flex-1">支付方法：{{ order.payment_method }}</div>
+              <!--<div class="flex-1">支付方法：{{ order.payment_method }}</div>-->
               <div class="flex-1">
                 时间：{{ order.created_at | dateFormat }}
               </div>
+               <div class="flex-1"></div>
               <div class="flex-1"></div>
             </div>
           </div>

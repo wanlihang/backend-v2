@@ -126,13 +126,20 @@
                 type="primary"
                 @click="detail(scope.row)"
               ></p-link>
-              <p-link
-                class="ml-5"
-                text="发消息"
-                p="member.message.send"
-                type="primary"
-                @click="sendMessage(scope.row)"
-              ></p-link>
+              <el-dropdown>
+                <el-link type="primary" class="el-dropdown-link ml-5">
+                  更多<i class="el-icon-arrow-down el-icon--right"></i>
+                </el-link>
+                <el-dropdown-menu slot="dropdown">
+                  <p-dropdown-item
+                    text="发消息"
+                    p="member.message.send"
+                    type="primary"
+                    @click="sendMessage(scope.row)"
+                  >
+                  </p-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
             </template>
           </el-table-column>
         </el-table>
@@ -478,14 +485,14 @@ export default {
     },
     editMulti() {
       if (this.spids.ids == "") {
-        this.$message.error("请选择需要操作的数据");
+        this.$message.error("请选择需要修改的学员");
         return;
       }
       this.editVisible = true;
     },
     sendMessageMulti() {
       if (this.spids.ids == "") {
-        this.$message.error("请选择需要操作的数据");
+        this.$message.error("请选择需要发消息的学员");
         return;
       }
       this.visible = true;
