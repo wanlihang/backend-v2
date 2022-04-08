@@ -5,7 +5,7 @@
       <el-form ref="form" label-width="205px">
         <template v-if="enabledAddons['AliyunHls'] === 1">
           <div class="title">阿里云HLS加密</div>
-          <el-form-item :key="1595" label="region">
+          <el-form-item :key="1595" label="Region">
             <div class="j-flex flex-column" style="margin-left: 3px">
               <div>
                 <el-select
@@ -30,7 +30,7 @@
               </div>
             </div>
           </el-form-item>
-          <el-form-item :key="1596" label="模板id">
+          <el-form-item :key="1596" label="模板ID">
             <div class="j-flex flex-column" style="margin-left: 3px">
               <div>
                 <el-input
@@ -40,7 +40,7 @@
               </div>
             </div>
           </el-form-item>
-          <el-form-item :key="1597" label="access_key">
+          <el-form-item :key="1597" label="AccessKeyId">
             <div class="j-flex flex-column" style="margin-left: 3px">
               <div>
                 <el-input
@@ -50,7 +50,7 @@
               </div>
             </div>
           </el-form-item>
-          <el-form-item :key="1598" label="access_secret">
+          <el-form-item :key="1598" label="AccessKeySecret">
             <div class="j-flex flex-column" style="margin-left: 3px">
               <div>
                 <el-input
@@ -60,17 +60,7 @@
               </div>
             </div>
           </el-form-item>
-          <el-form-item :key="1599" label="kms_region">
-            <div class="j-flex flex-column" style="margin-left: 3px">
-              <div>
-                <el-input
-                  class="w-200px"
-                  v-model="form.config['meedu.addons.AliyunHls.kms_region']"
-                ></el-input>
-              </div>
-            </div>
-          </el-form-item>
-          <el-form-item :key="1600" label="kms_key_id">
+          <el-form-item :key="1600" label="KmsKeyID">
             <div class="j-flex flex-column" style="margin-left: 3px">
               <div>
                 <el-input
@@ -376,6 +366,8 @@ export default {
             "meedu.addons.TencentCloudHls.transcode_definition"
           ].join(",");
       }
+      this.form.config["meedu.addons.AliyunHls.kms_region"] =
+        this.form.config["meedu.addons.AliyunHls.region"];
       this.$api.System.Config.Save(this.form).then(() => {
         this.$message.success(this.$t("common.success"));
         this.loading = false;
