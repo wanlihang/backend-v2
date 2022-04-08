@@ -107,7 +107,7 @@ export default {
         this.user.name = data.name;
         this.user.sort = data.sort;
         this.user.is_show = data.is_show;
-        this.user.parent_id = data.parent_id;
+        this.user.parent_id = data.parent_id === 0 ? null : data.parent_id;
       });
     },
     formValidate() {
