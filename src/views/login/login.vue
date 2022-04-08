@@ -149,6 +149,7 @@ export default {
         })
         .catch((e) => {
           this.loading = false;
+          this.form.captcha = "";
           this.getCaptcha();
           this.$message.error(e.message);
         });
