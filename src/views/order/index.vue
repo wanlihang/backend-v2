@@ -41,17 +41,6 @@
           </el-select>
         </div>
         <div class="ml-10">
-          <el-select class="w-150px" v-model="filter.is_refund">
-            <el-option
-              v-for="(item, index) in filterData.status"
-              :key="index"
-              :label="item.name"
-              :value="item.key"
-            >
-            </el-option>
-          </el-select>
-        </div>
-        <div class="ml-10">
           <el-button class="reset" @click="paginationReset()">清空</el-button>
           <el-button type="primary" class="search" @click="filterAct()">
             筛选
@@ -163,7 +152,9 @@
         <el-table-column label="退款" :width="120">
           <template slot-scope="scope">
             <span v-if="scope.row.is_refund === 0">-</span>
-            <span v-else>{{ showRefund(scope.row.refund) }}</span>
+            <span v-else-if="scope.row.refund">{{
+              showRefund(scope.row.refund)
+            }}</span>
           </template>
         </el-table-column>
         <el-table-column sortable label="订单创建时间" :width="220">
@@ -415,12 +406,12 @@ export default {
       },
       types: [
         {
-          name: "本地(仅记录)",
-          key: 1,
-        },
-        {
           name: "原渠道退回",
           key: 0,
+        },
+        {
+          name: "本地(仅记录)",
+          key: 1,
         },
       ],
       drawer: false,

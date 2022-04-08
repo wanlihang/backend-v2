@@ -158,7 +158,7 @@
                 >
               </template>
             </el-table-column>
-            <el-table-column sortable label="提交时间" :width="220">
+            <el-table-column label="提交时间" :width="220">
               <template slot-scope="scope">{{
                 scope.row.created_at | dateFormat
               }}</template>
