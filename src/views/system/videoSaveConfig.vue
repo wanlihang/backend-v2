@@ -169,12 +169,12 @@ export default {
       ],
       definition: [
         {
-          title: "MP4",
-          key: "MP4",
+          title: "mp4",
+          key: "mp4",
         },
         {
-          title: "M3U8",
-          key: "M3U8",
+          title: "m3u8",
+          key: "m3u8",
         },
       ],
     };
@@ -188,6 +188,15 @@ export default {
     }
   },
   methods: {
+    lowerCase(str) {
+      let arr = str.split("");
+      let newStr = "";
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i] >= "A" && arr[i] <= "Z") newStr += arr[i].toLowerCase();
+        else newStr += arr[i];
+      }
+      return newStr;
+    },
     saveHost(key) {
       let it = this.aliRegions.find((o) => o.key === key);
       this.form.config["meedu.upload.video.aliyun.host"] = it.host;
@@ -244,8 +253,9 @@ export default {
               configPlayData[index].value &&
               configPlayData[index].value.length > 0
             ) {
+              let value = this.lowerCase(configPlayData[index].value);
               this.form.config["meedu.system.player.video_format_whitelist"] =
-                configPlayData[index].value.split(",");
+                value.split(",");
             }
           }
         }
