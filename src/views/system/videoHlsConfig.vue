@@ -160,15 +160,15 @@ export default {
       },
       aliRegions: [
         {
-          title: "华东2",
+          title: "华东2(上海)",
           key: "cn-shanghai",
         },
         {
-          title: "华北2",
+          title: "华北2(北京)",
           key: "cn-beijing",
         },
         {
-          title: "华南1",
+          title: "华南1(深圳)",
           key: "cn-shenzhen",
         },
       ],
