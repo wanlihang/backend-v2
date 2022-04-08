@@ -386,17 +386,17 @@ export default {
           key: "tag",
         },
         {
-          name: "是否登录锁定",
+          name: "是否禁止登录",
           key: "is_lock",
         },
-        {
-          name: "是否已设置密码",
-          key: "is_password_set",
-        },
-        {
-          name: "是否已设置昵称",
-          key: "is_set_nickname",
-        },
+        // {
+        //   name: "是否已设置密码",
+        //   key: "is_password_set",
+        // },
+        // {
+        //   name: "是否已设置昵称",
+        //   key: "is_set_nickname",
+        // },
       ],
       dialogLoading: false,
     };
