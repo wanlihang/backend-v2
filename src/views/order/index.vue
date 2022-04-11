@@ -147,7 +147,7 @@
             </span>
           </template>
         </el-table-column>
-        <el-table-column label="退款" :width="150">
+        <el-table-column label="退款">
           <template slot-scope="scope">
             <span v-if="scope.row.is_refund === 0">-</span>
             <span v-else-if="scope.row.refund">{{
