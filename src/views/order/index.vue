@@ -101,7 +101,7 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column label="商品名称" :width="500">
+        <el-table-column label="商品名称" :width="300">
           <template slot-scope="scope">
             <span v-for="item in scope.row.goods" :key="item.id">
               {{ item.goods_name }}
