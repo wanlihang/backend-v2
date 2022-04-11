@@ -94,4 +94,11 @@ export default {
       window.location.pathname
     );
   },
+  passwordRules(value) {
+    let re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^]{12,25}$/;
+    let result = re.test(value);
+    if (!result) {
+      return "密码至少包含大写字母，小写字母，数字，且不少于12位";
+    }
+  },
 };

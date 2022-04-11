@@ -191,6 +191,9 @@ a {
 .c-green {
   color: #67c23a;
 }
+.c-gray {
+  color: #999999;
+}
 
 .w-100 {
   width: 100%;
@@ -258,6 +261,10 @@ a {
 
 .mr-5 {
   margin-right: 5px;
+}
+
+.mr-20 {
+  margin-right: 20px;
 }
 
 .mt-15 {
@@ -557,6 +564,45 @@ a {
       width: 30px;
       height: 30px;
       margin-right: 10px;
+    }
+  }
+}
+
+.rules {
+  color: #333333;
+  font-weight: 400;
+
+  .title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  .rule-item {
+    margin-bottom: 15px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .item-title {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .item-desc {
+      font-size: 14px;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      margin: 0;
+      line-height: 18px;
+      color: #333333;
+
+      code {
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+      }
     }
   }
 }

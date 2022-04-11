@@ -271,13 +271,26 @@ export default {
         ],
       },
       drawer: false,
-      showStatus: false,
       pickerOptions: {
         disabledDate(time) {
           return time.getTime() > Date.now();
         },
       },
     };
+  },
+  computed: {
+    showStatus() {
+      if (
+        this.filter.category_id ||
+        this.filter.user_id ||
+        this.filter.keywords ||
+        this.filter.status !== -1 ||
+        this.filter.created_at
+      ) {
+        return true;
+      }
+      return false;
+    },
   },
   activated() {
     this.getQuestion();
@@ -286,43 +299,6 @@ export default {
   beforeRouteLeave(to, from, next) {
     this.$utils.scrollTopRecord(this.pageName);
     next();
-  },
-  watch: {
-    "filter.category_id"(val) {
-      if (val) {
-        this.showStatus = true;
-      } else {
-        this.showStatus = false;
-      }
-    },
-    "filter.user_id"(val) {
-      if (val) {
-        this.showStatus = true;
-      } else {
-        this.showStatus = false;
-      }
-    },
-    "filter.keywords"(val) {
-      if (val) {
-        this.showStatus = true;
-      } else {
-        this.showStatus = false;
-      }
-    },
-    "filter.status"(val) {
-      if (val !== -1) {
-        this.showStatus = true;
-      } else {
-        this.showStatus = false;
-      }
-    },
-    "filter.created_at"(val) {
-      if (val) {
-        this.showStatus = true;
-      } else {
-        this.showStatus = false;
-      }
-    },
   },
   methods: {
     firstPageLoad() {

@@ -11,6 +11,7 @@ const zh = {
     role: "VIP会员",
     order: "全部订单",
     "order-detail": "订单详情",
+    "order-refund": "退款订单",
     promocode: "优惠码",
     promocodecreate: "添加优惠码",
     promocode_import: "优惠码批量导入",
@@ -209,6 +210,7 @@ const zh = {
         update: "编辑录播课程",
         detail: "录播学员",
         "video-import": "视频批量导入",
+        "user-import": "学员批量导入",
         comment: "课程评论",
         category: {
           index: "课程分类管理",

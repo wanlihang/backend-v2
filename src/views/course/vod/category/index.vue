@@ -15,6 +15,8 @@
         <el-table
           :header-cell-style="{ background: '#f1f2f9' }"
           :data="categories"
+          row-key="id"
+          :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
           class="float-left"
         >
           <el-table-column prop="id" label="ID" width="150"> </el-table-column>

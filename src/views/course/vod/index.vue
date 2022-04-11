@@ -257,7 +257,6 @@ export default {
         categories: [],
       },
       drawer: false,
-      showStatus: false,
     };
   },
   activated() {
@@ -268,27 +267,12 @@ export default {
     this.$utils.scrollTopRecord(this.pageName);
     next();
   },
-  watch: {
-    "filter.cid"(val) {
-      if (val) {
-        this.showStatus = true;
-      } else {
-        this.showStatus = false;
+  computed: {
+    showStatus() {
+      if (this.filter.cid || this.filter.id || this.filter.keywords) {
+        return true;
       }
-    },
-    "filter.id"(val) {
-      if (val) {
-        this.showStatus = true;
-      } else {
-        this.showStatus = false;
-      }
-    },
-    "filter.keywords"(val) {
-      if (val) {
-        this.showStatus = true;
-      } else {
-        this.showStatus = false;
-      }
+      return false;
     },
   },
   methods: {

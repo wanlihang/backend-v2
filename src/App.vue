@@ -97,6 +97,7 @@ export default {
     return {
       defaultActive: "Dashboard",
       menus: Menus,
+      loading: false,
       initComplete: false,
     };
   },
@@ -203,9 +204,21 @@ export default {
       this.$router.push({ name: "AdministratorChangePassword" });
     },
     logoutEvt() {
-      this.logout();
-      this.$message.success(this.$t("common.success"));
-      this.$router.push({ name: "Login" });
+      if (this.loading) {
+        return;
+      }
+      this.loading = true;
+      this.$api.Auth.Logout()
+        .then((res) => {
+          this.loading = false;
+          this.logout();
+          this.$message.success(this.$t("common.success"));
+          this.$router.push({ name: "Login" });
+        })
+        .catch((e) => {
+          this.loading = false;
+          this.$message.error("网络错误");
+        });
     },
     dropMenuEvt(cmd) {
       if (cmd === "logout") {

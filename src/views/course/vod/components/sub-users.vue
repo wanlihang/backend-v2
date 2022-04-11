@@ -5,6 +5,20 @@
         <el-button type="primary" @click="showUserAddWin = true">
           添加学员
         </el-button>
+        <p-button
+          text="批量导入"
+          p="course.subscribe.import"
+          type="primary"
+          @click="
+            $router.push({
+              name: 'VodUserImport',
+              query: {
+                id: id,
+              },
+            })
+          "
+        >
+        </p-button>
       </div>
       <div class="d-flex">
         <div>
