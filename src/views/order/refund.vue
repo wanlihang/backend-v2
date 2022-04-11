@@ -107,11 +107,6 @@
             </template>
           </el-table-column>
           <el-table-column
-            prop="order.order_id"
-            label="订单号"
-            width="200"
-          ></el-table-column>
-          <el-table-column
             prop="refund_no"
             label="退款单号"
             width="300"

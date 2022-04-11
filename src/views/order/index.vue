@@ -108,8 +108,6 @@
             </span>
           </template>
         </el-table-column>
-        <el-table-column prop="order_id" label="订单编号" :width="200">
-        </el-table-column>
         <el-table-column sortable label="支付金额" :width="150">
           <template slot-scope="scope">¥{{ scope.row.charge }}</template>
         </el-table-column>
@@ -149,7 +147,7 @@
             </span>
           </template>
         </el-table-column>
-        <el-table-column label="退款" :width="120">
+        <el-table-column label="退款" :width="150">
           <template slot-scope="scope">
             <span v-if="scope.row.is_refund === 0">-</span>
             <span v-else-if="scope.row.refund">{{
