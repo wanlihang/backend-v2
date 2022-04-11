@@ -173,7 +173,7 @@
               "
               type="primary"
             ></p-link>
-            <el-dropdown>
+            <el-dropdown :disabled="scope.row.status !== 9">
               <el-link type="primary" class="el-dropdown-link ml-5">
                 更多<i class="el-icon-arrow-down el-icon--right"></i>
               </el-link>
