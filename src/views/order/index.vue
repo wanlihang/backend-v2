@@ -211,7 +211,7 @@
     <el-dialog title="退款" :visible.sync="visible" width="420px">
       <div class="j-flex flex-column">
         <div class="d-flex">
-          <label class="mr-20">退款方式</label>
+          <label class="mr-20"><span class="c-red mr-5">*</span>退款方式</label>
           <el-select class="el-item" v-model="form.is_local">
             <el-option
               v-for="(item, index) in types"
@@ -223,7 +223,7 @@
           </el-select>
         </div>
         <div class="d-flex mt-20">
-          <label class="mr-20">退款金额</label>
+          <label class="mr-20"><span class="c-red mr-5">*</span>退款金额</label>
           <el-input
             class="el-item"
             placeholder="请输入退款金额"
@@ -234,7 +234,7 @@
           </el-input>
         </div>
         <div class="flex mt-20">
-          <label class="mr-20">退款理由</label>
+          <label class="mr-20"><span class="c-red mr-5">*</span>退款理由</label>
           <el-input
             class="el-item"
             type="textarea"
