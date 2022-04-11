@@ -522,7 +522,7 @@ export default {
       this.$api.Member.EditMulti({
         user_ids: this.spids.ids,
         field: this.current,
-        value: this.current === "tag_ids" ? null : this.form[this.current],
+        value: this.current === "tag" ? null : this.form[this.current],
         role_expired_at: this.form.role_expired_at,
         tag_ids: this.form.tag_ids,
       })
