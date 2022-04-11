@@ -295,6 +295,14 @@ const routes = [
     },
   },
   {
+    path: "/course/vod/user-import",
+    component: () => import("@/views/course/vod/user-import.vue"),
+    name: "VodUserImport",
+    meta: {
+      title: "title.course.vod.user-import",
+    },
+  },
+  {
     path: "/course/vod/video-import",
     component: () => import("@/views/course/vod/video/import.vue"),
     name: "VodImport",

@@ -311,6 +311,9 @@ const Api = {
       Detail(id) {
         return get(`/backend/api/v1/course/${id}`);
       },
+      UserImport(id, params) {
+        return post(`/backend/api/v1/course/${id}/subscribe/import`, params);
+      },
       Update(id, params) {
         return put(`/backend/api/v1/course/${id}`, params);
       },
