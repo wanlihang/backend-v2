@@ -255,40 +255,44 @@
         <div class="d-flex mt-20" v-if="current === 'is_lock'">
           <label class="w-100px mr-20">是否禁止登录</label>
           <el-switch
+            :key="current"
             v-model="form.is_lock"
             :active-value="1"
             :inactive-value="0"
           >
           </el-switch>
         </div>
-        <div class="d-flex mt-20" v-if="current === 'role_id'">
-          <label class="w-100px mr-20">选择VIP</label>
-          <el-select class="el-item" v-model="form.role_id">
-            <el-option
-              v-for="(item, index) in filterData.roles"
-              :key="index"
-              :label="item.name"
-              :value="item.id"
+        <template v-if="current === 'role_id'">
+          <div class="d-flex mt-20">
+            <label class="w-100px mr-20">选择VIP</label>
+            <el-select :key="current" class="el-item" v-model="form.role_id">
+              <el-option
+                v-for="(item, index) in filterData.roles"
+                :key="index"
+                :label="item.name"
+                :value="item.id"
+              >
+              </el-option>
+            </el-select>
+          </div>
+          <div class="d-flex mt-20">
+            <label class="w-100px mr-20">VIP过期时间</label>
+            <el-date-picker
+              class="el-item"
+              v-model="form.role_expired_at"
+              type="datetime"
+              placeholder="选择日期"
+              format="yyyy-MM-dd HH:mm:ss"
+              value-format="yyyy-MM-dd HH:mm:ss"
+              :picker-options="newPickerOptions"
             >
-            </el-option>
-          </el-select>
-        </div>
-        <div class="d-flex mt-20" v-if="current === 'role_id'">
-          <label class="w-100px mr-20">VIP过期时间</label>
-          <el-date-picker
-            class="el-item"
-            v-model="form.role_expired_at"
-            type="datetime"
-            placeholder="选择日期"
-            format="yyyy-MM-dd HH:mm:ss"
-            value-format="yyyy-MM-dd HH:mm:ss"
-            :picker-options="newPickerOptions"
-          >
-          </el-date-picker>
-        </div>
+            </el-date-picker>
+          </div>
+        </template>
         <div class="d-flex mt-20" v-if="current === 'is_password_set'">
           <label class="w-100px mr-20">是否已设置密码</label>
           <el-switch
+            :key="current"
             v-model="form.is_password_set"
             :active-value="1"
             :inactive-value="0"
@@ -298,6 +302,7 @@
         <div class="d-flex mt-20" v-if="current === 'is_set_nickname'">
           <label class="w-100px mr-20">是否已设置昵称</label>
           <el-switch
+            :key="current"
             v-model="form.is_set_nick_name"
             :active-value="1"
             :inactive-value="0"
@@ -306,7 +311,12 @@
         </div>
         <div class="d-flex mt-20" v-if="current === 'tag'">
           <label class="w-100px mr-20">选择标签</label>
-          <el-select class="el-item" multiple v-model="form.tag_ids">
+          <el-select
+            :key="current"
+            class="el-item"
+            multiple
+            v-model="form.tag_ids"
+          >
             <el-option
               v-for="(item, index) in filterData.tags"
               :key="index"
