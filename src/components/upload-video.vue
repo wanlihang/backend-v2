@@ -43,6 +43,13 @@
             class="float-left mb-15"
             v-loading="loading"
           >
+            <el-table-column label width="45">
+              <template slot-scope="scope">
+                <el-radio :label="scope.row.id" v-model="radio"
+                  ><span></span
+                ></el-radio>
+              </template>
+            </el-table-column>
             <el-table-column prop="id" label="ID" width="120">
             </el-table-column>
             <el-table-column prop="title" label="视频"> </el-table-column>
@@ -143,6 +150,7 @@ export default {
       },
       list: [],
       total: 0,
+      radio: "",
       loading: false,
       tab: {
         active: "list",
@@ -229,6 +237,7 @@ export default {
         this.selectedVideo = row;
         // 清空已上传的
         this.upload.fileId = null;
+        this.radio = row.id;
       }
     },
     getData() {
@@ -254,6 +263,7 @@ export default {
       this.$emit("change", this.selectedVideo);
     },
     close() {
+      this.radio = "";
       this.$emit("close");
     },
     videoPlayEvt() {
