@@ -478,6 +478,7 @@ export default {
             } else {
               this.appUrl = appUrl + "/";
             }
+            break;
           }
         }
 
