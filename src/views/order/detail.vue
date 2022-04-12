@@ -30,7 +30,7 @@
               <div class="flex-1">
                 时间：{{ order.created_at | dateFormat }}
               </div>
-               <div class="flex-1"></div>
+              <div class="flex-1"></div>
               <div class="flex-1"></div>
             </div>
           </div>
@@ -164,6 +164,16 @@
                 scope.row.created_at | dateFormat
               }}</template>
             </el-table-column>
+            <el-table-column fixed="right" label="操作" width="60">
+              <template slot-scope="scope">
+                <p-link
+                  text="删除"
+                  p="order.refund.delete"
+                  type="danger"
+                  @click="destory(scope.row.id)"
+                ></p-link>
+              </template>
+            </el-table-column>
           </el-table>
         </div>
       </div>
@@ -215,6 +225,33 @@ export default {
             });
         })
         .catch((e) => {});
+    },
+    destory(item) {
+      this.$confirm("确认操作？", "警告", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          //点击确定按钮的操作
+          if (this.loading) {
+            return;
+          }
+          this.loading = true;
+          this.$api.Order.RefundDestory(item)
+            .then(() => {
+              this.loading = false;
+              this.$message.success(this.$t("common.success"));
+              this.getDetail();
+            })
+            .catch((e) => {
+              this.loading = false;
+              this.$message.warning(e.message);
+            });
+        })
+        .catch(() => {
+          //点击删除按钮的操作
+        });
     },
   },
 };

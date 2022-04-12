@@ -475,7 +475,7 @@ export default {
           amount += item[i].amount / 100;
         }
       }
-      return "¥" + amount;
+      return "¥" + amount.toFixed(2);
     },
     paginationSizeChange(size) {
       this.pagination.size = size;
