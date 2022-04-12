@@ -37,6 +37,7 @@
           <div class="float-left d-flex" style="margin-left: 3px">
             <div>
               <el-input
+                placeholder="请输入跑马灯内容"
                 class="w-300px"
                 v-model="form.config['meedu.system.player.bullet_secret.text']"
               ></el-input>
