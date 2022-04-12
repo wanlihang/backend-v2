@@ -100,7 +100,7 @@
               <div class="mt-5">
                 <div class="form-helper-text">
                   <span
-                    >回调地址：http://你的域名/addons/zhibo/api/v1/aliyun/callback
+                    >回调地址：{{ appUrl }}addons/zhibo/api/v1/aliyun/callback
                     。如果您网站开启了https的话，那么请将回调地址中的http改为https。</span
                   >
                 </div>
@@ -202,7 +202,7 @@
               <div class="mt-5">
                 <div class="form-helper-text">
                   <span
-                    >回调地址：http://你的域名/addons/zhibo/api/v1/tencent/callback
+                    >回调地址：{{ appUrl }}addons/zhibo/api/v1/tencent/callback
                     。如果您网站开启了https的话，那么请将回调地址中的http改为https。</span
                   >
                 </div>
@@ -301,6 +301,7 @@ export default {
     return {
       key: "直播",
       config: null,
+      appUrl: null,
       loading: false,
       selects: [
         {
@@ -463,6 +464,18 @@ export default {
           ) {
             this.form.config["meedu.addons.zhibo.aodianyun.s_key"] =
               configData[index].value;
+          }
+        }
+
+        let configSysData = res.data["系统"];
+        for (let index in configSysData) {
+          if (configSysData[index].key === "app.url") {
+            let appUrl = configSysData[index].value;
+            if (appUrl.substr(appUrl.length - 1, 1) === "/") {
+              this.appUrl = appUrl;
+            } else {
+              this.appUrl = appUrl + "/";
+            }
           }
         }
 
