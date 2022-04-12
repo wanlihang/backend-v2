@@ -100,8 +100,9 @@
               <div class="mt-5">
                 <div class="form-helper-text">
                   <span
-                    >回调地址：{{ appUrl }}addons/zhibo/api/v1/aliyun/callback
-                    。如果您网站开启了https的话，那么请将回调地址中的http改为https。</span
+                    >回调地址：{{
+                      appUrl
+                    }}addons/zhibo/api/v1/aliyun/callback</span
                   >
                 </div>
               </div>
@@ -202,8 +203,9 @@
               <div class="mt-5">
                 <div class="form-helper-text">
                   <span
-                    >回调地址：{{ appUrl }}addons/zhibo/api/v1/tencent/callback
-                    。如果您网站开启了https的话，那么请将回调地址中的http改为https。</span
+                    >回调地址：{{
+                      appUrl
+                    }}addons/zhibo/api/v1/tencent/callback</span
                   >
                 </div>
               </div>
