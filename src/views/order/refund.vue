@@ -111,9 +111,9 @@
             label="退款单号"
             width="300"
           ></el-table-column>
-          <el-table-column label="退款类型" :width="180">
+          <el-table-column label="退款类型" :width="120">
             <template slot-scope="scope">
-              <span v-if="scope.row.is_local === 1">线下退款（线上记录）</span>
+              <span v-if="scope.row.is_local === 1">线下退款</span>
               <span v-else>原渠道退回</span>
             </template>
           </el-table-column>
