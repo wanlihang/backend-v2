@@ -107,18 +107,6 @@
               </div>
             </div>
           </el-form-item>
-          <el-form-item :key="1504" label="阿里云录制点播存储区域">
-            <div class="j-flex flex-column" style="margin-left: 3px">
-              <div>
-                <el-input
-                  class="w-200px"
-                  v-model="
-                    form.config['meedu.addons.zhibo.aliyun.record.region']
-                  "
-                ></el-input>
-              </div>
-            </div>
-          </el-form-item>
         </template>
         <template
           v-else-if="
