@@ -62,6 +62,9 @@ const Api = {
     RefundList(params) {
       return get(`/backend/api/v1/order/refund/list`, params);
     },
+    RefundDestory(id) {
+      return destroy(`/backend/api/v1/order/refund/${id}`);
+    },
     Detail(id) {
       return get(`/backend/api/v1/order/${id}`);
     },
