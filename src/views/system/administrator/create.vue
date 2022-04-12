@@ -28,15 +28,35 @@
           </div>
         </el-form-item>
         <el-form-item label="姓名" prop="name">
-          <el-input v-model="user.name" class="w-300px"></el-input>
+          <el-input
+            v-model="user.name"
+            class="w-300px"
+            autocomplete="off"
+          ></el-input>
         </el-form-item>
 
         <el-form-item label="邮箱" prop="email">
-          <el-input v-model="user.email" class="w-300px"></el-input>
+          <el-input
+            v-model="user.email"
+            class="w-300px"
+            autocomplete="off"
+          ></el-input>
         </el-form-item>
 
         <el-form-item label="密码" prop="password">
-          <el-input v-model="user.password" class="w-300px"></el-input>
+          <div class="d-flex">
+            <div>
+              <el-input
+                type="password"
+                v-model="user.password"
+                class="w-300px"
+                autocomplete="off"
+              ></el-input>
+            </div>
+            <div class="ml-10 c-red" v-if="user.password">
+              {{ this.$utils.passwordRules(user.password) }}
+            </div>
+          </div>
         </el-form-item>
 
         <el-form-item prop="is_ban_login" label="禁止登录">
@@ -121,6 +141,12 @@ export default {
     },
     confirm() {
       if (this.loading) {
+        return;
+      }
+      if (this.$utils.passwordRules(this.user.password)) {
+        this.$message.error(
+          "密码至少包含大写字母，小写字母，数字，且不少于12位"
+        );
         return;
       }
       this.loading = true;

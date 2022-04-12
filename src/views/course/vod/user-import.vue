@@ -16,57 +16,6 @@
         </div>
       </div>
       <div class="float-left">
-        <div class="rules">
-          <div class="title">用户批量导入规则介绍</div>
-          <div class="rule-item">
-            <div class="item-title">1.手机号</div>
-            <div class="item-desc">
-              <span class="c-red">必填</span> -
-              支持中国大陆手机号，标准的11位，不需要在手机号前面添加（+86）区号
-            </div>
-          </div>
-
-          <div class="rule-item">
-            <div class="item-title">2.密码</div>
-            <div class="item-desc">
-              <span class="c-red">必填</span> - 任意英文+数字的组合字符串
-            </div>
-          </div>
-
-          <div class="rule-item">
-            <div class="item-title">3.VIP</div>
-            <div class="item-desc">
-              选填 - 请填写[后台-运营-VIP会员]列表显示的ID
-            </div>
-          </div>
-
-          <div class="rule-item">
-            <div class="item-title">4.VIP过期时间</div>
-            <div class="item-desc">
-              选填 - 时间格式为：<code>YYYY-mm-dd HH:ii:ss</code>，如：<code
-                >2022-04-08 12:00:00</code
-              >
-            </div>
-          </div>
-
-          <div class="rule-item">
-            <div class="item-title">5.是否锁定</div>
-            <div class="item-desc">
-              选填 - 可填写值：[1, 0] -
-              1:锁定意味着无法登录,0:不锁定意味着无登录限制
-            </div>
-          </div>
-
-          <div class="rule-item">
-            <div class="item-title">6.标签</div>
-            <div class="item-desc">
-              选填 - 任意的字符串，多个标签请用英文逗号分割 -
-              例如我想给用户打上“大客户”+“精神小伙”这两个标签的话，可以这样输入：大客户,精神小伙
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="float-left">
         <div style="display: none">
           <form ref="form">
             <input type="file" ref="xlsfile" />
@@ -83,6 +32,7 @@ import XLSX from "xlsx";
 export default {
   data() {
     return {
+      id: this.$route.query.id,
       loading: false,
     };
   },
@@ -128,7 +78,7 @@ export default {
         // 请求导入api
         this.$refs.form.reset();
 
-        this.$api.Member.Import({ users: parseData })
+        this.$api.Course.Vod.UserImport(this.id, { mobiles: parseData })
           .then(() => {
             this.loading = false;
             this.$message.success("导入成功");
@@ -199,16 +149,7 @@ export default {
       aLink.dispatchEvent(event);
     },
     model() {
-      var array = [
-        [
-          "手机号",
-          "密码",
-          "VIP",
-          "VIP过期时间",
-          "是否锁定（1锁定，0不锁定）",
-          "标签",
-        ],
-      ];
+      var array = [["手机号"]];
       var sheet = XLSX.utils.aoa_to_sheet(array);
       var blob = this.sheet2blob(sheet, "学员批量导入模板");
       this.openDownloadXLSXDialog(blob, "学员批量导入模板.xlsx");
@@ -220,7 +161,9 @@ export default {
           header: 1,
         });
         if (roa.length) {
-          data.push(...roa);
+          for (let i = 0; i < roa.length; i++) {
+            data.push(roa[i][0]);
+          }
         }
       });
       return data;

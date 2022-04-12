@@ -352,6 +352,9 @@ export default {
     getVideo() {
       this.$api.Course.Vod.Videos.Detail(this.video_id).then((res) => {
         this.video = res.data.video;
+        if (this.video.chapter_id === 0) {
+          this.video.chapter_id = null;
+        }
       });
     },
     getCourse() {

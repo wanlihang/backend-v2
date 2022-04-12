@@ -3,12 +3,6 @@
     <back-bar class="mb-30" title="课程视频管理"></back-bar>
     <div class="float-left mb-30">
       <p-button
-        text="删除"
-        p="video.destroy"
-        type="danger"
-        @click="destoryMulti()"
-      ></p-button>
-      <p-button
         text="添加"
         p="video.store"
         @click="
@@ -37,6 +31,12 @@
         type="primary"
       >
       </p-button>
+      <p-button
+        text="删除"
+        p="video.destroy"
+        type="danger"
+        @click="destoryMulti()"
+      ></p-button>
     </div>
     <div class="float-left" v-loading="loading">
       <div class="float-left">

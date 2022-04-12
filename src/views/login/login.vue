@@ -29,6 +29,25 @@
               :placeholder="$t('login.tipmes2')"
             ></el-input>
           </el-form-item>
+          <el-form-item prop="captcha">
+            <div class="d-flex">
+              <el-input
+                class="input-short"
+                type="text"
+                v-model="form.captcha"
+                auto-complete="off"
+                placeholder="请输入图形验证码"
+              ></el-input>
+              <div class="captcha">
+                <img
+                  class="captcha-img"
+                  :src="captcha.img"
+                  mode="widthFix"
+                  @click="getCaptcha"
+                />
+              </div>
+            </div>
+          </el-form-item>
           <el-form-item style="width: 100%">
             <el-button
               type="primary"
@@ -55,8 +74,13 @@ export default {
       form: {
         username: "",
         password: "",
+        captcha: "",
       },
       checked: true,
+      captcha: {
+        key: null,
+        img: null,
+      },
       rules: {
         username: [
           {
@@ -72,6 +96,13 @@ export default {
             trigger: "blur",
           },
         ],
+        captcha: [
+          {
+            required: true,
+            message: "请您输入图形验证码",
+            trigger: "blur",
+          },
+        ],
       },
     };
   },
@@ -79,6 +110,7 @@ export default {
     if (this.$utils.getToken()) {
       this.goDashboard();
     }
+    this.getCaptcha();
   },
   methods: {
     ...mapMutations(["loginHandle"]),
@@ -89,12 +121,22 @@ export default {
         }
       });
     },
+    getCaptcha() {
+      this.$api.Auth.Captcha().then((res) => {
+        this.captcha = res.data;
+      });
+    },
     handleSubmit() {
       if (this.loading) {
         return;
       }
       this.loading = true;
-      this.$api.Auth.Login(this.form)
+      this.$api.Auth.Login({
+        username: this.form.username,
+        password: this.form.password,
+        image_key: this.captcha.key,
+        image_captcha: this.form.captcha,
+      })
         .then((resp) => {
           let token = resp.data.token;
 
@@ -107,6 +149,8 @@ export default {
         })
         .catch((e) => {
           this.loading = false;
+          this.form.captcha = "";
+          this.getCaptcha();
           this.$message.error(e.message);
         });
     },
@@ -116,7 +160,7 @@ export default {
   },
 };
 </script>
- 
+
 <style lang="less" scoped>
 #app {
   position: relative;
@@ -196,5 +240,24 @@ label.el-checkbox.rememberme {
 }
 .el-form-item {
   margin-bottom: 50px !important;
+}
+.input-short {
+  width: 250px;
+  /deep/.el-input__inner {
+    width: 250px;
+    height: 48px;
+    border-radius: 4px;
+    border: 1px solid #e5e5e5;
+  }
+}
+.captcha {
+  width: 120px;
+  height: 48px;
+  margin-left: 10px;
+  cursor: pointer;
+  img {
+    width: 120px;
+    height: 48px;
+  }
 }
 </style>

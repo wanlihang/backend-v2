@@ -3,6 +3,17 @@
     <back-bar class="mb-30" title="编辑课程分类"></back-bar>
     <div class="float-left">
       <el-form ref="form" :model="user" :rules="rules" label-width="200px">
+        <el-form-item label="父级" prop="parent_id">
+          <el-select v-model="user.parent_id">
+            <el-option
+              v-for="(item, index) in categories"
+              :key="index"
+              :label="item.name"
+              :value="item.id"
+            >
+            </el-option>
+          </el-select>
+        </el-form-item>
         <el-form-item label="升序" prop="sort">
           <div class="d-flex">
             <div>
@@ -58,7 +69,7 @@ export default {
         sort: 0,
         name: null,
         is_show: 0,
-        parent_id: 0,
+        parent_id: null,
       },
       rules: {
         sort: [
@@ -76,21 +87,27 @@ export default {
           },
         ],
       },
-
+      categories: [],
       loading: false,
     };
   },
   mounted() {
+    this.params();
     this.detail();
   },
   methods: {
+    params() {
+      this.$api.Course.Vod.Categories.Create().then((res) => {
+        this.categories = res.data.categories;
+      });
+    },
     detail() {
       this.$api.Course.Vod.Categories.Detail(this.user.id).then((res) => {
         var data = res.data;
         this.user.name = data.name;
         this.user.sort = data.sort;
         this.user.is_show = data.is_show;
-        this.parent_id = data.parent_id;
+        this.user.parent_id = data.parent_id === 0 ? null : data.parent_id;
       });
     },
     formValidate() {

@@ -70,6 +70,21 @@
                 <span>{{ scope.row.created_at | dateFormat }}</span>
               </template>
             </el-table-column>
+            <el-table-column fixed="right" label="操作" width="50">
+              <template slot-scope="scope">
+                <el-popconfirm
+                  title="确认删除吗？"
+                  @confirm="destory(scope.row.id)"
+                >
+                  <p-link
+                    slot="reference"
+                    text="删除"
+                    p="media.video.delete.multi"
+                    type="danger"
+                  ></p-link>
+                </el-popconfirm>
+              </template>
+            </el-table-column>
           </el-table>
 
           <div class="float-left mt-15 text-center">
@@ -450,6 +465,27 @@ export default {
           this.$message.error(e.message);
         });
     },
+    destory(item) {
+      //点击确定按钮的操作
+      if (this.loading) {
+        return;
+      }
+      this.loading = true;
+      let ids = [];
+      ids.push(item);
+      this.$api.Media.Video.Destroy({
+        ids: ids,
+      })
+        .then(() => {
+          this.loading = false;
+          this.$message.success(this.$t("common.success"));
+          this.getData();
+        })
+        .catch((e) => {
+          this.loading = false;
+          this.$message.error(e.message);
+        });
+    },
   },
 };
 </script>
@@ -461,5 +497,13 @@ export default {
   float: left;
   display: flex;
   justify-content: center;
+}
+</style>
+<style lang="less">
+.el-popconfirm__main {
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
 }
 </style>

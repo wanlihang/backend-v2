@@ -134,7 +134,7 @@ export default {
         order: "desc",
       },
       filter: {
-        user_id: "",
+        user_id: null,
         status: -1,
       },
       total: 0,

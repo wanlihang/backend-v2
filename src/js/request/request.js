@@ -5,6 +5,12 @@ const Api = {
     Login(params) {
       return post("/backend/api/v1/login", params);
     },
+    Logout(params) {
+      return post("/backend/api/v1/logout", params);
+    },
+    Captcha() {
+      return get(`/backend/api/v1/captcha/image`);
+    },
   },
   Administrator: {
     Detail() {
@@ -49,6 +55,15 @@ const Api = {
       List(params) {
         return get(`/backend/api/v1/order`, params);
       },
+      Refund(id, params) {
+        return post(`/backend/api/v1/order/${id}/refund`, params);
+      },
+    },
+    RefundList(params) {
+      return get(`/backend/api/v1/order/refund/list`, params);
+    },
+    RefundDestory(id) {
+      return destroy(`/backend/api/v1/order/refund/${id}`);
     },
     Detail(id) {
       return get(`/backend/api/v1/order/${id}`);
@@ -100,6 +115,9 @@ const Api = {
       },
       Store(params) {
         return post(`/backend/api/v1/media/videos/create`, params);
+      },
+      Destroy(params) {
+        return post(`/backend/api/v1/media/videos/delete/multi`, params);
       },
     },
   },
@@ -296,6 +314,9 @@ const Api = {
       Detail(id) {
         return get(`/backend/api/v1/course/${id}`);
       },
+      UserImport(id, params) {
+        return post(`/backend/api/v1/course/${id}/subscribe/import`, params);
+      },
       Update(id, params) {
         return put(`/backend/api/v1/course/${id}`, params);
       },
@@ -319,6 +340,9 @@ const Api = {
       Categories: {
         List(params) {
           return get(`/backend/api/v1/courseCategory`, params);
+        },
+        Create() {
+          return get(`/backend/api/v1/courseCategory/create`);
         },
         Store(params) {
           return post(`/backend/api/v1/courseCategory`, params);
@@ -393,6 +417,9 @@ const Api = {
         },
         Subscribe(id, params) {
           return get(`/backend/api/v1/video/${id}/subscribes`, params);
+        },
+        SubscribeDestory(id, params) {
+          return get(`/backend/api/v1/video/${id}/subscribe/delete`, params);
         },
         WatchRecords(id, params) {
           return get(`/backend/api/v1/video/${id}/watch/records`, params);
@@ -1035,7 +1062,13 @@ const Api = {
       return get(`/backend/api/v1/member/${id}/detail`);
     },
     SendMessage(id, params) {
-      return post(`/backend/api/v1/member/${id}/message `, params);
+      return post(`/backend/api/v1/member/${id}/message`, params);
+    },
+    SendMessageMulti(params) {
+      return post(`/backend/api/v1/member/message/multi`, params);
+    },
+    EditMulti(params) {
+      return put(`/backend/api/v1/member/field/multi`, params);
     },
     UserCourses(id, params) {
       return get(`/backend/api/v1/member/${id}/detail/userCourses`, params);

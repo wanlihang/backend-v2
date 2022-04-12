@@ -285,7 +285,21 @@ export default {
   methods: {
     params() {
       this.$api.Course.Vod.Create().then((res) => {
-        this.categories = res.data.categories;
+        let categories = res.data.categories;
+        let box = [];
+        for (let i = 0; i < categories.length; i++) {
+          if (categories[i].children.length > 0) {
+            box.push(categories[i]);
+            let children = categories[i].children;
+            for (let j = 0; j < children.length; j++) {
+              children[j].name = "|----" + children[j].name;
+              box.push(children[j]);
+            }
+          } else {
+            box.push(categories[i]);
+          }
+        }
+        this.categories = box;
       });
     },
     formValidate() {

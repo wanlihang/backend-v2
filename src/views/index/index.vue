@@ -58,7 +58,7 @@
       </div>
     </div>
     <div style="display: none">
-      <img src="https://addons.meedu.vip/api/v1/stat?v=v4.5" />
+      <img src="https://addons.meedu.vip/api/v1/stat?v=v4.6" />
     </div>
     <div class="el_top_row2" v-if="user">
       <div class="tit">{{ $t("index.quick_acsess") }}</div>
@@ -191,7 +191,7 @@
       <p class="info">
         <span>PHP{{ systemInfo.php_version }} </span>
         <span class="mx-10">主程序{{ systemInfo.meedu_version }}</span>
-        <span>后管v4.5.11</span>
+        <span>后管v4.6.0</span>
       </p>
     </div>
   </div>

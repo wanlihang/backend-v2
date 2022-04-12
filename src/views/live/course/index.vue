@@ -263,8 +263,20 @@ export default {
         statusList: [],
       },
       drawer: false,
-      showStatus: false,
     };
+  },
+  computed: {
+    showStatus() {
+      if (
+        this.filter.teacher_id ||
+        this.filter.category_id ||
+        this.filter.status !== -1 ||
+        this.filter.keywords
+      ) {
+        return true;
+      }
+      return false;
+    },
   },
   activated() {
     this.getData();
@@ -273,36 +285,6 @@ export default {
   beforeRouteLeave(to, from, next) {
     this.$utils.scrollTopRecord(this.pageName);
     next();
-  },
-  watch: {
-    "filter.teacher_id"(val) {
-      if (val) {
-        this.showStatus = true;
-      } else {
-        this.showStatus = false;
-      }
-    },
-    "filter.category_id"(val) {
-      if (val) {
-        this.showStatus = true;
-      } else {
-        this.showStatus = false;
-      }
-    },
-    "filter.keywords"(val) {
-      if (val) {
-        this.showStatus = true;
-      } else {
-        this.showStatus = false;
-      }
-    },
-    "filter.status"(val) {
-      if (val !== -1) {
-        this.showStatus = true;
-      } else {
-        this.showStatus = false;
-      }
-    },
   },
   methods: {
     firstPageLoad() {
