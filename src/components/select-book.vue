@@ -29,6 +29,13 @@
             class="float-left mb-15"
             v-loading="loading"
           >
+            <el-table-column label width="45">
+              <template slot-scope="scope">
+                <el-radio :label="scope.row.id" v-model="radio"
+                  ><span></span
+                ></el-radio>
+              </template>
+            </el-table-column>
             <el-table-column prop="id" label="电子书ID" width="120">
             </el-table-column>
             <el-table-column label="电子书">
@@ -80,6 +87,7 @@ export default {
         order: "desc",
         key: null,
       },
+      radio: "",
       loading: false,
       total: 0,
       courses: [],
@@ -109,6 +117,7 @@ export default {
     },
     handleCurrentChange(row) {
       this.result = row;
+      this.radio = row.id;
     },
     getCourse() {
       if (this.loading) {
@@ -138,6 +147,7 @@ export default {
       });
     },
     close() {
+      this.radio = "";
       this.$emit("close");
     },
   },

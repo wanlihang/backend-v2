@@ -29,6 +29,13 @@
             class="float-left mb-15"
             v-loading="loading"
           >
+            <el-table-column label width="45">
+              <template slot-scope="scope">
+                <el-radio :label="scope.row.id" v-model="radio"
+                  ><span></span
+                ></el-radio>
+              </template>
+            </el-table-column>
             <el-table-column prop="id" label="ID" width="120">
             </el-table-column>
             <el-table-column label="秒杀课程">
@@ -88,6 +95,7 @@ export default {
         order: "desc",
         keywords: null,
       },
+      radio: "",
       loading: false,
       total: 0,
       courses: [],
@@ -117,6 +125,7 @@ export default {
     },
     handleCurrentChange(row) {
       this.result = row;
+      this.radio = row.id;
     },
     getCourse() {
       if (this.loading) {
@@ -150,6 +159,7 @@ export default {
       });
     },
     close() {
+      this.radio = "";
       this.$emit("close");
     },
   },

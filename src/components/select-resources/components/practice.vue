@@ -22,6 +22,13 @@
       @current-change="tableItemChoice"
       class="float-left"
     >
+      <el-table-column label width="45">
+        <template slot-scope="scope">
+          <el-radio :label="scope.row.id" v-model="radio"
+            ><span></span
+          ></el-radio>
+        </template>
+      </el-table-column>
       <el-table-column prop="id" label="练习ID" width="120"> </el-table-column>
       <el-table-column label="练习">
         <template slot-scope="scope">
@@ -56,6 +63,7 @@ export default {
         order: "desc",
         key: null,
       },
+      radio: "",
       loading: false,
       total: 0,
       courses: [],
@@ -84,6 +92,7 @@ export default {
     },
     tableItemChoice(row) {
       if (row) {
+        this.radio = row.id;
         this.$emit("change", {
           resource_type: "practice",
           id: row.id,
