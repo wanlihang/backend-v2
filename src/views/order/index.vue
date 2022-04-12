@@ -415,7 +415,7 @@ export default {
           key: 0,
         },
         {
-          name: "本地(仅记录)",
+          name: "线下退款（线上记录）",
           key: 1,
         },
       ],
