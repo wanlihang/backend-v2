@@ -473,6 +473,9 @@ const Api = {
           List() {
             return get(`/backend/addons/zhibo/course_category/index`);
           },
+          Create() {
+            return get(`/backend/addons/zhibo/course_category/create`);
+          },
           Store(params) {
             return post(`/backend/addons/zhibo/course_category/create`, params);
           },
