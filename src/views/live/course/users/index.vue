@@ -3,7 +3,6 @@
     <back-bar class="mb-30" title="直播课程学员"></back-bar>
     <div class="float-left j-b-flex mb-30">
       <div class="d-flex">
-        <el-button type="danger" @click="delUser">删除学员</el-button>
         <el-button @click="showUserAddWin = true" type="primary"
           >添加学员</el-button
         >
@@ -14,6 +13,7 @@
           @click="importDialog = true"
         >
         </p-button>
+        <el-button type="danger" @click="delUser">删除学员</el-button>
       </div>
       <div class="d-flex">
         <div>
@@ -26,6 +26,7 @@
         <div class="ml-10">
           <el-button @click="paginationReset">清空</el-button>
           <el-button @click="firstPageLoad()" type="primary">筛选</el-button>
+          <el-button @click="importexcel" type="primary">导出表格</el-button>
         </div>
       </div>
     </div>
@@ -92,6 +93,7 @@
 </template>
 
 <script>
+import moment from "moment";
 import UserAddComp from "@/components/user-add";
 import UserImportComp from "@/components/user-import";
 
@@ -162,6 +164,7 @@ export default {
       let params = {};
       this.pagination.id = this.$route.query.id;
       Object.assign(params, this.pagination);
+      Object.assign(params, this.filter);
       this.$api.Course.Live.Course.Users.List(this.pagination.id, params).then(
         (res) => {
           this.loading = false;
@@ -187,7 +190,7 @@ export default {
           });
 
           this.$api.Course.Live.Course.Users.Del(this.pagination.id, {
-            ids: ids.join(","),
+            ids: ids,
           })
             .then(() => {
               this.$message.success(this.$t("common.success"));
@@ -216,6 +219,45 @@ export default {
         .catch((e) => {
           this.$message.error(e.message);
         });
+    },
+    importexcel() {
+      if (this.loading) {
+        return;
+      }
+      this.loading = true;
+
+      let params = {
+        page: 1,
+        size: this.total,
+      };
+      Object.assign(params, this.filter);
+
+      this.$api.Course.Live.Course.Users.List(this.pagination.id, params).then(
+        (res) => {
+          if (res.data.data.total === 0) {
+            this.$message.error("数据为空");
+            this.loading = false;
+            return;
+          }
+
+          let filename = "直播课程学员.xlsx";
+          let sheetName = "sheet1";
+
+          let data = [["学员ID", "学员", "手机号", "价格", "时间"]];
+          res.data.data.data.forEach((item) => {
+            data.push([
+              item.user_id,
+              item.user.nick_name,
+              item.user.mobile,
+              item.charge === 0 ? "-" : "￥" + item.charge,
+              moment(item.created_at).format("YYYY-MM-DD HH:mm"),
+            ]);
+          });
+
+          this.$utils.exportExcel(data, filename, sheetName);
+          this.loading = false;
+        }
+      );
     },
   },
 };
