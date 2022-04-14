@@ -121,6 +121,9 @@ export default {
     getDetail() {
       this.$api.Course.Live.Course.Video.Detail(this.id).then((res) => {
         this.course = res.data;
+        if (this.course.chapter_id === 0) {
+          this.course.chapter_id = null;
+        }
       });
     },
     formValidate() {
