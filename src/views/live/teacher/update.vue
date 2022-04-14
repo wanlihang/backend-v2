@@ -26,7 +26,7 @@
         <el-form-item label="邮箱" prop="username">
           <div class="d-flex">
             <div>
-              {{ teacher.username }}
+              <el-input v-model="teacher.username" class="w-200px"></el-input>
             </div>
             <div class="ml-10">
               <helper-text text="用于讲师客户端登录"></helper-text>

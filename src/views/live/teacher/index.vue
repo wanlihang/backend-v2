@@ -45,15 +45,8 @@
           <el-table-column fixed="right" label="操作" width="100">
             <template slot-scope="scope">
               <p-link
-                text="删除"
-                type="danger"
-                @click="destory(scope.row.id)"
-                p="addons.Zhibo.teacher.delete"
-              ></p-link>
-              <p-link
                 text="编辑"
                 type="primary"
-                class="ml-5"
                 @click="
                   $router.push({
                     name: 'LiveTeacherUpdate',
@@ -61,6 +54,13 @@
                   })
                 "
                 p="addons.Zhibo.teacher.update"
+              ></p-link>
+              <p-link
+                text="删除"
+                class="ml-5"
+                type="danger"
+                @click="destory(scope.row.id)"
+                p="addons.Zhibo.teacher.delete"
               ></p-link>
             </template>
           </el-table-column>
