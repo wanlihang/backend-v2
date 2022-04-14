@@ -25,7 +25,8 @@
           <el-table-column prop="id" label="ID" width="120"> </el-table-column>
           <el-table-column prop="name" label="标题">
             <template slot-scope="scope">
-              <span>{{ scope.row.chapter.name }}</span>
+              <span v-if="scope.row.chapter">{{ scope.row.chapter.name }}</span>
+              <span v-else>-</span>
               <span class="mx-5">/</span>
               <span>{{ scope.row.title }}</span>
             </template>
