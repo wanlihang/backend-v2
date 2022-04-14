@@ -196,18 +196,18 @@
         </el-pagination>
       </div>
     </div>
-    <el-drawer :size="260" :visible.sync="drawer" :with-header="false">
+    <el-drawer :size="360" :visible.sync="drawer" :with-header="false">
       <div class="n-padding-box">
         <div class="tit flex">更多筛选</div>
         <div class="j-flex">
           <el-input
-            class="w-200px"
+            class="w-300px"
             v-model="filter.keywords"
             placeholder="课程名称关键字"
           ></el-input>
         </div>
         <div class="j-flex mt-20">
-          <el-select class="w-200px" v-model="filter.cid" placeholder="分类">
+          <el-select class="w-300px" v-model="filter.cid" placeholder="分类">
             <el-option
               v-for="(item, index) in filterData.categories"
               :key="index"
@@ -219,7 +219,7 @@
         </div>
         <div class="j-flex mt-20">
           <el-input
-            class="w-200px"
+            class="w-300px"
             v-model="filter.id"
             placeholder="课程ID"
           ></el-input>
@@ -260,6 +260,7 @@ export default {
     };
   },
   activated() {
+    this.params();
     this.getCourse();
     this.$utils.scrollTopSet(this.pageName);
   },
@@ -276,6 +277,25 @@ export default {
     },
   },
   methods: {
+    params() {
+      this.$api.Course.Vod.Create().then((res) => {
+        let categories = res.data.categories;
+        let box = [];
+        for (let i = 0; i < categories.length; i++) {
+          if (categories[i].children.length > 0) {
+            box.push(categories[i]);
+            let children = categories[i].children;
+            for (let j = 0; j < children.length; j++) {
+              children[j].name = "|----" + children[j].name;
+              box.push(children[j]);
+            }
+          } else {
+            box.push(categories[i]);
+          }
+        }
+        this.filterData.categories = box;
+      });
+    },
     paginationReset() {
       this.pagination.page = 1;
       this.filter.keywords = null;
@@ -314,9 +334,6 @@ export default {
         this.loading = false;
         this.courses = res.data.courses.data;
         this.total = res.data.courses.total;
-
-        // 课程分类
-        this.filterData.categories = res.data.categories;
       });
     },
     destory(item) {
