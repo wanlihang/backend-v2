@@ -38,8 +38,24 @@
           </el-table-column>
           <el-table-column label="账号">
             <template slot-scope="scope">
-              <div class="mb-15">账号：{{ scope.row.username }}</div>
-              <div>密码：{{ scope.row.password }}</div>
+              {{ scope.row.username }}
+            </template>
+          </el-table-column>
+          <el-table-column label="密码">
+            <template slot-scope="scope">
+              <div class="d-flex">
+                <div v-if="scope.row.id === currentId">
+                  <span>{{ scope.row.password }}</span>
+                </div>
+                <div v-else>
+                  <span>∗∗∗∗∗∗</span>
+                </div>
+                <div class="ml-10">
+                  <el-link :underline="false" @click="setCurrent(scope.row.id)">
+                    <i class="el-icon-view"></i>
+                  </el-link>
+                </div>
+              </div>
             </template>
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="100">
@@ -93,6 +109,7 @@ export default {
         size: 10,
       },
       total: 0,
+      currentId: null,
       results: [],
     };
   },
@@ -105,6 +122,13 @@ export default {
     next();
   },
   methods: {
+    setCurrent(id) {
+      if (this.currentId === id) {
+        this.currentId = null;
+      } else {
+        this.currentId = id;
+      }
+    },
     paginationReset() {
       this.pagination.page = 1;
       this.getData();
