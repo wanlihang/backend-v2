@@ -53,7 +53,8 @@
         </el-table-column>
         <el-table-column label="价格" width="200">
           <template slot-scope="scope">
-            <span>￥{{ scope.row.charge }}</span>
+            <span v-if="scope.row.charge == 0">-</span>
+            <span v-else>￥{{ scope.row.charge }}</span>
           </template>
         </el-table-column>
         <el-table-column label="订阅时间" width="200">
@@ -240,7 +241,7 @@ export default {
             return;
           }
 
-          let filename = "直播课程学员.xlsx";
+          let filename = "直播课程订阅学员.xlsx";
           let sheetName = "sheet1";
 
           let data = [["学员ID", "学员", "手机号", "价格", "时间"]];
