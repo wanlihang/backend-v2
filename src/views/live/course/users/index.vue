@@ -175,7 +175,7 @@ export default {
     },
     delUser() {
       if (this.selectedRows === null) {
-        this.$message.warning("请选择需要操作的数据");
+        this.$message.warning("请选择需要删除的学员");
         return;
       }
       this.$confirm("确认操作？", "警告", {
