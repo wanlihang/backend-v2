@@ -9,14 +9,7 @@
           text="批量导入"
           p="course.subscribe.import"
           type="primary"
-          @click="
-            $router.push({
-              name: 'VodUserImport',
-              query: {
-                id: id,
-              },
-            })
-          "
+          @click="importDialog = true"
         >
         </p-button>
       </div>
@@ -107,20 +100,30 @@
       @close="showUserAddWin = false"
       @confirm="userAddChange"
     ></user-add-comp>
+    <user-import-comp
+      :show="importDialog"
+      :id="id"
+      type="vod"
+      @close="importDialog = false"
+      @change="getData"
+    ></user-import-comp>
   </div>
 </template>
 
 <script>
 import UserAddComp from "@/components/user-add";
+import UserImportComp from "@/components/user-import";
 
 export default {
   components: {
     UserAddComp,
+    UserImportComp,
   },
   props: ["id"],
   data() {
     return {
       loading: false,
+      importDialog: false,
       pagination: {
         page: 1,
         size: 10,

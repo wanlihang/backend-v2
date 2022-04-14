@@ -7,6 +7,13 @@
         <el-button @click="showUserAddWin = true" type="primary"
           >添加学员</el-button
         >
+        <p-button
+          text="批量导入"
+          p="addons.Zhibo.course.user.import"
+          type="primary"
+          @click="importDialog = true"
+        >
+        </p-button>
       </div>
       <div class="d-flex">
         <div>
@@ -74,20 +81,30 @@
       @close="showUserAddWin = false"
       @confirm="userAddChange"
     ></user-add-comp>
+    <user-import-comp
+      :show="importDialog"
+      :id="pagination.id"
+      type="live"
+      @close="importDialog = false"
+      @change="getData"
+    ></user-import-comp>
   </div>
 </template>
 
 <script>
 import UserAddComp from "@/components/user-add";
+import UserImportComp from "@/components/user-import";
 
 export default {
   components: {
     UserAddComp,
+    UserImportComp,
   },
   data() {
     return {
       pageName: "liveUsers-list",
       showUserAddWin: false,
+      importDialog: false,
       pagination: {
         id: this.$route.query.id,
         page: 1,

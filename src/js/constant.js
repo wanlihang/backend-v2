@@ -34,7 +34,6 @@ export default {
     AdminrolesCreate: "SystemAdministrator",
     AdminrolesUpdate: "SystemAdministrator",
     Vod: "Vod",
-    VodUserImport: "Vod",
     VodImport: "Vod",
     VodCreate: "Vod",
     VodUpdate: "Vod",

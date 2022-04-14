@@ -466,6 +466,9 @@ const Api = {
         CommentCheck(params) {
           return post(`/backend/addons/zhibo/course_comment/check`, params);
         },
+        UserImport(id, params) {
+          return post(`/backend/addons/zhibo/course/${id}/user/import`, params);
+        },
         Category: {
           List() {
             return get(`/backend/addons/zhibo/course_category/index`);
