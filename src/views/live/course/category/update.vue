@@ -5,7 +5,7 @@
       <div class="form-box broder-top-left-radius">
         <el-form ref="form" :model="course" :rules="rules" label-width="200px">
           <el-form-item label="父级" prop="parent_id">
-            <el-select v-model="course.parent_id">
+            <el-select clearable v-model="course.parent_id">
               <el-option
                 v-for="(item, index) in categories"
                 :key="index"
