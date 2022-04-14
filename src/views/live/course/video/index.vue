@@ -39,15 +39,14 @@
           </el-table-column>
           <el-table-column label="状态" width="100">
             <template slot-scope="scope">
-              <el-tag type="success" v-if="scope.row.status == 1">
-                {{ scope.row.status_text }}
-              </el-tag>
-              <el-tag v-else-if="scope.row.status == 2">
-                {{ scope.row.status_text }}
-              </el-tag>
-              <el-tag v-else type="info">
-                {{ scope.row.status_text }}
-              </el-tag>
+              <span
+                :class="{
+                  'c-green': scope.row.status === 1,
+                  'c-gray': scope.row.status === 0,
+                  'c-yellow': scope.row.status === 2,
+                }"
+                >· {{ scope.row.status_text }}</span
+              >
             </template>
           </el-table-column>
           <el-table-column fixed="right" label="操作" width="180">

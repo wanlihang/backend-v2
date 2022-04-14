@@ -97,7 +97,14 @@
           </el-table-column>
           <el-table-column label="状态" width="100">
             <template slot-scope="scope">
-              <span>{{ scope.row.status_text }}</span>
+              <span
+                :class="{
+                  'c-green': scope.row.status === 1,
+                  'c-gray': scope.row.status === 0,
+                  'c-yellow': scope.row.status === 2,
+                }"
+                >· {{ scope.row.status_text }}</span
+              >
             </template>
           </el-table-column>
           <el-table-column label="上架时间" sortable width="200">
