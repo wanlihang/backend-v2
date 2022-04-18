@@ -16,9 +16,10 @@
         <el-dropdown trigger="click">
           <div class="config"><i class="el-icon-more-outline"></i></div>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item @click.native="banUser(item.user)"
-              >禁言</el-dropdown-item
-            >
+            <el-dropdown-item @click.native="banUser(item.user)">
+              <span v-if="item.user.is_ban === 1 || all_ban === 1">解禁</span>
+              <span v-else>禁言</span>
+            </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
