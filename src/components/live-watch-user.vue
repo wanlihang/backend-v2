@@ -99,6 +99,10 @@ export default {
           this.$message.error(e.message);
         });
     },
+    getMoreChatRecords() {
+      this.pagination.page++;
+      this.getData();
+    },
     banUser(item) {
       if (this.loading) {
         return;
