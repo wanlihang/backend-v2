@@ -23,7 +23,20 @@
 
         <template v-else>
           <div class="nickname">{{ item.user.nick_name }}</div>
-          <div class="chat-content">{{ item.content }}</div>
+          <div class="message-content">
+            <div class="chat-content">{{ item.content }}</div>
+            <el-dropdown trigger="click">
+              <div class="config"><i class="el-icon-more-outline"></i></div>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item @click.native="delChatItem(index)"
+                  >删除</el-dropdown-item
+                >
+                <el-dropdown-item @click.native="banUser(item.user)"
+                  >禁言</el-dropdown-item
+                >
+              </el-dropdown-menu>
+            </el-dropdown>
+          </div>
         </template>
       </div>
     </div>
@@ -264,6 +277,43 @@ export default {
         content: mesMap[e],
       });
     },
+    delChatItem(index) {
+      this.chatRecords.splice(index, 1);
+      this.$message.success(this.$t("common.success"));
+    },
+    banUser(item) {
+      if (this.loading) {
+        return;
+      }
+      let act = null;
+      let key = item.is_ban;
+      if (item.is_ban === 0) {
+        act = "user-ban";
+      } else {
+        act = "user-un-ban";
+      }
+      let params = {
+        course_id: this.cid,
+        video_id: this.vid,
+        act: act,
+        user_id: item.id,
+      };
+      this.loading = true;
+      this.$api.Course.Live.Course.Video.RoomAction(params)
+        .then((res) => {
+          if (item.is_ban === 0) {
+            item.is_ban = 1;
+          } else {
+            item.is_ban = 0;
+          }
+          this.$message.success(this.$t("common.success"));
+          this.loading = false;
+        })
+        .catch((e) => {
+          this.loading = false;
+          this.$message.error(e.message);
+        });
+    },
     roomAct(val) {
       if (this.loading) {
         return;
@@ -325,6 +375,9 @@ export default {
 }
 /deep/.input .el-input__inner:focus {
   border: none;
+}
+.el-dropdown {
+  height: 14px;
 }
 .chat-contanier {
   width: 100%;
@@ -402,20 +455,39 @@ export default {
         line-height: 18px;
         margin-bottom: 5px;
       }
-
-      .chat-content {
-        width: auto;
+      .message-content {
+        width: 100%;
         height: auto;
         float: left;
-        background: #e1f1fd;
-        box-sizing: border-box;
-        padding: 8px 10px;
-        border-radius: 8px;
-        font-size: 13px;
-        font-weight: 400;
-        color: #333333;
-        line-height: 18px;
-        word-break: break-all;
+        display: flex;
+        justify-content: space-between;
+        .chat-content {
+          width: auto;
+          height: auto;
+          float: left;
+          background: #e1f1fd;
+          box-sizing: border-box;
+          padding: 8px 10px;
+          border-radius: 8px;
+          font-size: 13px;
+          font-weight: 400;
+          color: #333333;
+          line-height: 18px;
+          word-break: break-all;
+        }
+        .config {
+          width: 26px;
+          height: 14px;
+          border-radius: 8px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: #dddddd;
+          cursor: pointer;
+          i {
+            color: #fff;
+          }
+        }
       }
     }
   }
