@@ -27,9 +27,6 @@
         <div class="bullet-user active" v-if="!over">
           <div class="addmore" @click="getMoreUsers()">加载更多</div>
         </div>
-        <div class="bullet-user active" v-else>
-          <div class="addmore">已全部加载</div>
-        </div>
       </template>
     </div>
     <div class="config-box">

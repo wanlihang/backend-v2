@@ -28,14 +28,11 @@
             <el-dropdown trigger="click">
               <div class="config"><i class="el-icon-more-outline"></i></div>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item @click.native="delChatItem(index)"
+                <el-dropdown-item @click.native="delChatItem(index, item.id)"
                   >删除</el-dropdown-item
                 >
                 <el-dropdown-item @click.native="banUser(item.user)">
-                  <span v-if="item.user.is_ban === 1 || all_ban === 1"
-                    >解禁</span
-                  >
-                  <span v-else>禁言</span>
+                  <span>禁言</span>
                 </el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
@@ -280,35 +277,40 @@ export default {
         content: mesMap[e],
       });
     },
-    delChatItem(index) {
-      this.chatRecords.splice(index, 1);
-      this.$message.success(this.$t("common.success"));
+    delChatItem(index, id) {
+      if (this.loading) {
+        return;
+      }
+
+      this.loading = true;
+      let ids = [];
+      ids.push(id);
+      this.$api.Course.Live.Course.Video.ChatDestoryMulti({
+        ids: ids,
+      })
+        .then(() => {
+          this.loading = false;
+          this.chatRecords.splice(index, 1);
+          this.$message.success(this.$t("common.success"));
+        })
+        .catch((e) => {
+          this.loading = false;
+          this.$message.error(e.message);
+        });
     },
     banUser(item) {
       if (this.loading) {
         return;
       }
-      let act = null;
-      let key = item.is_ban;
-      if (item.is_ban === 0) {
-        act = "user-ban";
-      } else {
-        act = "user-un-ban";
-      }
       let params = {
         course_id: this.cid,
         video_id: this.vid,
-        act: act,
+        act: "user-ban",
         user_id: item.id,
       };
       this.loading = true;
       this.$api.Course.Live.Course.Video.RoomAction(params)
         .then((res) => {
-          if (item.is_ban === 0) {
-            item.is_ban = 1;
-          } else {
-            item.is_ban = 0;
-          }
           this.$message.success(this.$t("common.success"));
           this.loading = false;
         })
