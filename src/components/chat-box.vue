@@ -27,7 +27,40 @@
         </template>
       </div>
     </div>
-    <div class="reply-box"></div>
+    <div
+      class="reply-box"
+      :class="{
+        active: status && status !== 2,
+      }"
+    >
+      <div class="input" v-if="status && status !== 2">
+        <el-input
+          v-model="message.content"
+          class="w-100"
+          placeholder="此处填写你的内容"
+        ></el-input>
+      </div>
+      <div class="bottom">
+        <div class="d-flex">
+          <div class="label">全员禁言</div>
+          <el-switch
+            class="ml-10"
+            v-model="all_ban"
+            :active-value="1"
+            :inactive-value="0"
+            @change="roomAct"
+          >
+          </el-switch>
+        </div>
+        <el-button
+          type="primary"
+          v-if="status && status !== 2"
+          size="mini"
+          @click="submitMessage()"
+          >发送</el-button
+        >
+      </div>
+    </div>
     <remote-script
       src="https://cdn.aodianyun.com/dms/rop_client.js"
       @load="initADY"
@@ -37,7 +70,7 @@
 </template>
 <script>
 export default {
-  props: ["chat", "enabledChat", "status", "cid", "vid"],
+  props: ["chat", "enabledChat", "status", "cid", "vid", "roomBan"],
   data() {
     return {
       chatChannel: null,
@@ -62,6 +95,10 @@ export default {
       total: 0,
       enabledScrollBottom: false,
       newId: null,
+      all_ban: null,
+      message: {
+        content: null,
+      },
     };
   },
   watch: {
@@ -69,6 +106,9 @@ export default {
       if (this.enabledScrollBottom) {
         this.chatBoxScrollBottom();
       }
+    },
+    roomBan() {
+      this.all_ban = this.roomBan;
     },
     chat(data) {
       // 初始化聊天服务
@@ -224,12 +264,71 @@ export default {
         content: mesMap[e],
       });
     },
+    roomAct(val) {
+      if (this.loading) {
+        return;
+      }
+      let act = null;
+      if (val === 1) {
+        act = "room-ban";
+      } else {
+        act = "room-un-ban";
+      }
+      let params = {
+        course_id: this.cid,
+        video_id: this.vid,
+        act: act,
+      };
+      this.loading = true;
+      this.$api.Course.Live.Course.Video.RoomAction(params)
+        .then((res) => {
+          this.$message.success(this.$t("common.success"));
+          this.loading = false;
+        })
+        .catch((e) => {
+          if (this.all_ban === 1) {
+            this.all_ban = 0;
+          } else {
+            this.all_ban = 1;
+          }
+          this.loading = false;
+          this.$message.error(e.message);
+        });
+    },
+    submitMessage() {
+      if (!this.message.content) {
+        return;
+      }
+      this.saveChat(this.message.content);
+      this.message.content = null;
+    },
+    saveChat(content) {
+      this.$api.Course.Live.Course.Video.SendMessage(
+        this.course.id,
+        this.video.id,
+        {
+          content: content,
+          duration: this.curDuration,
+        }
+      ).catch((e) => {
+        this.$message.error(e.message);
+      });
+    },
   },
 };
 </script>
 <style lang="less" scoped>
+/deep/.input .el-input__inner {
+  height: 50px;
+  border: none;
+  padding-left: 0;
+}
+/deep/.input .el-input__inner:focus {
+  border: none;
+}
 .chat-contanier {
   width: 100%;
+  float: left;
   height: auto;
   box-sizing: border-box;
   position: relative;
@@ -237,6 +336,7 @@ export default {
   flex-direction: column;
   .chat-box {
     width: 100%;
+    float: left;
     height: 678px;
     overflow-x: hidden;
     overflow-y: auto;
@@ -321,8 +421,38 @@ export default {
   }
   .reply-box {
     width: 100%;
-    height: 93px;
+    float: left;
+    padding: 15px;
+    height: 58px;
     border-top: 1px solid #e5e5e5;
+    box-sizing: border-box;
+    margin-top: 35px;
+    &.active {
+      margin-top: 0px;
+      height: 93px;
+      padding: 0px 15px 15px 15px;
+    }
+
+    .bottom {
+      width: 100%;
+      height: 28px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      .label {
+        font-size: 14px;
+        font-weight: 400;
+        color: #666666;
+        line-height: 14px;
+      }
+      .submit {
+        cursor: pointer;
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+    }
   }
 }
 </style>

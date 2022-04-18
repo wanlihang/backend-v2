@@ -48,83 +48,84 @@
                 </el-switch>
               </div>
             </div>
-            <el-form
-              ref="form"
-              :model="form"
-              :rules="rules"
-              label-width="100px"
-              v-show="is_show === 0"
-            >
-              <el-form-item label="直播服务商" prop="service">
-                <el-select
-                  :disabled="
-                    !(video.service === null || video.service.length === 0)
-                  "
-                  v-model="form.service"
-                >
-                  <el-option
-                    v-for="(item, index) in services"
-                    :key="index"
-                    :label="item.name"
-                    :value="item.id"
+            <div class="form" v-show="is_show === 0">
+              <el-form
+                ref="form"
+                :model="form"
+                :rules="rules"
+                label-width="100px"
+              >
+                <el-form-item label="直播服务商" prop="service">
+                  <el-select
+                    :disabled="
+                      !(video.service === null || video.service.length === 0)
+                    "
+                    v-model="form.service"
                   >
-                  </el-option>
-                </el-select>
-                <el-button
-                  class="ml-10"
-                  @click="formValidate"
-                  :loading="loading"
-                  type="primary"
-                  v-if="!video.service"
-                >
-                  开始直播
-                </el-button>
-              </el-form-item>
-
-              <template v-if="push_url">
-                <el-form-item label="推流地址">
-                  <el-input
-                    placeholder="推流地址"
-                    class="w-300px"
-                    v-model="push_url"
-                  ></el-input>
+                    <el-option
+                      v-for="(item, index) in services"
+                      :key="index"
+                      :label="item.name"
+                      :value="item.id"
+                    >
+                    </el-option>
+                  </el-select>
                   <el-button
-                    type="primary"
                     class="ml-10"
-                    @click="copy(push_url)"
-                    >复制</el-button
+                    @click="formValidate"
+                    :loading="loading"
+                    type="primary"
+                    v-if="!video.service"
                   >
+                    开始直播
+                  </el-button>
                 </el-form-item>
 
-                <el-form-item label="OBS服务器">
-                  <el-input
-                    placeholder="OBS服务器"
-                    class="w-300px"
-                    v-model="obs.server"
-                  ></el-input>
-                  <el-button
-                    type="primary"
-                    class="ml-10"
-                    @click="copy(obs.server)"
-                    >复制</el-button
-                  >
-                </el-form-item>
+                <template v-if="push_url">
+                  <el-form-item label="推流地址">
+                    <el-input
+                      placeholder="推流地址"
+                      class="w-300px"
+                      v-model="push_url"
+                    ></el-input>
+                    <el-button
+                      type="primary"
+                      class="ml-10"
+                      @click="copy(push_url)"
+                      >复制</el-button
+                    >
+                  </el-form-item>
 
-                <el-form-item label="OBS串流秘钥">
-                  <el-input
-                    placeholder="OBS串流秘钥"
-                    class="w-300px"
-                    v-model="obs.token"
-                  ></el-input>
-                  <el-button
-                    type="primary"
-                    class="ml-10"
-                    @click="copy(obs.token)"
-                    >复制</el-button
-                  >
-                </el-form-item>
-              </template>
-            </el-form>
+                  <el-form-item label="OBS服务器">
+                    <el-input
+                      placeholder="OBS服务器"
+                      class="w-300px"
+                      v-model="obs.server"
+                    ></el-input>
+                    <el-button
+                      type="primary"
+                      class="ml-10"
+                      @click="copy(obs.server)"
+                      >复制</el-button
+                    >
+                  </el-form-item>
+
+                  <el-form-item label="OBS串流秘钥">
+                    <el-input
+                      placeholder="OBS串流秘钥"
+                      class="w-300px"
+                      v-model="obs.token"
+                    ></el-input>
+                    <el-button
+                      type="primary"
+                      class="ml-10"
+                      @click="copy(obs.token)"
+                      >复制</el-button
+                    >
+                  </el-form-item>
+                </template>
+              </el-form>
+            </div>
           </div>
         </div>
         <div class="chat-item">
@@ -147,6 +148,7 @@
             :status="playVideo.status"
             :cid="course.id"
             :vid="video.id"
+            :room-ban="room_ban"
           ></chat-box>
           <live-watch-user
             v-show="currentTab === 2"
@@ -483,9 +485,6 @@ export default {
         .replybox {
           width: 100%;
           height: 326px;
-          background: #ffffff;
-          box-sizing: border-box;
-          padding: 30px;
           position: relative;
           margin-top: 20px;
           .top {
@@ -494,7 +493,9 @@ export default {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
-            margin-bottom: 30px;
+            box-sizing: border-box;
+            padding: 30px;
+            background: #ffffff;
             .tit {
               font-size: 16px;
               font-weight: 500;
@@ -512,6 +513,11 @@ export default {
               line-height: 14px;
               margin-right: 15px;
             }
+          }
+          .form {
+            box-sizing: border-box;
+            padding: 0px 30px 30px 30px;
+            background: #ffffff;
           }
         }
       }
