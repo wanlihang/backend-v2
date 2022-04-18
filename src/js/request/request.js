@@ -539,6 +539,12 @@ const Api = {
           Play(params) {
             return get(`/backend/addons/zhibo/zhibo/getParams`, params);
           },
+          PlayInfo(params) {
+            return post(`/backend/addons/zhibo/zhibo/playInfo`, params);
+          },
+          RoomAction(params) {
+            return post(`/backend/addons/zhibo/zhibo/roomAction`, params);
+          },
           Stop(params) {
             return get(`/backend/addons/zhibo/zhibo/stop`, params);
           },

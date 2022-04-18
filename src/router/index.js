@@ -1168,6 +1168,7 @@ const routes = [
     name: "LiveCourseVideoPlay",
     meta: {
       title: "title.live.course.video.play",
+      pure: true,
     },
   },
   {

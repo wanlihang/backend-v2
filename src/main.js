@@ -7,6 +7,7 @@ import store from "./store";
 import api from "./js/request/request";
 import i18n from "./js/i18n";
 import utils from "./js/utils";
+import "@/js/remote-js.js";
 import htmlToPdf from "./js/htmlToPdf";
 import moment from "moment";
 
