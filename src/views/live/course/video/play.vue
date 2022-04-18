@@ -152,7 +152,7 @@
             v-show="currentTab === 2"
             :course="course"
             :vid="video.id"
-            :roomBan="room_ban"
+            :room-ban="room_ban"
           ></live-watch-user>
         </div>
       </div>

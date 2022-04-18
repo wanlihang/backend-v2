@@ -9,7 +9,7 @@
       >
         <div class="nickname">
           {{ item.user.nick_name }}
-          <strong v-if="item.user.is_ban === 1 || room_ban === 1"
+          <strong v-if="item.user.is_ban === 1 || all_ban === 1"
             >(已禁言)</strong
           >
         </div>
@@ -36,7 +36,7 @@
         <div class="label">全员禁言</div>
         <el-switch
           class="ml-10"
-          v-model="room_ban"
+          v-model="all_ban"
           :active-value="1"
           :inactive-value="0"
           @change="roomAct"
@@ -49,7 +49,7 @@
 </template>
 <script>
 export default {
-  props: ["vid", "course", "room_ban"],
+  props: ["vid", "course", "roomBan"],
   data() {
     return {
       users: [],
@@ -63,7 +63,13 @@ export default {
       pageLoading: false,
       over: false,
       total: 0,
+      all_ban: null,
     };
+  },
+  watch: {
+    roomBan() {
+      this.all_ban = this.roomBan;
+    },
   },
   mounted() {
     this.getData();
@@ -131,7 +137,7 @@ export default {
         return;
       }
       let act = null;
-      if (val === 0) {
+      if (val === 1) {
         act = "room-ban";
       } else {
         act = "room-un-ban";
@@ -148,6 +154,11 @@ export default {
           this.loading = false;
         })
         .catch((e) => {
+          if (this.all_ban === 1) {
+            this.all_ban = 0;
+          } else {
+            this.all_ban = 1;
+          }
           this.loading = false;
           this.$message.error(e.message);
         });
