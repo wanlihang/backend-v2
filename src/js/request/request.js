@@ -560,6 +560,9 @@ const Api = {
           ChatDestoryMulti(params) {
             return post(`/backend/addons/zhibo/chat/delete`, params);
           },
+          SendMessage(params) {
+            return post(`/backend/addons/zhibo/chat/send`, params);
+          },
         },
       },
       Teacher: {

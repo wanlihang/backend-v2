@@ -22,16 +22,20 @@
         </template>
 
         <template v-else>
-          <div class="nickname">{{ item.user.nick_name }}</div>
+          <div class="nickname" :class="{ teacher: item.msg_body.tec }">
+            {{ item.msg_body.nick_name }}
+          </div>
           <div class="message-content">
-            <div class="chat-content">{{ item.content }}</div>
+            <div class="chat-content">
+              {{ item.msg_body.content }}
+            </div>
             <el-dropdown trigger="click">
               <div class="config"><i class="el-icon-more-outline"></i></div>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item @click.native="delChatItem(index, item.id)"
                   >删除</el-dropdown-item
                 >
-                <el-dropdown-item @click.native="banUser(item.user)">
+                <el-dropdown-item @click.native="banUser(item.msg_body)">
                   <span>禁言</span>
                 </el-dropdown-item>
               </el-dropdown-menu>
@@ -245,11 +249,9 @@ export default {
         this.enabledScrollBottom = true;
         let message = JSON.parse(data);
         if (message.t === "message") {
+          let msgV = JSON.parse(message.v);
           this.chatRecords.push({
-            content: message.v,
-            user: {
-              nick_name: message.u.name,
-            },
+            msg_body: msgV,
           });
         } else if (message.t === "connect") {
           this.chatRecords.push({
@@ -352,20 +354,19 @@ export default {
     },
     submitMessage() {
       if (!this.message.content) {
+        this.$message.error("请输入消息内容");
         return;
       }
       this.saveChat(this.message.content);
       this.message.content = null;
     },
     saveChat(content) {
-      this.$api.Course.Live.Course.Video.SendMessage(
-        this.course.id,
-        this.video.id,
-        {
-          content: content,
-          duration: this.curDuration,
-        }
-      ).catch((e) => {
+      this.$api.Course.Live.Course.Video.SendMessage({
+        course_id: this.cid,
+        video_id: this.vid,
+        content: content,
+        duration: this.curDuration,
+      }).catch((e) => {
         this.$message.error(e.message);
       });
     },
@@ -459,6 +460,16 @@ export default {
         color: #666666;
         line-height: 18px;
         margin-bottom: 5px;
+        &.teacher {
+          width: auto;
+          font-size: 12px;
+          font-weight: 400;
+          color: #ffffff;
+          line-height: 12px;
+          padding: 5px 10px;
+          background: #3ca7fa;
+          border-radius: 2px;
+        }
       }
       .message-content {
         width: 100%;

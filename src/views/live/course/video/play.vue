@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="live-banner float-left">
-      <div class="live-box" v-if="video">
+      <div class="live-box">
         <div class="live-item">
           <div class="live-item-video">
             <div class="play" v-if="video.status === 1">
@@ -281,6 +281,9 @@ export default {
       this.currentTab = key;
     },
     submit() {
+      if (this.loading) {
+        return;
+      }
       this.loading = true;
       this.$api.Course.Live.Course.Video.Play({
         video_id: this.video_id,
