@@ -140,8 +140,6 @@ export default {
     LiveCourseVideoCreate: "LiveCourse",
     LiveCourseVideoUpdate: "LiveCourse",
     LiveCourseVideoPlay: "LiveCourse",
-    LiveCourseVideoWatchusers: "LiveCourse",
-    LiveCourseVideoChat: "LiveCourse",
     CodeExchanger: "CodeExchanger",
     CodeExchangerCreate: "CodeExchanger",
     CodeExchangerUpdate: "CodeExchanger",
