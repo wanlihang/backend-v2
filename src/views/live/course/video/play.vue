@@ -2,7 +2,10 @@
   <div class="meedu-main-body" v-if="video">
     <div class="float-left navheader">
       <div class="top">
-        <span>{{ video.title }}</span>
+        <div class="d-flex" @click="$router.back()">
+          <img class="icon-back" src="../../../../assets/img/icon-back.png" />
+          <span>{{ video.title }}</span>
+        </div>
         <el-button
           @click="stop"
           :loading="loading"
@@ -534,6 +537,15 @@ export default {
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
+      .icon-back {
+        width: 24px;
+        height: 24px;
+        margin-right: 10px;
+        cursor: pointer;
+      }
+      span {
+        cursor: pointer;
+      }
     }
   }
   .live-banner {
