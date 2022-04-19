@@ -167,7 +167,7 @@
             v-show="currentTab === 1"
             :chat="chat"
             :enabledChat="enabledChat"
-            :status="playVideo.status"
+            :status="video.status"
             :cid="course.id"
             :vid="video.id"
             :room-ban="room_ban"
@@ -176,24 +176,17 @@
             v-show="currentTab === 2"
             :course="course"
             :vid="video.id"
-            :status="playVideo.status"
+            :status="video.status"
             :room-ban="room_ban"
           ></live-watch-user>
         </div>
       </div>
     </div>
-    <template v-if="playVideo.status === 1">
+    <template v-if="video.status === 1">
       <template v-if="webrtc_play_url">
         <remote-script
           src="https://web.sdk.qcloud.com/player/tcplayerlite/release/v2.4.1/TcPlayer-2.4.1.js"
           @load="initLiveTencentPlayer"
-        ></remote-script>
-      </template>
-      <template v-else>
-        <remote-script src="/js/xg/index.js"></remote-script>
-        <remote-script
-          src="/js/xg/hls.min.js"
-          @load="initLivePlayer"
         ></remote-script>
       </template>
     </template>
@@ -244,7 +237,6 @@ export default {
       },
       playUrl: null,
       webrtc_play_url: null,
-      playVideo: [],
       course: [],
       chat: null,
       vodPlayerStatus: false,
@@ -269,10 +261,10 @@ export default {
   },
   computed: {
     enabledChat() {
-      if (typeof this.playVideo.status === "undefined") {
+      if (typeof this.video.status === "undefined") {
         return false;
       }
-      return this.playVideo.status === 0 || this.playVideo.status === 1;
+      return this.video.status === 0 || this.video.status === 1;
     },
     record_hour() {
       let h = parseInt(this.record_duration / 3600);
@@ -293,7 +285,6 @@ export default {
   },
   mounted() {
     this.getDetail();
-    this.getPlayInfo();
   },
   beforeDestroy() {
     this.livePlayer && this.livePlayer.destroy(true);
@@ -305,20 +296,30 @@ export default {
         this.video = res.data;
 
         let service = res.data.service;
-        if (!service) {
-          service = null;
+        if (service) {
+          this.form.service = service;
         }
-
-        this.form.service = service;
-        if (this.form.service) {
+        if (this.video.status === 1) {
           this.submit();
+        } else if (this.video.status === 2) {
+          this.getPlayInfo();
         }
       });
     },
     formValidate() {
       this.$refs["form"].validate((valid) => {
         if (valid) {
-          this.submit();
+          this.$confirm("确认开始直播？", "警告", {
+            confirmButtonText: "确定",
+            cancelButtonText: "取消",
+            type: "warning",
+          })
+            .then(() => {
+              this.submit();
+            })
+            .catch(() => {
+              //点击删除按钮的操作
+            });
         }
       });
     },
@@ -384,9 +385,9 @@ export default {
             this.obs.server = obs[0] + "meedu/";
             this.obs.token = obs[1];
           }
-
           this.video.service = this.form.service;
           this.loading = false;
+          this.getPlayInfo();
         })
         .catch((e) => {
           this.loading = false;
@@ -401,27 +402,37 @@ export default {
           let resData = res.data;
           this.chat = resData.chat;
           this.course = resData.course;
-          this.playVideo = resData.video;
+          this.video = resData.video;
           this.playUrl = resData.play_url;
           this.record_exists = resData.record_exists;
           this.record_duration = resData.record_duration;
           this.webrtc_play_url = resData.web_rtc_play_url;
+          if (!this.webrtc_play_url) {
+            this.$nextTick(() => {
+              this.initLivePlayer();
+            });
+          }
         })
         .catch((e) => {
+          console.log(e);
           this.$message.error(e.message);
         });
     },
     initLivePlayer() {
-      this.livePlayer = new window.HlsJsPlayer({
-        id: "meedu-live-player",
-        url: this.playUrl,
-        isLive: true,
-        autoplay: true,
-        poster: this.course.poster,
-        height: 473,
-        width: 840,
-        closeVideoTouch: true,
-        closeVideoClick: true,
+      this.livePlayer = new window.DPlayer({
+        container: document.getElementById("meedu-live-player"),
+        live: true,
+        video: {
+          url: this.playUrl,
+          pic: this.course.poster,
+        },
+        bulletSecret: {
+          enabled: false,
+          text: null,
+          size: null,
+          color: "red",
+          opacity: null,
+        },
       });
       this.livePlayer.on("timeupdate", () => {
         this.curDuration = parseInt(this.livePlayer.currentTime);

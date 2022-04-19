@@ -29,8 +29,7 @@
             <el-dropdown trigger="click">
               <div class="config"><i class="el-icon-more-outline"></i></div>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item
-                  @click.native="delChatItem(index, item.id)"
+                <el-dropdown-item @click.native="delChatItem(index, item.id)"
                   >删除</el-dropdown-item
                 >
                 <el-dropdown-item
@@ -45,7 +44,11 @@
         </template>
       </div>
     </div>
-    <div class="reply-box" v-if="status && status !== 2">
+    <div
+      class="reply-box"
+      :class="{ active: status && status !== 2 }"
+      v-if="status && status !== 2"
+    >
       <div class="input">
         <el-input
           v-model="message.content"
@@ -73,7 +76,7 @@
     <remote-script
       src="https://cdn.aodianyun.com/dms/rop_client.js"
       @load="initADY"
-      v-if="enabledChat"
+      v-if="enabledAllowedADY"
     ></remote-script>
   </div>
 </template>
@@ -110,6 +113,11 @@ export default {
       },
     };
   },
+  computed: {
+    enabledAllowedADY() {
+      return this.enabledChat && this.chat;
+    },
+  },
   watch: {
     chatRecords() {
       if (this.enabledScrollBottom) {
@@ -121,7 +129,7 @@ export default {
     },
     chat(data) {
       // 初始化聊天服务
-      if (typeof data !== "undefined") {
+      if (data) {
         this.chatChannel = data.channel;
         this.chatUser = data.user;
         this.ADYParams.sub_key = data.aodianyun.sub_key;
@@ -197,7 +205,7 @@ export default {
       let id = this.ADYParams.user.id;
       let nickname = this.ADYParams.user.name;
       let avatar = this.ADYParams.user.avatar;
-
+      console.log(pubKey);
       if (pubKey === null) {
         return;
       }
