@@ -54,6 +54,7 @@
           v-model="message.content"
           class="w-100"
           placeholder="此处填写你的内容"
+          @keyup.enter.native="submitMessage()"
         ></el-input>
       </div>
       <div class="bottom">
