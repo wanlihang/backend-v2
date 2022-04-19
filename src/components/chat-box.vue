@@ -280,24 +280,34 @@ export default {
       });
     },
     delChatItem(index, id) {
-      if (this.loading) {
-        return;
-      }
-
-      this.loading = true;
-      let ids = [];
-      ids.push(id);
-      this.$api.Course.Live.Course.Video.ChatDestoryMulti({
-        ids: ids,
+      this.$confirm("确认操作？", "警告", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
       })
         .then(() => {
-          this.loading = false;
-          this.chatRecords.splice(index, 1);
-          this.$message.success(this.$t("common.success"));
+          if (this.loading) {
+            return;
+          }
+
+          this.loading = true;
+          let ids = [];
+          ids.push(id);
+          this.$api.Course.Live.Course.Video.ChatDestoryMulti({
+            ids: ids,
+          })
+            .then(() => {
+              this.loading = false;
+              this.chatRecords.splice(index, 1);
+              this.$message.success(this.$t("common.success"));
+            })
+            .catch((e) => {
+              this.loading = false;
+              this.$message.error(e.message);
+            });
         })
-        .catch((e) => {
-          this.loading = false;
-          this.$message.error(e.message);
+        .catch(() => {
+          //点击删除按钮的操作
         });
     },
     banUser(item) {
@@ -339,7 +349,11 @@ export default {
       this.loading = true;
       this.$api.Course.Live.Course.Video.RoomAction(params)
         .then((res) => {
-          this.$message.success(this.$t("common.success"));
+          if (this.all_ban === 1) {
+            this.$message.success("已全局禁言");
+          } else {
+            this.$message.success("已全局解除禁言");
+          }
           this.loading = false;
         })
         .catch((e) => {
@@ -436,6 +450,7 @@ export default {
         width: 100%;
         height: auto;
         float: left;
+        text-align: center;
 
         .text-block {
           width: auto;
@@ -492,6 +507,7 @@ export default {
           word-break: break-all;
         }
         .config {
+          margin-left: 15px;
           width: 26px;
           height: 14px;
           border-radius: 8px;

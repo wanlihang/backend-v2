@@ -499,11 +499,7 @@ export default {
   },
 };
 </script>
-<style>
-page {
-  background: #f4fafe;
-}
-</style>
+
 <style lang="less" scoped>
 .el-form-item {
   margin-bottom: 20px !important;
@@ -512,6 +508,8 @@ page {
   }
 }
 .meedu-main-body {
+  position: relative;
+  height: 100%;
   padding: 0px;
   background: #f4fafe;
   margin-bottom: 0px;
@@ -534,6 +532,7 @@ page {
     }
   }
   .live-banner {
+    display: flex;
     width: 100%;
     height: 100%;
     padding: 50px 0px;

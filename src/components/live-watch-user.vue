@@ -9,15 +9,13 @@
       >
         <div class="nickname">
           {{ item.user.nick_name }}
-          <strong v-if="item.user.is_ban === 1 || all_ban === 1"
-            >(已禁言)</strong
-          >
+          <strong v-if="item.user.is_ban === 1">(已禁言)</strong>
         </div>
         <el-dropdown trigger="click" v-if="status !== 2">
           <div class="config"><i class="el-icon-more-outline"></i></div>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item @click.native="banUser(item.user)">
-              <span v-if="item.user.is_ban === 1 || all_ban === 1">解禁</span>
+              <span v-if="item.user.is_ban === 1">解禁</span>
               <span v-else>禁言</span>
             </el-dropdown-item>
           </el-dropdown-menu>
@@ -161,7 +159,11 @@ export default {
       this.loading = true;
       this.$api.Course.Live.Course.Video.RoomAction(params)
         .then((res) => {
-          this.$message.success(this.$t("common.success"));
+          if (this.all_ban === 1) {
+            this.$message.success("已全局禁言");
+          } else {
+            this.$message.success("已全局解除禁言");
+          }
           this.loading = false;
         })
         .catch((e) => {
