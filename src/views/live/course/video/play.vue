@@ -49,7 +49,7 @@
               </div>
             </template>
           </div>
-          <div class="replybox float-left" v-if="video.status !== 2">
+          <div class="replybox float-left">
             <div class="top">
               <div class="d-flex">
                 <div class="tit">直播配置</div>
@@ -70,7 +70,7 @@
                 </el-switch>
               </div>
             </div>
-            <div class="form" v-show="is_show === 0">
+            <div class="form" v-show="video.status !== 2 && is_show === 0">
               <el-form
                 ref="form"
                 :model="form"
