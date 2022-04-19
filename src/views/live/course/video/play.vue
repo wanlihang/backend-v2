@@ -301,7 +301,7 @@ export default {
         }
         if (this.video.status === 1) {
           this.submit();
-        } else if (this.video.status === 2) {
+        } else if (this.video.status === 2 || this.video.status === 0) {
           this.getPlayInfo();
         }
       });
@@ -407,7 +407,7 @@ export default {
           this.record_exists = resData.record_exists;
           this.record_duration = resData.record_duration;
           this.webrtc_play_url = resData.web_rtc_play_url;
-          if (!this.webrtc_play_url) {
+          if (!this.webrtc_play_url && this.video.status === 1) {
             this.$nextTick(() => {
               this.initLivePlayer();
             });
@@ -499,6 +499,11 @@ export default {
   },
 };
 </script>
+<style>
+page {
+  background: #f4fafe;
+}
+</style>
 <style lang="less" scoped>
 .el-form-item {
   margin-bottom: 20px !important;

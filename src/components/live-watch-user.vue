@@ -13,7 +13,7 @@
             >(已禁言)</strong
           >
         </div>
-        <el-dropdown trigger="click" v-if="status && status !== 2">
+        <el-dropdown trigger="click" v-if="status !== 2">
           <div class="config"><i class="el-icon-more-outline"></i></div>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item @click.native="banUser(item.user)">
@@ -34,7 +34,7 @@
     </div>
     <div class="config-box">
       <div class="d-flex">
-        <template v-if="status && status !== 2">
+        <template v-if="status !== 2">
           <div class="label">全员禁言</div>
           <el-switch
             class="ml-10"

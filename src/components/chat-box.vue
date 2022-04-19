@@ -33,7 +33,7 @@
                   >删除</el-dropdown-item
                 >
                 <el-dropdown-item
-                  v-if="status && status !== 2"
+                  v-if="!item.msg_body.tec && status !== 2"
                   @click.native="banUser(item.msg_body)"
                 >
                   <span>禁言</span>
@@ -46,8 +46,8 @@
     </div>
     <div
       class="reply-box"
-      :class="{ active: status && status !== 2 }"
-      v-if="status && status !== 2"
+      :class="{ active: status !== 2 }"
+      v-if="status !== 2"
     >
       <div class="input">
         <el-input
@@ -517,7 +517,7 @@ export default {
     margin-top: 35px;
     &.active {
       margin-top: 0px;
-      height: 93px;
+      height: 98px;
       padding: 0px 15px 15px 15px;
     }
 
