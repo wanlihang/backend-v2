@@ -30,22 +30,6 @@
         </div>
       </template>
     </div>
-    <div class="config-box">
-      <div class="d-flex">
-        <template v-if="status !== 2">
-          <div class="label">全员禁言</div>
-          <el-switch
-            class="ml-10"
-            v-model="all_ban"
-            :active-value="1"
-            :inactive-value="0"
-            @change="roomAct"
-          >
-          </el-switch>
-        </template>
-      </div>
-      <div class="num">全体({{ this.total }}人)</div>
-    </div>
   </div>
 </template>
 <script>
@@ -98,6 +82,7 @@ export default {
             this.over = true;
           }
           this.pageLoading = false;
+          this.$emit("change", this.total);
         })
         .catch((e) => {
           this.pageLoading = false;
@@ -189,7 +174,7 @@ export default {
   flex-direction: column;
   .user-box {
     width: 100%;
-    height: 723px;
+    height: 772px;
     overflow-x: hidden;
     overflow-y: auto;
     display: flex;
@@ -252,29 +237,6 @@ export default {
           color: #fff;
         }
       }
-    }
-  }
-  .config-box {
-    width: 100%;
-    height: 48px;
-    border-top: 1px solid #e5e5e5;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    box-sizing: border-box;
-    padding: 0 15px;
-    .label {
-      font-size: 14px;
-      font-weight: 400;
-      color: #666666;
-      line-height: 14px;
-    }
-    .num {
-      font-size: 14px;
-      font-weight: 400;
-      color: #666666;
-      line-height: 14px;
     }
   }
 }

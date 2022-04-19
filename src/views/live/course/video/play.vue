@@ -160,7 +160,8 @@
               :class="{ active: currentTab === item.id }"
               @click="tabChange(item.id)"
             >
-              {{ item.name }}
+              <div v-if="item.id === 1">{{ item.name }}</div>
+              <div v-else>{{ item.name }}({{ userNum }}人)</div>
               <div class="actline" v-if="currentTab === item.id"></div>
             </div>
           </div>
@@ -179,6 +180,7 @@
             :vid="video.id"
             :status="video.status"
             :room-ban="room_ban"
+            @change="getNum"
           ></live-watch-user>
         </div>
       </div>
@@ -258,6 +260,7 @@ export default {
         },
       ],
       room_ban: 0,
+      userNum: 0,
     };
   },
   computed: {
@@ -292,6 +295,9 @@ export default {
     this.vodPlayer && this.vodPlayer.destroy();
   },
   methods: {
+    getNum(val) {
+      this.userNum = val;
+    },
     getDetail() {
       this.$api.Course.Live.Course.Video.Detail(this.video_id).then((res) => {
         this.video = res.data;
@@ -663,20 +669,22 @@ export default {
           flex-direction: row;
           position: relative;
           border-bottom: 1px solid #e5e5e5;
-          justify-content: center;
+          justify-content: space-between;
+          box-sizing: border-box;
+          padding: 0px 60px;
           .item-tab {
-            width: 50px;
-            height: 16px;
+            display: flex;
+            width: auto;
+            min-width: 50px;
+            height: 46px;
             font-size: 16px;
             font-weight: 400;
             color: #333333;
             line-height: 16px;
-            margin-top: 15px;
-            margin-right: 120px;
-            text-align: center;
-            &:last-child {
-              margin-right: 0px;
-            }
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
+            padding-top: 15px;
             cursor: pointer;
             position: relative;
             &.active {
@@ -684,12 +692,11 @@ export default {
               color: #3ca7fa;
             }
             .actline {
+              display: block;
               width: 50px;
               height: 4px;
               background: #3ca7fa;
-              position: absolute;
-              left: 0px;
-              top: 27px;
+              margin-top: 11px;
             }
           }
         }
