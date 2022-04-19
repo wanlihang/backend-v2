@@ -1,6 +1,6 @@
 <template>
   <div class="chat-contanier">
-    <div class="chat-box" ref="chatBox">
+    <div class="chat-box" :class="{ end: status === 2 }" ref="chatBox">
       <template v-if="chatRecords.length > 0">
         <div class="bullet-chat active" v-if="!over">
           <div class="addmore" @click="getMoreChatRecords()">加载更多</div>
@@ -418,6 +418,9 @@ export default {
     flex-direction: column;
     box-sizing: border-box;
     padding: 15px 15px 0 15px;
+    &.end {
+      height: 772px;
+    }
 
     .bullet-chat {
       width: 100%;

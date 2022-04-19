@@ -49,7 +49,8 @@
               </div>
             </template>
           </div>
-          <div class="replybox float-left" v-if="video.status !== 2">
+          <div class="replybox float-left">
+            <div class="mask" v-if="video.status === 2">直播已结束</div>
             <div class="top">
               <div class="d-flex">
                 <div class="tit">直播配置</div>
@@ -601,6 +602,20 @@ export default {
           height: 326px;
           position: relative;
           margin-top: 20px;
+          .mask {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(#fff, 0.9);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: rgba(#000, 0.3);
+          }
           .top {
             width: 100%;
             height: auto;
