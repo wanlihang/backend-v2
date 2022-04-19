@@ -1,6 +1,7 @@
 <template>
   <span
-    >{{ hour }}:{{ minute >= 10 ? minute : "0" + minute }}:{{
+    >{{ hour === 0 ? null : hour + ":"
+    }}{{ minute >= 10 ? minute : "0" + minute }}:{{
       second >= 10 ? second : "0" + second
     }}</span
   >

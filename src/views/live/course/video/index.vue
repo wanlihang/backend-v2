@@ -49,11 +49,10 @@
               >
             </template>
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="180">
+          <el-table-column fixed="right" label="操作" width="120">
             <template slot-scope="scope">
               <p-link
-                v-if="scope.row.status == 1"
-                text="继续直播"
+                text="直播"
                 type="primary"
                 @click="
                   $router.push({
@@ -66,57 +65,11 @@
                 "
                 p="addons.Zhibo.zhibo.open"
               ></p-link>
-              <p-link
-                v-else
-                text="开播"
-                type="primary"
-                @click="
-                  $router.push({
-                    name: 'LiveCourseVideoPlay',
-                    query: {
-                      video_id: scope.row.id,
-                      course_id: scope.row.course_id,
-                    },
-                  })
-                "
-                p="addons.Zhibo.zhibo.open"
-              ></p-link>
-              <p-link
-                text="观看"
-                type="primary"
-                class="ml-5"
-                @click="
-                  $router.push({
-                    name: 'LiveCourseVideoWatchusers',
-                    query: {
-                      id: scope.row.id,
-                      course_id: scope.row.course_id,
-                    },
-                  })
-                "
-                p="addons.Zhibo.course_video.watch.users"
-              >
-              </p-link>
               <el-dropdown>
                 <el-link type="primary" class="el-dropdown-link ml-5">
                   更多<i class="el-icon-arrow-down el-icon--right"></i>
                 </el-link>
                 <el-dropdown-menu slot="dropdown">
-                  <p-dropdown-item
-                    text="讨论"
-                    type="primary"
-                    @click="
-                      $router.push({
-                        name: 'LiveCourseVideoChat',
-                        query: {
-                          id: scope.row.id,
-                          course_id: scope.row.course_id,
-                        },
-                      })
-                    "
-                    p="addons.Zhibo.chat.list"
-                  >
-                  </p-dropdown-item>
                   <p-dropdown-item
                     text="编辑"
                     type="primary"

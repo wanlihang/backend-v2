@@ -5,9 +5,6 @@
         <div class="bullet-chat active" v-if="!over">
           <div class="addmore" @click="getMoreChatRecords()">加载更多</div>
         </div>
-        <div class="bullet-chat active" v-else>
-          <div class="addmore">已全部加载</div>
-        </div>
       </template>
       <div
         class="bullet-chat"
@@ -32,10 +29,14 @@
             <el-dropdown trigger="click">
               <div class="config"><i class="el-icon-more-outline"></i></div>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item @click.native="delChatItem(index, item.id)"
+                <el-dropdown-item
+                  @click.native="delChatItem(index, item.id)"
                   >删除</el-dropdown-item
                 >
-                <el-dropdown-item @click.native="banUser(item.msg_body)">
+                <el-dropdown-item
+                  v-if="status && status !== 2"
+                  @click.native="banUser(item.msg_body)"
+                >
                   <span>禁言</span>
                 </el-dropdown-item>
               </el-dropdown-menu>
@@ -44,13 +45,8 @@
         </template>
       </div>
     </div>
-    <div
-      class="reply-box"
-      :class="{
-        active: status && status !== 2,
-      }"
-    >
-      <div class="input" v-if="status && status !== 2">
+    <div class="reply-box" v-if="status && status !== 2">
+      <div class="input">
         <el-input
           v-model="message.content"
           class="w-100"
@@ -69,11 +65,7 @@
           >
           </el-switch>
         </div>
-        <el-button
-          type="primary"
-          v-if="status && status !== 2"
-          size="mini"
-          @click="submitMessage()"
+        <el-button type="primary" size="mini" @click="submitMessage()"
           >发送</el-button
         >
       </div>

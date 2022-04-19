@@ -39,21 +39,29 @@
           <el-table-column type="selection" width="55"></el-table-column
           ><!-- 显示选取表格 -->
           <el-table-column prop="user_id" label="学员ID" width="150">
+            <template slot-scope="scope">
+              <span v-if="scope.row.user_id">{{ scope.row.user_id }}</span>
+              <span v-else>讲师：{{ scope.row.msg_body.id }}</span>
+            </template>
           </el-table-column>
           <el-table-column label="学员">
             <template slot-scope="scope">
-              <div class="d-flex" v-if="scope.row.user">
+              <div class="d-flex" v-if="scope.row.msg_body">
                 <div>
-                  <img :src="scope.row.user.avatar" width="40" height="40" />
+                  <img
+                    :src="scope.row.msg_body.avatar"
+                    width="40"
+                    height="40"
+                  />
                 </div>
-                <div class="ml-10">{{ scope.row.user.nick_name }}</div>
+                <div class="ml-10">{{ scope.row.msg_body.nick_name }}</div>
               </div>
               <span class="c-red" v-else>学员不存在</span>
             </template>
           </el-table-column>
           <el-table-column label="内容">
             <template slot-scope="scope">
-              <div v-html="scope.row.content"></div>
+              <div v-html="scope.row.msg_body.content"></div>
             </template>
           </el-table-column>
           <el-table-column label="时间" width="200">

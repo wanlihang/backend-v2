@@ -13,7 +13,7 @@
             >(已禁言)</strong
           >
         </div>
-        <el-dropdown trigger="click">
+        <el-dropdown trigger="click" v-if="status && status !== 2">
           <div class="config"><i class="el-icon-more-outline"></i></div>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item @click.native="banUser(item.user)">
@@ -22,6 +22,9 @@
             </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
+        <div class="nickname" v-else>
+          <duration-text :duration="item.duration"> </duration-text>
+        </div>
       </div>
       <template v-if="users.length > 0">
         <div class="bullet-user active" v-if="!over">
@@ -31,23 +34,29 @@
     </div>
     <div class="config-box">
       <div class="d-flex">
-        <div class="label">全员禁言</div>
-        <el-switch
-          class="ml-10"
-          v-model="all_ban"
-          :active-value="1"
-          :inactive-value="0"
-          @change="roomAct"
-        >
-        </el-switch>
+        <template v-if="status && status !== 2">
+          <div class="label">全员禁言</div>
+          <el-switch
+            class="ml-10"
+            v-model="all_ban"
+            :active-value="1"
+            :inactive-value="0"
+            @change="roomAct"
+          >
+          </el-switch>
+        </template>
       </div>
       <div class="num">全体({{ this.total }}人)</div>
     </div>
   </div>
 </template>
 <script>
+import DurationText from "@/components/duration-text";
 export default {
-  props: ["vid", "course", "roomBan"],
+  props: ["vid", "course", "status", "roomBan"],
+  components: {
+    DurationText,
+  },
   data() {
     return {
       users: [],

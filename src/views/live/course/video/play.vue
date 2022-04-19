@@ -7,7 +7,7 @@
           @click="stop"
           :loading="loading"
           type="primary"
-          v-if="video.service"
+          v-if="video.status === 1 && video.service"
         >
           结束直播
         </el-button>
@@ -26,8 +26,30 @@
             <div class="alert-message" v-else-if="video.status === 0">
               <div class="message">直播前请完成直播配置</div>
             </div>
+            <template v-else-if="video.status === 2">
+              <template v-if="!vodPlayerStatus">
+                <div class="alert-message">
+                  <div
+                    class="play-button"
+                    @click="showVodPlayer()"
+                    v-if="record_exists === 1"
+                  >
+                    回看直播 {{ record_hour }}{{ record_minute }}:{{
+                      record_second
+                    }}
+                  </div>
+                  <div v-else class="message">此直播无回放</div>
+                </div>
+              </template>
+              <div class="play" v-if="record_exists === 1 && vodPlayerStatus">
+                <div
+                  id="meedu-vod-player"
+                  style="width: 100%; height: 100%"
+                ></div>
+              </div>
+            </template>
           </div>
-          <div class="replybox float-left">
+          <div class="replybox float-left" v-if="video.status !== 2">
             <div class="top">
               <div class="d-flex">
                 <div class="tit">直播配置</div>
@@ -154,6 +176,7 @@
             v-show="currentTab === 2"
             :course="course"
             :vid="video.id"
+            :status="playVideo.status"
             :room-ban="room_ban"
           ></live-watch-user>
         </div>
@@ -224,9 +247,11 @@ export default {
       playVideo: [],
       course: [],
       chat: null,
+      vodPlayerStatus: false,
       record_exists: 0,
       record_duration: 0,
       livePlayer: null,
+      vodPlayer: null,
       curDuration: 0,
       currentTab: 1,
       tabs: [
@@ -249,9 +274,30 @@ export default {
       }
       return this.playVideo.status === 0 || this.playVideo.status === 1;
     },
+    record_hour() {
+      let h = parseInt(this.record_duration / 3600);
+      if (h === 0) {
+        return "";
+      } else {
+        return h >= 10 ? h + ":" : "0" + h + ":";
+      }
+    },
+    record_minute() {
+      let m = parseInt((this.record_duration % 3600) / 60);
+      return m >= 10 ? m : "0" + m;
+    },
+    record_second() {
+      let s = (this.record_duration % 3600) % 60;
+      return s >= 10 ? s : "0" + s;
+    },
   },
   mounted() {
     this.getDetail();
+    this.getPlayInfo();
+  },
+  beforeDestroy() {
+    this.livePlayer && this.livePlayer.destroy(true);
+    this.vodPlayer && this.vodPlayer.destroy();
   },
   methods: {
     getDetail() {
@@ -264,7 +310,6 @@ export default {
         }
 
         this.form.service = service;
-
         if (this.form.service) {
           this.submit();
         }
@@ -276,6 +321,41 @@ export default {
           this.submit();
         }
       });
+    },
+    initVodPlayer(url, poster) {
+      let dplayerUrls = [];
+      url.forEach((item) => {
+        dplayerUrls.push({
+          name: item.name,
+          url: item.url,
+        });
+      });
+      this.vodPlayer = new window.DPlayer({
+        container: document.getElementById("meedu-vod-player"),
+        autoplay: false,
+        video: {
+          quality: dplayerUrls,
+          defaultQuality: 0,
+          pic: poster,
+        },
+        bulletSecret: {
+          enabled: false,
+          text: null,
+          size: null,
+          color: "red",
+          opacity: null,
+        },
+      });
+    },
+    showVodPlayer() {
+      if (this.record_exists === 1 && this.playUrl.length > 0) {
+        this.vodPlayerStatus = true;
+        this.$nextTick(() => {
+          this.initVodPlayer(this.playUrl, this.course.poster);
+        });
+      } else {
+        this.$message.error("暂无回放");
+      }
     },
     tabChange(key) {
       this.currentTab = key;
@@ -306,7 +386,6 @@ export default {
           }
 
           this.video.service = this.form.service;
-          this.getPlayInfo();
           this.loading = false;
         })
         .catch((e) => {
@@ -474,6 +553,26 @@ export default {
             display: flex;
             align-items: center;
             justify-content: center;
+
+            .play-button {
+              width: auto;
+              height: auto;
+              background: #3ca7fa;
+              border-radius: 32px;
+              display: inline-block;
+              margin-top: -76px;
+              cursor: pointer;
+              font-size: 14px;
+              box-sizing: border-box;
+              padding: 15px 20px;
+              font-weight: 400;
+              line-height: 14px;
+              color: #ffffff;
+              &:hover {
+                opacity: 0.8;
+              }
+            }
+
             .message {
               background: rgba(255, 255, 255, 0.3);
               padding: 10px 20px;

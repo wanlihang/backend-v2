@@ -147,7 +147,7 @@ const zh = {
           index: "直播排课",
           create: "添加直播排课",
           update: "编辑直播排课",
-          play: "开播",
+          play: "直播详情",
           watch: "观看用户",
           chat: "聊天室内容",
         },
