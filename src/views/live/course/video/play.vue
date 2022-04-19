@@ -508,8 +508,6 @@ export default {
   }
 }
 .meedu-main-body {
-  position: relative;
-  height: 100%;
   padding: 0px;
   background: #f4fafe;
   margin-bottom: 0px;
@@ -532,9 +530,8 @@ export default {
     }
   }
   .live-banner {
-    display: flex;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     padding: 50px 0px;
     box-sizing: border-box;
     -moz-background-size: 100% 100%;
