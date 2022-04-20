@@ -599,7 +599,7 @@ export default {
             align-items: center;
             justify-content: center;
             .live-item-tip {
-              background: rgba(#fff, 0.2);
+              background: rgba(#fff, 0.6);
               padding: 15px 10px;
               font-size: 14px;
               font-weight: 400;
