@@ -46,7 +46,7 @@ export default {
         video_id: null,
         course_id: null,
         page: 1,
-        size: 100,
+        size: 200,
       },
       loading: false,
       pageLoading: false,
@@ -62,8 +62,19 @@ export default {
   },
   mounted() {
     this.getData();
+    this.timer = setInterval(this.resetData, 10000);
+  },
+  beforeDestroy() {
+    clearInterval(this.timer);
   },
   methods: {
+    resetData() {
+      this.users = [];
+      this.pagination.page = 1;
+      this.over = false;
+      this.pageLoading = false;
+      this.getData();
+    },
     getData() {
       if (this.pageLoading || this.over) {
         return;
