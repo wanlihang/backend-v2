@@ -20,6 +20,16 @@
       <div class="live-box">
         <div class="live-item">
           <div class="live-item-video">
+            <div class="alert-mask" v-if="video.status !== 2 && tip">
+              <div class="live-item-tip d-flex">
+                OBS推流成功后若此处无画面显示，请稍等后刷新此页
+                <img
+                  class="icon ml-10"
+                  @click="tip = false"
+                  src="../../../../assets/img/icon-close.png"
+                />
+              </div>
+            </div>
             <div class="play" v-if="video.status === 1">
               <div
                 id="meedu-live-player"
@@ -264,6 +274,7 @@ export default {
       ],
       room_ban: 0,
       userNum: 0,
+      tip: true,
     };
   },
   computed: {
@@ -571,11 +582,40 @@ export default {
           width: 100%;
           height: 473px;
           background-color: #000000;
+          position: relative;
 
           .play {
             width: 100%;
             height: 100%;
             background-color: #000000;
+          }
+          .alert-mask {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 473px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .live-item-tip {
+              background: rgba(#fff, 0.2);
+              padding: 15px 10px;
+              font-size: 14px;
+              font-weight: 400;
+              color: #ffffff;
+              line-height: 14px;
+              border-radius: 4px;
+              z-index: 100;
+              .icon {
+                width: 14px;
+                height: 14px;
+                cursor: pointer;
+                &:hover {
+                  opacity: 0.8;
+                }
+              }
+            }
           }
 
           .alert-message {
@@ -584,7 +624,6 @@ export default {
             display: flex;
             align-items: center;
             justify-content: center;
-
             .play-button {
               width: auto;
               height: auto;
