@@ -419,7 +419,7 @@ export default {
     box-sizing: border-box;
     padding: 15px 15px 0 15px;
     &.end {
-      height: 772px;
+      height: 775px;
     }
 
     .bullet-chat {

@@ -174,7 +174,7 @@ export default {
   flex-direction: column;
   .user-box {
     width: 100%;
-    height: 772px;
+    height: 775px;
     overflow-x: hidden;
     overflow-y: auto;
     display: flex;

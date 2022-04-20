@@ -663,7 +663,7 @@ export default {
           }
           .form {
             box-sizing: border-box;
-            padding: 0px 30px 30px 30px;
+            padding: 0px 30px 28px 30px;
             background: #ffffff;
           }
         }
