@@ -41,6 +41,7 @@ export default {
   },
   data() {
     return {
+      timer: null,
       users: [],
       pagination: {
         video_id: null,
