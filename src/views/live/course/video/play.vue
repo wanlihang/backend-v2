@@ -20,11 +20,8 @@
       <div class="live-box">
         <div class="live-item">
           <div class="live-item-video">
-            <div class="alert-mask" v-if="video.status !== 2 && tip">
-              <div
-                class="live-item-tip d-flex"
-                :class="{ more: video.status === 0 }"
-              >
+            <div class="alert-mask" v-if="video.status === 1 && tip">
+              <div class="live-item-tip d-flex">
                 OBS推流成功后若此处无画面显示，请稍等后刷新此页
                 <img
                   class="icon ml-10"
@@ -610,9 +607,6 @@ export default {
               line-height: 14px;
               border-radius: 4px;
               z-index: 100;
-              &.more {
-                margin-bottom: 85px;
-              }
 
               .icon {
                 width: 14px;
