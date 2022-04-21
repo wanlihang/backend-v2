@@ -489,7 +489,7 @@ export default {
       this.$message.success("复制成功");
     },
     stop() {
-      this.$confirm("确认操作？", "警告", {
+      this.$confirm("请确认是否结束本次直播？", "警告", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
