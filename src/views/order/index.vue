@@ -141,6 +141,7 @@
                 'c-green': scope.row.status_text === '已支付',
                 'c-red': scope.row.status_text === '未支付',
                 'c-yellow': scope.row.status_text === '支付中',
+                'c-gray': scope.row.status_text === '已取消',
               }"
             >
               · {{ scope.row.status_text }}

@@ -100,8 +100,8 @@
               <span
                 :class="{
                   'c-green': scope.row.status === 1,
-                  'c-gray': scope.row.status === 0,
-                  'c-yellow': scope.row.status === 2,
+                  'c-yellow': scope.row.status === 0,
+                  'c-gray': scope.row.status === 2,
                 }"
                 >· {{ scope.row.status_text }}</span
               >
