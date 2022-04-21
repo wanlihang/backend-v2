@@ -50,7 +50,7 @@
             v-model="teacher.short_desc"
             class="w-400px"
             rows="4"
-            placeholder="简介"
+            placeholder="此处填写讲师介绍"
           ></el-input>
         </el-form-item>
       </el-form>
