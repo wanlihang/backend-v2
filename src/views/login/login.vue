@@ -200,7 +200,7 @@ export default {
   margin-left: 0;
   width: 529px;
   height: 100%;
-  padding: 35px 35px 0px 49px;
+  padding: 0px 35px 0px 49px;
   background: #fff;
   box-sizing: border-box;
 }
