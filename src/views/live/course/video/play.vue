@@ -456,6 +456,7 @@ export default {
           opacity: null,
         },
       });
+      this.livePlayer.play();
       this.livePlayer.on("timeupdate", () => {
         this.curDuration = parseInt(this.livePlayer.currentTime);
       });
