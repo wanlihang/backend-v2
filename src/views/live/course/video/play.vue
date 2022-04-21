@@ -562,7 +562,7 @@ export default {
   }
   .live-banner {
     width: 100%;
-    height: auto;
+    height: 922px;
     padding: 50px 0px;
     box-sizing: border-box;
     -moz-background-size: 100% 100%;
