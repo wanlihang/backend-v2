@@ -506,7 +506,7 @@ export default {
           })
             .then(() => {
               this.loading = false;
-              this.$message.success("已停止直播");
+              this.$message.success("已结束直播");
               this.$router.back();
             })
             .catch((e) => {
