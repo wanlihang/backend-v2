@@ -442,6 +442,7 @@ export default {
     initLivePlayer() {
       this.livePlayer = new window.DPlayer({
         container: document.getElementById("meedu-live-player"),
+        autoplay: true,
         live: true,
         video: {
           url: this.playUrl,
