@@ -95,6 +95,12 @@
               <span>{{ scope.row.join_user_times }}人</span>
             </template>
           </el-table-column>
+          <el-table-column label="显示" width="60">
+            <template slot-scope="scope">
+              <span class="c-green" v-if="scope.row.is_show === 1">是</span>
+              <span class="c-gray" v-else>否</span>
+            </template>
+          </el-table-column>
           <el-table-column label="状态" width="100">
             <template slot-scope="scope">
               <span
