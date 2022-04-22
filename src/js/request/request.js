@@ -466,9 +466,15 @@ const Api = {
         CommentCheck(params) {
           return post(`/backend/addons/zhibo/course_comment/check`, params);
         },
+        UserImport(id, params) {
+          return post(`/backend/addons/zhibo/course/${id}/user/import`, params);
+        },
         Category: {
           List() {
             return get(`/backend/addons/zhibo/course_category/index`);
+          },
+          Create() {
+            return get(`/backend/addons/zhibo/course_category/create`);
           },
           Store(params) {
             return post(`/backend/addons/zhibo/course_category/create`, params);
@@ -533,6 +539,12 @@ const Api = {
           Play(params) {
             return get(`/backend/addons/zhibo/zhibo/getParams`, params);
           },
+          PlayInfo(params) {
+            return post(`/backend/addons/zhibo/zhibo/playInfo`, params);
+          },
+          RoomAction(params) {
+            return post(`/backend/addons/zhibo/zhibo/roomAction`, params);
+          },
           Stop(params) {
             return get(`/backend/addons/zhibo/zhibo/stop`, params);
           },
@@ -547,6 +559,9 @@ const Api = {
           },
           ChatDestoryMulti(params) {
             return post(`/backend/addons/zhibo/chat/delete`, params);
+          },
+          SendMessage(params) {
+            return post(`/backend/addons/zhibo/chat/send`, params);
           },
         },
       },

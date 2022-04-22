@@ -16,7 +16,9 @@
         <el-table
           :header-cell-style="{ background: '#f1f2f9' }"
           :data="list"
+          row-key="id"
           class="float-left"
+          :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
         >
           <el-table-column prop="id" label="ID" width="100"> </el-table-column>
           <el-table-column prop="sort" label="升序" width="100">
@@ -30,15 +32,8 @@
           <el-table-column fixed="right" label="操作" width="100">
             <template slot-scope="scope">
               <p-link
-                text="删除"
-                type="danger"
-                @click="destory(scope.row.id)"
-                p="addons.Zhibo.course_category.delete"
-              ></p-link>
-              <p-link
                 text="编辑"
                 type="primary"
-                class="ml-5"
                 @click="
                   $router.push({
                     name: 'LiveCourseCategoryUpdate',
@@ -46,6 +41,13 @@
                   })
                 "
                 p="addons.Zhibo.course_category.update"
+              ></p-link>
+              <p-link
+                class="ml-5"
+                text="删除"
+                type="danger"
+                @click="destory(scope.row.id)"
+                p="addons.Zhibo.course_category.delete"
               ></p-link>
             </template>
           </el-table-column>

@@ -95,9 +95,22 @@
               <span>{{ scope.row.join_user_times }}人</span>
             </template>
           </el-table-column>
+          <el-table-column label="显示" width="60">
+            <template slot-scope="scope">
+              <span class="c-green" v-if="scope.row.is_show === 1">· 是</span>
+              <span class="c-gray" v-else>· 否</span>
+            </template>
+          </el-table-column>
           <el-table-column label="状态" width="100">
             <template slot-scope="scope">
-              <span>{{ scope.row.status_text }}</span>
+              <span
+                :class="{
+                  'c-green': scope.row.status === 1,
+                  'c-yellow': scope.row.status === 0,
+                  'c-gray': scope.row.status === 2,
+                }"
+                >· {{ scope.row.status_text }}</span
+              >
             </template>
           </el-table-column>
           <el-table-column label="上架时间" sortable width="200">
@@ -175,19 +188,19 @@
         </el-pagination>
       </div>
     </div>
-    <el-drawer :size="260" :visible.sync="drawer" :with-header="false">
+    <el-drawer :size="360" :visible.sync="drawer" :with-header="false">
       <div class="n-padding-box">
         <div class="tit flex">更多筛选</div>
         <div class="j-flex">
           <el-input
-            class="w-200px"
+            class="w-300px"
             v-model="filter.keywords"
             placeholder="课程名称关键字"
           ></el-input>
         </div>
         <div class="j-flex mt-20">
           <el-select
-            class="w-200px"
+            class="w-300px"
             placeholder="分类"
             v-model="filter.category_id"
           >
@@ -203,7 +216,7 @@
 
         <div class="j-flex mt-20">
           <el-select
-            class="w-200px"
+            class="w-300px"
             placeholder="讲师"
             v-model="filter.teacher_id"
           >
@@ -218,7 +231,7 @@
         </div>
 
         <div class="j-flex mt-20">
-          <el-select class="w-200px" placeholder="状态" v-model="filter.status">
+          <el-select class="w-300px" placeholder="状态" v-model="filter.status">
             <el-option
               v-for="(item, index) in filterData.statusList"
               :key="index"
@@ -326,9 +339,24 @@ export default {
         this.list = res.data.data.data;
         this.total = res.data.data.total;
 
-        this.filterData.categories = res.data.categories;
         this.filterData.teachers = res.data.teachers;
         this.filterData.statusList = res.data.statusList;
+
+        let categories = res.data.categories;
+        let box = [];
+        for (let i = 0; i < categories.length; i++) {
+          if (categories[i].children.length > 0) {
+            box.push(categories[i]);
+            let children = categories[i].children;
+            for (let j = 0; j < children.length; j++) {
+              children[j].name = "|----" + children[j].name;
+              box.push(children[j]);
+            }
+          } else {
+            box.push(categories[i]);
+          }
+        }
+        this.filterData.categories = box;
       });
     },
     destory(item) {

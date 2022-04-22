@@ -9,14 +9,7 @@
           text="批量导入"
           p="course.subscribe.import"
           type="primary"
-          @click="
-            $router.push({
-              name: 'VodUserImport',
-              query: {
-                id: id,
-              },
-            })
-          "
+          @click="importDialog = true"
         >
         </p-button>
       </div>
@@ -44,6 +37,7 @@
         <div class="ml-10">
           <el-button @click="paginationReset()">清空</el-button>
           <el-button @click="firstPageLoad()" type="primary"> 筛选 </el-button>
+          <el-button @click="importexcel" type="primary">导出表格</el-button>
         </div>
       </div>
     </div>
@@ -72,9 +66,10 @@
           <span v-else class="c-red">学员已删除</span>
         </template>
       </el-table-column>
-      <el-table-column label="订阅价格" width="200">
+      <el-table-column label="价格" width="200">
         <template slot-scope="scope">
-          <span>{{ scope.row.charge }}元</span>
+          <span v-if="scope.row.charge == 0">-</span>
+          <span v-else>￥{{ scope.row.charge }}</span>
         </template>
       </el-table-column>
       <el-table-column label="订阅时间" width="200">
@@ -107,20 +102,31 @@
       @close="showUserAddWin = false"
       @confirm="userAddChange"
     ></user-add-comp>
+    <user-import-comp
+      :show="importDialog"
+      :id="id"
+      type="vod"
+      @close="importDialog = false"
+      @change="getData"
+    ></user-import-comp>
   </div>
 </template>
 
 <script>
+import moment from "moment";
 import UserAddComp from "@/components/user-add";
+import UserImportComp from "@/components/user-import";
 
 export default {
   components: {
     UserAddComp,
+    UserImportComp,
   },
   props: ["id"],
   data() {
     return {
       loading: false,
+      importDialog: false,
       pagination: {
         page: 1,
         size: 10,
@@ -243,6 +249,44 @@ export default {
           this.loading = false;
           this.$message.error(e.message);
         });
+    },
+    importexcel() {
+      if (this.loading) {
+        return;
+      }
+      this.loading = true;
+
+      let params = {
+        page: 1,
+        size: this.total,
+      };
+      Object.assign(params, this.filter);
+
+      this.$api.Course.Vod.SubUsers(this.id, params).then((res) => {
+        if (res.data.data.total === 0) {
+          this.$message.error("数据为空");
+          this.loading = false;
+          return;
+        }
+        let users = res.data.users;
+        let filename = "录播课程订阅学员.xlsx";
+        let sheetName = "sheet1";
+
+        let data = [["学员ID", "学员", "手机号", "价格", "时间"]];
+        res.data.data.data.forEach((item) => {
+          let user = users[item.user_id];
+          data.push([
+            item.user_id,
+            user.nick_name,
+            user.mobile,
+            item.charge === 0 ? "-" : "￥" + item.charge,
+            moment(item.created_at).format("YYYY-MM-DD HH:mm"),
+          ]);
+        });
+
+        this.$utils.exportExcel(data, filename, sheetName);
+        this.loading = false;
+      });
     },
   },
 };

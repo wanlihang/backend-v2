@@ -4,6 +4,17 @@
     <div class="float-left">
       <div class="form-box broder-top-left-radius">
         <el-form ref="form" :model="course" :rules="rules" label-width="200px">
+          <el-form-item label="父级" prop="parent_id">
+            <el-select clearable v-model="course.parent_id">
+              <el-option
+                v-for="(item, index) in categories"
+                :key="index"
+                :label="item.name"
+                :value="item.id"
+              >
+              </el-option>
+            </el-select>
+          </el-form-item>
           <el-form-item label="分类名" prop="name">
             <el-input v-model="course.name" class="w-200px"></el-input>
           </el-form-item>
@@ -65,6 +76,7 @@ export default {
         name: null,
         is_show: 1,
         sort: null,
+        parent_id: null,
       },
       rules: {
         name: [
@@ -89,12 +101,20 @@ export default {
           },
         ],
       },
+      categories: [],
       types: null,
       loading: false,
     };
   },
-  mounted() {},
+  mounted() {
+    this.params();
+  },
   methods: {
+    params() {
+      this.$api.Course.Live.Course.Category.Create().then((res) => {
+        this.categories = res.data.categories;
+      });
+    },
     formValidate() {
       this.$refs["form"].validate((valid) => {
         if (valid) {

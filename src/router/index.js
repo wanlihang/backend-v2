@@ -295,14 +295,6 @@ const routes = [
     },
   },
   {
-    path: "/course/vod/user-import",
-    component: () => import("@/views/course/vod/user-import.vue"),
-    name: "VodUserImport",
-    meta: {
-      title: "title.course.vod.user-import",
-    },
-  },
-  {
     path: "/course/vod/video-import",
     component: () => import("@/views/course/vod/video/import.vue"),
     name: "VodImport",
@@ -1176,24 +1168,7 @@ const routes = [
     name: "LiveCourseVideoPlay",
     meta: {
       title: "title.live.course.video.play",
-    },
-  },
-  {
-    path: "/live/course/video/watchusers",
-    component: () => import("@/views/live/course/video/watchusers"),
-    name: "LiveCourseVideoWatchusers",
-    meta: {
-      title: "title.live.course.video.watch",
-      keepAlive: true,
-    },
-  },
-  {
-    path: "/live/course/video/chat",
-    component: () => import("@/views/live/course/video/chat"),
-    name: "LiveCourseVideoChat",
-    meta: {
-      title: "title.live.course.video.chat",
-      keepAlive: true,
+      pure: true,
     },
   },
   {
