@@ -25,8 +25,10 @@
           <el-table-column prop="id" label="ID" width="120"> </el-table-column>
           <el-table-column prop="name" label="标题">
             <template slot-scope="scope">
-              <span>{{ scope.row.chapter.name }}</span>
-              <span class="mx-5">/</span>
+              <template v-if="scope.row.chapter">
+                <span>{{ scope.row.chapter.name }}</span>
+                <span class="mx-5">/</span>
+              </template>
               <span>{{ scope.row.title }}</span>
             </template>
           </el-table-column>
@@ -37,22 +39,20 @@
           </el-table-column>
           <el-table-column label="状态" width="100">
             <template slot-scope="scope">
-              <el-tag type="success" v-if="scope.row.status == 1">
-                {{ scope.row.status_text }}
-              </el-tag>
-              <el-tag v-else-if="scope.row.status == 2">
-                {{ scope.row.status_text }}
-              </el-tag>
-              <el-tag v-else type="info">
-                {{ scope.row.status_text }}
-              </el-tag>
+              <span
+                :class="{
+                  'c-green': scope.row.status === 1,
+                  'c-yellow': scope.row.status === 0,
+                  'c-gray': scope.row.status === 2,
+                }"
+                >· {{ scope.row.status_text }}</span
+              >
             </template>
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="180">
+          <el-table-column fixed="right" label="操作" width="120">
             <template slot-scope="scope">
               <p-link
-                v-if="scope.row.status == 1"
-                text="继续直播"
+                text="直播"
                 type="primary"
                 @click="
                   $router.push({
@@ -65,57 +65,11 @@
                 "
                 p="addons.Zhibo.zhibo.open"
               ></p-link>
-              <p-link
-                v-else
-                text="开播"
-                type="primary"
-                @click="
-                  $router.push({
-                    name: 'LiveCourseVideoPlay',
-                    query: {
-                      video_id: scope.row.id,
-                      course_id: scope.row.course_id,
-                    },
-                  })
-                "
-                p="addons.Zhibo.zhibo.open"
-              ></p-link>
-              <p-link
-                text="观看"
-                type="primary"
-                class="ml-5"
-                @click="
-                  $router.push({
-                    name: 'LiveCourseVideoWatchusers',
-                    query: {
-                      id: scope.row.id,
-                      course_id: scope.row.course_id,
-                    },
-                  })
-                "
-                p="addons.Zhibo.course_video.watch.users"
-              >
-              </p-link>
               <el-dropdown>
                 <el-link type="primary" class="el-dropdown-link ml-5">
                   更多<i class="el-icon-arrow-down el-icon--right"></i>
                 </el-link>
                 <el-dropdown-menu slot="dropdown">
-                  <p-dropdown-item
-                    text="讨论"
-                    type="primary"
-                    @click="
-                      $router.push({
-                        name: 'LiveCourseVideoChat',
-                        query: {
-                          id: scope.row.id,
-                          course_id: scope.row.course_id,
-                        },
-                      })
-                    "
-                    p="addons.Zhibo.chat.list"
-                  >
-                  </p-dropdown-item>
                   <p-dropdown-item
                     text="编辑"
                     type="primary"

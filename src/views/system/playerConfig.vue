@@ -37,13 +37,13 @@
           <div class="float-left d-flex" style="margin-left: 3px">
             <div>
               <el-input
-                placeholder="请输入跑马灯内容"
+                placeholder="此处填写跑马灯内容"
                 class="w-300px"
                 v-model="form.config['meedu.system.player.bullet_secret.text']"
               ></el-input>
             </div>
-            <div class="ml-10">
-              <span class="helper-text">变量：</span>
+            <div class="d-flex ml-10">
+              <span class="helper-text">添加变量：</span>
               <el-link class="ml-10" @click="addMobile" type="primary"
                 >学员手机号</el-link
               >

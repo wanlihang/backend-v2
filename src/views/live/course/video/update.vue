@@ -9,7 +9,7 @@
         :rules="rules"
         label-width="200px"
       >
-        <el-form-item label="章节" prop="chapter_id">
+        <el-form-item label="章节">
           <div class="d-flex">
             <div>
               <el-select class="w-300px" v-model="course.chapter_id">
@@ -78,13 +78,13 @@ export default {
       course_id: this.$route.query.course_id,
       course: null,
       rules: {
-        chapter_id: [
-          {
-            required: true,
-            message: "请选择章节",
-            trigger: "blur",
-          },
-        ],
+        // chapter_id: [
+        //   {
+        //     required: true,
+        //     message: "请选择章节",
+        //     trigger: "blur",
+        //   },
+        // ],
         title: [
           {
             required: true,
@@ -121,6 +121,9 @@ export default {
     getDetail() {
       this.$api.Course.Live.Course.Video.Detail(this.id).then((res) => {
         this.course = res.data;
+        if (this.course.chapter_id === 0) {
+          this.course.chapter_id = null;
+        }
       });
     },
     formValidate() {

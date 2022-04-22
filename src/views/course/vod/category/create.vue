@@ -4,7 +4,7 @@
     <div class="float-left">
       <el-form ref="form" :model="user" :rules="rules" label-width="200px">
         <el-form-item label="父级" prop="parent_id">
-          <el-select v-model="user.parent_id">
+          <el-select clearable v-model="user.parent_id">
             <el-option
               v-for="(item, index) in categories"
               :key="index"

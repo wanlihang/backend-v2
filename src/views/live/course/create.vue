@@ -328,8 +328,22 @@ export default {
     create() {
       this.$api.Course.Live.Course.Create().then((res) => {
         var data = res.data;
-        this.categories = data.categories;
         this.teachers = data.teachers;
+        let categories = data.categories;
+        let box = [];
+        for (let i = 0; i < categories.length; i++) {
+          if (categories[i].children.length > 0) {
+            box.push(categories[i]);
+            let children = categories[i].children;
+            for (let j = 0; j < children.length; j++) {
+              children[j].name = "|----" + children[j].name;
+              box.push(children[j]);
+            }
+          } else {
+            box.push(categories[i]);
+          }
+        }
+        this.categories = box;
       });
     },
     formValidate() {

@@ -9,7 +9,7 @@
         :rules="rules"
         label-width="200px"
       >
-        <el-form-item label="章节" prop="chapter_id">
+        <el-form-item label="章节" >
           <div class="d-flex">
             <div>
               <el-select class="w-300px" v-model="course.chapter_id">
@@ -82,13 +82,13 @@ export default {
         published_at: null,
       },
       rules: {
-        chapter_id: [
-          {
-            required: true,
-            message: "请选择章节",
-            trigger: "blur",
-          },
-        ],
+        // chapter_id: [
+        //   {
+        //     required: true,
+        //     message: "请选择章节",
+        //     trigger: "blur",
+        //   },
+        // ],
         title: [
           {
             required: true,

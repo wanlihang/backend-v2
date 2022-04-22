@@ -1,26 +1,30 @@
 <template>
-  <div class="meedu-main-body">
-    <back-bar class="mb-30" title="学员批量导入"></back-bar>
-
-    <div class="user-import-box">
-      <div class="float-left d-flex mb-30">
-        <div>
-          <el-button :loading="loading" type="primary" @click="choiceFile">
-            选择Excel表格文件
-          </el-button>
+  <div class="meedu-dialog-mask" v-show="show">
+    <div class="meedu-dialog-box">
+      <div class="meedu-dialog-header">学员批量导入</div>
+      <div class="meedu-dialog-body">
+        <div class="d-flex float-left">
+          <div>
+            <el-button :loading="loading" type="primary" @click="choiceFile">
+              选择Excel表格文件
+            </el-button>
+          </div>
+          <div class="ml-30">
+            <el-link type="primary" @click="model()">
+              点击链接下载「学员批量导入模板」
+            </el-link>
+          </div>
         </div>
-        <div class="ml-30">
-          <el-link type="primary" @click="model()">
-            点击链接下载「学员批量导入模板」
-          </el-link>
+        <div class="float-left">
+          <div style="display: none">
+            <form ref="form">
+              <input type="file" ref="xlsfile" />
+            </form>
+          </div>
         </div>
       </div>
-      <div class="float-left">
-        <div style="display: none">
-          <form ref="form">
-            <input type="file" ref="xlsfile" />
-          </form>
-        </div>
+      <div class="meedu-dialog-footer">
+        <el-button @click="close">取消</el-button>
       </div>
     </div>
   </div>
@@ -30,9 +34,9 @@
 import XLSX from "xlsx";
 
 export default {
+  props: ["id", "show", "type"],
   data() {
     return {
-      id: this.$route.query.id,
       loading: false,
     };
   },
@@ -42,6 +46,13 @@ export default {
     });
   },
   methods: {
+    close() {
+      this.$emit("close");
+    },
+    success() {
+      this.$emit("close");
+      this.$emit("change");
+    },
     choiceFile() {
       this.$refs.xlsfile.click();
     },
@@ -77,16 +88,31 @@ export default {
 
         // 请求导入api
         this.$refs.form.reset();
-
-        this.$api.Course.Vod.UserImport(this.id, { mobiles: parseData })
-          .then(() => {
-            this.loading = false;
-            this.$message.success("导入成功");
+        if (this.type === "vod") {
+          this.$api.Course.Vod.UserImport(this.id, { mobiles: parseData })
+            .then(() => {
+              this.loading = false;
+              this.$message.success("导入成功");
+              this.success();
+            })
+            .catch((e) => {
+              this.loading = false;
+              this.$message.error(e.message);
+            });
+        } else if (this.type === "live") {
+          this.$api.Course.Live.Course.UserImport(this.id, {
+            mobiles: parseData,
           })
-          .catch((e) => {
-            this.loading = false;
-            this.$message.error(e.message);
-          });
+            .then(() => {
+              this.loading = false;
+              this.$message.success("导入成功");
+              this.success();
+            })
+            .catch((e) => {
+              this.loading = false;
+              this.$message.error(e.message);
+            });
+        }
       };
       reader.readAsArrayBuffer(f);
     },
@@ -173,13 +199,16 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.user-import-box {
-  width: 100%;
-  height: auto;
-  float: left;
-  box-sizing: border-box;
-  padding: 30px 100px;
-  border-radius: 15px;
-  background-color: white;
+.meedu-dialog-mask {
+  z-index: 500 !important;
+}
+.meedu-dialog-box {
+  width: 900px !important;
+  margin-left: -450px !important;
+  height: 250px !important;
+  margin-top: -120px !important;
+  .meedu-dialog-body {
+    height: 100px !important;
+  }
 }
 </style>
