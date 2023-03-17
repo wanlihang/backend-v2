@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "serve": "vue-cli-service --openssl-legacy-provider serve",
+    "build": "vue-cli-service --openssl-legacy-provider build",
+    "lint": "vue-cli-service --openssl-legacy-provider lint"
   },
   "dependencies": {
     "accounting": "^0.4.1",
     "axios": "^0.21.1",
+    "browserslist": "^4.21.5",
     "core-js": "^3.6.5",
     "echarts": "^5.1.2",
     "element-ui": "^2.15.2",
