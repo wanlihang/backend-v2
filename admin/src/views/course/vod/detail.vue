@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body" v-if="id">
-    <back-bar class="mb-30" title="录播学员"></back-bar>
+    <back-bar class="mb-30" title="实验学员"></back-bar>
 
     <div class="float-left">
       <div class="float-left">

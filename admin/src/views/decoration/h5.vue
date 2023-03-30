@@ -91,7 +91,7 @@
                   height="44"
                 />
               </div>
-              <div class="name">录播</div>
+              <div class="name">实验</div>
             </div>
           </div>
 
@@ -450,7 +450,7 @@ export default {
         ];
       } else if (blockSign === "h5-vod-v1") {
         defaultConfig = {
-          title: "录播课程",
+          title: "实验课程",
           items: [
             {
               id: null,

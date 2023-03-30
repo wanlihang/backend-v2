@@ -26,7 +26,7 @@
                 height="44"
               />
             </div>
-            <div class="name">录播</div>
+            <div class="name">实验课程</div>
           </div>
         </div>
 
@@ -426,32 +426,32 @@ export default {
       let defaultConfig = null;
       if (blockSign === "pc-vod-v1") {
         defaultConfig = {
-          title: "录播课程",
+          title: "实验课程",
           items: [
             {
               id: null,
-              title: "录播课程",
+              title: "实验课程",
               thumb: null,
               user_count: 0,
               charge: 0,
             },
             {
               id: null,
-              title: "录播课程",
+              title: "实验课程",
               thumb: null,
               user_count: 0,
               charge: 0,
             },
             {
               id: null,
-              title: "录播课程",
+              title: "实验课程",
               thumb: null,
               user_count: 0,
               charge: 0,
             },
             {
               id: null,
-              title: "录播课程",
+              title: "实验课程",
               thumb: null,
               user_count: 0,
               charge: 0,

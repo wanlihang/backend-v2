@@ -65,26 +65,26 @@
           <div class="panel-info-item">ID：{{ user.id }}</div>
           <div class="panel-info-item">手机号：{{ user.mobile }}</div>
           <div class="panel-info-item">积分：{{ user.credit1 }}</div>
-          <div class="panel-info-item">
-            VIP： {{ user.role ? user.role.name : "" }}
-          </div>
-          <div class="panel-info-item">
-            VIP过期时间：{{ user.role_expired_at | dateFormat }}
-          </div>
-          <div class="panel-info-item">
-            一级邀请人：{{ user.invitor ? user.invitor.nick_name : "" }}
-            <template v-if="user.invitor">
-              <div class="item">
-                (有效期剩 {{ user.invite_user_expired_at | dateFormat }}天)
-              </div>
-            </template>
-          </div>
-          <div class="panel-info-item">
-            学员邀请码：{{
-              user.is_used_promo_code === 1 ? "已使用" : "未使用"
-            }}
-          </div>
-          <div class="panel-info-item">推广余额：{{ user.invite_balance }}</div>
+<!--          <div class="panel-info-item">-->
+<!--            VIP： {{ user.role ? user.role.name : "" }}-->
+<!--          </div>-->
+<!--          <div class="panel-info-item">-->
+<!--            VIP过期时间：{{ user.role_expired_at | dateFormat }}-->
+<!--          </div>-->
+<!--          <div class="panel-info-item">-->
+<!--            一级邀请人：{{ user.invitor ? user.invitor.nick_name : "" }}-->
+<!--            <template v-if="user.invitor">-->
+<!--              <div class="item">-->
+<!--                (有效期剩 {{ user.invite_user_expired_at | dateFormat }}天)-->
+<!--              </div>-->
+<!--            </template>-->
+<!--          </div>-->
+<!--          <div class="panel-info-item">-->
+<!--            学员邀请码：{{-->
+<!--              user.is_used_promo_code === 1 ? "已使用" : "未使用"-->
+<!--            }}-->
+<!--          </div>-->
+<!--          <div class="panel-info-item">推广余额：{{ user.invite_balance }}</div>-->
           <div class="panel-info-item">
             锁定登录：{{ user.is_lock === 1 ? "是" : "否" }}
           </div>
@@ -190,7 +190,7 @@ export default {
     courseTypes() {
       let types = [
         {
-          name: "录播",
+          name: "实验",
           key: "vod",
         },
         {
@@ -221,7 +221,7 @@ export default {
       types.push(
         ...[
           {
-            name: "录播观看",
+            name: "实验进度",
             key: "vod-watch-records",
           },
           {

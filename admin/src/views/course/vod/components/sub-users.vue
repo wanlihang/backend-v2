@@ -269,7 +269,7 @@ export default {
           return;
         }
         let users = res.data.users;
-        let filename = "录播课程订阅学员.xlsx";
+        let filename = "实验课程订阅学员.xlsx";
         let sheetName = "sheet1";
 
         let data = [["学员ID", "学员", "手机号", "价格", "时间"]];

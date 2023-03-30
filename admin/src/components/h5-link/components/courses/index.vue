@@ -82,7 +82,7 @@ export default {
     courseTypes() {
       let types = [
         {
-          name: "录播课程",
+          name: "实验课程",
           key: "vod",
         },
       ];

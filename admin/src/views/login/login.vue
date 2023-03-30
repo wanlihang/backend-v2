@@ -184,8 +184,9 @@ export default {
 }
 
 .left_content {
+  margin-top: 100px;
   width: 471px;
-  height: 100%;
+  height: 400px;
   background: url(../../assets/login/loginleft_banner.png) no-repeat;
   background-size: 100% 100%;
   box-sizing: border-box;

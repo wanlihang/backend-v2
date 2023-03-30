@@ -84,7 +84,7 @@ export default {
     funcLinks() {
       let links = [
         {
-          name: "录播课程",
+          name: "实验课程",
           url: "/packageA/vod/index",
         },
       ];

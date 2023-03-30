@@ -1,7 +1,7 @@
 <template>
   <div class="meedu-dialog-mask" v-if="show">
     <div class="meedu-dialog-box">
-      <div class="meedu-dialog-header">选择录播课程</div>
+      <div class="meedu-dialog-header">选择实验课程</div>
       <div class="meedu-dialog-body">
         <div class="courses-box">
           <div class="float-left mb-15">

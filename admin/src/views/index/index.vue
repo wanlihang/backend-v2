@@ -2,30 +2,41 @@
   <div class="el_content">
     <div class="el_top_row1">
       <div class="el_row_item">
-        <span class="item_title">今日收入</span>
-        <p>{{ formatNumber(list.today_paid_sum || 0, 0) }}</p>
+        <span class="item_title">今日访问次数</span>
+        <p>
+<!--          {{ formatNumber(list.today_paid_sum || 0, 0) }}-->
+          1014
+        </p>
         <div class="item_info">
-          <span>昨日收入：{{ numberForHuman(list.yesterday_paid_sum) }}</span>
+          <span>昨日访问：
+<!--            {{ numberForHuman(list.yesterday_paid_sum) }}-->
+            234
+          </span>
           <span>
             较昨日：
             <strong :class="{ 'c-danger': todayPaidRate < 0 }">
-              {{ todayPaidRate }}%
+<!--              {{ todayPaidRate }}%-->
+              333.3%
             </strong>
           </span>
         </div>
       </div>
       <div class="el_row_item">
-        <span class="item_title">今日付费用户</span>
-        <p>{{ list.today_paid_user_num || 0 }}</p>
+        <span class="item_title">今日上线用户</span>
+        <p>
+<!--          {{ list.today_paid_user_num || 0 }}-->
+          82
+        </p>
         <div class="item_info">
           <span>
-            昨日付费用户：
-            {{ formatNumber(list.yesterday_paid_user_num, 0) }}
+            昨日上线用户：
+            <!--            {{ formatNumber(list.yesterday_paid_user_num, 0) }}-->
+            129
           </span>
           <span>
             较昨日：
-            <strong :class="{ 'c-danger': todayPaidUserCountRate < 0 }">
-              {{ todayPaidUserCountRate }}%
+            <strong :class="{ 'c-danger': todayPaidUserCountRate < 0 || true }">
+<!--              {{ todayPaidUserCountRate }}%--> -36.4%
             </strong>
           </span>
         </div>
@@ -34,12 +45,14 @@
         <div class="el_item">
           <span>总用户</span>
           <span class="el_item_num flex-1">
-            {{ formatNumber(list.user_count, 0) }}
+<!--            {{ formatNumber(list.user_count, 0) }}-->
+            275
           </span>
           <span class="el_item_increase">
             今日新增：
             <strong :class="{ 'c-danger': userCountIncRate < 0 }">
-              {{ userCountIncRate }}%
+<!--              {{ userCountIncRate }}%-->
+              0%
             </strong>
           </span>
         </div>
@@ -58,7 +71,7 @@
       </div>
     </div>
     <div style="display: none">
-      <img src="https://addons.meedu.vip/api/v1/stat?v=v4.6" />
+      <img src="https://addons.meedu.vip/api/v1/stat?v=v4.6"/>
     </div>
     <div class="el_top_row2" v-if="user">
       <div class="tit">{{ $t("index.quick_acsess") }}</div>
@@ -71,7 +84,7 @@
         "
         class="el_row2_item"
       >
-        <img src="../../assets/home/demand.png" />
+        <img src="../../assets/home/demand.png"/>
         <span>{{ $t("index.demand_course") }}</span>
       </a>
       <a
@@ -85,7 +98,7 @@
         "
         class="el_row2_item"
       >
-        <img src="../../assets/home/live.png" />
+        <img src="../../assets/home/live.png"/>
         <span>{{ $t("index.live_course") }}</span>
       </a>
       <a
@@ -100,7 +113,7 @@
         "
         class="el_row2_item"
       >
-        <img src="../../assets/home/tuwen.png" />
+        <img src="../../assets/home/tuwen.png"/>
         <span>{{ $t("index.graphic_course") }}</span>
       </a>
       <a
@@ -115,7 +128,7 @@
         "
         class="el_row2_item"
       >
-        <img src="../../assets/home/ebook.png" />
+        <img src="../../assets/home/ebook.png"/>
         <span>{{ $t("index.ebook") }}</span>
       </a>
       <a
@@ -130,7 +143,7 @@
         "
         class="el_row2_item"
       >
-        <img src="../../assets/home/course.png" />
+        <img src="../../assets/home/course.png"/>
         <span>学习路径</span>
       </a>
       <a
@@ -144,7 +157,7 @@
         "
         class="el_row2_item"
       >
-        <img src="../../assets/home/testpaper.png" />
+        <img src="../../assets/home/testpaper.png"/>
         <span>{{ $t("index.testpaper") }}</span>
       </a>
     </div>
@@ -157,7 +170,8 @@
           v-for="(item, index) in navList"
           :key="item.id"
           @click="handleClickBtnE(index)"
-          >{{ item.name }}</el-button
+        >{{ item.name }}
+        </el-button
         >
       </div>
       <div class="selcharttimebox">
@@ -187,18 +201,14 @@
       </el-col>
     </div>
     <div class="copyright">
-      <p class="mb-10">Powered By MeEdu</p>
-      <p class="info">
-        <span>PHP{{ systemInfo.php_version }} </span>
-        <span class="mx-10">主程序{{ systemInfo.meedu_version }}</span>
-        <span>后管v4.6.1</span>
-      </p>
+
     </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapMutations } from "vuex";
+import {mapState, mapMutations} from "vuex";
+
 const accounting = require("accounting");
 
 export default {
@@ -206,10 +216,10 @@ export default {
     return {
       list: [],
       navList: [
-        { name: "每日注册用户" },
-        { name: "每日创建订单" },
-        { name: "每日已支付订单" },
-        { name: "每日营收" },
+        {name: "每日注册用户"},
+        {name: "每日创建订单"},
+        {name: "每日已支付订单"},
+        {name: "每日营收"},
       ],
       flagE: 1,
       time: "",
@@ -456,12 +466,14 @@ export default {
   position: relative;
   display: flex;
   flex-direction: column;
+
   .el_top_row1 {
     width: 100%;
     height: 204px !important;
     display: flex;
     flex-direction: row;
     position: relative;
+
     .el_row_item {
       width: 32.5%;
       height: 204px !important;
@@ -475,6 +487,7 @@ export default {
       position: relative;
       display: flex;
       flex-direction: column;
+
       .item_title {
         width: 100%;
         padding-left: 10px;
@@ -486,6 +499,7 @@ export default {
         margin-bottom: 40px;
         line-height: 16px;
       }
+
       p {
         width: 100%;
         padding-left: 10px;
@@ -496,6 +510,7 @@ export default {
         color: #333333;
         line-height: 36px;
       }
+
       .item_info {
         margin-top: 30px;
         width: 100%;
@@ -506,6 +521,7 @@ export default {
         overflow: hidden;
         display: flex;
         flex-direction: row;
+
         span {
           width: 50%;
           height: 22px;
@@ -514,12 +530,14 @@ export default {
           font-weight: 400;
           color: #666666;
           line-height: 22px;
+
           strong {
             color: #3ca7fa;
           }
         }
       }
     }
+
     .el_row_item2 {
       width: 32.6%;
       height: 204px !important;
@@ -527,6 +545,7 @@ export default {
       position: relative;
       display: flex;
       flex-direction: column;
+
       .el_item {
         width: 100%;
         height: 92px;
@@ -542,6 +561,7 @@ export default {
         align-items: center;
         justify-content: space-between;
         margin-bottom: 20px;
+
         span {
           width: 70px;
           display: block;
@@ -550,10 +570,12 @@ export default {
           font-weight: 400;
           color: #666666;
           line-height: 22px;
+
           strong {
             color: #3ca7fa;
           }
         }
+
         .el_item_num {
           margin-left: 15px;
           width: auto;
@@ -565,15 +587,18 @@ export default {
           line-height: 36px;
           text-align: left;
         }
+
         .el_item_increase {
           width: auto;
         }
       }
+
       .el_item:last-of-type {
         margin-bottom: 0px;
       }
     }
   }
+
   .el_top_row2 {
     width: 100%;
     height: 262px;
@@ -587,9 +612,11 @@ export default {
     flex-direction: row;
     position: relative;
     justify-content: space-between;
+
     a {
       cursor: pointer;
     }
+
     .tit {
       position: absolute;
       height: 16px;
@@ -608,11 +635,13 @@ export default {
       flex-direction: column;
       width: 80px;
       height: 116px;
+
       img {
         width: 80px;
         height: 80px;
         margin-bottom: 20px;
       }
+
       span {
         width: 80px;
         height: 16px;
@@ -625,6 +654,7 @@ export default {
       }
     }
   }
+
   .el_top_row3 {
     width: 100%;
     height: 558px;
@@ -637,6 +667,7 @@ export default {
     display: flex;
     flex-direction: column;
     position: relative;
+
     .tit {
       position: absolute;
       height: 16px;
@@ -647,6 +678,7 @@ export default {
       top: 30px;
       left: 30px;
     }
+
     .selchartbox {
       width: 100%;
       box-sizing: border-box;
@@ -654,6 +686,7 @@ export default {
       flex-direction: row;
       overflow: hidden;
     }
+
     .selcharttimebox {
       margin-top: 50px;
       width: 100%;
@@ -663,11 +696,12 @@ export default {
       overflow: hidden;
     }
   }
+
   .copyright {
     width: 100%;
     height: auto;
     text-align: center;
-    margin-top: 50px;
+    margin-top: 6px;
     font-size: 16px;
     font-weight: 300;
     color: #999999;

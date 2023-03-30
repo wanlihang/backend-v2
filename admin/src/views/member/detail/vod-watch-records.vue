@@ -28,7 +28,7 @@
           <span>{{ scope.row.progress }}%</span>
         </template>
       </el-table-column>
-      <el-table-column label="看完" :width="80">
+      <el-table-column label="完成" :width="80">
         <template slot-scope="scope">
           <span class="c-red" v-if="scope.row.is_watched === 1">是</span>
           <span v-else>否</span>
@@ -39,7 +39,7 @@
           scope.row.created_at | dateFormat
         }}</template></el-table-column
       >
-      <el-table-column label="看完时间" :width="200">
+      <el-table-column label="完成时间" :width="200">
         <template slot-scope="scope">{{
           scope.row.watched_at | dateFormat
         }}</template></el-table-column

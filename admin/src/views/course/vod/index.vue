@@ -9,37 +9,8 @@
           type="primary"
         >
         </p-button>
-        <p-button
-          text="录播课分类"
-          p="courseCategory"
-          @click="$router.push({ name: 'CourseCategories' })"
-          type="primary"
-        >
-        </p-button>
-        <p-button
-          text="课程评论"
-          p="course_comment"
-          @click="$router.push({ name: 'CourseComments' })"
-          type="primary"
-        >
-        </p-button>
-        <p-button
-          text="视频评论"
-          p="video_comment"
-          @click="$router.push({ name: 'VideoComments' })"
-          type="primary"
-        >
-        </p-button>
 
-        <p-button
-          text="视频批量导入"
-          p="video.import"
-          @click="$router.push({ name: 'VodImport' })"
-          type="primary"
-        >
-        </p-button>
-
-        <option-bar text="录播课设置" value="播放器配置"></option-bar>
+        <option-bar text="实验课设置" value="播放器配置"></option-bar>
       </div>
       <div class="d-flex">
         <div>
@@ -74,9 +45,9 @@
           @sort-change="sortChange"
           :default-sort="{ prop: 'id', order: 'descending' }"
         >
-          <el-table-column prop="id" sortable label="ID" width="100">
+          <el-table-column prop="id" sortable label="ID" width="150">
           </el-table-column>
-          <el-table-column label="分类">
+          <el-table-column label="分类" width="300">
             <template slot-scope="scope">
               <span v-if="scope.row.category">
                 {{ scope.row.category.name }}
@@ -84,7 +55,7 @@
               <span v-else class="c-red">数据不完整</span>
             </template>
           </el-table-column>
-          <el-table-column label="课程" width="400">
+          <el-table-column label="课程" width="500">
             <template slot-scope="scope">
               <thumb-bar
                 :value="scope.row.thumb"
@@ -94,11 +65,11 @@
               ></thumb-bar>
             </template>
           </el-table-column>
-          <el-table-column property="charge" label="价格" sortable width="100">
-            <template slot-scope="scope"> {{ scope.row.charge }}元 </template>
-          </el-table-column>
+<!--          <el-table-column property="charge" label="价格" sortable width="100">-->
+<!--            <template slot-scope="scope"> {{ scope.row.charge }}元 </template>-->
+<!--          </el-table-column>-->
           <el-table-column
-            label="付费人数"
+            label="参与人数"
             property="user_count"
             sortable
             width="150"
@@ -113,20 +84,19 @@
               scope.row.published_at | dateFormat
             }}</template>
           </el-table-column>
-          <el-table-column fixed="right" label="操作" width="140">
+          <el-table-column fixed="right" label="操作" width="200">
             <template slot-scope="scope">
               <p-link
-                text="视频"
-                p="video"
-                type="primary"
+                text="章节"
+                p="course_chapter"
                 @click="
                   $router.push({
-                    name: 'CourseVideos',
+                    name: 'CourseChapters',
                     query: { course_id: scope.row.id },
                   })
                 "
-              >
-              </p-link>
+                type="primary"
+              ></p-link>
               <p-link
                 text="学员"
                 p="course.subscribes"
@@ -156,6 +126,17 @@
                       })
                     "
                   >
+                  </p-dropdown-item>
+                  <p-dropdown-item
+                    text="视频"
+                    p="video"
+                    type="primary"
+                    @click="
+                  $router.push({
+                    name: 'CourseVideos',
+                    query: { course_id: scope.row.id },
+                  })
+                ">
                   </p-dropdown-item>
                   <p-dropdown-item
                     text="附件"

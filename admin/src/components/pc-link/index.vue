@@ -41,7 +41,7 @@ export default {
           active: "index",
         },
         {
-          name: "录播课程",
+          name: "实验课程",
           url: "/courses",
           active: "courses,course.show,video.show",
         },

@@ -164,7 +164,7 @@
               </div>
             </el-form-item>
 
-            <el-form-item label="购买录播课程">
+            <el-form-item label="购买实验课程">
               <div class="d-flex">
                 <div>
                   <el-select
@@ -185,7 +185,7 @@
                 </div>
                 <div class="ml-10">
                   <helper-text
-                    text="购买指定的录播课程可直接参与考试。"
+                    text="购买指定的实验课程可直接参与考试。"
                   ></helper-text>
                 </div>
               </div>
@@ -338,7 +338,7 @@ export default {
         (this.addform.required_courses.length === 0 ||
           this.addform.required_courses === "")
       ) {
-        this.$message.error("设置价格大于0或者设置有购买录播课程");
+        this.$message.error("设置价格大于0或者设置有购买实验课程");
         return;
       }
       this.loading = true;

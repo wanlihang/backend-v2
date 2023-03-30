@@ -10,6 +10,10 @@ axios.defaults.baseURL = config.url;
 // 请求拦截器(附带上token)
 axios.interceptors.request.use(
   (config) => {
+    if (config.url.indexOf("/ilab") >= 0) {
+      config.baseURL = "http://127.0.0.1:9204"
+      config.url = config.url.replace("/ilab", "")
+    }
     const token = Utils.getToken();
     token && (config.headers.Authorization = "Bearer " + token);
     return config;

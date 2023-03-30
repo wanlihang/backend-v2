@@ -1,6 +1,6 @@
 <template>
   <div class="meedu-main-body">
-    <back-bar class="mb-30" title="编辑录播视频"></back-bar>
+    <back-bar class="mb-30" title="编辑实验视频"></back-bar>
 
     <div class="center-tabs mb-30">
       <div>
@@ -82,7 +82,7 @@
               </div>
               <div class="ml-10">
                 <helper-text
-                  text="上架时间决定了录播课程下视频排名，时间越早越靠后。上架时间如果是未来时间，则需等到时间到达后学员才可查看。"
+                  text="上架时间决定了实验课程下视频排名，时间越早越靠后。上架时间如果是未来时间，则需等到时间到达后学员才可查看。"
                 ></helper-text>
               </div>
             </div>
@@ -164,7 +164,7 @@
               </div>
               <div class="ml-10">
                 <helper-text
-                  text="该字段控制学员是否可以直接购买该视频。如果禁止购买，那么学员观看该视频的话则必须先购买该视频所属录播课程。"
+                  text="该字段控制学员是否可以直接购买该视频。如果禁止购买，那么学员观看该视频的话则必须先购买该视频所属实验课程。"
                 ></helper-text>
               </div>
             </div>
